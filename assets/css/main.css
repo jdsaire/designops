@@ -918,6 +918,20 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 }
 
 /* ============================================================ ABOUT ============================================================ */
+
+/* About header — desktop/tablet center, mobile left (mirrors Capabilities) */
+.about__header {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.about__header .section__eyebrow {
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .about__header { text-align: left; }
+  .about__header .section__eyebrow { align-items: flex-start; }
+}
+
 .about-sticky-scene { position: relative; }
 
 /* Base track — 3-column grid on desktop/tablet */
