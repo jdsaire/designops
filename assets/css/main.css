@@ -1265,6 +1265,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 .contact__select { cursor: pointer; padding-right: 2.5rem; }
 .contact__select option { background: #1A1A1A; color: var(--color-brand-white); }
 .contact__select.is-placeholder { color: rgba(255,255,255,0.25); }
+.contact .is-hidden { display: none; }
 .contact__textarea { resize: vertical; min-height: 8rem; line-height: 1.6; }
 .contact__hint {
   font-size: 0.72rem;
