@@ -583,6 +583,7 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
           contactForm.classList.add('is-submitted');
           if (contactSuccess) {
             contactSuccess.classList.add('is-visible');
+            document.activeElement?.blur();
             contactSuccess.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         } else {
