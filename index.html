@@ -750,20 +750,22 @@
             <div class="contact__fields contact__fields--collab">
 
               <!-- Engagement type -->
-              <div class="contact__field" id="field-type">
-                <label class="contact__label" for="engagementType" data-i18n="contact_dropdown_label">What's your next digital ambition?</label>
-                <div class="contact__select-wrapper">
-                  <select class="contact__select is-placeholder" id="engagementType" name="engagementType"
-                          required aria-required="true">
-                    <option value="" disabled selected hidden data-i18n="contact_dropdown_placeholder">Select one</option>
-                    <option value="strategic-partnership"     data-i18n="contact_opt1">Strategic partnership — hiring, project, or co-creation</option>
-                    <option value="education-opportunity"     data-i18n="contact_opt2">Education — university teaching or corporate training</option>
-                    <option value="public-speaking-workshops" data-i18n="contact_opt3">Keynote or workshop — conference, panel, or open session</option>
-                    <option value="content-media-sponsorship" data-i18n="contact_opt4">Media and content — interviews, podcasts, or publications</option>
-                    <option value="other"                     data-i18n="contact_opt5">Other</option>
-                  </select>
+              <div class="contact__form-row">
+                <div class="contact__field" id="field-type">
+                  <label class="contact__label" for="engagementType" data-i18n="contact_dropdown_label">What's your next digital ambition?</label>
+                  <div class="contact__select-wrapper">
+                    <select class="contact__select is-placeholder" id="engagementType" name="engagementType"
+                            required aria-required="true">
+                      <option value="" disabled selected hidden data-i18n="contact_dropdown_placeholder">Select one</option>
+                      <option value="strategic-partnership"     data-i18n="contact_opt1">Strategic partnership — hiring, project, or co-creation</option>
+                      <option value="education-opportunity"     data-i18n="contact_opt2">Education — university teaching or corporate training</option>
+                      <option value="public-speaking-workshops" data-i18n="contact_opt3">Keynote or workshop — conference, panel, or open session</option>
+                      <option value="content-media-sponsorship" data-i18n="contact_opt4">Media and content — interviews, podcasts, or publications</option>
+                      <option value="other"                     data-i18n="contact_opt5">Other</option>
+                    </select>
+                  </div>
+                  <span class="contact__hint" aria-live="polite" data-i18n="contact_err_type">Please select an engagement type.</span>
                 </div>
-                <span class="contact__hint" aria-live="polite" data-i18n="contact_err_type">Please select an engagement type.</span>
               </div>
 
               <!-- Name + Email -->

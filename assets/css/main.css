@@ -1172,12 +1172,12 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   position: relative;
   border: 1px solid #2A2A2A;
   background: var(--color-brand-black);
-  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  padding: clamp(2rem, 3vw, 3rem);
 }
 .contact__form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 .contact__form-row {
   display: grid;
@@ -1333,7 +1333,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 .contact__intent-label {
   display: block;
@@ -1384,14 +1384,17 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   gap: 0.35rem;
 }
 .contact__intent-card-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #FFFFFF;
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-brand-white);
 }
 .contact__intent-card-desc {
   font-size: 0.8rem;
+  font-weight: var(--fw-regular);
+  line-height: 1.65;
   color: var(--color-text-muted);
-  line-height: 1.5;
 }
 
 /* ── Contact v6 — editorial centering (≥768 px) ──────────── */
