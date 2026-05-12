@@ -385,6 +385,12 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 
   if (!collabFieldsEl || !briefFieldsEl || !disclaimerEl || !submitLabelEl || !intentPathInput) return;
 
+  if (caseSelect) {
+    caseSelect.addEventListener('change', function () {
+      caseSelect.classList.toggle('is-placeholder', caseSelect.value === '');
+    });
+  }
+
   /* Capture the v4 collab submit-label key from the markup (do not invent). */
   const COLLAB_SUBMIT_KEY     = submitLabelEl.dataset.i18n || 'contact_submit';
   const COLLAB_DISCLAIMER_KEY = 'contact_disclaimer';
