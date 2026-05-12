@@ -403,12 +403,12 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
      handles collab path and skips disabled inputs via the guard added in
      the v4 IIFE above). */
   const briefFields = [
-    { id: 'contact-brief-case',    test: function (v) { return v !== ''; } },
-    { id: 'contact-brief-name',    test: function (v) { return v.trim().length >= 2; } },
-    { id: 'contact-brief-email',   test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
-    { id: 'contact-brief-company', test: function (v) { return v.trim().length >= 1; } },
-    { id: 'contact-brief-role',    test: function (v) { return v.trim().length >= 1; } },
-    { id: 'contact-brief-context', test: function (v) { return v.trim().length >= 5; } }
+    { id: 'contact-brief-case',    wrapperId: 'brief-field-case',    test: function (v) { return v !== ''; } },
+    { id: 'contact-brief-name',    wrapperId: 'brief-field-name',    test: function (v) { return v.trim().length >= 2; } },
+    { id: 'contact-brief-email',   wrapperId: 'brief-field-email',   test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
+    { id: 'contact-brief-company', wrapperId: 'brief-field-company', test: function (v) { return v.trim().length >= 1; } },
+    { id: 'contact-brief-role',    wrapperId: 'brief-field-role',    test: function (v) { return v.trim().length >= 1; } },
+    { id: 'contact-brief-context', wrapperId: 'brief-field-context', test: function (v) { return v.trim().length >= 5; } }
   ];
 
   function setFieldsetDisabled(fieldsetEl, disabled) {
@@ -448,9 +448,11 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     let firstInvalid = null;
     let allValid = true;
     briefFields.forEach(function (f) {
-      const el = document.getElementById(f.id);
-      if (!el || el.disabled) return;
+      const el      = document.getElementById(f.id);
+      const wrapper = document.getElementById(f.wrapperId);
+      if (!el || el.disabled || !wrapper) return;
       const valid = f.test(el.value);
+      wrapper.classList.toggle('has-error', !valid);
       if (!valid) {
         allValid = false;
         if (!firstInvalid) firstInvalid = el;

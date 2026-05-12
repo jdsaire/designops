@@ -803,7 +803,7 @@
 
               <!-- Case selector -->
               <div class="contact__form-row">
-                <div class="contact__field">
+                <div class="contact__field" id="brief-field-case">
                   <label class="contact__label" for="contact-brief-case" data-i18n="contact_case_label"></label>
                   <div class="contact__select-wrapper">
                     <select class="contact__select is-placeholder" id="contact-brief-case" name="case"
@@ -815,47 +815,53 @@
                       <option value="jdigital" data-i18n="contact_case_jdigital"></option>
                     </select>
                   </div>
+                  <span class="contact__hint" aria-live="polite" data-i18n="contact_brief_err_case">Please select a case study.</span>
                 </div>
               </div>
 
               <!-- Name + Work email -->
               <div class="contact__form-row">
-                <div class="contact__field">
+                <div class="contact__field" id="brief-field-name">
                   <label class="contact__label" for="contact-brief-name" data-i18n="contact_name_label"></label>
                   <input class="contact__input" type="text" id="contact-brief-name" name="name"
                          placeholder="Ana Torres" data-i18n-placeholder="contact_name_placeholder"
                          autocomplete="name" required />
+                  <span class="contact__hint" aria-live="polite" data-i18n="contact_brief_err_name">Full name is required.</span>
                 </div>
-                <div class="contact__field">
+                <div class="contact__field" id="brief-field-email">
                   <label class="contact__label" for="contact-brief-email" data-i18n="contact_email_label"></label>
                   <input class="contact__input" type="email" id="contact-brief-email" name="email"
                          placeholder="ana@company.com" data-i18n-placeholder="contact_email_placeholder"
                          autocomplete="email" required />
+                  <span class="contact__hint" aria-live="polite" data-i18n="contact_brief_err_email">A valid email is required.</span>
                 </div>
               </div>
 
               <!-- Company + Role -->
               <div class="contact__form-row">
-                <div class="contact__field">
+                <div class="contact__field" id="brief-field-company">
                   <label class="contact__label" for="contact-brief-company" data-i18n="contact_company_label"></label>
                   <input class="contact__input" type="text" id="contact-brief-company" name="company"
                          placeholder="Google" data-i18n-placeholder="contact_company_placeholder"
                          autocomplete="organization" required />
+                  <span class="contact__hint" aria-live="polite" data-i18n="contact_brief_err_company">Company is required.</span>
                 </div>
-                <div class="contact__field">
+                <div class="contact__field" id="brief-field-role">
                   <label class="contact__label" for="contact-brief-role" data-i18n="contact_role_label"></label>
                   <input class="contact__input" type="text" id="contact-brief-role" name="role"
                          placeholder="Head of Digital" data-i18n-placeholder="contact_role_placeholder"
                          autocomplete="organization-title" required />
+                  <span class="contact__hint" aria-live="polite" data-i18n="contact_brief_err_role">Role is required.</span>
                 </div>
               </div>
 
               <!-- Context -->
-              <div class="contact__field">
+              <div class="contact__field" id="brief-field-context">
                 <label class="contact__label" for="contact-brief-context" data-i18n="contact_context_label"></label>
                 <textarea class="contact__textarea" id="contact-brief-context" name="context"
                           data-i18n-placeholder="contact_context_placeholder"
                           required aria-required="true"></textarea>
+                <span class="contact__hint" aria-live="polite" data-i18n="contact_brief_err_context">Please share where we met or who referred you.</span>
               </div>
 
             </div>
