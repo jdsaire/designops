@@ -317,6 +317,15 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       return valid;
     }
 
+    contactFields.forEach(function (field) {
+      const wrapper = document.getElementById(field.id);
+      const input   = document.getElementById(field.input);
+      if (!wrapper || !input) return;
+      const clear = function () { wrapper.classList.remove('has-error'); };
+      input.addEventListener('input', clear);
+      input.addEventListener('change', clear);
+    });
+
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const allValid = contactFields.map(validateContactField).every(Boolean);
@@ -385,6 +394,12 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 
   if (!collabFieldsEl || !briefFieldsEl || !disclaimerEl || !submitLabelEl || !intentPathInput) return;
 
+  if (caseSelect) {
+    caseSelect.addEventListener('change', function () {
+      caseSelect.classList.toggle('is-placeholder', caseSelect.value === '');
+    });
+  }
+
   /* Capture the v4 collab submit-label key from the markup (do not invent). */
   const COLLAB_SUBMIT_KEY     = submitLabelEl.dataset.i18n || 'contact_submit';
   const COLLAB_DISCLAIMER_KEY = 'contact_disclaimer';
@@ -397,13 +412,22 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
      handles collab path and skips disabled inputs via the guard added in
      the v4 IIFE above). */
   const briefFields = [
-    { id: 'contact-brief-case',    test: function (v) { return v !== ''; } },
-    { id: 'contact-brief-name',    test: function (v) { return v.trim().length >= 2; } },
-    { id: 'contact-brief-email',   test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
-    { id: 'contact-brief-company', test: function (v) { return v.trim().length >= 1; } },
-    { id: 'contact-brief-role',    test: function (v) { return v.trim().length >= 1; } },
-    { id: 'contact-brief-context', test: function (v) { return v.trim().length >= 5; } }
+    { id: 'contact-brief-case',    wrapperId: 'brief-field-case',    test: function (v) { return v !== ''; } },
+    { id: 'contact-brief-name',    wrapperId: 'brief-field-name',    test: function (v) { return v.trim().length >= 2; } },
+    { id: 'contact-brief-email',   wrapperId: 'brief-field-email',   test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
+    { id: 'contact-brief-company', wrapperId: 'brief-field-company', test: function (v) { return v.trim().length >= 1; } },
+    { id: 'contact-brief-role',    wrapperId: 'brief-field-role',    test: function (v) { return v.trim().length >= 1; } },
+    { id: 'contact-brief-context', wrapperId: 'brief-field-context', test: function (v) { return v.trim().length >= 5; } }
   ];
+
+  briefFields.forEach(function (f) {
+    const el      = document.getElementById(f.id);
+    const wrapper = document.getElementById(f.wrapperId);
+    if (!el || !wrapper) return;
+    const clear = function () { wrapper.classList.remove('has-error'); };
+    el.addEventListener('input', clear);
+    el.addEventListener('change', clear);
+  });
 
   function setFieldsetDisabled(fieldsetEl, disabled) {
     fieldsetEl.querySelectorAll('input, select, textarea').forEach(function (el) {
@@ -442,9 +466,11 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     let firstInvalid = null;
     let allValid = true;
     briefFields.forEach(function (f) {
-      const el = document.getElementById(f.id);
-      if (!el || el.disabled) return;
+      const el      = document.getElementById(f.id);
+      const wrapper = document.getElementById(f.wrapperId);
+      if (!el || el.disabled || !wrapper) return;
       const valid = f.test(el.value);
+      wrapper.classList.toggle('has-error', !valid);
       if (!valid) {
         allValid = false;
         if (!firstInvalid) firstInvalid = el;

@@ -1241,6 +1241,12 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 .contact__select.is-placeholder { color: rgba(255,255,255,0.25); }
 .contact .is-hidden { display: none; }
 .contact__textarea { resize: vertical; min-height: 8rem; line-height: 1.6; }
+.contact__form-row--case-context .contact__textarea {
+  min-height: 0;
+  height: calc(0.95rem * 1.6 + 0.875rem * 2 + 2px);
+  resize: none;
+  line-height: 1.6;
+}
 .contact__hint {
   font-size: 0.72rem;
   color: #FF4444;
@@ -1415,6 +1421,19 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   .contact__intent-cards { grid-template-columns: 1fr; gap: 0.75rem; }
   .contact__intent-card  { min-height: 56px; }
   .contact__fields--brief .contact__textarea { min-height: 6rem; }
+  /* Brief context reposition: flatten case+context row so context can be sent last */
+  .contact__form--brief .contact__fields--brief {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact__form-row--case-context { display: contents; }
+  .contact__form-row--case-context #brief-field-context { order: 99; }
+  .contact__form-row--case-context .contact__textarea {
+    height: auto;
+    min-height: 6rem;
+    resize: vertical;
+  }
 }
 
 /* ============================================================ FOOTER ============================================================ */
