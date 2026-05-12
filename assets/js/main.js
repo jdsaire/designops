@@ -317,6 +317,15 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       return valid;
     }
 
+    contactFields.forEach(function (field) {
+      const wrapper = document.getElementById(field.id);
+      const input   = document.getElementById(field.input);
+      if (!wrapper || !input) return;
+      const clear = function () { wrapper.classList.remove('has-error'); };
+      input.addEventListener('input', clear);
+      input.addEventListener('change', clear);
+    });
+
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const allValid = contactFields.map(validateContactField).every(Boolean);
