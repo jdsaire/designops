@@ -343,9 +343,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   color: var(--color-brand-white);
 }
 
-/* Zero top padding is load-bearing: it lets Work butt directly against
-   the full-bleed Micro-About portrait above (no horizontal black band). */
-#work { padding: 0 0 clamp(4rem, 7vw, 7.5rem); }
+#work { padding: clamp(4rem, 7vw, 7.5rem) 0 clamp(4rem, 7vw, 7.5rem); }
 
 .work__track {
   list-style: none;
