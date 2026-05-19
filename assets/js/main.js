@@ -329,6 +329,12 @@ function swapLang(lang) {
     const key = el.dataset.i18nPlaceholder;
     if (dict[key] !== undefined) el.placeholder = dict[key];
   });
+
+  /* alt swap for images */
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+    const key = el.dataset.i18nAlt;
+    if (dict[key] !== undefined) el.alt = dict[key];
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function () { swapLang('EN'); });
