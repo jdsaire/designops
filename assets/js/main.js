@@ -1071,3 +1071,190 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
   computeLayout();
   requestAnimationFrame(render);
 })();
+
+
+/* ============================================================
+   ===== CONTACT V5 (Contact2) — parallel test =====
+   Gemini build validation + modal logic, wrapped in an IIFE so
+   variables/listeners don't leak into the global scope or
+   collide with the legacy contact handler. All DOM selectors
+   carry the "2" suffix to match the renamed Contact2 IDs.
+   Logic preserved 1:1; no behavior changes vs. Gemini source.
+   ============================================================ */
+(function () {
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm2');
+    if (!form) return; // safety: bail if Contact2 isn't on the page
+
+    const intentRadios = form.querySelectorAll('input[name="intent"]');
+    const cardCollab = document.getElementById('card-collab2');
+    const cardBrief  = document.getElementById('card-brief2');
+
+    const pathCollab = document.getElementById('path-collaboration2');
+    const pathBrief  = document.getElementById('path-brief2');
+
+    const footerActions = document.getElementById('footerActions2');
+    const submitLabel   = document.getElementById('submitLabel2');
+
+    const modalOverlay  = document.getElementById('successModal2');
+    const modalCloseBtn = document.getElementById('modalCloseBtn2');
+    const modalHeadline = document.getElementById('modalHeadline2');
+    const modalBody     = document.getElementById('modalBody2');
+
+    let currentActivePath = null;
+
+    // Helper: set disabled/enabled state for elements inside a container
+    const setFieldsDisabled = (container, disabled) => {
+      const fields = container.querySelectorAll('input, select, textarea');
+      fields.forEach(field => {
+        field.disabled = disabled;
+        const group = field.closest('.form-group');
+        if (group) group.classList.remove('has-error');
+      });
+    };
+
+    // Handler: switch form paths & update specific UI logic
+    const switchPath = (selectedPath) => {
+      currentActivePath = selectedPath;
+      cardCollab.classList.remove('is-selected');
+      cardBrief.classList.remove('is-selected');
+      pathCollab.classList.remove('is-active');
+      pathBrief.classList.remove('is-active');
+
+      if (selectedPath === 'collaboration') {
+        cardCollab.classList.add('is-selected');
+        pathCollab.classList.add('is-active');
+
+        setFieldsDisabled(pathCollab, false);
+        setFieldsDisabled(pathBrief, true);
+        // Sync text with EN dictionary string
+        submitLabel.textContent = 'Send message';
+
+      } else if (selectedPath === 'brief') {
+        cardBrief.classList.add('is-selected');
+        pathBrief.classList.add('is-active');
+
+        setFieldsDisabled(pathCollab, true);
+        setFieldsDisabled(pathBrief, false);
+        // Sync text with EN dictionary string
+        submitLabel.textContent = 'Request brief';
+      }
+
+      // Reveal the grouped footnote + submit row
+      footerActions.style.display = 'block';
+    };
+
+    // Handle intent card selections
+    intentRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        if (e.target.checked) switchPath(e.target.value);
+      });
+    });
+
+    // Validation logic
+    const validateField = (inputElement) => {
+      if (inputElement.disabled) return true;
+
+      const group = inputElement.closest('.form-group');
+      if (!group) return true;
+
+      let isValid = true;
+
+      if (inputElement.required && !inputElement.value.trim()) {
+        isValid = false;
+      } else if (inputElement.type === 'email' && inputElement.value.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(inputElement.value.trim())) {
+          isValid = false;
+        }
+      }
+
+      if (isValid) {
+        group.classList.remove('has-error');
+      } else {
+        group.classList.add('has-error');
+      }
+
+      return isValid;
+    };
+
+    // Primary Form Submit Event
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const activeFields = form.querySelectorAll('.form-group input:not(:disabled)[required], .form-group select:not(:disabled)[required], .form-group textarea:not(:disabled)[required]');
+      let formIsValid = true;
+
+      activeFields.forEach(field => {
+        if (!validateField(field)) {
+          formIsValid = false;
+        }
+      });
+
+      if (formIsValid) {
+        openModal();
+
+        form.reset();
+        cardCollab.classList.remove('is-selected');
+        cardBrief.classList.remove('is-selected');
+        pathCollab.classList.remove('is-active');
+        pathBrief.classList.remove('is-active');
+
+        setFieldsDisabled(pathCollab, true);
+        setFieldsDisabled(pathBrief, true);
+
+        footerActions.style.display = 'none';
+      } else {
+        const firstError = form.querySelector('.has-error input, .has-error select, .has-error textarea');
+        if (firstError) firstError.focus();
+      }
+    });
+
+    // Real-time error clearing
+    form.addEventListener('input', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+        const group = e.target.closest('.form-group');
+        if (group && group.classList.contains('has-error')) {
+          validateField(e.target);
+        }
+      }
+    });
+
+    // Modal Triggers & Dynamic UI Updates
+    const openModal = () => {
+      // Inject Dynamic Content Based on the path chosen mapped to EN dictionary
+      if (currentActivePath === 'collaboration') {
+        modalHeadline.textContent = "Message received.";
+        modalBody.textContent = "We appreciate your submission. We’re reviewing your message. Check back your email in 48 hours for a response.";
+      } else if (currentActivePath === 'brief') {
+        modalHeadline.textContent = "Request submitted.";
+        modalBody.textContent = "We appreciate your submission. We’re reviewing your request. Check back your email in 48 hours for a response.";
+      }
+
+      modalOverlay.classList.add('is-active');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    };
+
+    const closeModal = () => {
+      modalOverlay.classList.remove('is-active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    };
+
+    // Modal Dismissal listeners
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('is-active')) {
+        closeModal();
+      }
+    });
+
+  });
+})();
+/* ===== END CONTACT V5 (Contact2) ===== */
