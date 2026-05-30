@@ -1451,14 +1451,14 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   .cap-info-card { display: none !important; }
 }
 
-/* ============================================================
-   MICRO ABOUT — Portrait + Canva-highlight heading
-   Inserted between Hero and Work. Mobile: full-bleed image with
-   pure-black vertical gradient for legibility. Tablet+Desktop:
-   spatial split (text left 50% / image right 50%), no overlay —
-   organism background governs.
-   ============================================================ */
-.micro-about {
+/* ===== BRIDGE COMPONENT (shared across 3 instances) =====
+   Portrait + Canva-highlight heading. Full-bleed image with
+   pure-black vertical gradient on mobile for legibility.
+   Tablet+Desktop: spatial split (text left 50% / image right 50%),
+   no overlay — organism background governs. One rule block drives
+   all bridge sections (Onboarding, Positioning, Filter).
+   ======================================================== */
+.bridge {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -1469,13 +1469,13 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   background-color: var(--color-brand-black);
 }
 
-.micro-about__media {
+.bridge__media {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.micro-about__image {
+.bridge__image {
   display: block;
   width: 100%;
   height: 100%;
@@ -1485,7 +1485,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 /* Mobile-only overlay. Pure-black stops avoid the lighter-rectangle
    artefact that rgba(10,10,10,…) created against the section's #000. */
-.micro-about__overlay {
+.bridge__overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -1497,7 +1497,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   );
 }
 
-.micro-about__content {
+.bridge__content {
   position: relative;
   z-index: 1;
   padding: 2rem;
@@ -1507,7 +1507,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   box-sizing: border-box;
 }
 
-.micro-about__rule {
+.bridge__rule {
   display: block;
   border: none;
   height: 2px;
@@ -1516,14 +1516,14 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   margin: 0 0 1.25rem 0;
 }
 
-.micro-about__heading-wrapper {
+.bridge__heading-wrapper {
   margin: 0 0 1rem 0;
 }
 
 /* Canva-style inline highlight. border-radius: 8px is a scoped
    exception to the zero-radius brand rule — applied to the
    typographic effect only, not a structural container. */
-.micro-about__heading {
+.bridge__heading {
   font-family: var(--font-primary);
   font-weight: var(--fw-black);
   color: var(--color-brand-white);
@@ -1539,7 +1539,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   display: inline;
 }
 
-.micro-about__attribution {
+.bridge__attribution {
   font-family: var(--font-primary);
   font-weight: var(--fw-light);
   color: var(--color-purple-light);
@@ -1552,32 +1552,32 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 /* ── Tablet + Desktop: spatial split, no overlay ──────────── */
 @media (min-width: 768px) {
-  .micro-about {
+  .bridge {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
   }
-  .micro-about__media {
+  .bridge__media {
     left: auto;
     right: 0;
     width: 50%;
   }
-  .micro-about__overlay {
+  .bridge__overlay {
     display: none;
   }
-  .micro-about__content {
+  .bridge__content {
     padding: 4rem 5rem;
     width: 50%;
     max-width: 50%;
   }
-  .micro-about__rule {
+  .bridge__rule {
     width: 56px;
     margin-bottom: 2rem;
   }
-  .micro-about__heading {
+  .bridge__heading {
     font-size: 2.5rem;
   }
-  .micro-about__attribution {
+  .bridge__attribution {
     font-size: 1rem;
     margin-top: 1.5rem;
   }
@@ -1611,7 +1611,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
     opacity: 1;
   }
   /* Portrait: span must fill the absolute media container */
-  .micro-about .img-alt-host {
+  .bridge .img-alt-host {
     display: block;
     width: 100%;
     height: 100%;
