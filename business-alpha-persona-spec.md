@@ -36,6 +36,7 @@ Derived from: *The High-Value Alpha Persona* (archetype mechanics only), *T1 Off
 - **Manifesto / Triple Cero (filter):** non-negotiable terms that repel low-fit leads — the velvet rope.
 - **Contact (evaluation):** application, not purchase; viability + 48h hábiles.
 
-## Hard factual DO-NOTs *(from T1 — non-negotiable)*
-- Never use **"12-project portfolio"** — contradicts shipped truth.
-- Frame **TUUA** as operational standard-setting, not the detached audit.
+## Credential display rules (from T1 + principal confirmation)
+-  Microsoft Program Management Specialization: confirmed held; no badge issued (certificate only). May be referenced in copy where credentials are enumerated; do not list it alongside badge-grid credentials without noting the format distinction.
+-  Google Project Management: badge confirmed and displayed in capabilities grid — canonical reference for PM credentialing in copy.
+-  TUUA case study: frame exclusively as operational standard-setting (a new protocol codified from a novel scenario). The locked key (work_card3_body) is the canonical narrative — do not drift toward audit, EVM, or portfolio-management framing.
