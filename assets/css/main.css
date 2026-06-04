@@ -2073,3 +2073,183 @@ body.modal-open {
   }
 }
 /* ===== END CONTACT ===== */
+
+/* ===== WORK TICKER COMPONENT ===================================
+   Dual-lane horizontal marquee · BEM block: .work-ticker
+   Slot: inside .section--work, after .section__inner
+   Lane 1 scrolls LEFT · Lane 2 scrolls RIGHT
+   i18n: work_ticker_heading · lede · lane1 · lane2
+================================================================= */
+
+.work-ticker {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(4rem, 6vw, 6rem) 0 clamp(3rem, 5vw, 5rem);
+}
+
+.work-ticker__editorial {
+  width: 100%;
+  max-width: var(--max-content-width, 1440px);
+  margin: 0 auto;
+  padding: 0 var(--gutter, 80px);
+  box-sizing: border-box;
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .work-ticker__editorial {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .work-ticker__editorial {
+    padding: 0 var(--gutter);
+  }
+}
+
+.work-ticker__heading {
+  font-family: var(--font-primary, 'Graphik', Arial, sans-serif);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-white, #FFFFFF);
+  text-transform: none;
+  margin: 0 0 0.75rem 0;
+}
+
+.work-ticker__lede {
+  font-family: var(--font-primary, 'Graphik', Arial, sans-serif);
+  font-weight: 400;
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+  line-height: 1.55;
+  color: var(--color-text-muted, rgba(255,255,255,0.55));
+  margin: 0;
+}
+
+.work-ticker__lanes {
+  display: flex;
+  flex-direction: column;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* Anti-collision: extra bottom padding clears the lane label.
+   B4: reduced from clamp(3.5rem,5vw,4rem) so the two lanes read as
+   one unified band rather than two separate rows. */
+.work-ticker__band {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) 0 clamp(2.5rem, 3.5vw, 3rem);
+}
+
+.work-ticker__band:last-child {
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Edge fade masks — emerge from black on both sides */
+.work-ticker__band::before,
+.work-ticker__band::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(3rem, 8vw, 8rem);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.work-ticker__band::before {
+  left: 0;
+  background: linear-gradient(to right, #000000 0%, transparent 100%);
+}
+
+.work-ticker__band::after {
+  right: 0;
+  background: linear-gradient(to left, #000000 0%, transparent 100%);
+}
+
+/* Lane label: bottom-centered typographic annotation */
+.work-ticker__lane-label {
+  position: absolute;
+  bottom: clamp(0.5rem, 1.5vw, 1rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: var(--font-primary, 'Graphik', Arial, sans-serif);
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.40);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Scrolling tracks */
+.work-ticker__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  align-items: center;
+}
+
+.work-ticker__band--lane1 .work-ticker__track {
+  animation: work-ticker-left 28s linear infinite;
+}
+
+.work-ticker__band--lane2 .work-ticker__track {
+  animation: work-ticker-right 28s linear infinite;
+}
+
+/* Logo group */
+.work-ticker__group {
+  display: flex;
+  align-items: center;
+  gap: clamp(3rem, 5vw, 5.5rem);
+  padding-right: clamp(3rem, 5vw, 5.5rem);
+}
+
+@media (max-width: 768px) {
+  .work-ticker__group {
+    gap: clamp(2rem, 6vw, 3rem);
+    padding-right: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+/* Logo: render at intrinsic size — zero override per principal directive */
+.work-ticker__logo {
+  display: block;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+.work-ticker__logo:hover,
+.work-ticker__logo:focus {
+  opacity: 1;
+}
+
+/* Keyframes — namespaced to avoid collision with any existing rules */
+@keyframes work-ticker-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes work-ticker-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .work-ticker__band--lane1 .work-ticker__track,
+  .work-ticker__band--lane2 .work-ticker__track {
+    animation-duration: 120s;
+  }
+}
