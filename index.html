@@ -371,98 +371,77 @@
 
     </div>
 
-    <!-- Work Ticker: dual-lane institutional credentials -->
-    <div class="work-ticker">
+  </section>
 
-      <div class="work-ticker__editorial">
-        <h2 class="work-ticker__heading"
-            data-i18n="work_ticker_heading"></h2>
-        <p class="work-ticker__lede"
-           data-i18n="work_ticker_lede"></p>
+  <!-- ============================================================
+       TICKER — Standalone organism · EN/ES bilingual
+       Anchor: #ticker
+       Dual-lane institutional credentials marquee
+       JS clone-to-fill (assets/js/main.js → tickerMarquee)
+       ============================================================ -->
+  <section class="section section--ticker section--alt" id="ticker" aria-label="Institutional credentials">
+    <div class="section__inner">
+      <div class="ticker__header">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar" aria-hidden="true"></span>
+          <p class="section__eyebrow-text" data-i18n="ticker_eyebrow">TRACK RECORD</p>
+        </div>
+        <h2 class="section__headline" data-i18n="ticker_heading">Institutional foundation.</h2>
+        <p class="section__lede" data-i18n="ticker_lede">Ten years of execution across industry and academia.</p>
+      </div>
+    </div>
+
+    <div class="ticker__lanes">
+
+      <!-- Lane 1: Academic — scrolls LEFT -->
+      <div class="ticker__band ticker__band--lane1"
+           role="img"
+           aria-label="Academic and institutional credentials">
+        <div class="ticker__track">
+          <div class="ticker__group">
+            <img src="assets/img/logos/1__esan-bw.svg"
+                 alt="ESAN Graduate Business School"
+                 class="ticker__logo">
+            <img src="assets/img/logos/2__centrum-bw.svg"
+                 alt="CENTRUM PUCP Business School"
+                 class="ticker__logo">
+            <img src="assets/img/logos/3__uvic-bw.svg"
+                 alt="University of Victoria"
+                 class="ticker__logo">
+            <img src="assets/img/logos/4__um-bw.svg"
+                 alt="Maastricht University"
+                 class="ticker__logo">
+            <img src="assets/img/logos/5__bgs-bw.svg"
+                 alt="Beta Gamma Sigma"
+                 class="ticker__logo">
+          </div>
+        </div>
       </div>
 
-      <div class="work-ticker__lanes">
-
-        <!-- Lane 1: Respaldo — scrolls LEFT -->
-        <div class="work-ticker__band work-ticker__band--lane1"
-             role="img"
-             aria-label="Academic and institutional credentials">
-          <div class="work-ticker__track">
-            <div class="work-ticker__group">
-              <img src="assets/img/logos/1__esan-bw.svg"
-                   alt="ESAN Graduate Business School"
-                   class="work-ticker__logo">
-              <img src="assets/img/logos/2__centrum-bw.svg"
-                   alt="CENTRUM PUCP Business School"
-                   class="work-ticker__logo">
-              <img src="assets/img/logos/3__uvic-bw.svg"
-                   alt="University of Victoria"
-                   class="work-ticker__logo">
-              <img src="assets/img/logos/4__um-bw.svg"
-                   alt="Maastricht University"
-                   class="work-ticker__logo">
-              <img src="assets/img/logos/5__bgs-bw.svg"
-                   alt="Beta Gamma Sigma"
-                   class="work-ticker__logo">
-            </div>
-            <div class="work-ticker__group" aria-hidden="true">
-              <img src="assets/img/logos/1__esan-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/2__centrum-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/3__uvic-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/4__um-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/5__bgs-bw.svg"
-                   alt="" class="work-ticker__logo">
-            </div>
+      <!-- Lane 2: Industry — scrolls RIGHT -->
+      <div class="ticker__band ticker__band--lane2"
+           role="img"
+           aria-label="Industry and applied execution credentials">
+        <div class="ticker__track">
+          <div class="ticker__group">
+            <img src="assets/img/logos/6__hunt-bw.svg"
+                 alt="Hunt" class="ticker__logo">
+            <img src="assets/img/logos/7__lap-bw.svg"
+                 alt="Lima Airport Partners"
+                 class="ticker__logo">
+            <img src="assets/img/logos/8__hec-bw.svg"
+                 alt="HEC Montréal"
+                 class="ticker__logo">
+            <img src="assets/img/logos/9__utec-bw.svg"
+                 alt="UTEC" class="ticker__logo">
+            <img src="assets/img/logos/10__innova-bw.svg"
+                 alt="Innova ULima"
+                 class="ticker__logo">
           </div>
-          <span class="work-ticker__lane-label"
-                data-i18n="work_ticker_lane1"
-                aria-hidden="true"></span>
         </div>
+      </div>
 
-        <!-- Lane 2: Despliegue — scrolls RIGHT -->
-        <div class="work-ticker__band work-ticker__band--lane2"
-             role="img"
-             aria-label="Industry and applied execution credentials">
-          <div class="work-ticker__track">
-            <div class="work-ticker__group">
-              <img src="assets/img/logos/6__hunt-bw.svg"
-                   alt="Hunt" class="work-ticker__logo">
-              <img src="assets/img/logos/7__lap-bw.svg"
-                   alt="Lima Airport Partners"
-                   class="work-ticker__logo">
-              <img src="assets/img/logos/8__hec-bw.svg"
-                   alt="HEC Montréal"
-                   class="work-ticker__logo">
-              <img src="assets/img/logos/9__utec-bw.svg"
-                   alt="UTEC" class="work-ticker__logo">
-              <img src="assets/img/logos/10__innova-bw.svg"
-                   alt="Innova ULima"
-                   class="work-ticker__logo">
-            </div>
-            <div class="work-ticker__group" aria-hidden="true">
-              <img src="assets/img/logos/6__hunt-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/7__lap-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/8__hec-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/9__utec-bw.svg"
-                   alt="" class="work-ticker__logo">
-              <img src="assets/img/logos/10__innova-bw.svg"
-                   alt="" class="work-ticker__logo">
-            </div>
-          </div>
-          <span class="work-ticker__lane-label"
-                data-i18n="work_ticker_lane2"
-                aria-hidden="true"></span>
-        </div>
-
-      </div><!-- /.work-ticker__lanes -->
-    </div><!-- /.work-ticker -->
+    </div><!-- /.ticker__lanes -->
   </section>
 
   <!-- ============================================================
