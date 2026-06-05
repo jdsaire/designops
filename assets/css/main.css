@@ -2164,20 +2164,17 @@ body.modal-open {
 .ticker__logo {
   display: block;
   flex-shrink: 0;
-  width: 150px;
   height: 56px;
-  object-fit: contain;
-  object-position: center;
   opacity: 0.55;
   transform: translateZ(0);
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
 }
 @media (min-width: 641px) {
-  .ticker__logo { width: 200px; height: 72px; }
+  .ticker__logo { height: 72px; }
 }
 @media (min-width: 1024px) {
-  .ticker__logo { width: 300px; height: 88px; }
+  .ticker__logo { height: 88px; }
 }
 
 .ticker__logo:hover,
