@@ -2201,3 +2201,35 @@ body.modal-open {
     transform: none;
   }
 }
+
+/* ============================================================
+   WORK CARD — STATUS BADGE (v2)
+   Flat purple chip, zero border-radius. Revealed on hover/focus,
+   matching the work-card summary reveal cadence.
+   ============================================================ */
+.work-card__status {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--color-brand-white);
+  background: var(--color-brand-purple);
+  border-radius: 0;
+  opacity: 0;
+  transform: translateX(12px);
+  transition:
+    opacity   var(--duration-ui) var(--ease-standard),
+    transform var(--duration-ui) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-card:hover .work-card__status,
+  .work-card:focus-within .work-card__status { opacity: 1; transform: translateX(0); }
+}
+
+.work-card.is-active .work-card__status { opacity: 1; transform: translateX(0); }
