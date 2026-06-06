@@ -442,33 +442,23 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
   logoImg.src = 'assets/img/capabilities/logo_map_edit.svg';
 
   // ── Data ──
+  // Copy (branch + node labels and descriptions) is sourced live from the i18n
+  // dictionaries by id: pillar_<branch.id>_label and capabilities_node_<node.id>_label/_desc.
   const BRANCHES = [
     {
-      id: 'build', label: 'BUILD', labelES: 'CREA', angle: 90,
+      id: 'build', angle: 90,
       color: '#A100FF', glow: 'rgba(161,0,255,0.45)',
-      nodes: [
-        { id: 'pd',  label: 'Product\nDesigner',    labelES: 'Product\nDesigner',        desc: 'Every interface decision is a bet on user behavior. We design with behavioral assumptions baked into every interaction — tested against real users, not design committee preference.' },
-        { id: 'fd',  label: 'Front-end\nDeveloper', labelES: 'Desarrollador\nFront-end', desc: 'Design dies in handoff when no one can build it. We close that gap — writing production-grade Vanilla HTML/CSS/JS and C#, accelerated by AI workflows that ship, perform, and survive the first real user.' },
-        { id: 'ux',  label: 'UX/UI\nEngineer',      labelES: 'Ingeniero\nUX/UI',          desc: 'The handoff gap between Figma and production is where digital products lose their soul. We close it — owning both the design system and the code that implements it, frame by frame.' },
-      ]
+      nodes: [ { id: 'pd' }, { id: 'fd' }, { id: 'ux' } ]
     },
     {
-      id: 'scale', label: 'SCALE', labelES: 'CRECE', angle: 210,
+      id: 'scale', angle: 210,
       color: '#C2A3FF', glow: 'rgba(194,163,255,0.45)',
-      nodes: [
-        { id: 'cx',  label: 'CX\nLead',          labelES: 'Líder\nCX',          desc: 'Customer journey maps are decorative without an owner for each friction point. We map end-to-end experiences and assign accountability — so improvements have a name attached, not a committee.' },
-        { id: 'tt',  label: 'Tech\nTrainer',      labelES: 'Instructor\nTech',   desc: 'Tool adoption stalls the moment the rollout team leaves. We design and facilitate upskilling programs that move internal teams from passive recipients to active owners of new processes.' },
-        { id: 'gh',  label: 'Growth\nHacker',     labelES: 'Growth\nHacker',     desc: 'Acquisition only matters if the product retains. We identify high-leverage conversion levers through rapid experimentation — driving innovation by measuring what users do, not what they report.' },
-      ]
+      nodes: [ { id: 'cx' }, { id: 'tt' }, { id: 'gh' } ]
     },
     {
-      id: 'control', label: 'CONTROL', labelES: 'CONTROLA', angle: 330,
+      id: 'control', angle: 330,
       color: '#7500C0', glow: 'rgba(117,0,192,0.55)',
-      nodes: [
-        { id: 'pm',  label: 'Project\nManager',   desc: 'Complex programs lose money in the gaps between workstreams — not in the work itself. We govern multi-project and multi-phase portfolios with the systemic view that separates structure from noise.' },
-        { id: 'sm',  label: 'Scrum\nMaster',      desc: 'Agile ceremonies without accountability are expensive theater. We run sprint cadences where every ceremony has a decision attached — and the board reflects reality, not wishful planning.' },
-        { id: 'prd', label: 'Product\nManager',   desc: 'Roadmaps fail when no one can trace a feature to a business outcome. We own the product backlog with prioritization grounded in user evidence and business strategy — not committee consensus.' },
-      ]
+      nodes: [ { id: 'pm' }, { id: 'sm' }, { id: 'prd' } ]
     }
   ];
 
@@ -599,10 +589,12 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       ctx.setLineDash([]);
     }
 
-    // label
+    // label (sourced from i18n dict; split on first space into two canvas lines)
     const nodeLang  = document.documentElement.dataset.lang || 'EN';
-    const nodeLabel = (nodeLang === 'ES' && nd.labelES) ? nd.labelES : nd.label;
-    const lines  = nodeLabel.split('\n');
+    const nodeDict  = i18nDicts[nodeLang] || {};
+    const nodeLabel = nodeDict[`capabilities_node_${nd.id}_label`] || '';
+    const nlSp   = nodeLabel.indexOf(' ');
+    const lines  = nlSp === -1 ? [nodeLabel] : [nodeLabel.slice(0, nlSp), nodeLabel.slice(nlSp + 1)];
     const fSize  = W < 480 ? 10 : 11;
     ctx.font     = `600 ${fSize}px 'Graphik', Arial, sans-serif`;
     ctx.textAlign    = 'center';
@@ -621,7 +613,8 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     const by     = branch._by;
     const fSize  = W < 480 ? 13 : 16;
     const bLang  = document.documentElement.dataset.lang || 'EN';
-    const bLabel = (bLang === 'ES' && branch.labelES) ? branch.labelES : branch.label;
+    const bDict  = i18nDicts[bLang] || {};
+    const bLabel = (bDict[`pillar_${branch.id}_label`] || '').toUpperCase();
 
     ctx.font         = `600 ${fSize}px 'Graphik', Arial, sans-serif`;
     ctx.textAlign    = 'center';
@@ -706,8 +699,8 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
   function openInfoCard(nd) {
     const lang = document.documentElement.dataset.lang || 'EN';
     const dict = i18nDicts[lang] || {};
-    capInfoTitle.textContent = dict[`capabilities_node_${nd.id}_label`] || nd.label.replace('\n', ' ');
-    capInfoDesc.textContent  = dict[`capabilities_node_${nd.id}_desc`]  || nd.desc;
+    capInfoTitle.textContent = dict[`capabilities_node_${nd.id}_label`] || '';
+    capInfoDesc.textContent  = dict[`capabilities_node_${nd.id}_desc`]  || '';
 
     const margin = 12;
     const cardW  = 288;
@@ -738,8 +731,8 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
   function openSheet(nd) {
     const lang = document.documentElement.dataset.lang || 'EN';
     const dict = i18nDicts[lang] || {};
-    capSheetTitle.textContent = dict[`capabilities_node_${nd.id}_label`] || nd.label.replace('\n', ' ');
-    capSheetDesc.textContent  = dict[`capabilities_node_${nd.id}_desc`]  || nd.desc;
+    capSheetTitle.textContent = dict[`capabilities_node_${nd.id}_label`] || '';
+    capSheetDesc.textContent  = dict[`capabilities_node_${nd.id}_desc`]  || '';
     capBottomSheet.classList.add('visible');
     capBackdrop.classList.add('visible');
   }
