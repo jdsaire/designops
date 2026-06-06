@@ -1179,7 +1179,16 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   flex-direction: column;
   gap: 1.5rem;
 }
-.footer .cta { margin-bottom: 0.75rem; }
+.footer .cta { margin-bottom: 0.75rem; color: var(--color-brand-purple); }
+.footer .cta:hover,
+.footer .cta:focus-visible { color: var(--color-purple-hover); }
+.footer__linkedin-icon {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
 .footer__tagline {
   font-size: clamp(1.875rem, 3.6vw, 3rem);
   font-weight: var(--fw-bold);
