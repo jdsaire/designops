@@ -1188,7 +1188,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   color: var(--color-brand-white);
   white-space: nowrap;
 }
-.footer__tagline .purple { color: var(--color-brand-purple); }
+.footer__tagline .purple { color: var(--color-brand-purple); display: block; }
 .footer__columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
