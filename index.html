@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JDigital — Personal Portfolio</title>
-  <meta name="description" content="JDigital — digital architecture for leaders. A solo Lima-based practice shipping Build, Scale, and Control engagements across nine certified roles.">
-  <link rel="canonical" href="https://jdigital.pe/">
+  <title>Juan Diego Saire — UX Engineer / DesignOps Specialist</title>
+  <meta name="description" content="UX Engineer and DesignOps Specialist who takes digital products from feasible to shipped — viable products, enterprise AI automation, and one design standard governed at scale.">
   <link rel="icon" type="image/svg+xml" href="logos/jdigital-logo-default.svg">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jdigital.pe/">
-  <meta property="og:title" content="JDigital — Digital Architecture for Leaders">
-  <meta property="og:description" content="A solo Lima-based practice shipping Build, Scale, and Control engagements across nine certified roles.">
-  <meta property="og:image" content="https://jdigital.pe/assets/img/bridge1_onboarding.svg">
+  <meta property="og:title" content="Juan Diego Saire — UX Engineer / DesignOps Specialist">
+  <meta property="og:description" content="The strategist who takes digital products from feasible to shipped.">
+  <meta property="og:image" content="assets/img/bridge1_onboarding.svg">
   <meta property="og:locale" content="en_US">
-  <meta property="og:locale:alternate" content="es_PE">
 
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -44,28 +41,29 @@
       <!-- CENTER nav links -->
       <div class="nav__center">
         <a href="#work"         class="nav__link" data-i18n="nav_work">Work</a>
-        <a href="#services"     class="nav__link" data-i18n="nav_services">Services</a>
+        <a href="#offer"        class="nav__link" data-i18n="nav_offer">Offer</a>
         <a href="#capabilities" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
-        <a href="#about"        class="nav__link" data-i18n="nav_about">Standards</a>
+        <a href="#evolution"    class="nav__link" data-i18n="nav_evolution">Evolution</a>
       </div>
 
       <!-- RIGHT utility -->
       <div class="nav__utility">
-        <div class="nav__lang" id="langSelector">
+        <!-- SwapLang toggle hidden this run (EN-only public); engine + es.json preserved for a later pass -->
+        <div class="nav__lang" id="langSelector" hidden aria-hidden="true">
           <button class="nav__lang-btn" id="langBtn" type="button"
-                  aria-label="Select language" aria-haspopup="listbox">
+                  aria-label="Select language" aria-haspopup="listbox" tabindex="-1">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="10"/>
               <line x1="2" y1="12" x2="22" y2="12"/>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
-            <span id="langLabel">ES</span>
+            <span id="langLabel">EN</span>
           </button>
           <div class="nav__lang-panel" id="langPanel" role="listbox" aria-label="Language">
-            <button class="nav__lang-option nav__lang-option--active"
-                    role="option" aria-selected="true" data-lang="ES">ES</button>
             <button class="nav__lang-option"
-                    role="option" aria-selected="false" data-lang="EN">EN</button>
+                    role="option" aria-selected="false" data-lang="ES" tabindex="-1">ES</button>
+            <button class="nav__lang-option nav__lang-option--active"
+                    role="option" aria-selected="true" data-lang="EN" tabindex="-1">EN</button>
           </div>
         </div>
 
@@ -95,16 +93,16 @@
         <span data-i18n="nav_work">Work</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
-      <a href="#services"     class="nav__overlay-link">
-        <span data-i18n="nav_services">Services</span>
+      <a href="#offer"        class="nav__overlay-link">
+        <span data-i18n="nav_offer">Offer</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
       <a href="#capabilities" class="nav__overlay-link">
         <span data-i18n="nav_capabilities">Capabilities</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
-      <a href="#about"        class="nav__overlay-link">
-        <span data-i18n="nav_about">Mindset</span>
+      <a href="#evolution"    class="nav__overlay-link">
+        <span data-i18n="nav_evolution">Evolution</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
       <a href="#contact"      class="nav__overlay-link">
@@ -131,56 +129,20 @@
 
     <div class="hero__inner">
 
-      <!-- LEFT 62% -->
       <div class="hero__left">
 
         <span class="hero__badge">
           <span class="hero__badge-dot" aria-hidden="true"></span>
-          <span data-i18n="hero_badge">Building in Lima, Peru</span>
+          <span data-i18n="hero_badge">Building in Lima, Peru.</span>
         </span>
 
         <h1 class="hero__h1">
-          <span class="hero__h1-line" data-i18n="hero_h1_line1">Your digital</span>
-          <span class="hero__h1-line" data-i18n="hero_h1_line2">ambitions</span>
-          <span class="hero__h1-line"><span class="purple" data-i18n="hero_h1_line3">live here</span></span>
+          <span class="hero__h1-line" data-i18n="hero_h1_line1">Your digital products stall between strategy and launch.</span>
+          <span class="hero__h1-line"><span class="purple" data-i18n="hero_h1_line2">I take them from feasible to shipped.</span></span>
         </h1>
 
-        <div class="hero__tags" role="list">
-          <span class="hero__tag" role="listitem">BUILD</span>
-          <span class="hero__tag" role="listitem">SCALE</span>
-          <span class="hero__tag" role="listitem">CONTROL</span>
-        </div>
-      </div>
-
-      <!-- RIGHT 38% -->
-      <div class="hero__right">
-
-        <p class="hero__eyebrow">
-          <span class="hero__eyebrow-bar" aria-hidden="true"></span>
-          <span data-i18n="hero_eyebrow">Proven impact</span>
-        </p>
-
-        <div class="hero__stats">
-          <div>
-            <div class="stat__number" data-target="10" data-suffix="+">0+</div>
-            <div class="stat__label" data-i18n="hero_stat1">A decade across three disciplines</div>
-          </div>
-          <div>
-            <div class="stat__number" data-target="150" data-suffix="K+">0K+</div>
-            <div class="stat__label" data-i18n="hero_stat2">Students and users shaped by the work</div>
-          </div>
-          <div>
-            <div class="stat__number" data-target="50" data-suffix="+">0+</div>
-            <div class="stat__label" data-i18n="hero_stat3">Projects shipped across 5 industries</div>
-          </div>
-          <div>
-            <div class="stat__number" data-target="10" data-suffix="+">0+</div>
-            <div class="stat__label" data-i18n="hero_stat4">Faster builds with AI in the loop</div>
-          </div>
-        </div>
-
-        <a href="#work" class="cta" aria-label="See the work — case studies" data-i18n-aria="hero_cta_aria">
-          <span class="cta__label" data-i18n="hero_cta">See the work</span>
+        <a href="#work" class="cta" aria-label="See the work — selected builds" data-i18n-aria="hero_cta_aria">
+          <span class="cta__label" data-i18n="hero_cta">See the work.</span>
           <span class="cta__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
           </span>
@@ -218,12 +180,12 @@
           class="bridge__heading"
           id="bridge1-onboarding-heading"
           data-i18n="bridge1_onboarding_heading"
-        >JDigital is not an agency; it is my personal brand, my statement of execution.</h2>
+        >UX Engineer and DesignOps Specialist. I take products past the workshops and journey maps and into production &mdash; shipping viable digital products, building AI automation for the enterprise, and governing one design standard across the whole portfolio. A strategist who reads the code, runs the repo, and directs the build &mdash; not another pair of hands.</h2>
       </div>
       <p
         class="bridge__attribution"
         data-i18n="attribution"
-      >Juan Diego Saire &mdash; Founder, JDigital</p>
+      >Juan Diego Saire &mdash; DesignOps</p>
     </div>
   </section>
 
@@ -240,122 +202,90 @@
           <span class="section__eyebrow-bar" aria-hidden="true"></span>
           <p class="section__eyebrow-text" data-i18n="work_eyebrow">WORK</p>
         </div>
-        <h2 class="section__headline" data-i18n="work_heading">Success stories.</h2>
-        <p class="section__lede" data-i18n="work_lede">Scroll through the work that made it onto the shortlist.</p>
+        <h2 class="section__headline" data-i18n="work_heading">Built, not just mapped.</h2>
+        <p class="section__lede" data-i18n="work_lede">Three builds where the call and the code were mine.</p>
       </div>
 
       <ol class="work__track" role="list">
 
-        <!-- CARD 1 — LimaFly -->
+        <!-- CARD 1 — Design system (lead) -->
         <li class="work-card"
             tabindex="0"
-            aria-label="LimaFly — Built a revenue-first app for 40M+ passengers">
+            aria-label="A design system I built and govern end to end">
 
           <div class="work-card__bg" aria-hidden="true">
             <img src="assets/img/work/build.svg" alt="" class="work-card__bg-img">
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="pillar_build_label">Build</p>
-            <h3 class="work-card__title" data-i18n="work_card1_heading">Built a revenue-first app for 40M+ passengers</h3>
+            <p class="work-card__category" data-i18n="work_card1_label">Design system · Front-end</p>
+            <h3 class="work-card__title" data-i18n="work_card1_heading">A design system I built and govern end to end.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="pillar_build_label">Build</p>
-            <h3 class="work-card__hover-title" data-i18n="work_card1_heading">Built a revenue-first app for 40M+ passengers</h3>
-            <p class="work-card__summary" data-i18n="work_card1_body">Lima Airport's new terminal needed a mobile experience to unlock non-aeronautical revenue. We prototyped LimaFly in high fidelity — a full passenger journey for 40M+ annual arrivals and departures.</p>
-            <span class="work-card__status" data-i18n="work_card1_status">Q4 2024</span>
+            <p class="work-card__hover-category" data-i18n="work_card1_label">Design system · Front-end</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card1_heading">A design system I built and govern end to end.</h3>
+            <p class="work-card__summary" data-i18n="work_card1_body">My own site is the operating layer I run: global tokens, 10 reusable organisms, and a 175-key bilingual engine, hand-written in HTML/CSS/JS at WCAG AA. Every component is held to correct adoption — proven on the page you're reading.</p>
           </div>
 
-          <a href="#contact" class="work-card__cta" aria-label="Explore LimaFly case study">
-            <span data-i18n="work_cta">Explore</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+          <a href="#contact" class="work-card__cta" aria-label="Start a conversation">
+            <span data-i18n="work_cta">Start a conversation.</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
           </a>
 
           <button class="work-card__close" type="button" aria-label="Close summary">×</button>
 
         </li>
 
-        <!-- CARD 2 — Agile Workshops -->
+        <!-- CARD 2 — TUUA platform -->
         <li class="work-card"
             tabindex="0"
-            aria-label="Agile Workshops — Aligned airport staff in modern Agile with top-rated workshop">
-
-          <div class="work-card__bg" aria-hidden="true">
-            <img src="assets/img/work/scale.svg" alt="" class="work-card__bg-img">
-          </div>
-
-          <div class="work-card__default">
-            <p class="work-card__category" data-i18n="pillar_scale_label">Scale</p>
-            <h3 class="work-card__title" data-i18n="work_card2_heading">Aligned airport staff in modern Agile with top-rated workshop</h3>
-          </div>
-
-          <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="pillar_scale_label">Scale</p>
-            <h3 class="work-card__hover-title" data-i18n="work_card2_heading">Aligned airport staff in modern Agile with top-rated workshop</h3>
-            <p class="work-card__summary" data-i18n="work_card2_body">Lima Airport's cultural shift to Agile needed real traction, fast. We ran three hybrid workshops — 70 employees across all divisions walked away ready to apply it in their teams.</p>
-            <span class="work-card__status" data-i18n="work_card2_status">Q3 2025</span>
-          </div>
-
-          <a href="#contact" class="work-card__cta" aria-label="Explore Agile Workshops case study">
-            <span data-i18n="work_cta">Explore</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
-          </a>
-
-          <button class="work-card__close" type="button" aria-label="Close summary">×</button>
-
-        </li>
-
-        <!-- CARD 3 — TUUA Transfer -->
-        <li class="work-card"
-            tabindex="0"
-            aria-label="TUUA Transfer — Reset playbook of major airport program">
+            aria-label="The TUUA platform I designed, prototyped, and handed to engineering">
 
           <div class="work-card__bg" aria-hidden="true">
             <img src="assets/img/work/control.svg" alt="" class="work-card__bg-img">
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="pillar_control_label">Control</p>
-            <h3 class="work-card__title" data-i18n="work_card3_heading">Reset playbook of major airport program</h3>
+            <p class="work-card__category" data-i18n="work_card2_label">Product · Payment platform</p>
+            <h3 class="work-card__title" data-i18n="work_card2_heading">The TUUA platform I designed, prototyped, and handed to engineering.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="pillar_control_label">Control</p>
-            <h3 class="work-card__hover-title" data-i18n="work_card3_heading">Reset playbook of major airport program</h3>
-            <p class="work-card__summary" data-i18n="work_card3_body">Designing an unprecedented aeronautical fee meant making high-stakes calls without a playbook. We codified lessons from the TUUA Transfer to shape Lima Airport's next major programs.</p>
-            <span class="work-card__status" data-i18n="work_card3_status">Q3 2025</span>
+            <p class="work-card__hover-category" data-i18n="work_card2_label">Product · Payment platform</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card2_heading">The TUUA platform I designed, prototyped, and handed to engineering.</h3>
+            <p class="work-card__summary" data-i18n="work_card2_body">At Lima Airport Partners I designed, prototyped, and evaluated the TUUA international-transfer fee platform, then delivered the user flow and mockups to engineering for build. It's live, serving 130,000+ international-transfer passengers monthly.</p>
           </div>
 
-          <a href="#contact" class="work-card__cta" aria-label="Explore TUUA Transfer case study">
-            <span data-i18n="work_cta">Explore</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+          <a href="#contact" class="work-card__cta" aria-label="Start a conversation">
+            <span data-i18n="work_cta">Start a conversation.</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
           </a>
 
           <button class="work-card__close" type="button" aria-label="Close summary">×</button>
 
         </li>
 
-        <!-- CARD 4 — JDigital v1 (In Progress) -->
-        <li class="work-card work-card--coming-soon"
+        <!-- CARD 3 — LimaFly prototype -->
+        <li class="work-card"
             tabindex="0"
-            aria-label="JDigital v1 — Building with modern Microsoft Front-End">
+            aria-label="A high-fidelity prototype of the full airport passenger journey">
 
           <div class="work-card__bg" aria-hidden="true">
-            <img src="assets/img/work/build-in-progress.svg" alt="" class="work-card__bg-img">
+            <img src="assets/img/work/scale.svg" alt="" class="work-card__bg-img">
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category work-card__category--coming" data-i18n="pillar_build_label">Build · In progress</p>
-            <h3 class="work-card__title" data-i18n="work_card4_heading">Building JDigital v1 with modern Microsoft Front-End</h3>
+            <p class="work-card__category" data-i18n="work_card3_label">Prototype · Passenger journey</p>
+            <h3 class="work-card__title" data-i18n="work_card3_heading">A high-fidelity prototype of the full airport passenger journey.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category work-card__hover-category--coming" data-i18n="pillar_build_label">Build · In progress</p>
-            <h3 class="work-card__hover-title" data-i18n="work_card4_heading">Building JDigital v1 with modern Microsoft Front-End</h3>
-            <p class="work-card__summary" data-i18n="work_card4_body">This site is the first version of a full-stack boutique practice. Midway through a Microsoft front-end specialization, every technique gets pressure-tested here before it ships to partners.</p>
-            <span class="work-card__status" data-i18n="work_card4_status">Q2 2026</span>
+            <p class="work-card__hover-category" data-i18n="work_card3_label">Prototype · Passenger journey</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card3_heading">A high-fidelity prototype of the full airport passenger journey.</h3>
+            <p class="work-card__summary" data-i18n="work_card3_body">Before I applied to Lima Airport, I built LimaFly: a high-fidelity prototype of the complete passenger journey, on a scalable foundation of tokens, component variants, and Auto Layout. I prototype the industry to walk in already fluent.</p>
           </div>
 
-          <a href="#contact" class="work-card__cta" aria-label="Explore JDigital v1 journey">
-            <span data-i18n="work_cta">Explore</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+          <a href="#contact" class="work-card__cta" aria-label="Start a conversation">
+            <span data-i18n="work_cta">Start a conversation.</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
           </a>
 
           <button class="work-card__close" type="button" aria-label="Close summary">×</button>
@@ -366,10 +296,9 @@
 
       <!-- Pagination dots — mobile + tablet only -->
       <div class="work__dots" role="tablist" aria-label="Work cards pagination">
-        <button class="work__dot work__dot--active" type="button" aria-label="Card 1 of 4" data-card-index="0"></button>
-        <button class="work__dot" type="button" aria-label="Card 2 of 4" data-card-index="1"></button>
-        <button class="work__dot" type="button" aria-label="Card 3 of 4" data-card-index="2"></button>
-        <button class="work__dot" type="button" aria-label="Card 4 of 4" data-card-index="3"></button>
+        <button class="work__dot work__dot--active" type="button" aria-label="Card 1 of 3" data-card-index="0"></button>
+        <button class="work__dot" type="button" aria-label="Card 2 of 3" data-card-index="1"></button>
+        <button class="work__dot" type="button" aria-label="Card 3 of 3" data-card-index="2"></button>
       </div>
 
     </div>
@@ -377,357 +306,48 @@
   </section>
 
   <!-- ============================================================
-       TICKER — Standalone organism · EN/ES bilingual
-       Anchor: #ticker
-       Dual-lane institutional credentials marquee
-       JS clone-to-fill (assets/js/main.js → tickerMarquee)
+       OFFER — single panel · EN public
+       Anchor: #offer
        ============================================================ -->
-  <section class="section section--ticker section--alt" id="ticker" aria-label="Institutional credentials">
+  <section class="section section--offer section--alt" id="offer" aria-labelledby="offer-heading">
     <div class="section__inner">
-      <div class="ticker__header">
+
+      <div class="offer__header">
         <div class="section__eyebrow">
           <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="ticker_eyebrow">TRACK RECORD</p>
+          <p class="section__eyebrow-text" data-i18n="offer_eyebrow">OFFER</p>
         </div>
-        <h2 class="section__headline" data-i18n="ticker_heading">Institutional foundation.</h2>
-        <p class="section__lede" data-i18n="ticker_lede">Ten years of execution across industry and academia.</p>
+        <h2 class="section__headline" id="offer-heading" data-i18n="offer_heading">One seat. The whole stretch.</h2>
       </div>
+
+      <div class="offer__panel">
+        <p class="offer__titles" data-i18n="offer_titles">UX Engineer · DesignOps Specialist.</p>
+        <p class="offer__body" data-i18n="offer_body">I take products past design-thinking baby-steps and journey maps, all the way to production — not a commodity programmer, but the strategist who makes the feasibility call and then builds.</p>
+
+        <ol class="offer__mandates" role="list">
+          <li class="offer__mandate">
+            <h3 class="offer__mandate-title" data-i18n="offer_mandate1_title">Build viable digital products.</h3>
+            <p class="offer__mandate-body" data-i18n="offer_mandate1_body">UX through to production, with the feasibility and viability call made up front.</p>
+          </li>
+          <li class="offer__mandate">
+            <h3 class="offer__mandate-title" data-i18n="offer_mandate2_title">Build AI automation for the enterprise.</h3>
+            <p class="offer__mandate-body" data-i18n="offer_mandate2_body">Automation that clears friction from internal operations.</p>
+          </li>
+          <li class="offer__mandate">
+            <h3 class="offer__mandate-title" data-i18n="offer_mandate3_title">Standardize and govern one design practice at scale.</h3>
+            <p class="offer__mandate-body" data-i18n="offer_mandate3_body">Across the existing and incoming product portfolio.</p>
+          </li>
+        </ol>
+
+        <a href="#contact" class="cta" aria-label="Start a conversation">
+          <span class="cta__label" data-i18n="offer_cta">Start a conversation.</span>
+          <span class="cta__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
+        </a>
+      </div>
+
     </div>
-
-    <div class="ticker__lanes">
-
-      <!-- Lane 1: Academic — scrolls LEFT -->
-      <div class="ticker__band ticker__band--lane1"
-           role="img"
-           aria-label="Academic and institutional credentials">
-        <div class="ticker__track">
-          <div class="ticker__group">
-            <img src="assets/img/logos/1__esan-bw.png"
-                 data-i18n-alt="ticker_logo_esan_alt"
-                 class="ticker__logo">
-            <img src="assets/img/logos/2__centrum-bw.png"
-                 data-i18n-alt="ticker_logo_centrum_alt"
-                 class="ticker__logo">
-            <img src="assets/img/logos/3__uvic-bw.png"
-                 data-i18n-alt="ticker_logo_uvic_alt"
-                 class="ticker__logo">
-            <img src="assets/img/logos/4__um-bw.png"
-                 data-i18n-alt="ticker_logo_um_alt"
-                 class="ticker__logo">
-            <img src="assets/img/logos/5__bgs-bw.png"
-                 data-i18n-alt="ticker_logo_bgs_alt"
-                 class="ticker__logo">
-          </div>
-        </div>
-      </div>
-
-      <!-- Lane 2: Industry — scrolls RIGHT -->
-      <div class="ticker__band ticker__band--lane2"
-           role="img"
-           aria-label="Industry and applied execution credentials">
-        <div class="ticker__track">
-          <div class="ticker__group">
-            <img src="assets/img/logos/6__hunt-bw.png"
-                 data-i18n-alt="ticker_logo_hunt_alt" class="ticker__logo">
-            <img src="assets/img/logos/7__lap-bw.png"
-                 data-i18n-alt="ticker_logo_lap_alt"
-                 class="ticker__logo">
-            <img src="assets/img/logos/8__hec-bw.png"
-                 data-i18n-alt="ticker_logo_hec_alt"
-                 class="ticker__logo">
-            <img src="assets/img/logos/9__utec-bw.png"
-                 data-i18n-alt="ticker_logo_utec_alt" class="ticker__logo">
-            <img src="assets/img/logos/10__innova-bw.png"
-                 data-i18n-alt="ticker_logo_innova_alt"
-                 class="ticker__logo">
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /.ticker__lanes -->
-  </section>
-
-  <!-- ============================================================
-       BRIDGE 2 — Positioning · EN/ES bilingual
-       Anchor: #bridge2-positioning
-       ============================================================ -->
-  <section class="bridge" id="bridge2-positioning" aria-labelledby="bridge2-positioning-heading">
-    <div class="bridge__media">
-      <span class="img-alt-host" alt="Juan Diego Saire, JDigital founder, commanding the gap between digital strategy and code execution">
-        <img
-          class="bridge__image"
-          src="assets/img/bridge2_positioning.svg"
-          alt=""
-          data-i18n-alt="bridge2_positioning_image_alt"
-          loading="lazy"
-          decoding="async"
-          width="1068"
-          height="1600"
-        >
-      </span>
-      <div class="bridge__overlay" aria-hidden="true"></div>
-    </div>
-
-    <div class="bridge__content">
-      <span class="bridge__rule" aria-hidden="true"></span>
-      <div class="bridge__heading-wrapper">
-        <h2
-          class="bridge__heading"
-          id="bridge2-positioning-heading"
-          data-i18n="bridge2_positioning_heading"
-        >Innovation dies in the handoffs between strategy and code. I own this gap and ship it with authority.</h2>
-      </div>
-      <p
-        class="bridge__attribution"
-        data-i18n="attribution"
-      >Juan Diego Saire &mdash; Founder, JDigital</p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SERVICES — v1 · EN/ES bilingual · Lorem Ipsum placeholder
-       Anchor: #services
-       Copy: to be populated in next session
-       ============================================================ -->
-  <section class="section section--services section--alt" id="services" aria-label="Service pillars">
-
-    <div class="section__inner">
-      <div class="services__header">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="services_eyebrow">SERVICES</p>
-        </div>
-        <h2 class="section__headline" data-i18n="services_h2">How we engage.</h2>
-        <p class="section__lede" data-i18n="services_lede">Four ways to start — the right one depends on you.</p>
-      </div>
-    </div>
-
-    <div class="section__inner">
-      <div class="services__carousel-outer">
-        <div class="services__carousel" role="region" aria-roledescription="carousel" aria-label="Service pillars">
-
-          <ol class="services__slides" role="list" id="servicesTrack">
-
-            <!-- SLIDE 1 -->
-            <li class="services__slide services__slide--active"
-                role="group" aria-roledescription="slide" aria-label="Slide 1 of 4"
-                data-slide-index="0">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="JDigital strategic partnership illustration representing collaborative digital product management in Lima Peru">
-                      <img src="assets/img/services/strategic-partnership.svg" alt="" class="services__image" data-i18n-alt="services_img_strategic_alt">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="services_s1_label">STRATEGIC PARTNERSHIP</p>
-                  <h3 class="services__pillar-title" data-i18n="services_s1_title">The holistic mind your team needs</h3>
-                  <ul class="services__tags" aria-label="Slide 1 focus areas">
-                    <li class="services__tag">Tag one</li>
-                    <li class="services__tag">Tag two</li>
-                    <li class="services__tag">Tag three</li>
-                  </ul>
-                  <p class="services__pillar-body" data-i18n="services_s1_body">Some products need more than advice — they need someone in the room making calls. JDigital operates on a maximum of two strategic engagements per quarter, which means the ones that make it get undivided architecture, roadmap, and delivery focus.</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Read more about slide 1">
-                    <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Read more about slide 1">
-                      <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">1 / 4</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <!-- SLIDE 2 -->
-            <li class="services__slide"
-                role="group" aria-roledescription="slide" aria-label="Slide 2 of 4"
-                data-slide-index="1">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="JDigital education and opportunity illustration highlighting interactive and personalized learning experiences in digital">
-                      <img src="assets/img/services/education-opportunity.svg" alt="" class="services__image" data-i18n-alt="services_img_education_alt">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="services_s2_label">EDUCATION OPPORTUNITY</p>
-                  <h3 class="services__pillar-title" data-i18n="services_s2_title">Six years building programs that stuck</h3>
-                  <ul class="services__tags" aria-label="Slide 2 focus areas">
-                    <li class="services__tag">Tag one</li>
-                    <li class="services__tag">Tag two</li>
-                    <li class="services__tag">Tag three</li>
-                  </ul>
-                  <p class="services__pillar-body" data-i18n="services_s2_body">Organizations invest heavily in training, but rarely in learning experiences designed to actually change how people work. We design and deliver programs across the full modern tech spectrum, from university-level curricula to corporate upskilling programs</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Read more about slide 2">
-                    <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Read more about slide 2">
-                      <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">2 / 4</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <!-- SLIDE 3 -->
-            <li class="services__slide"
-                role="group" aria-roledescription="slide" aria-label="Slide 3 of 4"
-                data-slide-index="2">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="JDigital public speaking illustration showcasing keynote opportunities as thought leader">
-                      <img src="assets/img/services/public-speaking.svg" alt="" class="services__image" data-i18n-alt="services_img_speaking_alt">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="services_s3_label">PUBLIC SPEAKING</p>
-                  <h3 class="services__pillar-title" data-i18n="services_s3_title">Talks that move the room and the sprint</h3>
-                  <ul class="services__tags" aria-label="Slide 3 focus areas">
-                    <li class="services__tag">Tag one</li>
-                    <li class="services__tag">Tag two</li>
-                    <li class="services__tag">Tag three</li>
-                  </ul>
-                  <p class="services__pillar-body" data-i18n="services_s3_body">Most conference slots end the same way: applause, a photo, and no next step. We bring practitioner-grade perspectives to industry keynotes, panels, and innovation forums — real stories from live digital product builds.</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Read more about slide 3">
-                    <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Read more about slide 3">
-                      <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">3 / 4</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <!-- SLIDE 4 -->
-            <li class="services__slide"
-                role="group" aria-roledescription="slide" aria-label="Slide 4 of 4"
-                data-slide-index="3">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="JDigital media and content creation illustration for collaboration opportunities in media co-creation">
-                      <img src="assets/img/services/media-content.svg" alt="" class="services__image" data-i18n-alt="services_img_media_alt">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="services_s4_label">MEDIA & CONTENT</p>
-                  <h3 class="services__pillar-title" data-i18n="services_s4_title">Disruption pills for ambitious leaders</h3>
-                  <ul class="services__tags" aria-label="Slide 4 focus areas">
-                    <li class="services__tag">Tag one</li>
-                    <li class="services__tag">Tag two</li>
-                    <li class="services__tag">Tag three</li>
-                  </ul>
-                  <p class="services__pillar-body" data-i18n="services_s4_body">Bridging the gap between technical and executive audiences, we co-create content using a decade of product design and filmmaking expertise. Partner with us to share the insights that your audience deserves — in podcast or TikTok.</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Read more about slide 4">
-                    <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Read more about slide 4">
-                      <span class="services__cta-label" data-i18n="services_cta">Start conversation</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">4 / 4</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-          </ol>
-        </div><!-- /services__carousel -->
-      </div><!-- /services__carousel-outer -->
-
-      <!-- Desktop controls -->
-      <div class="services__controls">
-        <div aria-hidden="true"></div>
-        <div class="services__controls-inner">
-          <button class="services__nav services__nav--prev" type="button" aria-label="Previous pillar">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <span class="services__counter" aria-live="polite" aria-atomic="true">1 / 4</span>
-          <button class="services__nav services__nav--next" type="button" aria-label="Next pillar">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Pagination dots — all breakpoints -->
-      <div class="services__dots" role="tablist" aria-label="Services pagination">
-        <button class="services__dot services__dot--active" type="button" aria-label="Slide 1 of 4" data-slide-index="0"></button>
-        <button class="services__dot" type="button" aria-label="Slide 2 of 4" data-slide-index="1"></button>
-        <button class="services__dot" type="button" aria-label="Slide 3 of 4" data-slide-index="2"></button>
-        <button class="services__dot" type="button" aria-label="Slide 4 of 4" data-slide-index="3"></button>
-      </div>
-
-    </div><!-- /section__inner -->
-
   </section>
 
   <!-- ============================================================
@@ -736,110 +356,68 @@
        Copy locked: EN only (ES placeholder = EN; locked ES copy in next iteration)
        ============================================================ -->
   <section class="section section--capabilities" id="capabilities" aria-labelledby="capabilities-heading">
-    <div class="section__inner section__inner--capabilities">
+    <div class="section__inner">
 
-      <!-- LEFT COLUMN -->
-      <div class="capabilities__col-left">
-
-        <div class="cap-text-block">
-          <div class="section__eyebrow">
-            <span class="section__eyebrow-bar" aria-hidden="true"></span>
-            <p class="section__eyebrow-text" data-i18n="capabilities_eyebrow">Core capabilities</p>
-          </div>
-          <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">One partner.<br>Every role.</h2>
-          <p class="section__lede" data-i18n="capabilities_lede">Explore the certified roles this practice brings to every engagement.</p>
+      <div class="capabilities__header">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar" aria-hidden="true"></span>
+          <p class="section__eyebrow-text" data-i18n="capabilities_eyebrow">CAPABILITIES</p>
         </div>
-
-        <!-- 2×2 badge grid — McKinsey Forward · Google AI · Google UX · Google PM -->
-        <div class="capabilities__img-grid">
-          <div class="capabilities__img-slot">
-            <span class="img-alt-host" alt="McKinsey Forward program certification badge earned by Juan Diego Saire for modern work skills excellence">
-              <img src="assets/img/capabilities/forward.png" alt="" class="capabilities__badge-img" data-i18n-alt="capabilities_badge_forward_alt">
-            </span>
-          </div>
-          <div class="capabilities__img-slot">
-            <span class="img-alt-host" alt="Google AI Essentials certification badge recognizing Juan Diego Saire digital product management competency">
-              <img src="assets/img/capabilities/google-ai.png" alt="" class="capabilities__badge-img" data-i18n-alt="capabilities_badge_google_ai_alt">
-            </span>
-          </div>
-          <div class="capabilities__img-slot">
-            <span class="img-alt-host" alt="Google UX Design certification badge validating Juan Diego Saire UX strategy and front-end expertise">
-              <img src="assets/img/capabilities/google-ux.png" alt="" class="capabilities__badge-img" data-i18n-alt="capabilities_badge_google_ux_alt">
-            </span>
-          </div>
-          <div class="capabilities__img-slot">
-            <span class="img-alt-host" alt="Google Project Management certification badge confirming Juan Diego Saire digital product management credentials">
-              <img src="assets/img/capabilities/google-pm.png" alt="" class="capabilities__badge-img" data-i18n-alt="capabilities_badge_google_pm_alt">
-            </span>
-          </div>
-        </div>
-
-        <!-- Separator — visible on mobile only (between mental map and badge row) -->
-        <p class="capabilities__separator" data-i18n="capabilities_certified_label">Certified by:</p>
-
+        <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">Three mandates, one operator.</h2>
       </div>
 
-      <!-- RIGHT COLUMN: Capability mental map canvas -->
-      <div class="capabilities__right" id="capMapWrapper">
-        <canvas class="cap-map__canvas" id="capMapCanvas"></canvas>
-        <div class="cap-info-card" id="capInfoCard">
-          <div class="cap-info-card__accent-bar"></div>
-          <button class="cap-info-card__close" id="capInfoCardClose" type="button" aria-label="Close node info">&#215;</button>
-          <div class="cap-info-card__body">
-            <div class="cap-info-card__title" id="capInfoTitle"></div>
-            <div class="cap-info-card__desc"  id="capInfoDesc"></div>
+      <ol class="capabilities__cards" role="list">
+
+        <li class="work-card cap-card" tabindex="0" aria-label="Viable digital products">
+          <div class="work-card__bg" aria-hidden="true">
+            <img src="assets/img/work/build.svg" alt="" class="work-card__bg-img">
           </div>
-        </div>
-      </div>
+          <div class="work-card__default">
+            <p class="work-card__category" data-i18n="cap_card1_label">Mandate 01</p>
+            <h3 class="work-card__title" data-i18n="cap_card1_heading">Viable digital products.</h3>
+          </div>
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="cap_card1_label">Mandate 01</p>
+            <h3 class="work-card__hover-title" data-i18n="cap_card1_heading">Viable digital products.</h3>
+            <p class="work-card__summary" data-i18n="cap_card1_body">I make the feasibility and viability call up front, design the UX, and take it to production — so a strategic decision becomes a shipped product, not a deck. AI environments like Claude Code accelerate the build under tight token discipline.</p>
+          </div>
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
+        </li>
 
-    </div>
-  </section>
+        <li class="work-card cap-card" tabindex="0" aria-label="Enterprise AI automation">
+          <div class="work-card__bg" aria-hidden="true">
+            <img src="assets/img/work/scale.svg" alt="" class="work-card__bg-img">
+          </div>
+          <div class="work-card__default">
+            <p class="work-card__category" data-i18n="cap_card2_label">Mandate 02</p>
+            <h3 class="work-card__title" data-i18n="cap_card2_heading">Enterprise AI automation.</h3>
+          </div>
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="cap_card2_label">Mandate 02</p>
+            <h3 class="work-card__hover-title" data-i18n="cap_card2_heading">Enterprise AI automation.</h3>
+            <p class="work-card__summary" data-i18n="cap_card2_body">I map the workflows, find the bottlenecks, and build automation that clears daily operational friction — the same standardizing instinct that moved 70 trained staff from workshop to practice.</p>
+          </div>
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
+        </li>
 
-  <!-- Mobile bottom sheet + backdrop (capabilities map) -->
-  <div class="cap-backdrop" id="capBackdrop"></div>
-  <div class="cap-bottom-sheet" id="capBottomSheet">
-    <div class="cap-bottom-sheet__header">
-      <div class="cap-bottom-sheet__handle"></div>
-      <button class="cap-bottom-sheet__close" id="capBottomSheetClose" type="button" aria-label="Close">&#215;</button>
-    </div>
-    <div class="cap-bottom-sheet__title" id="capSheetTitle"></div>
-    <div class="cap-bottom-sheet__desc"  id="capSheetDesc"></div>
-  </div>
+        <li class="work-card cap-card" tabindex="0" aria-label="One design standard, at scale">
+          <div class="work-card__bg" aria-hidden="true">
+            <img src="assets/img/work/control.svg" alt="" class="work-card__bg-img">
+          </div>
+          <div class="work-card__default">
+            <p class="work-card__category" data-i18n="cap_card3_label">Mandate 03</p>
+            <h3 class="work-card__title" data-i18n="cap_card3_heading">One design standard, at scale.</h3>
+          </div>
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="cap_card3_label">Mandate 03</p>
+            <h3 class="work-card__hover-title" data-i18n="cap_card3_heading">One design standard, at scale.</h3>
+            <p class="work-card__summary" data-i18n="cap_card3_body">I define the tokens, components, and protocols once, then keep adoption correct and consistent across the whole portfolio — turning a shared standard into something local teams can actually run, day to day.</p>
+          </div>
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
+        </li>
 
-  <!-- ============================================================
-       BRIDGE 3 — Filter · EN/ES bilingual
-       Anchor: #bridge3-filter
-       ============================================================ -->
-  <section class="bridge" id="bridge3-filter" aria-labelledby="bridge3-filter-heading">
-    <div class="bridge__media">
-      <span class="img-alt-host" alt="Juan Diego Saire, JDigital founder, setting the execution standard for selective digital engagements">
-        <img
-          class="bridge__image"
-          src="assets/img/bridge3_filter.svg"
-          alt=""
-          data-i18n-alt="bridge3_filter_image_alt"
-          loading="lazy"
-          decoding="async"
-          width="1068"
-          height="1600"
-        >
-      </span>
-      <div class="bridge__overlay" aria-hidden="true"></div>
-    </div>
+      </ol>
 
-    <div class="bridge__content">
-      <span class="bridge__rule" aria-hidden="true"></span>
-      <div class="bridge__heading-wrapper">
-        <h2
-          class="bridge__heading"
-          id="bridge3-filter-heading"
-          data-i18n="bridge3_filter_heading"
-        >The arsenal is strong, but the bandwidth is exclusive. I only deploy for sponsors matching my execution baseline.</h2>
-      </div>
-      <p
-        class="bridge__attribution"
-        data-i18n="attribution"
-      >Juan Diego Saire &mdash; Founder, JDigital</p>
     </div>
   </section>
 
@@ -848,55 +426,158 @@
        Anchor: #about
        Copy locked: about-en.json + about-es.json
        ============================================================ -->
-  <section class="section section--alt" id="about" aria-labelledby="about-heading">
+  <!-- ============================================================
+       EVOLUTION — reveal-on-scroll timeline
+       Anchor: #evolution
+       ============================================================ -->
+  <section class="section section--alt section--evolution" id="evolution" aria-labelledby="evolution-heading">
     <div class="section__inner">
 
-      <div class="about__header">
+      <div class="evolution__header">
         <div class="section__eyebrow">
           <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="about_eyebrow">STANDARDS</p>
+          <p class="section__eyebrow-text" data-i18n="evolution_eyebrow">EVOLUTION</p>
         </div>
-        <h2 class="section__headline" id="about-heading" data-i18n="about_heading">Our non-negotiables.</h2>
-        <p class="section__lede" data-i18n="about_lede">Principles that decide whether we're a fit.</p>
+        <h2 class="section__headline" id="evolution-heading" data-i18n="evolution_heading">The making of the operator.</h2>
+        <p class="section__lede" data-i18n="evolution_lede">I came down from strategy and picked up the build. Here’s the arc.</p>
       </div>
 
-      <div class="about-sticky-scene" id="about-sticky-scene">
-        <div class="about-cards-track" id="about-cards-track">
+      <ol class="timeline" role="list">
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m1_title">Industrial Engineering — ESAN (2010–2014).</h3>
+            <p class="timeline__body" data-i18n="evo_m1_body">Industrial and Commercial Engineering, specialization Corporate Finance. The systems-and-process grounding under everything since.</p>
+          </div>
+        </li>
 
-          <article class="about-card about-card--blue" role="article" aria-label="Zero Improvisation.">
-            <div class="about-card__content">
-              <p class="about-card__principle" data-i18n="about_card1_principle">Zero Improvisation.</p>
-              <p class="about-card__body" data-i18n="about_card1_body">Before any work starts, the first conversation pins down what success actually looks like — what should be true at each defined checkpoint. Structured methods like Scrum make progress visible and results harder to dispute.</p>
-            </div>
-          </article>
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m2_title">Hunt LNG — Projects &amp; Contracts (2015–2016).</h3>
+            <p class="timeline__body" data-i18n="evo_m2_body">South America’s first LNG plant. Held contractor deliverables to quality, schedule, and spec across 35 EPC projects — vendor governance, learned early.</p>
+          </div>
+        </li>
 
-          <article class="about-card about-card--red" role="article" aria-label="Zero Noise.">
-            <div class="about-card__content">
-              <p class="about-card__principle" data-i18n="about_card2_principle">Zero Noise.</p>
-              <p class="about-card__body" data-i18n="about_card2_body">JDigital works best where honest input is expected, not managed — and where cultural fit is real, not performed. Engagements that hold are led by leaders who already understand this.</p>
-            </div>
-          </article>
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m3_title">Tricontinental MBA — CENTRUM PUCP (2016–2017).</h3>
+            <p class="timeline__body" data-i18n="evo_m3_body">Full-time, three continents (UVic, Canada; Maastricht, Netherlands). First in class. Strategic Consulting.</p>
+          </div>
+        </li>
 
-          <article class="about-card about-card--indigo" role="article" aria-label="Zero Overpromising.">
-            <div class="about-card__content">
-              <p class="about-card__principle" data-i18n="about_card3_principle">Zero Overpromising.</p>
-              <p class="about-card__body" data-i18n="about_card3_body">This practice runs on Claude Pro and Gemini Pro as key tools — named here, not buried in fine print, because transparency about how the work gets done is part of the standard. What gets built reflects what the best available tools can actually do right now.</p>
-            </div>
-          </article>
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m4_title">Lecturer — ESAN &amp; UTEC (2018–2024).</h3>
+            <p class="timeline__body" data-i18n="evo_m4_body">Taught 1,200+ students; mentored 29 project teams through end-to-end UX; seeded Communities of Practice.</p>
+            <p class="timeline__note" data-i18n="evo_m4_note">McKinsey Forward — McKinsey.org (2025).</p>
+          </div>
+        </li>
 
-        </div>
-      </div>
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m5_title">UX — HEC Montréal (2023).</h3>
+            <p class="timeline__body" data-i18n="evo_m5_body">MicroMasters in UX Design: the full UX lifecycle, including a UX-management track on team operations and process standardization.</p>
+            <p class="timeline__note" data-i18n="evo_m5_note">Google UX Design (2025) · Google GenAI Leader (2025) · Google Project Management (2025).</p>
+          </div>
+        </li>
 
-      <!-- Pagination dots — mobile + tablet only -->
-      <div class="about__dots" role="tablist" aria-label="About cards pagination">
-        <button class="about__dot about__dot--active" type="button" aria-label="Card 1 of 3" data-card-index="0"></button>
-        <button class="about__dot" type="button" aria-label="Card 2 of 3" data-card-index="1"></button>
-        <button class="about__dot" type="button" aria-label="Card 3 of 3" data-card-index="2"></button>
-      </div>
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m6_title">Innovation Specialist — Lima Airport Partners (2025).</h3>
+            <p class="timeline__body" data-i18n="evo_m6_body">Innovation’s seat on the most critical post-terminal program: designed and delivered the TUUA payment platform (now 130,000+ passengers monthly), articulated planning across five central areas — Finance, IT, Terminals, Commercial, Reputation — and trained 70 staff to 3.88/4.</p>
+            <p class="timeline__note" data-i18n="evo_m6_note">Microsoft Program Management (2026).</p>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m7_title">Self-built design system — JDigital (2025–present).</h3>
+            <p class="timeline__body" data-i18n="evo_m7_body">Designed, built, and govern a full system end to end: tokens, 10 organisms, a 175-key bilingual engine, hand-written, WCAG AA.</p>
+            <p class="timeline__note" data-i18n="evo_m7_note">Microsoft Front-End Developer (in progress).</p>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <h3 class="timeline__title" data-i18n="evo_m8_title">DesignOps, now.</h3>
+            <p class="timeline__body" data-i18n="evo_m8_body">Bringing this systemic way of working to a design organization scaling one system across many markets.</p>
+          </div>
+        </li>
+      </ol>
 
     </div>
   </section>
 
+  <!-- ============================================================
+       TRACK RECORD — stats + institutional marquee
+       Anchor: #track-record  (relocated low; preserved tickerMarquee)
+       ============================================================ -->
+  <section class="section section--track-record" id="track-record" aria-label="Track record">
+    <div class="section__inner">
+      <div class="track-record__header">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar" aria-hidden="true"></span>
+          <p class="section__eyebrow-text" data-i18n="tr_eyebrow">TRACK RECORD</p>
+        </div>
+        <h2 class="section__headline" data-i18n="tr_heading">Proof, by the numbers.</h2>
+      </div>
+
+      <div class="track-record__stats">
+        <div class="stat">
+          <div class="stat__number" data-target="130000" data-suffix="+">0+</div>
+          <div class="stat__label" data-i18n="tr_stat1_label">Monthly international-transfer passengers (TUUA)</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="70" data-suffix="">0</div>
+          <div class="stat__label" data-i18n="tr_stat2_label">Staff trained, at 3.88/4</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="1200" data-suffix="+">0+</div>
+          <div class="stat__label" data-i18n="tr_stat3_label">Students taught</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="29" data-suffix="">0</div>
+          <div class="stat__label" data-i18n="tr_stat4_label">Project teams mentored</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="175" data-suffix="">0</div>
+          <div class="stat__label" data-i18n="tr_stat5_label">Keys in the bilingual engine I built and run</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker__lanes">
+      <div class="ticker__band ticker__band--lane1" role="img" aria-label="Academic and institutional credentials">
+        <div class="ticker__track">
+          <div class="ticker__group">
+            <img src="assets/img/logos/1__esan-bw.png" data-i18n-alt="ticker_logo_esan_alt" class="ticker__logo">
+            <img src="assets/img/logos/2__centrum-bw.png" data-i18n-alt="ticker_logo_centrum_alt" class="ticker__logo">
+            <img src="assets/img/logos/3__uvic-bw.png" data-i18n-alt="ticker_logo_uvic_alt" class="ticker__logo">
+            <img src="assets/img/logos/4__um-bw.png" data-i18n-alt="ticker_logo_um_alt" class="ticker__logo">
+            <img src="assets/img/logos/5__bgs-bw.png" data-i18n-alt="ticker_logo_bgs_alt" class="ticker__logo">
+          </div>
+        </div>
+      </div>
+      <div class="ticker__band ticker__band--lane2" role="img" aria-label="Industry and applied execution credentials">
+        <div class="ticker__track">
+          <div class="ticker__group">
+            <img src="assets/img/logos/6__hunt-bw.png" data-i18n-alt="ticker_logo_hunt_alt" class="ticker__logo">
+            <img src="assets/img/logos/7__lap-bw.png" data-i18n-alt="ticker_logo_lap_alt" class="ticker__logo">
+            <img src="assets/img/logos/8__hec-bw.png" data-i18n-alt="ticker_logo_hec_alt" class="ticker__logo">
+            <img src="assets/img/logos/9__utec-bw.png" data-i18n-alt="ticker_logo_utec_alt" class="ticker__logo">
+            <img src="assets/img/logos/10__innova-bw.png" data-i18n-alt="ticker_logo_innova_alt" class="ticker__logo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============================================================
        CONTACT
@@ -907,9 +588,9 @@
 
       <header class="contact-header">
         <div class="header-bar" aria-hidden="true"></div>
-        <span class="header-eyebrow" data-i18n="contact_eyebrow">CONTACTO</span>
-        <h2 class="header-headline" id="contact-heading" data-i18n="contact_headline">Inicie la conversación.</h2>
-        <p class="header-lede" data-i18n="contact_lede">Hable con Juan Diego — cero fricciones.</p>
+        <span class="header-eyebrow" data-i18n="contact_eyebrow">CONTACT</span>
+        <h2 class="header-headline" id="contact-heading" data-i18n="contact_headline">Let's talk.</h2>
+        <p class="header-lede" data-i18n="contact_lede">Tell me about the team and the challenge.</p>
       </header>
 
       <div class="contact-form-box">
@@ -917,179 +598,49 @@
               action="https://formspree.io/f/YOUR_FORM_ID"
               method="POST" novalidate>
 
-          <fieldset class="intent-group">
-            <legend class="intent-legend" data-i18n="contact_intent_label">¿En qué podemos ayudarle?</legend>
-
-            <div class="intent-cards">
-              <label class="intent-card" id="card-collab">
-                <input type="radio" name="intent" value="collaboration" class="intent-input" required>
-                <span class="intent-card-content">
-                  <span class="intent-card-title" data-i18n="contact_intent_collab_title">Iniciar una colaboración</span>
-                  <span class="intent-card-desc" data-i18n="contact_intent_collab_desc">Hiring, proyectos, docencia o medios.</span>
-                </span>
-              </label>
-
-              <label class="intent-card" id="card-brief">
-                <input type="radio" name="intent" value="brief" class="intent-input">
-                <span class="intent-card-content">
-                  <span class="intent-card-title" data-i18n="contact_intent_brief_title">Solicitar brief de portfolio</span>
-                  <span class="intent-card-desc" data-i18n="contact_intent_brief_desc">Presentación ejecutiva de proyecto terminado.</span>
-                </span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="path-fields" id="path-collaboration">
-
-            <div class="form-group" id="field-collab-type">
-              <label class="form-label" for="engagementType">
-                <span data-i18n="contact_dropdown_label">¿Cuál es su próxima ambición digital?</span>
+          <div class="form-row">
+            <div class="form-group" id="field-name">
+              <label class="form-label" for="contactName">
+                <span data-i18n="contact_name_label">Name</span>
                 <span class="asterisk">*</span>
               </label>
-              <div class="select-wrapper">
-                <select class="form-select" id="engagementType" name="engagementType" required aria-describedby="hint-engagementType">
-                  <option value="" disabled selected hidden data-i18n="contact_dropdown_placeholder">Seleccione una opción</option>
-                  <option value="strategic-partnership" data-i18n="contact_opt1">Alianza — hiring, proyecto o co-creación</option>
-                  <option value="education-opportunity" data-i18n="contact_opt2">Educación — docencia o training</option>
-                  <option value="public-speaking" data-i18n="contact_opt3">Speaking — keynote, panel o workshop</option>
-                  <option value="content-media" data-i18n="contact_opt4">Medios — entrevista, podcast o publicación</option>
-                  <option value="other" data-i18n="contact_opt5">Otro</option>
-                </select>
-              </div>
-              <span class="error-hint" id="hint-engagementType" role="status" aria-live="polite" data-i18n="contact_err_type">Seleccione el tipo de consulta.</span>
+              <input class="form-input" type="text" id="contactName" name="fullName"
+                     placeholder="Ana Torres" required aria-describedby="hint-name"
+                     data-i18n-placeholder="contact_name_placeholder">
+              <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="contact_err_name">Your name is required.</span>
             </div>
-
-            <div class="form-row">
-              <div class="form-group" id="field-collab-name">
-                <label class="form-label" for="collabName">
-                  <span data-i18n="contact_name_label">Nombre completo</span>
-                  <span class="asterisk">*</span>
-                </label>
-                <input class="form-input" type="text" id="collabName" name="fullName"
-                       placeholder="Ana Torres" required aria-describedby="hint-collabName"
-                       data-i18n-placeholder="contact_name_placeholder">
-                <span class="error-hint" id="hint-collabName" role="status" aria-live="polite" data-i18n="contact_err_name">El nombre es requerido.</span>
-              </div>
-              <div class="form-group" id="field-collab-email">
-                <label class="form-label" for="collabEmail">
-                  <span data-i18n="contact_email_label">Correo electrónico</span>
-                  <span class="asterisk">*</span>
-                </label>
-                <input class="form-input" type="email" id="collabEmail" name="email"
-                       placeholder="ana@empresa.com" required aria-describedby="hint-collabEmail"
-                       data-i18n-placeholder="contact_email_placeholder">
-                <span class="error-hint" id="hint-collabEmail" role="status" aria-live="polite" data-i18n="contact_err_email">Ingrese un correo válido.</span>
-              </div>
-            </div>
-
-            <div class="form-group" id="field-collab-message">
-              <label class="form-label" for="collabMessage">
-                <span data-i18n="contact_msg_label">Cuéntenos el contexto</span>
+            <div class="form-group" id="field-email">
+              <label class="form-label" for="contactEmail">
+                <span data-i18n="contact_email_label">Email</span>
                 <span class="asterisk">*</span>
               </label>
-              <textarea class="form-textarea" id="collabMessage" name="message"
-                        placeholder="Describa el contexto — el rol, el proyecto o la iniciativa. Mientras más detalle, mejor."
-                        required aria-describedby="hint-collabMessage"
-                        data-i18n-placeholder="contact_msg_placeholder"></textarea>
-              <span class="error-hint" id="hint-collabMessage" role="status" aria-live="polite" data-i18n="contact_err_msg">El mensaje es requerido.</span>
+              <input class="form-input" type="email" id="contactEmail" name="email"
+                     placeholder="ana@company.com" required aria-describedby="hint-email"
+                     data-i18n-placeholder="contact_email_placeholder">
+              <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="contact_err_email">Enter a valid email.</span>
             </div>
-
           </div>
 
-          <div class="path-fields" id="path-brief">
-
-            <div class="form-group" id="field-brief-case">
-              <label class="form-label" for="briefCase">
-                <span data-i18n="contact_case_label">¿Cuál caso de estudio?</span>
-                <span class="asterisk">*</span>
-              </label>
-              <div class="select-wrapper">
-                <select class="form-select" id="briefCase" name="case" required aria-describedby="hint-briefCase">
-                  <option value="" disabled selected hidden data-i18n="contact_dropdown_placeholder">Seleccione una opción</option>
-                  <option value="limafly" data-i18n="contact_case_limafly">LimaFly App — UX/UI</option>
-                  <option value="agile" data-i18n="contact_case_agile">Lima Airport Agile — Taller</option>
-                  <option value="tuua" data-i18n="contact_case_tuua">TUUA Transfer — Proyectos y Programas</option>
-                  <option value="jdigital" data-i18n="contact_case_jdigital">JDigital v1 — Frontend</option>
-                </select>
-              </div>
-              <span class="error-hint" id="hint-briefCase" role="status" aria-live="polite" data-i18n="contact_brief_err_case">Seleccione un caso de estudio.</span>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group" id="field-brief-name">
-                <label class="form-label" for="briefName">
-                  <span data-i18n="contact_name_label">Nombre completo</span>
-                  <span class="asterisk">*</span>
-                </label>
-                <input class="form-input" type="text" id="briefName" name="fullName"
-                       placeholder="Ana Torres" required aria-describedby="hint-briefName"
-                       data-i18n-placeholder="contact_name_placeholder">
-                <span class="error-hint" id="hint-briefName" role="status" aria-live="polite" data-i18n="contact_err_name">El nombre es requerido.</span>
-              </div>
-              <div class="form-group" id="field-brief-email">
-                <label class="form-label" for="briefEmail">
-                  <span data-i18n="contact_email_label">Correo electrónico</span>
-                  <span class="asterisk">*</span>
-                </label>
-                <input class="form-input" type="email" id="briefEmail" name="email"
-                       placeholder="ana@empresa.com" required aria-describedby="hint-briefEmail"
-                       data-i18n-placeholder="contact_email_placeholder">
-                <span class="error-hint" id="hint-briefEmail" role="status" aria-live="polite" data-i18n="contact_err_email">Ingrese un correo válido.</span>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group" id="field-brief-company">
-                <label class="form-label" for="briefCompany">
-                  <span data-i18n="contact_company_label">Organización</span>
-                  <span class="asterisk">*</span>
-                </label>
-                <input class="form-input" type="text" id="briefCompany" name="company"
-                       placeholder="Google" required aria-describedby="hint-briefCompany"
-                       data-i18n-placeholder="contact_company_placeholder">
-                <span class="error-hint" id="hint-briefCompany" role="status" aria-live="polite" data-i18n="contact_brief_err_company">La organización es requerida.</span>
-              </div>
-              <div class="form-group" id="field-brief-role">
-                <label class="form-label" for="briefRole">
-                  <span data-i18n="contact_role_label">Cargo</span>
-                  <span class="asterisk">*</span>
-                </label>
-                <input class="form-input" type="text" id="briefRole" name="role"
-                       placeholder="Gerente Digital" required aria-describedby="hint-briefRole"
-                       data-i18n-placeholder="contact_role_placeholder">
-                <span class="error-hint" id="hint-briefRole" role="status" aria-live="polite" data-i18n="contact_brief_err_role">El cargo es requerido.</span>
-              </div>
-            </div>
-
-            <div class="form-group" id="field-brief-source">
-              <label class="form-label" for="briefSource">
-                <span data-i18n="contact_source_label">¿Cómo se enteró de JDigital?</span>
-                <span class="asterisk">*</span>
-              </label>
-              <div class="select-wrapper">
-                <select class="form-select" id="briefSource" name="source" required aria-describedby="hint-briefSource">
-                  <option value="" disabled selected hidden data-i18n="contact_dropdown_placeholder">Seleccione una opción</option>
-                  <option value="linkedin" data-i18n="contact_source_opt_linkedin">LinkedIn</option>
-                  <option value="web-search" data-i18n="contact_source_opt_search">Búsqueda web</option>
-                  <option value="referral" data-i18n="contact_source_opt_referral">Referencia</option>
-                  <option value="industry-event" data-i18n="contact_source_opt_event">Evento académico o profesional</option>
-                  <option value="academic-program" data-i18n="contact_source_opt_presentation">Presentación corporativa</option>
-                  <option value="other" data-i18n="contact_source_opt_other">Otro</option>
-                </select>
-              </div>
-              <span class="error-hint" id="hint-briefSource" role="status" aria-live="polite" data-i18n="contact_source_err">Seleccione cómo nos conoció.</span>
-            </div>
-
+          <div class="form-group" id="field-message">
+            <label class="form-label" for="contactMessage">
+              <span data-i18n="contact_msg_label">Message</span>
+              <span class="asterisk">*</span>
+            </label>
+            <textarea class="form-textarea" id="contactMessage" name="message"
+                      placeholder="Tell me about the team, the role, and the challenge."
+                      required aria-describedby="hint-message"
+                      data-i18n-placeholder="contact_msg_placeholder"></textarea>
+            <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="contact_err_msg">Your message is required.</span>
           </div>
 
-          <div id="footerActions" style="display: none;">
-            <p class="mandatory-footnote"><span class="asterisk">*</span> <span data-i18n="contact_mandatory_footnote">Indica un campo obligatorio</span></p>
+          <div id="footerActions">
+            <p class="mandatory-footnote"><span class="asterisk">*</span> <span data-i18n="contact_mandatory_footnote">Indicates a required field.</span></p>
 
             <div class="submit-row" id="submitRow">
-              <p class="form-disclaimer" data-i18n="contact_disclaimer">Respondemos en dos días hábiles — usualmente antes.</p>
+              <p class="form-disclaimer" data-i18n="contact_disclaimer">I'll reply within 48 hours — usually sooner.</p>
 
-              <button type="submit" class="submit-btn" aria-label="Submit">
-                <span class="submit-label" id="submitLabel">Enviar mensaje</span>
+              <button type="submit" class="submit-btn" aria-label="Send message">
+                <span class="submit-label" id="submitLabel" data-i18n="contact_submit">Send message</span>
                 <span class="submit-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
                 </span>
@@ -1106,17 +657,17 @@
   <div id="successModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalHeadline">
     <div class="modal-window">
       <button id="modalCloseBtn" class="modal-close-btn"
-              aria-label="Cerrar" data-i18n-aria="contact_modal_close_aria">
+              aria-label="Close" data-i18n-aria="contact_modal_close_aria">
         <svg viewBox="0 0 24 24" fill="none">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
 
-      <img src="assets/img/jdigital-logo-mini2.svg" alt="JD Icon" class="modal-logo" onerror="this.style.display=’none’">
+      <img src="assets/img/jdigital-logo-mini2.svg" alt="JD Icon" class="modal-logo" onerror="this.style.display='none'">
 
-      <h3 class="modal-headline" id="modalHeadline" data-i18n="contact_success_headline">Mensaje recibido.</h3>
-      <p class="modal-body" id="modalBody" aria-live="polite" aria-atomic="true" data-i18n="contact_success_body">Responderemos en dos días hábiles.</p>
+      <h3 class="modal-headline" id="modalHeadline" data-i18n="contact_success_headline">Thanks — message received.</h3>
+      <p class="modal-body" id="modalBody" aria-live="polite" aria-atomic="true" data-i18n="contact_success_body">I'll reply within 48 hours.</p>
     </div>
   </div>
 
@@ -1134,7 +685,7 @@
         <div class="footer__content">
 
           <p class="footer__tagline">
-            <span data-i18n="footer_tagline_pre">Let's build </span><span class="purple" data-i18n="footer_tagline_purple">together</span>
+            <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
           </p>
           <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
              class="cta" aria-label="Connect with Juan Diego on LinkedIn">
@@ -1153,7 +704,7 @@
 
       <div class="footer__strip">
         <div class="footer__meta">
-          <span data-i18n="footer_copyright">© 2026 JDigital. All Rights Reserved.</span>
+          <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
         </div>
       </div>
 

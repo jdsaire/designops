@@ -56,7 +56,7 @@ function swapLang(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const initialLang = 'ES';
+  const initialLang = 'EN';
   swapLang(initialLang);
   if (langLabel) langLabel.textContent = initialLang;
   langPanel.querySelectorAll('.nav__lang-option').forEach(b => {
@@ -237,752 +237,57 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 })();
 
 /* ============================================================
-   ABOUT — Dot pagination (mobile + tablet)
+   EVOLUTION — Timeline reveal-on-scroll
+   Vanilla IntersectionObserver. Respects prefers-reduced-motion
+   by revealing every milestone immediately.
    ============================================================ */
 (function () {
-  var aboutTrack = document.querySelector('.about-cards-track');
-  var aboutDots  = document.querySelectorAll('.about__dot');
-  if (!aboutTrack || !aboutDots.length) return;
+  var items = document.querySelectorAll('.timeline__item');
+  if (!items.length) return;
 
-  function updateAboutDots() {
-    var first = aboutTrack.firstElementChild;
-    if (!first) return;
-    var cardWidth = first.getBoundingClientRect().width;
-    var gap = parseFloat(getComputedStyle(aboutTrack).gap) || 12;
-    var idx = Math.round(aboutTrack.scrollLeft / (cardWidth + gap));
-    aboutDots.forEach(function (d, i) {
-      d.classList.toggle('about__dot--active', i === idx);
-    });
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
   }
 
-  var ticking = false;
-  aboutTrack.addEventListener('scroll', function () {
-    if (!ticking) {
-      requestAnimationFrame(function () { updateAboutDots(); ticking = false; });
-      ticking = true;
-    }
-  }, { passive: true });
-
-  aboutDots.forEach(function (dot) {
-    dot.addEventListener('click', function () {
-      var idx = parseInt(dot.dataset.cardIndex, 10);
-      var first = aboutTrack.firstElementChild;
-      if (!first) return;
-      var cardWidth = first.getBoundingClientRect().width;
-      var gap = parseFloat(getComputedStyle(aboutTrack).gap) || 12;
-      aboutTrack.scrollTo({ left: idx * (cardWidth + gap), behavior: 'smooth' });
+  var io = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      obs.unobserve(entry.target);
     });
-  });
+  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+  items.forEach(function (el) { io.observe(el); });
 })();
 
 /* ============================================================
-   ABOUT — Card tap-to-toggle (mobile touch)
-   Tap inactive card → show body; tap same card → revert to heading
-   Tap outside any card → deactivate all
-   ============================================================ */
-(function () {
-  var cards = document.querySelectorAll('.about-card');
-  if (!cards.length) return;
-
-  cards.forEach(function (card) {
-    card.addEventListener('click', function () {
-      var wasActive = card.classList.contains('is-active');
-      cards.forEach(function (c) { c.classList.remove('is-active'); });
-      if (!wasActive) card.classList.add('is-active');
-    });
-  });
-
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('.about-card')) {
-      cards.forEach(function (c) { c.classList.remove('is-active'); });
-    }
-  });
-}());
-
-/* ============================================================
-   SERVICES — Carousel IIFE
-   ============================================================ */
-(function () {
-  'use strict';
-
-  const track        = document.getElementById('servicesTrack');
-  if (!track) return;
-  const slides       = document.querySelectorAll('.services__slide');
-  const prevBtn      = document.querySelector('.services__controls .services__nav--prev');
-  const nextBtn      = document.querySelector('.services__controls .services__nav--next');
-  const servicesDots = document.querySelectorAll('.services__dot');
-  const desktopCounter = document.querySelector('.services__counter');
-  const total        = slides.length;
-  let   index        = 0;
-
-  function isMobile() { return window.innerWidth <= 767; }
-
-  function getSlideStep() {
-    if (!slides[0]) return 0;
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return slides[0].offsetWidth + gap;
-  }
-
-  function goTo(newIndex) {
-    if (newIndex < 0)      newIndex = total - 1;
-    if (newIndex >= total) newIndex = 0;
-    index = newIndex;
-
-    if (!isMobile()) {
-      track.style.transform = 'translateX(-' + (index * getSlideStep()) + 'px)';
-      slides.forEach(function (s, i) {
-        s.classList.toggle('services__slide--active', i === index);
-        s.setAttribute('aria-hidden', i !== index ? 'true' : 'false');
-      });
-    } else {
-      track.style.transform = '';
-      slides.forEach(function (s, i) {
-        s.classList.toggle('services__slide--active', i === index);
-        s.removeAttribute('aria-hidden');
-      });
-      var targetSlide = slides[index];
-      if (targetSlide && carousel) {
-        var paddingLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-        carousel.scrollTo({ left: targetSlide.offsetLeft - paddingLeft, behavior: 'smooth' });
-      }
-    }
-
-    servicesDots.forEach(function (d, i) {
-      d.classList.toggle('services__dot--active', i === index);
-    });
-
-    if (desktopCounter) desktopCounter.textContent = (index + 1) + ' / ' + total;
-  }
-
-  if (prevBtn) prevBtn.addEventListener('click', function () { goTo(index - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { goTo(index + 1); });
-
-  track.addEventListener('click', function (e) {
-    var btn = e.target.closest('.services__nav--mobile');
-    if (!btn) return;
-    if (btn.classList.contains('services__nav--prev')) goTo(index - 1);
-    if (btn.classList.contains('services__nav--next')) goTo(index + 1);
-  });
-
-  servicesDots.forEach(function (dot) {
-    dot.addEventListener('click', function () {
-      goTo(parseInt(dot.dataset.slideIndex, 10));
-    });
-  });
-
-  var carousel = document.querySelector('.services__carousel');
-  if (carousel) {
-    carousel.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(index - 1); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
-    });
-
-    var touchStartX = 0, touchStartY = 0;
-    carousel.addEventListener('touchstart', function (e) {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-    carousel.addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].screenX - touchStartX;
-      var dy = e.changedTouches[0].screenY - touchStartY;
-      if (!isMobile() && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-        goTo(dx < 0 ? index + 1 : index - 1);
-      }
-    }, { passive: true });
-
-    carousel.addEventListener('scroll', function () {
-      if (!isMobile()) return;
-      var step = getSlideStep();
-      if (step === 0) return;
-      var nearest = Math.round(carousel.scrollLeft / step);
-      if (nearest !== index && nearest >= 0 && nearest < total) {
-        index = nearest;
-        slides.forEach(function (s, i) { s.classList.toggle('services__slide--active', i === index); });
-        servicesDots.forEach(function (d, i) { d.classList.toggle('services__dot--active', i === index); });
-        if (desktopCounter) desktopCounter.textContent = (index + 1) + ' / ' + total;
-      }
-    }, { passive: true });
-  }
-
-  var resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () { goTo(index); }, 120);
-  });
-
-  goTo(0);
-})();
-
-/* ============================================================
-   CAPABILITIES — Mental Map Canvas
-   Scoped IIFE to avoid polluting global scope.
-   IDs prefixed with "cap" to avoid conflicts.
-   Logo loaded from file path (assets/img/capabilities/logo_map_edit.svg).
-   ============================================================ */
-(function () {
-  'use strict';
-
-  // Guard — element may not exist on the page
-  const capWrapper = document.getElementById('capMapWrapper');
-  const capCanvas  = document.getElementById('capMapCanvas');
-  if (!capWrapper || !capCanvas) return;
-
-  // ── Brand colors (Accenture purple spectrum) ──
-  const BRAND = {
-    purple:        '#A100FF',
-    purpleDark:    '#7500C0',
-    purpleDarkest: '#460073',
-    purpleLight:   '#C2A3FF',
-  };
-
-  // ── Logo ──
-  const logoImg  = new Image();
-  let   logoReady = false;
-  logoImg.onload = () => { logoReady = true; };
-  logoImg.src = 'assets/img/capabilities/logo_map_edit.svg';
-
-  // ── Data ──
-  // Copy (branch + node labels and descriptions) is sourced live from the i18n
-  // dictionaries by id: pillar_<branch.id>_label and capabilities_node_<node.id>_label/_desc.
-  const BRANCHES = [
-    {
-      id: 'build', angle: 90,
-      color: '#A100FF', glow: 'rgba(161,0,255,0.45)',
-      nodes: [ { id: 'pd' }, { id: 'fd' }, { id: 'ux' } ]
-    },
-    {
-      id: 'scale', angle: 210,
-      color: '#C2A3FF', glow: 'rgba(194,163,255,0.45)',
-      nodes: [ { id: 'cx' }, { id: 'tt' }, { id: 'gh' } ]
-    },
-    {
-      id: 'control', angle: 330,
-      color: '#7500C0', glow: 'rgba(117,0,192,0.55)',
-      nodes: [ { id: 'pm' }, { id: 'sm' }, { id: 'prd' } ]
-    }
-  ];
-
-  // ── Canvas setup ──
-  const ctx = capCanvas.getContext('2d');
-  let W, H, R, cx, cy;
-  let nodes       = [];
-  let hoveredNode = null;
-  let openNode    = null;
-
-  function getCanvasHeight() {
-    if (W <= 480) return 480;
-    if (W <= 767) return 540;
-    return 680;
-  }
-
-  function toRad(deg) { return deg * Math.PI / 180; }
-
-  function computeLayout() {
-    W  = capCanvas.offsetWidth;
-    H  = getCanvasHeight();
-    capCanvas.width  = W * devicePixelRatio;
-    capCanvas.height = H * devicePixelRatio;
-    capCanvas.style.height = H + 'px';
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-
-    R  = Math.min(W, H);
-    cx = W / 2;
-    cy = H / 2;
-
-    const branchR = R * (W <= 767 ? 0.21 : 0.24);
-    const childR  = R * (W <= 767 ? 0.16 : 0.18);
-    const fanSpan = W <= 767 ? 80 : 68;
-
-    nodes = [];
-
-    BRANCHES.forEach(branch => {
-      const bAngle = toRad(branch.angle);
-      const bx = cx + Math.cos(bAngle) * branchR;
-      const by = cy - Math.sin(bAngle) * branchR;
-      const n    = branch.nodes.length;
-      const step = n > 1 ? (2 * fanSpan) / (n - 1) : 0;
-      const startAngle = branch.angle - fanSpan;
-
-      branch.nodes.forEach((nd, i) => {
-        const angle = toRad(startAngle + i * step);
-        const nx = bx + Math.cos(angle) * childR;
-        const ny = by - Math.sin(angle) * childR;
-        nodes.push({
-          ...nd,
-          branchId:    branch.id,
-          branchColor: branch.color,
-          branchGlow:  branch.glow,
-          bx, by,
-          x: nx, y: ny,
-          phase:      Math.random() * Math.PI * 2,
-          floatAmp:   2.5 + Math.random() * 2,
-          floatSpeed: 0.6 + Math.random() * 0.5,
-        });
-      });
-
-      branch._bx = bx;
-      branch._by = by;
-    });
-  }
-
-  // ── Drawing helpers ──
-  function hexAlpha(hex, a) {
-    const r = parseInt(hex.slice(1,3), 16);
-    const g = parseInt(hex.slice(3,5), 16);
-    const b = parseInt(hex.slice(5,7), 16);
-    return `rgba(${r},${g},${b},${a})`;
-  }
-
-  function drawConnector(x1, y1, x2, y2, color, alpha, lw) {
-    const mx = (x1 + x2) / 2;
-    const my = (y1 + y2) / 2 - 10;
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.quadraticCurveTo(mx, my, x2, y2);
-    ctx.strokeStyle = hexAlpha(color, alpha);
-    ctx.lineWidth   = lw;
-    ctx.stroke();
-  }
-
-  function drawNode(nd, t) {
-    const floatY = Math.sin(t * nd.floatSpeed + nd.phase) * nd.floatAmp;
-    const isHov  = hoveredNode === nd;
-    const isOpen = openNode   === nd;
-    const x = nd.x;
-    const y = nd.y + floatY;
-    nd._ry = y;
-
-    const scale  = isHov || isOpen ? 1.16 : 1.0;
-    const baseR  = W < 480 ? 38 : 44;
-    const r      = baseR * scale;
-
-    // glow halo
-    const gAlpha = isHov || isOpen ? 0.50 : 0.14;
-    const grd    = ctx.createRadialGradient(x, y, r * 0.2, x, y, r * 2.2);
-    grd.addColorStop(0, hexAlpha(nd.branchColor, gAlpha));
-    grd.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.beginPath();
-    ctx.arc(x, y, r * 2.2, 0, Math.PI * 2);
-    ctx.fillStyle = grd;
-    ctx.fill();
-
-    // node fill
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    const fill = ctx.createRadialGradient(x - r * 0.2, y - r * 0.2, r * 0.1, x, y, r);
-    fill.addColorStop(0, hexAlpha(nd.branchColor, isHov || isOpen ? 0.22 : 0.08));
-    fill.addColorStop(1, hexAlpha(nd.branchColor, isHov || isOpen ? 0.06 : 0.02));
-    ctx.fillStyle   = fill;
-    ctx.fill();
-    ctx.strokeStyle = hexAlpha(nd.branchColor, isHov || isOpen ? 0.95 : 0.50);
-    ctx.lineWidth   = isHov || isOpen ? 1.8 : 1.2;
-    ctx.stroke();
-
-    // active dashed ring
-    if (isOpen) {
-      ctx.beginPath();
-      ctx.arc(x, y, r + 6, 0, Math.PI * 2);
-      ctx.strokeStyle = hexAlpha(nd.branchColor, 0.35);
-      ctx.lineWidth   = 1;
-      ctx.setLineDash([3, 5]);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
-
-    // label (sourced from i18n dict; split on first space into two canvas lines)
-    const nodeLang  = document.documentElement.dataset.lang || 'EN';
-    const nodeDict  = i18nDicts[nodeLang] || {};
-    const nodeLabel = nodeDict[`capabilities_node_${nd.id}_label`] || '';
-    const nlSp   = nodeLabel.indexOf(' ');
-    const lines  = nlSp === -1 ? [nodeLabel] : [nodeLabel.slice(0, nlSp), nodeLabel.slice(nlSp + 1)];
-    const fSize  = W < 480 ? 10 : 11;
-    ctx.font     = `600 ${fSize}px 'Graphik', Arial, sans-serif`;
-    ctx.textAlign    = 'center';
-    ctx.textBaseline = 'middle';
-    const lAlpha = isHov || isOpen ? 1 : 0.80;
-    const lH     = fSize * 1.42;
-    const totalH = (lines.length - 1) * lH;
-    lines.forEach((ln, i) => {
-      ctx.fillStyle = `rgba(255,255,255,${lAlpha})`;
-      ctx.fillText(ln, x, y - totalH / 2 + i * lH);
-    });
-  }
-
-  function drawBranchLabel(branch) {
-    const bx     = branch._bx;
-    const by     = branch._by;
-    const fSize  = W < 480 ? 13 : 16;
-    const bLang  = document.documentElement.dataset.lang || 'EN';
-    const bDict  = i18nDicts[bLang] || {};
-    const bLabel = (bDict[`pillar_${branch.id}_label`] || '').toUpperCase();
-
-    ctx.font         = `600 ${fSize}px 'Graphik', Arial, sans-serif`;
-    ctx.textAlign    = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle    = '#FFFFFF';
-    ctx.fillText(bLabel, bx, by);
-  }
-
-  function drawCenter(t) {
-    const pulse = 1 + Math.sin(t * 0.8) * 0.015;
-    const r     = (W < 480 ? 52 : 64) * pulse;
-
-    const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 1.15);
-    grd.addColorStop(0, 'rgba(161,0,255,0.10)');
-    grd.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.beginPath();
-    ctx.arc(cx, cy, r * 1.15, 0, Math.PI * 2);
-    ctx.fillStyle = grd;
-    ctx.fill();
-
-    if (logoReady) {
-      const logoAspect = 90 / 36; // native SVG viewBox 90×36
-      const logoH = Math.min(r * 2.5 / logoAspect, r * 0.88);
-      const logoW = logoH * logoAspect;
-      ctx.drawImage(logoImg, cx - logoW / 2, cy - logoH / 2, logoW, logoH);
-    } else {
-      ctx.textAlign    = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.font         = `900 20px 'Graphik', Arial, sans-serif`;
-      ctx.fillStyle    = '#A100FF';
-      ctx.fillText('JD', cx - 16, cy);
-      ctx.font         = `300 20px 'Graphik', Arial, sans-serif`;
-      ctx.fillStyle    = '#ffffff';
-      ctx.fillText('igital', cx + 20, cy);
-    }
-  }
-
-  // ── Render loop ──
-  function render(ts) {
-    const t = ts / 1000;
-    ctx.clearRect(0, 0, W, H);
-
-    const vgrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.75);
-    vgrd.addColorStop(0, 'rgba(0,0,0,0)');
-    vgrd.addColorStop(1, 'rgba(0,0,0,0.65)');
-    ctx.fillStyle = vgrd;
-    ctx.fillRect(0, 0, W, H);
-
-    BRANCHES.forEach(b => {
-      const hasActive = nodes.some(n => n.branchId === b.id && (openNode === n || hoveredNode === n));
-      drawConnector(cx, cy, b._bx, b._by, b.color, hasActive ? 0.80 : 0.50, hasActive ? 2.8 : 1.8);
-    });
-
-    nodes.forEach(nd => {
-      const floatY = Math.sin(t * nd.floatSpeed + nd.phase) * nd.floatAmp;
-      const isAct  = hoveredNode === nd || openNode === nd;
-      drawConnector(nd.bx, nd.by, nd.x, nd.y + floatY, nd.branchColor, isAct ? 0.85 : 0.50, isAct ? 2.8 : 1.6);
-    });
-
-    BRANCHES.forEach(b => drawBranchLabel(b));
-    nodes.forEach(nd => drawNode(nd, t));
-    drawCenter(t);
-
-    requestAnimationFrame(render);
-  }
-
-  // ── Hit detection ──
-  function hitTest(mx, my) {
-    const hitR = W < 480 ? 46 : 52;
-    for (const nd of nodes) {
-      const ry = nd._ry ?? nd.y;
-      if (Math.hypot(mx - nd.x, my - ry) < hitR) return nd;
-    }
-    return null;
-  }
-
-  // ── Info card (desktop) ──
-  const capInfoCard  = document.getElementById('capInfoCard');
-  const capInfoTitle = document.getElementById('capInfoTitle');
-  const capInfoDesc  = document.getElementById('capInfoDesc');
-
-  function openInfoCard(nd) {
-    const lang = document.documentElement.dataset.lang || 'EN';
-    const dict = i18nDicts[lang] || {};
-    capInfoTitle.textContent = dict[`capabilities_node_${nd.id}_label`] || '';
-    capInfoDesc.textContent  = dict[`capabilities_node_${nd.id}_desc`]  || '';
-
-    const margin = 12;
-    const cardW  = 288;
-    const cardH  = 170;
-    let left     = nd.x + 30;
-    let top      = (nd._ry ?? nd.y) - 44;
-
-    if (left + cardW + margin > W) left = nd.x - cardW - 30;
-    if (top < margin) top = margin;
-    if (top + cardH > H - margin) top = H - cardH - margin;
-
-    capInfoCard.style.left = left + 'px';
-    capInfoCard.style.top  = top  + 'px';
-    capInfoCard.classList.add('visible');
-  }
-
-  function closeInfoCard() {
-    capInfoCard.classList.remove('visible');
-    openNode = null;
-  }
-
-  // ── Bottom sheet (mobile) ──
-  const capBottomSheet = document.getElementById('capBottomSheet');
-  const capSheetTitle  = document.getElementById('capSheetTitle');
-  const capSheetDesc   = document.getElementById('capSheetDesc');
-  const capBackdrop    = document.getElementById('capBackdrop');
-
-  function openSheet(nd) {
-    const lang = document.documentElement.dataset.lang || 'EN';
-    const dict = i18nDicts[lang] || {};
-    capSheetTitle.textContent = dict[`capabilities_node_${nd.id}_label`] || '';
-    capSheetDesc.textContent  = dict[`capabilities_node_${nd.id}_desc`]  || '';
-    capBottomSheet.classList.add('visible');
-    capBackdrop.classList.add('visible');
-  }
-  function closeSheet() {
-    capBottomSheet.classList.remove('visible');
-    capBackdrop.classList.remove('visible');
-    openNode = null;
-  }
-  capBackdrop.addEventListener('click', closeSheet);
-  document.getElementById('capInfoCardClose').addEventListener('click', closeInfoCard);
-  document.getElementById('capBottomSheetClose').addEventListener('click', closeSheet);
-
-  // ── Interaction ──
-  function getPos(e) {
-    const rect = capCanvas.getBoundingClientRect();
-    return {
-      x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
-      y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top,
-    };
-  }
-
-  capCanvas.addEventListener('mousemove', e => {
-    const { x, y } = getPos(e);
-    hoveredNode = hitTest(x, y);
-    capCanvas.style.cursor = hoveredNode ? 'pointer' : 'default';
-  });
-
-  capCanvas.addEventListener('mouseleave', () => {
-    hoveredNode = null;
-    capCanvas.style.cursor = 'default';
-  });
-
-  capCanvas.addEventListener('click', e => {
-    const { x, y } = getPos(e);
-    const hit = hitTest(x, y);
-    if (!hit)             { closeInfoCard(); return; }
-    if (openNode === hit) { closeInfoCard(); return; }
-    openNode = hit;
-    openInfoCard(hit);
-  });
-
-  capCanvas.addEventListener('touchend', e => {
-    e.preventDefault();
-    const rect = capCanvas.getBoundingClientRect();
-    const tx   = e.changedTouches[0].clientX - rect.left;
-    const ty   = e.changedTouches[0].clientY - rect.top;
-    const hit  = hitTest(tx, ty);
-    if (!hit) return;
-    if (openNode === hit) { closeSheet(); return; }
-    openNode = hit;
-    openSheet(hit);
-  }, { passive: false });
-
-  document.addEventListener('click', e => {
-    if (!capInfoCard.contains(e.target) && e.target !== capCanvas) closeInfoCard();
-  });
-
-  // ── Resize ──
-  const ro = new ResizeObserver(() => {
-    closeInfoCard();
-    closeSheet();
-    computeLayout();
-  });
-  ro.observe(capWrapper);
-
-  // ── Init ──
-  computeLayout();
-  requestAnimationFrame(render);
-})();
-
-
-/* ============================================================
-   ===== CONTACT =====
-   Dual-intent contact form validation + success modal logic,
-   wrapped in an IIFE so variables/listeners don't leak into
-   the global scope.
+   CONTACT — single-path form validation + success modal
+   Name / Email / Message → Formspree. One success state.
    ============================================================ */
 (function () {
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm');
-    if (!form) return; // safety: bail if Contact form isn't on the page
-
-    const intentRadios = form.querySelectorAll('input[name="intent"]');
-    const cardCollab = document.getElementById('card-collab');
-    const cardBrief  = document.getElementById('card-brief');
-
-    const pathCollab = document.getElementById('path-collaboration');
-    const pathBrief  = document.getElementById('path-brief');
-
-    const footerActions = document.getElementById('footerActions');
-    const submitLabel   = document.getElementById('submitLabel');
+    if (!form) return;
 
     const modalOverlay  = document.getElementById('successModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
-    const modalHeadline = document.getElementById('modalHeadline');
-    const modalBody     = document.getElementById('modalBody');
-
-    let currentActivePath = null;
     let lastFocusedElement = null;
 
-    // Helper: set disabled/enabled state for elements inside a container.
-    // Also strips/restores `required` so hidden-path fields don't leak
-    // validation onto the active path.
-    const setFieldsDisabled = (container, disabled) => {
-      const fields = container.querySelectorAll('input, select, textarea');
-      fields.forEach(field => {
-        if (disabled) {
-          if (field.hasAttribute('required')) {
-            field.dataset.wasRequired = 'true';
-            field.removeAttribute('required');
-          }
-          field.disabled = true;
-        } else {
-          field.disabled = false;
-          if (field.dataset.wasRequired === 'true') {
-            field.setAttribute('required', '');
-            delete field.dataset.wasRequired;
-          }
-        }
-        const group = field.closest('.form-group');
-        if (group) group.classList.remove('has-error');
-      });
-    };
-
-    // Handler: switch form paths & update specific UI logic
-    const switchPath = (selectedPath) => {
-      currentActivePath = selectedPath;
-      cardCollab.classList.remove('is-selected');
-      cardBrief.classList.remove('is-selected');
-      pathCollab.classList.remove('is-active');
-      pathBrief.classList.remove('is-active');
-
-      const d = i18nDicts[i18nCurrent] || {};
-      if (selectedPath === 'collaboration') {
-        cardCollab.classList.add('is-selected');
-        pathCollab.classList.add('is-active');
-
-        setFieldsDisabled(pathCollab, false);
-        setFieldsDisabled(pathBrief, true);
-        submitLabel.textContent = d['contact_submit'] || 'Send message';
-
-      } else if (selectedPath === 'brief') {
-        cardBrief.classList.add('is-selected');
-        pathBrief.classList.add('is-active');
-
-        setFieldsDisabled(pathCollab, true);
-        setFieldsDisabled(pathBrief, false);
-        submitLabel.textContent = d['contact_brief_submit'] || 'Request brief';
-      }
-
-      // Reveal the grouped footnote + submit row
-      footerActions.style.display = 'block';
-    };
-
-    // Handle intent card selections
-    intentRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        if (e.target.checked) switchPath(e.target.value);
-      });
-    });
-
-    // Validation logic
-    const validateField = (inputElement) => {
-      if (inputElement.disabled) return true;
-
-      const group = inputElement.closest('.form-group');
+    const validateField = (el) => {
+      const group = el.closest('.form-group');
       if (!group) return true;
-
-      let isValid = true;
-
-      if (inputElement.required && !inputElement.value.trim()) {
-        isValid = false;
-      } else if (inputElement.type === 'email' && inputElement.value.trim()) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(inputElement.value.trim())) {
-          isValid = false;
-        }
+      let ok = true;
+      if (el.required && !el.value.trim()) {
+        ok = false;
+      } else if (el.type === 'email' && el.value.trim()) {
+        ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
       }
-
-      if (isValid) {
-        group.classList.remove('has-error');
-      } else {
-        group.classList.add('has-error');
-      }
-
-      return isValid;
+      group.classList.toggle('has-error', !ok);
+      return ok;
     };
 
-    // Primary Form Submit Event
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const activeFields = form.querySelectorAll('.form-group input:not(:disabled)[required], .form-group select:not(:disabled)[required], .form-group textarea:not(:disabled)[required]');
-      let formIsValid = true;
-
-      activeFields.forEach(field => {
-        if (!validateField(field)) {
-          formIsValid = false;
-        }
-      });
-
-      if (formIsValid) {
-        openModal();
-
-        form.reset();
-        cardCollab.classList.remove('is-selected');
-        cardBrief.classList.remove('is-selected');
-        pathCollab.classList.remove('is-active');
-        pathBrief.classList.remove('is-active');
-
-        setFieldsDisabled(pathCollab, true);
-        setFieldsDisabled(pathBrief, true);
-
-        footerActions.style.display = 'none';
-      } else {
-        const firstError = form.querySelector('.has-error input, .has-error select, .has-error textarea');
-        if (firstError) firstError.focus();
-      }
-    });
-
-    // Real-time error clearing
-    form.addEventListener('input', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
-        const group = e.target.closest('.form-group');
-        if (group && group.classList.contains('has-error')) {
-          validateField(e.target);
-        }
-      }
-    });
-
-    // Re-sync submit label when language changes while a path is active
-    document.addEventListener('i18n:changed', ({ detail: { dict } }) => {
-      if (currentActivePath === 'collaboration') {
-        submitLabel.textContent = dict['contact_submit'] || 'Send message';
-      } else if (currentActivePath === 'brief') {
-        submitLabel.textContent = dict['contact_brief_submit'] || 'Request brief';
-      }
-    });
-
-    // Modal Triggers & Dynamic UI Updates
     const openModal = () => {
-      const d = i18nDicts[i18nCurrent] || {};
-      if (currentActivePath === 'collaboration') {
-        modalHeadline.textContent = d['contact_success_headline'] || 'Message received.';
-        modalBody.textContent = d['contact_success_body'] || "We'll reply within two business days.";
-      } else if (currentActivePath === 'brief') {
-        modalHeadline.textContent = d['contact_brief_success_headline'] || 'Request received.';
-        modalBody.textContent = d['contact_brief_success_body'] || "We'll review and reply within two business days.";
-      }
-
       lastFocusedElement = document.activeElement;
       modalOverlay.classList.add('is-active');
       modalOverlay.setAttribute('aria-hidden', 'false');
@@ -999,19 +304,30 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       }
     };
 
-    // Modal Dismissal listeners
-    modalCloseBtn.addEventListener('click', closeModal);
-
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalOverlay.classList.contains('is-active')) {
-        closeModal();
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fields = form.querySelectorAll('input[required], textarea[required]');
+      let valid = true;
+      fields.forEach((f) => { if (!validateField(f)) valid = false; });
+      if (valid) {
+        openModal();
+        form.reset();
+      } else {
+        const firstError = form.querySelector('.has-error input, .has-error textarea');
+        if (firstError) firstError.focus();
       }
     });
 
+    form.addEventListener('input', (e) => {
+      const group = e.target.closest('.form-group');
+      if (group && group.classList.contains('has-error')) validateField(e.target);
+    });
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('is-active')) closeModal();
+    });
   });
 })();
 /* ===== END CONTACT ===== */
