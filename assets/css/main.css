@@ -350,7 +350,6 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(0.75rem, 1.5vw, 1.25rem);
-  align-items: stretch;
 }
 
 .work-card {
