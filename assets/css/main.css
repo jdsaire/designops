@@ -348,14 +348,15 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 .work__track {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  align-items: stretch;
 }
 
 .work-card {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 4 / 5;
   cursor: pointer;
   background: #1a1a1a;
   box-shadow:
@@ -1553,6 +1554,11 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
           box-decoration-break: clone;
   display: inline;
 }
+/* Force the second sentence onto its own line, keeping the inline highlight. */
+.bridge__heading-line2::before {
+  content: "\A";
+  white-space: pre;
+}
 
 .bridge__attribution {
   font-family: var(--font-primary);
@@ -1641,7 +1647,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 /* ============================================================
    ===== CONTACT =====
-   Dual-intent contact organism styles. Selectors scoped to
+   Single-path contact organism styles. Selectors scoped to
    #contact (or #successModal for the modal which lives at
    document root).
    ============================================================ */
@@ -1719,84 +1725,7 @@ body.modal-open {
 #contact .contact-form {
   display: flex;
   flex-direction: column;
-}
-
-/* ── Intent Radio Cards Layout ─────────────────────────────── */
-#contact .intent-group {
-  border: none;
-  margin-bottom: 2rem;
-}
-#contact .intent-legend {
-  font-size: 0.75rem;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-text-dim);
-  margin-bottom: 1.25rem;
-  display: block;
-}
-#contact .intent-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-}
-#contact .intent-card {
-  position: relative;
-  display: block;
-  cursor: pointer;
-  padding: 1.5rem;
-  background: #111111;
-  border: 1px solid #222222;
-  transition: background var(--duration-ui) var(--ease-standard),
-              border-color var(--duration-ui) var(--ease-standard);
-}
-#contact .intent-card:hover {
-  background: #161616;
-  border-color: var(--color-border-hover);
-}
-#contact .intent-input {
-  position: absolute;
-  opacity: 0;
-  inset: 0;
-  cursor: pointer;
-  z-index: 2;
-}
-#contact .intent-card.is-selected {
-  border-color: var(--color-brand-purple);
-  background: #141118;
-}
-/* Visible keyboard focus for the intent cards (hidden radio is opacity:0) */
-#contact .intent-card:has(.intent-input:focus-visible) {
-  outline: 2px solid var(--color-brand-purple);
-  outline-offset: 2px;
-}
-#contact .intent-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-#contact .intent-card-title {
-  font-size: 1.1rem;
-  font-weight: var(--fw-bold);
-  color: var(--color-brand-white);
-}
-#contact .intent-card-desc {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-}
-
-/* ── Path-Specific Dynamic Containers ────────────────────────── */
-#contact .path-fields {
-  display: none;
-  flex-direction: column;
   gap: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #1A1A1A;
-  margin-bottom: 1.5rem;
-}
-#contact .path-fields.is-active {
-  display: flex;
 }
 
 /* ── Form Fields & Elements ─────────────────────────────────── */
@@ -2054,10 +1983,6 @@ body.modal-open {
     text-align: left;
     align-items: flex-start;
   }
-  #contact .intent-cards {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
   #contact .form-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -2078,7 +2003,6 @@ body.modal-open {
 }
 /* Respect user motion preference: disable Contact transitions/animations */
 @media (prefers-reduced-motion: reduce) {
-  #contact .intent-card,
   #contact .form-input,
   #contact .form-select,
   #contact .form-textarea,
@@ -2253,14 +2177,12 @@ body.modal-open {
 #langSelector { display: none !important; }
 
 /* ---- Shared section headers (centered desktop, left on mobile) ---- */
-.offer__header,
 .capabilities__header,
 .evolution__header,
 .track-record__header {
   text-align: center;
   margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
 }
-.offer__header .section__eyebrow,
 .capabilities__header .section__eyebrow,
 .evolution__header .section__eyebrow,
 .track-record__header .section__eyebrow {
@@ -2271,75 +2193,16 @@ body.modal-open {
   margin-right: auto;
 }
 @media (max-width: 767px) {
-  .offer__header,
   .capabilities__header,
   .evolution__header,
   .track-record__header { text-align: left; }
-  .offer__header .section__eyebrow,
   .capabilities__header .section__eyebrow,
   .evolution__header .section__eyebrow,
   .track-record__header .section__eyebrow { align-items: flex-start; }
   .evolution__header .section__lede { margin-left: 0; margin-right: 0; }
 }
 
-/* ---- OFFER — single panel ---- */
-.offer__panel {
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: clamp(1.75rem, 3.5vw, 3rem);
-  background: #0b0b0b;
-  border: 1px solid var(--color-border-faint);
-}
-.offer__titles {
-  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.01em;
-  color: var(--color-brand-white);
-}
-.offer__body {
-  margin-top: 1rem;
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
-  font-weight: var(--fw-light);
-  line-height: 1.65;
-  color: var(--color-text-muted);
-}
-.offer__mandates {
-  list-style: none;
-  margin: clamp(1.5rem, 3vw, 2.25rem) 0 1.5rem;
-  display: grid;
-  gap: 1.25rem;
-}
-.offer__mandate {
-  padding-left: 1rem;
-  border-left: 3px solid var(--color-brand-purple);
-}
-.offer__mandate-title {
-  font-size: 1.0625rem;
-  font-weight: var(--fw-semibold);
-  line-height: 1.3;
-  color: var(--color-brand-white);
-}
-.offer__mandate-body {
-  margin-top: 0.4rem;
-  font-size: 0.95rem;
-  font-weight: var(--fw-regular);
-  line-height: 1.55;
-  color: var(--color-text-muted);
-}
-
-/* ---- CAPABILITIES — three cards reuse .work-card ---- */
-.capabilities__cards {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.75rem, 1.5vw, 1.25rem);
-}
-@media (max-width: 767px) {
-  .capabilities__cards { grid-template-columns: 1fr; }
-  .cap-card { aspect-ratio: 16 / 11; }
-}
-
-/* ---- EVOLUTION — reveal-on-scroll timeline ---- */
+/* ---- EVOLUTION — tap-to-expand timeline ---- */
 .timeline {
   list-style: none;
   max-width: 46rem;
@@ -2359,14 +2222,8 @@ body.modal-open {
 .timeline__item {
   position: relative;
   padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
-  opacity: 0;
-  transform: translateY(1.125rem);
-  transition:
-    opacity   600ms var(--ease-decelerate),
-    transform 600ms var(--ease-decelerate);
 }
 .timeline__item:last-child { padding-bottom: 0; }
-.timeline__item.is-visible { opacity: 1; transform: translateY(0); }
 .timeline__marker {
   position: absolute;
   left: calc(-1.75rem - 1px);
@@ -2375,12 +2232,47 @@ body.modal-open {
   height: 12px;
   background: var(--color-brand-purple);
   transform: translateX(-50%);
+  transition: transform 250ms var(--ease-decelerate);
+}
+.timeline__item.is-open .timeline__marker { transform: translateX(-50%) scale(1.3); }
+.timeline__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.1rem 0;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+.timeline__toggle:focus-visible {
+  outline: 2px solid var(--color-brand-purple);
+  outline-offset: 4px;
 }
 .timeline__title {
   font-size: 1.0625rem;
   font-weight: var(--fw-semibold);
   line-height: 1.3;
   color: var(--color-brand-white);
+  margin: 0;
+}
+.timeline__chevron {
+  flex: 0 0 auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid var(--color-brand-purple);
+  border-bottom: 2px solid var(--color-brand-purple);
+  transform: rotate(45deg);
+  transition: transform 250ms var(--ease-decelerate);
+}
+.timeline__item.is-open .timeline__chevron { transform: rotate(-135deg); }
+.timeline__panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 320ms var(--ease-decelerate);
 }
 .timeline__body {
   margin-top: 0.45rem;
@@ -2411,8 +2303,13 @@ body.modal-open {
 }
 @media (max-width: 480px) {
   .track-record__stats { grid-template-columns: 1fr; }
+  .track-record__stats .stat,
+  .track-record__stats .stat__number,
+  .track-record__stats .stat__label { text-align: left; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .timeline__item { opacity: 1; transform: none; }
+  .timeline__panel,
+  .timeline__chevron,
+  .timeline__marker { transition: none; }
 }

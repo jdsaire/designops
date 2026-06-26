@@ -237,28 +237,175 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 })();
 
 /* ============================================================
-   EVOLUTION — Timeline reveal-on-scroll
-   Vanilla IntersectionObserver. Respects prefers-reduced-motion
-   by revealing every milestone immediately.
+   CAPABILITIES — Carousel IIFE
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const track        = document.getElementById('servicesTrack');
+  if (!track) return;
+  const slides       = document.querySelectorAll('.services__slide');
+  const prevBtn      = document.querySelector('.services__controls .services__nav--prev');
+  const nextBtn      = document.querySelector('.services__controls .services__nav--next');
+  const servicesDots = document.querySelectorAll('.services__dot');
+  const desktopCounter = document.querySelector('.services__counter');
+  const total        = slides.length;
+  let   index        = 0;
+
+  function isMobile() { return window.innerWidth <= 767; }
+
+  function getSlideStep() {
+    if (!slides[0]) return 0;
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    return slides[0].offsetWidth + gap;
+  }
+
+  function goTo(newIndex) {
+    if (newIndex < 0)      newIndex = total - 1;
+    if (newIndex >= total) newIndex = 0;
+    index = newIndex;
+
+    if (!isMobile()) {
+      track.style.transform = 'translateX(-' + (index * getSlideStep()) + 'px)';
+      slides.forEach(function (s, i) {
+        s.classList.toggle('services__slide--active', i === index);
+        s.setAttribute('aria-hidden', i !== index ? 'true' : 'false');
+      });
+    } else {
+      track.style.transform = '';
+      slides.forEach(function (s, i) {
+        s.classList.toggle('services__slide--active', i === index);
+        s.removeAttribute('aria-hidden');
+      });
+      var targetSlide = slides[index];
+      if (targetSlide && carousel) {
+        var paddingLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+        carousel.scrollTo({ left: targetSlide.offsetLeft - paddingLeft, behavior: 'smooth' });
+      }
+    }
+
+    servicesDots.forEach(function (d, i) {
+      d.classList.toggle('services__dot--active', i === index);
+    });
+
+    if (desktopCounter) desktopCounter.textContent = (index + 1) + ' / ' + total;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', function () { goTo(index - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { goTo(index + 1); });
+
+  track.addEventListener('click', function (e) {
+    var btn = e.target.closest('.services__nav--mobile');
+    if (!btn) return;
+    if (btn.classList.contains('services__nav--prev')) goTo(index - 1);
+    if (btn.classList.contains('services__nav--next')) goTo(index + 1);
+  });
+
+  servicesDots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      goTo(parseInt(dot.dataset.slideIndex, 10));
+    });
+  });
+
+  var carousel = document.querySelector('.services__carousel');
+  if (carousel) {
+    carousel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(index - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
+    });
+
+    var touchStartX = 0, touchStartY = 0;
+    carousel.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].screenX - touchStartX;
+      var dy = e.changedTouches[0].screenY - touchStartY;
+      if (!isMobile() && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        goTo(dx < 0 ? index + 1 : index - 1);
+      }
+    }, { passive: true });
+
+    carousel.addEventListener('scroll', function () {
+      if (!isMobile()) return;
+      var step = getSlideStep();
+      if (step === 0) return;
+      var nearest = Math.round(carousel.scrollLeft / step);
+      if (nearest !== index && nearest >= 0 && nearest < total) {
+        index = nearest;
+        slides.forEach(function (s, i) { s.classList.toggle('services__slide--active', i === index); });
+        servicesDots.forEach(function (d, i) { d.classList.toggle('services__dot--active', i === index); });
+        if (desktopCounter) desktopCounter.textContent = (index + 1) + ' / ' + total;
+      }
+    }, { passive: true });
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { goTo(index); }, 120);
+  });
+
+  goTo(0);
+})();
+
+/* ============================================================
+   EVOLUTION — Timeline tap-to-expand accordion
+   One open at a time. Keyboard accessible. All breakpoints.
+   Respects prefers-reduced-motion (instant open/close).
    ============================================================ */
 (function () {
   var items = document.querySelectorAll('.timeline__item');
   if (!items.length) return;
 
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    items.forEach(function (el) { el.classList.add('is-visible'); });
-    return;
+  var toggles = [];
+
+  function setOpen(item, open) {
+    var toggle = item.querySelector('.timeline__toggle');
+    var panel  = item.querySelector('.timeline__panel');
+    item.classList.toggle('is-open', open);
+    if (toggle) toggle.setAttribute('aria-expanded', String(open));
+    if (panel) {
+      if (open) {
+        panel.hidden = false;
+        panel.style.maxHeight = prefersReducedMotion ? 'none' : panel.scrollHeight + 'px';
+      } else {
+        if (prefersReducedMotion) {
+          panel.style.maxHeight = '';
+          panel.hidden = true;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(function () { panel.style.maxHeight = '0px'; });
+        }
+      }
+    }
   }
 
-  var io = new IntersectionObserver(function (entries, obs) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      obs.unobserve(entry.target);
-    });
-  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+  items.forEach(function (item) {
+    var toggle = item.querySelector('.timeline__toggle');
+    var panel  = item.querySelector('.timeline__panel');
+    if (!toggle || !panel) return;
+    toggles.push(item);
 
-  items.forEach(function (el) { io.observe(el); });
+    panel.hidden = true;
+    panel.style.maxHeight = '0px';
+    toggle.setAttribute('aria-expanded', 'false');
+
+    if (!prefersReducedMotion) {
+      panel.addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'max-height' && !item.classList.contains('is-open')) {
+          panel.hidden = true;
+        }
+      });
+    }
+
+    toggle.addEventListener('click', function () {
+      var willOpen = !item.classList.contains('is-open');
+      toggles.forEach(function (other) { if (other !== item) setOpen(other, false); });
+      setOpen(item, willOpen);
+    });
+  });
 })();
 
 /* ============================================================
@@ -306,15 +453,22 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const fields = form.querySelectorAll('input[required], textarea[required]');
+      const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
       let valid = true;
       fields.forEach((f) => { if (!validateField(f)) valid = false; });
       if (valid) {
         openModal();
         form.reset();
       } else {
-        const firstError = form.querySelector('.has-error input, .has-error textarea');
+        const firstError = form.querySelector('.has-error input, .has-error select, .has-error textarea');
         if (firstError) firstError.focus();
+      }
+    });
+
+    form.addEventListener('change', (e) => {
+      if (e.target.tagName === 'SELECT') {
+        const group = e.target.closest('.form-group');
+        if (group && group.classList.contains('has-error')) validateField(e.target);
       }
     });
 
