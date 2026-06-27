@@ -94,14 +94,14 @@ function openOverlay() {
   hamburger.setAttribute('aria-expanded', 'true');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  if (isMobile()) { langSelector.style.display = 'none'; mobileClose.style.display = 'flex'; }
+  if (isMobile()) { langSelector.style.display = 'none'; mobileClose.style.display = 'flex'; hamburger.style.display = 'none'; }
 }
 function closeOverlay() {
   overlay.classList.remove('nav__overlay--open');
   hamburger.setAttribute('aria-expanded', 'false');
   overlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
-  if (isMobile()) { mobileClose.style.display = 'none'; langSelector.style.display = ''; }
+  if (isMobile()) { mobileClose.style.display = 'none'; langSelector.style.display = ''; hamburger.style.display = ''; }
 }
 
 hamburger.addEventListener('click', openOverlay);
