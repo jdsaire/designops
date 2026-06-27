@@ -2289,6 +2289,9 @@ body.modal-open {
   letter-spacing: 0.01em;
   color: var(--color-brand-purple);
 }
+@media (max-width: 1023px) {
+  .timeline__note { display: none; }
+}
 
 /* ---- TRACK RECORD — stat grid + preserved marquee ---- */
 .section--track-record { padding-bottom: clamp(2.5rem, 4vw, 4rem); }
@@ -2314,3 +2317,4 @@ body.modal-open {
   .timeline__chevron,
   .timeline__marker { transition: none; }
 }
+
