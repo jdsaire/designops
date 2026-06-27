@@ -57,13 +57,13 @@
   "evo_m4_body": "Teaching and mentoring experience.",
   "evo_m5_title": "MicroMasters UX — HEC Montréal (2023).",
   "evo_m5_body": "Prototyping, Data Analysis & Management.",
-  "evo_m5_note": "Google UX Design (2025) · Google GenAI Leader (2025) · Google Project Management (2025).",
   "evo_m6_title": "Innovation Specialist — LAP (2025).",
   "evo_m6_body": "Seat on critical airport program.",
-  "evo_m6_note": "McKinsey Forward — McKinsey.org (2025) · Microsoft Program Management (2026).",
+  "evo_m6_note": "Google UX Design (2025) · Google GenAI Leader (2025) · Google Project Management (2025).",
   "evo_m7_title": "Self-built design system (2025–now).",
   "evo_m7_body": "Designed, built, and governed.",
-  "evo_m7_note": "Microsoft Front-End Developer (in progress).",
+  "evo_m7_note": "McKinsey Forward — McKinsey.org (2025) · Microsoft Program Management (2026).",
+  "evo_m8_note": "Microsoft Front-End Developer (in progress).",
   "evo_m8_title": "AI DesignOps, now.",
   "evo_m8_body": "Bringing the skillset to mature companies.",
 
@@ -117,3 +117,4 @@
   "footer_linkedin": "Connect on LinkedIn",
   "footer_copyright": "© 2026 Juan Diego Saire."
 }
+
