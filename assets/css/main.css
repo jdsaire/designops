@@ -673,6 +673,10 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   object-fit: cover;
   display: block;
 }
+/* Capabilities carousel — contain design cards (native ~4:3); no clipping */
+.section--capabilities .services__image {
+  object-fit: contain;
+}
 
 /* Pillar label — purple kicker */
 .services__pillar-label {
