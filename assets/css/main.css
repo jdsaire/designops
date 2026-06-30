@@ -260,6 +260,8 @@ a { text-decoration:none; color:inherit; }
 }
 .hero__h1-line { display:block; }
 .hero__h1 .purple { color:var(--color-brand-purple); }
+html[data-lang="EN"] .hero__h1--lang-es { display:none; }
+html[data-lang="ES"] .hero__h1--lang-en { display:none; }
 
 .hero__tags {
   display:none; /* hidden — reserved for future pillar overlay iteration */
