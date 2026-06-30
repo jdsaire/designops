@@ -56,7 +56,7 @@ function swapLang(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const initialLang = 'EN';
+  const initialLang = 'ES';
   swapLang(initialLang);
   if (langLabel) langLabel.textContent = initialLang;
   langPanel.querySelectorAll('.nav__lang-option').forEach(b => {
@@ -212,6 +212,9 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       var idx = Math.round(workTrack.scrollLeft / (cardWidth + gap));
       workDots.forEach(function (d, i) {
         d.classList.toggle('work__dot--active', i === idx);
+      });
+      workCards.forEach(function (c, i) {
+        if (i !== idx) c.classList.remove('is-active');
       });
     }
 

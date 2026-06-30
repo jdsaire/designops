@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="EN">
+<html lang="es" data-lang="ES">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,22 +47,22 @@
 
       <!-- RIGHT utility -->
       <div class="nav__utility">
-        <!-- SwapLang toggle hidden this run (EN-only public); engine + es.json preserved for a later pass -->
-        <div class="nav__lang" id="langSelector" hidden aria-hidden="true">
+        <!-- SwapLang — EN/ES bilingual toggle -->
+        <div class="nav__lang" id="langSelector">
           <button class="nav__lang-btn" id="langBtn" type="button"
-                  aria-label="Select language" aria-haspopup="listbox" tabindex="-1">
+                  aria-label="Select language" aria-haspopup="listbox">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="10"/>
               <line x1="2" y1="12" x2="22" y2="12"/>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
-            <span id="langLabel">EN</span>
+            <span id="langLabel">ES</span>
           </button>
           <div class="nav__lang-panel" id="langPanel" role="listbox" aria-label="Language">
-            <button class="nav__lang-option"
-                    role="option" aria-selected="false" data-lang="ES" tabindex="-1">ES</button>
             <button class="nav__lang-option nav__lang-option--active"
-                    role="option" aria-selected="true" data-lang="EN" tabindex="-1">EN</button>
+                    role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
+            <button class="nav__lang-option"
+                    role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
           </div>
         </div>
 
