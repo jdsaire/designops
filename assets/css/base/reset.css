@@ -1,0 +1,4 @@
+/* base/reset.css — body, a base rules — split from main.css lines 30-32. See docs/ for the reorg record. */
+body { font-family:var(--font-primary); background:var(--color-brand-black); color:var(--color-brand-white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+a { text-decoration:none; color:inherit; }
+

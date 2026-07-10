@@ -1,0 +1,57 @@
+/* shared/section-extras.css — SHARED SECTION EXTRAS — split from main.css lines 912-967. See docs/ for the reorg record. */
+/* ============================================================ SHARED SECTION EXTRAS ============================================================ */
+.section--alt { background: #050505; }
+
+/* WORK + SERVICES + TICKER HEADER — mirrors .about__header pattern */
+.work__header,
+.services__header,
+.ticker__header {
+  text-align: center;
+  margin-bottom: clamp(1rem, 2vw, 1.75rem);
+}
+.work__header .section__eyebrow,
+.services__header .section__eyebrow,
+.ticker__header .section__eyebrow {
+  align-items: center;
+}
+.work__header .section__lede,
+.services__header .section__lede,
+.ticker__header .section__lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 767px) {
+  .work__header,
+  .services__header,
+  .ticker__header {
+    text-align: left;
+  }
+  .work__header .section__eyebrow,
+  .services__header .section__eyebrow,
+  .ticker__header .section__eyebrow {
+    align-items: flex-start;
+  }
+  .work__header .section__lede,
+  .services__header .section__lede,
+  .ticker__header .section__lede {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.section__headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-white);
+}
+.section__lede {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  font-weight: var(--fw-light);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin-top: 1rem;
+  max-width: 36rem;
+}
+

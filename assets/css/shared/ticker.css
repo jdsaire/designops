@@ -1,0 +1,123 @@
+/* shared/ticker.css — TICKER ORGANISM — split from main.css lines 2027-2148. See docs/ for the reorg record. */
+/* ===== TICKER ORGANISM =========================================
+   Standalone dual-lane horizontal marquee · BEM block: .ticker
+   Slot: <section id="ticker"> between #work and #bridge2-positioning
+   Header reuses shared .section__eyebrow / __headline / __lede
+   Lane 1 scrolls LEFT · Lane 2 scrolls RIGHT
+   Animation: JS-driven (assets/js/main.js → tickerMarquee) sets
+   --ticker-shift (integer px) + --ticker-duration per lane.
+   i18n: ticker_eyebrow · ticker_heading · ticker_lede
+================================================================= */
+
+.ticker__lanes {
+  display: flex;
+  flex-direction: column;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+.ticker__band {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: 0;
+}
+
+.ticker__band:last-child {
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Edge fade masks — emerge from black on both sides */
+.ticker__band::before,
+.ticker__band::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(3rem, 8vw, 8rem);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ticker__band::before {
+  left: 0;
+  background: linear-gradient(to right, #000000 0%, transparent 100%);
+}
+
+.ticker__band::after {
+  right: 0;
+  background: linear-gradient(to left, #000000 0%, transparent 100%);
+}
+
+/* Scrolling tracks — JS clones the base group to fill the viewport */
+.ticker__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  align-items: center;
+}
+
+.ticker__band--lane1 .ticker__track {
+  animation: ticker-left var(--ticker-duration, 28s) linear infinite;
+}
+
+.ticker__band--lane2 .ticker__track {
+  animation: ticker-right var(--ticker-duration, 28s) linear infinite;
+}
+
+/* Logo group */
+.ticker__group {
+  display: flex;
+  align-items: center;
+  gap: clamp(3rem, 5vw, 5.5rem);
+  padding-right: clamp(3rem, 5vw, 5.5rem);
+}
+
+@media (max-width: 768px) {
+  .ticker__group {
+    gap: clamp(2rem, 6vw, 3rem);
+    padding-right: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+.ticker__logo {
+  display: block;
+  flex-shrink: 0;
+  height: 112px;
+  opacity: 0.55;
+  transform: translateZ(0);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+@media (min-width: 641px) {
+  .ticker__logo { height: 144px; }
+}
+@media (min-width: 1024px) {
+  .ticker__logo { height: 176px; }
+}
+
+.ticker__logo:hover,
+.ticker__logo:focus {
+  opacity: 1;
+}
+
+/* Keyframes — shift by exactly one base-group width (integer px set by JS) */
+@keyframes ticker-left {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(var(--ticker-shift, 0px) * -1), 0, 0); }
+}
+
+@keyframes ticker-right {
+  from { transform: translate3d(calc(var(--ticker-shift, 0px) * -1), 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* Accessibility: reduce motion — static, fully visible, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .ticker__band--lane1 .ticker__track,
+  .ticker__band--lane2 .ticker__track {
+    animation: none;
+    transform: none;
+  }
+}
+

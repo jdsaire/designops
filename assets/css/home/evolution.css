@@ -1,0 +1,201 @@
+/* home/evolution.css — EVOLUTION organism (banner: ABOUT) — split from main.css lines 968-1167. See docs/ for the reorg record. */
+/* ============================================================ ABOUT ============================================================ */
+
+/* About header — desktop/tablet center, mobile left (mirrors Capabilities) */
+.about__header {
+  text-align: center;
+  margin-bottom: clamp(1rem, 2vw, 1.75rem);
+}
+.about__header .section__eyebrow {
+  align-items: center;
+}
+.about__header .section__lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 767px) {
+  .about__header { text-align: left; }
+  .about__header .section__eyebrow { align-items: flex-start; }
+  .about__header .section__lede { margin-left: 0; margin-right: 0; }
+}
+
+.about-sticky-scene { position: relative; }
+
+/* Base track — 3-column grid on desktop/tablet */
+.about-cards-track {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 1.8vw, 1.75rem);
+  padding-top: clamp(1.5rem, 2.5vw, 2.5rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+/* Base card */
+.about-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.about-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 400ms var(--ease-standard);
+  z-index: 0;
+}
+.about-card--blue { background-color: #0041f0; }
+.about-card--blue::before {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent           0px,
+    transparent           14px,
+    rgba(255,255,255,.08) 14px,
+    rgba(255,255,255,.08) 16px
+  );
+}
+.about-card--red { background-color: #e3062e; }
+.about-card--red::before {
+  background-image:
+    radial-gradient(ellipse at 105% 110%, transparent 13%, rgba(255,255,255,.08) 14%, rgba(255,255,255,.08) 16%, transparent 17%),
+    radial-gradient(ellipse at 105% 110%, transparent 26%, rgba(255,255,255,.08) 27%, rgba(255,255,255,.08) 29%, transparent 30%),
+    radial-gradient(ellipse at 105% 110%, transparent 39%, rgba(255,255,255,.08) 40%, rgba(255,255,255,.08) 42%, transparent 43%),
+    radial-gradient(ellipse at 105% 110%, transparent 52%, rgba(255,255,255,.08) 53%, rgba(255,255,255,.08) 55%, transparent 56%),
+    radial-gradient(ellipse at 105% 110%, transparent 65%, rgba(255,255,255,.08) 66%, rgba(255,255,255,.08) 68%, transparent 69%),
+    radial-gradient(ellipse at 105% 110%, transparent 78%, rgba(255,255,255,.08) 79%, rgba(255,255,255,.08) 81%, transparent 82%);
+}
+.about-card--indigo { background-color: #431ea0; }
+.about-card--indigo::before {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent           0px,
+    transparent           22px,
+    rgba(255,255,255,.08) 22px,
+    rgba(255,255,255,.08) 24px
+  );
+}
+.about-card:hover::before,
+.about-card:focus-within::before { opacity: 0; }
+.about-card__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: clamp(2rem, 4vw, 3rem);
+}
+.about-card__principle {
+  position: absolute;
+  top: clamp(2rem, 4vw, 3rem);
+  left:   clamp(2rem, 4vw, 3rem);
+  right:  clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: var(--fw-bold);
+  color: var(--color-brand-white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  transition: opacity 400ms var(--ease-standard), transform 400ms var(--ease-standard);
+}
+.about-card__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.1rem, 1.265vw, 1.21rem);
+  font-weight: var(--fw-regular);
+  line-height: 1.45;
+  text-align: left;
+  color: var(--color-brand-white);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 400ms var(--ease-standard), transform 400ms var(--ease-standard);
+}
+.about-card:hover .about-card__principle,
+.about-card:focus-within .about-card__principle,
+.about-card.is-active .about-card__principle { opacity: 0; transform: translateY(-10px); }
+.about-card:hover .about-card__body,
+.about-card:focus-within .about-card__body,
+.about-card.is-active .about-card__body { opacity: 1; transform: translateY(0); }
+
+/* Pagination dots — hidden on desktop */
+.about__dots {
+  display: none;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.about__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  background: rgba(255,255,255,0.22);
+  border: none;
+  cursor: pointer;
+  transition:
+    background var(--duration-ui) var(--ease-standard),
+    width      var(--duration-ui) var(--ease-standard);
+}
+.about__dot--active { background: var(--color-brand-purple); width: 1.25rem; }
+
+/* ABOUT — TABLET 768px–1023px: 3-column grid */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-cards-track {
+    grid-template-columns: repeat(3, 1fr);
+    overflow-x: unset;
+    scroll-snap-type: unset;
+    padding: clamp(2rem, 4vw, 3rem) 0;
+    margin: 0;
+  }
+  .about-card {
+    flex: unset;
+    max-width: unset;
+    width: 100%;
+    margin-left: 0 !important;
+    scroll-snap-align: unset;
+    aspect-ratio: 4 / 3;
+  }
+  .about-card__body { font-size: clamp(1.1rem, 1.265vw, 1.21rem); }
+  .about__dots { display: none; }
+}
+
+/* ABOUT — MOBILE ≤767px: carousel with bleed peek */
+@media (max-width: 767px) {
+  .about-cards-track {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 4vw, 2rem) var(--gutter) 1rem;
+    margin: 0 calc(-1 * var(--gutter));
+    scrollbar-width: none;
+  }
+  .about-cards-track::-webkit-scrollbar { display: none; }
+  .about-card {
+    flex: 0 0 80vw;
+    width: auto;
+    max-width: none;
+    margin-left: 0 !important;
+    scroll-snap-align: center;
+    aspect-ratio: 4 / 3;
+  }
+  .about-card__principle { font-size: clamp(1.375rem, 5vw, 1.75rem); }
+  .about-card__body { font-size: 1.1rem; }
+  .about__dots { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-card::before, .about-card__principle, .about-card__body {
+    transition-duration: 0.01ms !important;
+  }
+}
+

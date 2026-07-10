@@ -1,0 +1,30 @@
+/* base/tokens.css — global :root custom properties (+ universal reset selector, html base) — split from main.css lines 1-29. See docs/ for the reorg record. */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; border-radius:0; box-shadow:none; }
+html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:root {
+  --color-brand-purple:  #A100FF;
+  --color-purple-hover:  #8C00D9;
+  --color-purple-light:  #C2A3FF;
+  --color-brand-black:   #000000;
+  --color-brand-white:   #FFFFFF;
+  --color-text-muted:    rgba(255,255,255,0.6);
+  --color-text-dim:      rgba(255,255,255,0.45);
+  --color-border-faint:  rgba(255,255,255,0.06);
+  --color-border-soft:   rgba(255,255,255,0.10);
+  --font-primary:        'Graphik', Arial, sans-serif;
+  --fw-light:300; --fw-regular:400; --fw-medium:500;
+  --fw-semibold:600; --fw-bold:700; --fw-black:900;
+  --max-content-width: 1440px;
+  --gutter:      clamp(1rem, 3.5vw, 5rem);
+  --nav-height:  clamp(3.5rem, 4vw, 4rem);
+  /* Services carousel tokens */
+  --peek-width:  clamp(3rem, 8vw, 6rem);
+  --slide-gap:   clamp(3rem, 4vw, 4rem);
+  --col-gap:     clamp(3rem, 5vw, 5rem);
+  --img-col:     51fr;
+  --txt-col:     49fr;
+  --ease-standard:   cubic-bezier(0.4,0.0,0.2,1);
+  --ease-decelerate: cubic-bezier(0.0,0.0,0.2,1);
+  --duration-ui:     250ms;
+  --duration-ambient:7000ms;
+}

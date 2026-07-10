@@ -1,0 +1,285 @@
+/* home/capabilities.css — CAPABILITIES carousel (banner: SERVICES) — split from main.css lines 628-911. See docs/ for the reorg record. */
+/* ============================================================ SERVICES ============================================================ */
+.section--services { padding: clamp(4rem, 7vw, 7.5rem) 0; }
+
+/* Carousel outer — clips horizontal overflow, keeps left edge at gutter */
+.services__carousel-outer { overflow: hidden; }
+
+/* Carousel track container — bleeds right for peek */
+.services__carousel {
+  position: relative;
+  margin-right: calc(-1 * var(--gutter));
+  overflow: hidden;
+}
+
+/* Flex track */
+.services__slides {
+  display: flex;
+  gap: var(--slide-gap);
+  list-style: none;
+  transition: transform 420ms var(--ease-standard);
+}
+
+/* Each slide occupies full visible width minus peek window */
+.services__slide {
+  flex: 0 0 calc(100% - var(--peek-width));
+  min-width: 0;
+}
+
+/* Slide inner: --img-col / --txt-col split (desktop: ~51/49 = +25% image) */
+.services__slide-inner {
+  display: grid;
+  grid-template-columns: var(--img-col) var(--txt-col);
+  gap: var(--col-gap);
+  align-items: center;
+}
+
+.services__media  { order: 1; }
+.services__content { order: 2; }
+
+/* Image slot */
+.services__image-slot {
+  aspect-ratio: 3 / 2;
+  width: 100%;
+  overflow: hidden;
+  background: #0A0A0A;
+}
+.services__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Capabilities carousel — contain design cards (native ~4:3); no clipping */
+.section--capabilities .services__image {
+  object-fit: contain;
+}
+
+/* Pillar label — purple kicker */
+.services__pillar-label {
+  font-size: 0.8rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-purple);
+  margin-bottom: 0.75rem;
+}
+
+/* Title */
+.services__pillar-title {
+  font-size: clamp(1.25rem, 1.75vw, 1.625rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-brand-white);
+  margin-bottom: 0;
+}
+
+/* Tags — hidden (HTML preserved for future re-enable) */
+.services__tags { display: none; }
+
+/* Body copy */
+.services__pillar-body {
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.65;
+  color: var(--color-brand-white);
+  margin-top: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Read more CTA — matches Hero .cta style */
+.services__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  width: fit-content;
+  padding: 0.125rem 0;
+}
+.services__cta-label {
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-brand-white);
+  letter-spacing: 0.005em;
+}
+.services__cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--color-brand-purple);
+  flex-shrink: 0;
+  transition: background var(--duration-ui) var(--ease-standard);
+}
+.services__cta:hover .services__cta-icon,
+.services__cta:focus-visible .services__cta-icon { background: var(--color-purple-hover); }
+.services__cta-icon svg {
+  width: 0.9rem; height: 0.9rem;
+  fill: none;
+  stroke: var(--color-brand-white);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Controls — desktop */
+.services__controls {
+  display: grid;
+  grid-template-columns: var(--img-col) var(--txt-col);
+  gap: var(--col-gap);
+  align-items: center;
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
+}
+.services__controls > [aria-hidden] { grid-column: 1; }
+.services__controls-inner {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Pagination dots — hidden */
+.services__dots { display: none; }
+
+/* Slide counter — desktop (between arrows) */
+.services__counter {
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-brand-white);
+  letter-spacing: 0.04em;
+  min-width: 2.5rem;
+  text-align: center;
+}
+.services__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  background: rgba(255,255,255,0.22);
+  border: none;
+  cursor: pointer;
+  transition:
+    background var(--duration-ui) var(--ease-standard),
+    width      var(--duration-ui) var(--ease-standard);
+}
+.services__dot--active { background: var(--color-brand-purple); width: 1.25rem; }
+
+/* Arrow buttons */
+.services__nav {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-brand-white);
+  cursor: pointer;
+  transition: border-color var(--duration-ui) var(--ease-standard),
+              background   var(--duration-ui) var(--ease-standard);
+}
+.services__nav:hover,
+.services__nav:focus-visible {
+  border-color: var(--color-brand-purple);
+  background: rgba(161,0,255,0.08);
+}
+.services__nav svg {
+  width: 1rem; height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* SERVICES — TABLET 768px–1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section--services { padding: clamp(3rem, 6vw, 5rem) 0; }
+  .services__slide-inner,
+  .services__controls {
+    grid-template-columns: 45fr 55fr;
+    gap: clamp(2rem, 3.5vw, 3rem);
+  }
+}
+
+/* SERVICES — MOBILE ≤767px */
+@media (max-width: 767px) {
+  .section--services { padding: clamp(2.5rem, 8vw, 3.5rem) 0; }
+
+  /* carousel-outer: visible so touch-scroll events reach inner carousel on all mobile browsers */
+  .section--services .services__carousel-outer { overflow: visible; }
+
+  /* Carousel contained within section__inner — no bleed */
+  .section--services .services__carousel {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .section--services .services__carousel::-webkit-scrollbar { display: none; }
+
+  /* Track: disable JS transform; gap: 0 eliminates inter-card gap artifact during swipe */
+  .section--services .services__slides {
+    transform: none !important;
+    transition: none;
+    gap: 0;
+  }
+
+  /* One card at a time — full carousel width */
+  .section--services .services__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  /* Image: 4:3 on mobile */
+  .section--services .services__image-slot {
+    aspect-ratio: 4 / 3;
+  }
+
+  .services__slide-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .services__media  { order: 1; }
+  .services__content { order: 2; }
+  .services__pillar-title { font-size: clamp(1.125rem, 4.5vw, 1.375rem); }
+  .services__pillar-body  { font-size: 1rem; margin-bottom: 0; }
+  .services__mobile-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+  .services__mobile-footer > .services__cta {
+    align-self: flex-start;   /* left-anchor CTA; nav stays flex-end */
+    display: none;
+  }
+  .services__mobile-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .services__counter--mobile {
+    font-size: 0.875rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-brand-white);
+    letter-spacing: 0.04em;
+    min-width: 2.5rem;
+    text-align: center;
+  }
+  .services__cta--desktop { display: none; }
+  .services__controls     { display: none; }
+}
+
+/* Desktop/tablet: hide mobile-only footer */
+@media (min-width: 768px) {
+  .services__mobile-footer { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__slides { transition: none; }
+}
+
