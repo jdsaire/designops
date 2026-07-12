@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-lang="ES">
+<html lang="es" data-lang="ES" data-nav-context="home">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +45,7 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a href="#top" class="nav__logo" aria-label="JDigital — Home">
+      <a href="#top" data-nav-link="#top" class="nav__logo" aria-label="JDigital — Home">
         <img class="nav__logo-img nav__logo-img--default" src="logos/jdigital-logo-default.svg" alt="JDigital" data-i18n-alt="nav_logo_alt">
         <img class="nav__logo-img nav__logo-img--hover"   src="logos/jdigital-logo-hover.svg"      alt="" aria-hidden="true">
         <img class="nav__logo-img nav__logo-img--active"  src="logos/jdigital-logo-active.svg"     alt="" aria-hidden="true">
@@ -54,9 +54,9 @@
 
       <!-- CENTER nav links -->
       <div class="nav__center">
-        <a href="#work"         class="nav__link" data-i18n="nav_work">Work</a>
-        <a href="#capabilities" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
-        <a href="#evolution"    class="nav__link" data-i18n="nav_evolution">Evolution</a>
+        <a href="#work"         data-nav-link="#work"         class="nav__link" data-i18n="nav_work">Work</a>
+        <a href="#capabilities" data-nav-link="#capabilities" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="#evolution"    data-nav-link="#evolution"    class="nav__link" data-i18n="nav_evolution">Evolution</a>
       </div>
 
       <!-- RIGHT utility -->
@@ -200,6 +200,9 @@
         class="bridge__attribution"
         data-i18n="attribution"
       >Juan Diego Saire &mdash; DesignOps</p>
+      <a href="work/designops-system/" class="bridge__cta" aria-label="Access the DesignOps System brief">
+        <span data-i18n="work_card1_cta">Access Brief</span> <span class="bridge__cta-icon" aria-hidden="true">›</span>
+      </a>
     </div>
   </section>
 
@@ -242,7 +245,7 @@
             <p class="work-card__summary" data-i18n="work_card1_body">I refused to stop at the slide. I learned front-end development, put AI under my standard, and shipped the system you are reading, governed daily by me alone. The next four minutes show exactly how.</p>
           </div>
 
-          <a href="work-designops-system.html" class="work-card__cta" aria-label="Access the DesignOps System brief">
+          <a href="work/designops-system/" class="work-card__cta" aria-label="Access the DesignOps System brief">
             <span data-i18n="work_card1_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
           </a>
 

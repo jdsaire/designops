@@ -14,6 +14,8 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 - Brief 01 renumbered act eyebrows (display numerals 03→04, 04→05, 05→06): `act3_eyebrow`, `act4_eyebrow`, `act5_eyebrow` — plus their ES counterparts once the ES chassis exists.
 - Home (`assets/i18n/es.json`): `work_card1_body` (superseded by the EN hero short version).
 - Exception — NOT stale: `work_card1_cta` ES = "Acceder al Brief" is principal-supplied and populated.
+- Wave-4.5 CHROME split (`assets/i18n/en.json`) new EN-only keys awaiting ES: `chrome_wordmark_sub`, `chrome_nav_cta`.
+- Wave-4.5 BODY split (`assets/i18n/briefs/designops.en.json`) — full Brief 01 BODY namespace is EN-only; `designops.es.json` is an empty stub pending the Wave 6 ES pass.
 
 ## Logged tensions (Wave 4)
 
