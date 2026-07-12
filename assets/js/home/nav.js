@@ -2,6 +2,12 @@
 import { swapLang } from '../core/i18n.js';
 
 function init() {
+  /* Nav context — resolve cross-document hrefs from a base hash. On home the
+     prefix is "" (no-op; hrefs unchanged); a brief page prepends "../../".
+     Idempotent (derives from data-nav-link, not the current href). */
+  const navPrefix = document.documentElement.getAttribute('data-nav-context') === 'brief' ? '../../' : '';
+  document.querySelectorAll('[data-nav-link]').forEach(a => a.setAttribute('href', navPrefix + a.getAttribute('data-nav-link')));
+
   const nav = document.getElementById('navbar');
   let lastScroll = 0, ticking = false;
   function onScroll() {

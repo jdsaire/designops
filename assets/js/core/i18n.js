@@ -21,6 +21,7 @@ function loadDict(lang) {
 
 function swapLang(lang) {
   i18nCurrent = lang;
+  try { localStorage.setItem('jds-lang', lang); } catch (e) {}
   loadDict(lang).then(dict => {
     if (!dict || i18nCurrent !== lang) return;
     document.documentElement.setAttribute('lang', lang === 'ES' ? 'es' : 'en');
@@ -54,7 +55,8 @@ function swapLang(lang) {
 }
 
 function init() {
-  const initialLang = 'ES';
+  let initialLang = 'ES';
+  try { initialLang = localStorage.getItem('jds-lang') || 'ES'; } catch (e) {}
   swapLang(initialLang);
   const langLabel = document.getElementById('langLabel');
   const langPanel = document.getElementById('langPanel');

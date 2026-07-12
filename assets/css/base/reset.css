@@ -2,3 +2,12 @@
 body { font-family:var(--font-primary); background:var(--color-brand-black); color:var(--color-brand-white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 a { text-decoration:none; color:inherit; }
 
+/* Cross-document View Transitions — same-origin navigation gets a default
+   cross-fade; non-supporting browsers ignore this and navigate plainly. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
