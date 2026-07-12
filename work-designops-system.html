@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A design system I built and govern end to end · Juan Diego Saire</title>
+<meta name="description" content="Discover how I stopped handing off my strategy and built the product myself — a live design system, governed end to end.">
+<!-- ============================================================
+     DEPLOY-F1-Brief1-SiteBuild-v2_0 · Brief 1 ONLY · EN
+     Iteration 1: bridge · redundancies · structure · eyebrows
+     Acts: The Problem · The Reinvention · The Architecture ·
+           The Dashboard · The Reflection
+     ES keys (future): El Problema · La Reinvención · La
+           Arquitectura · El Dashboard · La Reflexión — FULL PARITY
+     Gate K keywords: AI-native · Front-end · DesignOps
+     [TEMPORAL]: contact mailto (data-temporal="contact-email")
+     ============================================================ -->
+<style>
+/* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
+html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:root{
+  --color-brand-purple:#A100FF;
+  --color-purple-hover:#8C00D9;
+  --color-purple-light:#C2A3FF;
+  --color-brand-black:#000000;
+  --color-brand-white:#FFFFFF;
+  --color-text-muted:rgba(255,255,255,0.6);
+  --color-text-dim:rgba(255,255,255,0.45);
+  --color-border-faint:rgba(255,255,255,0.06);
+  --color-border-soft:rgba(255,255,255,0.10);
+  --font-primary:'Graphik',Arial,sans-serif;
+  --fw-light:300; --fw-regular:400; --fw-medium:500;
+  --fw-semibold:600; --fw-bold:700; --fw-black:900;
+  --max-content-width:1440px;
+  --gutter:clamp(1rem,3.5vw,5rem);
+  --nav-height:clamp(3.5rem,4vw,4rem);
+  --peek-width:clamp(3rem,8vw,6rem);
+  --slide-gap:clamp(1.25rem,2vw,2rem);
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-decelerate:cubic-bezier(0,0,0.2,1);
+  --duration-ui:250ms;
+  --act-pad:clamp(4rem,8vw,8rem);
+  --panel-w:min(430px,36vw);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--color-brand-black); color:var(--color-brand-white);
+  font-family:var(--font-primary); font-weight:var(--fw-regular);
+  line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img,svg{display:block;}
+a{color:inherit; text-decoration:none;}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
+::selection{background:var(--color-brand-purple); color:var(--color-brand-white);}
+:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:3px;}
+.container{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+
+/* ================= SCROLL PROGRESS BAR — above nav ================= */
+.progress{position:fixed; top:0; left:0; width:100%; height:3px; z-index:100;
+  background:transparent; pointer-events:none;}
+.progress__fill{height:100%; width:100%; background:var(--color-brand-purple);
+  transform:scaleX(0); transform-origin:left center;}
+
+/* ================= NAV (live organism shape) ================= */
+.nav{position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-height);
+  background:rgba(0,0,0,0.86); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--color-border-faint);}
+.nav__inner{max-width:var(--max-content-width); margin:0 auto; height:100%;
+  padding:0 var(--gutter); display:flex; align-items:center; justify-content:space-between; gap:clamp(1rem,2.5vw,2.5rem);}
+.nav__logo{display:flex; align-items:baseline; gap:.5rem; font-weight:var(--fw-black); letter-spacing:-0.01em; font-size:1.05rem;}
+.nav__logo small{font-weight:var(--fw-medium); color:var(--color-text-muted); letter-spacing:.14em; font-size:.62rem; text-transform:uppercase;}
+.nav__logo:hover small{color:var(--color-brand-purple);}
+.nav__center{display:flex; align-items:center; gap:clamp(.75rem,1.5vw,1.5rem);}
+.nav__link{font-size:.85rem; font-weight:var(--fw-medium); color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
+.nav__link:hover{color:var(--color-brand-white);}
+.nav__cta{font-size:.8rem; font-weight:var(--fw-semibold); padding:.5rem 1rem; border:1px solid var(--color-border-soft);
+  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
+.nav__cta:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+@media (max-width:767px){ .nav__center{display:none;} }
+
+/* ================= SECTION EYEBROW — inherited from live designops main.css, verbatim ================= */
+.section__eyebrow{display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem;
+  margin-bottom:clamp(1.5rem,2.5vw,2.5rem);}
+.section__eyebrow-bar{width:2.5rem; height:3px; background:var(--color-brand-purple);}
+.section__eyebrow-text{font-size:0.8rem; font-weight:var(--fw-semibold); letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--color-brand-white);}
+.section__eyebrow-text .dim{color:var(--color-text-dim);}
+
+/* ================= TYPE ROLES ================= */
+.verdict{font-size:clamp(1.75rem,4vw,3.25rem); font-weight:var(--fw-black); line-height:1.08; letter-spacing:-0.02em;}
+.scan{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:34em;}
+.scan strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
+
+/* ================= HERO — full-width heading, no metrics ================= */
+.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-height) + 3px); position:relative;}
+.hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
+.hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
+.hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
+.kwrow{display:flex; flex-wrap:wrap; gap:.6rem;}
+.kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
+.scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
+.scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
+
+/* ================= ACTS ================= */
+.act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
+.act__head{display:flex; flex-direction:column; gap:1rem; margin-bottom:clamp(2rem,4vw,3.25rem); max-width:60rem;}
+
+/* ---- Contrast card (Act 1) ---- */
+.contrast{display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--color-border-soft); margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+.contrast__face{padding:clamp(1.4rem,2.5vw,2.25rem); display:flex; flex-direction:column; gap:.7rem;}
+.contrast__face + .contrast__face{border-left:1px solid var(--color-border-soft);}
+.contrast__tag{font-size:.66rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim);}
+.contrast__face--build .contrast__tag{color:var(--color-brand-purple);}
+.contrast__txt{font-size:clamp(.98rem,1.2vw,1.1rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.contrast__bridge{grid-column:1 / -1; border-top:1px solid var(--color-border-soft); padding:1rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+/* Role strip — three stacked lines */
+.rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
+  border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-faint);
+  margin-bottom:clamp(1.5rem,2.5vw,2rem);}
+.rolestrip span{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-muted); font-weight:var(--fw-medium);}
+.rolestrip b{color:var(--color-brand-purple); font-weight:var(--fw-bold);}
+
+/* ---- Timeline carousel (Act 2 — the single lateral gesture, 3 stops) ---- */
+.timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
+.timeline__track{display:grid; grid-auto-flow:column; grid-auto-columns:calc(100% - var(--peek-width));
+  gap:var(--slide-gap); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem; scrollbar-width:none;}
+.timeline__track::-webkit-scrollbar{display:none;}
+.stop{scroll-snap-align:start; border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2vw,1.8rem);
+  display:flex; flex-direction:column; gap:.75rem; background:var(--color-brand-black); position:relative;}
+.stop::before{content:""; position:absolute; top:0; left:0; width:2.25rem; height:3px; background:var(--color-brand-purple);}
+.stop__n{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; color:var(--color-text-dim); text-transform:uppercase;}
+.stop__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
+.stop__x{font-size:.95rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+.timeline__nav{display:flex; gap:.6rem; margin-top:1rem;}
+.timeline__btn{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center;
+  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
+.timeline__btn:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.timeline__btn:disabled{opacity:.3; cursor:default;}
+@media (min-width:1024px){
+  .timeline__track{grid-auto-flow:row; grid-template-columns:repeat(3,1fr); grid-auto-columns:unset; overflow:visible; padding-bottom:0;}
+  .timeline__nav{display:none;}
+  .timeline::before{content:""; position:absolute; top:-1.1rem; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, var(--color-brand-purple), var(--color-border-soft));}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .timeline__track{grid-auto-columns:calc(50% - var(--slide-gap)/2);}
+}
+
+/* ---- Cards ---- */
+.cardgrid{display:grid; gap:1rem;}
+.cardgrid--3{grid-template-columns:repeat(3,1fr);}
+.cardgrid--2{grid-template-columns:repeat(2,1fr);}
+.card{border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2.2vw,1.9rem); display:flex; flex-direction:column; gap:.75rem;
+  transition:border-color var(--duration-ui) var(--ease-standard);}
+.card:hover{border-color:var(--color-brand-purple);}
+.card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
+.card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+@media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
+@media (max-width:767px){
+  .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
+  .contrast{grid-template-columns:1fr;}
+  .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
+}
+
+/* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
+.reveal{margin-top:auto;}
+.reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
+  transition:color var(--duration-ui) var(--ease-standard); min-height:44px;}
+.reveal__btn::before{content:"⊕"; font-size:1rem;}
+.reveal__btn[aria-expanded="true"]::before{content:"⊖";}
+.reveal__btn:hover{color:var(--color-purple-light);}
+.reveal__body{border-left:2px solid var(--color-brand-purple); padding:.9rem 0 .2rem 1rem; margin-top:.6rem;}
+.reveal__body[hidden]{display:none;}
+.reveal__body p{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted); margin-bottom:.7rem;}
+.reveal__body p:last-child{margin-bottom:0;}
+
+/* Side panel (desktop) */
+.panel{position:fixed; top:calc(var(--nav-height) + 3px); right:0; bottom:0; width:var(--panel-w); z-index:70;
+  background:#050505; border-left:1px solid var(--color-border-soft); padding:1.5rem 1.6rem 2rem;
+  overflow-y:auto; transform:translateX(102%); transition:transform 320ms var(--ease-decelerate);
+  display:flex; flex-direction:column; gap:1rem;}
+.panel.is-open{transform:none;}
+.panel__head{display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  border-bottom:1px solid var(--color-border-faint); padding-bottom:.9rem;}
+.panel__title{font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-brand-purple);}
+.panel__close{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center; font-size:1rem;}
+.panel__close:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.panel__slot .reveal__body{border-left:0; padding-left:0; margin-top:0;}
+/* Short Version — poster read in desktop panel: enlarged, solid white */
+@media (min-width:1024px){
+  .panel__slot .reveal__body--poster p{font-size:clamp(1.35rem,1.7vw,1.8rem); line-height:1.4;
+    color:var(--color-brand-white); font-weight:var(--fw-light);}
+}
+
+/* ---- Schedule · dated build timeline (Act 03) — static, single-gesture-safe, no reveals ---- */
+.sched{--sched-label:clamp(9rem,22vw,13rem); border:1px solid var(--color-border-soft); overflow:hidden;}
+.sched__axis{position:relative; height:1.9rem; margin-left:var(--sched-label);
+  border-bottom:1px solid var(--color-border-soft);}
+.sched__mo{position:absolute; top:0; bottom:0; padding-left:.4rem; display:flex; align-items:center;
+  font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase;
+  color:var(--color-text-dim); border-left:1px solid var(--color-border-faint);}
+.sched__mile{position:absolute; top:0; bottom:0; width:1px; background:var(--color-brand-purple); opacity:.55;}
+.sched__mile::before{content:""; position:absolute; top:.2rem; left:50%; transform:translateX(-50%);
+  width:.36rem; height:.36rem; background:var(--color-brand-purple);}
+.srow{display:grid; grid-template-columns:var(--sched-label) 1fr; align-items:stretch;
+  border-top:1px solid var(--color-border-faint);}
+.srow__label{padding:.8rem clamp(.9rem,1.5vw,1.2rem); display:flex; flex-direction:column; gap:.22rem;
+  justify-content:center; border-right:1px solid var(--color-border-faint);}
+.srow__t{font-size:.88rem; font-weight:var(--fw-semibold); letter-spacing:-0.01em; line-height:1.25;}
+.srow__m{font-size:.66rem; font-weight:var(--fw-light); color:var(--color-text-dim); letter-spacing:.02em;}
+.srow__track{position:relative; min-height:2.5rem;}
+.sbar{position:absolute; top:50%; transform:translateY(-50%); height:.9rem;
+  left:calc(var(--l) * 1%); width:calc(var(--w) * 1%); min-width:.5rem; background:var(--color-brand-purple);}
+.sbar--close{background:var(--color-purple-light);}
+.sched__legend{margin-top:1rem; display:flex; flex-wrap:wrap; gap:.35rem 1.4rem;
+  font-size:.72rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+@media (max-width:767px){
+  .sched__axis{display:none;}
+  .srow{grid-template-columns:1fr;}
+  .srow__label{border-right:0; border-bottom:1px solid var(--color-border-faint);}
+  .srow__track{min-height:2rem; margin:.6rem clamp(.9rem,1.5vw,1.2rem);}
+}
+
+/* ---- Evidence bar (Act 3) ---- */
+.evidence{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
+  border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem) clamp(1.2rem,2.2vw,1.8rem); margin-top:1.4rem;}
+.evidence__label{font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold);}
+.evidence__links{display:flex; gap:1.4rem; flex-wrap:wrap;}
+.evidence__link{font-weight:var(--fw-semibold); font-size:.95rem; border-bottom:1px solid var(--color-brand-purple);
+  padding-bottom:.15rem; transition:color var(--duration-ui) var(--ease-standard);}
+.evidence__link:hover{color:var(--color-brand-purple);}
+
+/* ---- ACT 04 · THE DASHBOARD — master dashboard ---- */
+.dash{border:1px solid var(--color-border-soft);}
+.dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
+.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
+  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+.dash__tab:hover{color:var(--color-brand-white);}
+.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
+.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
+.dash__panel[hidden]{display:none;}
+.dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
+.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
+.dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
+.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
+.dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
+.dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
+  transition:transform 900ms var(--ease-decelerate);}
+.dash__read{display:flex; flex-direction:column; gap:1.1rem; max-width:52rem;}
+.dash__readline{font-size:clamp(1.15rem,1.7vw,1.5rem); font-weight:var(--fw-light); line-height:1.45;}
+.dash__readline strong{font-weight:var(--fw-bold);}
+.dash__readsub{font-size:.95rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.dash__reco{border-left:3px solid var(--color-brand-purple); padding:.6rem 0 .6rem 1rem;
+  font-size:1rem; font-weight:var(--fw-medium);}
+.dash__foot{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+@media (max-width:1023px){ .dash__grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:767px){
+  .dash__grid{grid-template-columns:1fr 1fr;}
+  .dash__grid--derived{grid-template-columns:1fr;}
+  .dash__tab{font-size:.6rem; letter-spacing:.1em;}
+}
+
+/* ---- ACT 05 · THE REFLECTION ---- */
+.house .card__t{display:flex; flex-direction:column; gap:.3rem;}
+.house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-brand-purple);}
+.sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+
+/* ---- Conversion ---- */
+.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
+  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
+  transition:background var(--duration-ui) var(--ease-standard);}
+.convert__cta:hover{background:var(--color-brand-purple);}
+.temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
+  border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
+
+/* ================= FOOTER (live organism, verbatim strings) ================= */
+.footer{border-top:1px solid var(--color-border-faint); padding:clamp(2.5rem,5vw,4rem) 0; margin-top:var(--act-pad);}
+.footer__inner{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;}
+.footer__tag{font-size:clamp(1.1rem,1.6vw,1.4rem); font-weight:var(--fw-bold);}
+.footer__tag em{font-style:normal; color:var(--color-brand-purple);}
+.footer__meta{display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap;}
+.footer__link{font-size:.85rem; color:var(--color-text-muted); border-bottom:1px solid var(--color-border-soft); padding-bottom:.1rem;}
+.footer__link:hover{color:var(--color-brand-purple); border-color:var(--color-brand-purple);}
+.footer__c{font-size:.75rem; color:var(--color-text-dim);}
+
+/* ================= MOTION ================= */
+.io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
+.io.is-in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important; transition:none!important;}
+  .io{opacity:1; transform:none;}
+  .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
+  .timeline__nav{display:none;}
+  .dcell__bar i{transform:scaleX(var(--v,0));}
+}
+
+/* ================= MOTION · D7 NATIVE LAYER (progressive enhancement, compositor-only) =================
+   All effects gate behind prefers-reduced-motion:no-preference + @supports; the reduced-motion block
+   above (animation:none!important; .io reset) is the authoritative static end-state for every effect.
+   Radius 0 / shadow none / purple-accent-only held; no property here carries or recolors body text. */
+
+/* S1 — scroll choreography: layer a view()-linked entrance over the JS .is-in fade (fallback intact) */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
+  }
+}
+@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
+
+/* S5 — compositing signature: the hero eyebrow accent draws in with a blended flourish (decorative bar) */
+@media (prefers-reduced-motion:no-preference){
+  @supports (mix-blend-mode:difference){
+    .hero .section__eyebrow-bar{ transform-origin:left center; mix-blend-mode:difference;
+      animation:sig-draw 900ms var(--ease-decelerate) both; }
+  }
+}
+@keyframes sig-draw{ from{transform:scaleX(0); opacity:.35;} to{transform:scaleX(1); opacity:1;} }
+
+/* S6 — depth: subtle preserve-3d lift on the Architecture (#act3) evidence cards, hover/focus only */
+@media (prefers-reduced-motion:no-preference){
+  @supports (transform-style:preserve-3d){
+    #act3 .cardgrid--2{ perspective:1100px; }
+    #act3 .card{ transform-style:preserve-3d; transition:transform 260ms var(--ease-standard), border-color var(--duration-ui) var(--ease-standard); }
+    #act3 .card__t{ transition:transform 260ms var(--ease-standard); }
+    #act3 .card:hover, #act3 .card:focus-within{ transform:rotateX(2deg) translateZ(8px); }
+    #act3 .card:hover .card__t, #act3 .card:focus-within .card__t{ transform:translateZ(14px); }
+  }
+}
+</style>
+</head>
+<body id="top">
+
+<!-- Scroll progress — above nav, grows L→R, reverses on upscroll -->
+<div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
+
+<!-- ================= NAV — routes BACK to designops home ================= -->
+<header class="nav">
+  <nav class="nav__inner" role="navigation" aria-label="Primary">
+    <!-- INTEGRATION NOTE: swap wordmark for live SVG logo set on repo merge -->
+    <a href="https://jdsaire.github.io/designops/#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+      JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+    </a>
+    <div class="nav__center">
+      <a class="nav__link" href="https://jdsaire.github.io/designops/#work" data-i18n="nav_work">Work</a>
+      <a class="nav__link" href="https://jdsaire.github.io/designops/#capabilities" data-i18n="nav_capabilities">Capabilities</a>
+      <a class="nav__link" href="https://jdsaire.github.io/designops/#evolution" data-i18n="nav_evolution">Evolution</a>
+    </div>
+    <a class="nav__cta" href="#convert" data-i18n="chrome_nav_cta">Start a conversation</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ================= HERO — bridge from the designops work card ================= -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="container hero__inner">
+    <div class="section__eyebrow" style="margin-bottom:0;">
+      <span class="section__eyebrow-bar"></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
+    </div>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">A design system I built and govern end to end.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">Discover how I stopped handing off my designs and started building the front-end myself, governed daily.</p>
+    <div class="kwrow" role="list" aria-label="Case keywords">
+      <span class="kw" role="listitem" data-i18n="kw1">Web Development</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Front-end</span>
+      <span class="kw" role="listitem" data-i18n="kw3">DesignOps</span>
+    </div>
+    <div class="reveal" data-act="hero">
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
+      <!-- canonical: this copy supersedes work_card1_body upstream (pending designops Fable-5 pass) -->
+      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
+        <p data-i18n="hero_rv_txt">I refused to stop at the slide. I learned front-end development, put AI under my standard, and shipped the system you are reading, governed daily by me alone. The next four minutes show exactly how.</p>
+      </div>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
+</section>
+
+<!-- ================= ACT 01 · THE PROBLEM ================= -->
+<section class="act" id="act1" aria-labelledby="v1">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
+      </div>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Most strategy dies at the slide.</h2>
+    </div>
+
+    <div class="contrast io" role="group" aria-label="The handoff, split in two">
+      <div class="contrast__face">
+        <span class="contrast__tag" data-i18n="act1_c1_tag">Describe</span>
+        <p class="contrast__txt" data-i18n="act1_c1_txt">Someone describes a product —</p>
+      </div>
+      <div class="contrast__face contrast__face--build">
+        <span class="contrast__tag" data-i18n="act1_c2_tag">Build</span>
+        <p class="contrast__txt" data-i18n="act1_c2_txt">— and someone else, months later, builds a lesser version of it.</p>
+      </div>
+      <p class="contrast__bridge" data-i18n="act1_bridge">The distance between the two is <strong>where good work goes to die.</strong></p>
+    </div>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act1_scan1"
+         data-full="I spent the first part of my career on the describing side of that handoff — trained in the early 2010s, when building software was simply not part of a strategist's education, and treating code as a specialist's territory I would never enter.">
+         I spent the first part of my career on the describing side of that handoff.</p>
+      <p class="scan" data-i18n="act1_scan2"
+         data-full="Then AI removed the old barriers to building, and there were two honest options: watch it happen to my profession, or take it by the horns. High risk, high reward, no way back. This case documents the second option.">
+         Then AI removed the barriers. Two honest options: watch it happen to my profession — <strong>or take it by the horns.</strong></p>
+    </div>
+
+    <div class="rolestrip io" aria-label="Role and scope">
+      <span data-i18n="act1_role1"><b>Role</b> — Sole owner</span>
+      <span data-i18n="act1_role2"><b>Duration</b> — 2025 to present</span>
+      <span data-i18n="act1_role3"><b>Scope</b> — Strategy → design → build → operation</span>
+    </div>
+
+    <div class="reveal io" data-act="act1">
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a1" data-panel-title="Why a picture can't prove this" data-i18n="act1_rv_btn">Why a picture can't prove this</button>
+      <div class="reveal__body" id="rv-a1" hidden>
+        <p data-i18n="act1_rv_txt">A design file cannot misbehave — it sits still and looks perfect. Only a live product can drift, break, age, or hold. That is why this case's evidence is a running system rather than a picture of one: it is the only format in which governance claims can actually fail, and therefore the only format in which they mean something.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 02 · THE REINVENTION — 3 stops, the single lateral gesture ================= -->
+<section class="act" id="act2" aria-labelledby="v2">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Reinvention</span>
+      </div>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">I learned to build — then made building answer to my standard.</h2>
+    </div>
+
+    <div class="timeline io">
+      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The reinvention, in three stops">
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s1_n">Stop 1</span>
+          <h3 class="stop__t" data-i18n="act2_s1_t">The picture era</h3>
+          <p class="stop__x" data-i18n="act2_s1_x">I designed for years in Canva, Figma, and Framer while builders like Webflow, Wix, and WordPress stayed someone else's system.</p>
+        </article>
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s2_n">Stop 2</span>
+          <h3 class="stop__t" data-i18n="act2_s2_t">The decision · late 2025</h3>
+          <p class="stop__x" data-i18n="act2_s2_x">I chose to learn front-end development itself, not coding in the abstract, with a Microsoft specialization laying the foundations.</p>
+        </article>
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s3_n">Stop 3</span>
+          <h3 class="stop__t" data-i18n="act2_s3_t">The new method</h3>
+          <p class="stop__x" data-i18n="act2_s3_x">I direct AI to build what I design. AI is my senior developer. The vision and authorship stay mine.</p>
+        </article>
+      </div>
+      <div class="timeline__nav">
+        <button class="timeline__btn" id="tlPrev" aria-label="Previous stop">←</button>
+        <button class="timeline__btn" id="tlNext" aria-label="Next stop">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 03 · THE SCHEDULE — dated build timeline · static, no lateral gesture, no reveals ================= -->
+<section class="act" id="sched" aria-labelledby="vsch">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
+      </div>
+      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Seventy-three days, in public, gate by gate.</h2>
+      <p class="scan" data-i18n="sch_lede">The reinvention has a paper trail. Every epic below is reconstructed from the public commit history — from the day I adopted the AI-governed build workflow to the day the repository was cleansed and handed off. Dates and planned days appear here, and nowhere else on this page.</p>
+    </div>
+
+    <div class="sched io">
+      <div class="sched__axis" aria-hidden="true">
+        <span class="sched__mo" style="left:0%">Apr</span>
+        <span class="sched__mo" style="left:9.6%">May</span>
+        <span class="sched__mo" style="left:52.1%">Jun</span>
+        <span class="sched__mo" style="left:93.2%">Jul</span>
+        <span class="sched__mile" style="left:45.2%"></span>
+        <span class="sched__mile" style="left:58.9%"></span>
+        <span class="sched__mile" style="left:97.3%"></span>
+      </div>
+
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e1_t">Workflow adoption & foundation</span>
+          <span class="srow__m" data-i18n="sch_e1_m">24–28 Apr · 5 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:0.0;--w:5.5" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e2_t">Capabilities & about system</span>
+          <span class="srow__m" data-i18n="sch_e2_m">30 Apr – 06 May · 5 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:8.2;--w:8.2" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e3_t">CTAs & contact form</span>
+          <span class="srow__m" data-i18n="sch_e3_m">07–12 May · 5 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:17.8;--w:6.9" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e4_t">Contact integration & i18n stabilization</span>
+          <span class="srow__m" data-i18n="sch_e4_m">19–28 May · 4 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:34.2;--w:12.4" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e5_t">Bridges & positioning refactor</span>
+          <span class="srow__m" data-i18n="sch_e5_m">30–31 May · 2 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:49.3;--w:2.0" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e6_t">Pages pipeline & i18n v2</span>
+          <span class="srow__m" data-i18n="sch_e6_m">03–07 Jun · 5 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:54.8;--w:5.5" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e7_t">DesignOps variant baseline</span>
+          <span class="srow__m" data-i18n="sch_e7_m">26–27 Jun · 2 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:86.3;--w:2.0" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e8_t">ES localization & mobile UX</span>
+          <span class="srow__m" data-i18n="sch_e8_m">29–30 Jun · 2 days</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:90.4;--w:2.0" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e9_t">Repo cleanse, backup & Brief handoff</span>
+          <span class="srow__m" data-i18n="sch_e9_m">04 Jul · 1 day</span>
+        </div>
+        <div class="srow__track"><span class="sbar" style="--l:95.3;--w:2.0" aria-hidden="true"></span></div>
+      </div>
+      <div class="srow">
+        <div class="srow__label">
+          <span class="srow__t" data-i18n="sch_e10_t">Ground Zero reorganization</span>
+          <span class="srow__m" data-i18n="sch_e10_m">06 Jul · 1 day</span>
+        </div>
+        <div class="srow__track"><span class="sbar sbar--close" style="--l:98.0;--w:2.0" aria-hidden="true"></span></div>
+      </div>
+    </div>
+
+    <p class="sched__legend io">
+      <span data-i18n="sch_lg1">Bar — calendar span.</span>
+      <span data-i18n="sch_lg2">Number — planned-capacity days.</span>
+      <span data-i18n="sch_lg3">Marks — 27 May i18n stabilized · 06 Jun pipeline live · 04 Jul Brief handoff.</span>
+    </p>
+    <p class="dash__foot io" data-i18n="sch_note" style="border-top:0; padding-left:0;">Reconstructed from public GitHub history, 24 Apr – 06 Jul 2026 — 32 active build-days across the window. The closing Ground Zero reorganization (~1 day) is documented for completeness. No task appears that the commit record cannot support.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 04 · THE ARCHITECTURE — 4 merged cards, enriched reveals, zero figures ================= -->
+<section class="act" id="act3" aria-labelledby="v3">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 04 · The Architecture</span>
+      </div>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">The evidence is public — and you're standing in it.</h2>
+      <p class="scan" data-i18n="act3_lede">This is not a case about a product I once touched. The evidence is the site itself: live, versioned, and open to inspection. Four claims, each one checkable.</p>
+    </div>
+
+    <div class="cardgrid cardgrid--2 io">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act3_c1_t">Ten building blocks, one standard</h3>
+        <p class="card__x" data-i18n="act3_c1_x">Every section of this site is built from reusable components under one standard — so nothing drifts, and new pages inherit quality instead of reinventing it.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Ten building blocks" data-i18n="act3_c1_rv_btn">What the blocks are</button>
+          <div class="reveal__body" id="rv-a3c1" hidden>
+            <p data-i18n="act3_c1_rv_txt1">Ten reusable organisms — navigation, hero, work cards, capability carousel, timeline, contact, and footer among them — each held to correct adoption of the global token layer. The structure beneath is semantic: header, nav, main, section, and footer landmarks, a single top-level heading, and a clean hierarchy below it, so browsers, assistive technologies, and other developers read the same order a visitor sees.</p>
+            <p data-i18n="act3_c1_rv_txt2">Design rules are declared once at the root as custom properties and referenced everywhere — change a token, and the change propagates. Layout runs on Flexbox and Grid with one consistent type scale. All interface copy is dictionary-driven, so a new language enters as a data file, not a rewrite.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act3_c2_t">Built to last</h3>
+        <p class="card__x" data-i18n="act3_c2_x">Nothing to patch, nothing to migrate, nothing borrowed — no rented platform, no stack of dependencies rotting quietly while you're not looking.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Built to last" data-i18n="act3_c2_rv_btn">The framework rule</button>
+          <div class="reveal__body" id="rv-a3c2" hidden>
+            <p data-i18n="act3_c2_rv_txt">Hand-authored HTML, CSS, and JavaScript with no framework I couldn't justify, and no build tooling. Every style rule lives in one external system — no inline patches, no exceptions — which is what keeps the standard enforceable. No third-party dependencies means no forced migrations, no security-patch treadmill, and a payload small enough to stay fast without optimization theater.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act3_c3_t">Accessible by default</h3>
+        <p class="card__x" data-i18n="act3_c3_x">Usable with screen readers and keyboards, held to a recognized international standard from the first line of code — a requirement, not a repair.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Accessible by default" data-i18n="act3_c3_rv_btn">The standard, named</button>
+          <div class="reveal__body" id="rv-a3c3" hidden>
+            <p data-i18n="act3_c3_rv_txt">WCAG AA held as a build gate: every meaningful image described in alt text, every form control paired with its label, landmarks distinguished with aria labels, visible focus styles so keyboard users always know where they are, and text contrast held at the 4.5:1 floor. Accessibility claims sit on this very page — which means they can be tested against it.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act3_c4_t">Governed, end to end</h3>
+        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me. Every build session runs under written rules and approval gates before anything ships.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Governed, end to end" data-i18n="act3_c4_rv_btn">How the build actually runs</button>
+          <div class="reveal__body" id="rv-a3c4" hidden>
+            <p data-i18n="act3_c4_rv_txt1">Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.</p>
+            <p data-i18n="act3_c4_rv_txt2">And when a stubborn spacing defect in the site's contact form outlasted the primary environment, a second AI tool, Gemini, rebuilt the component cleanly from zero for reintegration into the master codebase — the right tool, invoked when needed, under the same standard.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="evidence io">
+      <span class="evidence__label" data-i18n="act3_ev_label">Source, live</span>
+      <div class="evidence__links">
+        <a class="evidence__link" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener" data-i18n="act3_ev_repo">github.com/jdsaire/designops</a>
+        <a class="evidence__link" href="https://jdsaire.github.io/designops/" target="_blank" rel="noopener" data-i18n="act3_ev_site">Open the live site</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 05 · THE DASHBOARD — all figures debut here ================= -->
+<section class="act" id="act4" aria-labelledby="v4">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 05 · The Dashboard</span>
+      </div>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Running today, governed daily, by me alone.</h2>
+      <p class="scan" data-i18n="act4_insight">The number that matters is the ratio: <strong>nothing I ship lands without passing a gate I set for myself.</strong> The page you're reading is the evidence.</p>
+    </div>
+
+    <div class="dash io">
+      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
+        <button class="dash__tab" role="tab" id="tab-m" aria-selected="true" aria-controls="dp-m" data-i18n="dash_tab1">Measured</button>
+        <button class="dash__tab" role="tab" id="tab-d" aria-selected="false" aria-controls="dp-d" data-i18n="dash_tab2">Derived</button>
+        <button class="dash__tab" role="tab" id="tab-r" aria-selected="false" aria-controls="dp-r" data-i18n="dash_tab3">The read</button>
+      </div>
+
+      <!-- LEVEL 1 · MEASURED -->
+      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
+        <div class="dash__grid">
+          <div class="dcell"><span class="dcell__n" data-count="10">10</span><span class="dcell__l" data-i18n="dash_m1">Building blocks</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="175">175</span><span class="dcell__l" data-i18n="dash_m2">Dictionary keys</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="2">2</span><span class="dcell__l" data-i18n="dash_m3">Languages engineered</span></div>
+          <div class="dcell"><span class="dcell__n" data-i18n="dash_m4_n">AA</span><span class="dcell__l" data-i18n="dash_m4">Accessibility standard</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="0">0</span><span class="dcell__l" data-i18n="dash_m5">Frameworks / dependencies</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="286">286</span><span class="dcell__l" data-i18n="dash_m6">Commits</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="49">49</span><span class="dcell__l" data-i18n="dash_m7">Pull requests</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="73">73</span><span class="dcell__l" data-i18n="dash_m8">Days of public history</span></div>
+        </div>
+      </div>
+
+      <!-- LEVEL 2 · DERIVED -->
+      <div class="dash__panel" id="dp-d" role="tabpanel" aria-labelledby="tab-d" hidden>
+        <div class="dash__grid dash__grid--derived">
+          <div class="dcell">
+            <span class="dcell__n" data-count="3.9">3.9</span>
+            <span class="dcell__l" data-i18n="dash_d1">Commits per day, sustained</span>
+            <span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 73 days</span>
+            <span class="dcell__bar" aria-hidden="true"><i style="--v:.65"></i></span>
+          </div>
+          <div class="dcell">
+            <span class="dcell__n" data-count="4.7">4.7</span>
+            <span class="dcell__l" data-i18n="dash_d2">Pull requests per week</span>
+            <span class="dcell__p" data-i18n="dash_d2_p">49 PRs ÷ 10.4 weeks</span>
+            <span class="dcell__bar" aria-hidden="true"><i style="--v:.78"></i></span>
+          </div>
+          <div class="dcell">
+            <span class="dcell__n" data-count="5.8">5.8</span>
+            <span class="dcell__l" data-i18n="dash_d3">Commits per review gate</span>
+            <span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 49 PRs</span>
+            <span class="dcell__bar" aria-hidden="true"><i style="--v:.97"></i></span>
+          </div>
+          <div class="dcell">
+            <span class="dcell__n" data-count="49">49</span>
+            <span class="dcell__l" data-i18n="dash_d4">Review gates in 73 days</span>
+            <span class="dcell__p" data-i18n="dash_d4_p">A gate roughly every 6 commits</span>
+            <span class="dcell__bar" aria-hidden="true"><i style="--v:.67"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVEL 3 · THE READ -->
+      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
+        <div class="dash__read">
+          <p class="dash__readline" data-i18n="dash_r1"><strong>The signal isn't the volume. It's the ratio.</strong> 286 commits mean momentum; 49 pull requests mean restraint. A review gate roughly every six commits is the cadence design organizations try to install in whole teams — I run it on myself.</p>
+          <p class="dash__readsub" data-i18n="dash_r2">Beneath the numbers sits a qualitative floor: the build meets a graded professional rubric for semantic structure, accessibility, styling discipline, interactivity, and responsive behavior.</p>
+          <p class="dash__reco" data-i18n="dash_r3">What transfers to your team isn't my code. It's this operating habit.</p>
+        </div>
+      </div>
+
+      <p class="dash__foot" data-i18n="dash_foot">Method: public GitHub history, 24 Apr – 06 Jul 2026 (73 days). Rates are simple averages — 286÷73, 49÷10.4, 286÷49. Figures verifiable at the repository linked above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE REFLECTION — three houses ================= -->
+<section class="act" id="act5" aria-labelledby="v5">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 06 · The Reflection</span>
+      </div>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What fell, what bent, what stands.</h2>
+      <p class="scan" data-i18n="act5_intro">The story reads clean in hindsight. It wasn't. Here is the journey in three houses, in the order I built them.</p>
+    </div>
+
+    <div class="cardgrid cardgrid--3 io">
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act5_h1_tag">House of straw</span><span data-i18n="act5_h1_t">What collapsed first</span></h3>
+        <p class="card__x" data-i18n="act5_h1_x">My first prompts were plain text and good intentions. They decayed as builds grew, I chased every flag to closure, and template shortcuts gave me speed without ownership. It blew down — and falling taught me exactly what a foundation is for.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act5_h2_tag">House of sticks</span><span data-i18n="act5_h2_t">What held, but bent</span></h3>
+        <p class="card__x" data-i18n="act5_h2_x">Iteration cycles ate whole sessions. One bug outlasted my main environment and needed a second tool. My documentation lived scattered across chats before a system existed. The structure held, barely — and every bend showed me where the next wall belonged.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act5_h3_tag">House of bricks</span><span data-i18n="act5_h3_t">What stands</span></h3>
+        <p class="card__x" data-i18n="act5_h3_x">Versioned dispatches with approval gates. Skills that turn my intent into build-grade prompts. Project knowledge as the order I had historically lacked. Previews before code lands. And the habit of letting best judgment close the small flags — instead of overthinking them.</p>
+      </article>
+    </div>
+
+    <p class="sequel io" data-i18n="act5_sequel"><strong>The sequel is already dispatched:</strong> per-case pages, the Spanish layer, and the next product rebuild. The houses get neighbors.</p>
+
+    <!-- Terminal conversion unit — unchanged -->
+    <div class="convert io" id="convert">
+      <!-- [TEMPORAL] contact — principal swaps address before publish -->
+      <a class="convert__cta" data-temporal="contact-email" href="mailto:confirm-before-publish@temporal.invalid">
+        <span data-i18n="convert_cta">Start a conversation</span>
+      </a><span class="temporal" data-i18n="convert_temporal">Temporal · email pending</span>
+
+      <div class="convert__next">
+        <p class="convert__nextlabel" data-i18n="convert_next_label">Continue the work</p>
+        <div class="cardgrid cardgrid--2">
+          <a class="card card--continuity" href="https://jdsaire.github.io/designops/#work">
+            <h3 class="card__t" data-i18n="convert_c1_t">TUUA Transfer</h3>
+            <p class="card__x" data-i18n="convert_c1_x">A payment platform designed, prototyped, and evaluated — now serving 130,000+ passengers monthly.</p>
+          </a>
+          <a class="card card--continuity" href="https://jdsaire.github.io/designops/#work">
+            <h3 class="card__t" data-i18n="convert_c2_t">LimaFly</h3>
+            <p class="card__x" data-i18n="convert_c2_x">The complete passenger journey, prototyped on a scalable system.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER — live organism strings, verbatim ================= -->
+<footer class="footer" id="pageFooter">
+  <div class="container footer__inner">
+    <p class="footer__tag"><span data-i18n="footer_tagline_pre">Built and governed</span> <em data-i18n="footer_tagline_purple">end to end.</em></p>
+    <div class="footer__meta">
+      <a class="footer__link" href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener" data-i18n="footer_linkedin">Connect on LinkedIn</a>
+      <span class="footer__c" data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= DESKTOP SIDE PANEL ================= -->
+<aside class="panel" id="panel" aria-label="Detail panel" aria-hidden="true">
+  <div class="panel__head">
+    <span class="panel__title" id="panelTitle"></span>
+    <button class="panel__close" id="panelClose" aria-label="Close detail panel">✕</button>
+  </div>
+  <div class="panel__slot" id="panelSlot"></div>
+</aside>
+
+<script>
+/* ============================================================
+   i18n — CHROME/BODY split, mirrors skeleton convention.
+   MIGRATION: CHROME → assets/i18n/{en,es}.json (site chrome)
+   MIGRATION: BODY  → assets/i18n/briefs/designops.{en,es}.json
+   EN ships. ES staged — key parity FULL:
+   act1 El Problema · act2 La Reinvención · act3 La Arquitectura ·
+   act4 El Dashboard · act5 La Reflexión
+   ============================================================ */
+const CHROME = { en: {
+  nav_work:"Work", nav_capabilities:"Capabilities", nav_evolution:"Evolution",
+  chrome_wordmark_sub:"DesignOps",
+  chrome_nav_cta:"Start a conversation",
+  footer_tagline_pre:"Built and governed", footer_tagline_purple:"end to end.",
+  footer_linkedin:"Connect on LinkedIn", footer_copyright:"© 2026 Juan Diego Saire."
+}};
+const BODY = { en: {
+  hero_eyebrow:"Work brief · 01", hero_read:"5 min read",
+  hero_title:"A design system I built and govern end to end.",
+  hero_deck:"Discover how I stopped handing off my designs and started building the front-end myself, governed daily.",
+  kw1:"Web Development", kw2:"Front-end", kw3:"DesignOps",
+  hero_rv_btn:"The short version",
+  /* canonical: supersedes work_card1_body upstream (pending designops Fable-5 pass) */
+  hero_rv_txt:"I refused to stop at the slide. I learned front-end development, put AI under my standard, and shipped the system you are reading, governed daily by me alone. The next four minutes show exactly how.",
+  hero_cue:"The story",
+  act1_eyebrow:"Act 01 · The Problem",
+  act1_verdict:"Most strategy dies at the slide.",
+  act1_c1_tag:"Describe", act1_c1_txt:"Someone describes a product —",
+  act1_c2_tag:"Build", act1_c2_txt:"— and someone else, months later, builds a lesser version of it.",
+  act1_bridge:"The distance between the two is where good work goes to die.",
+  act1_scan1:"I spent the first part of my career on the describing side of that handoff.",
+  act1_scan2:"Then AI removed the barriers. Two honest options: watch it happen to my profession — or take it by the horns.",
+  act1_role1:"Role — Sole owner", act1_role2:"Duration — 2025 to present", act1_role3:"Scope — Strategy → design → build → operation",
+  act1_rv_btn:"Why a picture can't prove this",
+  act1_rv_txt:"A design file cannot misbehave — it sits still and looks perfect. Only a live product can drift, break, age, or hold. That is why this case's evidence is a running system rather than a picture of one: it is the only format in which governance claims can actually fail, and therefore the only format in which they mean something.",
+  act2_eyebrow:"Act 02 · The Reinvention",
+  act2_verdict:"I learned to build — then made building answer to my standard.",
+  act2_s1_n:"Stop 1", act2_s1_t:"The picture era",
+  act2_s1_x:"I designed for years in Canva, Figma, and Framer while builders like Webflow, Wix, and WordPress stayed someone else's system.",
+  act2_s2_n:"Stop 2", act2_s2_t:"The decision · late 2025",
+  act2_s2_x:"I chose to learn front-end development itself, not coding in the abstract, with a Microsoft specialization laying the foundations.",
+  act2_s3_n:"Stop 3", act2_s3_t:"The new method",
+  act2_s3_x:"I direct AI to build what I design. AI is my senior developer. The vision and authorship stay mine.",
+  act3_eyebrow:"Act 04 · The Architecture",
+  act3_verdict:"The evidence is public — and you're standing in it.",
+  act3_lede:"This is not a case about a product I once touched. The evidence is the site itself: live, versioned, and open to inspection. Four claims, each one checkable.",
+  act3_c1_t:"Ten building blocks, one standard",
+  act3_c1_x:"Every section of this site is built from reusable components under one standard — so nothing drifts, and new pages inherit quality instead of reinventing it.",
+  act3_c1_rv_btn:"What the blocks are",
+  act3_c1_rv_txt1:"Ten reusable organisms — navigation, hero, work cards, capability carousel, timeline, contact, and footer among them — each held to correct adoption of the global token layer. The structure beneath is semantic: header, nav, main, section, and footer landmarks, a single top-level heading, and a clean hierarchy below it, so browsers, assistive technologies, and other developers read the same order a visitor sees.",
+  act3_c1_rv_txt2:"Design rules are declared once at the root as custom properties and referenced everywhere — change a token, and the change propagates. Layout runs on Flexbox and Grid with one consistent type scale. All interface copy is dictionary-driven, so a new language enters as a data file, not a rewrite.",
+  act3_c2_t:"Built to last",
+  act3_c2_x:"Nothing to patch, nothing to migrate, nothing borrowed — no rented platform, no stack of dependencies rotting quietly while you're not looking.",
+  act3_c2_rv_btn:"The framework rule",
+  act3_c2_rv_txt:"Hand-authored HTML, CSS, and JavaScript with no framework I couldn't justify, and no build tooling. Every style rule lives in one external system — no inline patches, no exceptions — which is what keeps the standard enforceable. No third-party dependencies means no forced migrations, no security-patch treadmill, and a payload small enough to stay fast without optimization theater.",
+  act3_c3_t:"Accessible by default",
+  act3_c3_x:"Usable with screen readers and keyboards, held to a recognized international standard from the first line of code — a requirement, not a repair.",
+  act3_c3_rv_btn:"The standard, named",
+  act3_c3_rv_txt:"WCAG AA held as a build gate: every meaningful image described in alt text, every form control paired with its label, landmarks distinguished with aria labels, visible focus styles so keyboard users always know where they are, and text contrast held at the 4.5:1 floor. Accessibility claims sit on this very page — which means they can be tested against it.",
+  act3_c4_t:"Governed, end to end",
+  act3_c4_x:"Speed came from AI; the standard stayed with me. Every build session runs under written rules and approval gates before anything ships.",
+  act3_c4_rv_btn:"How the build actually runs",
+  act3_c4_rv_txt1:"Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.",
+  act3_c4_rv_txt2:"And when a stubborn spacing defect in the site's contact form outlasted the primary environment, a second AI tool, Gemini, rebuilt the component cleanly from zero for reintegration into the master codebase — the right tool, invoked when needed, under the same standard.",
+  act3_ev_label:"Source, live", act3_ev_repo:"github.com/jdsaire/designops", act3_ev_site:"Open the live site",
+  act4_eyebrow:"Act 05 · The Dashboard",
+  act4_verdict:"Running today, governed daily, by me alone.",
+  act4_insight:"The number that matters is the ratio: nothing I ship lands without passing a gate I set for myself. The page you're reading is the evidence.",
+  dash_tab1:"Measured", dash_tab2:"Derived", dash_tab3:"The read",
+  dash_m1:"Building blocks", dash_m2:"Dictionary keys", dash_m3:"Languages engineered",
+  dash_m4_n:"AA", dash_m4:"Accessibility standard", dash_m5:"Frameworks / dependencies",
+  dash_m6:"Commits", dash_m7:"Pull requests", dash_m8:"Days of public history",
+  dash_d1:"Commits per day, sustained", dash_d1_p:"286 commits ÷ 73 days",
+  dash_d2:"Pull requests per week", dash_d2_p:"49 PRs ÷ 10.4 weeks",
+  dash_d3:"Commits per review gate", dash_d3_p:"286 commits ÷ 49 PRs",
+  dash_d4:"Review gates in 73 days", dash_d4_p:"A gate roughly every 6 commits",
+  dash_r1:"The signal isn't the volume. It's the ratio. 286 commits mean momentum; 49 pull requests mean restraint. A review gate roughly every six commits is the cadence design organizations try to install in whole teams — I run it on myself.",
+  dash_r2:"Beneath the numbers sits a qualitative floor: the build meets a graded professional rubric for semantic structure, accessibility, styling discipline, interactivity, and responsive behavior.",
+  dash_r3:"What transfers to your team isn't my code. It's this operating habit.",
+  dash_foot:"Method: public GitHub history, 24 Apr – 06 Jul 2026 (73 days). Rates are simple averages — 286÷73, 49÷10.4, 286÷49. Figures verifiable at the repository linked above.",
+  act5_eyebrow:"Act 06 · The Reflection",
+  act5_verdict:"What fell, what bent, what stands.",
+  act5_intro:"The story reads clean in hindsight. It wasn't. Here is the journey in three houses, in the order I built them.",
+  act5_h1_tag:"House of straw", act5_h1_t:"What collapsed first",
+  act5_h1_x:"My first prompts were plain text and good intentions. They decayed as builds grew, I chased every flag to closure, and template shortcuts gave me speed without ownership. It blew down — and falling taught me exactly what a foundation is for.",
+  act5_h2_tag:"House of sticks", act5_h2_t:"What held, but bent",
+  act5_h2_x:"Iteration cycles ate whole sessions. One bug outlasted my main environment and needed a second tool. My documentation lived scattered across chats before a system existed. The structure held, barely — and every bend showed me where the next wall belonged.",
+  act5_h3_tag:"House of bricks", act5_h3_t:"What stands",
+  act5_h3_x:"Versioned dispatches with approval gates. Skills that turn my intent into build-grade prompts. Project knowledge as the order I had historically lacked. Previews before code lands. And the habit of letting best judgment close the small flags — instead of overthinking them.",
+  act5_sequel:"The sequel is already dispatched: per-case pages, the Spanish layer, and the next product rebuild. The houses get neighbors.",
+  convert_cta:"Start a conversation", convert_temporal:"Temporal · email pending",
+  convert_next_label:"Continue the work",
+  convert_c1_t:"TUUA Transfer",
+  convert_c1_x:"A payment platform designed, prototyped, and evaluated — now serving 130,000+ passengers monthly.",
+  convert_c2_t:"LimaFly",
+  convert_c2_x:"The complete passenger journey, prototyped on a scalable system.",
+  sch_eyebrow:"Act 03 · The Schedule",
+  sch_verdict:"Seventy-three days, in public, gate by gate.",
+  sch_lede:"The reinvention has a paper trail. Every epic below is reconstructed from the public commit history — from the day I adopted the AI-governed build workflow to the day the repository was cleansed and handed off. Dates and planned days appear here, and nowhere else on this page.",
+  sch_e1_t:"Workflow adoption & foundation", sch_e1_m:"24–28 Apr · 5 days",
+  sch_e2_t:"Capabilities & about system", sch_e2_m:"30 Apr – 06 May · 5 days",
+  sch_e3_t:"CTAs & contact form", sch_e3_m:"07–12 May · 5 days",
+  sch_e4_t:"Contact integration & i18n stabilization", sch_e4_m:"19–28 May · 4 days",
+  sch_e5_t:"Bridges & positioning refactor", sch_e5_m:"30–31 May · 2 days",
+  sch_e6_t:"Pages pipeline & i18n v2", sch_e6_m:"03–07 Jun · 5 days",
+  sch_e7_t:"DesignOps variant baseline", sch_e7_m:"26–27 Jun · 2 days",
+  sch_e8_t:"ES localization & mobile UX", sch_e8_m:"29–30 Jun · 2 days",
+  sch_e9_t:"Repo cleanse, backup & Brief handoff", sch_e9_m:"04 Jul · 1 day",
+  sch_e10_t:"Ground Zero reorganization", sch_e10_m:"06 Jul · 1 day",
+  sch_lg1:"Bar — calendar span.", sch_lg2:"Number — planned-capacity days.",
+  sch_lg3:"Marks — 27 May i18n stabilized · 06 Jun pipeline live · 04 Jul Brief handoff.",
+  sch_note:"Reconstructed from public GitHub history, 24 Apr – 06 Jul 2026 — 32 active build-days across the window. The closing Ground Zero reorganization (~1 day) is documented for completeness. No task appears that the commit record cannot support."
+}};
+/* ES injects here later — same keys, zero structural change. */
+
+const LANG="en";
+function dict(){ return { ...CHROME[LANG], ...BODY[LANG] }; }
+(function applyI18n(){
+  const d=dict();
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.getAttribute("data-i18n"); if(d[k]!==undefined && el.children.length===0) el.textContent=d[k]; });
+})();
+
+/* ============ Scroll progress bar — above nav, reverses on upscroll ============ */
+const pFill = document.getElementById("progressFill");
+function updateProgress(){
+  const doc = document.documentElement;
+  const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+  const p = Math.min(1, Math.max(0, window.scrollY / max));
+  pFill.style.transform = "scaleX(" + p + ")";
+}
+window.addEventListener("scroll", updateProgress, {passive:true});
+window.addEventListener("resize", updateProgress);
+updateProgress();
+
+/* ============ Reveal system: accordion ≤1023 / side-panel ≥1024 (approved) ============ */
+const mqDesktop = window.matchMedia("(min-width:1024px)");
+const panel = document.getElementById("panel");
+const panelSlot = document.getElementById("panelSlot");
+const panelTitle = document.getElementById("panelTitle");
+const panelClose = document.getElementById("panelClose");
+let panelHome = null, panelTrigger = null;
+
+function closePanel(){
+  if(panelHome && panelSlot.firstElementChild){
+    const body = panelSlot.firstElementChild;
+    body.hidden = true;
+    panelHome.replaceWith(body);
+    panelHome = null;
+  }
+  panel.classList.remove("is-open");
+  panel.setAttribute("aria-hidden","true");
+  if(panelTrigger){ panelTrigger.setAttribute("aria-expanded","false"); panelTrigger.focus(); panelTrigger=null; }
+}
+panelClose.addEventListener("click", closePanel);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && panel.classList.contains("is-open")) closePanel(); });
+
+function closeAccordionsIn(actName, except){
+  document.querySelectorAll('.reveal[data-act="'+actName+'"] .reveal__btn').forEach(btn=>{
+    if(btn!==except && btn.getAttribute("aria-expanded")==="true"){
+      btn.setAttribute("aria-expanded","false");
+      document.getElementById(btn.getAttribute("aria-controls")).hidden = true;
+    }
+  });
+}
+document.querySelectorAll(".reveal__btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const body = document.getElementById(btn.getAttribute("aria-controls"));
+    const act = btn.closest(".reveal").getAttribute("data-act");
+    const isOpen = btn.getAttribute("aria-expanded")==="true";
+    if(mqDesktop.matches){
+      if(isOpen){ closePanel(); return; }
+      closePanel();
+      closeAccordionsIn(act, btn);
+      panelHome = document.createComment("panel-home");
+      body.replaceWith(panelHome); panelSlot.replaceChildren(body);
+      body.hidden = false;
+      panelTitle.textContent = btn.getAttribute("data-panel-title") || "";
+      panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
+      btn.setAttribute("aria-expanded","true");
+      panelTrigger = btn; panelClose.focus();
+    } else {
+      closeAccordionsIn(act, btn);
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      body.hidden = isOpen;
+    }
+  });
+});
+mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
+
+/* ============ Timeline carousel nav (≤1023) ============ */
+const track = document.getElementById("tlTrack");
+const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
+function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
+prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:"smooth"}));
+next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:"smooth"}));
+function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
+track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
+
+/* ============ Dashboard tabs ============ */
+const tabs = [...document.querySelectorAll(".dash__tab")];
+const panels = { "tab-m":"dp-m", "tab-d":"dp-d", "tab-r":"dp-r" };
+tabs.forEach(tab=>{
+  tab.addEventListener("click", ()=>{
+    tabs.forEach(t=>{
+      const sel = t===tab;
+      t.setAttribute("aria-selected", String(sel));
+      document.getElementById(panels[t.id]).hidden = !sel;
+    });
+    runCounts(document.getElementById(panels[tab.id]));
+  });
+});
+
+/* ============ Count-up (once per element, reduced-motion aware) ============ */
+const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+function runCounts(scope){
+  (scope||document).querySelectorAll("[data-count]").forEach(el=>{
+    if(el.dataset.done || el.closest("[hidden]")) return; el.dataset.done="1";
+    const raw = el.dataset.count, target = parseFloat(raw), dec = raw.includes(".") ? 1 : 0;
+    if(reduce || target===0){ el.textContent = target.toFixed(dec); return; }
+    let t0=null; const dur=700;
+    const step=(ts)=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1);
+      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec); if(p<1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ============ Entrance (once) ============ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    en.target.classList.add("is-in");
+    runCounts(en.target);
+    io.unobserve(en.target);
+  });
+},{threshold:0.18});
+document.querySelectorAll(".io").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
