@@ -4,6 +4,11 @@ One line each, no elaboration. Reviewed once, per the Execution Roadmap's Rule 1
 
 - Evaluate Web Components / single-file colocation for the per-organism structure once the multipage migration lands.
 - Evaluate adopting CSS `@layer` for cascade management across base/shared/home partials.
+- LimaFly app build cancelled; old Wave 3 will not resume in any form.
+- Old Brief 04 (LimaFly App) archived — will not ship as an airport-app brief.
+- Old Wave 1 Figma-export debt retired as a hard blocker; only the slice evidencing Brief 03 remains, as an optional principal task.
+- /work/limafly-app route slot retired pending a new slug decision at Gate G1 (see Execution_Roadmap_v2_0.md §8).
+- Execution_Roadmap_v2_0.md supersedes v1.0 as of this commit; v1.0 retained in docs/ as history, not deleted.
 
 ## Stale ES keys — Wave 6 Sonnet translation pass (never hand-write Spanish)
 
