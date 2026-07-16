@@ -431,4 +431,4 @@ Saire, J. D. (2026d). *Execution roadmap v2.0* [Unpublished internal governance 
 
 ---
 
-*End of dossier. Awaiting Gate G1 decision.*
+*End of dossier. Gate G1 CLOSED — problem space approved (payment-confirmation trust and verification, grounded in "Yape falso"); Brief 04 slug confirmed as `yape-trust-verify`; both alternate candidates rejected (SME/micro-merchant finance management; inclusion onboarding for the newly-banked).*
