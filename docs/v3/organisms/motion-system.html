@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motion system — native vocabulary</title>
+<style>
+/* ============================================================
+   TOKENS — consumed verbatim from assets/css/base/tokens.css
+   ============================================================ */
+:root {
+  --color-brand-purple: #A100FF;
+  --color-purple-hover:  #8C00D9;
+  --color-brand-black:   #000000;
+  --color-brand-white:   #FFFFFF;
+  --color-text-muted:    rgba(255,255,255,0.6);
+  --color-text-dim:      rgba(255,255,255,0.45);
+  --color-border-soft:   rgba(255,255,255,0.10);
+  --font-primary:        'Graphik', Arial, sans-serif;
+  --ease-standard:       cubic-bezier(0.4,0.0,0.2,1);
+  --ease-decelerate:     cubic-bezier(0.0,0.0,0.2,1);
+  --duration-ui:         250ms;
+  --duration-ambient:    7000ms;
+}
+
+/* ============================================================
+   BASE — dark canvas, flat depth, zero radius, fluid type
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; box-shadow: none; }
+html { scroll-behavior: auto; }
+body {
+  background: var(--color-brand-black);
+  color: var(--color-brand-white);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  line-height: 1.6;
+}
+:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 clamp(1rem, 3.5vw, 5rem); }
+
+/* ============================================================
+   CHROME
+   ============================================================ */
+header { padding: clamp(3rem, 8vw, 7rem) 0 clamp(2rem, 4vw, 3rem); border-bottom: 1px solid var(--color-border-soft); }
+.eyebrow {
+  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-text-muted); margin-bottom: 1rem;
+}
+.accent-bar { width: 40px; height: 4px; background: var(--color-brand-purple); margin-bottom: 1.5rem; }
+h1 { font-size: clamp(2.25rem, 1.5rem + 4vw, 4.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; max-width: 20ch; }
+.lede { color: var(--color-text-muted); max-width: 58ch; margin-top: 1.5rem; }
+
+footer { border-top: 1px solid var(--color-border-soft); padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 0.9375rem; }
+
+/* ============================================================
+   SPECIMEN CHASSIS
+   ============================================================ */
+.specimen { padding: clamp(3rem, 7vw, 6rem) 0; border-bottom: 1px solid var(--color-border-soft); }
+.specimen__head { margin-bottom: 2.5rem; max-width: 62ch; }
+.specimen__title { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem); font-weight: 700; line-height: 1.15; margin-bottom: 0.75rem; }
+.specimen__api { color: var(--color-text-muted); }
+.specimen__api code {
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 0.9em; color: var(--color-brand-white);
+  border: 1px solid var(--color-border-soft); padding: 0.05em 0.4em;
+}
+.specimen__rm {
+  margin-top: 1rem; font-size: 0.9375rem; color: var(--color-text-muted);
+  border-left: 2px solid var(--color-border-soft); padding-left: 0.875rem;
+}
+.specimen__rm strong { color: var(--color-brand-white); font-weight: 600; }
+.stage {
+  border: 1px solid var(--color-border-soft);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  min-height: 16rem;
+  display: grid; align-content: center; gap: 1rem;
+  position: relative; overflow: hidden;
+}
+.controls { margin-top: 1.25rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+button.action {
+  font-family: inherit; font-size: 1rem; font-weight: 500;
+  background: var(--color-brand-black); color: var(--color-brand-white);
+  border: 1px solid var(--color-brand-white);
+  padding: 0.75rem 1.5rem; cursor: pointer;
+  transition: background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);
+}
+button.action:hover { background: var(--color-brand-white); color: var(--color-brand-black); }
+button.action:active { background: var(--color-purple-hover); border-color: var(--color-purple-hover); color: var(--color-brand-white); }
+
+/* ============================================================
+   S1 · SCROLL CHOREOGRAPHY — animation-timeline: view(), zero JS
+   Static end-state is the default; motion is layered on where
+   both scroll timelines and motion preference allow it.
+   ============================================================ */
+.s1-bar {
+  height: 3.5rem; border: 1px solid var(--color-border-soft);
+  display: flex; align-items: center; padding: 0 1.25rem;
+  color: var(--color-text-muted); background: var(--color-brand-black);
+}
+.s1-bar b { color: var(--color-brand-white); font-weight: 600; margin-right: 0.75rem; }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .s1-bar {
+      animation: s1-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+    .s1-bar:nth-child(2) { animation-range: entry 10% entry 90%; }
+    .s1-bar:nth-child(3) { animation-range: entry 20% entry 100%; }
+  }
+}
+@keyframes s1-enter {
+  from { opacity: 0; transform: translateY(2.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   S2 · PAGE-TO-PAGE CONTINUITY — View Transitions API (same-doc)
+   Tiles swap between grid and stack; the browser interpolates.
+   ============================================================ */
+.s2-field { display: grid; gap: 1rem; }
+.s2-field[data-layout="grid"]  { grid-template-columns: repeat(3, 1fr); }
+.s2-field[data-layout="stack"] { grid-template-columns: 1fr; }
+.s2-tile {
+  border: 1px solid var(--color-border-soft); padding: 1.25rem;
+  color: var(--color-brand-white); font-weight: 600; background: var(--color-brand-black);
+}
+.s2-tile span { display: block; font-weight: 400; color: var(--color-text-muted); font-size: 0.9375rem; margin-top: 0.25rem; }
+.s2-tile:nth-child(1) { view-transition-name: s2-tile-a; }
+.s2-tile:nth-child(2) { view-transition-name: s2-tile-b; }
+.s2-tile:nth-child(3) { view-transition-name: s2-tile-c; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+/* ============================================================
+   S3 · SEQUENCED TIMELINE — Web Animations API
+   Bars are visible at rest (static end-state); the script
+   re-runs the entrance as a composed, staggered timeline.
+   ============================================================ */
+.s3-bar {
+  height: 2.75rem; border: 1px solid var(--color-border-soft);
+  background: var(--color-brand-black);
+  display: flex; align-items: center; padding: 0 1rem;
+  color: var(--color-text-muted); font-size: 0.9375rem;
+}
+.s3-bar:first-child { border-left: 4px solid var(--color-brand-purple); }
+
+/* ============================================================
+   S4 · VECTOR DRAW-ON — SVG stroke-dashoffset + @property
+   Spec-sanctioned exception to the transform/opacity rule:
+   §12 row 4 names stroke draw-on as the required capability.
+   Default state: fully drawn (static, reduced-motion correct).
+   ============================================================ */
+.s4-svg { width: 100%; max-width: 40rem; height: auto; display: block; margin: 0 auto; }
+.s4-path {
+  fill: none; stroke: var(--color-brand-purple); stroke-width: 2;
+  stroke-linecap: butt; stroke-linejoin: miter;
+  stroke-dasharray: 1; stroke-dashoffset: 0; /* drawn at rest */
+}
+.s4-grid { fill: none; stroke: var(--color-border-soft); stroke-width: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .s4-svg.is-playing .s4-path { animation: s4-draw 2400ms var(--ease-decelerate) both; }
+}
+@keyframes s4-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ============================================================
+   S5 · COMPOSITING — clip-path frame + mask + mix-blend-mode
+   The ONLY animated property is transform: a purple field
+   sweeps beneath display type set to blend-mode difference.
+   clip-path and mask are static compositing, not animation.
+   ============================================================ */
+.s5-stage { isolation: isolate; min-height: 14rem; display: grid; place-items: center; }
+.s5-word {
+  position: relative; z-index: 2;
+  font-size: clamp(2.5rem, 2rem + 5vw, 6rem);
+  font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase;
+  color: var(--color-brand-white);
+  mix-blend-mode: difference;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+.s5-field {
+  position: absolute; inset: 0; z-index: 1;
+  clip-path: inset(18% 6% 18% 6%);
+  overflow: hidden; pointer-events: none;
+}
+.s5-block {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 34%;
+  background: var(--color-brand-purple);
+  transform: translateX(-110%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .s5-block { animation: s5-sweep var(--duration-ambient) var(--ease-standard) infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .s5-block { transform: translateX(100%); } /* static: resting at frame edge, type fully legible */
+}
+@keyframes s5-sweep {
+  0%   { transform: translateX(-110%); }
+  50%  { transform: translateX(320%); }
+  100% { transform: translateX(-110%); }
+}
+
+/* ============================================================
+   S6 · DEPTH — transform-style: preserve-3d + perspective
+   Pointer hover or keyboard focus tilts the plane; children
+   sit at distinct translateZ depths. transform only.
+   ============================================================ */
+.s6-scene { perspective: 900px; display: grid; place-items: center; min-height: 16rem; }
+.s6-card {
+  transform-style: preserve-3d;
+  width: min(24rem, 100%); padding: 2rem;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-brand-black);
+  transform: rotateX(0) rotateY(0);
+  transition: transform 600ms var(--ease-standard);
+}
+.s6-card:hover, .s6-card:focus-within, .s6-scene:focus-visible .s6-card {
+  transform: rotateX(6deg) rotateY(-10deg);
+}
+.s6-layer-back  { color: var(--color-text-dim); font-weight: 900; font-size: clamp(2rem, 1.5rem + 2vw, 3rem); transform: translateZ(-40px); }
+.s6-layer-mid   { color: var(--color-text-muted); margin-top: 0.5rem; transform: translateZ(20px); }
+.s6-layer-front { display: inline-block; margin-top: 1.25rem; font-weight: 600; color: var(--color-brand-white);
+                  border-bottom: 2px solid var(--color-brand-purple); padding-bottom: 0.2rem; transform: translateZ(55px); }
+@media (prefers-reduced-motion: reduce) {
+  .s6-card, .s6-card:hover, .s6-card:focus-within { transform: none; transition: none; }
+}
+
+/* ============================================================
+   REDUCED-MOTION HARD FLOOR — belt and suspenders.
+   Base styles above are already static-correct; this clamps
+   anything that slips through to an instant resolution.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Design system · motion layer</p>
+    <div class="accent-bar" aria-hidden="true"></div>
+    <h1>Native motion, no libraries</h1>
+    <p class="lede">Six specimens. Each maps a motion capability to the platform API that delivers it
+    and the tool it replaces. Everything animates on the compositor, ships a static end-state, and
+    honours reduced motion. One file, zero dependencies.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ SPECIMEN 1 ============ -->
+  <section class="specimen" aria-labelledby="s1-title">
+    <div class="specimen__head">
+      <p class="eyebrow">01 · Scroll choreography</p>
+      <h2 class="specimen__title" id="s1-title">Elements enter as the page moves</h2>
+      <p class="specimen__api">Native: <code>animation-timeline: view()</code> — compositor-threaded, zero JavaScript. Replaces GSAP ScrollTrigger.</p>
+      <p class="specimen__rm"><strong>Reduced motion →</strong> rows render in place, fully opaque. Same layout, no entrance.</p>
+    </div>
+    <div class="stage" role="group" aria-label="Scroll choreography demonstration">
+      <div class="s1-bar"><b>Research</b> enters first</div>
+      <div class="s1-bar"><b>Build</b> follows on a later range</div>
+      <div class="s1-bar"><b>Ship</b> completes the stagger</div>
+    </div>
+  </section>
+
+  <!-- ============ SPECIMEN 2 ============ -->
+  <section class="specimen" aria-labelledby="s2-title">
+    <div class="specimen__head">
+      <p class="eyebrow">02 · Page-to-page continuity</p>
+      <h2 class="specimen__title" id="s2-title">The browser carries elements between states</h2>
+      <p class="specimen__api">Native: <code>document.startViewTransition()</code> — same-document. Cross-document
+      navigation uses <code>@view-transition { navigation: auto }</code>; see the spec. Replaces an SPA framework.</p>
+      <p class="specimen__rm"><strong>Reduced motion →</strong> layout swaps instantly. No interpolation plays.</p>
+    </div>
+    <div class="stage">
+      <div class="s2-field" id="s2-field" data-layout="grid">
+        <div class="s2-tile">Brief 01<span>DesignOps</span></div>
+        <div class="s2-tile">Brief 02<span>TUUA</span></div>
+        <div class="s2-tile">Brief 03<span>LimaFly UX</span></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="action" id="s2-toggle" type="button" aria-controls="s2-field">Swap layout</button>
+    </div>
+  </section>
+
+  <!-- ============ SPECIMEN 3 ============ -->
+  <section class="specimen" aria-labelledby="s3-title">
+    <div class="specimen__head">
+      <p class="eyebrow">03 · Sequenced timeline</p>
+      <h2 class="specimen__title" id="s3-title">A composed timeline, scripted like a storyboard</h2>
+      <p class="specimen__api">Native: Web Animations API — <code>element.animate()</code> with per-element delay,
+      duration, and easing. Replaces After Effects for interface sequencing.</p>
+      <p class="specimen__rm"><strong>Reduced motion →</strong> the play control resolves the sequence instantly to its end-state.</p>
+    </div>
+    <div class="stage" role="group" aria-label="Web Animations API sequence demonstration" id="s3-stage">
+      <div class="s3-bar">Frame 01 — anchor holds</div>
+      <div class="s3-bar">Frame 02 — offset 120 milliseconds</div>
+      <div class="s3-bar">Frame 03 — offset 240 milliseconds</div>
+      <div class="s3-bar">Frame 04 — offset 360 milliseconds</div>
+      <div class="s3-bar">Frame 05 — decelerating close</div>
+    </div>
+    <div class="controls">
+      <button class="action" id="s3-play" type="button" aria-controls="s3-stage">Play sequence</button>
+    </div>
+  </section>
+
+  <!-- ============ SPECIMEN 4 ============ -->
+  <section class="specimen" aria-labelledby="s4-title">
+    <div class="specimen__head">
+      <p class="eyebrow">04 · Vector draw-on</p>
+      <h2 class="specimen__title" id="s4-title">A stroke draws itself along its path</h2>
+      <p class="specimen__api">Native: SVG <code>stroke-dasharray</code> / <code>stroke-dashoffset</code> with
+      <code>pathLength</code> normalisation. Replaces Illustrator line-build exports.</p>
+      <p class="specimen__rm"><strong>Reduced motion →</strong> the path renders fully drawn. That is also its resting state.</p>
+    </div>
+    <div class="stage">
+      <svg class="s4-svg" id="s4-svg" viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="An angular route line drawing itself across a faint grid from lower left to upper right">
+        <path class="s4-grid" d="M0 50 H640 M0 100 H640 M0 150 H640 M160 0 V200 M320 0 V200 M480 0 V200"/>
+        <path class="s4-path" pathLength="1" d="M20 170 L140 170 L220 96 L340 96 L420 40 L540 40 L620 20"/>
+      </svg>
+    </div>
+    <div class="controls">
+      <button class="action" id="s4-replay" type="button" aria-controls="s4-svg">Redraw</button>
+    </div>
+  </section>
+
+  <!-- ============ SPECIMEN 5 ============ -->
+  <section class="specimen" aria-labelledby="s5-title">
+    <div class="specimen__head">
+      <p class="eyebrow">05 · Compositing</p>
+      <h2 class="specimen__title" id="s5-title">Clip, mask, and blend — moved by transform alone</h2>
+      <p class="specimen__api">Native: <code>clip-path</code> frames the field, <code>mask-image</code> fades the type's
+      base, <code>mix-blend-mode: difference</code> inverts on contact. The only animated property is
+      <code>transform</code>. Replaces Photoshop compositing.</p>
+      <p class="specimen__rm"><strong>Reduced motion →</strong> the field rests at the frame edge; the type is fully legible, nothing moves.</p>
+    </div>
+    <div class="stage s5-stage" role="img" aria-label="Display type reading 'composite' with a purple field sweeping behind it, inverting the letters it passes">
+      <div class="s5-field" aria-hidden="true"><div class="s5-block"></div></div>
+      <div class="s5-word">Composite</div>
+    </div>
+  </section>
+
+  <!-- ============ SPECIMEN 6 ============ -->
+  <section class="specimen" aria-labelledby="s6-title">
+    <div class="specimen__head">
+      <p class="eyebrow">06 · Depth</p>
+      <h2 class="specimen__title" id="s6-title">Three planes, one perspective</h2>
+      <p class="specimen__api">Native: <code>transform-style: preserve-3d</code> with a parent
+      <code>perspective</code>; children sit at distinct <code>translateZ</code> depths. Replaces WebGL for flat-brand depth.</p>
+      <p class="specimen__rm"><strong>Reduced motion →</strong> the card holds flat. All three layers remain readable.</p>
+    </div>
+    <div class="stage s6-scene">
+      <div class="s6-card" tabindex="0" role="group"
+           aria-label="Layered card. Hover or focus to tilt it in perspective and separate its three depth planes.">
+        <div class="s6-layer-back" aria-hidden="true">Depth</div>
+        <p class="s6-layer-mid">Back, middle, and front planes hold their offsets as the card tilts on hover or keyboard focus.</p>
+        <span class="s6-layer-front">Front plane</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Motion system — six native capabilities, compositor-only, reduced-motion honoured, WCAG AA held.
+    Consumed by the home page and all four briefs.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- S2 · View Transitions (same-document) ---------- */
+  var s2Field = document.getElementById('s2-field');
+  var s2Toggle = document.getElementById('s2-toggle');
+  function swapLayout() {
+    var next = s2Field.getAttribute('data-layout') === 'grid' ? 'stack' : 'grid';
+    var apply = function () { s2Field.setAttribute('data-layout', next); };
+    if (document.startViewTransition && !prefersReduced.matches) {
+      document.startViewTransition(apply);       /* browser interpolates the tiles */
+    } else {
+      apply();                                    /* fallback: instant swap */
+    }
+  }
+  s2Toggle.addEventListener('click', swapLayout);
+
+  /* ---------- S3 · Web Animations API sequence ---------- */
+  var s3Bars = document.querySelectorAll('#s3-stage .s3-bar');
+  var s3Play = document.getElementById('s3-play');
+  var EASE_DECELERATE = 'cubic-bezier(0.0,0.0,0.2,1)';
+  function playSequence() {
+    s3Bars.forEach(function (bar, i) {
+      /* transform + opacity only; reduced motion resolves instantly */
+      bar.animate(
+        [
+          { opacity: 0, transform: 'translateX(-1.5rem)' },
+          { opacity: 1, transform: 'translateX(0)' }
+        ],
+        {
+          duration: prefersReduced.matches ? 0 : 500,
+          delay:    prefersReduced.matches ? 0 : i * 120,
+          easing:   EASE_DECELERATE,
+          fill:     'backwards'
+        }
+      );
+    });
+  }
+  s3Play.addEventListener('click', playSequence);
+
+  /* ---------- S4 · SVG draw-on replay ---------- */
+  var s4Svg = document.getElementById('s4-svg');
+  var s4Replay = document.getElementById('s4-replay');
+  s4Replay.addEventListener('click', function () {
+    if (prefersReduced.matches) { return; }       /* resting state is fully drawn */
+    s4Svg.classList.remove('is-playing');
+    void s4Svg.getBoundingClientRect();           /* restart the CSS animation */
+    s4Svg.classList.add('is-playing');
+  });
+})();
+</script>
+</body>
+</html>

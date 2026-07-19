@@ -1,5 +1,11 @@
 # Brief 4 — Payment-Confirmation Trust & Verification · Copy Record
-**Verbatim copy target · v3.0 · Status: ELEMENTARY — REGENERATED per principal feedback (16 Jul 2026)**
+**Verbatim copy target · v3.0 · Status: SUPERSEDED — retained as history**
+
+> **SUPERSEDED.** v4.0 replaces this file and is the copy the live page is built from:
+> `work/yape-trust-verify-brief/docs/Brief-4_YapeTrustVerify_Copy_v4_0.md`.
+> This version is retained as history, not deleted — the same treatment v1.0 received when v2.0 superseded it. Do not build from it.
+
+**Original header · v3.0 · Status: ELEMENTARY — REGENERATED per principal feedback (16 Jul 2026)**
 
 > **⚠️ STATUS BANNER — READ FIRST**
 > This Copy MD reflects the **new, corrected seven-section structure** (Acts 00–06, with Act 03 reserved) per the principal's dated content feedback. It **intentionally diverges from the current Site HTML**, which still runs the old five-act sequence and has not yet been rebuilt to match. A separate HTML-fix run reconciles the two — it starts only after this file is approved.
