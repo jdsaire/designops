@@ -850,8 +850,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <script>
 /* ============================================================
    i18n — CHROME/BODY split, mirrors skeleton convention.
-   MIGRATION: CHROME → assets/i18n/{en,es}.json (site chrome)
-   MIGRATION: BODY  → assets/i18n/briefs/designops.{en,es}.json
+   CHROME → assets/i18n/{en,es}.json (site chrome, shared)
+   BODY   → this page's own i18n/designops.{en,es}.json (page-scoped)
    EN ships. ES staged — key parity FULL:
    act1 El Problema · act2 La Reinvención · act3 La Arquitectura ·
    act4 El Dashboard · act5 La Reflexión
@@ -860,9 +860,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
    per-page BODY dict at runtime, then applies the same sweep the
    home engine (assets/js/core/i18n.js) uses. Language persists via
    localStorage 'jds-lang' (shared with home); default ES sitewide.
-   CHROME → ../../assets/i18n/{lang}.json
-   BODY   → ../../assets/i18n/briefs/designops.{lang}.json */
+   CHROME → ../../assets/i18n/{lang}.json  (shared, site root)
+   BODY   → i18n/designops.{lang}.json     (page-scoped, colocated) */
 const I18N_BASE = "../../assets/i18n/";
+const BODY_BASE = "i18n/";
 const chromeCache = {}, bodyCache = {};
 function fetchDict(url){
   return fetch(url)
@@ -872,7 +873,7 @@ function fetchDict(url){
 function loadMerged(lang){
   const lc = lang === "ES" ? "es" : "en";
   const c = chromeCache[lc] || (chromeCache[lc] = fetchDict(I18N_BASE + lc + ".json"));
-  const b = bodyCache[lc]   || (bodyCache[lc]   = fetchDict(I18N_BASE + "briefs/designops." + lc + ".json"));
+  const b = bodyCache[lc]   || (bodyCache[lc]   = fetchDict(BODY_BASE + "designops." + lc + ".json"));
   return Promise.all([c, b]).then(([cd, bd]) => ({ ...(cd || {}), ...(bd || {}) }));
 }
 let curLang = "ES";
