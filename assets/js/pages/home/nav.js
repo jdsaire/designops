@@ -1,5 +1,5 @@
 /* home/nav.js — NAV scroll hide/show + language selector (globe + panel). */
-import { swapLang } from '../core/i18n.js';
+import { swapLang } from '../../core/i18n.js';
 
 function init() {
   /* Nav context — resolve cross-document hrefs from a base hash. On home the
