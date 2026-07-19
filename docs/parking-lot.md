@@ -21,6 +21,14 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 - Exception — NOT stale: `work_card1_cta` ES = "Acceder al Brief" is principal-supplied and populated.
 - Wave-4.5 CHROME split (`assets/i18n/en.json`) new EN-only keys awaiting ES: `chrome_wordmark_sub`, `chrome_nav_cta`.
 - Wave-4.5 BODY split (`assets/i18n/briefs/designops.en.json`) — full Brief 01 BODY namespace is EN-only; `designops.es.json` is an empty stub pending the Wave 6 ES pass.
+- Wave-5 PR-1 IA migration: Brief 01's BODY dict moved to `work/designops-system/i18n/` — no key changed, ES staleness unaffected.
+- Wave-5 PR-2 Brief 04 page (`work/yape-trust-verify-brief/i18n/yape-trust-verify.es.json`) — the **entire 135-key BODY namespace is EN-only**, mirrored from EN as a temporary value so SwapLang renders rather than falling through. Every key awaits the Wave 5.6 Sonnet ES pass: `hero_*` (8), `act0_*` (10), `act1_*` (14), `act2_*` (10), `act3_verdict`/`act3_eyebrow`, `gantt_*` (10), `act4_*` (14), `act5_*`/`m1_l`–`m8_p` (24), `r1`–`r3`, `act6_*` (14), `evidence_*`, `convert_*`, `band_m_*`. Full key list is the JSON file itself — it and the EN file have identical key sets by construction.
+
+## Logged tensions (Wave 5)
+
+- Brief 04 Act 03 is a reconstructed effort chart, not a recorded sprint artifact: the v4 spec reserved this act for a future Gantt build, and the deployment authorized instantiating it. Story points express relative effort derived from the Wave 4 plan's phases and the completion report; the on-page caption states this plainly. If a real estimation record ever exists, replace the data object.
+- Brief 04's `hero_read` now reads "7 min read", replacing the inherited-and-unverified "4 min read" that Copy v4's own fact register flagged and the spec's open item 7 authorized adjusting. Measured from the page: 1,517 surface words, ~6.3–7.6 min at 200–240 wpm; reveals add roughly two minutes more for a reader who opens them. Re-measure if the page's surface copy changes materially.
+- Continuity card `../tuua-transfer/` 404s until the Wave 5 PR-3 placeholder pages land. Authored against the planned route, per the Copy v4 open item.
 
 ## Logged tensions (Wave 4)
 

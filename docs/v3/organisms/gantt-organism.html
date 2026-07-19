@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap organism — generic template</title>
+<style>
+:root {
+  --color-brand-purple: #A100FF;
+  --color-purple-hover:  #8C00D9;
+  --color-brand-black:   #000000;
+  --color-brand-white:   #FFFFFF;
+  --color-text-muted:    rgba(255,255,255,0.6);
+  --color-text-dim:      rgba(255,255,255,0.45);
+  --color-border-soft:   rgba(255,255,255,0.10);
+  --font-primary:        'Graphik', Arial, sans-serif;
+  --ease-standard:       cubic-bezier(0.4,0.0,0.2,1);
+  --ease-decelerate:     cubic-bezier(0.0,0.0,0.2,1);
+  --duration-ui:         250ms;
+  --duration-ambient:    7000ms;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; box-shadow: none; }
+body {
+  background: var(--color-brand-black);
+  color: var(--color-brand-white);
+  font-family: var(--font-primary);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  line-height: 1.5;
+}
+:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 2px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 clamp(1rem, 3.5vw, 5rem); }
+header { padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(1.5rem, 3vw, 2.5rem); border-bottom: 1px solid var(--color-border-soft); }
+.eyebrow {
+  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-text-muted); margin-bottom: 1rem;
+}
+.accent-bar { width: 40px; height: 4px; background: var(--color-brand-purple); margin-bottom: 1.25rem; }
+h1 { font-size: clamp(1.875rem, 1.3rem + 3vw, 3.5rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.01em; }
+.lede { color: var(--color-text-muted); max-width: 62ch; margin-top: 1rem; }
+.caption { color: var(--color-text-dim); font-size: 0.8125rem; margin-top: 0.75rem; }
+footer { border-top: 1px solid var(--color-border-soft); padding: 2rem 0 3.5rem; color: var(--color-text-muted); font-size: 0.875rem; }
+
+/* Toolbar: zoom + filter chips */
+.chart-tools { display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem 0; flex-wrap: wrap; }
+button.action {
+  font-family: inherit; font-size: 0.9375rem; font-weight: 500;
+  background: var(--color-brand-black); color: var(--color-brand-white);
+  border: 1px solid var(--color-brand-white);
+  padding: 0.6rem 1.25rem; cursor: pointer;
+  transition: background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);
+}
+button.action:hover { background: var(--color-brand-white); color: var(--color-brand-black); }
+.filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filters-label { color: var(--color-text-muted); font-size: 0.8125rem; align-self: center; margin-right: 0.25rem; }
+button.chip {
+  font-family: inherit; font-size: 0.8125rem; font-weight: 500;
+  background: var(--color-brand-black); color: var(--color-text-muted);
+  border: 1px solid var(--color-border-soft);
+  padding: 0.45rem 0.9rem; cursor: pointer;
+  transition: color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);
+}
+button.chip[aria-pressed="true"] {
+  color: var(--color-brand-white); border-color: var(--color-brand-purple);
+}
+button.chip[aria-pressed="true"]::before { content: "✓ "; color: var(--color-brand-purple); }
+
+.chart { position: relative; border: 1px solid var(--color-border-soft); overflow-x: auto; }
+.chart-grid { min-width: 820px; }
+.axis {
+  display: grid; grid-template-columns: minmax(200px, 260px) 1fr minmax(120px, 150px);
+  border-bottom: 1px solid var(--color-border-soft);
+  color: var(--color-text-muted); font-size: 0.8125rem;
+}
+.axis > div { padding: 0.75rem 1rem; }
+.axis-units { position: relative; border-left: 1px solid var(--color-border-soft); border-right: 1px solid var(--color-border-soft); }
+.axis-tick { position: absolute; top: 0.75rem; transform: translateX(-50%); color: var(--color-text-dim); font-size: 0.75rem; }
+.axis-summary { text-align: right; }
+
+.row, .task-row {
+  display: grid; grid-template-columns: minmax(200px, 260px) 1fr minmax(120px, 150px);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+.task-row { background: rgba(255,255,255,0.02); }
+.row-label { padding: 0.75rem 1rem; display: flex; align-items: center; }
+.task-label { padding: 0.5rem 1rem 0.5rem 2.4rem; color: var(--color-text-muted); font-size: 0.875rem; display: flex; align-items: center; }
+.row-field, .task-field {
+  position: relative;
+  border-left: 1px solid var(--color-border-soft);
+  border-right: 1px solid var(--color-border-soft);
+}
+.row-field { min-height: 3.25rem; }
+.task-field { min-height: 2.5rem; }
+.row-summary, .task-summary {
+  padding: 0.5rem 1rem; display: flex; flex-direction: column; justify-content: center;
+  align-items: flex-end; font-size: 0.8125rem; color: var(--color-text-muted);
+}
+.row-summary b { color: var(--color-brand-white); font-weight: 600; }
+.hours-val { color: var(--color-text-dim); }
+.gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--color-border-soft); }
+
+button.epic-toggle {
+  font-family: inherit; font-size: 0.9375rem; font-weight: 600;
+  background: none; border: 0; color: var(--color-brand-white);
+  cursor: pointer; text-align: left;
+  display: flex; align-items: baseline; gap: 0.6rem; width: 100%;
+  padding: 0.25rem 0;
+}
+button.epic-toggle .marker {
+  display: inline-block; width: 0.8em; color: var(--color-text-muted); font-weight: 400;
+  transition: transform var(--duration-ui) var(--ease-standard);
+}
+button.epic-toggle[aria-expanded="true"] .marker { transform: rotate(90deg); }
+.epic-row:has(.epic-toggle[aria-expanded="true"]) .row-label { border-left: 3px solid var(--color-brand-purple); }
+.epic-row:hover .epic-bar, .epic-row:has(.epic-toggle:focus-visible) .epic-bar { border-color: var(--color-brand-purple); }
+
+.bar {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: var(--color-border-soft);
+  border: 1px solid var(--color-text-dim);
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.epic-bar { height: 1.625rem; }
+.task-bar { height: 1rem; }
+.bar .sp-label {
+  font-size: 0.6875rem; font-weight: 600; color: var(--color-brand-white);
+  padding: 0 0.35rem; white-space: nowrap;
+}
+.bar .sp-label .hours-val { font-weight: 400; }
+
+.milestone {
+  position: absolute; top: 50%; width: 0.875rem; height: 0.875rem;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--color-brand-black);
+  border: 2px solid var(--color-brand-purple);
+}
+.milestone-label {
+  position: absolute; top: 0.1rem; transform: translateX(-50%);
+  font-size: 0.6875rem; color: var(--color-text-muted); white-space: nowrap;
+}
+
+#dep-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+#dep-overlay path { fill: none; stroke: var(--color-brand-purple); stroke-width: 1.5; stroke-dasharray: 5 4; }
+#dep-overlay .dep-head { fill: var(--color-brand-purple); stroke: none; }
+
+[hidden] { display: none !important; }
+.layer-off { visibility: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .task-list { animation: rows-in var(--duration-ui) var(--ease-decelerate); }
+  @keyframes rows-in { from { opacity: 0; } to { opacity: 1; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Design system · roadmap organism</p>
+    <div class="accent-bar" aria-hidden="true"></div>
+    <h1>Effort, not calendar</h1>
+    <p class="lede">A generic programme roadmap. Bars are sized and placed by story points on a
+    Fibonacci scale — every extent is traceable to a number on screen. Hours carry the planned-capacity
+    baseline. Milestones mark phase boundaries. Filters reveal only what the reading calls for.</p>
+    <p class="caption">Generic template shown with sample data. Each brief instantiates its own epics,
+    tasks, and estimates by editing the data object only.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="chart-tools">
+    <button class="action" id="toggle-all" type="button" aria-expanded="false">Expand all epics</button>
+    <div class="filters" role="group" aria-label="Progressive disclosure filters">
+      <span class="filters-label" id="filters-label">Show:</span>
+      <button class="chip" type="button" data-filter="sp" aria-pressed="true">Story points</button>
+      <button class="chip" type="button" data-filter="hours" aria-pressed="false">Hours</button>
+      <button class="chip" type="button" data-filter="milestones" aria-pressed="true">Milestones</button>
+      <button class="chip" type="button" data-filter="deps" aria-pressed="true">Dependencies</button>
+    </div>
+  </div>
+
+  <div class="visually-hidden" id="dep-list">
+    Dependencies: Discovery leads to Foundation. Foundation leads to Core build. Core build leads to
+    Integration. Integration leads to Hardening and launch. The design tokens task in Foundation leads to
+    the component library task in Core build.
+  </div>
+
+  <div class="chart">
+    <svg id="dep-overlay" aria-hidden="true"></svg>
+    <div class="chart-grid" id="chart-grid" role="tree"
+         aria-label="Generic programme roadmap: five epics with task rows, sized in story points. Dependencies are listed before this chart."
+         aria-describedby="dep-list"></div>
+  </div>
+  <noscript><p class="caption">This component renders from its data object and requires JavaScript.</p></noscript>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Roadmap organism — generic, data-driven, effort-scaled. No dates. Instantiated per brief by
+    editing the data object; markup and logic never change.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     DATA OBJECT — the single source of truth. A brief instantiates
+     this component by editing ONLY this object.
+     - storyPoints: Fibonacci scale (1,2,3,5,8,13). Assignment logic:
+       2–3 = bounded, well-understood work; 5 = moderate breadth or
+       coordination; 8 = broad surface or high uncertainty; 13 =
+       epic-scale complexity that resists decomposition.
+     - hours: INDEPENDENT planned-capacity estimates per task (not
+       derived from points). Their sum is the planned-value baseline
+       (BAC) for EVM tracking outside this component.
+     - Bars: width ∝ storyPoints; position = cumulative points of
+       all preceding tasks (sequence order). Axis ticks in points.
+     ============================================================ */
+  var DATA = {
+    epics: [
+      { id: 'discovery', name: 'Discovery', tasks: [
+        { id: 'stakeholder-framing', name: 'Stakeholder framing',  sp: 3,  hours: 24 },
+        { id: 'current-state-audit', name: 'Current-state audit',  sp: 5,  hours: 40 },
+        { id: 'success-criteria',    name: 'Success criteria',     sp: 2,  hours: 16 }
+      ]},
+      { id: 'foundation', name: 'Foundation', tasks: [
+        { id: 'architecture-decisions', name: 'Architecture decisions', sp: 5, hours: 40 },
+        { id: 'tooling-scaffold',       name: 'Tooling + scaffold',     sp: 5, hours: 36 },
+        { id: 'design-tokens',          name: 'Design tokens',          sp: 3, hours: 20 }
+      ]},
+      { id: 'core-build', name: 'Core build', tasks: [
+        { id: 'primary-flows',     name: 'Primary flows',        sp: 13, hours: 96 },
+        { id: 'component-library', name: 'Component library',    sp: 8,  hours: 64 },
+        { id: 'state-data-layer',  name: 'State + data layer',   sp: 8,  hours: 56 }
+      ]},
+      { id: 'integration', name: 'Integration', tasks: [
+        { id: 'cross-surface-wiring', name: 'Cross-surface wiring', sp: 8, hours: 60 },
+        { id: 'localisation-pass',    name: 'Localisation pass',    sp: 5, hours: 36 },
+        { id: 'content-assembly',     name: 'Content assembly',     sp: 5, hours: 32 }
+      ]},
+      { id: 'hardening-launch', name: 'Hardening & launch', tasks: [
+        { id: 'a11y-qa',           name: 'Accessibility + QA',   sp: 8, hours: 56 },
+        { id: 'performance-pass',  name: 'Performance pass',     sp: 5, hours: 32 },
+        { id: 'release-readiness', name: 'Release readiness',    sp: 3, hours: 24 }
+      ]}
+    ],
+    milestones: [
+      { name: 'Discovery sign-off', after: 'discovery' },
+      { name: 'Feature complete',   after: 'core-build' },
+      { name: 'Launch-ready',       after: 'hardening-launch' }
+    ],
+    dependencies: [
+      { from: 'discovery',      to: 'foundation',        level: 'epic' },
+      { from: 'foundation',     to: 'core-build',        level: 'epic' },
+      { from: 'core-build',     to: 'integration',       level: 'epic' },
+      { from: 'integration',    to: 'hardening-launch',  level: 'epic' },
+      { from: 'design-tokens',  to: 'component-library', level: 'task' }
+    ]
+  };
+
+  /* ---------- Derived layout: cumulative story points ---------- */
+  var cursor = 0;
+  DATA.epics.forEach(function (epic) {
+    epic.start = cursor;
+    epic.sp = 0; epic.hours = 0;
+    epic.tasks.forEach(function (t) {
+      t.start = cursor; cursor += t.sp;
+      epic.sp += t.sp; epic.hours += t.hours;
+    });
+    epic.end = cursor;
+  });
+  var TOTAL_SP = cursor;
+  var TOTAL_HOURS = DATA.epics.reduce(function (s, e) { return s + e.hours; }, 0);
+  DATA.milestones.forEach(function (m) {
+    var epic = DATA.epics.filter(function (e) { return e.id === m.after; })[0];
+    m.at = epic ? epic.end : 0;
+  });
+  function pct(points) { return (points / TOTAL_SP * 100).toFixed(3) + '%'; }
+
+  /* ---------- Render from data ---------- */
+  var grid = document.getElementById('chart-grid');
+  var TICK_STEP = 10;
+  function ticksHtml() {
+    var h = '';
+    for (var p = 0; p <= TOTAL_SP; p += TICK_STEP) {
+      h += '<span class="axis-tick" style="left:' + pct(p) + '">' + p + '</span>';
+      h += '<span class="gridline" data-grid style="left:' + pct(p) + '"></span>';
+    }
+    return h;
+  }
+  function barHtml(item, cls, dataAttr) {
+    var label = '<span class="sp-label"><span data-layer="sp">' + item.sp + ' SP</span>' +
+                '<span class="hours-val" data-layer="hours" hidden> · ' + item.hours + ' h</span></span>';
+    return '<div class="bar ' + cls + '" ' + dataAttr + ' style="left:' + pct(item.start) +
+           '; width:' + pct(item.sp !== undefined && item.end === undefined ? item.sp : item.end - item.start) + ';" role="img" aria-label="' +
+           item.name + ', ' + (item.end !== undefined ? (item.end - item.start) : item.sp) +
+           ' story points, ' + item.hours + ' planned hours, effort position ' + item.start + ' to ' +
+           (item.end !== undefined ? item.end : item.start + item.sp) + '">' + label + '</div>';
+  }
+  function summaryHtml(item) {
+    return '<b><span data-layer="sp">' + item.sp + ' SP</span></b>' +
+           '<span class="hours-val" data-layer="hours" hidden>' + item.hours + ' h planned</span>';
+  }
+  var html = '<div class="axis" aria-hidden="true"><div>Epic</div>' +
+             '<div class="axis-units">' + ticksHtml() + '<span class="axis-tick" style="left:100%">' + TOTAL_SP + '</span></div>' +
+             '<div class="axis-summary">Effort</div></div>';
+
+  DATA.epics.forEach(function (epic) {
+    html += '<div class="epic-row" data-epic="' + epic.id + '">' +
+      '<div class="row">' +
+        '<div class="row-label"><button class="epic-toggle" type="button" aria-expanded="false" aria-controls="tasks-' + epic.id + '" role="treeitem">' +
+          '<span class="marker" aria-hidden="true">›</span>' + epic.name + '</button></div>' +
+        '<div class="row-field">' + barHtml(epic, 'epic-bar', 'data-bar="' + epic.id + '"') +
+          '<span data-milestone-slot="' + epic.id + '"></span></div>' +
+        '<div class="row-summary" aria-label="' + epic.name + ' totals: ' + epic.sp + ' story points, ' + epic.hours + ' planned hours">' + summaryHtml(epic) + '</div>' +
+      '</div>' +
+      '<ul class="task-list" id="tasks-' + epic.id + '" hidden role="group">';
+    epic.tasks.forEach(function (t) {
+      html += '<li class="task-row"><span class="task-label">' + t.name + '</span>' +
+        '<span class="task-field">' + barHtml(t, 'task-bar', 'data-bar="' + t.id + '"') + '</span>' +
+        '<span class="task-summary">' + summaryHtml(t) + '</span></li>';
+    });
+    html += '</ul></div>';
+  });
+  grid.innerHTML = html;
+
+  /* Milestones — diamonds on the epic band, positioned by cumulative SP */
+  DATA.milestones.forEach(function (m) {
+    var slot = grid.querySelector('[data-milestone-slot="' + m.after + '"]');
+    if (!slot) { return; }
+    slot.outerHTML = '<span data-layer="milestones">' +
+      '<span class="milestone" data-ms style="left:' + pct(m.at) + '" role="img" aria-label="Milestone: ' +
+      m.name + ', at ' + m.at + ' cumulative story points"></span>' +
+      '<span class="milestone-label" style="left:' + pct(m.at) + '">' + m.name + '</span></span>';
+  });
+
+  /* ---------- Zoom: expand/collapse (rescued from v1) ---------- */
+  var chart = document.querySelector('.chart');
+  var overlay = document.getElementById('dep-overlay');
+  var toggles = Array.prototype.slice.call(grid.querySelectorAll('.epic-toggle'));
+  var toggleAll = document.getElementById('toggle-all');
+  function setExpanded(btn, expanded) {
+    btn.setAttribute('aria-expanded', String(expanded));
+    var list = document.getElementById(btn.getAttribute('aria-controls'));
+    if (list) { list.hidden = !expanded; }
+  }
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
+      syncToggleAll(); drawConnectors();
+    });
+  });
+  function syncToggleAll() {
+    var allOpen = toggles.every(function (b) { return b.getAttribute('aria-expanded') === 'true'; });
+    toggleAll.setAttribute('aria-expanded', String(allOpen));
+    toggleAll.textContent = allOpen ? 'Collapse all epics' : 'Expand all epics';
+  }
+  toggleAll.addEventListener('click', function () {
+    var open = toggleAll.getAttribute('aria-expanded') !== 'true';
+    toggles.forEach(function (b) { setExpanded(b, open); });
+    syncToggleAll(); drawConnectors();
+  });
+  toggles.forEach(function (btn, i) {
+    btn.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowDown') { next = toggles[i + 1]; }
+      if (e.key === 'ArrowUp')   { next = toggles[i - 1]; }
+      if (e.key === 'Home')      { next = toggles[0]; }
+      if (e.key === 'End')       { next = toggles[toggles.length - 1]; }
+      if (next) { e.preventDefault(); next.focus(); }
+    });
+  });
+
+  /* ---------- Filters: progressive disclosure ---------- */
+  var FILTERS = { sp: true, hours: false, milestones: true, deps: true };
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  function applyFilters() {
+    ['sp', 'hours', 'milestones'].forEach(function (key) {
+      Array.prototype.slice.call(document.querySelectorAll('[data-layer="' + key + '"]')).forEach(function (el) {
+        el.hidden = !FILTERS[key];
+      });
+    });
+    overlay.classList.toggle('layer-off', !FILTERS.deps);
+    drawConnectors();
+  }
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var key = chip.getAttribute('data-filter');
+      FILTERS[key] = !FILTERS[key];
+      chip.setAttribute('aria-pressed', String(FILTERS[key]));
+      applyFilters();
+    });
+  });
+
+  /* ---------- Dependency connectors (rescued from v1; edges from DATA) ---------- */
+  function rectOf(id) {
+    var el = chart.querySelector('[data-bar="' + id + '"]');
+    if (!el || el.offsetParent === null) { return null; }
+    return el.getBoundingClientRect();
+  }
+  function epicOfTask(taskId) {
+    for (var i = 0; i < DATA.epics.length; i++) {
+      if (DATA.epics[i].tasks.some(function (t) { return t.id === taskId; })) { return DATA.epics[i].id; }
+    }
+    return null;
+  }
+  function drawConnectors() {
+    if (!FILTERS.deps) { overlay.innerHTML = ''; return; }
+    var base = chart.getBoundingClientRect();
+    overlay.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
+    var svg = '';
+    DATA.dependencies.forEach(function (edge) {
+      var from = rectOf(edge.from) || (edge.level === 'task' ? rectOf(epicOfTask(edge.from)) : null);
+      var to   = rectOf(edge.to)   || (edge.level === 'task' ? rectOf(epicOfTask(edge.to))   : null);
+      if (!from || !to) { return; }
+      var x1 = from.right - base.left, y1 = from.top + from.height / 2 - base.top;
+      var x2 = to.left - base.left,    y2 = to.top + to.height / 2 - base.top;
+      var midX = x1 + Math.max(10, (x2 - x1) / 2);
+      svg += '<path d="M' + x1 + ' ' + y1 + ' H' + midX + ' V' + y2 + ' H' + (x2 - 5) + '"/>';
+      svg += '<rect class="dep-head" x="' + (x2 - 5) + '" y="' + (y2 - 3) + '" width="5" height="6"/>';
+    });
+    overlay.innerHTML = svg;
+  }
+  window.addEventListener('resize', drawConnectors);
+  applyFilters();
+})();
+</script>
+</body>
+</html>
