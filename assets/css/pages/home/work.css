@@ -36,9 +36,12 @@
 .work__track {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(0.75rem, 1.5vw, 1.25rem);
 }
+
+/* A card filtered out is removed from layout and from the tab order alike. */
+.work-card[hidden] { display: none; }
 
 .work-card {
   position: relative;
@@ -310,4 +313,84 @@
     width      var(--duration-ui) var(--ease-standard);
 }
 .work__dot--active { background: var(--color-brand-purple); width: 1.25rem; }
+.work__dot[hidden] { display: none; }
+
+/* ============================================================
+   TAG FILTER — shortlists the work cards.
+   Tag values are never hardcoded here: each chip carries
+   data-tag and each card carries data-tags, both fed from the
+   i18n dictionaries. Changing a tag is a data edit.
+   ============================================================ */
+.tagfilter {
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--color-border-faint);
+  border-bottom: 1px solid var(--color-border-faint);
+  padding: clamp(1rem, 2vw, 1.4rem) 0;
+}
+.tagfilter__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 0.9rem;
+}
+.tagfilter__label {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--color-text-dim);
+}
+.tagfilter__clear {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-brand-purple);
+  background: none; border: none; cursor: pointer; padding: 0.4rem 0;
+  min-height: 44px;
+}
+.tagfilter__clear:hover { color: var(--color-purple-light); }
+.tagfilter__clear[hidden] { display: none; }
+
+.tagfilter__groups { display: flex; flex-direction: column; gap: 0.85rem; }
+.tagfilter__group { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
+.tagfilter__cat {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--color-text-dim);
+  min-width: 5.5rem; flex-shrink: 0;
+}
+.tagfilter__chips { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+
+.tag {
+  font-family: inherit; font-size: 0.76rem; font-weight: 500;
+  color: var(--color-text-muted); background: transparent;
+  border: 1px solid var(--color-border-soft);
+  padding: 0.42rem 0.8rem; cursor: pointer; min-height: 44px;
+  display: inline-flex; align-items: center;
+  transition:
+    color var(--duration-ui) var(--ease-standard),
+    border-color var(--duration-ui) var(--ease-standard),
+    background var(--duration-ui) var(--ease-standard);
+}
+.tag:hover { color: var(--color-brand-white); border-color: var(--color-text-dim); }
+.tag[aria-pressed="true"] {
+  color: var(--color-brand-white);
+  border-color: var(--color-brand-purple);
+  background: rgba(161, 0, 255, 0.14);
+}
+.tag[aria-pressed="true"]::before { content: "✓"; margin-right: 0.4rem; color: var(--color-brand-purple); }
+/* A tag that cannot narrow the current shortlist any further */
+.tag[data-empty="true"]:not([aria-pressed="true"]) { opacity: 0.35; }
+
+.tagfilter__status {
+  margin-top: 0.9rem; font-size: 0.76rem; font-weight: 300;
+  color: var(--color-text-dim);
+}
+.tagfilter__status b { color: var(--color-brand-white); font-weight: 600; }
+
+.work__empty {
+  border: 1px dashed var(--color-border-soft);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  text-align: center; color: var(--color-text-muted);
+  font-weight: 300; font-size: 0.95rem;
+}
+.work__empty[hidden] { display: none; }
+
+@media (max-width: 767px) {
+  .tagfilter__group { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .tagfilter__cat { min-width: 0; }
+  .tag { font-size: 0.72rem; padding: 0.4rem 0.7rem; }
+}
 

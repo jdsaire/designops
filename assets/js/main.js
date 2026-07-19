@@ -6,6 +6,7 @@ import { init as initNav }       from './pages/home/nav.js';
 import { init as initOverlay }   from './pages/home/overlay.js';
 import { init as initHero }      from './pages/home/hero.js';
 import { init as initWork }      from './pages/home/work.js';
+import { init as initTagFilter } from './pages/home/tagfilter.js';
 import { init as initCarousel }  from './pages/home/carousel.js';
 import { init as initEvolution } from './pages/home/evolution.js';
 import { init as initContact }   from './pages/home/contact.js';
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initOverlay();
   initHero();
   initWork();
+  initTagFilter();
   initCarousel();
   initEvolution();
   initContact();
