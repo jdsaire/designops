@@ -172,6 +172,10 @@
   transition:
     opacity   var(--duration-ui) var(--ease-standard),
     transform var(--duration-ui) var(--ease-standard);
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .work-card__timeline {
@@ -294,6 +298,17 @@
   }
   .work__track::-webkit-scrollbar { display: none; }
   .work-card { flex: 0 0 42vw; max-width: 380px; scroll-snap-align: start; }
+}
+
+/* Desktop: the 4-column grid narrows each card enough that aspect-ratio sizing
+   made it too short to hold the hover overlay. Height is set explicitly instead,
+   matching the pre-4-column height at every desktop width (fit through the old
+   3-column height at 1024px and at 1440px). */
+@media (min-width: 1024px) {
+  .work-card {
+    aspect-ratio: auto;
+    height: clamp(384px, 37.5vw, 540px);
+  }
 }
 
 .work__dots {
