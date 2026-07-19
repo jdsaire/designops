@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en" data-nav-context="brief">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The TUUA platform I designed, prototyped, and handed to engineering. · Juan Diego Saire</title>
+<meta name="description" content="A digital payment platform for an unprecedented international-transfer fee — designed, prototyped, evaluated, and handed to engineering. Case study in progress.">
+<!-- ============================================================
+     Brief 04 · Payment-confirmation trust & verification · EN
+     Structure per Brief-4_YapeTrustVerify_Spec_v4_0.md
+     Copy verbatim per Brief-4_YapeTrustVerify_Copy_v4_0.md
+     Acts: 00 The Context · 01 The Problem · 02 The Adaptation ·
+           03 The Build Shape · 04 The Architecture ·
+           05 The Dashboard · 06 The Reflection
+     Route depth: work/yape-trust-verify-brief/ — nav paths ../../
+     [TEMPORAL]: contact mailto (data-temporal="contact-email")
+     ============================================================ -->
+<style>
+/* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
+html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:root{
+  --color-brand-purple:#A100FF;
+  --color-purple-hover:#8C00D9;
+  --color-purple-light:#C2A3FF;
+  --color-brand-black:#000000;
+  --color-brand-white:#FFFFFF;
+  --color-text-muted:rgba(255,255,255,0.6);
+  --color-text-dim:rgba(255,255,255,0.45);
+  --color-border-faint:rgba(255,255,255,0.06);
+  --color-border-soft:rgba(255,255,255,0.10);
+  --font-primary:'Graphik',Arial,sans-serif;
+  --fw-light:300; --fw-regular:400; --fw-medium:500;
+  --fw-semibold:600; --fw-bold:700; --fw-black:900;
+  --max-content-width:1440px;
+  --gutter:clamp(1rem,3.5vw,5rem);
+  --nav-height:clamp(3.5rem,4vw,4rem);
+  --peek-width:clamp(3rem,8vw,6rem);
+  --slide-gap:clamp(1.25rem,2vw,2rem);
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-decelerate:cubic-bezier(0,0,0.2,1);
+  --duration-ui:250ms;
+  --act-pad:clamp(4rem,8vw,8rem);
+  --panel-w:min(430px,36vw);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--color-brand-black); color:var(--color-brand-white);
+  font-family:var(--font-primary); font-weight:var(--fw-regular);
+  line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img,svg{display:block;}
+a{color:inherit; text-decoration:none;}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
+::selection{background:var(--color-brand-purple); color:var(--color-brand-white);}
+:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:3px;}
+.container{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+
+/* Cross-document View Transitions — same-origin navigation cross-fade. */
+@view-transition{ navigation:auto; }
+
+/* ================= SCROLL PROGRESS BAR — above nav ================= */
+.progress{position:fixed; top:0; left:0; width:100%; height:3px; z-index:100;
+  background:transparent; pointer-events:none;}
+.progress__fill{height:100%; width:100%; background:var(--color-brand-purple);
+  transform:scaleX(0); transform-origin:left center;}
+
+/* ================= NAV (live organism shape) ================= */
+.nav{position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-height);
+  background:rgba(0,0,0,0.86); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--color-border-faint);}
+.nav__inner{max-width:var(--max-content-width); margin:0 auto; height:100%;
+  padding:0 var(--gutter); display:flex; align-items:center; justify-content:space-between; gap:clamp(1rem,2.5vw,2.5rem);}
+.nav__logo{display:flex; align-items:baseline; gap:.5rem; font-weight:var(--fw-black); letter-spacing:-0.01em; font-size:1.05rem;}
+.nav__logo small{font-weight:var(--fw-medium); color:var(--color-text-muted); letter-spacing:.14em; font-size:.62rem; text-transform:uppercase;}
+.nav__logo:hover small{color:var(--color-brand-purple);}
+.nav__center{display:flex; align-items:center; gap:clamp(.75rem,1.5vw,1.5rem);}
+.nav__link{font-size:.85rem; font-weight:var(--fw-medium); color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
+.nav__link:hover{color:var(--color-brand-white);}
+.nav__cta{font-size:.8rem; font-weight:var(--fw-semibold); padding:.5rem 1rem; border:1px solid var(--color-border-soft);
+  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
+.nav__cta:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.nav__right{display:flex; align-items:center; gap:clamp(.75rem,1.5vw,1.25rem);}
+/* SwapLang globe — mirrors shared/nav.css, tokens only, no new copy */
+.nav__lang{position:relative; display:inline-flex; align-items:center;}
+.nav__lang-btn{background:transparent; border:none; cursor:pointer;
+  color:var(--color-text-dim); font-size:.85rem; font-weight:var(--fw-medium);
+  display:inline-flex; align-items:center; gap:.35rem; padding:.375rem .25rem;
+  transition:color var(--duration-ui) var(--ease-standard); letter-spacing:.03em;}
+.nav__lang-btn:hover, .nav__lang:hover .nav__lang-btn{color:var(--color-brand-white);}
+.nav__lang-btn svg{width:1.05rem; height:1.05rem; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+.nav__lang-panel{position:absolute; top:100%; right:0; min-width:4.5rem;
+  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
+  padding:.3rem 0; opacity:0; pointer-events:none; transform:translateY(-0.25rem);
+  transition:opacity var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);}
+@media (hover:hover){ .nav__lang:hover .nav__lang-panel{opacity:1; pointer-events:auto; transform:translateY(0);} }
+.nav__lang--panel-open .nav__lang-panel{opacity:1; pointer-events:auto; transform:translateY(0);}
+.nav__lang-option{display:block; width:100%; background:transparent; border:none; cursor:pointer;
+  font-size:.85rem; font-weight:var(--fw-medium); letter-spacing:.03em; color:var(--color-text-muted);
+  padding:.45rem 1rem; text-align:left; transition:color var(--duration-ui) var(--ease-standard);}
+.nav__lang-option--active, .nav__lang-option:hover{color:var(--color-brand-white);}
+.nav__lang-option--active{font-weight:var(--fw-semibold);}
+@media (max-width:767px){ .nav__center{display:none;} }
+
+/* ================= SECTION EYEBROW — inherited live organism, verbatim ================= */
+.section__eyebrow{display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem;
+  margin-bottom:clamp(1.5rem,2.5vw,2.5rem);}
+.section__eyebrow-bar{width:2.5rem; height:3px; background:var(--color-brand-purple);}
+.section__eyebrow-text{font-size:0.8rem; font-weight:var(--fw-semibold); letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--color-brand-white);}
+.section__eyebrow-text .dim{color:var(--color-text-dim);}
+
+/* ================= TYPE ROLES ================= */
+.verdict{font-size:clamp(1.75rem,4vw,3.25rem); font-weight:var(--fw-black); line-height:1.08; letter-spacing:-0.02em;}
+.scan{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:34em;}
+.scan strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
+
+/* ================= HERO ================= */
+.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-height) + 3px); position:relative;}
+.hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
+.hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
+.hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
+.kwrow{display:flex; flex-wrap:wrap; gap:.6rem; max-width:44em;}
+.kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
+.scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
+.scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
+
+/* ================= INDEPENDENCE NOTICE — non-affiliation, always visible ================= */
+.independence{border:1px dashed var(--color-border-soft); padding:.75rem 1rem; font-size:.72rem;
+  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:44em;}
+.independence strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+
+/* ================= ACTS ================= */
+.act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
+.act__head{display:flex; flex-direction:column; gap:1rem; margin-bottom:clamp(2rem,4vw,3.25rem); max-width:60rem;}
+
+/* ---- Contrast card (Act 01) ---- */
+.contrast{display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--color-border-soft); margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+.contrast__face{padding:clamp(1.4rem,2.5vw,2.25rem); display:flex; flex-direction:column; gap:.7rem;}
+.contrast__face + .contrast__face{border-left:1px solid var(--color-border-soft);}
+.contrast__tag{font-size:.66rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim);}
+.contrast__face--build .contrast__tag{color:var(--color-brand-purple);}
+.contrast__txt{font-size:clamp(.98rem,1.2vw,1.1rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.contrast__bridge{grid-column:1 / -1; border-top:1px solid var(--color-border-soft); padding:1rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+
+/* Role strip — three stacked lines */
+.rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
+  border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-faint);
+  margin-bottom:clamp(1.5rem,2.5vw,2rem);}
+.rolestrip span{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-muted); font-weight:var(--fw-medium);}
+.rolestrip b{color:var(--color-brand-purple); font-weight:var(--fw-bold);}
+
+/* ---- Act 01 two-column: text left, receipt right (≥1024) ---- */
+.split{display:grid; grid-template-columns:1fr; gap:clamp(1.75rem,3vw,3rem); align-items:start;}
+@media (min-width:1024px){ .split{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:clamp(2rem,4vw,4rem);} }
+.receipt{border:1px solid var(--color-border-soft); padding:clamp(.75rem,1.5vw,1.1rem);
+  display:flex; flex-direction:column; gap:.75rem;}
+.receipt img{width:100%; height:auto; max-width:23rem; margin:0 auto;}
+.receipt__cap{font-size:.7rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.5;}
+.receipt__cap b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+
+/* ---- Timeline carousel (Act 02 — the single lateral gesture, 3 stops) ---- */
+.timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
+.timeline__track{display:grid; grid-auto-flow:column; grid-auto-columns:calc(100% - var(--peek-width));
+  gap:var(--slide-gap); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem; scrollbar-width:none;}
+.timeline__track::-webkit-scrollbar{display:none;}
+.stop{scroll-snap-align:start; border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2vw,1.8rem);
+  display:flex; flex-direction:column; gap:.75rem; background:var(--color-brand-black); position:relative;}
+.stop::before{content:""; position:absolute; top:0; left:0; width:2.25rem; height:3px; background:var(--color-brand-purple);}
+.stop__n{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; color:var(--color-text-dim); text-transform:uppercase;}
+.stop__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
+.stop__x{font-size:.95rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+.timeline__nav{display:flex; gap:.6rem; margin-top:1rem;}
+.timeline__btn{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center;
+  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
+.timeline__btn:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.timeline__btn:disabled{opacity:.3; cursor:default;}
+@media (min-width:1024px){
+  .timeline__track{grid-auto-flow:row; grid-template-columns:repeat(3,1fr); grid-auto-columns:unset; overflow:visible; padding-bottom:0;}
+  .timeline__nav{display:none;}
+  .timeline::before{content:""; position:absolute; top:-1.1rem; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, var(--color-brand-purple), var(--color-border-soft));}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .timeline__track{grid-auto-columns:calc(50% - var(--slide-gap)/2);}
+}
+
+/* ---- Cards ---- */
+.cardgrid{display:grid; gap:1rem;}
+.cardgrid--3{grid-template-columns:repeat(3,1fr);}
+.cardgrid--2{grid-template-columns:repeat(2,1fr);}
+/* Act 06 grew 3 → 4 cards: its own 2×2 variant, never forced into the 3-col rule */
+.cardgrid--4{grid-template-columns:repeat(2,1fr);}
+.card{border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2.2vw,1.9rem); display:flex; flex-direction:column; gap:.75rem;
+  transition:border-color var(--duration-ui) var(--ease-standard);}
+.card:hover{border-color:var(--color-brand-purple);}
+.card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
+.card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+@media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
+@media (max-width:767px){
+  .cardgrid--3,.cardgrid--2,.cardgrid--4{grid-template-columns:1fr;}
+  .contrast{grid-template-columns:1fr;}
+  .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
+}
+
+/* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
+.reveal{margin-top:auto;}
+.reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
+  transition:color var(--duration-ui) var(--ease-standard); min-height:44px;}
+.reveal__btn::before{content:"⊕"; font-size:1rem;}
+.reveal__btn[aria-expanded="true"]::before{content:"⊖";}
+.reveal__btn:hover{color:var(--color-purple-light);}
+.reveal__body{border-left:2px solid var(--color-brand-purple); padding:.9rem 0 .2rem 1rem; margin-top:.6rem;}
+.reveal__body[hidden]{display:none;}
+.reveal__body p{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted); margin-bottom:.7rem;}
+.reveal__body p:last-child{margin-bottom:0;}
+
+/* Side panel (desktop) */
+.panel{position:fixed; top:calc(var(--nav-height) + 3px); right:0; bottom:0; width:var(--panel-w); z-index:70;
+  background:#050505; border-left:1px solid var(--color-border-soft); padding:1.5rem 1.6rem 2rem;
+  overflow-y:auto; transform:translateX(102%); transition:transform 320ms var(--ease-decelerate);
+  display:flex; flex-direction:column; gap:1rem;}
+.panel.is-open{transform:none;}
+.panel__head{display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  border-bottom:1px solid var(--color-border-faint); padding-bottom:.9rem;}
+.panel__title{font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-brand-purple);}
+.panel__close{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center; font-size:1rem;}
+.panel__close:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.panel__slot .reveal__body{border-left:0; padding-left:0; margin-top:0;}
+@media (min-width:1024px){
+  .panel__slot .reveal__body--poster p{font-size:clamp(1.35rem,1.7vw,1.8rem); line-height:1.4;
+    color:var(--color-brand-white); font-weight:var(--fw-light);}
+}
+
+/* ---- Fields synthesis — prose, not a table (Act 04 terminal) ---- */
+.synthesis{border-left:3px solid var(--color-brand-purple); padding:.2rem 0 .2rem 1.15rem;
+  margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;
+  font-size:clamp(1rem,1.2vw,1.12rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+
+/* ---- Evidence bar ---- */
+.evidence{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
+  border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem) clamp(1.2rem,2.2vw,1.8rem); margin-top:1.4rem;}
+.evidence__label{font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold);}
+.evidence__links{display:flex; gap:1.4rem; flex-wrap:wrap;}
+.evidence__link{font-weight:var(--fw-semibold); font-size:.95rem; border-bottom:1px solid var(--color-brand-purple);
+  padding-bottom:.15rem; transition:color var(--duration-ui) var(--ease-standard);}
+.evidence__link:hover{color:var(--color-brand-purple);}
+
+/* ---- ACT 05 · THE DASHBOARD ---- */
+.dash{border:1px solid var(--color-border-soft);}
+.dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
+.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
+  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+.dash__tab:hover{color:var(--color-brand-white);}
+.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
+.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
+.dash__panel[hidden]{display:none;}
+
+/* Provenance band — measured only in this act; staged content lives in Act 04 Card 3 */
+.band{border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem); display:flex; flex-direction:column; gap:1rem;}
+.band--measured{border-left:3px solid var(--color-brand-purple);}
+.band__head{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;}
+.band__badge{font-size:.58rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; padding:.25rem .55rem;
+  background:var(--color-brand-purple); color:var(--color-brand-black);}
+.band__what{font-size:.75rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
+.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
+.dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
+.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
+.dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
+.dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
+  transition:transform 900ms var(--ease-decelerate);}
+.dash__read{display:flex; flex-direction:column; gap:1.1rem; max-width:52rem;}
+.dash__readline{font-size:clamp(1.15rem,1.7vw,1.5rem); font-weight:var(--fw-light); line-height:1.45;}
+.dash__readline strong{font-weight:var(--fw-bold);}
+.dash__readsub{font-size:.95rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.dash__reco{border-left:3px solid var(--color-brand-purple); padding:.6rem 0 .6rem 1rem;
+  font-size:1rem; font-weight:var(--fw-medium);}
+.dash__foot{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+@media (max-width:1023px){ .dash__grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:767px){
+  .dash__grid{grid-template-columns:1fr 1fr;}
+  .dash__tab{font-size:.6rem; letter-spacing:.1em;}
+}
+
+/* ================= ACT 03 · ROADMAP ORGANISM (scoped under .gantt) ================= */
+.gantt{--g-border:var(--color-border-soft);}
+.gantt *{border-radius:0; box-shadow:none;}
+.gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
+.gantt__action{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-medium);
+  background:var(--color-brand-black); color:var(--color-brand-white);
+  border:1px solid var(--color-brand-white); padding:.6rem 1.25rem; cursor:pointer; min-height:44px;
+  transition:background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
+.gantt__action:hover{background:var(--color-brand-white); color:var(--color-brand-black);}
+.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
+.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
+.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
+  background:var(--color-brand-black); color:var(--color-text-muted);
+  border:1px solid var(--g-border); padding:.45rem .9rem; cursor:pointer; min-height:44px;
+  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
+.gantt__chip[aria-pressed="true"]::before{content:"✓ "; color:var(--color-brand-purple);}
+.gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
+.gantt__grid{min-width:820px;}
+.gantt__axis{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
+  border-bottom:1px solid var(--g-border); color:var(--color-text-muted); font-size:.8125rem;}
+.gantt__axis > div{padding:.75rem 1rem;}
+.gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem;}
+.gantt__axis-summary{text-align:right;}
+.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
+  border-bottom:1px solid var(--g-border);}
+.gantt__task-row{background:rgba(255,255,255,0.02);}
+.gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
+.gantt__task-label{padding:.5rem 1rem .5rem 2.4rem; color:var(--color-text-muted); font-size:.875rem; display:flex; align-items:center;}
+.gantt__row-field,.gantt__task-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__row-field{min-height:3.25rem;}
+.gantt__task-field{min-height:2.5rem;}
+.gantt__row-summary,.gantt__task-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
+  align-items:flex-end; font-size:.8125rem; color:var(--color-text-muted);}
+.gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.gantt__hours{color:var(--color-text-dim);}
+.gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
+.gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
+  background:none; border:0; color:var(--color-brand-white); cursor:pointer; text-align:left;
+  display:flex; align-items:baseline; gap:.6rem; width:100%; padding:.25rem 0; min-height:44px;}
+.gantt__toggle .gantt__marker{display:inline-block; width:.8em; color:var(--color-text-muted); font-weight:var(--fw-regular);
+  transition:transform var(--duration-ui) var(--ease-standard);}
+.gantt__toggle[aria-expanded="true"] .gantt__marker{transform:rotate(90deg);}
+.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__row-label{border-left:3px solid var(--color-brand-purple);}
+.gantt__epic:hover .gantt__bar--epic,.gantt__epic:has(.gantt__toggle:focus-visible) .gantt__bar--epic{border-color:var(--color-brand-purple);}
+.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); background:var(--g-border);
+  border:1px solid var(--color-text-dim); display:flex; align-items:center; justify-content:flex-end;}
+.gantt__bar--epic{height:1.625rem;}
+.gantt__bar--task{height:1rem;}
+.gantt__sp{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white);
+  padding:0 .35rem; white-space:nowrap;}
+.gantt__sp .gantt__hours{font-weight:var(--fw-regular);}
+.gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
+  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-black);
+  border:2px solid var(--color-brand-purple);}
+.gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
+  font-size:.6875rem; color:var(--color-text-muted); white-space:nowrap;}
+.gantt__overlay{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:2;}
+.gantt__overlay path{fill:none; stroke:var(--color-brand-purple); stroke-width:1.5; stroke-dasharray:5 4;}
+.gantt__overlay .gantt__dep-head{fill:var(--color-brand-purple); stroke:none;}
+.gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
+  margin-top:1rem; max-width:52rem; line-height:1.6;}
+.gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+.gantt .layer-off{visibility:hidden;}
+.gantt [hidden]{display:none !important;}
+.visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
+
+/* ---- ACT 06 · THE REFLECTION ---- */
+.house .card__t{display:flex; flex-direction:column; gap:.3rem;}
+.house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-brand-purple);}
+.sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+
+/* ---- Conversion ---- */
+.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
+  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
+  transition:background var(--duration-ui) var(--ease-standard);}
+.convert__cta:hover{background:var(--color-brand-purple);}
+.temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
+  border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
+
+/* ================= FOOTER (live organism, verbatim strings) ================= */
+.footer{border-top:1px solid var(--color-border-faint); padding:clamp(2.5rem,5vw,4rem) 0; margin-top:var(--act-pad);}
+.footer__inner{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;}
+.footer__tag{font-size:clamp(1.1rem,1.6vw,1.4rem); font-weight:var(--fw-bold);}
+.footer__tag em{font-style:normal; color:var(--color-brand-purple);}
+.footer__meta{display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap;}
+.footer__link{font-size:.85rem; color:var(--color-text-muted); border-bottom:1px solid var(--color-border-soft); padding-bottom:.1rem;}
+.footer__link:hover{color:var(--color-brand-purple); border-color:var(--color-brand-purple);}
+.footer__c{font-size:.75rem; color:var(--color-text-dim);}
+
+
+/* ================= IN-PROGRESS TREATMENT — placeholder discipline =================
+   This page is a placeholder. The banner below is always visible, and every act
+   carrying scaffold copy is badged individually so no section can be mistaken for
+   finished content about this brief. */
+.wip{border:1px dashed var(--color-brand-purple); background:rgba(161,0,255,0.06);
+  padding:clamp(1rem,2vw,1.4rem) clamp(1.1rem,2.2vw,1.6rem); display:flex; flex-direction:column; gap:.5rem;
+  max-width:52em;}
+.wip__tag{display:inline-flex; align-items:center; gap:.45rem; align-self:flex-start;
+  font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase;
+  color:var(--color-brand-purple); border:1px solid var(--color-brand-purple); padding:.25rem .55rem;}
+.wip__txt{font-size:.86rem; font-weight:var(--fw-light); color:var(--color-text-muted); line-height:1.6;}
+.wip__txt strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+/* Act-level scaffold badge */
+.scaffold{border-left:3px dashed var(--color-brand-purple); padding:.75rem 0 .75rem 1rem;
+  margin-bottom:clamp(1.5rem,2.5vw,2rem); display:flex; flex-direction:column; gap:.35rem; max-width:52em;}
+.scaffold__tag{font-size:.58rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase;
+  color:var(--color-brand-purple);}
+.scaffold__txt{font-size:.78rem; font-weight:var(--fw-light); color:var(--color-text-dim); line-height:1.55;}
+/* Scaffold bodies read as visibly provisional, never as this brief's finished prose */
+.act--scaffold .verdict, .act--scaffold .scan, .act--scaffold .card, .act--scaffold .stop,
+.act--scaffold .dash, .act--scaffold .contrast, .act--scaffold .synthesis, .act--scaffold .gantt{opacity:.62;}
+.act--scaffold .verdict{font-weight:var(--fw-bold);}
+
+/* ================= MOTION ================= */
+.io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
+.io.is-in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important; transition:none!important;}
+  .io{opacity:1; transform:none;}
+  .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
+  .timeline__nav{display:none;}
+  .dcell__bar i{transform:scaleX(var(--v,0));}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- Scroll progress — above nav, grows L→R, reverses on upscroll -->
+<div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
+
+<!-- ================= NAV — routes BACK to designops home (../../ = route depth work/<slug>/) ================= -->
+<header class="nav">
+  <nav class="nav__inner" role="navigation" aria-label="Primary">
+    <a href="../../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+      JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+    </a>
+    <div class="nav__center">
+      <a class="nav__link" href="../../#work" data-nav-link="#work" data-i18n="nav_work">Work</a>
+      <a class="nav__link" href="../../#capabilities" data-nav-link="#capabilities" data-i18n="nav_capabilities">Capabilities</a>
+      <a class="nav__link" href="../../#evolution" data-nav-link="#evolution" data-i18n="nav_evolution">Evolution</a>
+    </div>
+    <div class="nav__right">
+      <!-- SwapLang — EN/ES bilingual toggle (mirrors home chrome; no new copy) -->
+      <div class="nav__lang" id="briefLangSel">
+        <button class="nav__lang-btn" id="briefLangBtn" type="button"
+                aria-label="Select language" aria-haspopup="listbox">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span id="briefLangLabel">ES</span>
+        </button>
+        <div class="nav__lang-panel" id="briefLangPanel" role="listbox" aria-label="Language">
+          <button class="nav__lang-option nav__lang-option--active"
+                  role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
+          <button class="nav__lang-option"
+                  role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
+        </div>
+      </div>
+      <a class="nav__cta" href="#convert" data-i18n="chrome_nav_cta">Start a conversation</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="container hero__inner">
+    <div class="section__eyebrow" style="margin-bottom:0;">
+      <span class="section__eyebrow-bar"></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 02</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_status">Case study in progress</span></span>
+    </div>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The TUUA platform I designed, prototyped, and handed to engineering.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">Lima Airport had to charge a fee it had never collected, through a channel that did not exist — with five divisions holding a piece of it and engineering waiting on a definition.</p>
+    <div class="kwrow" role="list" aria-label="Case keywords">
+      <span class="kw" role="listitem" data-i18n="kw1">Airport</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Payments</span>
+      <span class="kw" role="listitem" data-i18n="kw3">Product Design</span>
+      <span class="kw" role="listitem" data-i18n="kw4">Prototyping</span>
+    </div>
+    <div class="reveal" data-act="hero">
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
+      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
+        <p data-i18n="hero_rv_txt">At Lima Airport I designed, prototyped, and evaluated the TUUA international-transfer fee platform, then delivered the user flow and mockups engineering built from. It is live, serving 130,000+ international-transfer passengers monthly.</p>
+      </div>
+    </div>
+
+    <div class="wip" role="note">
+      <span class="wip__tag" data-i18n="wip_tag">Build in progress</span>
+      <p class="wip__txt" data-i18n="wip_txt"><strong>This case study is not finished.</strong> The summary above is real. Every section below it is layout scaffold borrowed from another brief, kept only to hold the page's shape — it is not about this project and should not be read as such. The written case study lands when its copy is approved.</p>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
+</section>
+
+<!-- ================= ACT 00 · THE CONTEXT ================= -->
+<section class="act act--scaffold" id="act0" aria-labelledby="v0">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+      </div>
+      <h2 class="verdict" id="v0" data-i18n="act0_verdict">First, meet the app most of Peru pays with.</h2>
+    </div>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act0_scan1"
+         data-full="Yape started inside Banco de Crédito del Perú as a simple way to send money to a phone number. A decade later it reports on the order of twenty million users across Peru and Bolivia, and its monthly active base is equivalent to roughly four of every five economically active Peruvians.">
+         Yape started as a way to send money to a phone number. It is now how a large share of Peru transacts daily.</p>
+      <p class="scan" data-i18n="act0_scan2"
+         data-full="It stopped being a transfer app years ago. Today it carries micro-loans, utility and phone payments, a marketplace, remittances, even bus top-ups — the super-app playbook, built for people the banking system had never reached. Millions entered the financial system for the first time through it.">
+         It stopped being a transfer app years ago: credit, bill payments, a marketplace, remittances — a super app.</p>
+      <p class="scan" data-i18n="act0_scan3"
+         data-full="That success created a new kind of crime. When an entire economy learns to trust one confirmation screen, the attack is obvious: fake the screen. Counterfeit apps that imitate it are openly sold, iterated like products, and exported to neighboring countries.">
+         Its success created a new kind of crime: if everyone trusts the app's confirmation screen, fake the screen.</p>
+    </div>
+
+    <div class="cardgrid cardgrid--3 io">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c1_t">Everyone's wallet</h3>
+        <p class="card__x" data-i18n="act0_c1_x">Cash still matters in Peru, but its share of transactions has fallen steeply as fast payments took over daily commerce — with Yape and its interbank rival Plin carrying most of that shift.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c2_t">The counter economy</h3>
+        <p class="card__x" data-i18n="act0_c2_x">The typical scene is a market stall or bodega: a customer shows a payment confirmation, a queue waits, and the merchant has seconds to decide whether to hand over the goods.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c3_t">The stakes</h3>
+        <p class="card__x" data-i18n="act0_c3_x">The people most exposed are the ones financial inclusion was meant to serve — small merchants and independent workers, for whom one fake payment can erase a day's earnings.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 01 · THE PROBLEM — two-column, receipt right ================= -->
+<section class="act act--scaffold" id="act1" aria-labelledby="v1">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
+      </div>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Looking harder at the receipt cannot save you.</h2>
+    </div>
+
+    <div>
+      <div>
+        <div class="contrast io" role="group" aria-label="The fraud, split in two">
+          <div class="contrast__face">
+            <span class="contrast__tag" data-i18n="act1_c1_tag">What you see</span>
+            <p class="contrast__txt" data-i18n="act1_c1_txt">A payment confirmation, on a phone, held up at your counter —</p>
+          </div>
+          <div class="contrast__face contrast__face--build">
+            <span class="contrast__tag" data-i18n="act1_c2_tag">What it is</span>
+            <p class="contrast__txt" data-i18n="act1_c2_txt">— an image, where every field is text that whoever made it can set.</p>
+          </div>
+          <p class="contrast__bridge" data-i18n="act1_bridge">The fake reproduces exactly what you are looking at. <strong>That is why staring harder fails.</strong></p>
+        </div>
+
+        <div class="scanstack io">
+          <p class="scan" data-i18n="act1_scan1"
+             data-full="Peru's wallet boom outran its trust infrastructure. In the &quot;Yape falso&quot; fraud, a counterfeit app generates a convincing confirmation screen — and the merchant hands over the goods for a payment that never settles. The national digital-security centre documented the method in an official 2024 alert.">
+             Peru's wallet boom outran its trust infrastructure — and the fake receipt is the hole it left.</p>
+          <p class="scan" data-i18n="act1_scan2"
+             data-full="A three-digit security code shipped in April 2025 to close this. It appears on every receipt in the app. It does not appear in Yape's own public anti-fraud guidance, which still tells users to check their movements, their balance, and their notifications. A verification step a merchant has never heard of is not a verification step.">
+             A security code shipped to close it. <strong>The public guidance still does not mention the code.</strong></p>
+          <p class="scan" data-i18n="act1_scan3"
+             data-full="The harm concentrates on the people the financial-inclusion story celebrates most: market traders, bodegueros, and independent workers, taking payment at a counter with a queue behind it and seconds to decide.">
+             The people it hits hardest are the ones the inclusion story celebrates most.</p>
+        </div>
+
+        <div class="rolestrip io" aria-label="Role and scope">
+          <span data-i18n="act1_role1"><b>Role</b> — Sole author</span>
+          <span data-i18n="act1_role2"><b>Duration</b> — July 2026, one build cycle</span>
+          <span data-i18n="act1_role3"><b>Scope</b> — Research → selection → front-end build → test</span>
+        </div>
+
+        <div class="reveal io" data-act="act1">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a1" data-panel-title="Why I chose this problem" data-i18n="act1_rv_btn">Why I chose this problem</button>
+          <div class="reveal__body" id="rv-a1" hidden>
+            <p data-i18n="act1_rv_txt">I benchmarked three innovation-centre banks in markets comparable to Peru — Nubank, Nequi, Attijariwafa. All three treat verifiable payment trust as a core product surface, so the gap here is real, not invented. Two other candidates lost: merchant finance tools are a crowded, solved space, and onboarding flows drift into regulated identity territory. Payment trust won because it is real, urgent, and answerable in front-end code alone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 02 · THE ADAPTATION — 3 stops, the single lateral gesture ================= -->
+<section class="act act--scaffold" id="act2" aria-labelledby="v2">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Adaptation</span>
+      </div>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">I did not set out to master an app. I set out to solve one problem inside it.</h2>
+      <p class="scan" data-i18n="act2_scan">Give me the exact design system and I can build or redesign the whole app — but that is not the purpose. This case shows one real fraud problem, solved through front-end alone, with every framework, security, and codebase decision understood and backed by me.</p>
+    </div>
+
+    <div class="timeline io">
+      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The adaptation, in three stops">
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s1_n">Stop 1</span>
+          <h3 class="stop__t" data-i18n="act2_s1_t">The gap I mapped</h3>
+          <p class="stop__x" data-i18n="act2_s1_x">I read the frontend requirements Peru's largest bank actually hires for, mapped them against my own skillset, and aimed this project directly at the distance between the two.</p>
+        </article>
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s2_n">Stop 2</span>
+          <h3 class="stop__t" data-i18n="act2_s2_t">The jump to apps</h3>
+          <p class="stop__x" data-i18n="act2_s2_x">I left the vanilla web approach this whole site was built on and entered frameworks and app development, to experience first-hand what I am able to build.</p>
+        </article>
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s3_n">Stop 3</span>
+          <h3 class="stop__t" data-i18n="act2_s3_t">One problem, done fully</h3>
+          <p class="stop__x" data-i18n="act2_s3_x">I knew reshaping an already successful super app takes years. I chose instead to understand what solving a single banking problem with frontend truly takes.</p>
+        </article>
+      </div>
+      <div class="timeline__nav">
+        <button class="timeline__btn" id="tlPrev" aria-label="Previous stop">←</button>
+        <button class="timeline__btn" id="tlNext" aria-label="Next stop">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 03 · THE BUILD SHAPE — roadmap organism, effort-scaled ================= -->
+<section class="act act--scaffold" id="act3" aria-labelledby="v3">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · The Build Shape</span>
+      </div>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five phases, sized by effort rather than calendar.</h2>
+    </div>
+
+    <div class="gantt io" id="gantt">
+      <div class="gantt__tools">
+        <button class="gantt__action" id="ganttToggleAll" type="button" aria-expanded="false" data-i18n="gantt_expand">Expand all phases</button>
+        <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
+          <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
+          <button class="gantt__chip" type="button" data-filter="sp" aria-pressed="true" data-i18n="gantt_f_sp">Story points</button>
+          <button class="gantt__chip" type="button" data-filter="hours" aria-pressed="false" data-i18n="gantt_f_hours">Hours</button>
+          <button class="gantt__chip" type="button" data-filter="milestones" aria-pressed="true" data-i18n="gantt_f_ms">Milestones</button>
+          <button class="gantt__chip" type="button" data-filter="deps" aria-pressed="true" data-i18n="gantt_f_deps">Dependencies</button>
+        </div>
+      </div>
+
+      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">
+        Dependencies: Foundation leads to The one job. The one job leads to Architecture. Architecture leads to Security layer. Security layer leads to Proof and delivery. The singleton session task in Architecture leads to the execution-lock fix in Proof and delivery.
+      </div>
+
+      <div class="gantt__chart" id="ganttChart">
+        <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
+        <div class="gantt__grid" id="ganttGrid" role="tree"
+             aria-label="Brief 04 build shape: five phases with task rows, sized in story points. Dependencies are listed before this chart."
+             aria-describedby="ganttDepList"></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript.</p></noscript>
+
+      <p class="gantt__caption" data-i18n="gantt_caption"><b>How to read this.</b> The five phases and their tasks are reconstructed from this build's own plan and completion record. Story points express relative effort between phases, not a recorded sprint artifact — this build was not run as a pointed sprint. Hours are planned-capacity estimates, off by default. No progress or completion percentage is shown, because a finished build has nothing left to forecast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, zero figures on the surface ================= -->
+<section class="act act--scaffold" id="act4" aria-labelledby="v4">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Architecture</span>
+      </div>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Every technology here was chosen for a reason I can defend.</h2>
+    </div>
+
+    <div class="cardgrid cardgrid--2 io">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c1_t">React — one source of truth for every screen</h3>
+        <p class="card__x" data-i18n="act4_c1_x">React draws every screen from the app's data, never the reverse — so what the merchant sees always matches what the app knows. In a trust tool, that guarantee is the product.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c1" data-panel-title="Why React, and not vanilla or Angular" data-i18n="act4_c1_rv_btn">Why React, and not vanilla or Angular</button>
+          <div class="reveal__body" id="rv-a4c1" hidden>
+            <p data-i18n="act4_c1_rv_txt">The one failure a verification tool cannot survive is a stale screen — "verified" still showing for a check the operator cancelled. React is built for exactly this: the interface is a function of state, read through its supported mechanism for stores that live outside the framework, so a verdict cannot tear under rapid updates. Vanilla — how this entire site is built — would mean hand-wiring every listener and owning every teardown, and this build's one real defect was precisely a missed listener. Angular would work, but brings a large, opinionated framework surface to a deliberately small single-job build; a smaller surface is faster to get right. That the banking sector's own job postings name React is convenient corroboration — the natural tool for the problem happens to be the one the industry already builds in.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c2_t">TypeScript — code that checks itself</h3>
+        <p class="card__x" data-i18n="act4_c2_x">TypeScript is JavaScript with a strict proofreader: it catches whole classes of mistakes before the code runs. In a tool that tells a merchant to trust a payment, that net is not optional.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c2" data-panel-title="What the safety layer buys" data-i18n="act4_c2_rv_btn">What the safety layer buys</button>
+          <div class="reveal__body" id="rv-a4c2" hidden>
+            <p data-i18n="act4_c2_rv_txt">Every receipt field, verdict state, and API response has a declared shape, so a malformed record cannot silently flow into a verdict. The compiler runs as a CI gate on every push — the same discipline production banking code expects: typed contracts, automated checks, continuous integration.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c3_t">Security — a film set with one real lock</h3>
+        <p class="card__x" data-i18n="act4_c3_x">Think of the security layer as a film set: the heavy bank infrastructure is painted scenery, openly staged, while every lock the merchant actually touches is real, working, and tested.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c3" data-panel-title="What is scenery, what is the lock" data-i18n="act4_c3_rv_btn">What is scenery, what is the lock</button>
+          <div class="reveal__body" id="rv-a4c3" hidden>
+            <p data-i18n="act4_c3_rv_txt">The scenery demonstrates the sector's security vocabulary — TLS 1.2 encrypted exchanges, RSA-2048 key pairs, mutual certificate authentication, adaptive risk scoring — against fabricated material, badged SIMULATED throughout so no one mistakes a painted server for a real one. The lock is everything the merchant touches: an in-app keypad no third-party keyboard can read, digits that shuffle to defeat a watching eye, an execution lock against double-taps, a blocking overlay while the check runs, and privacy masking on every name and number. Neither side ever borrows credibility from the other.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c4_t">Six scenarios — the proof the build answers to</h3>
+        <p class="card__x" data-i18n="act4_c4_x">Before trusting the build, I wrote a six-scenario testing protocol drawn from the case research: can it tell a fake from a real payment, and does it refuse to misfire under pressure?</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c4" data-panel-title="What the six scenarios check" data-i18n="act4_c4_rv_btn">What the six scenarios check</button>
+          <div class="reveal__body" id="rv-a4c4" hidden>
+            <p data-i18n="act4_c4_rv_txt">1: a forged amount on a real operation number is caught and named. 2: a verdict stays reachable even when the user has never heard of the security code — an unreadable field is never scored as a mismatch. 3: a double-tap or mid-flight cancel can never fire the check twice or record a verdict the operator backed out of. 4: the action stays inert until its preconditions hold. 5: the busy overlay truly blocks the page. 6: privacy masking never leaks a full name or number. Results live in the dashboard below.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <p class="synthesis io" data-i18n="act4_synthesis">Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. <strong>Treating it as proof is the trap the tool exists to close.</strong></p>
+
+    <div class="evidence io">
+      <span class="evidence__label" data-i18n="evidence_label">The running build</span>
+      <div class="evidence__links">
+        <a class="evidence__link" href="https://jdsaire.github.io/designops/work/yape-trust-verify/" target="_blank" rel="noopener" data-i18n="evidence_l1">Open the app</a>
+        <a class="evidence__link" href="https://github.com/jdsaire/designops/tree/main/work/yape-trust-verify" target="_blank" rel="noopener" data-i18n="evidence_l2">Read the source</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 05 · THE DASHBOARD — measured only; staged lives in Act 04 Card 3 ================= -->
+<section class="act act--scaffold" id="act5" aria-labelledby="v5">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Dashboard</span>
+      </div>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">The numbers a technical lead can verify at the source.</h2>
+    </div>
+
+    <div class="dash io">
+      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
+        <button class="dash__tab" id="tab-m" role="tab" aria-selected="true" aria-controls="dp-m" data-i18n="act5_tab_m">Measured</button>
+        <button class="dash__tab" id="tab-r" role="tab" aria-selected="false" aria-controls="dp-r" data-i18n="act5_tab_r">The read</button>
+      </div>
+
+      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
+        <div class="band band--measured">
+          <div class="band__head">
+            <span class="band__badge" data-i18n="band_m_badge">Build · measured</span>
+            <span class="band__what" data-i18n="band_m_what">Counted from the repository and the recorded test run. Verifiable at the linked source.</span>
+          </div>
+          <div class="dash__grid">
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="45">0</span></span>
+              <span class="dcell__l" data-i18n="m1_l">Assertions passing</span>
+              <span class="dcell__p" data-i18n="m1_p">45 of 45. None waived.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="6">0</span></span>
+              <span class="dcell__l" data-i18n="m2_l">Protocol scenarios</span>
+              <span class="dcell__p" data-i18n="m2_p">All six pass.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="0">0</span></span>
+              <span class="dcell__l" data-i18n="m3_l">Backend services</span>
+              <span class="dcell__p" data-i18n="m3_p">Front-end only, by constraint.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="5">0</span></span>
+              <span class="dcell__l" data-i18n="m4_l">CI gates per push</span>
+              <span class="dcell__p" data-i18n="m4_p">Typecheck, tests, build, drift, paths.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="5">0</span></span>
+              <span class="dcell__l" data-i18n="m5_l">Security controls running in the client</span>
+              <span class="dcell__p" data-i18n="m5_p">Secure keypad, shuffled digits, execution lock, blocking overlay, privacy masking.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="3">0</span></span>
+              <span class="dcell__l" data-i18n="m6_l">API endpoints consumed</span>
+              <span class="dcell__p" data-i18n="m6_p">Real request handling against mock fixtures.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:0.6"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n">&lt;7</span>
+              <span class="dcell__l" data-i18n="m7_l">Days, research to deployed app</span>
+              <span class="dcell__p" data-i18n="m7_p">First app build, first use of this stack.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:0.5"></i></span>
+            </div>
+            <div class="dcell">
+              <span class="dcell__n"><span data-count="0">0</span></span>
+              <span class="dcell__l" data-i18n="m8_l">Lines of code typed by hand</span>
+              <span class="dcell__p" data-i18n="m8_p">Every line directed, reviewed, and understood. None typed.</span>
+              <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
+        <div class="dash__read">
+          <p class="dash__readline" data-i18n="r1"><strong>The fastest artifact in this portfolio is also its most technical.</strong> That inversion is the finding.</p>
+          <p class="dash__readsub" data-i18n="r2">Entering app development — new stack, new security discipline, new testing rigor — was supposed to be the slow, intimidating path reserved for career developers. Directed properly, it took under a week and produced the only work here whose claims a stranger can verify by running a test suite. The cost of entering a new stack has collapsed; what remains scarce is knowing what to build and how to prove it held.</p>
+          <p class="dash__reco" data-i18n="r3">What transfers: any stack a client's problem requires is now reachable — with every decision owned, and every claim checkable.</p>
+        </div>
+      </div>
+
+      <p class="dash__foot" data-i18n="act5_foot">Method — figures counted from the repository and the recorded test run (Node 24.18.0, Vitest 3.2.7, TypeScript 5.9.3, 15 Jul 2026), verifiable at the linked source. Staged security demonstrations are described, and badged, in The Architecture above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE REFLECTION — 4 house cards ================= -->
+<section class="act act--scaffold" id="act6" aria-labelledby="v6">
+  <div class="container">
+          <div class="scaffold" role="note">
+        <span class="scaffold__tag" data-i18n="scaffold_tag">Placeholder section</span>
+        <p class="scaffold__txt" data-i18n="scaffold_txt">The text in this section belongs to a different brief and is shown only as layout scaffold. It describes another project, not this one.</p>
+      </div>
+<div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Reflection</span>
+      </div>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">The fastest thing I ever built was the one I thought I couldn't.</h2>
+    </div>
+
+    <div class="cardgrid cardgrid--4 io">
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_h1_tag">The ceiling</span><span data-i18n="act6_h1_t">Territory I thought was closed</span></h3>
+        <p class="card__x" data-i18n="act6_h1_x">I believed app development belonged to career developers and computer scientists. This build broke that ceiling: I now work the technical side of a solution while owning every strategic call — especially the stack itself.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_h2_tag">The method</span><span data-i18n="act6_h2_t">Directed, not typed</span></h3>
+        <p class="card__x" data-i18n="act6_h2_x">My fastest portfolio artifact yet — without typing a line of code, and without vibe-coding shortcuts. Every framework, security, and codebase decision was directed, reviewed, and understood by me. That is the superpower worth building.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_h3_tag">The tools</span><span data-i18n="act6_h3_t">Knowing what each tool is for</span></h3>
+        <p class="card__x" data-i18n="act6_h3_x">Gemini compiled fifteen app screenshots into one master flow file and out-synthesized NotebookLM on the CEO interview. Claude Code executed deployment prompts I authored as reusable skills — every run directed, reviewed, and mine.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_h4_tag">The choice</span><span data-i18n="act6_h4_t">One problem, not a redesign</span></h3>
+        <p class="card__x" data-i18n="act6_h4_x">Banking is too wide to enter everywhere at once. A short, focused study pointed at one real fraud mechanism — approached purely through front-end eyes, not as UX, redesign, or innovation theatre.</p>
+      </article>
+    </div>
+
+    <p class="sequel io" data-i18n="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong> — and the next thing I intend to be able to prove.</p>
+
+    <!-- ================= CONVERSION — temporal mailto + two continuity cards ================= -->
+    <div class="convert" id="convert">
+      <div class="container" style="padding:0;">
+        <a class="convert__cta" href="mailto:" data-temporal="contact-email" data-i18n="convert_cta">
+          Start a conversation <span class="temporal" data-i18n="convert_temporal">Pending</span>
+        </a>
+        <div class="convert__next">
+          <p class="convert__nextlabel" data-i18n="convert_nextlabel">Keep reading</p>
+          <div class="cardgrid cardgrid--2">
+            
+            <a class="card card--continuity" href="../designops-system/">
+              <h3 class="card__t" data-i18n="convert_c1_t">DesignOps System</h3>
+              <p class="card__x" data-i18n="convert_c1_x">The system this brief is published on — built, governed, and operated end to end.</p>
+            </a>
+            <a class="card card--continuity" href="../limafly-ux/">
+              <h3 class="card__t" data-i18n="convert_c2_t">LimaFly UX</h3>
+              <p class="card__x" data-i18n="convert_c2_x">The prototype built before the airport role: the complete passenger journey, end to end.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER — live organism strings, verbatim ================= -->
+<footer class="footer" id="pageFooter">
+  <div class="container footer__inner">
+    <p class="footer__tag"><span data-i18n="footer_tagline_pre">Built and governed</span> <em data-i18n="footer_tagline_purple">end to end.</em></p>
+    <div class="footer__meta">
+      <a class="footer__link" href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener" data-i18n="footer_linkedin">Connect on LinkedIn</a>
+      <span class="footer__c" data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= DESKTOP SIDE PANEL ================= -->
+<aside class="panel" id="panel" aria-label="Detail panel" aria-hidden="true">
+  <div class="panel__head">
+    <span class="panel__title" id="panelTitle"></span>
+    <button class="panel__close" id="panelClose" aria-label="Close detail panel">✕</button>
+  </div>
+  <div class="panel__slot" id="panelSlot"></div>
+</aside>
+
+<script>
+/* ============================================================
+   i18n — CHROME/BODY split, mirrors Brief 01 convention.
+   CHROME → ../../assets/i18n/{lang}.json  (shared, site root)
+   BODY   → i18n/tuua-transfer.{lang}.json (page-scoped)
+   EN ships. ES staged — key parity FULL:
+   act0 El Contexto · act1 El Problema · act2 La Adaptación ·
+   act3 La Forma del Build · act4 La Arquitectura ·
+   act5 El Dashboard · act6 La Reflexión
+   ============================================================ */
+const I18N_BASE = "../../assets/i18n/";
+const BODY_BASE = "i18n/";
+const chromeCache = {}, bodyCache = {};
+function fetchDict(url){
+  return fetch(url)
+    .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
+    .catch(err => { console.warn("i18n fetch failed for " + url + ":", err); return null; });
+}
+function loadMerged(lang){
+  const lc = lang === "ES" ? "es" : "en";
+  const c = chromeCache[lc] || (chromeCache[lc] = fetchDict(I18N_BASE + lc + ".json"));
+  const b = bodyCache[lc]   || (bodyCache[lc]   = fetchDict(BODY_BASE + "tuua-transfer." + lc + ".json"));
+  return Promise.all([c, b]).then(([cd, bd]) => ({ ...(cd || {}), ...(bd || {}) }));
+}
+let curLang = "ES";
+try { curLang = localStorage.getItem("jds-lang") || "ES"; } catch(e) {}
+function applyI18n(lang){
+  return loadMerged(lang).then(d => {
+    if(curLang !== lang) return;
+    document.documentElement.setAttribute("lang", lang === "ES" ? "es" : "en");
+    document.documentElement.setAttribute("data-lang", lang);
+    document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.getAttribute("data-i18n"); if(d[k]!==undefined && el.children.length===0) el.textContent=d[k]; });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ const k=el.getAttribute("data-i18n-aria"); if(d[k]!==undefined) el.setAttribute("aria-label",d[k]); });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ const k=el.getAttribute("data-i18n-placeholder"); if(d[k]!==undefined) el.placeholder=d[k]; });
+    document.querySelectorAll("[data-i18n-alt]").forEach(el=>{ const k=el.getAttribute("data-i18n-alt"); if(d[k]!==undefined) el.alt=d[k]; });
+    document.dispatchEvent(new CustomEvent("i18n:changed",{ detail:{ lang, dict:d } }));
+  });
+}
+function swapLang(lang){ curLang=lang; try{ localStorage.setItem("jds-lang",lang); }catch(e){} applyI18n(lang); }
+applyI18n(curLang);
+
+/* ============ Nav context — resolve cross-document hrefs from a base hash. ============ */
+(function navContext(){
+  const prefix = document.documentElement.getAttribute("data-nav-context") === "brief" ? "../../" : "";
+  document.querySelectorAll("[data-nav-link]").forEach(a => a.setAttribute("href", prefix + a.getAttribute("data-nav-link")));
+})();
+
+/* ============ SwapLang globe — brief nav toggle (mirrors home chrome). ============ */
+(function briefLang(){
+  const sel = document.getElementById("briefLangSel");
+  const panel = document.getElementById("briefLangPanel");
+  const label = document.getElementById("briefLangLabel");
+  function setActive(lang){
+    label.textContent = lang;
+    panel.querySelectorAll(".nav__lang-option").forEach(b => {
+      const on = b.dataset.lang === lang;
+      b.classList.toggle("nav__lang-option--active", on);
+      b.setAttribute("aria-selected", String(on));
+    });
+  }
+  setActive(curLang);
+  document.getElementById("briefLangBtn").addEventListener("click", e => {
+    e.stopPropagation();
+    sel.classList.toggle("nav__lang--panel-open");
+  });
+  document.addEventListener("click", () => sel.classList.remove("nav__lang--panel-open"));
+  panel.addEventListener("click", e => e.stopPropagation());
+  panel.querySelectorAll(".nav__lang-option").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lang = btn.dataset.lang;
+      setActive(lang);
+      sel.classList.remove("nav__lang--panel-open");
+      swapLang(lang);
+    });
+  });
+})();
+
+/* ============ Scroll progress bar — above nav, reverses on upscroll ============ */
+const pFill = document.getElementById("progressFill");
+function updateProgress(){
+  const doc = document.documentElement;
+  const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+  const p = Math.min(1, Math.max(0, window.scrollY / max));
+  pFill.style.transform = "scaleX(" + p + ")";
+}
+window.addEventListener("scroll", updateProgress, {passive:true});
+window.addEventListener("resize", updateProgress);
+updateProgress();
+
+/* ============ Reveal system: accordion ≤1023 / side-panel ≥1024 ============ */
+const mqDesktop = window.matchMedia("(min-width:1024px)");
+const panel = document.getElementById("panel");
+const panelSlot = document.getElementById("panelSlot");
+const panelTitle = document.getElementById("panelTitle");
+const panelClose = document.getElementById("panelClose");
+let panelHome = null, panelTrigger = null;
+
+function closePanel(){
+  if(panelHome && panelSlot.firstElementChild){
+    const body = panelSlot.firstElementChild;
+    body.hidden = true;
+    panelHome.replaceWith(body);
+    panelHome = null;
+  }
+  panel.classList.remove("is-open");
+  panel.setAttribute("aria-hidden","true");
+  if(panelTrigger){ panelTrigger.setAttribute("aria-expanded","false"); panelTrigger.focus(); panelTrigger=null; }
+}
+panelClose.addEventListener("click", closePanel);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && panel.classList.contains("is-open")) closePanel(); });
+
+function closeAccordionsIn(actName, except){
+  document.querySelectorAll('.reveal[data-act="'+actName+'"] .reveal__btn').forEach(btn=>{
+    if(btn!==except && btn.getAttribute("aria-expanded")==="true"){
+      btn.setAttribute("aria-expanded","false");
+      document.getElementById(btn.getAttribute("aria-controls")).hidden = true;
+    }
+  });
+}
+document.querySelectorAll(".reveal__btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const body = document.getElementById(btn.getAttribute("aria-controls"));
+    const act = btn.closest(".reveal").getAttribute("data-act");
+    const isOpen = btn.getAttribute("aria-expanded")==="true";
+    if(mqDesktop.matches){
+      if(isOpen){ closePanel(); return; }
+      closePanel();
+      closeAccordionsIn(act, btn);
+      panelHome = document.createComment("panel-home");
+      body.replaceWith(panelHome); panelSlot.replaceChildren(body);
+      body.hidden = false;
+      panelTitle.textContent = btn.getAttribute("data-panel-title") || "";
+      panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
+      btn.setAttribute("aria-expanded","true");
+      panelTrigger = btn; panelClose.focus();
+    } else {
+      closeAccordionsIn(act, btn);
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      body.hidden = isOpen;
+    }
+  });
+});
+mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
+
+/* ============ Timeline carousel nav (≤1023) ============ */
+const track = document.getElementById("tlTrack");
+const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
+function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
+prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:"smooth"}));
+next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:"smooth"}));
+function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
+track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
+
+/* ============ Dashboard tabs — two-way (Measured / The read) ============ */
+const tabs = [...document.querySelectorAll(".dash__tab")];
+const panels = { "tab-m":"dp-m", "tab-r":"dp-r" };
+tabs.forEach(tab=>{
+  tab.addEventListener("click", ()=>{
+    tabs.forEach(t=>{
+      const sel = t===tab;
+      t.setAttribute("aria-selected", String(sel));
+      document.getElementById(panels[t.id]).hidden = !sel;
+    });
+    runCounts(document.getElementById(panels[tab.id]));
+  });
+});
+
+/* ============ Count-up (once per element, reduced-motion aware) ============ */
+const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+function runCounts(scope){
+  (scope||document).querySelectorAll("[data-count]").forEach(el=>{
+    if(el.dataset.done || el.closest("[hidden]")) return; el.dataset.done="1";
+    const raw = el.dataset.count, target = parseFloat(raw), dec = raw.includes(".") ? 1 : 0;
+    if(reduce || target===0){ el.textContent = target.toFixed(dec); return; }
+    let t0=null; const dur=700;
+    const step=(ts)=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1);
+      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec); if(p<1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ============================================================
+   ACT 03 · ROADMAP ORGANISM — data-driven, effort-scaled.
+   Instantiation contract: only the DATA object is edited per
+   brief; markup, CSS and logic are the organism's own.
+   Source for this instance: this build's plan (docs/v2/
+   Plan-Wave4-BankingExpressBuild.md, sections a–g) and its
+   completion report. Story points express RELATIVE effort;
+   this build was not run as a pointed sprint. Hours are
+   planned-capacity estimates. No progress metric is rendered.
+   ============================================================ */
+(function ganttOrganism(){
+  'use strict';
+
+  var DATA = {
+    epics: [
+      { id:'foundation', name:'Foundation', tasks:[
+        { id:'scaffold',      name:'Vite + TypeScript scaffold', sp:3, hours:4 },
+        { id:'dependencies',  name:'Dependency justification',   sp:2, hours:2 },
+        { id:'relative-paths',name:'Relative-path constraint',   sp:2, hours:2 }
+      ]},
+      { id:'one-job', name:'The one job', tasks:[
+        { id:'entry-screen',  name:'Entry screen',   sp:3, hours:4 },
+        { id:'secure-keypad', name:'Secure keypad',  sp:5, hours:6 },
+        { id:'verdict-screen',name:'Verdict screen', sp:5, hours:6 }
+      ]},
+      { id:'architecture', name:'Architecture', tasks:[
+        { id:'singleton-session', name:'Singleton session service', sp:5, hours:6 },
+        { id:'observer-state',    name:'Observer flow state',       sp:5, hours:5 },
+        { id:'mock-rest',         name:'Mock REST surface',         sp:3, hours:4 }
+      ]},
+      { id:'security', name:'Security layer', tasks:[
+        { id:'staged-panel',    name:'Staged security panel', sp:5, hours:5 },
+        { id:'client-controls', name:'Client-side controls',  sp:5, hours:6 },
+        { id:'provenance',      name:'Provenance badging',    sp:2, hours:2 }
+      ]},
+      { id:'proof', name:'Proof & delivery', tasks:[
+        { id:'six-scenarios',  name:'Six-scenario protocol',    sp:8, hours:8 },
+        { id:'lock-defect',    name:'Execution-lock defect fix', sp:3, hours:3 },
+        { id:'ci-gates',       name:'CI gates & deploy',        sp:3, hours:3 }
+      ]}
+    ],
+    milestones: [
+      { name:'Core flow confirmed', after:'one-job' },
+      { name:'Protocol passing',    after:'proof' }
+    ],
+    dependencies: [
+      { from:'foundation',   to:'one-job',      level:'epic' },
+      { from:'one-job',      to:'architecture', level:'epic' },
+      { from:'architecture', to:'security',     level:'epic' },
+      { from:'security',     to:'proof',        level:'epic' },
+      { from:'singleton-session', to:'lock-defect', level:'task' }
+    ]
+  };
+
+  var root = document.getElementById('gantt');
+  if(!root) return;
+
+  /* ---------- Derived layout: cumulative story points ---------- */
+  var cursor = 0;
+  DATA.epics.forEach(function(epic){
+    epic.start = cursor; epic.sp = 0; epic.hours = 0;
+    epic.tasks.forEach(function(t){
+      t.start = cursor; cursor += t.sp;
+      epic.sp += t.sp; epic.hours += t.hours;
+    });
+    epic.end = cursor;
+  });
+  var TOTAL_SP = cursor;
+  DATA.milestones.forEach(function(m){
+    var e = DATA.epics.filter(function(x){ return x.id === m.after; })[0];
+    m.at = e ? e.end : 0;
+  });
+  function pct(points){ return (points / TOTAL_SP * 100).toFixed(3) + '%'; }
+
+  var grid = document.getElementById('ganttGrid');
+  var chart = document.getElementById('ganttChart');
+  var overlay = document.getElementById('ganttOverlay');
+  var TICK_STEP = 10;
+
+  function ticksHtml(){
+    var h = '';
+    for(var p = 0; p <= TOTAL_SP; p += TICK_STEP){
+      h += '<span class="gantt__tick" style="left:' + pct(p) + '">' + p + '</span>';
+      h += '<span class="gantt__gridline" style="left:' + pct(p) + '"></span>';
+    }
+    return h;
+  }
+  function barHtml(item, cls, id){
+    var span = (item.end !== undefined) ? (item.end - item.start) : item.sp;
+    var label = '<span class="gantt__sp"><span data-layer="sp">' + item.sp + ' SP</span>' +
+                '<span class="gantt__hours" data-layer="hours" hidden> · ' + item.hours + ' h</span></span>';
+    return '<div class="gantt__bar ' + cls + '" data-bar="' + id + '" style="left:' + pct(item.start) +
+           '; width:' + pct(span) + ';" role="img" aria-label="' + item.name + ', ' + span +
+           ' story points, ' + item.hours + ' planned hours">' + label + '</div>';
+  }
+  function summaryHtml(item){
+    return '<b><span data-layer="sp">' + item.sp + ' SP</span></b>' +
+           '<span class="gantt__hours" data-layer="hours" hidden>' + item.hours + ' h planned</span>';
+  }
+
+  var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div>' +
+             '<div class="gantt__axis-units">' + ticksHtml() +
+             '<span class="gantt__tick" style="left:100%">' + TOTAL_SP + '</span></div>' +
+             '<div class="gantt__axis-summary">Effort</div></div>';
+
+  DATA.epics.forEach(function(epic){
+    html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
+      '<div class="gantt__row">' +
+        '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
+          '<span class="gantt__marker" aria-hidden="true">›</span>' + epic.name + '</button></div>' +
+        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id) +
+          '<span data-ms-slot="' + epic.id + '"></span></div>' +
+        '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + epic.sp + ' story points, ' + epic.hours + ' planned hours">' + summaryHtml(epic) + '</div>' +
+      '</div>' +
+      '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
+    epic.tasks.forEach(function(t){
+      html += '<li class="gantt__task-row"><span class="gantt__task-label">' + t.name + '</span>' +
+        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id) + '</span>' +
+        '<span class="gantt__task-summary">' + summaryHtml(t) + '</span></li>';
+    });
+    html += '</ul></div>';
+  });
+  grid.innerHTML = html;
+
+  DATA.milestones.forEach(function(m){
+    var slot = grid.querySelector('[data-ms-slot="' + m.after + '"]');
+    if(!slot) return;
+    slot.outerHTML = '<span data-layer="milestones">' +
+      '<span class="gantt__milestone" style="left:' + pct(m.at) + '" role="img" aria-label="Milestone: ' +
+      m.name + ', at ' + m.at + ' cumulative story points"></span>' +
+      '<span class="gantt__milestone-label" style="left:' + pct(m.at) + '">' + m.name + '</span></span>';
+  });
+
+  /* ---------- Zoom: expand / collapse ---------- */
+  var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+  var toggleAll = document.getElementById('ganttToggleAll');
+  function setExpanded(btn, expanded){
+    btn.setAttribute('aria-expanded', String(expanded));
+    var list = document.getElementById(btn.getAttribute('aria-controls'));
+    if(list) list.hidden = !expanded;
+  }
+  function syncToggleAll(){
+    var allOpen = toggles.every(function(b){ return b.getAttribute('aria-expanded') === 'true'; });
+    toggleAll.setAttribute('aria-expanded', String(allOpen));
+    toggleAll.textContent = allOpen ? (toggleAll.dataset.collapse || 'Collapse all phases')
+                                    : (toggleAll.dataset.expand || 'Expand all phases');
+  }
+  toggles.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
+      syncToggleAll(); drawConnectors();
+    });
+    btn.addEventListener('keydown', function(e){
+      var nx = null;
+      if(e.key === 'ArrowDown') nx = toggles[i+1];
+      if(e.key === 'ArrowUp')   nx = toggles[i-1];
+      if(e.key === 'Home')      nx = toggles[0];
+      if(e.key === 'End')       nx = toggles[toggles.length-1];
+      if(nx){ e.preventDefault(); nx.focus(); }
+    });
+  });
+  toggleAll.addEventListener('click', function(){
+    var open = toggleAll.getAttribute('aria-expanded') !== 'true';
+    toggles.forEach(function(b){ setExpanded(b, open); });
+    syncToggleAll(); drawConnectors();
+  });
+
+  /* ---------- Filters: progressive disclosure ---------- */
+  var FILTERS = { sp:true, hours:false, milestones:true, deps:true };
+  Array.prototype.slice.call(root.querySelectorAll('.gantt__chip')).forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var key = chip.getAttribute('data-filter');
+      FILTERS[key] = !FILTERS[key];
+      chip.setAttribute('aria-pressed', String(FILTERS[key]));
+      applyFilters();
+    });
+  });
+  function applyFilters(){
+    ['sp','hours','milestones'].forEach(function(key){
+      Array.prototype.slice.call(root.querySelectorAll('[data-layer="' + key + '"]')).forEach(function(el){
+        el.hidden = !FILTERS[key];
+      });
+    });
+    overlay.classList.toggle('layer-off', !FILTERS.deps);
+    drawConnectors();
+  }
+
+  /* ---------- Dependency connectors ---------- */
+  function rectOf(id){
+    var el = chart.querySelector('[data-bar="' + id + '"]');
+    if(!el || el.offsetParent === null) return null;
+    return el.getBoundingClientRect();
+  }
+  function epicOfTask(taskId){
+    for(var i = 0; i < DATA.epics.length; i++){
+      if(DATA.epics[i].tasks.some(function(t){ return t.id === taskId; })) return DATA.epics[i].id;
+    }
+    return null;
+  }
+  function drawConnectors(){
+    if(!FILTERS.deps){ overlay.innerHTML = ''; return; }
+    var base = chart.getBoundingClientRect();
+    overlay.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
+    var svg = '';
+    DATA.dependencies.forEach(function(edge){
+      var from = rectOf(edge.from) || (edge.level === 'task' ? rectOf(epicOfTask(edge.from)) : null);
+      var to   = rectOf(edge.to)   || (edge.level === 'task' ? rectOf(epicOfTask(edge.to))   : null);
+      if(!from || !to) return;
+      var x1 = from.right - base.left, y1 = from.top + from.height/2 - base.top;
+      var x2 = to.left  - base.left,   y2 = to.top  + to.height/2  - base.top;
+      var midX = x1 + Math.max(10, (x2 - x1)/2);
+      svg += '<path d="M' + x1 + ' ' + y1 + ' H' + midX + ' V' + y2 + ' H' + (x2 - 5) + '"/>';
+      svg += '<rect class="gantt__dep-head" x="' + (x2-5) + '" y="' + (y2-3) + '" width="5" height="6"/>';
+    });
+    overlay.innerHTML = svg;
+  }
+  window.addEventListener('resize', drawConnectors);
+
+  /* Keep the toggle-all label translatable: cache both strings up front. */
+  toggleAll.dataset.expand = toggleAll.textContent.trim();
+  toggleAll.dataset.collapse = 'Collapse all phases';
+  document.addEventListener('i18n:changed', function(e){
+    var d = e.detail && e.detail.dict; if(!d) return;
+    if(d.gantt_expand)   toggleAll.dataset.expand   = d.gantt_expand;
+    if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
+    syncToggleAll();
+  });
+
+  applyFilters();
+})();
+
+/* ============ Entrance (once) ============ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    en.target.classList.add("is-in");
+    runCounts(en.target);
+    io.unobserve(en.target);
+  });
+},{threshold:0.18});
+document.querySelectorAll(".io").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
