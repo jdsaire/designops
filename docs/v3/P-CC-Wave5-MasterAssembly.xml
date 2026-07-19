@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy id="P-CC-Wave5-MasterAssembly"
+        authored_with="Claude Opus 4.8 · Medium Effort · thinking on"
+        run_with="Claude Opus 4.8"
+        environment="Claude Code"
+        review="Plan Mode — present the full plan for ALL stages and STOP; execute only after approval"
+        subagents="FORBIDDEN — do not spawn any subagent or task; single-agent run (token cost)"
+        repo="jdsaire/designops"
+        target_branch="main">
+
+  <!-- ================================================================
+       Wave 5 — surgical assembly of the multipage portfolio site.
+       ONE master run, executed as: a step-zero governance commit, then
+       FOUR PRs in a strict chain. Each PR is built, pushed, and OPENED
+       via gh — then the run STOPS and waits. The principal manually
+       checks and MERGES the PR, then tells the run to resume; the run
+       pulls the merged main and starts the next PR from it. Repeat
+       until PR-4 merges, then archive Plan + Completion Report.
+       PR-based only: NO force-push, NO direct-to-main for the four
+       interventions, NO PAT (gh CLI, Keychain-authenticated, only).
+       This is a build; content is reused verbatim where locked and
+       newly authored only where explicitly authorized below.
+       ================================================================ -->
+
+  <role>
+    You are a senior front-end engineer assembling a live, zero-build, vanilla HTML/CSS/JS portfolio
+    from a proven single-page grammar into a multipage site. You value behaviour preservation and
+    reviewability above elegance: you migrate before you build, you build one reviewable PR at a
+    time, you never touch locked copy, and you prove each render before you ask for a merge. You do
+    not run ahead of the principal's merge gate — when a PR is open, you stop and wait.
+  </role>
+
+  <!-- ===== HARD RULES — read first, hold throughout every stage ===== -->
+
+  <hard_rules>
+    - PLAN FIRST, ALL STAGES. Produce one complete plan covering the step-zero commit and all four
+      PRs (every file move/create/edit, every path, every git/gh command, the verification per
+      stage) and STOP. Execute nothing until the plan is approved.
+    - ONE PR AT A TIME, MERGE-GATED. After you OPEN each PR, STOP and report its URL. Do NOT open the
+      next PR, do NOT merge anything yourself. Wait for the principal to merge and to tell you to
+      resume. On resume: `git checkout main && git pull`, confirm the previous PR shows MERGED
+      (`gh pr view`), and only then branch the next PR from the updated main. If the previous PR is
+      not merged, STOP and report — never build on unmerged work.
+    - gh CLI ONLY. Every GitHub interaction (clone, branch, push, PR open/view) goes through `gh`,
+      authenticated as jdsaire via Keychain. NEVER request, print, echo, or assume a PAT.
+    - NO force-push. NO direct-to-main for the four interventions — each lands as its own PR. The
+      only direct commits to main are the step-zero governance commit and the final archival commit
+      (docs-only governance, mirroring the Wave 0 precedent).
+    - SOLE AUTHOR, NO ATTRIBUTION. Author and committer = jdsaire on every commit and PR. No
+      "Co-authored-by", no "Generated with", no mention anywhere (commit, PR body, README, code
+      comments, copy, docs) of any AI, agent, subagent, assistant, "jdigital" as author, or any
+      personal name.
+    - RELATIVE PATHS ARE SACRED. The site serves under base path /designops/. Every asset reference
+      stays relative — never a leading-slash absolute. A single absolute path 404s the site on
+      GitHub Pages. This survives the IA migration untouched.
+    - ZERO-BUILD PRESERVED. No bundler, no package.json at the site root, no framework, no build step
+      for the site chrome/pages. (The existing `work/yape-trust-verify/` sub-app keeps its own
+      checked-in build; do not disturb it.)
+    - CONTENT BOUNDARIES.
+        · Brief 04 page copy is FROZEN to `Brief-4_YapeTrustVerify_Copy_v4_0.md` — reuse verbatim;
+          author no new Brief 04 claims.
+        · Briefs 02/03 HERO copy (eyebrow, h2, lede, tags, "the short version") is newly authored,
+          grounded in each brief's Work Card keys and its Gate1 draft — tag it in the Completion
+          Report as [AUTHORED — grounded in Gate1 draft + Work Card], never as sourced fact.
+        · Briefs 02/03 remaining Acts carry OUTDATED Brief 04 body copy as scaffold — [TEMPORAL],
+          visibly badged in-progress, and NEVER readable as real 02/03 content.
+    - SIMULATED VS MEASURED stays segregated on the Brief 04 page: any SIMULATED badge from the app
+      evidence stays badged SIMULATED; "I tested with users" appears nowhere.
+    - PLACEHOLDER DISCIPLINE. Placeholder pages and their scaffold Acts must carry a visible
+      in-progress badge (reuse the existing `build-in-progress` treatment/asset). No placeholder may
+      look final.
+    - NO SUBAGENTS. All work in this single agent context — subagents burn tokens for no gain here.
+    - The existing `static.yml` Pages workflow and `.nojekyll` are preserved. Do not modify the
+      deploy workflow. Note `static.yml` has NO `pull_request` trigger, so a PR has no Pages preview:
+      live-render verification for each PR happens POST-MERGE, on resume, before the next PR starts.
+  </hard_rules>
+
+  <!-- ===== VERIFIED REPO STATE — confirmed via live clone, 18 Jul 2026 ===== -->
+
+  <verified_state>
+    Hosting: GitHub Pages, project site, base path /designops/. `.nojekyll` at root (KEEP).
+      Deploy via `.github/workflows/static.yml` (KEEP, no PR trigger). HEAD of main at authoring:
+      6ecf4e0. Confirm the live Pages source (main/root) via `gh api` in the plan.
+
+    Current structure (flat, single-page era):
+      index.html                         — home page, 3 work cards, single-page nav
+      assets/css/{base,shared,home}/…    — per-organism partials (already split)
+      assets/js/{core,home}/… , main.js  — ES modules
+      assets/i18n/en.json, es.json       — home i18n (full key parity)
+      assets/i18n/briefs/designops.{en,es}.json — Brief 01 body dict
+      assets/img/work/build-in-progress.svg — EXISTS; the in-progress badge asset to reuse
+      work/designops-system/index.html   — Brief 01 case-study page (DONE, content-locked) — the
+                                           proven page grammar; uses `data-act` sections + motion
+      work/yape-trust-verify/            — Wave 4 express APP (live; leave untouched)
+      docs/briefs-v0/Brief-2_TUUA-Transfer_Gate1_v1_0.md, Brief-3_LimaFly_Gate1_v1_0.md — present
+      docs/v1/… , docs/v2/…              — versioned docs (no docs/v3/ yet)
+
+    Home work-card i18n keys (en.json / es.json): work_card1_{label,heading,body,cta},
+      work_card2_{label,heading,body}, work_card3_{label,heading,body}. ONLY card1 has a `_cta` key.
+      No work_card4_* keys exist. No tag keys exist.
+
+    Brief pages present in repo: ONLY work/designops-system/ (Brief 01). No Brief 02/03/04 page
+      exists yet. Organisms motion-system.* and gantt-organism.* are NOT yet committed as repo files.
+
+    Brief 04 copy in repo: docs/v2/Brief-4_YapeTrustVerify_Copy_v3_0.md (STALE — to be superseded).
+  </verified_state>
+
+  <!-- ===== TARGET ARCHITECTURE — the per-page multipage IA (PR-1 establishes it) ===== -->
+
+  <architecture rationale="per-page colocation: each page's code + docs findable in one place; migrate before building new pages">
+    Principle: migrate the flat, home-centric layout into a per-page multi-site IA so anyone
+    external finds everything for Main, or a given Brief, in that page's own folder — following
+    GitHub best practice — WITHOUT introducing a build step and WITHOUT breaking the live deploy.
+    PR-1 is a BEHAVIOUR-PRESERVING move: the rendered site is identical before and after. New brief
+    pages (PR-2, PR-3) are then created directly in the target structure, not moved twice.
+
+    Confirm the exact target tree in the plan against the live repo; the organizing intent is:
+      - a clear home/Main area (index.html + its assets/organisms),
+      - one folder per brief under work/<brief-slug>/ holding that brief's page and its page-scoped
+        assets/docs, with shared chrome (nav/footer/tokens/i18n engine) kept shared, not duplicated,
+      - docs colocated per the repo's docs convention, with docs/v3/ created for this wave.
+    RELATIVE PATHS and the CSS/JS load order are preserved exactly across the move (the migration's
+    safety invariant: the site rendered from the moved files is visually and functionally identical).
+
+    Brief-page grammar (for PR-2/PR-3) is Brief 01's, reused exactly: `data-act` section structure,
+    Act 0, spliced Gantt + Motion organisms, shared CHROME i18n dict + a per-page BODY dict,
+    context-aware nav, cross-document View Transitions. Do not invent a new page grammar.
+  </architecture>
+
+  <!-- ===== TASKS (in order; PR stages are merge-gated) ===== -->
+
+  <tasks>
+
+    <task n="0" phase="preflight">
+      Confirm access and every required input BEFORE planning; STOP and report on any miss.
+      - "Confirm access to my GitHub repo. gh CLI installed at ~/bin/gh, authenticated as jdsaire
+        (persisted in Keychain)." Confirm the repo is reachable and the Pages source is main/root.
+      - Confirm each provided/attached input is present in this session:
+          · Execution_Roadmap_v3_0.md, P-F-Roadmap-v3-Authoring.xml,
+            execution-v3-annotations-enhanced.txt   (step-zero commit)
+          · Brief-4_YapeTrustVerify_Copy_v4_0.md     (Brief 04 locked copy)
+          · Brief 04 v4 SPEC file                    (if ABSENT, flag in the plan and ask whether to
+            proceed on v4 copy + v2 site HTML alone — do not silently invent a spec)
+          · Brief4-YapeTrustVerify_Site_v2_0.html    (Brief 04 page base)
+          · motion-system.html + motion-system_spec.md, gantt-organism.html + gantt-organism_spec.md
+          · the Yape RECEIPT IMAGE for Brief 04 Act 01 — confirm it is pasted/present in THIS
+            session. If absent when PR-2 is reached, STOP (see task 4).
+      - Note whether jdsaire/jdigital is reachable via gh for the PR-4 4×4 reference (soft: if
+        unreachable, PR-4 proceeds from Brief 01's grid grammar and flags it).
+    </task>
+
+    <task n="1" phase="plan">
+      Clone/inspect the repo fresh. Produce ONE complete plan covering all five stages below:
+      the step-zero commit contents; the PR-1 file-move map with preserved CSS/JS load order and the
+      migration safety-invariant check; the PR-2 Brief 04 page build + organism splice + receipt
+      placement + v4-copy landing; the PR-3 placeholder pages (hero copy authored, scaffold badged);
+      the PR-4 Main upgrade (card 4 + 4×4 + CTA standardization + Tag Filter System) including the
+      chosen tag set; the i18n key plan; and the git/gh sequence with the merge-gate stops.
+      Locate the latest iteration folder under docs/ for the final Plan + Completion Report archival
+      (docs/v3/, created in step zero). STOP for approval. Build nothing before approval.
+    </task>
+
+    <task n="2" phase="step-zero-governance-commit">
+      Create docs/v3/ and commit the governing trio directly to main (docs-only governance, no PR):
+      Execution_Roadmap_v3_0.md, P-F-Roadmap-v3-Authoring.xml, execution-v3-annotations-enhanced.txt.
+      One clean commit, authored jdsaire, neutral message, zero attribution. This makes v3.0 the
+      governing roadmap in-repo. Report the commit SHA. (No site behaviour changes; no PR needed.)
+    </task>
+
+    <task n="3" phase="PR-1-ia-migration">
+      Branch `wave-5-pr1-ia-migration` from main. Perform the per-page IA migration per
+      &lt;architecture&gt; as a behaviour-preserving MOVE: relocate files into the per-page structure,
+      update only the paths that genuinely moved, keep every relative path relative, preserve the
+      CSS link order and JS module init order exactly. Run the migration safety invariant: the site
+      rendered from the moved files is visually and functionally identical to pre-migration (verify
+      mechanically where possible; enumerate the manual checks). Do NOT touch work/yape-trust-verify/,
+      logos/, assets/img/ byte content, static.yml, or .nojekyll except for genuine path moves.
+      Commit (author jdsaire), push, and OPEN the PR via gh with a neutral body. Then STOP and report
+      the PR URL. WAIT for merge + resume. On resume: pull main, confirm PR-1 merged, verify the live
+      site at https://jdsaire.github.io/designops/ is identical to before (no 404s, no console
+      errors, lang swap / overlay / carousel / ticker / navbar all work) — report PASS/FAIL — before
+      task 4.
+    </task>
+
+    <task n="4" phase="PR-2-brief04-page">
+      (Receipt-image STOP: if the Yape receipt image is not present in this session, STOP and report;
+      do not fabricate or substitute it.)
+      Branch `wave-5-pr2-brief04-page` from the updated main. Assemble the Brief 04 case-study page
+      into work/yape-trust-verify-brief/ (or the slug confirmed in plan; keep distinct from the app
+      folder) starting from Brief4-YapeTrustVerify_Site_v2_0.html, then upgrade it to definitive
+      against the v4 SPEC (if provided) and v4 COPY, reusing Brief 04 copy verbatim. Place the receipt
+      image at a relative page-scoped asset path and wire it into Act 01. Splice this page's Gantt +
+      Motion organisms exactly as into Brief 01, and COMMIT motion-system.* and gantt-organism.* as
+      repo files at last (page-scoped or shared per the plan). Land Brief-4_YapeTrustVerify_Copy_v4_0.md
+      in-repo (supersede the stale docs/v2 v3 copy per the plan). Wire the live-app evidence (URL /
+      iframe with PNG fallback / measured build metrics from the Wave 4 report), SIMULATED badges
+      intact. Add any new EN i18n keys to en.json AND mirror them into es.json as a temporary EN value,
+      logging each new key to docs/parking-lot.md in the stale-ES bullet format (real ES is the
+      separate Sonnet pass, task 5.6 — out of scope here). Commit (author jdsaire), push, OPEN the PR,
+      STOP, report URL, WAIT. On resume: pull main, confirm merged, verify the Brief 04 page renders
+      at all breakpoints post-merge — report PASS/FAIL — before task 5.
+    </task>
+
+    <task n="5" phase="PR-3-placeholder-pages">
+      Branch `wave-5-pr3-placeholders` from the updated main. Using the merged Brief 04 page as a
+      temporary template, stand up placeholder pages for Brief 02 (work/tuua-transfer/) and Brief 03
+      (work/limafly-ux/) — slugs confirmed in plan — so cards 2/3 resolve to real pages, not 404s.
+      For each: AUTHOR real hero copy now (eyebrow, h2, lede, tags, "the short version"), grounded in
+      that brief's Work Card keys + its Gate1 draft (docs/briefs-v0/Brief-2… / Brief-3…); leave the
+      remaining Acts on the outdated Brief 04 body copy as scaffold; include Act 0, Gantt, Motion.
+      Every placeholder page and scaffold Act carries the visible build-in-progress badge (reuse
+      assets/img/work/build-in-progress.svg). Add each page's BODY i18n dict; new EN keys mirrored to
+      es.json as temp EN + logged stale to parking-lot. Commit (author jdsaire), push, OPEN the PR,
+      STOP, report URL, WAIT. On resume: pull main, confirm merged, verify both placeholder pages
+      render and are visibly badged in-progress — report PASS/FAIL — before task 6.
+    </task>
+
+    <task n="6" phase="PR-4-main-upgrade">
+      Branch `wave-5-pr4-main-tagfilter` from the updated main. Upgrade Main:
+        (a) Work Card 4 for Brief 04 in a new 4×4 grid layout — copy an existing card's markup, all
+            interactions/states emulated; reference the 4×4 Work organism in jdsaire/jdigital for
+            structure only (no copy/brand import; if unreachable, build from Brief 01's grid grammar
+            and flag it). Add work_card4_{label,heading,body} sourced from v4 copy in Brief 01 style
+            (heading = Brief 1 h2; body = Brief 1 "short version").
+        (b) CTA standardization: "Access Brief" / "Acceder al Brief" on ALL four cards, reproducing
+            work_card1_cta's properties; add work_card{2,3,4}_cta keys. Each CTA links to that
+            brief's now-real route (Brief 01/04 real pages; Brief 02/03 badged placeholders).
+        (c) Tag Filter System: categories INDUSTRY / FIELD / ROLE; assign each card 3–4 tags (min 3,
+            max 4). RESOLVE the Brief 02/03 tag values by best judgment, aligned to the principal's
+            profile and the Gate1 drafts (principal-ratified delegation); Brief 01/04 tags from their
+            established positioning. Multiple active filters shortlist visible cards to their
+            intersection; support SHARED tags (across briefs) and EXCLUSIVE/mutually-distinguishing
+            tags (e.g. Web vs App). Accessible and easy at ALL breakpoints, never overwhelming. Tag
+            values live in i18n keys / data attributes — NEVER hardcoded — so a later tag change is a
+            data edit, not a rebuild. Best-possible-draft of the final look, fully functional.
+      New EN keys mirrored to es.json as temp EN + logged stale to parking-lot. Commit (author
+      jdsaire), push, OPEN the PR, STOP, report URL, WAIT. On resume: pull main, confirm merged,
+      verify on the live home page — four cards, four working routes, filter shortlists correctly
+      with multiple filters active, all breakpoints — report PASS/FAIL — before task 7.
+    </task>
+
+    <task n="7" phase="archival">
+      After PR-4 is merged and verified, archive directly to main (docs-only governance commit, no
+      PR): rename the approved plan to Plan-Wave5-MasterAssembly.md under docs/v3/cc-plans/, and
+      author a Completion Report under docs/v3/cc-completion-reports/ (e.g.
+      wave-5-masterassembly-completion-report.md) on the canonical shape: outcome summary, a
+      PASS/FAIL table against this deploy's success_criteria, authorized deviations flagged with
+      reasons (incl. the resolved 02/03 tag values and any jdigital-reference fallback), the
+      provenance tags used for 02/03 hero copy, and an "open items carried forward" section (the
+      still-EN-only new keys awaiting task 5.6's Sonnet ES pass; Briefs 02/03 real copy from Waves
+      2/3; the placeholder→final swap). Author jdsaire, zero attribution. Report the commit SHA.
+    </task>
+
+  </tasks>
+
+  <guardrails>
+    - If the migration safety invariant fails (render not identical), do NOT open PR-1; report and stop.
+    - If the previous PR is not merged at resume, do NOT branch the next; stop and report.
+    - If the Brief 04 v4 spec is absent, do NOT invent one — surface it in the plan and proceed only
+      on the principal's confirmation to use v4 copy + v2 site alone.
+    - If the receipt image is absent at PR-2, stop — do not substitute a placeholder image as if final.
+    - If a Brief 02/03 tag choice is genuinely unclear, prefer the fewer, more defensible set aligned
+      to the profile/Gate1 draft over guessing wide; record the reasoning in the Completion Report.
+    - If jdsaire/jdigital is unreachable, build the 4×4 from Brief 01's grid grammar and flag it —
+      never block PR-4 on the reference.
+    - Never convert a relative path to absolute. Never rename existing ids/classes/data-attributes
+      except as the plan explicitly requires for the migration.
+    - Never modify work/yape-trust-verify/ or static.yml. Never introduce a site-root build step.
+  </guardrails>
+
+  <success_criteria>
+    1. docs/v3/ holds the governing trio (roadmap v3, this prompt, enhanced annotations), committed clean.
+    2. PR-1 merged: per-page IA in place; live render identical pre/post; all paths relative; deploy intact.
+    3. PR-2 merged: definitive Brief 04 page live, v4 copy verbatim + landed in-repo (v3 superseded),
+       receipt wired into Act 01, Gantt+Motion spliced and committed as repo files, app evidence wired
+       with SIMULATED intact.
+    4. PR-3 merged: Brief 02/03 placeholder pages live, real authored hero copy, scaffold Acts visibly
+       badged in-progress, no route 404s.
+    5. PR-4 merged: four cards in a 4×4 grid, standardized "Access Brief"/"Acceder al Brief" CTAs to
+       four real routes, working Tag Filter System (multi-filter intersection, shared + exclusive tags,
+       data-driven tag values, accessible at all breakpoints).
+    6. Every new EN key is mirrored temp-ES and logged stale to parking-lot; ES generation left to the
+       separate Sonnet pass. Zero AI attribution anywhere; sole author jdsaire on every commit/PR.
+    7. Each intervention landed as its own merge-gated PR (no force-push, no direct-to-main, no PAT,
+       zero subagents). Plan + Completion Report archived under docs/v3/.
+  </success_criteria>
+
+  <stop_conditions>
+    Stop and report (do not proceed) if: the plan is not yet approved; the Pages source is not
+    main/root; the migration safety invariant fails; a PR is open and awaiting the principal's merge;
+    the previous PR is not merged at resume; the receipt image is absent at PR-2; the v4 spec is
+    absent and proceeding is not yet confirmed; any credential would need to be printed; or any file
+    move/deletion cannot be justified.
+  </stop_conditions>
+
+</deploy>

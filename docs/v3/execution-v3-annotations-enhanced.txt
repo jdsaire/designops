@@ -1,0 +1,248 @@
+========================================================================
+EXECUTION ROADMAP v3.0 — SOURCE ANNOTATIONS (ENHANCED)
+Input for: P-F-Roadmap-v3-Authoring.xml → Execution_Roadmap_v3_0.md
+Supersedes as source: the raw "execution-v3-annotations" notes
+Enhancement pass: Opus 4.8 · Medium Effort · thinking on
+Programme state verified via live clone of jdsaire/designops, 18 Jul 2026
+========================================================================
+
+WHY v3 EXISTS (read first)
+--------------------------------------------------------------------
+v2.0 planned the pivot to a banking Brief 04 and an "elementary-first,
+then big-bang assembly" endgame. Two of its waves have since executed and
+returned learnings that change the endgame — not the strategy. v3.0 keeps
+every governing law and the entire wave *spine* of v2.0; it re-scopes the
+unexecuted waves (2, 3, 5) around a surgical, placeholder-driven assembly
+and a new Tag Filter System, marks the executed waves done, and carries
+Waves 6–7 forward. v3.0 renumbers NOTHING — same wave numbers as v2.0,
+updated statuses and revised task rows.
+
+RECONCILE PRINCIPLE 1 ("you do not open a v3 roadmap mid-build"):
+v3.0 is authored at a WAVE BOUNDARY, not mid-wave — Wave 4 has landed and
+Gate G1 has closed. This is a deliberate, principal-directed re-plan at a
+natural seam, exactly the condition under which re-planning is legitimate.
+v3.0 must restate the plan/execute-separation principle so it reads
+consistently: strategy is never reopened *inside* a wave; it may be
+re-planned at a wave boundary when executed waves return learnings. State
+this explicitly so the document does not contradict its own principle.
+
+VERIFIED PROGRAMME STATE AT v3.0 AUTHORING (live, 18 Jul 2026)
+--------------------------------------------------------------------
+Repo jdsaire/designops, HEAD 6ecf4e0. Sole author/committer jdsaire.
+Zero-build vanilla HTML/CSS/JS, GitHub Pages at /designops/, relative
+paths only.
+
+- Wave 0 (pivot commit): DONE.
+- Wave 1 (banking research & selection): DONE. Gate G1 CLOSED. Selection
+  dossier committed at docs/v2/banking-selection-dossier.md. Winning case:
+  payment-confirmation trust & verification, grounded in "Yape falso"
+  fake-screenshot fraud. Brief 04 slug CONFIRMED: yape-trust-verify. Both
+  alternate candidates rejected.
+- Wave 4 (banking express build): DONE. Front-end-only express app live at
+  work/yape-trust-verify/ (React/TS, Vite output checked in, Singleton +
+  Observer, mock REST ledger, simulated-security panel badged SIMULATED,
+  45/45 tests, scoped CI). PR #8 merged. Completion report at
+  docs/v2/wave-4-banking-expressbuild-completion-report.md. Task 4.4 (the
+  elementary Brief 04 file trio) was OUT OF SCOPE of that run and is NOT
+  started — it now folds into the Wave 5 surgical set below.
+- Waves 2, 3, 5, 6, 7: NOT executed.
+- Repo contains ONLY ONE brief case-study page: work/designops-system/
+  (Brief 01, done, content-locked — the proven page grammar). No Brief 02,
+  03, or 04 case-study page exists in the repo yet.
+- Home index.html has THREE work cards (keys work_card1..3_*), single-page
+  nav. Only work_card1 carries a *_cta key today.
+- Gate1 source md files present at docs/briefs-v0/: Brief-1..., Brief-2
+  (TUUA-Transfer), Brief-3 (LimaFly).
+- Organisms motion-system.* and gantt-organism.* still exist only as
+  standalone artifacts (project knowledge), NOT yet committed as repo files.
+- Brief 4 copy: docs/v2/Brief-4_YapeTrustVerify_Copy_v3_0.md is in-repo but
+  STALE. Brief-4_YapeTrustVerify_Copy_v4_0.md (approved) exists only in
+  project knowledge and must land in the repo as part of the Brief 4 site
+  upgrade below.
+
+GIT WORKFLOW FOR v3 WAVES (new, standing)
+--------------------------------------------------------------------
+The majority of v3's remaining interventions modify the repo and MUST land
+as PRs in jdsaire/designops (PR opened, reviewed, merged — not direct-to-
+main), each a discrete, reviewable unit. Each such intervention is authored
+as its own just-in-time deployment prompt via the cc-deploy-prompts skill,
+launched via pcc-dispatch-trigger, and absorbed via post-deploy-sync after
+it runs. The roadmap's routing/governance section must state this
+PR-per-intervention + skill-driven cadence.
+
+========================================================================
+WAVE STATUS TABLE (for the roadmap's "what changed from v2.0")
+========================================================================
+Wave 0 — pivot commit .................... DONE (v2)
+Wave 1 — banking research & selection .... DONE · Gate G1 CLOSED
+Wave 2 — Brief 03 (LimaFly UX) ........... RE-SCOPED · copy-only, deferred
+Wave 3 — Brief 02 (TUUA) ................. RE-SCOPED · copy-only, deferred
+Wave 4 — banking express build ........... DONE (app live; 4.4 trio → W5)
+Wave 5 — assembly ........................ RE-SCOPED · surgical + placeholders + tag filter + repo IA
+Wave 6 — Fable enhancement pass .......... CARRIED · now grooms a real multipage site incl. placeholders
+Wave 7 — content wave .................... CARRIED · EN-first start permitted
+
+========================================================================
+WAVE 2 — BRIEF 03 (LimaFly UX) · RE-SCOPED
+========================================================================
+Not executed. Now produces ONLY the correct COPY file for Brief 03,
+evolving from docs/briefs-v0/Brief-3_LimaFly_Gate1_v1_0.md. No HTML and no
+spec are built until that copy is approved. Closes at original scope, no
+sequel. (The Wave 5 placeholder page for Brief 03 does NOT depend on this
+wave finishing — it uses hero copy authored fresh from the Work Card 3
+keys; see Wave 5 intervention 4.)
+
+========================================================================
+WAVE 3 — BRIEF 02 (TUUA) · RE-SCOPED
+========================================================================
+Not executed. Same shape as Wave 2: produces ONLY the correct COPY file for
+Brief 02, evolving from docs/briefs-v0/Brief-2_TUUA-Transfer_Gate1_v1_0.md,
+principal-assisted (principal rescues source context; model builds, does
+not originate facts). No HTML/spec until copy approved. (Placeholder page in
+Wave 5 does not block on this wave.)
+
+========================================================================
+WAVE 5 — SURGICAL ASSEMBLY · RE-SCOPED (the heart of v3)
+========================================================================
+v2's Wave 5 waited for complete elementary trios (Site+Spec+Copy) of all
+briefs, then assembled in one pass. v3 REPLACES that: assemble a FUNCTIONAL
+multi-page shell NOW — a real Brief 04 page, placeholder pages for 02/03,
+a working 4-card grid, real CTA routing, and a working Tag Filter System —
+then backfill real copy for 02/03 later (Waves 2/3) and enhance (Wave 6).
+The point is a whole, navigable, best-draft-of-final site now, improvable
+later — not a perfect site never. Each intervention below lands as a PR.
+
+FOUNDATION — Repo information-architecture migration (do first)
+  Migrate the repo from its current flat single-page layout to a per-page
+  multi-site IA: anyone external should find everything for one page (Main,
+  or a given Brief) inside that page's own folder, following GitHub
+  best-practice conventions. This precedes the page work because the new
+  pages should be created in the target structure, not moved twice.
+  Constraint: zero-build and RELATIVE paths survive the migration; the live
+  Pages deploy must not break.
+
+INTERVENTION 1 — Work Card 4 + 4×4 grid
+  Build a 4th work card for Brief 04 by copying an existing card into a new
+  4×4 layout; all interactions and states are emulated. Reference layout:
+  the 4×4 Work organism already achieved in jdsaire/jdigital (use as visual/
+  structural reference only — do not import its copy or brand). Card 4
+  produces keys work_card4_label / work_card4_heading / work_card4_body,
+  sourced from Brief-4_YapeTrustVerify_Copy_v4_0.md and written in the Brief
+  01 style: heading = Brief 1's h2; body = Brief 1's "short version".
+
+INTERVENTION 2 — CTA standardization
+  Once all 4 cards exist, standardize the CTA to "Access Brief" /
+  "Acceder al Brief" on every card, reproducing the properties already on
+  Work Card 1's CTA (work_card1_cta). This works only because intervention 4
+  gives cards 2/3 a real (placeholder) page to point at — no broken links.
+
+INTERVENTION 3 — Brief 04 case-study page → definitive
+  Assemble the Brief 04 case-study page into the multi-site from the
+  outdated-but-good Brief4-YapeTrustVerify_Site_v2_0.html, then upgrade it
+  to its definitive version using the latest v4 SPEC and v4 COPY
+  (Brief-4_YapeTrustVerify_Copy_v4_0.md). Land v4 copy in the repo as part
+  of this (it supersedes the stale in-repo v3). Then splice this page's own
+  Gantt and Motion HTML, exactly as done for Brief 01.
+  HARD STOP: the Act 01 Yape receipt image is a pending principal-supplied
+  asset. If it is not attached when this intervention runs, STOP and report —
+  do not fabricate or substitute it.
+
+INTERVENTION 4 — Placeholder pages for Briefs 02 & 03
+  Use the Brief 04 page (Brief4.html) as a TEMPORARY template to stand up
+  placeholder pages for Briefs 02 and 03, so Work Card 2/3 CTAs resolve to a
+  real (if not-yet-final) page instead of a 404. For each placeholder:
+    - Author REAL hero copy now — eyebrow, h2, lede, tags, and "the short
+      version" — for Briefs 02 and 03, the same way Briefs 01 and 04 have
+      it. Fill the hero from the respective Work Card EN/ES keys.
+    - Leave the remaining Acts carrying the outdated Brief 04 body copy as
+      visible scaffold. This is a placeholder, not final content.
+    - Include Act 0, the Gantt organism, and the Motion organism (the
+      placeholder pages still need these).
+  PLACEHOLDER DISCIPLINE (integrity): placeholder pages and their scaffold
+  Acts MUST be visibly badged in-progress (reuse the existing
+  build-in-progress treatment). Outdated Brief 04 body copy must NEVER read
+  as real Brief 02/03 content. These pages get replaced by the real spec+
+  copy the moment Waves 2/3 lock — logged for that swap.
+
+INTERVENTION 5 — Gate1 files as tag input (acknowledge, don't ship)
+  Files docs/briefs-v0/Brief-2_TUUA-Transfer_Gate1_v1_0.md and
+  Brief-3_LimaFly_Gate1_v1_0.md are NOT final copy (Waves 2/3 revise them),
+  but they are valid INPUT for choosing Briefs 02/03 tags in the Tag Filter
+  System below. Use them for tag selection only.
+
+INTERVENTION 6 — Tag Filter System in Main
+  Main adopts a tag system that shortlists the case studies a visitor most
+  wants. Tentative categories:
+    INDUSTRY — e.g. banking, airport, tech
+    FIELD    — e.g. design, development, cybersecurity
+    ROLE     — e.g. program manager, frontend developer, UX engineer
+  Every case study carries 3–4 tags (min 3, max 4), set on the home page.
+  Implement the interaction NOW using the chosen tags for Briefs 01 & 04 and
+  what we know of 02 & 03 (from the Gate1 files) — do not wait for 02/03 to
+  lock. Behaviour: multiple filters active at once; the visible work cards
+  are the intersection/shortlist of what's triggered. Tags may be SHARED
+  across briefs (e.g. "UX Design", "Prototyping", "AI") or EXCLUSIVE and
+  thus mutually distinguishing (e.g. "Web" vs "App"). The result must be an
+  easy-to-navigate pool: accessible and easy to activate at ALL breakpoints,
+  never an overwhelming build that confuses navigation.
+  DRAFT-BUT-FUNCTIONAL: this version must both work and be the best possible
+  draft of how the final will look. Because Briefs 02/03 tags are not locked,
+  tag values must be easily updatable (i18n keys / data attributes), never
+  hardcoded, so a later tag change is a data edit, not a rebuild.
+
+WAVE 5 CLOSE — full-site sweep (Sonnet 5): banned strings, relative paths,
+breakpoints, EN/ES key parity across the now-multipage site.
+
+========================================================================
+WAVE 6 — FABLE ENHANCEMENT PASS · CARRIED
+========================================================================
+Fable performs the complete consistency brush and proposes structural +
+copy enhancements across the assembled multipage site — now including the
+placeholder pages, which it helps evolve toward final as Waves 2/3 copy
+lands. Named carry-forward upgrade from v2: promote Brief 01's purple
+scroll-progress bar to ALL pages, Home included, plus whatever else the
+upgraded site needs. Fable runs in Claude Chat ONLY — never routed to
+Claude Code.
+
+========================================================================
+WAVE 7 — CONTENT WAVE · CARRIED (the real prize)
+========================================================================
+The enhanced site is the feedstock for Fable to produce ultra-powered CV +
+LinkedIn (EN/ES) and the editorial line for ongoing LinkedIn content
+(voice/style referenced to luke-tobin-linkedin-interaction-sample.json).
+Reprioritized above per-brief artifact polish.
+LANGUAGE RULE (refined): Wave 7 MAY START on EN copy alone, without ES keys
+present. ES is then produced as a best-approximation pass by Sonnet 5 acting
+as an expert bilingual copywriter, sufficient to display correctly on
+SwapLang; the principal's inspection locks the ultimate ES. This is
+consistent with the standing invariant — intermediate EN-only states are
+allowed; the final ship is bilingual — the Sonnet approximation is that ES
+pass, permitted early for display parity.
+
+========================================================================
+NEW / UPDATED PRINCIPLES v3 MUST STATE
+========================================================================
+- Wave-boundary re-planning is legitimate; mid-wave strategy churn is not
+  (reconciles principle 1; see top).
+- PR-per-intervention: repo-modifying v3 work lands as reviewed PRs, each
+  authored/launched/absorbed through the cc-deploy-prompts /
+  pcc-dispatch-trigger / post-deploy-sync skill cadence.
+- Placeholder discipline: placeholder pages and scaffold copy are always
+  visibly badged in-progress and never presented as final content.
+- Assemble-functional-first: a whole navigable site with placeholders and a
+  working tag filter now beats a complete site never; real copy backfills.
+- Per-page IA: each page's code and docs live in that page's own folder.
+- Carry intact from v2: sole author / no attribution; zero-build + relative
+  paths; simulated-vs-measured segregation ("I tested with users" never
+  appears); EN-before-ES with a single Sonnet ES pass; Fable Chat-only.
+
+========================================================================
+OPEN ITEMS / DEPENDENCIES TO SURFACE (not resolve)
+========================================================================
+- Pending Yape receipt image (blocks Brief 04 page Act 01 completion —
+  intervention 3 stop condition).
+- Brief-4 Copy v4 must land in-repo (supersedes stale v3).
+- Briefs 02/03 real spec+copy (Waves 2/3) — placeholder pages await them.
+- Final tag values for Briefs 02/03 — provisional until 02/03 lock.
+- Motion + Gantt organisms committed as repo files — at last, during the
+  page splices (interventions 3 & 4).
