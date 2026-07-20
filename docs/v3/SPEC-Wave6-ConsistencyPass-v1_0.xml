@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enhancement_spec id="SPEC-Wave6-ConsistencyPass-v1_0"
+                  produced_by="task 6.1 · Fable 5 · Chat"
+                  source_prompt="P-F-Wave6-ConsistencyPass-v1_0"
+                  audited_head="4ca323e"
+                  status="AWAITING PRINCIPAL APPROVAL — nothing here is built until approved and routed to task 6.2">
+
+  <!-- ============================================================
+       PART 1 · FINDINGS — the diagnosis every proposal cites.
+       All facts verified against the live repo at HEAD 4ca323e.
+       ============================================================ -->
+
+  <findings>
+
+    <finding id="F-1" area="filter" page="home">
+      The tag filter is engineered well and presented expensively. Engine (assets/js/pages/home/
+      tagfilter.js): faceted category-AND/chip-OR matching, predictive dead-end dimming via
+      data-empty, aria-pressed toggle chips, role="status" aria-live="polite" count line, hidden
+      attribute keeping layout and tab order synchronized. Presentation (index.html 232–272 +
+      work.css .tagfilter block): 13 always-visible chips at min-height 44px across 3 stacked,
+      labeled rows, plus head row, status line, and top/bottom borders — roughly 260–330px of
+      vertical space at every viewport, permanently expanded, to shortlist a pool of FOUR cards.
+      The disproportion is the defect; the engine is an asset to preserve.
+    </finding>
+
+    <finding id="F-2" area="motion" page="home">
+      Home carries only hero-local CSS motion (fadeUp entrances, ambient drift, badge pulse in
+      hero.css) plus cross-document View Transitions via assets/css/base/reset.css
+      (@view-transition navigation:auto, with a reduced-motion suppressor). ZERO of the motion
+      spec's named Home splice points are implemented: no S1 scroll choreography on section
+      entrances, no S3 sequenced hero build, no S5 compositing signature, no S6 depth on work
+      cards. The briefs, by contrast, carry a native motion layer (Brief 01's D7 layer) and the
+      scroll-progress bar. Home is the least-animated page on a site whose motion system is
+      itself a portfolio claim.
+    </finding>
+
+    <finding id="F-3" area="chrome" page="all">
+      Scroll-progress bar: present inline on brief pages (.progress/.progress__fill, purple,
+      reverses on upscroll, aria-hidden="true"), ABSENT on Home — the roadmap's named upgrade.
+      Nav: shared nav.css gives Home smart hide-on-scroll (.nav--hidden translateY) + hover/focus
+      underline + language panel; briefs replicate chrome inline. No active-section indication
+      exists on Home's nav. Footer: present on all five pages (Home: tagline + LinkedIn CTA +
+      meta strip); content parity across the five copies is unverified and drift-prone since
+      briefs are self-contained.
+    </finding>
+
+    <finding id="F-4" area="responsive" page="all">
+      The breakpoint grid is inconsistent across the CSS corpus: max-width 767px (10 uses) and
+      min-width 768px (6) form the dominant mobile/desktop hinge, but variants coexist —
+      max-width:768px (3+1), min-width:769px (2), max-width 1023px (5+2) vs max-width 1024px (1),
+      plus strays at 900px, 641px, 480px. Off-by-one pairs (768/769, 1023/1024) create 1px bands
+      where rules from both sides apply or neither does. Not currently a visible defect, but a
+      latent consistency risk and the single cheapest hardening available.
+    </finding>
+
+    <finding id="F-5" area="interaction-patterns" page="briefs-vs-home">
+      Interaction organisms proven on briefs and absent on Home: expandable reveal-cards
+      (aria-expanded + rv_btn pattern — used 8+ times across Brief 01/04 for progressive
+      disclosure of depth), tabbed dashboards (Measured / Derived / The read), and expand-all
+      controls (Brief 04 Gantt). These deliver the site's signature move — headline claim,
+      voluntary depth — and Home currently has no progressive-disclosure vocabulary at all.
+    </finding>
+
+    <finding id="F-6" area="copy" page="all">
+      EN/ES voice is consistent post-task-5.6 with two logged residuals: (a) the
+      contact_engagement_placeholder tuteo slip ("Selecciona una" amid usted register) — carried
+      forward from 5.6 as an open item; (b) the Wave-4 logged tension between Brief 01's
+      hero_read "5 min read" and its hero_rv_txt "the next four minutes" (EN; ES mirrors the
+      tension as "los próximos cuatro minutos"). No new drift found.
+    </finding>
+
+    <finding id="F-7" area="a11y" page="home">
+      Hero entrance animations in hero.css (fadeUp, drift, pulse) run as unconditional CSS
+      keyframes; whether the site's global reduced-motion clamp actually covers them is not
+      verifiable by static read alone (7 prefers-reduced-motion blocks exist across the corpus,
+      none co-located with hero.css). Flagged for runtime verification in 6.2 rather than
+      asserted as a defect.
+    </finding>
+
+  </findings>
+
+  <!-- ============================================================
+       PART 2 · HIGH-CONFIDENCE PROPOSALS — build these on approval.
+       Ranked: Home first, then cross-page chrome, then per-brief.
+       Every proposal carries Responsive / AA lines; motion maps to
+       spec capabilities S1–S6; no dependency, no build step, no
+       immovable path moved; architecture-asymmetry landing stated
+       where a proposal spans both.
+       ============================================================ -->
+
+  <proposals confidence="high">
+
+    <!-- ─────────── THE FILTER MASTER COMPONENT (priority per principal) ─────────── -->
+
+    <proposal id="P-1" rank="1" target="home · index.html #tagFilter · work.css .tagfilter* · tagfilter.js">
+      <title>Filter bar v2 — collapsed disclosure bar, same engine</title>
+      <change>
+        Collapse the permanently-expanded three-row filter into a single resting row (~56px):
+        left, the existing uppercase label ("Filter the work"); center, three CATEGORY DISCLOSURE
+        TRIGGERS — "Industry", "Field", "Role" — each a button carrying aria-expanded +
+        aria-controls and a live count badge when its category has active chips ("Field · 2");
+        right, the status line and Clear. Activating a trigger opens that category's chip panel
+        directly beneath the bar (one panel at a time; Escape closes and returns focus to the
+        trigger; outside-click closes). THE CHIP ENGINE IS UNCHANGED: the same aria-pressed
+        toggle chips, the same tagfilter.js faceted matching, dead-end dimming, live-region
+        status — the panels simply house the chips that today sit permanently open. Active
+        selections additionally render as removable mini-chips inline in the bar (each a button:
+        "Banking ✕"), so the current filter state is always visible at resting height without
+        any panel open.
+      </change>
+      <rationale>
+        Reclaims ~200–270px above the fold's work grid, converts the filter from a wall the
+        visitor must read past into an instrument they opt into, and keeps every proven
+        engineering behavior. Cognitive load drops because the resting state shows only what is
+        chosen, not everything choosable. This is the disclosure grammar the briefs already
+        taught the site (F-5), applied to Home's one overweight organism (F-1).
+      </rationale>
+      <interaction_model>
+        Triggers are buttons with aria-expanded/aria-controls (disclosure pattern — chosen over
+        listbox/menu/select-multiple precisely because the payload stays ordinary toggle buttons,
+        the most robust multi-select a11y primitive available; native select-multiple is rejected
+        for unusable mobile UX and unstylable rendering; checkbox groups are equivalent a11y but
+        would discard the proven chip idiom for no gain).
+      </interaction_model>
+      <responsive>
+        Desktop (min-width 768px): single-row bar, panels open as full-width strips beneath it.
+        Mobile (max-width 767px): the three triggers remain in one horizontally-wrapping row;
+        panels open identically; active mini-chips wrap to a second row when present. No new
+        breakpoint introduced; uses the dominant 767/768 hinge. Resting height shrinks at every
+        viewport; nothing overflows; 44px minimum touch targets preserved on triggers, chips,
+        and mini-chip removers.
+      </responsive>
+      <aa>
+        Preserved and improved: chips keep aria-pressed; triggers add correct
+        aria-expanded/aria-controls; focus order follows DOM (bar → open panel → grid); Escape
+        + focus-return implemented; the existing role="status" live region continues announcing
+        counts; mini-chip removers get accessible names ("Remove filter: Banking" via
+        aria-label from a new i18n key). Contrast unchanged (existing token palette). Panel
+        open/close ships a static end-state and respects reduced motion (see P-2).
+      </aa>
+      <i18n_keys>
+        New CHROME keys (EN first; ES direction per designops-copy-es, final ES locks at 6.3):
+        filter_remove_label ("Remove filter: {tag}" / "Quitar filtro: {tag}"),
+        filter_open_cat ("Open {category} filters" / "Abrir filtros de {category}") — both
+        template keys whose placeholders the module substitutes, following the established
+        filter_status pattern.
+      </i18n_keys>
+    </proposal>
+
+    <proposal id="P-2" rank="2" target="home · tagfilter.js + work.css" motion="S3">
+      <title>Filter result motion — sequenced re-entry, spec-sanctioned</title>
+      <change>
+        When a filter application changes the shortlist, animate the surviving cards' re-entry
+        with a WAAPI sequenced stagger (element.animate, transform+opacity only, ~40ms per-card
+        delay) — motion spec capability S3 ("sequenced timeline… Splice: home hero build; brief
+        evidence reveals" — extended here to the work grid as a principal-visible option, noted
+        as a splice-point extension rather than an invention: the capability itself is
+        sanctioned; the location is new). Panels' open/close uses a compositor-only
+        height-reveal via transform (scaleY on a wrapper with transform-origin top) rather than
+        height animation.
+      </change>
+      <rationale>Makes filtering feel like curation rather than deletion; showcases S3 on the
+        page recruiters land on first.</rationale>
+      <responsive>Identical behavior at all breakpoints; no layout change — motion only.</responsive>
+      <aa>Duration and delay collapse to 0 under prefers-reduced-motion (matchMedia check in
+        script, per the spec's S3 contract); static end-state is the filtered grid itself;
+        no content is motion-gated.</aa>
+    </proposal>
+
+    <proposal id="P-3" rank="3" target="home · index.html #tagFilter · tagfilter.js · i18n">
+      <title>One new filter category: Status (Live / In progress) — and no more</title>
+      <change>
+        Add a fourth category, "Status", with exactly two chips: "Live" (cards 1, 2, 4 — pages
+        with real, sourced content) and "In progress" (cards 2, 3 — the badged placeholders;
+        card 2 TUUA is Live-as-work but its page is a placeholder, so its data-tags carry the
+        value matching its PAGE state: in-progress). Implemented purely as data: two data-tag
+        values on chips, data-tags additions on cards, four i18n keys (filter_cat_status,
+        tag_live, tag_wip + ES). The engine needs zero changes — categoryOf reads groups from
+        the DOM.
+      </change>
+      <rationale>
+        The one category a recruiter actually lacks: "show me only the finished work." It also
+        makes the placeholder state a navigable fact rather than a discovered disappointment —
+        honesty as UX (hard rule: placeholder honesty preserved; this proposal strengthens it).
+        Further categories (stack, year) are deliberately NOT proposed: with four cards, a
+        fourth category is the ceiling before the filter outweighs its pool again.
+      </rationale>
+      <responsive>One more trigger in the P-1 bar row; wraps on mobile with the existing
+        flex-wrap. No new breakpoint.</responsive>
+      <aa>Same disclosure/chip semantics as P-1; two more chips announced by the existing
+        live region. ES direction: "Estado" / "En vivo" / "En progreso" (usted-neutral labels,
+        anglicismo rule not applicable).</aa>
+    </proposal>
+
+    <proposal id="P-4" rank="4" target="home · tagfilter.js">
+      <title>Filter state in the URL hash — shareable shortlists</title>
+      <change>
+        Reflect active chips into location.hash (#f=banking,frontend-developer) via
+        history.replaceState on apply(), and hydrate from the hash on init. ~15 lines in
+        tagfilter.js; no routing, no storage, no dependency; empty hash = no filters, identical
+        to today.
+      </change>
+      <rationale>Wave 7's content engine gains deep links ("see my banking front-end work" →
+        one URL). Zero-cost now, compounding value later.</rationale>
+      <responsive>None — behavioral only.</responsive>
+      <aa>None regressed; hydration runs before first paint of the grid state, so no
+        announced flicker; hash changes use replaceState to avoid polluting back-button
+        history.</aa>
+    </proposal>
+
+    <!-- ─────────── CHROME — all five pages ─────────── -->
+
+    <proposal id="P-5" rank="5" target="all pages · new assets/css/shared/progress.css + assets/js/core/progress.js" motion="native">
+      <title>Scroll-progress bar promoted site-wide (the roadmap's named upgrade)</title>
+      <change>
+        Extract Brief 01's proven progress bar (3px, brand purple, fixed top, grows L→R,
+        reverses on upscroll, aria-hidden="true") into shared files: progress.css under
+        assets/css/shared/, progress.js under assets/js/core/. Home loads both via its existing
+        modular graph (main.js imports + link tag). ARCHITECTURE-ASYMMETRY LANDING: the briefs
+        — self-contained by convention — REPLACE their inline copies with links to the shared
+        files at ../../assets/… — the exact depth-2 relative pattern their i18n CHROME fetches
+        already prove works (IA-CONVENTION's immovable paths untouched). This trades strict
+        self-containment for guaranteed non-drift of a chrome element that must be identical
+        everywhere; the IA convention's own rule ("everything genuinely shared stays shared")
+        supports it — the bar is chrome, not page content.
+      </change>
+      <rationale>Roadmap-named; unifies the site's most visible chrome signature.</rationale>
+      <responsive>Fixed-position 3px bar, viewport-width at every breakpoint; no interaction
+        with any layout.</responsive>
+      <aa>aria-hidden="true" (decorative); scroll-linked width update is transform/scaleX-based
+        (compositor-only); under prefers-reduced-motion the bar still tracks position (it is
+        state, not decoration-motion) but its easing transition is removed — matching Brief
+        01's current behavior.</aa>
+    </proposal>
+
+    <proposal id="P-6" rank="6" target="all pages · assets/css/shared/nav.css + assets/js/pages/home/nav.js + brief inline nav">
+      <title>Smart navbar v2 — active-section awareness + hardened panel semantics</title>
+      <change>
+        (a) Home: add scrollspy via one IntersectionObserver — the nav link whose section
+        occupies the viewport majority gains aria-current="true" + the existing underline held
+        at scaleX(1). (b) All pages: language panel gains Escape-to-close with focus return and
+        explicit aria-expanded on its trigger (today hover/class-driven). (c) Briefs: no
+        structural change — their inline nav already carries data-nav-context; 6.2 verifies
+        byte-parity of shared behaviors (hide-on-scroll threshold, heights, link set) across
+        the five copies and corrects any drift found, treating nav.css as the single source of
+        truth.
+      </change>
+      <rationale>Turns the nav from a static header into an orientation instrument on a page
+        that is now five sections deep; closes the one keyboard gap in the language panel.</rationale>
+      <responsive>Scrollspy is presentation-only on the existing links; mobile nav behavior
+        unchanged. No new breakpoint.</responsive>
+      <aa>aria-current="true" is the canonical current-location semantic; underline persistence
+        gives the sighted equivalent; Escape/focus-return closes the panel per the disclosure
+        pattern; hide-on-scroll already never traps focus (bar returns on upscroll and on
+        focus-within — 6.2 verifies the focus-within clause and adds it if absent).</aa>
+    </proposal>
+
+    <proposal id="P-7" rank="7" target="all pages · assets/css/shared/footer.css + footer markup">
+      <title>Unified smart footer — one structure, five pages, zero drift</title>
+      <change>
+        Canonicalize one footer structure and apply it to all five pages: (col A) tagline +
+        LinkedIn CTA (existing); (col B, new) a compact site map — the four nav anchors plus
+        the four brief links, giving every page a full-site exit ramp; (strip) existing meta
+        plus one new line: the 48-hour response commitment ("I reply within 48 hours." /
+        "Responderé antes de 48 horas." — reusing the established contact-copy fact, no new
+        claim). Briefs receive the identical markup inline (footer is content-light enough
+        that inline duplication is acceptable; 6.2's sweep greps structural parity across the
+        five copies).
+      </change>
+      <rationale>The footer is the last thing every visitor sees on every page; today it is a
+        dead end on briefs. A site map + response commitment converts it into the site's
+        quiet second conversion surface.</rationale>
+      <responsive>Col A/B stack under max-width 767px (existing hinge); site-map links wrap
+        as a two-column list on mobile. Existing footer grid tokens reused.</responsive>
+      <aa>Links are plain anchors in a nav element with aria-label="Site" — landmark-correct;
+        contrast from existing tokens; no motion.</aa>
+      <i18n_keys>footer_map_label ("Site" / "Mapa del sitio"), footer_sla (EN/ES above) —
+        CHROME dict, both pages' loaders already consume it.</i18n_keys>
+    </proposal>
+
+    <!-- ─────────── HOME MOTION + ORGANISM DEPTH ─────────── -->
+
+    <proposal id="P-8" rank="8" target="home · section entrances" motion="S1">
+      <title>S1 scroll choreography on Home section entrances</title>
+      <change>
+        Apply the spec's S1 capability (animation-timeline: view(), pure CSS, @supports-gated,
+        Chromium 115+) to the entrances of the work, capabilities, evolution, track-record, and
+        contact sections — subtle translateY+opacity on section headers and first-level
+        children. Exactly the spec's named Home splice point ("home page section entrances").
+      </change>
+      <rationale>Home stops being the least-animated page (F-2) using zero JS and the spec's
+        cheapest capability.</rationale>
+      <responsive>Identical at all widths; entrance distances in rem.</responsive>
+      <aa>Per the S1 contract: static fallback renders rows in place fully opaque outside the
+        @supports gate; reduced motion gets the same static render; no content motion-gated.</aa>
+    </proposal>
+
+    <proposal id="P-9" rank="9" target="home · work cards · work.css" motion="S6">
+      <title>S6 restrained depth on work-card hover/focus</title>
+      <change>
+        The spec's named splice ("home work cards (restrained use)"): preserve-3d + parent
+        perspective, card tilt ≤4° on hover and focus-within, layers at two translateZ offsets
+        (art vs overlay text). Hover-capable pointers only (@media (hover:hover) and
+        (pointer:fine) — both queries already in the corpus).
+      </change>
+      <rationale>The cards are the site's four doors; depth marks them as objects, not
+        rectangles — and demonstrates S6 where recruiters will actually hover.</rationale>
+      <responsive>Gated off touch devices entirely; no layout shift (transform-only).</responsive>
+      <aa>Static fallback is the flat card (S6 contract); reduced-motion holds flat;
+        focus-within parity means keyboard users get the same affordance; text layers remain
+        AA-contrast at rest and in tilt (no opacity change on text).</aa>
+    </proposal>
+
+    <proposal id="P-10" rank="10" target="home · contact form + assets/i18n/es.json">
+      <title>Copy consistency closures</title>
+      <change>
+        (a) contact_engagement_placeholder: "Selecciona una" → "Seleccione una" (the F-6/5.6
+        carried item — a one-key ES value fix, in scope here as consistency, distinct from
+        6.3's parity pass). (b) Brief 01 EN hero_rv_txt "the next four minutes" → "the next
+        five minutes" with ES "los próximos cuatro minutos" → "los próximos cinco minutos" —
+        closing the Wave-4 logged tension in favor of the measured hero_read value, the
+        smaller and factual edit.
+      </change>
+      <rationale>Two known, logged inconsistencies; both one-line; both voice-preserving.</rationale>
+      <responsive>None.</responsive>
+      <aa>None. No fact invented; hero_read's "5 min read" is the measured figure per the
+        parking-lot record.</aa>
+    </proposal>
+
+    <proposal id="P-11" rank="11" target="all CSS files">
+      <title>Breakpoint grid unification</title>
+      <change>
+        Canonicalize the grid to exactly: max-width 767px / min-width 768px (mobile hinge),
+        max-width 1023px / min-width 1024px (desktop hinge), and prefers-reduced-motion:
+        reduce — normalizing the off-by-one variants (768/769 → 767/768; 1024-as-max → 1023)
+        and whitespace variants, file by file. The strays (900px, 641px, 480px) are each
+        individually assessed in 6.2: migrate to the nearest canonical hinge if visually
+        equivalent, retain with a justifying comment if genuinely load-bearing. Every touched
+        file gets a before/after visual check at 360, 767, 768, 1023, 1024, and 1440px.
+      </change>
+      <rationale>F-4 — the cheapest hardening available; eliminates the 1px dead bands and
+        makes the responsive contract auditable.</rationale>
+      <responsive>This IS the responsive-integrity proposal; the six-width check per file is
+        its own regression gate.</responsive>
+      <aa>None affected; reduced-motion queries normalized in spelling only, never in
+        scope.</aa>
+    </proposal>
+
+    <!-- ─────────── BRIEF PAGES ─────────── -->
+
+    <proposal id="P-12" rank="12" target="briefs 02/03 · hero + wip badge">
+      <title>Placeholder heroes sharpened, honesty loudened</title>
+      <change>
+        On tuua-transfer and limafly-ux only: (a) elevate the in-progress treatment from the
+        current badge to a hero-integrated state line directly under the deck — the existing
+        dashed-purple .temporal idiom, reading the existing hero_status key — so the page's
+        provisional nature is unmissable before any scaffold is read; (b) apply P-5's shared
+        progress bar and P-7's footer like every page. NO scaffold body copy is touched, no
+        badge removed, no figure re-framed — the honesty invariant holds by construction:
+        this proposal makes provisionality MORE visible, not less.
+      </change>
+      <rationale>The placeholders' current honesty relies on a badge the eye can skip; moving
+        the declaration into the hero's reading path protects both the visitor and the
+        author's credibility.</rationale>
+      <responsive>State line wraps naturally; existing hero stack at both hinges.</responsive>
+      <aa>Text state line (not color-only); dashed border decorative; existing token
+        contrast.</aa>
+    </proposal>
+
+  </proposals>
+
+  <!-- ============================================================
+       PART 3 · OPTIONS / OPEN QUESTIONS — principal decides before 6.2.
+       Presented as choices, not silent picks.
+       ============================================================ -->
+
+  <options>
+
+    <option id="O-1" question="Hero signature moment — adopt S5, S3, or neither?">
+      The motion spec names Home hero for both S5 (compositing sweep — the boldest signature)
+      and S3 (sequenced WAAPI build — replacing the current plain fadeUp cascade). Adopting
+      BOTH would over-animate one viewport. Recommendation if forced: S3 (it upgrades what
+      exists rather than adding a set-piece), deferring S5 to a future refresh. But this is a
+      taste call the principal should make. Either choice ships the capability's static
+      fallback + reduced-motion contract; neither risks AA.
+    </option>
+
+    <option id="O-2" question="Evolution timeline — adopt the brief reveal-card pattern?">
+      Each timeline milestone could carry an aria-expanded reveal ("what this stop really
+      involved") using the briefs' proven rv_btn pattern — progressive depth on the organism
+      recruiters read as a CV. Cost: 6–8 new EN keys + ES, and the timeline gains interaction
+      complexity. Genuinely optional: the timeline works today. Responsive/AA: pattern already
+      proven AA on briefs; would inherit identical semantics.
+    </option>
+
+    <option id="O-3" question="P-1 panel behavior on mobile — inline strip or bottom sheet?">
+      P-1 specifies panels opening as inline strips at all widths (simplest, zero new pattern).
+      A bottom-sheet presentation on max-width 767px would be more thumb-friendly for 13 chips
+      but introduces a new overlay pattern (scrim, scroll-lock, focus trap) the site doesn't
+      otherwise have. Recommendation: inline strips (P-1 as written) unless the principal
+      wants the sheet; both hold AA if built to pattern.
+    </option>
+
+    <option id="O-4" question="Status category naming — 'Live / In progress' or 'Shipped / In build'?">
+      P-3's two chip labels carry positioning weight. "Live / In progress" states page status
+      plainly; "Shipped / In build" reads more product-native but slightly overstates the
+      placeholder pages' trajectory. Recommendation: Live / In progress (the humbler, truer
+      pair). ES direction: "En vivo / En progreso" either way.
+    </option>
+
+  </options>
+
+  <!-- ============================================================
+       PART 4 · WHAT THIS SPEC DELIBERATELY DOES NOT CHANGE
+       ============================================================ -->
+
+  <not_changed>
+    - The filter ENGINE (tagfilter.js matching, dead-end logic, live region) — presentation
+      changes wrap it; the logged faceted-AND tension stays resolved as-is.
+    - The two immovable paths (index.html at root; assets/i18n/{en,es}.json in place) and both
+      i18n loader depths — every proposal was checked against IA-CONVENTION.
+    - Brief 01 and Brief 04 body content, structure, dashboards, and Gantt — the real briefs'
+      locked, sourced material is untouched beyond P-10(b)'s one-word tension closure.
+    - Scaffold body copy on the placeholders — awaiting Waves 2/3 real copy, per the parking
+      lot; P-12 only raises the visibility of its provisional status.
+    - The work-card desktop height clamp and line-clamp safety net from PR-5 — the ~30px
+      residual sizing question above 1024px is a 6.2 verification item, not a redesign.
+    - Zero-build, zero-dependency, hand-authored stack — no proposal introduces tooling.
+    - The ES corpus beyond P-10's two named keys — full ES parity for all new keys introduced
+      here locks at task 6.3, per the roadmap.
+    - The parking lot — read, honored, not actioned; task 6.4 owns it.
+  </not_changed>
+
+  <!-- ============================================================
+       PART 5 · NEW I18N KEY INVENTORY (for 6.3's parity pass)
+       ============================================================ -->
+
+  <new_keys scope="CHROME unless noted">
+    filter_remove_label · filter_open_cat · filter_cat_status · tag_live · tag_wip ·
+    footer_map_label · footer_sla · (O-2 if adopted: evo_rv_* namespace, 6–8 keys, HOME body)
+    — EN authored at 6.2 build time per this spec's stated directions; ES locked at 6.3.
+  </new_keys>
+
+  <verification_carryforward to="6.2">
+    - Runtime check: hero.css animations under prefers-reduced-motion (F-7).
+    - Nav focus-within return on hide-on-scroll (P-6c).
+    - Footer + nav structural parity grep across all five pages after P-6/P-7 land.
+    - Six-width visual regression per file touched by P-11.
+    - The PR-5 lesson institutionalized: any file move or import-path change gets a runtime
+      execution check, not just resolution/existence checks.
+  </verification_carryforward>
+
+</enhancement_spec>
