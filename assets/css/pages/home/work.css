@@ -264,6 +264,29 @@
 .work-card.is-active .work-card__close { opacity: 1; transform: translateX(0); pointer-events: auto; }
 .work-card.is-active .work-card__bg-img { filter: blur(6px); }
 
+/* ============================================================
+   P-9 · S6 restrained depth — a subtle whole-card tilt on hover/
+   focus-within (transform only, compositor-safe). Per-layer
+   translateZ is intentionally omitted: the card's overflow:hidden
+   (required to clip the art + overlay) flattens any preserve-3d
+   context, so depth reads as a single-plane tilt instead. Gated to
+   hover-capable fine pointers; reduced motion holds the card flat.
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  .work__track { perspective: 1400px; }
+  .work-card {
+    transition:
+      transform var(--duration-ui) var(--ease-standard),
+      box-shadow var(--duration-ui) var(--ease-standard);
+    will-change: transform;
+  }
+  .work-card:hover,
+  .work-card:focus-within { transform: translateY(-4px) rotateX(3deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-card { transform: none !important; }
+}
+
 @media (max-width: 767px) {
   .work__track {
     display: flex;
@@ -331,41 +354,93 @@
 .work__dot[hidden] { display: none; }
 
 /* ============================================================
-   TAG FILTER — shortlists the work cards.
-   Tag values are never hardcoded here: each chip carries
-   data-tag and each card carries data-tags, both fed from the
-   i18n dictionaries. Changing a tag is a data edit.
+   TAG FILTER v2 — collapsed disclosure bar (P-1 / O-3 inline strips)
+   + sequenced result motion (P-2). Tag values are never hardcoded:
+   each chip carries data-tag and each card data-tags, both fed from
+   the i18n dictionaries. Changing a tag is a data edit.
    ============================================================ */
 .tagfilter {
   margin: clamp(1.5rem, 3vw, 2.25rem) 0 clamp(1.75rem, 3vw, 2.5rem);
   border-top: 1px solid var(--color-border-faint);
   border-bottom: 1px solid var(--color-border-faint);
-  padding: clamp(1rem, 2vw, 1.4rem) 0;
+  padding: clamp(0.75rem, 1.5vw, 1rem) 0;
 }
-.tagfilter__head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 1rem; flex-wrap: wrap; margin-bottom: 0.9rem;
+
+/* Resting bar — one row: label · triggers · active mini-chips · clear */
+.tagfilter__bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 0.9rem;
 }
 .tagfilter__label {
   font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--color-text-dim);
+  text-transform: uppercase; color: var(--color-text-dim); margin-right: 0.25rem;
 }
+.tagfilter__triggers { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tagfilter__trigger {
+  font-family: inherit; font-size: 0.76rem; font-weight: 500;
+  color: var(--color-text-muted); background: transparent;
+  border: 1px solid var(--color-border-soft);
+  padding: 0.42rem 0.7rem; cursor: pointer; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  transition:
+    color var(--duration-ui) var(--ease-standard),
+    border-color var(--duration-ui) var(--ease-standard),
+    background var(--duration-ui) var(--ease-standard);
+}
+.tagfilter__trigger:hover { color: var(--color-brand-white); border-color: var(--color-text-dim); }
+.tagfilter__trigger[data-active="true"] {
+  color: var(--color-brand-white);
+  border-color: var(--color-brand-purple);
+  background: rgba(161, 0, 255, 0.14);
+}
+.tagfilter__trigger-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 1.1rem; height: 1.1rem; padding: 0 0.3rem;
+  font-size: 0.66rem; font-weight: 700;
+  color: var(--color-brand-white); background: var(--color-brand-purple);
+}
+.tagfilter__trigger-count[hidden] { display: none; }
+.tagfilter__trigger-caret {
+  width: 0; height: 0;
+  border-left: 3.5px solid transparent; border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor;
+  transition: transform var(--duration-ui) var(--ease-standard);
+}
+.tagfilter__trigger[aria-expanded="true"] .tagfilter__trigger-caret { transform: rotate(180deg); }
+
+/* Active selections — always-visible removable mini-chips */
+.tagfilter__active { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tagfilter__minichip {
+  font-family: inherit; font-size: 0.72rem; font-weight: 500;
+  color: var(--color-brand-white); background: rgba(161, 0, 255, 0.14);
+  border: 1px solid var(--color-brand-purple);
+  padding: 0.3rem 0.55rem; cursor: pointer; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: background var(--duration-ui) var(--ease-standard);
+}
+.tagfilter__minichip:hover { background: rgba(161, 0, 255, 0.26); }
+.tagfilter__minichip-x { font-size: 0.95rem; line-height: 1; color: var(--color-purple-light); }
+
 .tagfilter__clear {
   font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--color-brand-purple);
   background: none; border: none; cursor: pointer; padding: 0.4rem 0;
-  min-height: 44px;
+  min-height: 44px; margin-left: auto;
 }
 .tagfilter__clear:hover { color: var(--color-purple-light); }
 .tagfilter__clear[hidden] { display: none; }
 
-.tagfilter__groups { display: flex; flex-direction: column; gap: 0.85rem; }
-.tagfilter__group { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
-.tagfilter__cat {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--color-text-dim);
-  min-width: 5.5rem; flex-shrink: 0;
+/* Inline-strip panels — compositor-only reveal via scaleY (P-2) */
+.tagfilter__panel { overflow: hidden; }
+.tagfilter__panel[hidden] { display: none; }
+.tagfilter__panel-inner {
+  padding-top: clamp(0.75rem, 1.5vw, 1rem);
+  transform: scaleY(0); transform-origin: top; opacity: 0;
+  transition:
+    transform 260ms var(--ease-decelerate),
+    opacity 220ms var(--ease-decelerate);
 }
+.tagfilter__panel.is-open .tagfilter__panel-inner { transform: scaleY(1); opacity: 1; }
+.tagfilter__group { display: flex; }
 .tagfilter__chips { display: flex; gap: 0.45rem; flex-wrap: wrap; }
 
 .tag {
@@ -404,8 +479,7 @@
 .work__empty[hidden] { display: none; }
 
 @media (max-width: 767px) {
-  .tagfilter__group { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-  .tagfilter__cat { min-width: 0; }
+  .tagfilter__clear { margin-left: 0; }
   .tag { font-size: 0.72rem; padding: 0.4rem 0.7rem; }
 }
 

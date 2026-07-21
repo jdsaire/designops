@@ -121,6 +121,51 @@
   .timeline__note { display: none; }
 }
 
+/* ---- O-2 · nested "go deeper" reveal (adopts the briefs' rv pattern) ---- */
+.timeline__reveal { margin-top: 0.6rem; }
+.timeline__rv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0.35rem 0;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  color: var(--color-purple-light);
+  transition: color var(--duration-ui) var(--ease-standard);
+}
+.timeline__rv-btn:hover { color: var(--color-brand-purple); }
+.timeline__rv-btn:focus-visible {
+  outline: 2px solid var(--color-brand-purple);
+  outline-offset: 4px;
+}
+.timeline__rv-icon {
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 250ms var(--ease-decelerate);
+}
+.timeline__rv-btn[aria-expanded="true"] .timeline__rv-icon { transform: rotate(-135deg); }
+.timeline__rv-panel {
+  margin-top: 0.4rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--color-border-faint);
+}
+.timeline__rv-panel[hidden] { display: none; }
+.timeline__rv-txt {
+  font-size: 0.9rem;
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
 /* ---- TRACK RECORD — stat grid + preserved marquee ---- */
 .section--track-record { padding-bottom: clamp(2.5rem, 4vw, 4rem); }
 .track-record__stats {
@@ -130,6 +175,12 @@
   margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }
 .track-record__stats .stat { text-align: center; }
+/* P-11: 900px/480px are RETAINED (not migrated to the canonical 767/1023
+   hinges). They are the column-count staircase for the five-stat track
+   record grid (5 → 2 → 1), load-bearing for this specific grid rather than
+   layout hinges: forcing 5 columns down to 768px would cramp them, and
+   collapsing to a canonical hinge would drop the 2-column intermediate
+   stage. Both are documented, deliberate exceptions. */
 @media (max-width: 900px) {
   .track-record__stats { grid-template-columns: repeat(2, 1fr); }
 }
@@ -143,6 +194,7 @@
 @media (prefers-reduced-motion: reduce) {
   .timeline__panel,
   .timeline__chevron,
-  .timeline__marker { transition: none; }
+  .timeline__marker,
+  .timeline__rv-icon { transition: none; }
 }
 

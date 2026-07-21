@@ -1,0 +1,24 @@
+/* shared/progress.css — SCROLL PROGRESS BAR (P-5).
+   Promoted site-wide from Brief 01 so every page carries the identical
+   chrome signature. Fixed 3px bar at the very top, grows L→R with scroll
+   and reverses on upscroll. Decorative (the bar is aria-hidden).
+   The width update is a compositor-only scaleX with no easing transition,
+   so it tracks scroll position 1:1 and is inherently reduced-motion-safe.
+   z-index sits above every nav (Home nav = 100, brief nav = 60). */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 101;
+  background: transparent;
+  pointer-events: none;
+}
+.progress__fill {
+  height: 100%;
+  width: 100%;
+  background: var(--color-brand-purple);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
