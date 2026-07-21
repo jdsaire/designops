@@ -173,8 +173,8 @@
 }
 .cap-backdrop.visible { display: block; }
 
-/* CAPABILITIES — TABLET ≤1024px */
-@media (max-width: 1024px) {
+/* CAPABILITIES — TABLET ≤1023px */
+@media (max-width: 1023px) {
   .section__inner--capabilities { gap: clamp(2rem, 4vw, 3.5rem); }
 }
 

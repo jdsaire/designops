@@ -2,6 +2,7 @@
    Imports every feature module and initializes them, in original
    execution order, inside one DOMContentLoaded handler. */
 import { init as initI18n }      from './core/i18n.js';
+import { init as initProgress }  from './core/progress.js';
 import { init as initNav }       from './pages/home/nav.js';
 import { init as initOverlay }   from './pages/home/overlay.js';
 import { init as initHero }      from './pages/home/hero.js';
@@ -14,6 +15,7 @@ import { init as initTicker }    from './pages/home/ticker.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initI18n();
+  initProgress();
   initNav();
   initOverlay();
   initHero();

@@ -15,6 +15,7 @@
      Route depth: work/yape-trust-verify-brief/ — nav paths ../../
      [TEMPORAL]: contact mailto (data-temporal="contact-email")
      ============================================================ -->
+<link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -58,11 +59,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* Cross-document View Transitions — same-origin navigation cross-fade. */
 @view-transition{ navigation:auto; }
 
-/* ================= SCROLL PROGRESS BAR — above nav ================= */
-.progress{position:fixed; top:0; left:0; width:100%; height:3px; z-index:100;
-  background:transparent; pointer-events:none;}
-.progress__fill{height:100%; width:100%; background:var(--color-brand-purple);
-  transform:scaleX(0); transform-origin:left center;}
+/* Scroll progress bar — moved to shared assets/css/shared/progress.css (P-5). */
 
 /* ================= NAV (live organism shape) ================= */
 .nav{position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-height);
@@ -375,19 +372,33 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert__cta:hover{background:var(--color-brand-purple);}
 .temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
   border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
+/* P-12: hero-integrated in-progress state line — the .temporal idiom moved
+   into the hero's reading path, directly under the deck, so provisionality
+   is unmissable before any scaffold is read. */
+.hero__state{margin-top:.9rem;}
+.hero__state .temporal{margin-left:0; display:inline-block;}
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 
-/* ================= FOOTER (live organism, verbatim strings) ================= */
-.footer{border-top:1px solid var(--color-border-faint); padding:clamp(2.5rem,5vw,4rem) 0; margin-top:var(--act-pad);}
-.footer__inner{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;}
-.footer__tag{font-size:clamp(1.1rem,1.6vw,1.4rem); font-weight:var(--fw-bold);}
-.footer__tag em{font-style:normal; color:var(--color-brand-purple);}
-.footer__meta{display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap;}
-.footer__link{font-size:.85rem; color:var(--color-text-muted); border-bottom:1px solid var(--color-border-soft); padding-bottom:.1rem;}
-.footer__link:hover{color:var(--color-brand-purple); border-color:var(--color-brand-purple);}
-.footer__c{font-size:.75rem; color:var(--color-text-dim);}
+/* ================= FOOTER (unified structure — P-7) ================= */
+.footer{border-top:1px solid var(--color-border-faint); padding:clamp(4rem,6vw,6rem) 0 clamp(2rem,3vw,2.5rem); margin-top:var(--act-pad);}
+.footer__inner{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+.footer__grid{display:grid; grid-template-columns:55fr 45fr; gap:clamp(2rem,4vw,3rem);}
+.footer__content{display:flex; flex-direction:column; gap:1.5rem;}
+.footer__tagline{font-size:clamp(1.875rem,3.6vw,3rem); font-weight:var(--fw-bold); line-height:1.1; letter-spacing:-0.02em; color:var(--color-brand-white); white-space:nowrap;}
+.footer__tagline .purple{color:var(--color-brand-purple); display:block;}
+.footer .cta{display:inline-flex; align-items:center; gap:0.6rem; color:var(--color-brand-purple);}
+.footer .cta:hover,.footer .cta:focus-visible{color:var(--color-purple-hover);}
+.footer__linkedin-icon{display:inline-block; width:1.25rem; height:1.25rem; flex-shrink:0; vertical-align:middle;}
+.footer__columns{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(2rem,4vw,4rem); max-width:32rem;}
+.footer__links{list-style:none; display:flex; flex-direction:column; gap:0.75rem; padding:0; margin:0;}
+.footer__link{font-size:0.95rem; color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
+.footer__link:hover,.footer__link:focus-visible{color:var(--color-brand-white);}
+.footer__strip{padding-top:0.75rem; border-top:1px solid var(--color-border-faint); margin-top:clamp(2rem,4vw,3rem);}
+.footer__meta{display:flex; flex-wrap:wrap; gap:1.25rem; font-size:0.8rem; color:var(--color-text-dim);}
+@media (min-width:768px) and (max-width:1023px){ .footer__grid{grid-template-columns:1fr;} }
+@media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__columns{grid-template-columns:1fr; gap:2rem;} .footer__tagline{white-space:normal;} }
 
 
 /* ================= IN-PROGRESS TREATMENT — placeholder discipline =================
@@ -478,6 +489,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The TUUA platform I designed, prototyped, and handed to engineering.</h1>
     <p class="hero__deck" data-i18n="hero_deck">Lima Airport had to charge a fee it had never collected, through a channel that did not exist — with five divisions holding a piece of it and engineering waiting on a definition.</p>
+    <p class="hero__state"><span class="temporal" data-i18n="hero_status">Case study in progress</span></p>
     <div class="kwrow" role="list" aria-label="Case keywords">
       <span class="kw" role="listitem" data-i18n="kw1">Airport</span>
       <span class="kw" role="listitem" data-i18n="kw2">Payments</span>
@@ -918,11 +930,40 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 <!-- ================= FOOTER — live organism strings, verbatim ================= -->
 <footer class="footer" id="pageFooter">
-  <div class="container footer__inner">
-    <p class="footer__tag"><span data-i18n="footer_tagline_pre">Built and governed</span> <em data-i18n="footer_tagline_purple">end to end.</em></p>
-    <div class="footer__meta">
-      <a class="footer__link" href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener" data-i18n="footer_linkedin">Connect on LinkedIn</a>
-      <span class="footer__c" data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div class="footer__content">
+        <p class="footer__tagline">
+          <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
+        </p>
+        <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
+           class="cta" aria-label="Connect with Juan Diego on LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
+          </svg>
+          <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+        </a>
+      </div>
+      <nav class="footer__columns" aria-label="Site" data-i18n-aria="footer_map_label">
+        <ul class="footer__links">
+          <li><a class="footer__link" href="../../#work" data-i18n="nav_work">Work</a></li>
+          <li><a class="footer__link" href="../../#capabilities" data-i18n="nav_capabilities">Capabilities</a></li>
+          <li><a class="footer__link" href="../../#evolution" data-i18n="nav_evolution">Evolution</a></li>
+          <li><a class="footer__link" href="../../#contact" data-i18n="nav_cta">Contact</a></li>
+        </ul>
+        <ul class="footer__links">
+          <li><a class="footer__link" href="../designops-system/" data-i18n="work_card1_label">Design system · Front-end</a></li>
+          <li><a class="footer__link" href="../tuua-transfer/" data-i18n="work_card2_label">Product · Payments</a></li>
+          <li><a class="footer__link" href="../limafly-ux/" data-i18n="work_card3_label">Prototype · User journey</a></li>
+          <li><a class="footer__link" href="../yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__strip">
+      <div class="footer__meta">
+        <span data-i18n="footer_sla">I reply within 48 hours.</span>
+        <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+      </div>
     </div>
   </div>
 </footer>
@@ -988,6 +1029,7 @@ applyI18n(curLang);
   const sel = document.getElementById("briefLangSel");
   const panel = document.getElementById("briefLangPanel");
   const label = document.getElementById("briefLangLabel");
+  const btn = document.getElementById("briefLangBtn");
   function setActive(lang){
     label.textContent = lang;
     panel.querySelectorAll(".nav__lang-option").forEach(b => {
@@ -996,34 +1038,33 @@ applyI18n(curLang);
       b.setAttribute("aria-selected", String(on));
     });
   }
+  /* P-6b: explicit aria-expanded on the trigger + Escape-to-close / focus return. */
+  function setPanel(open){
+    sel.classList.toggle("nav__lang--panel-open", open);
+    btn.setAttribute("aria-expanded", String(open));
+  }
   setActive(curLang);
-  document.getElementById("briefLangBtn").addEventListener("click", e => {
+  btn.setAttribute("aria-expanded", "false");
+  btn.addEventListener("click", e => {
     e.stopPropagation();
-    sel.classList.toggle("nav__lang--panel-open");
+    setPanel(!sel.classList.contains("nav__lang--panel-open"));
   });
-  document.addEventListener("click", () => sel.classList.remove("nav__lang--panel-open"));
+  document.addEventListener("click", () => setPanel(false));
   panel.addEventListener("click", e => e.stopPropagation());
-  panel.querySelectorAll(".nav__lang-option").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const lang = btn.dataset.lang;
+  sel.addEventListener("keydown", e => {
+    if (e.key === "Escape" || e.key === "Esc") { setPanel(false); btn.focus(); }
+  });
+  panel.querySelectorAll(".nav__lang-option").forEach(opt => {
+    opt.addEventListener("click", () => {
+      const lang = opt.dataset.lang;
       setActive(lang);
-      sel.classList.remove("nav__lang--panel-open");
+      setPanel(false);
       swapLang(lang);
     });
   });
 })();
 
-/* ============ Scroll progress bar — above nav, reverses on upscroll ============ */
-const pFill = document.getElementById("progressFill");
-function updateProgress(){
-  const doc = document.documentElement;
-  const max = Math.max(1, doc.scrollHeight - window.innerHeight);
-  const p = Math.min(1, Math.max(0, window.scrollY / max));
-  pFill.style.transform = "scaleX(" + p + ")";
-}
-window.addEventListener("scroll", updateProgress, {passive:true});
-window.addEventListener("resize", updateProgress);
-updateProgress();
+/* Scroll progress bar — moved to shared assets/js/core/progress.js (P-5), loaded via the module bootstrap at the end of the page (P-5). */
 
 /* ============ Reveal system: accordion ≤1023 / side-panel ≥1024 ============ */
 const mqDesktop = window.matchMedia("(min-width:1024px)");
@@ -1359,5 +1400,6 @@ const io = new IntersectionObserver(entries=>{
 },{threshold:0.18});
 document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
+<script type="module">import { init as initProgress } from "../../assets/js/core/progress.js"; initProgress();</script>
 </body>
 </html>

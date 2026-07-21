@@ -73,7 +73,7 @@
   padding-right: clamp(3rem, 5vw, 5.5rem);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .ticker__group {
     gap: clamp(2rem, 6vw, 3rem);
     padding-right: clamp(2rem, 6vw, 3rem);
@@ -89,6 +89,11 @@
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default;
 }
+/* P-11: 641px is RETAINED (not migrated to a canonical hinge). It is the
+   middle step of the marquee logo-size staircase (112 → 144 → 176px at
+   641/1024), sized for the logos' own visual rhythm rather than a layout
+   hinge — migrating it to 768 would shrink the logos across the 641–767
+   band. A documented, deliberate exception, like the track-record grid. */
 @media (min-width: 641px) {
   .ticker__logo { height: 144px; }
 }

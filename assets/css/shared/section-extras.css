@@ -55,3 +55,31 @@
   max-width: 36rem;
 }
 
+/* ============================================================
+   P-8 · S1 scroll choreography on Home section entrances.
+   Motion spec capability 01: pure CSS, scroll-driven via
+   animation-timeline: view(), @supports-gated (Chromium 115+).
+   The static end-state is the resting, fully-opaque header — the
+   base styles never hide anything, so outside the @supports gate
+   (and under reduced motion) the headers simply render in place.
+   Scope is the section HEADERS only, to avoid a transform conflict
+   with the work grid's P-2 re-entry and P-9 depth motion.
+   ============================================================ */
+@keyframes sectionRise {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section--work .work__header,
+    .section--capabilities .capabilities__header,
+    .section--evolution .evolution__header,
+    .section--track-record .track-record__header,
+    #contact .contact-header {
+      animation: sectionRise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
