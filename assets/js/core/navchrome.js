@@ -14,19 +14,28 @@
    that differs per page — the i18n engine — is injected via opts.swapLang, so
    this module imports neither Home's module engine nor a brief's inline one. */
 
+import { rootPrefix } from './paths.js';
+
 function init(opts) {
   opts = opts || {};
   const swapLang = typeof opts.swapLang === 'function' ? opts.swapLang : null;
-  const isBrief = document.documentElement.getAttribute('data-nav-context') === 'brief';
 
-  /* ── Cross-document href rewrite (idempotent; derives from data-*). ── */
-  const anchorPrefix = isBrief ? '../../' : '';
+  /* ── Cross-document href rewrite (idempotent; derives from data-* + depth). ──
+     rootPrefix ('' | '../' | '../../') comes from the page's data-nav-depth,
+     so a page at any depth resolves the same authored intent:
+       data-nav-link  ('#top')            → rootPrefix + value
+       data-nav-page  ('capabilities/')   → rootPrefix + value          (page routes)
+       data-nav-work  ('<slug>/')         → rootPrefix + 'work/' + value (brief routes)
+     Each href is recomputed from the immutable data-* attribute, never from
+     the current href, so running init() twice yields identical hrefs. */
   document.querySelectorAll('[data-nav-link]').forEach(a => {
-    if (a.tagName === 'A') a.setAttribute('href', anchorPrefix + a.getAttribute('data-nav-link'));
+    if (a.tagName === 'A') a.setAttribute('href', rootPrefix + a.getAttribute('data-nav-link'));
   });
-  const workPrefix = isBrief ? '../' : 'work/';
+  document.querySelectorAll('[data-nav-page]').forEach(a => {
+    if (a.tagName === 'A') a.setAttribute('href', rootPrefix + a.getAttribute('data-nav-page'));
+  });
   document.querySelectorAll('[data-nav-work]').forEach(a => {
-    if (a.tagName === 'A') a.setAttribute('href', workPrefix + a.getAttribute('data-nav-work'));
+    if (a.tagName === 'A') a.setAttribute('href', rootPrefix + 'work/' + a.getAttribute('data-nav-work'));
   });
 
   /* ── Hide-on-scroll bar (P-6c focus-within return). Needs #navbar. ── */

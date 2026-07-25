@@ -1,0 +1,33 @@
+/* pages/home/teaser.css — Main's reduced teaser blocks (W6.2.2).
+   The heavy organisms (capabilities carousel, evolution timeline, contact
+   form) migrated to their dedicated pages; Main keeps a teaser that motivates
+   the click. Header + CTA reuse existing idioms (.section__eyebrow/.headline/
+   .lede and .cta*); only the Capabilities triptych needs its own small layout. */
+.teaser__triptych {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.75rem, 3vw, 2.5rem);
+}
+.teaser__item {
+  border-top: 1px solid var(--color-border-soft);
+  padding-top: 1rem;
+}
+.teaser__label {
+  font-size: 0.72rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand-purple);
+  margin-bottom: 0.4rem;
+}
+.teaser__title {
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.25;
+  color: var(--color-brand-white);
+}
+@media (max-width: 767px) {
+  .teaser__triptych { grid-template-columns: 1fr; }
+}

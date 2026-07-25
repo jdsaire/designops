@@ -4,6 +4,8 @@
    swapLang(lang)'s public signature is unchanged — callers
    fire-and-forget. The HTML's default English markup is the
    render fallback during the brief async fetch window. */
+import { rootPrefix } from './paths.js';
+
 const i18nDicts   = { EN: null, ES: null };
 const i18nLoading = { EN: null, ES: null };
 let   i18nCurrent = 'EN';
@@ -12,7 +14,7 @@ function loadDict(lang) {
   if (i18nDicts[lang])   return Promise.resolve(i18nDicts[lang]);
   if (i18nLoading[lang]) return i18nLoading[lang];
   const file = lang === 'ES' ? 'es.json' : 'en.json';
-  i18nLoading[lang] = fetch('assets/i18n/' + file)
+  i18nLoading[lang] = fetch(rootPrefix + 'assets/i18n/' + file)
     .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
     .then(dict => { i18nDicts[lang] = dict; return dict; })
     .catch(err => { console.warn('i18n fetch failed for ' + lang + ':', err); return null; });

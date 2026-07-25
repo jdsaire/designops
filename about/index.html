@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="ES" data-nav-context="page" data-nav-depth="1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About · Juan Diego Saire — DesignOps</title>
+  <meta name="description" content="The path from industrial engineering and an MBA to UX, the airport, and a self-built design system — the making of an operator who builds.">
+  <link rel="icon" type="image/svg+xml" href="../logos/jdigital-logo-default.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About · Juan Diego Saire — DesignOps">
+  <meta property="og:description" content="The path from industrial engineering and an MBA to UX, the airport, and a self-built design system — the making of an operator who builds.">
+  <meta property="og:image" content="../assets/img/bridge1_onboarding.svg">
+  <meta property="og:locale" content="en_US">
+
+  <link rel="stylesheet" href="../assets/css/base/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base/reset.css">
+  <link rel="stylesheet" href="../assets/css/shared/progress.css">
+  <link rel="stylesheet" href="../assets/css/shared/nav.css">
+  <link rel="stylesheet" href="../assets/css/shared/page-hero.css">
+  <link rel="stylesheet" href="../assets/css/shared/section-extras.css">
+  <link rel="stylesheet" href="../assets/css/pages/about/evolution.css">
+  <link rel="stylesheet" href="../assets/css/shared/footer.css">
+  <link rel="stylesheet" href="../assets/css/shared/designops-variant.css">
+</head>
+<body>
+
+  <!-- Scroll progress (P-5) — shared chrome, grows L→R, reverses on upscroll -->
+  <div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
+
+  <header class="nav" id="navbar">
+    <nav class="nav__inner" role="navigation" aria-label="Primary">
+
+      <button class="nav__hamburger" id="hamburger" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+
+      <!-- CENTER nav links -->
+      <div class="nav__center">
+        <div class="nav__dropdown">
+          <button class="nav__link nav__work-trigger" id="workTrigger" type="button"
+                  aria-expanded="false" aria-controls="workMenu">
+            <span data-i18n="nav_work">Work</span>
+            <span class="nav__work-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
+            <a class="nav__work-item" role="menuitem" href="../work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="../work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="../work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+            <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+          </div>
+        </div>
+        <a href="../capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="../about/" data-nav-page="about/" class="nav__link" aria-current="page" data-i18n="nav_evolution">About</a>
+      </div>
+
+      <!-- RIGHT utility -->
+      <div class="nav__utility">
+        <!-- SwapLang — EN/ES bilingual toggle -->
+        <div class="nav__lang" id="langSelector">
+          <button class="nav__lang-btn" id="langBtn" type="button"
+                  aria-label="Select language" aria-haspopup="listbox">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="langLabel">ES</span>
+          </button>
+          <div class="nav__lang-panel" id="langPanel" role="listbox" aria-label="Language">
+            <button class="nav__lang-option nav__lang-option--active"
+                    role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
+            <button class="nav__lang-option"
+                    role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
+          </div>
+        </div>
+
+        <a href="../contact/" data-nav-page="contact/" class="nav__cta">
+          <span class="nav__cta-label" data-i18n="nav_cta">Contact</span>
+          <span class="nav__cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+
+    <div class="nav__overlay-header">
+      <a href="../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
+    </div>
+
+    <nav class="nav__overlay-links" aria-label="Mobile navigation">
+      <div class="nav__overlay-group">
+        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                aria-expanded="false" aria-controls="overlayWorkMenu">
+          <span data-i18n="nav_work">Work</span>
+          <span class="nav__overlay-link-chevron">&#8250;</span>
+        </button>
+        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+        </div>
+      </div>
+      <a href="../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
+        <span data-i18n="nav_capabilities">Capabilities</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
+        <span data-i18n="nav_evolution">About</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
+        <span data-i18n="nav_cta">Contact</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+    </nav>
+
+    <div class="nav__overlay-lang" id="overlayLang" role="group" aria-label="Language">
+      <button class="nav__overlay-lang-option" type="button" data-lang="ES">ES</button>
+      <button class="nav__overlay-lang-option" type="button" data-lang="EN">EN</button>
+    </div>
+
+  </div>
+
+  <main id="main">
+
+  <section class="pagehero" aria-label="About">
+    <div class="section__inner pagehero__inner">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="about_hero_eyebrow">ABOUT</p>
+      </div>
+      <h1 class="pagehero__h1" data-i18n="about_hero_head">The making of the operator.</h1>
+      <p class="pagehero__deck" data-i18n="about_hero_lede">I came down from strategy and picked up the build — engineering, an MBA, teaching, the airport, then the system you're reading.</p>
+    </div>
+  </section>
+
+<section class="section section--alt section--evolution" id="evolution" aria-labelledby="evolution-heading">
+    <div class="section__inner">
+
+      <div class="evolution__header">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar" aria-hidden="true"></span>
+          <p class="section__eyebrow-text" data-i18n="evolution_eyebrow">EVOLUTION</p>
+        </div>
+        <h2 class="section__headline" id="evolution-heading" data-i18n="evolution_heading">The making of the operator.</h2>
+        <p class="section__lede" data-i18n="evolution_lede">I came down from strategy and picked up the build. Here’s the arc.</p>
+      </div>
+
+      <ol class="timeline" role="list">
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-1">
+              <h3 class="timeline__title" data-i18n="evo_m1_title">Industrial Engineering — ESAN (2010–2014).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-1">
+              <p class="timeline__body" data-i18n="evo_m1_body">Industrial and Commercial Engineering, specialization Corporate Finance. The systems-and-process grounding under everything since.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-2">
+              <h3 class="timeline__title" data-i18n="evo_m2_title">Hunt LNG — Projects &amp; Contracts (2015–2016).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-2">
+              <p class="timeline__body" data-i18n="evo_m2_body">South America’s first LNG plant. Held contractor deliverables to quality, schedule, and spec across 35 EPC projects — vendor governance, learned early.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-3">
+              <h3 class="timeline__title" data-i18n="evo_m3_title">Tricontinental MBA — CENTRUM PUCP (2016–2017).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-3">
+              <p class="timeline__body" data-i18n="evo_m3_body">Full-time, three continents (UVic, Canada; Maastricht, Netherlands). First in class. Strategic Consulting.</p>
+              <div class="timeline__reveal">
+                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-3">
+                  <span class="timeline__rv-icon" aria-hidden="true"></span>
+                  <span class="timeline__rv-label" data-i18n="evo_m3_rv_btn">The exchanges</span>
+                </button>
+                <div class="timeline__rv-panel" id="evo-rv-3" hidden>
+                  <p class="timeline__rv-txt" data-i18n="evo_m3_rv_txt">Full-time across three continents — terms at the University of Victoria in Canada and Maastricht University in the Netherlands — finishing first in class, specialized in Strategic Consulting.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-4">
+              <h3 class="timeline__title" data-i18n="evo_m4_title">Lecturer — ESAN &amp; UTEC (2018–2024).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-4">
+              <p class="timeline__body" data-i18n="evo_m4_body">Taught 1,200+ students; mentored 29 project teams through end-to-end UX; seeded Communities of Practice.</p>
+              <div class="timeline__reveal">
+                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-4">
+                  <span class="timeline__rv-icon" aria-hidden="true"></span>
+                  <span class="timeline__rv-label" data-i18n="evo_m4_rv_btn">What I taught</span>
+                </button>
+                <div class="timeline__rv-panel" id="evo-rv-4" hidden>
+                  <p class="timeline__rv-txt" data-i18n="evo_m4_rv_txt">At UTEC, eleven courses across three project levels, mentoring 29 teams end to end through UX design and evaluation. At ESAN, Calculus I to 1,200+ students, in person and remote at scale.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-5">
+              <h3 class="timeline__title" data-i18n="evo_m5_title">UX — HEC Montréal (2023).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-5">
+              <p class="timeline__body" data-i18n="evo_m5_body">MicroMasters in UX Design: the full UX lifecycle, including a UX-management track on team operations and process standardization.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-6">
+              <h3 class="timeline__title" data-i18n="evo_m6_title">Innovation Specialist — Lima Airport Partners (2025).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-6">
+              <p class="timeline__body" data-i18n="evo_m6_body">Innovation’s seat on the most critical post-terminal program: designed and delivered the TUUA payment platform (now 130,000+ passengers monthly), articulated planning across five central areas — Finance, IT, Terminals, Commercial, Reputation — and trained 70 staff to 3.88/4.</p>
+              <p class="timeline__note" data-i18n="evo_m6_note">McKinsey Forward — McKinsey.org (2025) · Microsoft Program Management (2026).</p>
+              <div class="timeline__reveal">
+                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-6">
+                  <span class="timeline__rv-icon" aria-hidden="true"></span>
+                  <span class="timeline__rv-label" data-i18n="evo_m6_rv_btn">Beyond the platform</span>
+                </button>
+                <div class="timeline__rv-panel" id="evo-rv-6" hidden>
+                  <p class="timeline__rv-txt" data-i18n="evo_m6_rv_txt">Beyond TUUA, I ran a tracking dashboard across a twelve-project hybrid portfolio, working preventive and corrective action alongside the Product Owners, and articulated the planning phase of five central units into one standard.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-7">
+              <h3 class="timeline__title" data-i18n="evo_m7_title">Self-built design system — JDigital (2025–present).</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-7">
+              <p class="timeline__body" data-i18n="evo_m7_body">Designed, built, and govern a full system end to end: tokens, 10 organisms, a 175-key bilingual engine, hand-written, WCAG AA.</p>
+              <p class="timeline__note" data-i18n="evo_m7_note">Microsoft Front-End Developer (in progress).</p>
+              <div class="timeline__reveal">
+                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-7">
+                  <span class="timeline__rv-icon" aria-hidden="true"></span>
+                  <span class="timeline__rv-label" data-i18n="evo_m7_rv_btn">What's under it</span>
+                </button>
+                <div class="timeline__rv-panel" id="evo-rv-7" hidden>
+                  <p class="timeline__rv-txt" data-i18n="evo_m7_rv_txt">Not just tokens: ten organisms, a Gantt and a native motion system, and a 175-key bilingual engine — all hand-written to WCAG AA, governed daily by me alone.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="timeline__item">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-8">
+              <h3 class="timeline__title" data-i18n="evo_m8_title">DesignOps, now.</h3>
+              <span class="timeline__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__panel" id="evo-panel-8">
+              <p class="timeline__body" data-i18n="evo_m8_body">Bringing this systemic way of working to a design organization scaling one system across many markets.</p>
+              <p class="timeline__note" data-i18n="evo_m8_note">Microsoft Front-End Developer (in progress).</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <section class="section" aria-label="Curriculum vitae">
+    <div class="section__inner">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="about_cv_head">The one-page version.</p>
+      </div>
+      <a class="cta" href="../assets/docs/CV_Juan_Diego_Saire.pdf" download aria-label="Download Juan Diego Saire's CV (PDF)">
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="7 11 12 16 17 11"/><line x1="12" y1="4" x2="12" y2="16"/></svg></span>
+        <span class="cta__label" data-i18n="about_cv_cta">Download CV (PDF)</span>
+      </a>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+
+      <div class="footer__grid">
+        <div class="footer__content">
+
+          <p class="footer__tagline">
+            <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
+          </p>
+          <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
+             class="cta" aria-label="Connect with Juan Diego on LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 class="footer__linkedin-icon"
+                 aria-hidden="true"
+                 focusable="false">
+              <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
+            </svg>
+            <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="footer__strip">
+        <div class="footer__meta">
+          <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="../assets/js/pages/about/main.js"></script>
+</body>
+</html>

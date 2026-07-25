@@ -1,0 +1,84 @@
+/* shared/page-hero.css — dedicated-page hero + the shared section primitives the
+   dedicated pages need. The dedicated pages (capabilities/about/contact) link the
+   organism partials but NOT pages/home/work.css, where these primitives live today,
+   so they are reproduced here VERBATIM (same precedent as 6.2.1's nav-scoped
+   reproduction of shared atoms). No values are invented.
+
+   Section frame + eyebrow idiom — verbatim from pages/home/work.css lines 3–32.
+   Page hero (.pagehero*) — verbatim from the brief inline chassis
+   (work/designops-system/index.html lines 87–90), renamed off .hero* because
+   pages/home/hero.css already owns .hero and a collision would be silent. */
+
+/* ---- Section frame (work.css:3–13) ---- */
+.section {
+  position: relative;
+  width: 100vw;
+  background: var(--color-brand-black);
+  padding: clamp(4rem, 7vw, 7.5rem) 0;
+}
+.section__inner {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---- Eyebrow idiom (work.css:14–32) ---- */
+.section__eyebrow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+.section__eyebrow-bar {
+  width: 2.5rem;
+  height: 3px;
+  background: var(--color-brand-purple);
+}
+.section__eyebrow-text {
+  font-size: 0.8rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-white);
+}
+
+/* ---- Page hero (brief chassis :87–90, .hero* → .pagehero*) ---- */
+.pagehero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--nav-height) + 3px);
+  position: relative;
+}
+.pagehero__inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.2rem, 2vw, 1.9rem);
+}
+.pagehero__h1 {
+  font-size: clamp(2.4rem, 5.6vw, 5rem);
+  font-weight: var(--fw-black);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 16em;
+}
+.pagehero__deck {
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  font-weight: var(--fw-light);
+  color: var(--color-text-muted);
+  max-width: 32em;
+}
+
+/* ---- CTA atoms (verbatim from pages/home/hero.css:68–73) ----
+   The shared footer's LinkedIn link uses .cta + .cta__label, and these
+   dedicated pages do NOT link hero.css, so without this reproduction the
+   footer (and the About CV / Contact destination affordances, which reuse
+   the same idiom) would render unstyled. Same reproduction precedent as above. */
+.cta { display:inline-flex; align-items:center; gap:0.75rem; cursor:pointer; width:fit-content; padding:0.125rem 0; margin-bottom:2rem; }
+.cta__label { font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em; }
+.cta__icon { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard); }
+.cta:hover .cta__icon, .cta:focus-visible .cta__icon { background:var(--color-purple-hover); }
+.cta__icon svg { width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-brand-white); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+button.cta { background:none; border:none; font-family:var(--font-primary); }
