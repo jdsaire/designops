@@ -34,7 +34,6 @@ function init() {
   var triggers = Array.prototype.slice.call(root.querySelectorAll('.tagfilter__trigger'));
   var clearBtn = document.getElementById('tagClear');
   var status = document.getElementById('tagStatus');
-  var activeHost = document.getElementById('tagActive');
   var empty = document.getElementById('workEmpty');
   if (!chips.length || !cards.length) return;
 
@@ -104,37 +103,34 @@ function init() {
     });
   }
 
-  /* Active selections rendered as removable mini-chips in the resting bar,
-     so the chosen filters are always visible without opening a panel. */
-  function renderActiveChips() {
-    if (!activeHost) return;
-    activeHost.textContent = '';
-    chips.forEach(function (chip) {
-      if (chip.getAttribute('aria-pressed') !== 'true') return;
-      var label = (chip.textContent || '').trim();
-      var mini = document.createElement('button');
-      mini.type = 'button';
-      mini.className = 'tagfilter__minichip';
-      mini.setAttribute('data-tag', chip.dataset.tag);
-      mini.setAttribute('aria-label', tpl('filter_remove_label', 'Remove filter: {tag}', { tag: label }));
-      var text = document.createElement('span');
-      text.className = 'tagfilter__minichip-label';
-      text.textContent = label;
-      var x = document.createElement('span');
-      x.className = 'tagfilter__minichip-x';
-      x.setAttribute('aria-hidden', 'true');
-      x.textContent = '×';
-      mini.appendChild(text);
-      mini.appendChild(x);
-      mini.addEventListener('click', function () {
-        chip.setAttribute('aria-pressed', 'false');
-        apply(true);
-        var next = activeHost.querySelector('.tagfilter__minichip');
-        if (next) next.focus();
-        else if (clearBtn && !clearBtn.hidden) clearBtn.focus();
-        else chip.focus();
+  /* The chosen filters now live inside the work cards (PICK A1): every card
+     always renders its OWN full tag set, and any tag matching an active filter
+     is emphasised. Tag strings are never hardcoded here — the vocabulary comes
+     from each card's `data-tags` and the visible label from the matching chip
+     (already translated by the i18n engine), so the row stays bilingual and in
+     sync with the dictionaries. */
+  function labelForTag(tag) {
+    var chip = chips.filter(function (c) { return c.dataset.tag === tag; })[0];
+    if (chip) return (chip.textContent || '').trim();
+    var key = 'tag_' + tag.replace(/-/g, '_');
+    return dict()[key] || tag;
+  }
+  function renderCardTags(active) {
+    var activeTags = {};
+    Object.keys(active).forEach(function (c) {
+      active[c].forEach(function (t) { activeTags[t] = true; });
+    });
+    cards.forEach(function (card) {
+      var tags = tagsOf(card);
+      Array.prototype.slice.call(card.querySelectorAll('[data-tagrow]')).forEach(function (row) {
+        row.textContent = '';
+        tags.forEach(function (t) {
+          var span = document.createElement('span');
+          span.className = 'work-card__tag' + (activeTags[t] ? ' work-card__tag--on' : '');
+          span.textContent = labelForTag(t);
+          row.appendChild(span);
+        });
       });
-      activeHost.appendChild(mini);
     });
   }
 
@@ -202,7 +198,7 @@ function init() {
     }
 
     updateTriggerCounts(active);
-    renderActiveChips();
+    renderCardTags(active);
     markDeadEnds(active);
     syncHash();
     if (animate) animateCards(visibleCards);

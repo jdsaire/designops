@@ -1,7 +1,7 @@
 {
   "nav_work": "Work",
   "nav_capabilities": "Capabilities",
-  "nav_evolution": "Evolution",
+  "nav_evolution": "About",
   "nav_cta": "Contact",
   "nav_logo_alt": "Juan Diego Saire — DesignOps. Home.",
   "chrome_wordmark_sub": "DesignOps",
@@ -40,7 +40,6 @@
   "filter_cat_industry": "Industry",
   "filter_cat_field": "Field",
   "filter_cat_role": "Role",
-  "filter_cat_status": "Status",
   "filter_status": "Showing {shown} of {total} briefs.",
   "filter_empty": "No brief carries every tag selected. Remove one to widen the shortlist.",
   "filter_open_cat": "Open {category} filters",
@@ -58,8 +57,6 @@
   "tag_program_manager": "Program Manager",
   "tag_ux_designer": "UX Designer",
   "tag_frontend_developer": "Frontend Developer",
-  "tag_live": "Live",
-  "tag_wip": "In progress",
   "capabilities_eyebrow": "CAPABILITIES",
   "capabilities_headline": "Triple Value Proposition.",
   "capabilities_lede": " The strategist who builds – Not a commodity coder.",
@@ -152,7 +149,5 @@
   "footer_tagline_pre": "Built and governed",
   "footer_tagline_purple": "end to end.",
   "footer_linkedin": "Connect on LinkedIn",
-  "footer_copyright": "© 2026 Juan Diego Saire.",
-  "footer_map_label": "Site",
-  "footer_sla": "I reply within 48 hours."
+  "footer_copyright": "© 2026 Juan Diego Saire."
 }

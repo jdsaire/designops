@@ -49,18 +49,27 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a href="#top" data-nav-link="#top" class="nav__logo" aria-label="JDigital — Home">
-        <img class="nav__logo-img nav__logo-img--default" src="logos/jdigital-logo-default.svg" alt="JDigital" data-i18n-alt="nav_logo_alt">
-        <img class="nav__logo-img nav__logo-img--hover"   src="logos/jdigital-logo-hover.svg"      alt="" aria-hidden="true">
-        <img class="nav__logo-img nav__logo-img--active"  src="logos/jdigital-logo-active.svg"     alt="" aria-hidden="true">
-        <img class="nav__logo-img nav__logo-img--mono"    src="logos/jdigital-logo-mono-light.svg" alt="" aria-hidden="true">
+      <a href="#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
       </a>
 
       <!-- CENTER nav links -->
       <div class="nav__center">
-        <a href="#work"         data-nav-link="#work"         class="nav__link" data-i18n="nav_work">Work</a>
+        <div class="nav__dropdown">
+          <button class="nav__link nav__work-trigger" id="workTrigger" type="button"
+                  aria-expanded="false" aria-controls="workMenu">
+            <span data-i18n="nav_work">Work</span>
+            <span class="nav__work-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
+            <a class="nav__work-item" role="menuitem" href="work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+            <a class="nav__work-item" role="menuitem" href="work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+          </div>
+        </div>
         <a href="#capabilities" data-nav-link="#capabilities" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
-        <a href="#evolution"    data-nav-link="#evolution"    class="nav__link" data-i18n="nav_evolution">Evolution</a>
+        <a href="#evolution"    data-nav-link="#evolution"    class="nav__link" data-i18n="nav_evolution">About</a>
       </div>
 
       <!-- RIGHT utility -->
@@ -84,9 +93,10 @@
           </div>
         </div>
 
-        <button class="nav__mobile-close" id="mobileClose" type="button" aria-label="Close menu">&#215;</button>
-
-        <a href="#contact" class="nav__cta" data-i18n="nav_cta">Contact</a>
+        <a href="#contact" data-nav-link="#contact" class="nav__cta">
+          <span class="nav__cta-label" data-i18n="nav_cta">Contact</span>
+          <span class="nav__cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
       </div>
 
     </nav>
@@ -96,35 +106,47 @@
   <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
 
     <div class="nav__overlay-header">
-      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
-      <a href="#top" class="nav__overlay-logo" aria-label="JDigital — Home">
-        <img class="nav__logo-img nav__logo-img--default" src="logos/jdigital-logo-default.svg" alt="JDigital" data-i18n-alt="nav_logo_alt">
-        <img class="nav__logo-img nav__logo-img--hover"   src="logos/jdigital-logo-hover.svg"      alt="" aria-hidden="true">
-        <img class="nav__logo-img nav__logo-img--active"  src="logos/jdigital-logo-active.svg"     alt="" aria-hidden="true">
-        <img class="nav__logo-img nav__logo-img--mono"    src="logos/jdigital-logo-mono-light.svg" alt="" aria-hidden="true">
+      <a href="#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
       </a>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
     </div>
 
     <nav class="nav__overlay-links" aria-label="Mobile navigation">
-      <a href="#work"         class="nav__overlay-link">
-        <span data-i18n="nav_work">Work</span>
-        <span class="nav__overlay-link-chevron">&#8250;</span>
-      </a>
-      <a href="#capabilities" class="nav__overlay-link">
+      <div class="nav__overlay-group">
+        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                aria-expanded="false" aria-controls="overlayWorkMenu">
+          <span data-i18n="nav_work">Work</span>
+          <span class="nav__overlay-link-chevron">&#8250;</span>
+        </button>
+        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+        </div>
+      </div>
+      <a href="#capabilities" data-nav-link="#capabilities" class="nav__overlay-link">
         <span data-i18n="nav_capabilities">Capabilities</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
-      <a href="#evolution"    class="nav__overlay-link">
-        <span data-i18n="nav_evolution">Evolution</span>
+      <a href="#evolution"    data-nav-link="#evolution"    class="nav__overlay-link">
+        <span data-i18n="nav_evolution">About</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
-      <a href="#contact"      class="nav__overlay-link">
+      <a href="#contact"      data-nav-link="#contact"      class="nav__overlay-link">
         <span data-i18n="nav_cta">Contact</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
     </nav>
 
+    <div class="nav__overlay-lang" id="overlayLang" role="group" aria-label="Language">
+      <button class="nav__overlay-lang-option" type="button" data-lang="ES">ES</button>
+      <button class="nav__overlay-lang-option" type="button" data-lang="EN">EN</button>
+    </div>
+
   </div>
+
 
 
   <main id="main">
@@ -159,13 +181,6 @@
           <span class="hero__h1-line"><span data-i18n="hero_h1_es_w1">Domino </span><span class="purple" data-i18n="hero_h1_es_p1">código</span><span data-i18n="hero_h1_es_w2"> con </span><span class="purple" data-i18n="hero_h1_es_p2">IA</span><span data-i18n="hero_h1_es_w3"> para</span></span>
           <span class="hero__h1-line"><span class="purple" data-i18n="hero_h1_es_p3">escalar</span><span data-i18n="hero_h1_es_w4"> sus productos digitales</span></span>
         </h1>
-
-        <a href="#work" class="cta" aria-label="See the work — selected builds" data-i18n-aria="hero_cta_aria">
-          <span class="cta__label" data-i18n="hero_cta">See the work.</span>
-          <span class="cta__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-          </span>
-        </a>
 
       </div>
     </div>
@@ -204,9 +219,6 @@
         class="bridge__attribution"
         data-i18n="attribution"
       >Juan Diego Saire &mdash; DesignOps</p>
-      <a href="work/designops-system/" class="bridge__cta" aria-label="Access the DesignOps System brief">
-        <span data-i18n="work_card1_cta">Access Brief</span> <span class="bridge__cta-icon" aria-hidden="true">›</span>
-      </a>
     </div>
   </section>
 
@@ -236,9 +248,11 @@
            groups keep aria-labelledby, cards keep data-tags. Changing a tag
            is still a data edit, never a markup rebuild.
            ============================================================ -->
-      <div class="tagfilter" id="tagFilter">
+      <div class="tagfilter" id="tagFilter" role="group" data-i18n-aria="filter_label" aria-label="Filter the work">
         <div class="tagfilter__bar">
-          <p class="tagfilter__label" data-i18n="filter_label">Filter the work</p>
+          <span class="tagfilter__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </span>
 
           <div class="tagfilter__triggers" role="group" aria-label="Filter categories">
             <button class="tagfilter__trigger" id="tf-trig-industry" type="button"
@@ -259,16 +273,7 @@
               <span class="tagfilter__trigger-count" aria-hidden="true" hidden></span>
               <span class="tagfilter__trigger-caret" aria-hidden="true"></span>
             </button>
-            <button class="tagfilter__trigger" id="tf-trig-status" type="button"
-                    aria-expanded="false" aria-controls="tf-panel-status" data-cat="tf-cat-status">
-              <span class="tagfilter__trigger-label" id="tf-cat-status" data-i18n="filter_cat_status">Status</span>
-              <span class="tagfilter__trigger-count" aria-hidden="true" hidden></span>
-              <span class="tagfilter__trigger-caret" aria-hidden="true"></span>
-            </button>
           </div>
-
-          <!-- Active selections as removable mini-chips (JS-populated). -->
-          <div class="tagfilter__active" id="tagActive"></div>
 
           <button class="tagfilter__clear" id="tagClear" type="button" hidden data-i18n="filter_clear">Clear filters</button>
         </div>
@@ -315,16 +320,6 @@
             </div>
           </div>
 
-          <div class="tagfilter__panel" id="tf-panel-status" role="region" aria-labelledby="tf-trig-status" hidden>
-            <div class="tagfilter__panel-inner">
-              <div class="tagfilter__group" role="group" aria-labelledby="tf-cat-status">
-                <div class="tagfilter__chips">
-                  <button class="tag" type="button" aria-pressed="false" data-tag="live" data-i18n="tag_live">Live</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="wip"  data-i18n="tag_wip">In progress</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <p class="tagfilter__status" id="tagStatus" role="status" aria-live="polite"></p>
@@ -335,7 +330,7 @@
         <!-- CARD 1 — Design system (lead) -->
         <li class="work-card"
             tabindex="0"
-            data-tags="tech design-systems development ux-engineer live"
+            data-tags="tech design-systems development ux-engineer"
             aria-label="A design system I built and govern end to end">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -343,12 +338,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card1_label">Design system · Front-end</p>
+            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card1_heading">A design system I built and govern end to end.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card1_label">Design system · Front-end</p>
+            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card1_heading">A design system I built and govern end to end.</h3>
             <p class="work-card__summary" data-i18n="work_card1_body">I refused to stop at the slide. I learned front-end development, put AI under my standard, and shipped the system you are reading, governed daily by me alone.</p>
           </div>
@@ -364,7 +359,7 @@
         <!-- CARD 2 — TUUA platform -->
         <li class="work-card"
             tabindex="0"
-            data-tags="airport product-design program-manager wip"
+            data-tags="airport product-design program-manager"
             aria-label="The TUUA platform I designed, prototyped, and handed to engineering">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -372,12 +367,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card2_label">Product · Payment platform</p>
+            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card2_heading">The TUUA platform I designed, prototyped, and handed to engineering.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card2_label">Product · Payment platform</p>
+            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card2_heading">The TUUA platform I designed, prototyped, and handed to engineering.</h3>
             <p class="work-card__summary" data-i18n="work_card2_body">At Lima Airport Partners I designed, prototyped, and evaluated the TUUA international-transfer fee platform, then delivered the user flow and mockups to engineering for build. It's live, serving 130,000+ international-transfer passengers monthly.</p>
           </div>
@@ -393,7 +388,7 @@
         <!-- CARD 3 — LimaFly prototype -->
         <li class="work-card"
             tabindex="0"
-            data-tags="airport ux-research prototyping ux-designer wip"
+            data-tags="airport ux-research prototyping ux-designer"
             aria-label="A high-fidelity prototype of the full airport passenger journey">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -401,12 +396,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card3_label">Prototype · Passenger journey</p>
+            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card3_heading">A high-fidelity prototype of the full airport passenger journey.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card3_label">Prototype · Passenger journey</p>
+            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card3_heading">A high-fidelity prototype of the full airport passenger journey.</h3>
             <p class="work-card__summary" data-i18n="work_card3_body">Before I applied to Lima Airport, I built LimaFly: a high-fidelity prototype of the complete passenger journey, on a scalable foundation of tokens, component variants, and Auto Layout. I prototype the industry to walk in already fluent.</p>
           </div>
@@ -422,7 +417,7 @@
         <!-- CARD 4 — Yape trust & verify -->
         <li class="work-card"
             tabindex="0"
-            data-tags="banking development cybersecurity frontend-developer live"
+            data-tags="banking development cybersecurity frontend-developer"
             aria-label="The payment verification app I built front-end only">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -430,12 +425,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card4_label">Front-end · Banking</p>
+            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card4_heading">The screenshot says paid. My app asks the bank.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card4_label">Front-end · Banking</p>
+            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card4_heading">The screenshot says paid. My app asks the bank.</h3>
             <p class="work-card__summary" data-i18n="work_card4_body">Yape receipts can be faked field by field — except one. I entered app development to build the merchant-side check that reads it: React, TypeScript, banking-grade security discipline, and a test protocol that proves the claim held.</p>
           </div>
@@ -1018,27 +1013,10 @@
           </a>
 
         </div>
-
-        <!-- P-7 · unified site map — four nav anchors + four brief links -->
-        <nav class="footer__columns" aria-label="Site" data-i18n-aria="footer_map_label">
-          <ul class="footer__links">
-            <li><a class="footer__link" href="#work" data-i18n="nav_work">Work</a></li>
-            <li><a class="footer__link" href="#capabilities" data-i18n="nav_capabilities">Capabilities</a></li>
-            <li><a class="footer__link" href="#evolution" data-i18n="nav_evolution">Evolution</a></li>
-            <li><a class="footer__link" href="#contact" data-i18n="nav_cta">Contact</a></li>
-          </ul>
-          <ul class="footer__links">
-            <li><a class="footer__link" href="work/designops-system/" data-i18n="work_card1_label">Design system · Front-end</a></li>
-            <li><a class="footer__link" href="work/tuua-transfer/" data-i18n="work_card2_label">Product · Payments</a></li>
-            <li><a class="footer__link" href="work/limafly-ux/" data-i18n="work_card3_label">Prototype · User journey</a></li>
-            <li><a class="footer__link" href="work/yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a></li>
-          </ul>
-        </nav>
       </div>
 
       <div class="footer__strip">
         <div class="footer__meta">
-          <span data-i18n="footer_sla">I reply within 48 hours.</span>
           <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
         </div>
       </div>

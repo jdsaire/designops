@@ -15,6 +15,7 @@
      Route depth: work/yape-trust-verify-brief/ — nav paths ../../
      [TEMPORAL]: contact mailto (data-temporal="contact-email")
      ============================================================ -->
+<link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
@@ -61,42 +62,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* Scroll progress bar — moved to shared assets/css/shared/progress.css (P-5). */
 
-/* ================= NAV (live organism shape) ================= */
-.nav{position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-height);
-  background:rgba(0,0,0,0.86); backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--color-border-faint);}
-.nav__inner{max-width:var(--max-content-width); margin:0 auto; height:100%;
-  padding:0 var(--gutter); display:flex; align-items:center; justify-content:space-between; gap:clamp(1rem,2.5vw,2.5rem);}
-.nav__logo{display:flex; align-items:baseline; gap:.5rem; font-weight:var(--fw-black); letter-spacing:-0.01em; font-size:1.05rem;}
-.nav__logo small{font-weight:var(--fw-medium); color:var(--color-text-muted); letter-spacing:.14em; font-size:.62rem; text-transform:uppercase;}
-.nav__logo:hover small{color:var(--color-brand-purple);}
-.nav__center{display:flex; align-items:center; gap:clamp(.75rem,1.5vw,1.5rem);}
-.nav__link{font-size:.85rem; font-weight:var(--fw-medium); color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
-.nav__link:hover{color:var(--color-brand-white);}
-.nav__cta{font-size:.8rem; font-weight:var(--fw-semibold); padding:.5rem 1rem; border:1px solid var(--color-border-soft);
-  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
-.nav__cta:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
-.nav__right{display:flex; align-items:center; gap:clamp(.75rem,1.5vw,1.25rem);}
-/* SwapLang globe — mirrors shared/nav.css, tokens only, no new copy */
-.nav__lang{position:relative; display:inline-flex; align-items:center;}
-.nav__lang-btn{background:transparent; border:none; cursor:pointer;
-  color:var(--color-text-dim); font-size:.85rem; font-weight:var(--fw-medium);
-  display:inline-flex; align-items:center; gap:.35rem; padding:.375rem .25rem;
-  transition:color var(--duration-ui) var(--ease-standard); letter-spacing:.03em;}
-.nav__lang-btn:hover, .nav__lang:hover .nav__lang-btn{color:var(--color-brand-white);}
-.nav__lang-btn svg{width:1.05rem; height:1.05rem; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
-.nav__lang-panel{position:absolute; top:100%; right:0; min-width:4.5rem;
-  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
-  padding:.3rem 0; opacity:0; pointer-events:none; transform:translateY(-0.25rem);
-  transition:opacity var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);}
-@media (hover:hover){ .nav__lang:hover .nav__lang-panel{opacity:1; pointer-events:auto; transform:translateY(0);} }
-.nav__lang--panel-open .nav__lang-panel{opacity:1; pointer-events:auto; transform:translateY(0);}
-.nav__lang-option{display:block; width:100%; background:transparent; border:none; cursor:pointer;
-  font-size:.85rem; font-weight:var(--fw-medium); letter-spacing:.03em; color:var(--color-text-muted);
-  padding:.45rem 1rem; text-align:left; transition:color var(--duration-ui) var(--ease-standard);}
-.nav__lang-option--active, .nav__lang-option:hover{color:var(--color-brand-white);}
-.nav__lang-option--active{font-weight:var(--fw-semibold);}
-@media (max-width:767px){ .nav__center{display:none;} }
+/* NAV — promoted to shared assets/css/shared/nav.css (task 6.2.1). */
 
 /* ================= SECTION EYEBROW — inherited live organism, verbatim ================= */
 .section__eyebrow{display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem;
@@ -384,21 +350,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* ================= FOOTER (unified structure — P-7) ================= */
 .footer{border-top:1px solid var(--color-border-faint); padding:clamp(4rem,6vw,6rem) 0 clamp(2rem,3vw,2.5rem); margin-top:var(--act-pad);}
 .footer__inner{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
-.footer__grid{display:grid; grid-template-columns:55fr 45fr; gap:clamp(2rem,4vw,3rem);}
+.footer__grid{display:grid; grid-template-columns:1fr; gap:clamp(2rem,4vw,3rem);}
 .footer__content{display:flex; flex-direction:column; gap:1.5rem;}
 .footer__tagline{font-size:clamp(1.875rem,3.6vw,3rem); font-weight:var(--fw-bold); line-height:1.1; letter-spacing:-0.02em; color:var(--color-brand-white); white-space:nowrap;}
 .footer__tagline .purple{color:var(--color-brand-purple); display:block;}
 .footer .cta{display:inline-flex; align-items:center; gap:0.6rem; color:var(--color-brand-purple);}
 .footer .cta:hover,.footer .cta:focus-visible{color:var(--color-purple-hover);}
+.cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
 .footer__linkedin-icon{display:inline-block; width:1.25rem; height:1.25rem; flex-shrink:0; vertical-align:middle;}
-.footer__columns{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(2rem,4vw,4rem); max-width:32rem;}
-.footer__links{list-style:none; display:flex; flex-direction:column; gap:0.75rem; padding:0; margin:0;}
-.footer__link{font-size:0.95rem; color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
-.footer__link:hover,.footer__link:focus-visible{color:var(--color-brand-white);}
 .footer__strip{padding-top:0.75rem; border-top:1px solid var(--color-border-faint); margin-top:clamp(2rem,4vw,3rem);}
 .footer__meta{display:flex; flex-wrap:wrap; gap:1.25rem; font-size:0.8rem; color:var(--color-text-dim);}
 @media (min-width:768px) and (max-width:1023px){ .footer__grid{grid-template-columns:1fr;} }
-@media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__columns{grid-template-columns:1fr; gap:2rem;} .footer__tagline{white-space:normal;} }
+@media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__tagline{white-space:normal;} }
 
 
 /* ================= IN-PROGRESS TREATMENT — placeholder discipline =================
@@ -444,39 +407,111 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
 
 <!-- ================= NAV — routes BACK to designops home (../../ = route depth work/<slug>/) ================= -->
-<header class="nav">
-  <nav class="nav__inner" role="navigation" aria-label="Primary">
-    <a href="../../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
-      JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
-    </a>
-    <div class="nav__center">
-      <a class="nav__link" href="../../#work" data-nav-link="#work" data-i18n="nav_work">Work</a>
-      <a class="nav__link" href="../../#capabilities" data-nav-link="#capabilities" data-i18n="nav_capabilities">Capabilities</a>
-      <a class="nav__link" href="../../#evolution" data-nav-link="#evolution" data-i18n="nav_evolution">Evolution</a>
+<header class="nav" id="navbar">
+    <nav class="nav__inner" role="navigation" aria-label="Primary">
+
+      <button class="nav__hamburger" id="hamburger" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="../../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+
+      <!-- CENTER nav links -->
+      <div class="nav__center">
+        <div class="nav__dropdown">
+          <button class="nav__link nav__work-trigger" id="workTrigger" type="button"
+                  aria-expanded="false" aria-controls="workMenu">
+            <span data-i18n="nav_work">Work</span>
+            <span class="nav__work-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
+            <a class="nav__work-item" role="menuitem" href="../designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="../tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="../limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+            <a class="nav__work-item" role="menuitem" href="../yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+          </div>
+        </div>
+        <a href="../../#capabilities" data-nav-link="#capabilities" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="../../#evolution"    data-nav-link="#evolution"    class="nav__link" data-i18n="nav_evolution">About</a>
+      </div>
+
+      <!-- RIGHT utility -->
+      <div class="nav__utility">
+        <!-- SwapLang — EN/ES bilingual toggle -->
+        <div class="nav__lang" id="langSelector">
+          <button class="nav__lang-btn" id="langBtn" type="button"
+                  aria-label="Select language" aria-haspopup="listbox">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="langLabel">ES</span>
+          </button>
+          <div class="nav__lang-panel" id="langPanel" role="listbox" aria-label="Language">
+            <button class="nav__lang-option nav__lang-option--active"
+                    role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
+            <button class="nav__lang-option"
+                    role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
+          </div>
+        </div>
+
+        <a href="../../#contact" data-nav-link="#contact" class="nav__cta">
+          <span class="nav__cta-label" data-i18n="nav_cta">Contact</span>
+          <span class="nav__cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+
+    <div class="nav__overlay-header">
+      <a href="../../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
     </div>
-    <div class="nav__right">
-      <!-- SwapLang — EN/ES bilingual toggle (mirrors home chrome; no new copy) -->
-      <div class="nav__lang" id="briefLangSel">
-        <button class="nav__lang-btn" id="briefLangBtn" type="button"
-                aria-label="Select language" aria-haspopup="listbox">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-          <span id="briefLangLabel">ES</span>
+
+    <nav class="nav__overlay-links" aria-label="Mobile navigation">
+      <div class="nav__overlay-group">
+        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                aria-expanded="false" aria-controls="overlayWorkMenu">
+          <span data-i18n="nav_work">Work</span>
+          <span class="nav__overlay-link-chevron">&#8250;</span>
         </button>
-        <div class="nav__lang-panel" id="briefLangPanel" role="listbox" aria-label="Language">
-          <button class="nav__lang-option nav__lang-option--active"
-                  role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
-          <button class="nav__lang-option"
-                  role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
+        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
+          <a class="nav__overlay-subitem" role="menuitem" href="../designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
         </div>
       </div>
-      <a class="nav__cta" href="#convert" data-i18n="chrome_nav_cta">Start a conversation</a>
+      <a href="../../#capabilities" data-nav-link="#capabilities" class="nav__overlay-link">
+        <span data-i18n="nav_capabilities">Capabilities</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../../#evolution"    data-nav-link="#evolution"    class="nav__overlay-link">
+        <span data-i18n="nav_evolution">About</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../../#contact"      data-nav-link="#contact"      class="nav__overlay-link">
+        <span data-i18n="nav_cta">Contact</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+    </nav>
+
+    <div class="nav__overlay-lang" id="overlayLang" role="group" aria-label="Language">
+      <button class="nav__overlay-lang-option" type="button" data-lang="ES">ES</button>
+      <button class="nav__overlay-lang-option" type="button" data-lang="EN">EN</button>
     </div>
-  </nav>
-</header>
+
+  </div>
 
 <main>
 
@@ -944,24 +979,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
         </a>
       </div>
-      <nav class="footer__columns" aria-label="Site" data-i18n-aria="footer_map_label">
-        <ul class="footer__links">
-          <li><a class="footer__link" href="../../#work" data-i18n="nav_work">Work</a></li>
-          <li><a class="footer__link" href="../../#capabilities" data-i18n="nav_capabilities">Capabilities</a></li>
-          <li><a class="footer__link" href="../../#evolution" data-i18n="nav_evolution">Evolution</a></li>
-          <li><a class="footer__link" href="../../#contact" data-i18n="nav_cta">Contact</a></li>
-        </ul>
-        <ul class="footer__links">
-          <li><a class="footer__link" href="../designops-system/" data-i18n="work_card1_label">Design system · Front-end</a></li>
-          <li><a class="footer__link" href="../tuua-transfer/" data-i18n="work_card2_label">Product · Payments</a></li>
-          <li><a class="footer__link" href="../limafly-ux/" data-i18n="work_card3_label">Prototype · User journey</a></li>
-          <li><a class="footer__link" href="../yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a></li>
-        </ul>
-      </nav>
     </div>
     <div class="footer__strip">
       <div class="footer__meta">
-        <span data-i18n="footer_sla">I reply within 48 hours.</span>
         <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
       </div>
     </div>
@@ -1018,51 +1038,7 @@ function applyI18n(lang){
 function swapLang(lang){ curLang=lang; try{ localStorage.setItem("jds-lang",lang); }catch(e){} applyI18n(lang); }
 applyI18n(curLang);
 
-/* ============ Nav context — resolve cross-document hrefs from a base hash. ============ */
-(function navContext(){
-  const prefix = document.documentElement.getAttribute("data-nav-context") === "brief" ? "../../" : "";
-  document.querySelectorAll("[data-nav-link]").forEach(a => a.setAttribute("href", prefix + a.getAttribute("data-nav-link")));
-})();
-
-/* ============ SwapLang globe — brief nav toggle (mirrors home chrome). ============ */
-(function briefLang(){
-  const sel = document.getElementById("briefLangSel");
-  const panel = document.getElementById("briefLangPanel");
-  const label = document.getElementById("briefLangLabel");
-  const btn = document.getElementById("briefLangBtn");
-  function setActive(lang){
-    label.textContent = lang;
-    panel.querySelectorAll(".nav__lang-option").forEach(b => {
-      const on = b.dataset.lang === lang;
-      b.classList.toggle("nav__lang-option--active", on);
-      b.setAttribute("aria-selected", String(on));
-    });
-  }
-  /* P-6b: explicit aria-expanded on the trigger + Escape-to-close / focus return. */
-  function setPanel(open){
-    sel.classList.toggle("nav__lang--panel-open", open);
-    btn.setAttribute("aria-expanded", String(open));
-  }
-  setActive(curLang);
-  btn.setAttribute("aria-expanded", "false");
-  btn.addEventListener("click", e => {
-    e.stopPropagation();
-    setPanel(!sel.classList.contains("nav__lang--panel-open"));
-  });
-  document.addEventListener("click", () => setPanel(false));
-  panel.addEventListener("click", e => e.stopPropagation());
-  sel.addEventListener("keydown", e => {
-    if (e.key === "Escape" || e.key === "Esc") { setPanel(false); btn.focus(); }
-  });
-  panel.querySelectorAll(".nav__lang-option").forEach(opt => {
-    opt.addEventListener("click", () => {
-      const lang = opt.dataset.lang;
-      setActive(lang);
-      setPanel(false);
-      swapLang(lang);
-    });
-  });
-})();
+/* Nav chrome (href rewrite + SwapLang panel) — promoted to core/navchrome.js (task 6.2.1). */
 
 /* Scroll progress bar — moved to shared assets/js/core/progress.js (P-5), loaded via the module bootstrap at the end of the page (P-5). */
 
@@ -1400,6 +1376,11 @@ const io = new IntersectionObserver(entries=>{
 },{threshold:0.18});
 document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
-<script type="module">import { init as initProgress } from "../../assets/js/core/progress.js"; initProgress();</script>
+<script type="module">
+  import { init as initProgress } from "../../assets/js/core/progress.js";
+  import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
+  initProgress();
+  initNavChrome({ swapLang: window.swapLang });
+</script>
 </body>
 </html>
