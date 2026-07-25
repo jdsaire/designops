@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="ES" data-nav-context="page" data-nav-depth="1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact · Juan Diego Saire — DesignOps</title>
+  <meta name="description" content="Tell me about the team and the challenge. One form, a reply within 48 hours.">
+  <link rel="icon" type="image/svg+xml" href="../logos/jdigital-logo-default.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact · Juan Diego Saire — DesignOps">
+  <meta property="og:description" content="Tell me about the team and the challenge. One form, a reply within 48 hours.">
+  <meta property="og:image" content="../assets/img/bridge1_onboarding.svg">
+  <meta property="og:locale" content="en_US">
+
+  <link rel="stylesheet" href="../assets/css/base/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base/reset.css">
+  <link rel="stylesheet" href="../assets/css/shared/progress.css">
+  <link rel="stylesheet" href="../assets/css/shared/nav.css">
+  <link rel="stylesheet" href="../assets/css/shared/page-hero.css">
+  <link rel="stylesheet" href="../assets/css/shared/section-extras.css">
+  <link rel="stylesheet" href="../assets/css/pages/contact/contact.css">
+  <link rel="stylesheet" href="../assets/css/shared/footer.css">
+  <link rel="stylesheet" href="../assets/css/shared/designops-variant.css">
+</head>
+<body>
+
+  <!-- Scroll progress (P-5) — shared chrome, grows L→R, reverses on upscroll -->
+  <div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
+
+  <header class="nav" id="navbar">
+    <nav class="nav__inner" role="navigation" aria-label="Primary">
+
+      <button class="nav__hamburger" id="hamburger" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+
+      <!-- CENTER nav links -->
+      <div class="nav__center">
+        <div class="nav__dropdown">
+          <button class="nav__link nav__work-trigger" id="workTrigger" type="button"
+                  aria-expanded="false" aria-controls="workMenu">
+            <span data-i18n="nav_work">Work</span>
+            <span class="nav__work-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
+            <a class="nav__work-item" role="menuitem" href="../work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="../work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="../work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+            <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+          </div>
+        </div>
+        <a href="../capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="../about/" data-nav-page="about/" class="nav__link" data-i18n="nav_evolution">About</a>
+      </div>
+
+      <!-- RIGHT utility -->
+      <div class="nav__utility">
+        <!-- SwapLang — EN/ES bilingual toggle -->
+        <div class="nav__lang" id="langSelector">
+          <button class="nav__lang-btn" id="langBtn" type="button"
+                  aria-label="Select language" aria-haspopup="listbox">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="langLabel">ES</span>
+          </button>
+          <div class="nav__lang-panel" id="langPanel" role="listbox" aria-label="Language">
+            <button class="nav__lang-option nav__lang-option--active"
+                    role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
+            <button class="nav__lang-option"
+                    role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
+          </div>
+        </div>
+
+        <a href="../contact/" data-nav-page="contact/" class="nav__cta" aria-current="page">
+          <span class="nav__cta-label" data-i18n="nav_cta">Contact</span>
+          <span class="nav__cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+
+    <div class="nav__overlay-header">
+      <a href="../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
+    </div>
+
+    <nav class="nav__overlay-links" aria-label="Mobile navigation">
+      <div class="nav__overlay-group">
+        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                aria-expanded="false" aria-controls="overlayWorkMenu">
+          <span data-i18n="nav_work">Work</span>
+          <span class="nav__overlay-link-chevron">&#8250;</span>
+        </button>
+        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+        </div>
+      </div>
+      <a href="../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
+        <span data-i18n="nav_capabilities">Capabilities</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../about/" data-nav-page="about/" class="nav__overlay-link">
+        <span data-i18n="nav_evolution">About</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link" aria-current="page">
+        <span data-i18n="nav_cta">Contact</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+    </nav>
+
+    <div class="nav__overlay-lang" id="overlayLang" role="group" aria-label="Language">
+      <button class="nav__overlay-lang-option" type="button" data-lang="ES">ES</button>
+      <button class="nav__overlay-lang-option" type="button" data-lang="EN">EN</button>
+    </div>
+
+  </div>
+
+  <main id="main">
+
+  <section class="pagehero" aria-label="Contact">
+    <div class="section__inner pagehero__inner">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="contact_eyebrow">CONTACT</p>
+      </div>
+      <h1 class="pagehero__h1" data-i18n="contact_headline">Let's talk.</h1>
+      <p class="pagehero__deck" data-i18n="contact_lede">Submit your business inquiry.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section" aria-label="Contact form">
+    <div class="section__inner">
+      <div class="contact-form-box">
+        <form id="contactForm" class="contact-form"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST" novalidate>
+
+          <div class="form-group" id="field-engagement">
+            <label class="form-label" for="engagementType">
+              <span data-i18n="contact_engagement_label">The engagement</span>
+              <span class="asterisk">*</span>
+            </label>
+            <div class="select-wrapper">
+              <select class="form-select" id="engagementType" name="engagementType" required aria-describedby="hint-engagement">
+                <option value="" disabled selected hidden data-i18n="contact_engagement_placeholder">Select one</option>
+                <option value="viable" data-i18n="contact_engagement_opt1">A viable product to ship</option>
+                <option value="govern" data-i18n="contact_engagement_opt2">One design standard to govern</option>
+                <option value="multiplier" data-i18n="contact_engagement_opt3">An AI capability multiplier</option>
+                <option value="other" data-i18n="contact_engagement_opt4">Something else</option>
+              </select>
+            </div>
+            <span class="error-hint" id="hint-engagement" role="status" aria-live="polite" data-i18n="contact_err_type">Select an engagement type.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" id="field-name">
+              <label class="form-label" for="contactName">
+                <span data-i18n="contact_name_label">Full name</span>
+                <span class="asterisk">*</span>
+              </label>
+              <input class="form-input" type="text" id="contactName" name="fullName"
+                     placeholder="Applicant" required aria-describedby="hint-name"
+                     data-i18n-placeholder="contact_name_placeholder">
+              <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="contact_err_name">Full name is required.</span>
+            </div>
+            <div class="form-group" id="field-email">
+              <label class="form-label" for="contactEmail">
+                <span data-i18n="contact_email_label">Corporate email</span>
+                <span class="asterisk">*</span>
+              </label>
+              <input class="form-input" type="email" id="contactEmail" name="email"
+                     placeholder="name@company.com" required aria-describedby="hint-email"
+                     data-i18n-placeholder="contact_email_placeholder">
+              <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="contact_err_email">A valid email is required.</span>
+            </div>
+          </div>
+
+          <div class="form-group" id="field-message">
+            <label class="form-label" for="contactMessage">
+              <span data-i18n="contact_msg_label">Requirement details</span>
+              <span class="asterisk">*</span>
+            </label>
+            <textarea class="form-textarea" id="contactMessage" name="message"
+                      placeholder="Describe the scope, the expected role, and the timeline. The precision of these details will determine whether the engagement is viable."
+                      required aria-describedby="hint-message"
+                      data-i18n-placeholder="contact_msg_placeholder"></textarea>
+            <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="contact_err_msg">A message is required.</span>
+          </div>
+
+          <div id="footerActions">
+            <p class="mandatory-footnote"><span class="asterisk">*</span> <span data-i18n="contact_mandatory_footnote">Indicates a required field.</span></p>
+
+            <div class="submit-row" id="submitRow">
+              <p class="form-disclaimer" data-i18n="contact_disclaimer">I'll reply within 48 hours — usually sooner.</p>
+
+              <button type="submit" class="submit-btn" aria-label="Send message">
+                <span class="submit-label" id="submitLabel" data-i18n="contact_submit">Send message</span>
+                <span class="submit-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Other channels">
+    <div class="section__inner">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="contact_elsewhere_head">Or find me here.</p>
+      </div>
+      <a class="cta" href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer" aria-label="Connect with Juan Diego on LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/></svg>
+        <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+      </a>
+      <a class="cta" href="https://github.com/jdsaire" target="_blank" rel="noopener noreferrer" aria-label="Browse Juan Diego's code on GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.575.106.785-.25.785-.556 0-.274-.01-1-.015-1.965-3.195.695-3.87-1.54-3.87-1.54-.523-1.33-1.276-1.684-1.276-1.684-1.043-.713.08-.699.08-.699 1.153.081 1.76 1.184 1.76 1.184 1.025 1.757 2.69 1.25 3.345.955.104-.742.4-1.25.728-1.538-2.55-.29-5.234-1.275-5.234-5.673 0-1.253.448-2.278 1.183-3.081-.119-.29-.513-1.458.112-3.04 0 0 .965-.309 3.16 1.177a10.98 10.98 0 0 1 2.877-.387c.976.004 1.96.132 2.877.387 2.194-1.486 3.157-1.177 3.157-1.177.627 1.582.233 2.75.114 3.04.737.803 1.182 1.828 1.182 3.081 0 4.409-2.688 5.38-5.246 5.665.412.355.78 1.056.78 2.128 0 1.537-.014 2.776-.014 3.154 0 .309.207.668.79.555C20.713 21.386 24 17.077 24 12 24 5.73 18.77.5 12 .5Z" fill="currentColor"/></svg>
+        <span class="cta__label" data-i18n="contact_github">Browse the code on GitHub</span>
+      </a>
+    </div>
+  </section>
+
+  <div id="successModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalHeadline">
+    <div class="modal-window">
+      <button id="modalCloseBtn" class="modal-close-btn"
+              aria-label="Close" data-i18n-aria="contact_modal_close_aria">
+        <svg viewBox="0 0 24 24" fill="none">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <img src="../assets/img/jdigital-logo-mini2.svg" alt="JD Icon" class="modal-logo" onerror="this.style.display='none'">
+
+      <h3 class="modal-headline" id="modalHeadline" data-i18n="contact_success_headline">Thanks — message received.</h3>
+      <p class="modal-body" id="modalBody" aria-live="polite" aria-atomic="true" data-i18n="contact_success_body">I'll reply within 48 hours.</p>
+    </div>
+  </div>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+
+      <div class="footer__grid">
+        <div class="footer__content">
+
+          <p class="footer__tagline">
+            <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
+          </p>
+          <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
+             class="cta" aria-label="Connect with Juan Diego on LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 class="footer__linkedin-icon"
+                 aria-hidden="true"
+                 focusable="false">
+              <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
+            </svg>
+            <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="footer__strip">
+        <div class="footer__meta">
+          <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script type="module" src="../assets/js/pages/contact/main.js"></script>
+</body>
+</html>

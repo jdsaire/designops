@@ -45,6 +45,11 @@
 /* P-6a scrollspy — current section link holds solid white + semibold weight
    (reconciliation for the retired underline; aria-current still set in JS). */
 .nav__link--current { color:var(--color-brand-white); font-weight:var(--fw-semibold); }
+/* W6.2.2 — dedicated pages carry an explicit page-level current state as an
+   authored attribute (scrollspy no longer applies once the categories are page
+   routes). Attribute-based so navbar/overlay CLASS sequences stay byte-identical. */
+.nav__link[aria-current="page"],
+.nav__overlay-link[aria-current="page"] { color:var(--color-brand-white); font-weight:var(--fw-semibold); }
 
 /* Work dropdown — disclosure over the four brief pages */
 .nav__dropdown { position:relative; display:inline-flex; }

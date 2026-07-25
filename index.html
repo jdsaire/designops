@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-lang="ES" data-nav-context="home">
+<html lang="es" data-lang="ES" data-nav-context="home" data-nav-depth="0">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,13 +20,10 @@
   <link rel="stylesheet" href="assets/css/shared/nav.css">
   <link rel="stylesheet" href="assets/css/pages/home/hero.css">
   <link rel="stylesheet" href="assets/css/pages/home/work.css">
-  <link rel="stylesheet" href="assets/css/pages/home/capabilities.css">
   <link rel="stylesheet" href="assets/css/shared/section-extras.css">
-  <link rel="stylesheet" href="assets/css/pages/home/evolution.css">
+  <link rel="stylesheet" href="assets/css/pages/home/teaser.css">
   <link rel="stylesheet" href="assets/css/shared/footer.css">
-  <link rel="stylesheet" href="assets/css/pages/home/capabilities-cards.css">
   <link rel="stylesheet" href="assets/css/shared/bridge.css">
-  <link rel="stylesheet" href="assets/css/pages/home/contact.css">
   <link rel="stylesheet" href="assets/css/shared/ticker.css">
   <link rel="stylesheet" href="assets/css/pages/home/work-status.css">
   <link rel="stylesheet" href="assets/css/shared/designops-variant.css">
@@ -68,8 +65,8 @@
             <a class="nav__work-item" role="menuitem" href="work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
           </div>
         </div>
-        <a href="#capabilities" data-nav-link="#capabilities" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
-        <a href="#evolution"    data-nav-link="#evolution"    class="nav__link" data-i18n="nav_evolution">About</a>
+        <a href="capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="about/"    data-nav-page="about/"    class="nav__link" data-i18n="nav_evolution">About</a>
       </div>
 
       <!-- RIGHT utility -->
@@ -93,7 +90,7 @@
           </div>
         </div>
 
-        <a href="#contact" data-nav-link="#contact" class="nav__cta">
+        <a href="contact/" data-nav-page="contact/" class="nav__cta">
           <span class="nav__cta-label" data-i18n="nav_cta">Contact</span>
           <span class="nav__cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
         </a>
@@ -126,15 +123,15 @@
           <a class="nav__overlay-subitem" role="menuitem" href="work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
         </div>
       </div>
-      <a href="#capabilities" data-nav-link="#capabilities" class="nav__overlay-link">
+      <a href="capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
         <span data-i18n="nav_capabilities">Capabilities</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
-      <a href="#evolution"    data-nav-link="#evolution"    class="nav__overlay-link">
+      <a href="about/"    data-nav-page="about/"    class="nav__overlay-link">
         <span data-i18n="nav_evolution">About</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
-      <a href="#contact"      data-nav-link="#contact"      class="nav__overlay-link">
+      <a href="contact/"      data-nav-page="contact/"      class="nav__overlay-link">
         <span data-i18n="nav_cta">Contact</span>
         <span class="nav__overlay-link-chevron">&#8250;</span>
       </a>
@@ -460,353 +457,57 @@
   </section>
 
   <!-- ============================================================
-       CAPABILITIES — carousel (absorbs former Offer) · EN public
+       CAPABILITIES — teaser (full carousel lives at /capabilities/)
        Anchor: #capabilities
-       Eyebrow + Heading + Lede locked.
        ============================================================ -->
   <section class="section section--services section--capabilities" id="capabilities" aria-labelledby="capabilities-heading">
-
     <div class="section__inner">
-      <div class="services__header capabilities__header">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="capabilities_eyebrow">CAPABILITIES</p>
-        </div>
-        <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">Three mandates, one operator.</h2>
-        <p class="section__lede" data-i18n="capabilities_lede">Not a commodity programmer — the strategist who calls feasibility, then builds.</p>
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="capabilities_eyebrow">CAPABILITIES</p>
       </div>
+      <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">Triple Value Proposition.</h2>
+      <p class="section__lede" data-i18n="capabilities_lede"> The strategist who builds – Not a commodity coder.</p>
+      <ul class="teaser__triptych" role="list">
+        <li class="teaser__item">
+          <p class="teaser__label" data-i18n="cap_s1_label">PRODUCTION</p>
+          <h3 class="teaser__title" data-i18n="cap_s1_title">Viable digital products.</h3>
+        </li>
+        <li class="teaser__item">
+          <p class="teaser__label" data-i18n="cap_s2_label">ADOPTION</p>
+          <h3 class="teaser__title" data-i18n="cap_s2_title">One design standard, at scale.</h3>
+        </li>
+        <li class="teaser__item">
+          <p class="teaser__label" data-i18n="cap_s3_label">AUGMENTATION</p>
+          <h3 class="teaser__title" data-i18n="cap_s3_title">An AI capability multiplier.</h3>
+        </li>
+      </ul>
+      <a class="cta" href="capabilities/" data-nav-page="capabilities/" aria-label="See all three capabilities">
+        <span class="cta__label" data-i18n="home_cap_cta">See all three capabilities</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
-
-    <div class="section__inner">
-      <div class="services__carousel-outer">
-        <div class="services__carousel" role="region" aria-roledescription="carousel" aria-label="Capabilities">
-
-          <ol class="services__slides" role="list" id="servicesTrack">
-
-            <!-- SLIDE 1 — PRODUCTION (old Mandate 01) -->
-            <li class="services__slide services__slide--active"
-                role="group" aria-roledescription="slide" aria-label="Slide 1 of 3"
-                data-slide-index="0">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="Viable digital products — feasibility to production">
-                      <img src="assets/img/services/cap-production.svg" alt="" data-i18n-alt="cap_s1_img_alt" class="services__image">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="cap_s1_label">PRODUCTION</p>
-                  <h3 class="services__pillar-title" data-i18n="cap_s1_title">Viable digital products.</h3>
-                  <p class="services__pillar-body" data-i18n="cap_s1_body">I make the feasibility and viability call up front, design the UX, and take it to production — so a strategic decision becomes a shipped product, not a deck.</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Start a conversation">
-                    <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Start a conversation">
-                      <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">1 / 3</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <!-- SLIDE 2 — ADOPTION (old Mandate 03) -->
-            <li class="services__slide"
-                role="group" aria-roledescription="slide" aria-label="Slide 2 of 3"
-                data-slide-index="1">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="One design standard, governed and adopted at scale">
-                      <img src="assets/img/services/cap-adoption.svg" alt="" data-i18n-alt="cap_s2_img_alt" class="services__image">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="cap_s2_label">ADOPTION</p>
-                  <h3 class="services__pillar-title" data-i18n="cap_s2_title">One design standard, at scale.</h3>
-                  <p class="services__pillar-body" data-i18n="cap_s2_body">I define the tokens, components, and protocols once, then keep adoption correct and consistent across the whole portfolio — turning a shared standard into something local teams can actually run, day to day.</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Start a conversation">
-                    <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Start a conversation">
-                      <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">2 / 3</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <!-- SLIDE 3 — AUGMENTATION (old Mandate 02, reframed) -->
-            <li class="services__slide"
-                role="group" aria-roledescription="slide" aria-label="Slide 3 of 3"
-                data-slide-index="2">
-              <div class="services__slide-inner">
-                <div class="services__media">
-                  <div class="services__image-slot" aria-hidden="true">
-                    <span class="img-alt-host" alt="AI capability multiplier augmenting the whole team">
-                      <img src="assets/img/services/cap-augmentation.svg" alt="" data-i18n-alt="cap_s3_img_alt" class="services__image">
-                    </span>
-                  </div>
-                </div>
-                <div class="services__content">
-                  <p class="services__pillar-label" data-i18n="cap_s3_label">AUGMENTATION</p>
-                  <h3 class="services__pillar-title" data-i18n="cap_s3_title">An AI capability multiplier.</h3>
-                  <p class="services__pillar-body" data-i18n="cap_s3_body">I build and automate to multiply what internal teams can do — sharing AI assistants and know-how that lift productivity and the quality of deliverables across the workforce. The capability multiplier that turns curiosity into learning, learning into solutions, and solutions into real impact.</p>
-                  <a href="#contact" class="services__cta services__cta--desktop" aria-label="Start a conversation">
-                    <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-                    <span class="services__cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                    </span>
-                  </a>
-                  <div class="services__mobile-footer">
-                    <a href="#contact" class="services__cta" aria-label="Start a conversation">
-                      <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-                      <span class="services__cta-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                      </span>
-                    </a>
-                    <div class="services__mobile-nav">
-                      <button class="services__nav services__nav--prev services__nav--mobile" type="button" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                      </button>
-                      <span class="services__counter--mobile" aria-hidden="true">3 / 3</span>
-                      <button class="services__nav services__nav--next services__nav--mobile" type="button" aria-label="Next">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-          </ol>
-        </div><!-- /services__carousel -->
-      </div><!-- /services__carousel-outer -->
-
-      <!-- Desktop controls -->
-      <div class="services__controls">
-        <div aria-hidden="true"></div>
-        <div class="services__controls-inner">
-          <button class="services__nav services__nav--prev" type="button" aria-label="Previous capability">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <span class="services__counter" aria-live="polite" aria-atomic="true">1 / 3</span>
-          <button class="services__nav services__nav--next" type="button" aria-label="Next capability">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Pagination dots — all breakpoints -->
-      <div class="services__dots" role="tablist" aria-label="Capabilities pagination">
-        <button class="services__dot services__dot--active" type="button" aria-label="Slide 1 of 3" data-slide-index="0"></button>
-        <button class="services__dot" type="button" aria-label="Slide 2 of 3" data-slide-index="1"></button>
-        <button class="services__dot" type="button" aria-label="Slide 3 of 3" data-slide-index="2"></button>
-      </div>
-
-    </div><!-- /section__inner -->
-
   </section>
 
   <!-- ============================================================
-       ABOUT — v5 · EN/ES bilingual
-       Anchor: #about
-       Copy locked: about-en.json + about-es.json
+       ABOUT — teaser (full timeline lives at /about/)
+       Anchor: #about  (historical alias #evolution retained)
        ============================================================ -->
-  <!-- ============================================================
-       EVOLUTION — reveal-on-scroll timeline
-       Anchor: #evolution
-       ============================================================ -->
-  <section class="section section--alt section--evolution" id="evolution" aria-labelledby="evolution-heading">
+  <section class="section section--alt" id="about" aria-labelledby="about-heading">
+    <span id="evolution" aria-hidden="true"></span>
     <div class="section__inner">
-
       <div class="evolution__header">
         <div class="section__eyebrow">
           <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="evolution_eyebrow">EVOLUTION</p>
+          <p class="section__eyebrow-text" data-i18n="about_hero_eyebrow">ABOUT</p>
         </div>
-        <h2 class="section__headline" id="evolution-heading" data-i18n="evolution_heading">The making of the operator.</h2>
-        <p class="section__lede" data-i18n="evolution_lede">I came down from strategy and picked up the build. Here’s the arc.</p>
+        <h2 class="section__headline" id="about-heading" data-i18n="home_about_head">The strategist who learned to build.</h2>
+        <p class="section__lede" data-i18n="home_about_lede">Engineering, an MBA, teaching, the airport — then the system you're reading.</p>
       </div>
-
-      <ol class="timeline" role="list">
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-1">
-              <h3 class="timeline__title" data-i18n="evo_m1_title">Industrial Engineering — ESAN (2010–2014).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-1">
-              <p class="timeline__body" data-i18n="evo_m1_body">Industrial and Commercial Engineering, specialization Corporate Finance. The systems-and-process grounding under everything since.</p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-2">
-              <h3 class="timeline__title" data-i18n="evo_m2_title">Hunt LNG — Projects &amp; Contracts (2015–2016).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-2">
-              <p class="timeline__body" data-i18n="evo_m2_body">South America’s first LNG plant. Held contractor deliverables to quality, schedule, and spec across 35 EPC projects — vendor governance, learned early.</p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-3">
-              <h3 class="timeline__title" data-i18n="evo_m3_title">Tricontinental MBA — CENTRUM PUCP (2016–2017).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-3">
-              <p class="timeline__body" data-i18n="evo_m3_body">Full-time, three continents (UVic, Canada; Maastricht, Netherlands). First in class. Strategic Consulting.</p>
-              <div class="timeline__reveal">
-                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-3">
-                  <span class="timeline__rv-icon" aria-hidden="true"></span>
-                  <span class="timeline__rv-label" data-i18n="evo_m3_rv_btn">The exchanges</span>
-                </button>
-                <div class="timeline__rv-panel" id="evo-rv-3" hidden>
-                  <p class="timeline__rv-txt" data-i18n="evo_m3_rv_txt">Full-time across three continents — terms at the University of Victoria in Canada and Maastricht University in the Netherlands — finishing first in class, specialized in Strategic Consulting.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-4">
-              <h3 class="timeline__title" data-i18n="evo_m4_title">Lecturer — ESAN &amp; UTEC (2018–2024).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-4">
-              <p class="timeline__body" data-i18n="evo_m4_body">Taught 1,200+ students; mentored 29 project teams through end-to-end UX; seeded Communities of Practice.</p>
-              <div class="timeline__reveal">
-                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-4">
-                  <span class="timeline__rv-icon" aria-hidden="true"></span>
-                  <span class="timeline__rv-label" data-i18n="evo_m4_rv_btn">What I taught</span>
-                </button>
-                <div class="timeline__rv-panel" id="evo-rv-4" hidden>
-                  <p class="timeline__rv-txt" data-i18n="evo_m4_rv_txt">At UTEC, eleven courses across three project levels, mentoring 29 teams end to end through UX design and evaluation. At ESAN, Calculus I to 1,200+ students, in person and remote at scale.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-5">
-              <h3 class="timeline__title" data-i18n="evo_m5_title">UX — HEC Montréal (2023).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-5">
-              <p class="timeline__body" data-i18n="evo_m5_body">MicroMasters in UX Design: the full UX lifecycle, including a UX-management track on team operations and process standardization.</p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-6">
-              <h3 class="timeline__title" data-i18n="evo_m6_title">Innovation Specialist — Lima Airport Partners (2025).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-6">
-              <p class="timeline__body" data-i18n="evo_m6_body">Innovation’s seat on the most critical post-terminal program: designed and delivered the TUUA payment platform (now 130,000+ passengers monthly), articulated planning across five central areas — Finance, IT, Terminals, Commercial, Reputation — and trained 70 staff to 3.88/4.</p>
-              <p class="timeline__note" data-i18n="evo_m6_note">McKinsey Forward — McKinsey.org (2025) · Microsoft Program Management (2026).</p>
-              <div class="timeline__reveal">
-                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-6">
-                  <span class="timeline__rv-icon" aria-hidden="true"></span>
-                  <span class="timeline__rv-label" data-i18n="evo_m6_rv_btn">Beyond the platform</span>
-                </button>
-                <div class="timeline__rv-panel" id="evo-rv-6" hidden>
-                  <p class="timeline__rv-txt" data-i18n="evo_m6_rv_txt">Beyond TUUA, I ran a tracking dashboard across a twelve-project hybrid portfolio, working preventive and corrective action alongside the Product Owners, and articulated the planning phase of five central units into one standard.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-7">
-              <h3 class="timeline__title" data-i18n="evo_m7_title">Self-built design system — JDigital (2025–present).</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-7">
-              <p class="timeline__body" data-i18n="evo_m7_body">Designed, built, and govern a full system end to end: tokens, 10 organisms, a 175-key bilingual engine, hand-written, WCAG AA.</p>
-              <p class="timeline__note" data-i18n="evo_m7_note">Microsoft Front-End Developer (in progress).</p>
-              <div class="timeline__reveal">
-                <button class="timeline__rv-btn" type="button" aria-expanded="false" aria-controls="evo-rv-7">
-                  <span class="timeline__rv-icon" aria-hidden="true"></span>
-                  <span class="timeline__rv-label" data-i18n="evo_m7_rv_btn">What's under it</span>
-                </button>
-                <div class="timeline__rv-panel" id="evo-rv-7" hidden>
-                  <p class="timeline__rv-txt" data-i18n="evo_m7_rv_txt">Not just tokens: ten organisms, a Gantt and a native motion system, and a 175-key bilingual engine — all hand-written to WCAG AA, governed daily by me alone.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="evo-panel-8">
-              <h3 class="timeline__title" data-i18n="evo_m8_title">DesignOps, now.</h3>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="evo-panel-8">
-              <p class="timeline__body" data-i18n="evo_m8_body">Bringing this systemic way of working to a design organization scaling one system across many markets.</p>
-              <p class="timeline__note" data-i18n="evo_m8_note">Microsoft Front-End Developer (in progress).</p>
-            </div>
-          </div>
-        </li>
-      </ol>
-
+      <a class="cta" href="about/" data-nav-page="about/" aria-label="See the full arc">
+        <span class="cta__label" data-i18n="home_about_cta">See the full arc</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </section>
 
@@ -876,113 +577,23 @@
   </section>
 
   <!-- ============================================================
-       CONTACT
-       Single-path contact organism — engagement dropdown + fields.
+       CONTACT — teaser (form + modal live at /contact/)
+       Anchor: #contact
        ============================================================ -->
   <section id="contact" class="section" aria-labelledby="contact-heading">
     <div class="section__inner">
-
-      <header class="contact-header">
-        <div class="header-bar" aria-hidden="true"></div>
-        <span class="header-eyebrow" data-i18n="contact_eyebrow">CONTACT</span>
-        <h2 class="header-headline" id="contact-heading" data-i18n="contact_headline">Let's talk.</h2>
-        <p class="header-lede" data-i18n="contact_lede">Tell me about the team and the challenge.</p>
-      </header>
-
-      <div class="contact-form-box">
-        <form id="contactForm" class="contact-form"
-              action="https://formspree.io/f/YOUR_FORM_ID"
-              method="POST" novalidate>
-
-          <div class="form-group" id="field-engagement">
-            <label class="form-label" for="engagementType">
-              <span data-i18n="contact_engagement_label">The engagement</span>
-              <span class="asterisk">*</span>
-            </label>
-            <div class="select-wrapper">
-              <select class="form-select" id="engagementType" name="engagementType" required aria-describedby="hint-engagement">
-                <option value="" disabled selected hidden data-i18n="contact_engagement_placeholder">Select one</option>
-                <option value="viable" data-i18n="contact_engagement_opt1">A viable product to ship</option>
-                <option value="govern" data-i18n="contact_engagement_opt2">One design standard to govern</option>
-                <option value="multiplier" data-i18n="contact_engagement_opt3">An AI capability multiplier</option>
-                <option value="other" data-i18n="contact_engagement_opt4">Something else</option>
-              </select>
-            </div>
-            <span class="error-hint" id="hint-engagement" role="status" aria-live="polite" data-i18n="contact_err_type">Select an engagement type.</span>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group" id="field-name">
-              <label class="form-label" for="contactName">
-                <span data-i18n="contact_name_label">Full name</span>
-                <span class="asterisk">*</span>
-              </label>
-              <input class="form-input" type="text" id="contactName" name="fullName"
-                     placeholder="Applicant" required aria-describedby="hint-name"
-                     data-i18n-placeholder="contact_name_placeholder">
-              <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="contact_err_name">Full name is required.</span>
-            </div>
-            <div class="form-group" id="field-email">
-              <label class="form-label" for="contactEmail">
-                <span data-i18n="contact_email_label">Corporate email</span>
-                <span class="asterisk">*</span>
-              </label>
-              <input class="form-input" type="email" id="contactEmail" name="email"
-                     placeholder="name@company.com" required aria-describedby="hint-email"
-                     data-i18n-placeholder="contact_email_placeholder">
-              <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="contact_err_email">A valid email is required.</span>
-            </div>
-          </div>
-
-          <div class="form-group" id="field-message">
-            <label class="form-label" for="contactMessage">
-              <span data-i18n="contact_msg_label">Requirement details</span>
-              <span class="asterisk">*</span>
-            </label>
-            <textarea class="form-textarea" id="contactMessage" name="message"
-                      placeholder="Describe the scope, the expected role, and the timeline. The precision of these details will determine whether the engagement is viable."
-                      required aria-describedby="hint-message"
-                      data-i18n-placeholder="contact_msg_placeholder"></textarea>
-            <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="contact_err_msg">A message is required.</span>
-          </div>
-
-          <div id="footerActions">
-            <p class="mandatory-footnote"><span class="asterisk">*</span> <span data-i18n="contact_mandatory_footnote">Indicates a required field.</span></p>
-
-            <div class="submit-row" id="submitRow">
-              <p class="form-disclaimer" data-i18n="contact_disclaimer">I'll reply within 48 hours — usually sooner.</p>
-
-              <button type="submit" class="submit-btn" aria-label="Send message">
-                <span class="submit-label" id="submitLabel" data-i18n="contact_submit">Send message</span>
-                <span class="submit-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-                </span>
-              </button>
-            </div>
-          </div>
-
-        </form>
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="contact_eyebrow">CONTACT</p>
       </div>
-
+      <h2 class="section__headline" id="contact-heading" data-i18n="contact_headline">Let's talk.</h2>
+      <p class="section__lede" data-i18n="home_contact_lede">One form. A reply within 48 hours — usually sooner.</p>
+      <a class="cta" href="contact/" data-nav-page="contact/" aria-label="Start a conversation">
+        <span class="cta__label" data-i18n="chrome_nav_cta">Start a conversation</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </section>
-
-  <div id="successModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalHeadline">
-    <div class="modal-window">
-      <button id="modalCloseBtn" class="modal-close-btn"
-              aria-label="Close" data-i18n-aria="contact_modal_close_aria">
-        <svg viewBox="0 0 24 24" fill="none">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-
-      <img src="assets/img/jdigital-logo-mini2.svg" alt="JD Icon" class="modal-logo" onerror="this.style.display='none'">
-
-      <h3 class="modal-headline" id="modalHeadline" data-i18n="contact_success_headline">Thanks — message received.</h3>
-      <p class="modal-body" id="modalBody" aria-live="polite" aria-atomic="true" data-i18n="contact_success_body">I'll reply within 48 hours.</p>
-    </div>
-  </div>
 
   </main>
 
