@@ -127,6 +127,7 @@ The whole multipage site is assembled now from what exists: the Brief 01 grammar
 | 6.0 | Write `P-F-Wave6-ConsistencyPass.xml` | Chat · **Opus 4.8** | live assembled site | prompt file | You approve it |
 | 6.1 | Complete consistency brush + proposed structural and copy enhancements across the assembled site — placeholder pages included, which this pass helps evolve toward final as Waves 2/3 copy lands. Named upgrade: promote Brief 01's purple scroll-progress bar to **all** pages, Home included | Chat · **Fable 5** | prompt + live site | findings + enhancement set | You approve the set |
 | 6.2 | Surgical refinements spliced; per-brief copy upgraded and locked where it earns it | Code · **Opus 4.8**, sweeps by **Sonnet 5** | 6.1 set | refined site | Grep-verifiable; sweeps clean |
+| 6.2.1 | Chrome consolidation onto one shared navbar surface + work-section structural corrections; inserted after 6.2, ahead of 6.3, so the ES lock translates final surfaces | Code · **Opus 5** | 6.2 merged site + principal annotations | consolidated chrome | Grep-verifiable parity across five pages |
 | 6.3 | ES lock pass, all pages, on approved EN | Chat · **Sonnet 5** | approved EN keys | full ES parity | You review; site ships bilingual |
 | 6.4 | Parking-lot review — the only time it opens | Chat · **Opus 4.8** | `parking-lot.md` | items become tasks, or die | List is empty or scheduled |
 

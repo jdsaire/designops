@@ -1,4 +1,6 @@
-/* shared/nav.css — NAVBAR + MOBILE OVERLAY + responsive — split from main.css lines 33-219. See docs/ for the reorg record. */
+/* shared/nav.css — NAVBAR + WORK DROPDOWN + MOBILE OVERLAY + responsive.
+   ONE shared surface for all five pages (Home + four briefs). Consolidated in
+   task 6.2.1 from Home's nav.css and each brief's inline nav block. */
 /* ============================================================ NAVBAR ============================================================ */
 .nav {
   position:fixed; top:0; left:0; width:100%; height:var(--nav-height);
@@ -16,46 +18,62 @@
   align-items:center; gap:clamp(1rem,2.5vw,2.5rem);
 }
 
+/* LEFT — wordmark logo (shared, replaces Home's four-state SVG set) */
 .nav__logo {
-  position:relative; display:inline-flex; align-items:center;
-  width:8.25rem; height:2.2rem; flex-shrink:0;
+  display:inline-flex; align-items:baseline; gap:0.5rem; flex-shrink:0;
+  font-weight:var(--fw-black); letter-spacing:-0.01em; font-size:1.05rem;
+  color:var(--color-brand-white);
 }
-.nav__logo-img {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  opacity:0; transition:opacity var(--duration-ui) var(--ease-standard);
-  pointer-events:none;
+.nav__logo small {
+  font-weight:var(--fw-medium); color:var(--color-text-muted);
+  letter-spacing:0.14em; font-size:0.62rem; text-transform:uppercase;
 }
-.nav__logo-img--default { opacity:1; }
-.nav__logo-img--mono    { opacity:0 !important; } /* hidden — reserved */
-.nav__logo:hover  .nav__logo-img--default { opacity:0; }
-.nav__logo:hover  .nav__logo-img--hover   { opacity:1; }
-.nav__logo:active .nav__logo-img--default { opacity:0; }
-.nav__logo:active .nav__logo-img--hover   { opacity:0; }
-.nav__logo:active .nav__logo-img--active  { opacity:1; }
+.nav__logo:hover small { color:var(--color-brand-purple); }
 
+/* CENTER — links + Work dropdown. Muted resting, solid white on hover/focus,
+   NO underline sweep (global link grammar, task 6.2.1). */
 .nav__center { display:flex; align-items:center; justify-content:center; gap:clamp(0.25rem,0.5vw,0.75rem); }
 
 .nav__link {
-  position:relative; display:inline-block;
-  color:var(--color-text-muted); font-size:1rem; font-weight:var(--fw-medium);
-  letter-spacing:0.005em; padding:0.5rem 1rem;
+  position:relative; display:inline-flex; align-items:center; gap:0.35rem;
+  color:var(--color-text-muted); font-size:0.9rem; font-weight:var(--fw-medium);
+  font-family:var(--font-primary); letter-spacing:0.005em; padding:0.5rem 0.75rem;
+  background:none; border:none; cursor:pointer;
   transition:color var(--duration-ui) var(--ease-standard);
 }
-.nav__link::after {
-  content:''; position:absolute; left:1rem; right:1rem; bottom:0.25rem;
-  height:2px; background:var(--color-brand-purple);
-  transform:scaleX(0); transform-origin:left;
-  transition:transform 250ms var(--ease-decelerate);
-}
 .nav__link:hover, .nav__link:focus-visible { color:var(--color-brand-white); }
-.nav__link:hover::after, .nav__link:focus-visible::after { transform:scaleX(1); }
-/* P-6 scrollspy — the current section's link holds white + a full underline */
-.nav__link--current { color:var(--color-brand-white); }
-.nav__link--current::after { transform:scaleX(1); }
+/* P-6a scrollspy — current section link holds solid white + semibold weight
+   (reconciliation for the retired underline; aria-current still set in JS). */
+.nav__link--current { color:var(--color-brand-white); font-weight:var(--fw-semibold); }
+
+/* Work dropdown — disclosure over the four brief pages */
+.nav__dropdown { position:relative; display:inline-flex; }
+.nav__work-caret {
+  width:0; height:0;
+  border-left:3.5px solid transparent; border-right:3.5px solid transparent;
+  border-top:4px solid currentColor;
+  transition:transform var(--duration-ui) var(--ease-standard);
+}
+.nav__work-trigger[aria-expanded="true"] .nav__work-caret { transform:rotate(180deg); }
+.nav__work-menu {
+  position:absolute; top:100%; left:0; margin-top:0.5rem; min-width:15rem;
+  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
+  padding:0.3rem 0; display:flex; flex-direction:column; z-index:101;
+}
+.nav__work-menu[hidden] { display:none; }
+.nav__work-item {
+  display:block; padding:0.6rem 1rem;
+  color:var(--color-text-muted); font-size:0.85rem; font-weight:var(--fw-medium);
+  letter-spacing:0.005em;
+  transition:color var(--duration-ui) var(--ease-standard);
+}
+.nav__work-item:hover, .nav__work-item:focus-visible {
+  color:var(--color-brand-white); font-weight:var(--fw-bold);
+}
 
 .nav__utility { display:flex; align-items:center; justify-content:flex-end; gap:clamp(0.75rem,1.25vw,1.25rem); }
 
-/* Language selector */
+/* Language selector (SwapLang — unchanged behaviour) */
 .nav__lang { position:relative; display:inline-flex; align-items:center; }
 .nav__lang-btn {
   background:transparent; border:none; cursor:pointer;
@@ -87,37 +105,29 @@
 .nav__lang-option--active { font-weight:var(--fw-bold); }
 @media (max-width:767px) { .nav__lang-panel { top:calc(100% + 0.5rem); right:0; } }
 
-/* CTA */
-.nav__cta {
-  position:relative; display:inline-block;
-  color:var(--color-brand-white); font-size:1rem; font-weight:var(--fw-bold);
-  letter-spacing:0.005em; padding:0.5rem 0;
+/* Contact CTA — label + purple square chevron, reusing the hero CTA grammar
+   (2rem purple square, > polyline, purple-hover). hero.css is Home-only, so the
+   declarations are reproduced here nav-scoped for all five pages. */
+.nav__cta { display:inline-flex; align-items:center; gap:0.6rem; cursor:pointer; }
+.nav__cta-label {
+  font-size:0.9rem; font-weight:var(--fw-bold); color:var(--color-brand-white);
+  letter-spacing:0.005em;
   transition:color var(--duration-ui) var(--ease-standard);
 }
-.nav__cta::after {
-  content:''; position:absolute; left:0; right:0; bottom:0.25rem;
-  height:2px; background:var(--color-brand-purple);
-  transform:scaleX(0); transform-origin:left;
-  transition:transform 250ms var(--ease-decelerate);
+.nav__cta-icon {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:2rem; height:2rem; background:var(--color-brand-purple); flex-shrink:0;
+  transition:background var(--duration-ui) var(--ease-standard);
 }
-.nav__cta:hover::after, .nav__cta:focus-visible::after { transform:scaleX(1); }
+.nav__cta:hover .nav__cta-icon, .nav__cta:focus-visible .nav__cta-icon { background:var(--color-purple-hover); }
+.nav__cta-icon svg { width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-brand-white); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
 
-/* Hamburger */
+/* Hamburger — hidden at desktop/tablet, real display at ≤767px */
 .nav__hamburger { display:none; flex-direction:column; gap:0.3rem; width:1.5rem; background:none; border:none; cursor:pointer; padding:0; }
 .nav__hamburger span { display:block; width:100%; height:1.5px; background:var(--color-brand-white); transition:transform 250ms var(--ease-standard), opacity 200ms; }
 .nav__hamburger--open span:nth-child(1) { transform:translateY(0.45rem) rotate(45deg); }
 .nav__hamburger--open span:nth-child(2) { opacity:0; }
 .nav__hamburger--open span:nth-child(3) { transform:translateY(-0.45rem) rotate(-45deg); }
-
-/* X close (mobile) */
-.nav__mobile-close {
-  display:none; background:none; border:none; cursor:pointer;
-  color:var(--color-brand-white); font-size:1.5rem; line-height:1;
-  font-weight:var(--fw-light); padding:0.25rem 0.125rem;
-  align-items:center; justify-content:center;
-  transition:opacity var(--duration-ui) var(--ease-standard);
-}
-.nav__mobile-close:hover { opacity:0.7; }
 
 /* ============================================================ MOBILE OVERLAY ============================================================ */
 .nav__overlay {
@@ -140,52 +150,79 @@
 }
 .nav__overlay-close:hover { opacity:0.7; }
 .nav__overlay-logo {
-  position:relative; display:inline-flex; align-items:center;
-  width:7.5rem; height:2rem; flex-shrink:0;
+  display:inline-flex; align-items:baseline; gap:0.5rem; flex-shrink:0;
+  font-weight:var(--fw-black); letter-spacing:-0.01em; font-size:1.05rem;
+  color:var(--color-brand-white);
 }
-.nav__overlay-logo .nav__logo-img--default { opacity:1; }
-.nav__overlay-logo .nav__logo-img--mono    { opacity:0 !important; }
-.nav__overlay-logo:hover  .nav__logo-img--default { opacity:0; }
-.nav__overlay-logo:hover  .nav__logo-img--hover   { opacity:1; }
-.nav__overlay-logo:active .nav__logo-img--default { opacity:0; }
-.nav__overlay-logo:active .nav__logo-img--hover   { opacity:0; }
-.nav__overlay-logo:active .nav__logo-img--active  { opacity:1; }
+.nav__overlay-logo small {
+  font-weight:var(--fw-medium); color:var(--color-text-muted);
+  letter-spacing:0.14em; font-size:0.62rem; text-transform:uppercase;
+}
 
 .nav__overlay-links { flex:1; display:flex; flex-direction:column; padding:1.5rem 0; }
+.nav__overlay-group { display:flex; flex-direction:column; }
 
 .nav__overlay-link {
-  display:flex; align-items:center; justify-content:flex-start; gap:0.5rem;
+  display:flex; align-items:center; justify-content:space-between; gap:0.5rem; width:100%;
   padding:1.1rem var(--gutter); font-size:1.375rem; font-weight:var(--fw-medium);
+  font-family:var(--font-primary); text-align:left;
   color:var(--color-brand-white); border-bottom:1px solid var(--color-border-faint);
+  background:none; border-left:none; border-right:none; border-top:none;
   transition:color var(--duration-ui) var(--ease-standard); cursor:pointer;
 }
-.nav__overlay-link:first-child { border-top:1px solid var(--color-border-faint); }
+.nav__overlay-group:first-child .nav__overlay-link:first-child,
+.nav__overlay-links > .nav__overlay-link:first-child { border-top:1px solid var(--color-border-faint); }
 .nav__overlay-link-chevron {
   font-size:1em; line-height:1; color:var(--color-text-dim);
   transition:color var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);
 }
 .nav__overlay-link:hover .nav__overlay-link-chevron { color:var(--color-brand-purple); transform:translateX(3px); }
-.nav__overlay-link:active { font-weight:var(--fw-bold); }
+.nav__overlay-work-trigger[aria-expanded="true"] .nav__overlay-link-chevron { transform:rotate(90deg); color:var(--color-brand-purple); }
+
+.nav__overlay-submenu { display:flex; flex-direction:column; }
+.nav__overlay-submenu[hidden] { display:none; }
+.nav__overlay-subitem {
+  display:block; padding:0.85rem var(--gutter) 0.85rem calc(var(--gutter) + 1.25rem);
+  font-size:1rem; font-weight:var(--fw-medium); color:var(--color-text-muted);
+  border-bottom:1px solid var(--color-border-faint);
+  transition:color var(--duration-ui) var(--ease-standard);
+}
+.nav__overlay-subitem:hover, .nav__overlay-subitem:focus-visible { color:var(--color-brand-white); }
+
+.nav__overlay-lang {
+  display:flex; align-items:center; gap:0.5rem;
+  padding:1.25rem var(--gutter); flex-shrink:0;
+  border-top:1px solid var(--color-border-faint);
+}
+.nav__overlay-lang-option {
+  background:transparent; border:1px solid var(--color-border-soft); cursor:pointer;
+  font-family:var(--font-primary); font-size:0.9rem; font-weight:var(--fw-medium);
+  letter-spacing:0.03em; color:var(--color-text-muted); padding:0.4rem 0.9rem;
+  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);
+}
+.nav__overlay-lang-option:hover { color:var(--color-brand-white); }
+.nav__overlay-lang-option--active { color:var(--color-brand-white); font-weight:var(--fw-bold); border-color:var(--color-brand-purple); }
 
 /* ============================================================ TABLET ============================================================ */
 @media (min-width:768px) and (max-width:1023px) {
   .nav__inner { grid-template-columns:1fr auto 1fr; gap:0.75rem; }
-  .nav__link { padding:0.5rem 0.625rem; font-size:0.9rem; }
+  .nav__link { padding:0.5rem 0.5rem; font-size:0.85rem; }
   .nav__utility { gap:0.75rem; }
-  .nav__cta { font-size:0.9rem; }
+  .nav__cta-label { font-size:0.85rem; }
   .nav__hamburger { display:none; }
   .nav__center { display:flex; }
   .nav__lang { display:inline-flex; }
 }
 
 /* ============================================================ MOBILE ============================================================ */
+/* Per the principal's dispatch note: the mobile bar carries ONLY the wordmark
+   (left) and the hamburger (right). SwapLang and the Contact CTA (both in
+   .nav__utility) are hidden here — language switching + Work/Contact live in
+   the overlay reached by tapping the hamburger. */
 @media (max-width:767px) {
   .nav__inner { display:flex; align-items:center; justify-content:space-between; gap:0; }
-  .nav__logo { order:1; flex-shrink:0; }
-  .nav__hamburger { display:none; }
-  .nav__center { display:none; order:3; }
-  .nav__utility { order:4; margin-left:0; display:flex; align-items:center; gap:0.5rem; }
-  .nav__lang { display:inline-flex; }
-  .nav__cta { display:none; }
+  .nav__logo { order:1; }
+  .nav__hamburger { display:flex; order:2; }
+  .nav__center { display:none; }
+  .nav__utility { display:none; }
 }
-
