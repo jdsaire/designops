@@ -61,3 +61,10 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 
 - Eyebrow vs. copy: `hero_read` now reads "5 min read" while the locked hero short version (`hero_rv_txt`, E1-verbatim) still says "the next four minutes." Reconcile in a later copy pass if desired.
 - D8 framing: Act 04 dashboard `dash_m5` cell ("0" · "Frameworks / dependencies") is a measured fact, not the identity claim, and Act 04 is frozen. The D8 governance line is now "No framework I couldn't justify" — a softer stance than a literal "0." Revisit the numeric cell's framing when Act 04 next opens.
+- Evaluate inheriting JDigital_NetworkingTour toggle file's animation/CSS system into work-brief components (post-freeze).
+- Definitive SVG cover art for the four work cards, replacing the placeholder containers.
+- Verify whether Coursera transfers course completion between the Front-End and Full-Stack certificates.
+- Correct the stale Wave-5 ES parity entries: all four brief dictionaries are already translated.
+- The Yape build ships a Vite/npm toolchain (package.json, vite.config.ts, devDependencies) inside a repository declared zero-dependency and buildless.
+- The oversized assets/img SVGs carry embedded base64 JPEG rasters rather than vector geometry.
+- docs/W7/1_CV_JDSaire_UltraSpec_v1_0.md is a v1.0 copy of a spec that has since advanced.
