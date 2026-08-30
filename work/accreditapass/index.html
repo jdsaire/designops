@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" data-nav-context="brief" data-nav-depth="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You find out at the gate. This one tells you first. · Juan Diego Saire</title>
+<meta name="description" content="A journalist's accreditation can change without anyone saying so. I researched, specified and built the record that says so — six documented UX mandates, then a Blazor application, in three languages.">
+<!-- ============================================================
+     Brief 05 · AccreditaPass · media-accreditation record · EN
+     Copy verbatim per the S3 copy record, which is held outside this
+     repository and is both the copy record and the specification.
+     Acts: 00 The Context · 01 The Problem · 02 The Research ·
+           03 The Concept · 04 The Build · 05 The Evidence ·
+           06 The Reflection
+     Route depth: work/accreditapass/ — nav paths ../../
+     Two standing badges on the hero; the simulated-research badge
+     repeats at the head of Act 02 and Act 05.
+     Act 06 rows Claim..Forward-looking are a locked calibration
+     block and are kept visibly distinct from the Origin row.
+     The Brief 01 cross-reference ships as prose with no href —
+     work/front-end-evolution/ does not exist until S10.
+     ============================================================ -->
+<link rel="stylesheet" href="../../assets/css/shared/nav.css">
+<link rel="stylesheet" href="../../assets/css/shared/progress.css">
+<style>
+/* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
+html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:root{
+  --color-brand-purple:#A100FF;
+  --color-purple-hover:#8C00D9;
+  --color-purple-light:#C2A3FF;
+  --color-brand-black:#000000;
+  --color-brand-white:#FFFFFF;
+  --color-text-muted:rgba(255,255,255,0.6);
+  --color-text-dim:rgba(255,255,255,0.45);
+  --color-border-faint:rgba(255,255,255,0.06);
+  --color-border-soft:rgba(255,255,255,0.10);
+  --font-primary:'Graphik',Arial,sans-serif;
+  --fw-light:300; --fw-regular:400; --fw-medium:500;
+  --fw-semibold:600; --fw-bold:700; --fw-black:900;
+  --max-content-width:1440px;
+  --gutter:clamp(1rem,3.5vw,5rem);
+  --nav-height:clamp(3.5rem,4vw,4rem);
+  --peek-width:clamp(3rem,8vw,6rem);
+  --slide-gap:clamp(1.25rem,2vw,2rem);
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-decelerate:cubic-bezier(0,0,0.2,1);
+  --duration-ui:250ms;
+  --act-pad:clamp(4rem,8vw,8rem);
+  --panel-w:min(430px,36vw);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--color-brand-black); color:var(--color-brand-white);
+  font-family:var(--font-primary); font-weight:var(--fw-regular);
+  line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img,svg{display:block;}
+a{color:inherit; text-decoration:none;}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
+::selection{background:var(--color-brand-purple); color:var(--color-brand-white);}
+:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:3px;}
+.container{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+
+/* Cross-document View Transitions — same-origin navigation cross-fade. */
+@view-transition{ navigation:auto; }
+
+/* Scroll progress bar — moved to shared assets/css/shared/progress.css (P-5). */
+
+/* NAV — promoted to shared assets/css/shared/nav.css (task 6.2.1). */
+
+/* ================= SECTION EYEBROW — inherited live organism, verbatim ================= */
+.section__eyebrow{display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem;
+  margin-bottom:clamp(1.5rem,2.5vw,2.5rem);}
+.section__eyebrow-bar{width:2.5rem; height:3px; background:var(--color-brand-purple);}
+.section__eyebrow-text{font-size:0.8rem; font-weight:var(--fw-semibold); letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--color-brand-white);}
+.section__eyebrow-text .dim{color:var(--color-text-dim);}
+
+/* ================= TYPE ROLES ================= */
+.verdict{font-size:clamp(1.75rem,4vw,3.25rem); font-weight:var(--fw-black); line-height:1.08; letter-spacing:-0.02em;}
+.scan{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:34em;}
+.scan strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
+
+/* ================= HERO ================= */
+.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-height) + 3px); position:relative;}
+.hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
+.hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
+.hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
+.kwrow{display:flex; flex-wrap:wrap; gap:.6rem; max-width:44em;}
+.kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
+.scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
+.scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
+
+/* ================= INDEPENDENCE NOTICE — non-affiliation, always visible ================= */
+.independence{border:1px dashed var(--color-border-soft); padding:.75rem 1rem; font-size:.72rem;
+  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:44em;}
+.independence strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+
+/* ================= ACTS ================= */
+.act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
+.act__head{display:flex; flex-direction:column; gap:1rem; margin-bottom:clamp(2rem,4vw,3.25rem); max-width:60rem;}
+
+.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+
+/* ---- Cards ---- */
+.cardgrid{display:grid; gap:1rem;}
+.cardgrid--3{grid-template-columns:repeat(3,1fr);}
+.cardgrid--2{grid-template-columns:repeat(2,1fr);}
+/* Act 06 grew 3 → 4 cards: its own 2×2 variant, never forced into the 3-col rule */
+.cardgrid--4{grid-template-columns:repeat(2,1fr);}
+.card{border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2.2vw,1.9rem); display:flex; flex-direction:column; gap:.75rem;
+  transition:border-color var(--duration-ui) var(--ease-standard);}
+.card:hover{border-color:var(--color-brand-purple);}
+.card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
+.card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+@media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
+/* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
+.reveal{margin-top:auto;}
+.reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
+  transition:color var(--duration-ui) var(--ease-standard); min-height:44px;}
+.reveal__btn::before{content:"⊕"; font-size:1rem;}
+.reveal__btn[aria-expanded="true"]::before{content:"⊖";}
+.reveal__btn:hover{color:var(--color-purple-light);}
+.reveal__body{border-left:2px solid var(--color-brand-purple); padding:.9rem 0 .2rem 1rem; margin-top:.6rem;}
+.reveal__body[hidden]{display:none;}
+.reveal__body p{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted); margin-bottom:.7rem;}
+.reveal__body p:last-child{margin-bottom:0;}
+
+/* Side panel (desktop) */
+.panel{position:fixed; top:calc(var(--nav-height) + 3px); right:0; bottom:0; width:var(--panel-w); z-index:70;
+  background:#050505; border-left:1px solid var(--color-border-soft); padding:1.5rem 1.6rem 2rem;
+  overflow-y:auto; transform:translateX(102%); transition:transform 320ms var(--ease-decelerate);
+  display:flex; flex-direction:column; gap:1rem;}
+.panel.is-open{transform:none;}
+.panel__head{display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  border-bottom:1px solid var(--color-border-faint); padding-bottom:.9rem;}
+.panel__title{font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-brand-purple);}
+.panel__close{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center; font-size:1rem;}
+.panel__close:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.panel__slot .reveal__body{border-left:0; padding-left:0; margin-top:0;}
+@media (min-width:1024px){
+  .panel__slot .reveal__body--poster p{font-size:clamp(1.35rem,1.7vw,1.8rem); line-height:1.4;
+    color:var(--color-brand-white); font-weight:var(--fw-light);}
+}
+
+/* ---- Conversion ---- */
+.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
+  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
+  transition:background var(--duration-ui) var(--ease-standard);}
+.convert__cta:hover{background:var(--color-brand-purple);}
+/* ---- Fields synthesis — prose, not a table (Act 04 terminal) ---- */
+.synthesis{border-left:3px solid var(--color-brand-purple); padding:.2rem 0 .2rem 1.15rem;
+  margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;
+  font-size:clamp(1rem,1.2vw,1.12rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+
+/* ================= STANDING BADGES — two on the hero, one repeated at act level =================
+   Both are [BADGE] in the copy record: always visible, not dismissible, never behind a reveal
+   and never in the footer. --sim marks the simulated-research disclosure, which repeats at the
+   head of Act 02 and Act 05. Each badge is two keyed spans so both halves stay translatable —
+   the shared loop skips any element that has element children. */
+.badges{display:flex; flex-direction:column; gap:.6rem; max-width:44em;}
+.independence--sim{border:1px solid var(--color-border-soft); border-left:3px solid var(--color-brand-purple);}
+.act .independence--sim{margin-bottom:clamp(1.75rem,3vw,2.5rem); max-width:52rem;}
+
+/* ---- Pull quote (Act 01) ---- */
+.pull{font-size:clamp(1.35rem,2.6vw,2.1rem); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.02em;
+  max-width:22em; margin:clamp(1.75rem,3vw,2.5rem) 0; padding-left:1.15rem;
+  border-left:3px solid var(--color-brand-purple);}
+
+/* ---- Question callout (Act 02) — the open design question, quoted from the ideation gate ---- */
+.question{border:1px solid var(--color-border-soft); padding:clamp(1.4rem,2.5vw,2rem);
+  margin:clamp(1.5rem,2.5vw,2rem) 0; max-width:52rem;
+  font-size:clamp(1.1rem,1.7vw,1.45rem); font-weight:var(--fw-light); font-style:italic; line-height:1.4;
+  color:var(--color-brand-white);}
+
+/* ---- Boundary card (Act 03) — the concept's stated edges ---- */
+.card--boundary{border-left:3px solid var(--color-brand-purple); margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;}
+
+/* ================= ACT 05 · MOVEMENT TABLE =================
+   Two measurements on the same instruments. Scrolls inside its own container so the page body
+   never scrolls horizontally; the required footnote carries both build stamps. */
+.movement__wrap{overflow-x:auto; border:1px solid var(--color-border-soft); margin:clamp(1.5rem,2.5vw,2rem) 0;}
+.movement{border-collapse:collapse; width:100%; min-width:34rem;}
+.movement th,.movement td{padding:.85rem clamp(.9rem,1.6vw,1.35rem); text-align:left; vertical-align:top;
+  border-bottom:1px solid var(--color-border-faint);}
+.movement thead th{font-size:.66rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--color-text-dim); border-bottom:1px solid var(--color-border-soft); white-space:nowrap;}
+.movement tbody th{font-size:.92rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); width:34%;}
+.movement tbody td{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+.movement tbody td:last-child{color:var(--color-brand-white); font-weight:var(--fw-medium);}
+.movement tbody tr:last-child th,.movement tbody tr:last-child td{border-bottom:0;}
+.tblnote{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.6;
+  max-width:52rem; font-style:italic;}
+
+/* ================= ACT 06 · TWO ZONES, NOT MERGED =================
+   .reflect__origin is ordinary sourced copy. .locked is the calibration block: no artefact may
+   state more or less than it, so it is rendered as its own bounded group rather than folded into
+   the surrounding prose. The two never become one paragraph. */
+.reflect{display:flex; flex-direction:column; gap:clamp(1.5rem,2.5vw,2rem); max-width:52rem;}
+.reflect__origin{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.locked{border:1px solid var(--color-border-soft); border-left:3px solid var(--color-brand-purple);
+  padding:clamp(1.4rem,2.5vw,2rem); display:flex; flex-direction:column; gap:1rem;}
+.locked p{font-size:clamp(1rem,1.3vw,1.15rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.closing{font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold); line-height:1.3; letter-spacing:-0.01em;
+  max-width:30em; margin-top:clamp(1.5rem,2.5vw,2rem);}
+
+/* ---- The two closing calls to action ---- */
+.ctarow{display:flex; flex-wrap:wrap; gap:1rem; margin-top:clamp(1.5rem,2.5vw,2rem);}
+@media (max-width:767px){ .ctarow .convert__cta{width:100%; justify-content:center;} }
+
+/* ================= FOOTER (unified structure — P-7) ================= */
+.footer{border-top:1px solid var(--color-border-faint); padding:clamp(4rem,6vw,6rem) 0 clamp(2rem,3vw,2.5rem); margin-top:var(--act-pad);}
+.footer__inner{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+.footer__grid{display:grid; grid-template-columns:1fr; gap:clamp(2rem,4vw,3rem);}
+.footer__content{display:flex; flex-direction:column; gap:1.5rem;}
+.footer__tagline{font-size:clamp(1.875rem,3.6vw,3rem); font-weight:var(--fw-bold); line-height:1.1; letter-spacing:-0.02em; color:var(--color-brand-white); white-space:nowrap;}
+.footer__tagline .purple{color:var(--color-brand-purple); display:block;}
+.footer .cta{display:inline-flex; align-items:center; gap:0.6rem; color:var(--color-brand-purple);}
+.footer .cta:hover,.footer .cta:focus-visible{color:var(--color-purple-hover);}
+.cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.footer__linkedin-icon{display:inline-block; width:1.25rem; height:1.25rem; flex-shrink:0; vertical-align:middle;}
+.footer__strip{padding-top:0.75rem; border-top:1px solid var(--color-border-faint); margin-top:clamp(2rem,4vw,3rem);}
+.footer__meta{display:flex; flex-wrap:wrap; gap:1.25rem; font-size:0.8rem; color:var(--color-text-dim);}
+@media (min-width:768px) and (max-width:1023px){ .footer__grid{grid-template-columns:1fr;} }
+@media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__tagline{white-space:normal;} }
+
+/* ================= MOTION ================= */
+.io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
+.io.is-in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important; transition:none!important;}
+  .io{opacity:1; transform:none;}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- Scroll progress — above nav, grows L→R, reverses on upscroll -->
+<div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
+
+<!-- ================= NAV — routes BACK to designops home (../../ = route depth work/<slug>/) ================= -->
+<header class="nav" id="navbar">
+    <nav class="nav__inner" role="navigation" aria-label="Primary">
+
+      <button class="nav__hamburger" id="hamburger" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="../../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+
+      <!-- CENTER nav links -->
+      <div class="nav__center">
+        <div class="nav__dropdown">
+          <button class="nav__link nav__work-trigger" id="workTrigger" type="button"
+                  aria-expanded="false" aria-controls="workMenu">
+            <span data-i18n="nav_work">Work</span>
+            <span class="nav__work-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
+            <a class="nav__work-item" role="menuitem" href="../designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="../tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="../limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+            <a class="nav__work-item" role="menuitem" href="../yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+          </div>
+        </div>
+        <a href="../../capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="../../about/"    data-nav-page="about/"    class="nav__link" data-i18n="nav_evolution">About</a>
+      </div>
+
+      <!-- RIGHT utility -->
+      <div class="nav__utility">
+        <!-- SwapLang — EN/ES bilingual toggle -->
+        <div class="nav__lang" id="langSelector">
+          <button class="nav__lang-btn" id="langBtn" type="button"
+                  aria-label="Select language" aria-haspopup="listbox">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="langLabel">ES</span>
+          </button>
+          <div class="nav__lang-panel" id="langPanel" role="listbox" aria-label="Language">
+            <button class="nav__lang-option nav__lang-option--active"
+                    role="option" aria-selected="true" data-lang="ES" tabindex="-1">ES</button>
+            <button class="nav__lang-option"
+                    role="option" aria-selected="false" data-lang="EN" tabindex="-1">EN</button>
+          </div>
+        </div>
+
+        <a href="../../contact/" data-nav-page="contact/" class="nav__cta">
+          <span class="nav__cta-label" data-i18n="nav_cta">Contact</span>
+          <span class="nav__cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+
+    <div class="nav__overlay-header">
+      <a href="../../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
+    </div>
+
+    <nav class="nav__overlay-links" aria-label="Mobile navigation">
+      <div class="nav__overlay-group">
+        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                aria-expanded="false" aria-controls="overlayWorkMenu">
+          <span data-i18n="nav_work">Work</span>
+          <span class="nav__overlay-link-chevron">&#8250;</span>
+        </button>
+        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
+          <a class="nav__overlay-subitem" role="menuitem" href="../designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+        </div>
+      </div>
+      <a href="../../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
+        <span data-i18n="nav_capabilities">Capabilities</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../../about/"    data-nav-page="about/"    class="nav__overlay-link">
+        <span data-i18n="nav_evolution">About</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../../contact/"      data-nav-page="contact/"      class="nav__overlay-link">
+        <span data-i18n="nav_cta">Contact</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+    </nav>
+
+    <div class="nav__overlay-lang" id="overlayLang" role="group" aria-label="Language">
+      <button class="nav__overlay-lang-option" type="button" data-lang="ES">ES</button>
+      <button class="nav__overlay-lang-option" type="button" data-lang="EN">EN</button>
+    </div>
+
+  </div>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="container hero__inner">
+    <div class="section__eyebrow" style="margin-bottom:0;">
+      <span class="section__eyebrow-bar"></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 05</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">9 min read</span></span>
+    </div>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">You find out at the gate. This one tells you first.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">A journalist's accreditation can change without anyone saying so. I researched, specified and built the record that says so — six documented UX mandates, then a Blazor application, in three languages.</p>
+    <div class="kwrow" role="list" aria-label="Case keywords">
+      <span class="kw" role="listitem" data-i18n="kw1">Design Research</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Design Systems</span>
+      <span class="kw" role="listitem" data-i18n="kw3">Accessibility</span>
+      <span class="kw" role="listitem" data-i18n="kw4">Blazor</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Internationalization</span>
+    </div>
+    <div class="reveal" data-act="hero">
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
+      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
+        <p data-i18n="hero_rv_txt">Access changes quietly and gets discovered at a gate. Six documented mandates — audit, research, ideation, specification, evaluation, iteration — converge on one concept: an append-only record where every change carries a reason and a next step. Then I built it.</p>
+      </div>
+    </div>
+
+    <!-- The two standing notices. Both always visible, neither dismissible. -->
+    <div class="badges">
+      <p class="independence"><strong data-i18n="badge_independence_lead">An independent portfolio demonstration.</strong> <span data-i18n="badge_independence_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</span></p>
+      <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page. Survey and interview datasets, workshop participants and task-attempts were authored, not recruited. Each dossier states in its own scope and limitations files what it can and cannot establish.</span></p>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
+</section>
+
+<!-- ================= ACT 00 · THE CONTEXT ================= -->
+<section class="act" id="act0" aria-labelledby="v0">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+      </div>
+      <h2 class="verdict" id="v0" data-i18n="act0_verdict">Accreditation is a permission that keeps moving after it is granted.</h2>
+    </div>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act0_scan1"
+         data-full="A journalist covering a tournament holds a credential that resolves to a set of permissions: which stadiums, which zones inside them, which fixtures. That set is not settled at issue. It moves with capacity, with reallocation, with a knockout bracket nobody has played yet. The holder is the last to know, and the place they usually find out is a gate.">
+         A media accreditation is not a ticket. It is a standing permission — which venues, which zones, which fixtures — and it can be narrowed, widened or withdrawn after it has been granted.</p>
+      <p class="scan" data-i18n="act0_scan2">The research pass framed the moment precisely: what a journalist needs to be told, and how fast, when their access falls apart after they thought it was settled.</p>
+      <p class="scan" data-i18n="act0_scan3">So the question I took was not "how do I show a status." It was: what would a record have to do so that being refused is never how you learn.</p>
+    </div>
+
+    <div class="cardgrid cardgrid--3 io">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c1_t">The permission moves</h3>
+        <p class="card__x" data-i18n="act0_c1_x">Rejection, mid-tournament reallocation, a denial at the gate — three different events, one experience: the holder finds out last.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c2_t">The status page is the wrong shape</h3>
+        <p class="card__x" data-i18n="act0_c2_x">A page that shows what you hold today answers the wrong question. What a holder needs is what changed, when, why, and what to do about it.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c3_t">Some of it hasn't happened yet</h3>
+        <p class="card__x" data-i18n="act0_c3_x">Access to a knockout fixture depends on a result nobody has played. Wording that sounds settled turns a warning into a promise the service cannot keep.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 01 · THE PROBLEM ================= -->
+<section class="act" id="act1" aria-labelledby="v1">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
+      </div>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">I started by auditing the app I already had, and it failed on one thing, twice.</h2>
+    </div>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act1_scan1">The first pass was a usability and accessibility audit of the app as it stood before any reframing: 26 findings — 4 critical, 12 major, 10 minor — and 12 things it did genuinely well, recorded because an audit that lists only defects misrepresents what was built.</p>
+      <p class="scan" data-i18n="act1_scan2">The useful finding was not the total. Six of the ten usability principles failed for the same underlying reason: one component that had only an editable presentation, reused on every page. One structural fix addressed most of them at once.</p>
+      <p class="scan" data-i18n="act1_scan3"
+         data-full="Nine checks were left OPEN rather than counted as passing: reflow on a phone, tap-target comfort, whether a screen reader completes the journey end to end. No browser rendered the app during that audit and no screen reader was used. That is a boundary, and it is stated rather than worked around.">
+         Every finding cited the file and line it lived at. A claim that could not be pointed at a place in the source was left out rather than stated — which is why the total is 26 and not a rounder, larger number.</p>
+    </div>
+
+    <p class="pull io" data-i18n="act1_pull">A working app and a usable app are not the same thing.</p>
+
+    <p class="synthesis io" data-i18n="act1_outcome">The audit produced a fix list, not a verdict: 26 findings sequenced into 19 commits, each naming the files it touches.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 02 · THE RESEARCH — opens with the simulated-research badge ================= -->
+<section class="act" id="act2" aria-labelledby="v2">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Research</span>
+      </div>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">No real journalist was interviewed. I built the study so a reader can see exactly what that costs.</h2>
+    </div>
+
+    <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page. Survey and interview datasets, workshop participants and task-attempts were authored, not recruited. Each dossier states in its own scope and limitations files what it can and cannot establish.</span></p>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act2_scan1">Eight gates, in order: scope lock, research plan, instruments, a simulation methodology note, analysis, artifacts, design brief, limitations. Two datasets — a 30-respondent survey and five interviews — both synthetic, both declared as such in their own gate.</p>
+      <p class="scan" data-i18n="act2_scan2">It is not empirical evidence about real journalists. It is a documented chain of reasoning from a sourced evidence base to a set of design decisions, each traceable back to its source and labelled by how much weight it can carry.</p>
+      <p class="scan" data-i18n="act2_scan3">It produced two personas, an empathy map, three scenarios and a service blueprint of the accreditation-to-matchday lifecycle — and one design question it deliberately left open.</p>
+    </div>
+
+    <p class="question io" data-i18n="act2_question">How might we tell a journalist that their access has changed before they discover it by being refused?</p>
+
+    <p class="synthesis io" data-i18n="act2_method">Every scope decision is defended in its own file, and each dossier states plainly what it does and does not support. The disclosure is a gate deliverable, not a footnote.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 03 · THE CONCEPT ================= -->
+<section class="act" id="act3" aria-labelledby="v3">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · The Concept</span>
+      </div>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Thirty-two ideas, ranked and argued down to one: Access Record.</h2>
+    </div>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act3_scan1">A second eight-gate mandate turned the open question into a buildable concept. Six participants were authored, not recruited, and every vote, coalition and objection recorded is one person's simulation of a documented method. That is stated at the top of the folder, not buried in it.</p>
+      <p class="scan" data-i18n="act3_scan2">Divergence produced 18 risk-sorted assumptions, then 14 more with feasibility suspended — a 32-idea pool. Convergence ran two prioritization matrices and a Buy a Feature round against the whole pool and closed on a ranked shortlist of eight.</p>
+      <p class="scan" data-i18n="act3_scan3">The concept that survived: an append-only record where every change carries a reason and a next step, and anything depending on an unplayed result is worded as a condition rather than a decision already taken.</p>
+      <p class="scan" data-i18n="act3_scan4">A third mandate — nine gates plus a four-file addendum — turned that concept into a specification: benchmarking, an information architecture from a simulated card sort with ten choreography rules, design tokens verified against WCAG 2.2 AA in both themes, screen states, a data model, and a build brief. No application code was written in it.</p>
+    </div>
+
+    <article class="card card--boundary io">
+      <p class="card__x" data-i18n="act3_boundary">Concept, not evidence, and not interface. The folder names the edges where the concept will disappoint before anything was built against it.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================= ACT 04 · THE BUILD ================= -->
+<section class="act" id="act4" aria-labelledby="v4">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Build</span>
+      </div>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Then I built it, and made the app admit what it is.</h2>
+    </div>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act4_scan1">A Blazor WebAssembly client in C#, an ASP.NET Core Web API it can read from, SignalR between them, .NET 10 throughout — plus a deliberately narrow TypeScript layer of exactly two files, theme storage and locale storage.</p>
+      <p class="scan" data-i18n="act4_scan2">The API is optional and off by default. The app ships with no API configured and runs on an in-memory mock, so the live site works whether or not a server is running anywhere.</p>
+      <p class="scan" data-i18n="act4_scan3">Three locales — English, Spanish, Portuguese — at exact parity: 339 entries each, 308 of them interface strings. Language and theme are independent of each other and of the session, so changing either never signs you out.</p>
+      <p class="scan" data-i18n="act4_scan4">A fixture that hasn't been played never names its teams, on any screen, in any of the three languages. The schedule the app reads is a record of a completed tournament, and the app is built not to read ahead.</p>
+    </div>
+
+    <div class="cardgrid cardgrid--4 io">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c1_t">Honest about being fake</h3>
+        <p class="card__x" data-i18n="act4_c1_x">The sign-in publishes its own passwords on screen; the API's token is a fixed string printed in the repository. Neither secures anything, and both say so wherever a reader could mistake them for real.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c2_t">The record, not the status</h3>
+        <p class="card__x" data-i18n="act4_c2_x">Seven routes. The record is gated because an access record is personal by definition; the schedule and the help page are public. Requesting access writes a new, animated-in entry to your record rather than showing a separate confirmation screen.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c3_t">A pipeline with an order</h3>
+        <p class="card__x" data-i18n="act4_c3_x">The API's middleware runs in a stated order — CORS, error handling, token authentication, request logging — and the backend documentation set explains why the order is the design, not an accident.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act4_c4_t">Proof, counted</h3>
+        <p class="card__x" data-i18n="act4_c4_x">512 front-end test cases across 36 files and 33 back-end tests, in xUnit and bUnit.</p>
+      </article>
+    </div>
+
+    <p class="synthesis io" data-i18n="act4_folders">backend/ is documentation; src/backend/ is the code. Two folders, similar names, entirely different contents — the documentation folder is prose that never compiles, deliberately parallel to ux-ui/, which documents the front end's design without containing any of it.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 05 · THE EVIDENCE — opens with the simulated-research badge ================= -->
+<section class="act" id="act5" aria-labelledby="v5">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evidence</span>
+      </div>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Two measurements, the same instruments, and the movement between them.</h2>
+    </div>
+
+    <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page. Survey and interview datasets, workshop participants and task-attempts were authored, not recruited. Each dossier states in its own scope and limitations files what it can and cannot establish.</span></p>
+
+    <div class="scanstack io">
+      <p class="scan" data-i18n="act5_scan1">The re-audit had something the first one did not: six task-attempts run against the shipped build rather than derived from source in the abstract. Six of six completed. It is still not real usability testing — no person sat down with this app — and the dossier says so at every gate that matters.</p>
+    </div>
+
+    <div class="movement__wrap io">
+      <table class="movement">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="act5_tbl_h1">Measure</th>
+            <th scope="col" data-i18n="act5_tbl_h2">First audit</th>
+            <th scope="col" data-i18n="act5_tbl_h3">Re-audit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-i18n="act5_tbl_r1_m">Critical findings</th>
+            <td data-i18n="act5_tbl_r1_a">4</td>
+            <td data-i18n="act5_tbl_r1_b">1</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="act5_tbl_r2_m">Major findings</th>
+            <td data-i18n="act5_tbl_r2_a">12</td>
+            <td data-i18n="act5_tbl_r2_b">2</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="act5_tbl_r3_m">Minor findings</th>
+            <td data-i18n="act5_tbl_r3_a">10</td>
+            <td data-i18n="act5_tbl_r3_b">2</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="act5_tbl_r4_m">Nielsen's ten heuristics</th>
+            <td data-i18n="act5_tbl_r4_a">5 fail · 4 partial · 1 pass</td>
+            <td data-i18n="act5_tbl_r4_b">2 fail · 1 partial · 7 pass</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="act5_tbl_r5_m">WCAG 2.2 AA</th>
+            <td data-i18n="act5_tbl_r5_a">8 pass · 12 fail · 3 open</td>
+            <td data-i18n="act5_tbl_r5_b">18 pass · 1 fail · 3 open</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="act5_tbl_r6_m">Task success</th>
+            <td data-i18n="act5_tbl_r6_a">no tasks existed</td>
+            <td data-i18n="act5_tbl_r6_b">6 of 6</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tblnote io" data-i18n="act5_footnote">First audit measured the pre-reframing app at commit 0653b4e. Re-audit measured the build at b37066d. Both used simulated task-attempts and authored participants; neither involved a human user.</p>
+
+    <div class="scanstack io" style="margin-top:clamp(1.75rem,3vw,2.5rem);">
+      <p class="scan" data-i18n="act5_scan2">All 26 findings from the first audit received an explicit disposition — 18 fixed, 5 not applicable, 2 still open, 1 partially fixed. None was silently dropped. Five new findings were raised, and one critical finding accounts for most of what remains.</p>
+      <p class="scan" data-i18n="act5_scan3">Two findings were deliberately left out of the remediation sequence rather than resolved, and flagged as such — one needing a demo record that does not exist, one needing a render the dossier could not produce.</p>
+      <p class="scan" data-i18n="act5_scan4">A fifth mandate read a separate reference application — ShopEase, my own e-commerce build from the certificate's final front-end course — and realigned this one's navigation, settings, front door, sign-in and match list against it. Six places where that overturned a decision this codebase argues for in its own comments were opened as numbered reversals and closed with the reasoning that resolved them. None was closed by preference alone.</p>
+      <p class="scan" data-i18n="act5_scan5">One reversal was closed by being wrong: the premise behind it was factually impossible against the app's own simulated clock. It is recorded that way rather than quietly dropped.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE REFLECTION — two zones, never merged ================= -->
+<section class="act" id="act6" aria-labelledby="v6">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Reflection</span>
+      </div>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">What this build entitles me to say, and what it does not.</h2>
+    </div>
+
+    <div class="reflect io">
+
+      <!-- Zone 1 — ordinary sourced copy. Brief 01 is named in prose with NO href:
+           work/front-end-evolution/ does not exist until S10 and a live link would 404. -->
+      <p class="reflect__origin" data-i18n="act6_origin">This started from the structure of a Blazor course capstone and became my own adaptation — the wider ladder it sits on is told in Brief 01, Front-End Evolution.</p>
+
+      <!-- Zone 2 — the locked calibration block. No artefact may state more or less than these
+           rows, so they stay bounded and visibly attached to the lock that governs them. -->
+      <div class="locked">
+        <p data-i18n="act6_claim">I completed Back-End Development with .NET, and its capstone shipped as its own repository.</p>
+        <p data-i18n="act6_notclaimed">I do not claim the Full-Stack certificate. I began Full-Stack Integration and set it aside: it needs more dedication than I expected, and those skills would still be forming when this portfolio goes live.</p>
+        <p data-i18n="act6_stated">I am learning front-to-back integration. For an experienced full-stack developer that is basic; for a front-end practitioner it is a real gain. I am at that stage and I embrace it.</p>
+        <p data-i18n="act6_context">I came to programming from outside it in higher education, and I learn by building rather than by enrolling.</p>
+        <p data-i18n="act6_forward">Future backend capstones, and a second part to this brief series, will tell how that unfolds before 2026 closes.</p>
+      </div>
+
+    </div>
+
+    <p class="closing io" data-i18n="act6_closing">The dossiers came first and the application came second, and that order is the argument.</p>
+
+    <div class="convert" id="convert">
+      <div class="ctarow">
+        <a class="convert__cta" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer" data-i18n="cta_repo">Read the repository</a>
+        <a class="convert__cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer" data-i18n="cta_live">Open the running application</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER — live organism strings, verbatim ================= -->
+<footer class="footer" id="pageFooter">
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div class="footer__content">
+        <p class="footer__tagline">
+          <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
+        </p>
+        <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
+           class="cta" aria-label="Connect with Juan Diego on LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
+          </svg>
+          <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer__strip">
+      <div class="footer__meta">
+        <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= DESKTOP SIDE PANEL ================= -->
+<aside class="panel" id="panel" aria-label="Detail panel" aria-hidden="true">
+  <div class="panel__head">
+    <span class="panel__title" id="panelTitle"></span>
+    <button class="panel__close" id="panelClose" aria-label="Close detail panel">✕</button>
+  </div>
+  <div class="panel__slot" id="panelSlot"></div>
+</aside>
+
+<script>
+/* ============================================================
+   i18n — CHROME/BODY split, mirrors the sibling brief convention.
+   CHROME → ../../assets/i18n/{lang}.json  (shared, site root)
+   BODY   → i18n/accreditapass.{lang}.json (page-scoped)
+
+   EN ships alone. The site's default language is ES, so when the ES
+   body dictionary is absent the loader falls back to the EN one: the
+   body renders in English rather than failing, with no console error
+   and no fabricated translation. Chrome still resolves to ES.
+   REMOVE THE FALLBACK when the ES body dictionary is authored — the
+   page then loads accreditapass.es.json like any other brief.
+   ============================================================ */
+const I18N_BASE = "../../assets/i18n/";
+const BODY_BASE = "i18n/";
+const BODY_SLUG = "accreditapass";
+const chromeCache = {}, bodyCache = {};
+function fetchDict(url){
+  return fetch(url)
+    .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
+    .catch(() => null);
+}
+function fetchBody(lc){
+  return fetchDict(BODY_BASE + BODY_SLUG + "." + lc + ".json")
+    .then(d => (d || lc === "en") ? d : fetchDict(BODY_BASE + BODY_SLUG + ".en.json"));
+}
+function loadMerged(lang){
+  const lc = lang === "ES" ? "es" : "en";
+  const c = chromeCache[lc] || (chromeCache[lc] = fetchDict(I18N_BASE + lc + ".json"));
+  const b = bodyCache[lc]   || (bodyCache[lc]   = fetchBody(lc));
+  return Promise.all([c, b]).then(([cd, bd]) => ({ ...(cd || {}), ...(bd || {}) }));
+}
+let curLang = "ES";
+try { curLang = localStorage.getItem("jds-lang") || "ES"; } catch(e) {}
+function applyI18n(lang){
+  return loadMerged(lang).then(d => {
+    if(curLang !== lang) return;
+    document.documentElement.setAttribute("lang", lang === "ES" ? "es" : "en");
+    document.documentElement.setAttribute("data-lang", lang);
+    document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.getAttribute("data-i18n"); if(d[k]!==undefined && el.children.length===0) el.textContent=d[k]; });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ const k=el.getAttribute("data-i18n-aria"); if(d[k]!==undefined) el.setAttribute("aria-label",d[k]); });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ const k=el.getAttribute("data-i18n-placeholder"); if(d[k]!==undefined) el.placeholder=d[k]; });
+    document.querySelectorAll("[data-i18n-alt]").forEach(el=>{ const k=el.getAttribute("data-i18n-alt"); if(d[k]!==undefined) el.alt=d[k]; });
+    document.dispatchEvent(new CustomEvent("i18n:changed",{ detail:{ lang, dict:d } }));
+  });
+}
+function swapLang(lang){ curLang=lang; try{ localStorage.setItem("jds-lang",lang); }catch(e){} applyI18n(lang); }
+applyI18n(curLang);
+
+/* Nav chrome (href rewrite + SwapLang panel) — promoted to core/navchrome.js (task 6.2.1). */
+
+/* Scroll progress bar — moved to shared assets/js/core/progress.js (P-5), loaded via the module bootstrap at the end of the page (P-5). */
+
+/* ============ Reveal system: accordion ≤1023 / side-panel ≥1024 ============ */
+const mqDesktop = window.matchMedia("(min-width:1024px)");
+const panel = document.getElementById("panel");
+const panelSlot = document.getElementById("panelSlot");
+const panelTitle = document.getElementById("panelTitle");
+const panelClose = document.getElementById("panelClose");
+let panelHome = null, panelTrigger = null;
+
+function closePanel(){
+  if(panelHome && panelSlot.firstElementChild){
+    const body = panelSlot.firstElementChild;
+    body.hidden = true;
+    panelHome.replaceWith(body);
+    panelHome = null;
+  }
+  panel.classList.remove("is-open");
+  panel.setAttribute("aria-hidden","true");
+  if(panelTrigger){ panelTrigger.setAttribute("aria-expanded","false"); panelTrigger.focus(); panelTrigger=null; }
+}
+panelClose.addEventListener("click", closePanel);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && panel.classList.contains("is-open")) closePanel(); });
+
+function closeAccordionsIn(actName, except){
+  document.querySelectorAll('.reveal[data-act="'+actName+'"] .reveal__btn').forEach(btn=>{
+    if(btn!==except && btn.getAttribute("aria-expanded")==="true"){
+      btn.setAttribute("aria-expanded","false");
+      document.getElementById(btn.getAttribute("aria-controls")).hidden = true;
+    }
+  });
+}
+document.querySelectorAll(".reveal__btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const body = document.getElementById(btn.getAttribute("aria-controls"));
+    const act = btn.closest(".reveal").getAttribute("data-act");
+    const isOpen = btn.getAttribute("aria-expanded")==="true";
+    if(mqDesktop.matches){
+      if(isOpen){ closePanel(); return; }
+      closePanel();
+      closeAccordionsIn(act, btn);
+      panelHome = document.createComment("panel-home");
+      body.replaceWith(panelHome); panelSlot.replaceChildren(body);
+      body.hidden = false;
+      panelTitle.textContent = btn.getAttribute("data-panel-title") || "";
+      panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
+      btn.setAttribute("aria-expanded","true");
+      panelTrigger = btn; panelClose.focus();
+    } else {
+      closeAccordionsIn(act, btn);
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      body.hidden = isOpen;
+    }
+  });
+});
+mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
+
+
+/* ============ Entrance (once) ============ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    en.target.classList.add("is-in");
+    io.unobserve(en.target);
+  });
+},{threshold:0.18});
+document.querySelectorAll(".io").forEach(el=>io.observe(el));
+</script>
+<script type="module">
+  import { init as initProgress } from "../../assets/js/core/progress.js";
+  import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
+  initProgress();
+  initNavChrome({ swapLang: window.swapLang });
+</script>
+</body>
+</html>
