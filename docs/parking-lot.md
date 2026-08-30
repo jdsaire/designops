@@ -68,3 +68,7 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 - The Yape build ships a Vite/npm toolchain (package.json, vite.config.ts, devDependencies) inside a repository declared zero-dependency and buildless.
 - The oversized assets/img SVGs carry embedded base64 JPEG rasters rather than vector geometry.
 - docs/W7/1_CV_JDSaire_UltraSpec_v1_0.md is a v1.0 copy of a spec that has since advanced.
+- Brief renumbering pending once all four briefs exist: the TUUA and LimaFly merge leaves a gap in the 01-05 sequence.
+- AccreditaPass ux-ui/05-iteration/README.md line 5 calls ShopEase a course-mate's build; its own Gate 0 file names jdsaire/frontend_c6_ecommerce - correct the README line.
+- S2's interview question set shows no issue date; freeze D11's 72-hour clock is unstarted.
+- Home's work pagination dots are hardcoded at four and labelled "Card N of 4" while the section carries five cards.
