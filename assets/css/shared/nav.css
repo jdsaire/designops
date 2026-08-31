@@ -231,3 +231,18 @@
   .nav__center { display:none; }
   .nav__utility { display:none; }
 }
+
+/* ============================================================
+   PRIMARY NAVIGATION — uppercase labels (S4D · F3.1).
+   Presentation only: the dictionary values stay mixed-case in both
+   languages, so no key changes and no ES debt is created. Deleting
+   this block restores the original casing exactly.
+   ============================================================ */
+.nav__link,
+.nav__work-trigger,
+.nav__work-item,
+.nav__cta-label,
+.nav__overlay-link,
+.nav__overlay-subitem {
+  text-transform: uppercase;
+}
