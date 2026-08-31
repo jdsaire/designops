@@ -1,0 +1,14 @@
+/* pages/home/home-layout.css — Main-only layout corrections (S4).
+   Linked from index.html alone, so nothing here can reach a child page.
+   That isolation is the point: contact/index.html carries its own
+   #contact section, and shared/footer.css is linked by four pages, so
+   both of the rules below would leak if they lived in a shared file. */
+
+/* ---- CAPABILITIES · card art to purple label ----
+   The pre-migration organism was a carousel whose slide-inner is a two-column
+   grid, so the art and the text never sat one above the other and no vertical
+   gap was ever specified. Main's triptych stacks them, which left the label
+   flush against the image at every breakpoint. */
+.teaser__item .services__media {
+  margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
+}
