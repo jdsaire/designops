@@ -35,3 +35,10 @@
   #contact .section__eyebrow { align-items: center; }
   #contact .section__lede    { margin-left: auto; margin-right: auto; }
 }
+
+/* ---- CAPABILITIES · per-vertical CTAs hidden (S4D · F3.6) ----
+   Main's Contact organism already carries a conversation CTA, which makes
+   three more redundant. Markup and cap_slide_cta are retained: the key stays
+   in both dictionaries and the child page still references it six times.
+   Deleting this one rule restores all three. */
+.teaser__triptych .services__cta { display: none; }
