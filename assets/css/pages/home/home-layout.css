@@ -42,3 +42,9 @@
    in both dictionaries and the child page still references it six times.
    Deleting this one rule restores all three. */
 .teaser__triptych .services__cta { display: none; }
+
+/* ---- TRACK RECORD · fifth figure hidden (S4D · F3.8) ----
+   The bilingual-engine key count goes stale every time the dictionaries
+   grow or shrink. Hidden rather than maintained; markup and both
+   dictionary values are retained, and deleting this rule restores it. */
+.track-record__stats .stat:nth-child(5) { display: none; }
