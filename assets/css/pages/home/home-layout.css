@@ -12,3 +12,14 @@
 .teaser__item .services__media {
   margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
 }
+
+/* ---- ABOUT · editorial + CTA ----
+   The milestone list was redundant with about/, which carries the same eight
+   events with their bodies, notes and reveal panels. Main keeps the editorial
+   and the route in. The CTA follows the header's own alignment contract from
+   shared/designops-variant.css: centred at desktop and tablet, left at mobile.
+   .cta is inline-flex, so the parent's text-align is what moves it. */
+@media (min-width: 768px) {
+  #about .section__inner { text-align: center; }
+}
+#about .cta { margin-top: clamp(0.5rem, 1vw, 1rem); }
