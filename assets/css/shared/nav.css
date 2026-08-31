@@ -246,3 +246,10 @@
 .nav__overlay-subitem {
   text-transform: uppercase;
 }
+
+/* ---- CAPABILITIES entry withdrawn site-wide (S4D · F3.4) ----
+   The page it points at is hidden pending retirement, so the entry is
+   withheld on all nine pages that carry the chrome — the desktop link
+   and the mobile overlay alike. Markup retained; the route still
+   resolves; deleting this rule restores the entry everywhere. */
+[data-nav-page="capabilities/"] { display: none; }

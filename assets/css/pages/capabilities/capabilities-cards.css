@@ -226,3 +226,15 @@
   .cap-info-card { display: none !important; }
 }
 
+
+/* ============================================================
+   PAGE HIDDEN — pending retirement (S4D · F3.4).
+   Amendment F3 retires C1 and hides this page rather than deepening
+   it: its carousel duplicated Main's organism and added no argument
+   an inspector would value. The route still resolves; only the page
+   body is withheld. This file is linked ONLY by capabilities/index.html,
+   so the rule cannot reach Main, which shares capabilities.css.
+   Markup and every rule above are retained; deleting this block
+   restores the page whole.
+   ============================================================ */
+main { display: none; }
