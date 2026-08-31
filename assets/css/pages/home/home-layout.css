@@ -35,3 +35,10 @@
   #contact .section__eyebrow { align-items: center; }
   #contact .section__lede    { margin-left: auto; margin-right: auto; }
 }
+
+/* ---- FOOTER · hidden pending its redesign ----
+   Markup and shared/footer.css are left intact so the redesign restores it
+   without a rebuild. display:none keeps it out of the tab order and the
+   accessibility tree alike — hidden, never a focus trap. Main only; the three
+   child pages keep their footer. */
+.footer { display: none; }
