@@ -237,98 +237,11 @@
         <p class="section__lede" data-i18n="work_lede">Four builds where the call and the code were mine.</p>
       </div>
 
-      <!-- ============================================================
-           TAG FILTER v2 — collapsed disclosure bar (P-1 / O-3 inline strips).
-           The resting state is a single row: label + category disclosure
-           triggers + active mini-chips + status/clear. Each trigger opens
-           its category's chip panel as an inline strip directly beneath.
-           The chip ENGINE is unchanged: chips keep data-tag + aria-pressed,
-           groups keep aria-labelledby, cards keep data-tags. Changing a tag
-           is still a data edit, never a markup rebuild.
-           ============================================================ -->
-      <div class="tagfilter" id="tagFilter" role="group" data-i18n-aria="filter_label" aria-label="Filter the work">
-        <div class="tagfilter__bar">
-          <span class="tagfilter__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-          </span>
-
-          <div class="tagfilter__triggers" role="group" aria-label="Filter categories">
-            <button class="tagfilter__trigger" id="tf-trig-industry" type="button"
-                    aria-expanded="false" aria-controls="tf-panel-industry" data-cat="tf-cat-industry">
-              <span class="tagfilter__trigger-label" id="tf-cat-industry" data-i18n="filter_cat_industry">Industry</span>
-              <span class="tagfilter__trigger-count" aria-hidden="true" hidden></span>
-              <span class="tagfilter__trigger-caret" aria-hidden="true"></span>
-            </button>
-            <button class="tagfilter__trigger" id="tf-trig-field" type="button"
-                    aria-expanded="false" aria-controls="tf-panel-field" data-cat="tf-cat-field">
-              <span class="tagfilter__trigger-label" id="tf-cat-field" data-i18n="filter_cat_field">Field</span>
-              <span class="tagfilter__trigger-count" aria-hidden="true" hidden></span>
-              <span class="tagfilter__trigger-caret" aria-hidden="true"></span>
-            </button>
-            <button class="tagfilter__trigger" id="tf-trig-role" type="button"
-                    aria-expanded="false" aria-controls="tf-panel-role" data-cat="tf-cat-role">
-              <span class="tagfilter__trigger-label" id="tf-cat-role" data-i18n="filter_cat_role">Role</span>
-              <span class="tagfilter__trigger-count" aria-hidden="true" hidden></span>
-              <span class="tagfilter__trigger-caret" aria-hidden="true"></span>
-            </button>
-          </div>
-
-          <button class="tagfilter__clear" id="tagClear" type="button" hidden data-i18n="filter_clear">Clear filters</button>
-        </div>
-
-        <!-- Inline-strip panels — one open at a time; the chips live here. -->
-        <div class="tagfilter__panels">
-          <div class="tagfilter__panel" id="tf-panel-industry" role="region" aria-labelledby="tf-trig-industry" hidden>
-            <div class="tagfilter__panel-inner">
-              <div class="tagfilter__group" role="group" aria-labelledby="tf-cat-industry">
-                <div class="tagfilter__chips">
-                  <button class="tag" type="button" aria-pressed="false" data-tag="tech"    data-i18n="tag_tech">Tech</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="airport" data-i18n="tag_airport">Airport</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="banking" data-i18n="tag_banking">Banking</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tagfilter__panel" id="tf-panel-field" role="region" aria-labelledby="tf-trig-field" hidden>
-            <div class="tagfilter__panel-inner">
-              <div class="tagfilter__group" role="group" aria-labelledby="tf-cat-field">
-                <div class="tagfilter__chips">
-                  <button class="tag" type="button" aria-pressed="false" data-tag="design-systems" data-i18n="tag_design_systems">Design Systems</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="development"    data-i18n="tag_development">Development</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="product-design" data-i18n="tag_product_design">Product Design</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="ux-research"    data-i18n="tag_ux_research">UX Research</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="prototyping"    data-i18n="tag_prototyping">Prototyping</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="cybersecurity"  data-i18n="tag_cybersecurity">Cybersecurity</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tagfilter__panel" id="tf-panel-role" role="region" aria-labelledby="tf-trig-role" hidden>
-            <div class="tagfilter__panel-inner">
-              <div class="tagfilter__group" role="group" aria-labelledby="tf-cat-role">
-                <div class="tagfilter__chips">
-                  <button class="tag" type="button" aria-pressed="false" data-tag="ux-engineer"        data-i18n="tag_ux_engineer">UX Engineer</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="program-manager"    data-i18n="tag_program_manager">Program Manager</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="ux-designer"        data-i18n="tag_ux_designer">UX Designer</button>
-                  <button class="tag" type="button" aria-pressed="false" data-tag="frontend-developer" data-i18n="tag_frontend_developer">Frontend Developer</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <p class="tagfilter__status" id="tagStatus" role="status" aria-live="polite"></p>
-      </div>
-
       <ol class="work__track" role="list">
 
         <!-- CARD 1 — Design system (lead) -->
         <li class="work-card"
             tabindex="0"
-            data-tags="tech design-systems development ux-engineer"
             aria-label="A design system I built and govern end to end">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -336,12 +249,10 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card1_heading">A design system I built and govern end to end.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card1_heading">A design system I built and govern end to end.</h3>
             <p class="work-card__summary" data-i18n="work_card1_body">I refused to stop at the slide. I learned front-end development, put AI under my standard, and shipped the system you are reading, governed daily by me alone.</p>
           </div>
@@ -357,7 +268,6 @@
         <!-- CARD 2 — TUUA platform -->
         <li class="work-card"
             tabindex="0"
-            data-tags="airport product-design program-manager"
             aria-label="The TUUA platform I designed, prototyped, and handed to engineering">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -365,12 +275,10 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card2_heading">The TUUA platform I designed, prototyped, and handed to engineering.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card2_heading">The TUUA platform I designed, prototyped, and handed to engineering.</h3>
             <p class="work-card__summary" data-i18n="work_card2_body">At Lima Airport Partners I designed, prototyped, and evaluated the TUUA international-transfer fee platform, then delivered the user flow and mockups to engineering for build. It's live, serving 130,000+ international-transfer passengers monthly.</p>
           </div>
@@ -386,7 +294,6 @@
         <!-- CARD 3 — LimaFly prototype -->
         <li class="work-card"
             tabindex="0"
-            data-tags="airport ux-research prototyping ux-designer"
             aria-label="A high-fidelity prototype of the full airport passenger journey">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -394,12 +301,10 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card3_heading">A high-fidelity prototype of the full airport passenger journey.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card3_heading">A high-fidelity prototype of the full airport passenger journey.</h3>
             <p class="work-card__summary" data-i18n="work_card3_body">Before I applied to Lima Airport, I built LimaFly: a high-fidelity prototype of the complete passenger journey, on a scalable foundation of tokens, component variants, and Auto Layout. I prototype the industry to walk in already fluent.</p>
           </div>
@@ -415,7 +320,6 @@
         <!-- CARD 4 — Yape trust & verify -->
         <li class="work-card"
             tabindex="0"
-            data-tags="banking development cybersecurity frontend-developer"
             aria-label="The payment verification app I built front-end only">
 
           <div class="work-card__bg" aria-hidden="true">
@@ -423,12 +327,10 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card4_heading">The screenshot says paid. My app asks the bank.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card4_heading">The screenshot says paid. My app asks the bank.</h3>
             <p class="work-card__summary" data-i18n="work_card4_body">Yape receipts can be faked field by field — except one. I entered app development to build the merchant-side check that reads it: React, TypeScript, banking-grade security discipline, and a test protocol that proves the claim held.</p>
           </div>
@@ -444,18 +346,15 @@
         <!-- CARD 5 — AccreditaPass -->
         <li class="work-card"
             tabindex="0"
-            data-tags="tech ux-research design-systems development ux-engineer"
             aria-label="You find out at the gate. This one tells you first">
 
           <div class="work-card__bg" aria-hidden="true"></div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__title" data-i18n="work_card5_heading">You find out at the gate. This one tells you first.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-tagrow aria-hidden="true"></p>
             <h3 class="work-card__hover-title" data-i18n="work_card5_heading">You find out at the gate. This one tells you first.</h3>
             <p class="work-card__summary" data-i18n="work_card5_body">Access changes quietly and gets discovered at a gate. Six documented mandates — audit, research, ideation, specification, evaluation, iteration — converge on one concept: an append-only record where every change carries a reason and a next step. Then I built it.</p>
           </div>
@@ -469,8 +368,6 @@
         </li>
 
       </ol>
-
-      <p class="work__empty" id="workEmpty" hidden data-i18n="filter_empty">No brief carries every tag selected. Remove one to widen the shortlist.</p>
 
       <!-- Pagination dots — mobile + tablet only -->
       <div class="work__dots" role="tablist" aria-label="Work cards pagination">
