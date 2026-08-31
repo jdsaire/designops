@@ -23,3 +23,15 @@
   #about .section__inner { text-align: center; }
 }
 #about .cta { margin-top: clamp(0.5rem, 1vw, 1rem); }
+
+/* ---- CONTACT · centred at desktop and tablet ----
+   Mirrors the header contract in shared/designops-variant.css. Scoped to Main
+   because contact/index.html carries its own #contact section. The eyebrow is
+   a flex column pinned to flex-start, and the lede has max-width:36rem, so
+   both need an explicit override; the headline and the inline-flex CTA follow
+   text-align. Mobile keeps the untouched left alignment. */
+@media (min-width: 768px) {
+  #contact .section__inner  { text-align: center; }
+  #contact .section__eyebrow { align-items: center; }
+  #contact .section__lede    { margin-left: auto; margin-right: auto; }
+}
