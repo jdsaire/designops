@@ -35,3 +35,42 @@
   #contact .section__eyebrow { align-items: center; }
   #contact .section__lede    { margin-left: auto; margin-right: auto; }
 }
+
+/* ---- CAPABILITIES · per-vertical CTAs hidden (S4D · F3.6) ----
+   Main's Contact organism already carries a conversation CTA, which makes
+   three more redundant. Markup and cap_slide_cta are retained: the key stays
+   in both dictionaries and the child page still references it six times.
+   Deleting this one rule restores all three. */
+.teaser__triptych .services__cta { display: none; }
+
+/* ---- TRACK RECORD · fifth figure hidden (S4D · F3.8) ----
+   The bilingual-engine key count goes stale every time the dictionaries
+   grow or shrink. Hidden rather than maintained; markup and both
+   dictionary values are retained, and deleting this rule restores it. */
+.track-record__stats .stat:nth-child(5) { display: none; }
+
+/* ---- CAPABILITIES · lede centring (S4D-fix) ----
+   shared/designops-variant.css gives auto margins to .evolution__header and
+   .track-record__header ledes but omits .capabilities__header, so this lede
+   kept its 36rem block hard-left under centred text. Home-only: index.html is
+   the sole page carrying .capabilities__header. */
+@media (min-width: 768px) {
+  #capabilities .section__lede { margin-left: auto; margin-right: auto; }
+}
+
+/* ---- TRACK RECORD · grid after the fifth figure was hidden (S4D-fix) ----
+   The shared grid is repeat(5, 1fr); hiding the fifth stat left its column
+   standing empty. Four columns close the gap. Home-only: index.html is the
+   sole page carrying .track-record__stats, so the shared 5→2→1 staircase is
+   untouched for any other consumer. */
+@media (min-width: 901px) {
+  .track-record__stats { grid-template-columns: repeat(4, 1fr); }
+}
+/* Two-column band: keep the columns, left-align the text inside each.
+   Below 480px the shared staircase drops to one column and already
+   left-aligns, so the treatment is consistent across both. */
+@media (max-width: 900px) {
+  .track-record__stats .stat,
+  .track-record__stats .stat__number,
+  .track-record__stats .stat__label { text-align: left; }
+}

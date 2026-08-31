@@ -61,10 +61,10 @@
             <span class="nav__work-caret" aria-hidden="true"></span>
           </button>
           <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
-            <a class="nav__work-item" role="menuitem" href="work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
-            <a class="nav__work-item" role="menuitem" href="work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="work_card2_label">Product · Payments</a>
             <a class="nav__work-item" role="menuitem" href="work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
-            <a class="nav__work-item" role="menuitem" href="work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+            <a class="nav__work-item" role="menuitem" href="work/designops-system/" data-nav-work="designops-system/" data-i18n="work_card4_label">Front-end · Banking</a>
           </div>
         </div>
         <a href="capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
@@ -119,10 +119,10 @@
           <span class="nav__overlay-link-chevron">&#8250;</span>
         </button>
         <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
-          <a class="nav__overlay-subitem" role="menuitem" href="work/designops-system/"      data-nav-work="designops-system/"      data-i18n="work_card1_label">Design system · Front-end</a>
-          <a class="nav__overlay-subitem" role="menuitem" href="work/tuua-transfer/"          data-nav-work="tuua-transfer/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="work_card2_label">Product · Payments</a>
           <a class="nav__overlay-subitem" role="menuitem" href="work/limafly-ux/"             data-nav-work="limafly-ux/"             data-i18n="work_card3_label">Prototype · User journey</a>
-          <a class="nav__overlay-subitem" role="menuitem" href="work/yape-trust-verify-brief/" data-nav-work="yape-trust-verify-brief/" data-i18n="work_card4_label">Front-end · Banking</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="work/designops-system/" data-nav-work="designops-system/" data-i18n="work_card4_label">Front-end · Banking</a>
         </div>
       </div>
       <a href="capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
@@ -240,75 +240,108 @@
 
       <ol class="work__track" role="list">
 
-        <!-- CARD 1 — AccreditaPass (lead artefact, A14 spotlight) -->
-        <li class="work-card work-card--spotlight">
+        <!-- CARD 1 -->
+        <li class="work-card work-card--spotlight" tabindex="0" aria-label="Access the AccreditaPass brief">
 
           <div class="work-card__bg" aria-hidden="true"></div>
 
           <div class="work-card__default">
-            <h3 class="work-card__title" data-i18n="work_card5_heading">You find out at the gate. This one tells you first.</h3>
-            <p class="work-card__summary" data-i18n="work_card5_body">Access changes quietly and gets discovered at a gate. Six documented mandates — audit, research, ideation, specification, evaluation, iteration — converge on one concept: an append-only record where every change carries a reason and a next step. Then I built it.</p>
+            <p class="work-card__category" data-i18n="work_card1_label">01 · ACCREDITAPASS · SPORTS</p>
+            <h3 class="work-card__title" data-i18n="work_card1_heading">You find out at the gate. This one tells you first.</h3>
+          </div>
+
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="work_card1_label">01 · ACCREDITAPASS · SPORTS</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card1_heading">You find out at the gate. This one tells you first.</h3>
+            <p class="work-card__summary" data-i18n="work_card1_body">Access changes quietly and gets discovered at a gate. Six documented mandates — audit, research, ideation, specification, evaluation, iteration — converge on one concept: an append-only record where every change carries a reason and a next step. Then I built it.</p>
           </div>
 
           <a href="work/accreditapass/" class="work-card__cta" aria-label="Access the AccreditaPass brief">
-            <span data-i18n="work_card5_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+            <span data-i18n="work_card1_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">&#8250;</span>
           </a>
+
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
 
         </li>
 
-        <!-- CARD 2 — Yape Trust & Verify -->
-        <li class="work-card">
+        <!-- CARD 2 -->
+        <li class="work-card" tabindex="0" aria-label="Access the Yape Trust and Verify brief">
 
           <div class="work-card__bg" aria-hidden="true">
             <img src="assets/img/work/verify.svg" alt="" class="work-card__bg-img">
           </div>
 
           <div class="work-card__default">
-            <h3 class="work-card__title" data-i18n="work_card4_heading">The screenshot says paid. My app asks the bank.</h3>
-            <p class="work-card__summary" data-i18n="work_card4_body">Yape receipts can be faked field by field — except one. I entered app development to build the merchant-side check that reads it: React, TypeScript, banking-grade security discipline, and a test protocol that proves the claim held.</p>
+            <p class="work-card__category" data-i18n="work_card2_label">02 · VERIFY APP · BANKING</p>
+            <h3 class="work-card__title" data-i18n="work_card2_heading">The screenshot says paid. My app asks the bank.</h3>
+          </div>
+
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="work_card2_label">02 · VERIFY APP · BANKING</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card2_heading">The screenshot says paid. My app asks the bank.</h3>
+            <p class="work-card__summary" data-i18n="work_card2_body">Yape receipts can be faked field by field — except one. I entered app development to build the merchant-side check that reads it: React, TypeScript, banking-grade security discipline, and a test protocol that proves the claim held.</p>
           </div>
 
           <a href="work/yape-trust-verify-brief/" class="work-card__cta" aria-label="Access the Yape Trust and Verify brief">
-            <span data-i18n="work_card4_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+            <span data-i18n="work_card2_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">&#8250;</span>
           </a>
+
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
 
         </li>
 
-        <!-- CARD 3 — Airport (LimaFly + TUUA on one page; ships at S6) -->
-        <li class="work-card">
+        <!-- CARD 3 -->
+        <li class="work-card" tabindex="0" aria-label="Access the Airport brief">
 
           <div class="work-card__bg" aria-hidden="true">
             <img src="assets/img/work/control.svg" alt="" class="work-card__bg-img">
           </div>
 
           <div class="work-card__default">
-            <h3 class="work-card__title" data-i18n="work_card2_heading">Two ways into the same airport: from outside it, and from inside it.</h3>
-            <p class="work-card__summary" data-i18n="work_card2_body">An outsider's prototype for a departure experience, and an insider's platform work on the tax that funds it. One airport, two vantage points, and what each one could see that the other could not.</p>
+            <p class="work-card__category" data-i18n="work_card3_label">03 · AIRPORT APPS · RETAIL</p>
+            <h3 class="work-card__title" data-i18n="work_card3_heading">Two ways into the same airport: from outside it, and from inside it.</h3>
+          </div>
+
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="work_card3_label">03 · AIRPORT APPS · RETAIL</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card3_heading">Two ways into the same airport: from outside it, and from inside it.</h3>
+            <p class="work-card__summary" data-i18n="work_card3_body">An outsider's prototype for a departure experience, and an insider's platform work on the tax that funds it. One airport, two vantage points, and what each one could see that the other could not.</p>
           </div>
 
           <a href="work/airport/" class="work-card__cta" aria-label="Access the Airport brief">
-            <span data-i18n="work_card2_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+            <span data-i18n="work_card3_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">&#8250;</span>
           </a>
+
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
 
         </li>
 
-        <!-- CARD 4 — Front-End Evolution (Brief 01, renamed by A2; ships at S10) -->
-        <li class="work-card">
+        <!-- CARD 4 -->
+        <li class="work-card" tabindex="0" aria-label="Access the Front-End Evolution brief">
 
           <div class="work-card__bg" aria-hidden="true">
             <img src="assets/img/work/build.svg" alt="" class="work-card__bg-img">
           </div>
 
           <div class="work-card__default">
-            <h3 class="work-card__title" data-i18n="work_card1_heading">Nine repositories, in the order I learned them.</h3>
-            <p class="work-card__summary" data-i18n="work_card1_body">The ladder from a first console application to this portfolio, one rung per course, each one linking to the repository it produced and naming the single thing it added.</p>
+            <p class="work-card__category" data-i18n="work_card4_label">04 · JDSAIRE · PORTFOLIO</p>
+            <h3 class="work-card__title" data-i18n="work_card4_heading">Nine repositories, in the order I learned them.</h3>
+          </div>
+
+          <div class="work-card__hover" aria-hidden="true">
+            <p class="work-card__hover-category" data-i18n="work_card4_label">04 · JDSAIRE · PORTFOLIO</p>
+            <h3 class="work-card__hover-title" data-i18n="work_card4_heading">Nine repositories, in the order I learned them.</h3>
+            <p class="work-card__summary" data-i18n="work_card4_body">The ladder from a first console application to this portfolio, one rung per course, each one linking to the repository it produced and naming the single thing it added.</p>
           </div>
 
           <a href="work/front-end-evolution/" class="work-card__cta" aria-label="Access the Front-End Evolution brief">
-            <span data-i18n="work_card1_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">›</span>
+            <span data-i18n="work_card4_cta">Access Brief</span> <span class="work-card__cta-icon" aria-hidden="true">&#8250;</span>
           </a>
 
+          <button class="work-card__close" type="button" aria-label="Close summary">&#215;</button>
+
         </li>
+
       </ol>
 
       <!-- Pagination dots — mobile + tablet only -->
@@ -329,12 +362,14 @@
        ============================================================ -->
   <section class="section section--services section--capabilities" id="capabilities" aria-labelledby="capabilities-heading">
     <div class="section__inner">
-      <div class="section__eyebrow">
-        <span class="section__eyebrow-bar" aria-hidden="true"></span>
-        <p class="section__eyebrow-text" data-i18n="capabilities_eyebrow">CAPABILITIES</p>
+      <div class="capabilities__header">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar" aria-hidden="true"></span>
+          <p class="section__eyebrow-text" data-i18n="capabilities_eyebrow">CAPABILITIES</p>
+        </div>
+        <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">Triple Value Proposition.</h2>
+        <p class="section__lede" data-i18n="capabilities_lede"> The strategist who builds – Not a commodity coder.</p>
       </div>
-      <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">Triple Value Proposition.</h2>
-      <p class="section__lede" data-i18n="capabilities_lede"> The strategist who builds – Not a commodity coder.</p>
       <ul class="teaser__triptych" role="list">
         <li class="teaser__item">
           <div class="services__media">
@@ -398,28 +433,6 @@
        ABOUT — full organism (the milestone timeline deepens at /about/)
        Anchor: #about  (historical alias #evolution retained)
        ============================================================ -->
-  <section class="section section--alt" id="about" aria-labelledby="about-heading">
-    <span id="evolution" aria-hidden="true"></span>
-    <div class="section__inner">
-      <div class="evolution__header">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="about_hero_eyebrow">ABOUT</p>
-        </div>
-        <h2 class="section__headline" id="about-heading" data-i18n="evolution_heading">About Juan Diego.</h2>
-        <p class="section__lede" data-i18n="evolution_lede">My history – from ideator to builder.</p>
-      </div>
-      <a class="cta" href="about/" data-nav-page="about/" aria-label="See the full arc">
-        <span class="cta__label" data-i18n="home_about_cta">See the full arc</span>
-        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       TRACK RECORD — stats + institutional marquee
-       Anchor: #track-record  (relocated low; preserved tickerMarquee)
-       ============================================================ -->
   <section class="section section--track-record" id="track-record" aria-label="Track record">
     <div class="section__inner">
       <div class="track-record__header">
@@ -478,6 +491,28 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRACK RECORD — stats + institutional marquee
+       Anchor: #track-record  (relocated low; preserved tickerMarquee)
+       ============================================================ -->
+  <section class="section section--alt" id="about" aria-labelledby="about-heading">
+    <span id="evolution" aria-hidden="true"></span>
+    <div class="section__inner">
+      <div class="evolution__header">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar" aria-hidden="true"></span>
+          <p class="section__eyebrow-text" data-i18n="about_hero_eyebrow">ABOUT</p>
+        </div>
+        <h2 class="section__headline" id="about-heading" data-i18n="evolution_heading">About Juan Diego.</h2>
+        <p class="section__lede" data-i18n="evolution_lede">My history – from ideator to builder.</p>
+      </div>
+      <a class="cta" href="about/" data-nav-page="about/" aria-label="See the full arc">
+        <span class="cta__label" data-i18n="home_about_cta">See the full arc</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </section>
 

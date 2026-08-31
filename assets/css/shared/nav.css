@@ -231,3 +231,77 @@
   .nav__center { display:none; }
   .nav__utility { display:none; }
 }
+
+/* ============================================================
+   PRIMARY NAVIGATION — uppercase labels (S4D · F3.1).
+   Presentation only: the dictionary values stay mixed-case in both
+   languages, so no key changes and no ES debt is created. Deleting
+   this block restores the original casing exactly.
+   ============================================================ */
+.nav__link,
+.nav__work-trigger,
+.nav__work-item,
+.nav__overlay-link,
+.nav__overlay-subitem {
+  text-transform: uppercase;
+}
+/* The Contact CTA is deliberately NOT uppercased (S4D-fix): it is a button,
+   not a nav label, and sentence case keeps it distinct from the link set. */
+
+/* ---- CAPABILITIES entry withdrawn site-wide (S4D · F3.4) ----
+   The page it points at is hidden pending retirement, so the entry is
+   withheld on all nine pages that carry the chrome — the desktop link
+   and the mobile overlay alike. Markup retained; the route still
+   resolves; deleting this rule restores the entry everywhere. */
+[data-nav-page="capabilities/"] { display: none; }
+
+/* ============================================================
+   NAV POLISH (S4D-fix) — hover weight and the Work dropdown.
+   ============================================================ */
+
+/* Hover and keyboard focus resolve to solid white AND bold. The default
+   stays muted and unweighted. font-variation-settings is paired with
+   font-weight so a variable face thickens without a second file. */
+.nav__link:hover,
+.nav__link:focus-visible,
+.nav__work-trigger:hover,
+.nav__work-trigger:focus-visible {
+  color: var(--color-brand-white);
+  font-weight: var(--fw-bold);
+}
+/* Bold is wider than medium, so hovering nudges the labels to its right by
+   a pixel or two. Reserving the bold width in CSS is not possible here: the
+   label text arrives from the i18n dictionary at runtime and changes with
+   language, so no static width or pseudo-element content can stand in for
+   it. The shift is measured and reported rather than papered over. */
+
+/* ---- Work dropdown ---- */
+.nav__work-menu {
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  min-width: 18rem;
+  padding: 0.4rem 0;
+  border-radius: 2px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+/* One line per label — 01 · ACCREDITAPASS · SPORTS is the longest at 27
+   characters and was wrapping against the old 15rem floor. */
+.nav__work-item {
+  white-space: nowrap;
+  padding: 0.7rem 1.35rem;
+  border-left: 2px solid transparent;
+  transition:
+    color var(--duration-ui) var(--ease-standard),
+    background var(--duration-ui) var(--ease-standard),
+    border-color var(--duration-ui) var(--ease-standard);
+}
+.nav__work-item:hover,
+.nav__work-item:focus-visible {
+  color: var(--color-brand-white);
+  background: rgba(161, 0, 255, 0.10);
+  border-left-color: var(--color-brand-purple);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav__work-item { transition: none; }
+}

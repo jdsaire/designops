@@ -79,3 +79,6 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 - capabilities/ no longer carries per-vertical prose Main does not after the H1 restoration; a later stage should re-deepen it so the route stays justified.
 - The nav Work submenu is stale on all four pages: it points at the retired designops-system, tuua-transfer and limafly-ux routes and carries no AccreditaPass entry.
 - The 13 tag_* dictionary pairs in both Home dictionaries are orphaned by the tag-filter removal and are cleanup candidates at the closure audit.
+- Redesign and restore the site-wide footer; the hide is a holding action, markup retained in source.
+- Include Credly badges (Microsoft, Google, Claude, McKinsey) to populate the About child.
+- Amendment F3 (signed 31-08-2026) executed six previously parked Home items and killed three; they are settled, not dropped.
