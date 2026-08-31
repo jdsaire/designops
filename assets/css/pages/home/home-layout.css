@@ -1,0 +1,37 @@
+/* pages/home/home-layout.css — Main-only layout corrections (S4).
+   Linked from index.html alone, so nothing here can reach a child page.
+   That isolation is the point: contact/index.html carries its own
+   #contact section, and shared/footer.css is linked by four pages, so
+   both of the rules below would leak if they lived in a shared file. */
+
+/* ---- CAPABILITIES · card art to purple label ----
+   The pre-migration organism was a carousel whose slide-inner is a two-column
+   grid, so the art and the text never sat one above the other and no vertical
+   gap was ever specified. Main's triptych stacks them, which left the label
+   flush against the image at every breakpoint. */
+.teaser__item .services__media {
+  margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+/* ---- ABOUT · editorial + CTA ----
+   The milestone list was redundant with about/, which carries the same eight
+   events with their bodies, notes and reveal panels. Main keeps the editorial
+   and the route in. The CTA follows the header's own alignment contract from
+   shared/designops-variant.css: centred at desktop and tablet, left at mobile.
+   .cta is inline-flex, so the parent's text-align is what moves it. */
+@media (min-width: 768px) {
+  #about .section__inner { text-align: center; }
+}
+#about .cta { margin-top: clamp(0.5rem, 1vw, 1rem); }
+
+/* ---- CONTACT · centred at desktop and tablet ----
+   Mirrors the header contract in shared/designops-variant.css. Scoped to Main
+   because contact/index.html carries its own #contact section. The eyebrow is
+   a flex column pinned to flex-start, and the lede has max-width:36rem, so
+   both need an explicit override; the headline and the inline-flex CTA follow
+   text-align. Mobile keeps the untouched left alignment. */
+@media (min-width: 768px) {
+  #contact .section__inner  { text-align: center; }
+  #contact .section__eyebrow { align-items: center; }
+  #contact .section__lede    { margin-left: auto; margin-right: auto; }
+}

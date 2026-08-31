@@ -61,3 +61,12 @@
   .footer__grid { grid-template-columns: 1fr; margin-bottom: 0; }
 }
 
+/* ============================================================
+   FOOTER HIDDEN — pending redesign.
+   The footer is withheld site-wide to ease navigation rather than
+   add visual friction. Every rule above is retained so the redesign
+   restores it by deleting this block alone. display:none keeps it
+   out of the tab order and the accessibility tree, so nothing here
+   becomes an invisible focus stop.
+   ============================================================ */
+.footer { display: none; }

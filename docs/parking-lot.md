@@ -72,3 +72,10 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 - AccreditaPass ux-ui/05-iteration/README.md line 5 calls ShopEase a course-mate's build; its own Gate 0 file names jdsaire/frontend_c6_ecommerce - correct the README line.
 - S2's interview question set shows no issue date; freeze D11's 72-hour clock is unstarted.
 - Home's work pagination dots are hardcoded at four and labelled "Card N of 4" while the section carries five cards.
+- Build a JS/TS equivalent of AccreditaPass in a new repo, assessing WebSockets and other unlearned tooling, as post-application backup for hiring-manager inspection.
+- Inherit the progressive-disclosure components from briefs 1 and 4 into the AccreditaPass brief and reallocate surface prose behind them.
+- Build a Gantt component and a three-level KPI set for the AccreditaPass brief, matching the components briefs 1 and 4 already carry.
+- Add a Next Steps section to the AccreditaPass brief narrating the planned JS/TS equivalent build.
+- capabilities/ no longer carries per-vertical prose Main does not after the H1 restoration; a later stage should re-deepen it so the route stays justified.
+- The nav Work submenu is stale on all four pages: it points at the retired designops-system, tuua-transfer and limafly-ux routes and carries no AccreditaPass entry.
+- The 13 tag_* dictionary pairs in both Home dictionaries are orphaned by the tag-filter removal and are cleanup candidates at the closure audit.
