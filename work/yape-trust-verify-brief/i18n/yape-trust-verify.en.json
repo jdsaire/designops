@@ -130,8 +130,8 @@
   "convert_nextlabel": "Keep reading",
   "convert_c1_t": "DesignOps System",
   "convert_c1_x": "The system this brief is published on — built, governed, and operated end to end.",
-  "convert_c2_t": "TUUA Transfer",
-  "convert_c2_x": "The paid engagement: a payment platform designed, prototyped, and handed to engineering.",
+  "convert_c2_t": "Airport Apps",
+  "convert_c2_x": "Three positions on one airport, including the paid engagement: a payment platform designed, prototyped and handed to engineering.",
   "act1_receipt_alt": "A Yape payment confirmation screen showing an amount in soles, a recipient name, a date and time, a three-digit security code, and an operation number.",
   "gantt_collapse": "Collapse all phases"
 }
