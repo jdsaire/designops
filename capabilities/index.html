@@ -14,6 +14,7 @@
   <meta property="og:image" content="../assets/img/bridge1_onboarding.svg">
   <meta property="og:locale" content="en_US">
 
+  <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <link rel="stylesheet" href="../assets/css/base/tokens.css">
   <link rel="stylesheet" href="../assets/css/base/reset.css">
   <link rel="stylesheet" href="../assets/css/shared/progress.css">
@@ -63,6 +64,12 @@
 
       <!-- RIGHT utility -->
       <div class="nav__utility">
+        <!-- Theme toggle — peer to SwapLang -->
+        <button class="nav__theme-btn" id="themeBtn" type="button"
+                aria-label="Toggle light and dark theme" aria-pressed="false">
+          <span class="nav__theme-icon" aria-hidden="true">◑</span>
+        </button>
+
         <!-- SwapLang — EN/ES bilingual toggle -->
         <div class="nav__lang" id="langSelector">
           <button class="nav__lang-btn" id="langBtn" type="button"
@@ -132,6 +139,10 @@
     <div class="nav__overlay-lang" id="overlayLang" role="group" aria-label="Language">
       <button class="nav__overlay-lang-option" type="button" data-lang="ES">ES</button>
       <button class="nav__overlay-lang-option" type="button" data-lang="EN">EN</button>
+      <button class="nav__overlay-theme-btn" id="overlayThemeBtn" type="button"
+              aria-label="Toggle light and dark theme" aria-pressed="false">
+        <span class="nav__theme-icon" aria-hidden="true">◑</span>
+      </button>
     </div>
 
   </div>
