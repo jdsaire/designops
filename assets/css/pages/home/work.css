@@ -44,6 +44,12 @@
   overflow: hidden;
   aspect-ratio: 4 / 5;
   background: var(--surface-hover);
+  /* The card art is seated below the three-line headline and runs off the
+     base, the card's own overflow doing the clip. Held as custom properties
+     because the headline block bottoms out at a different fraction of card
+     height per breakpoint — ~47% at mobile, ~36% at tablet, ~35% desktop. */
+  --work-art-h:     50%;
+  --work-art-bleed: -10%;
   box-shadow:
     0 2px 8px  var(--shadow-1),
     0 8px 32px var(--shadow-2),
@@ -77,10 +83,11 @@ html[data-theme="light"] .work-card {
 }
 .work-card__bg-img {
   position: absolute;
-  inset: 0;
+  inset: auto 0 var(--work-art-bleed) 0;
   width: 100%;
-  height: 100%;
+  height: var(--work-art-h);
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: filter var(--duration-ui) var(--ease-standard);
 }
@@ -218,6 +225,7 @@ html[data-theme="light"] .work-card {
   .work__dots { display: flex; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
+  .work-card { --work-art-h: 56%; }
   .work__track {
     display: flex;
     flex-direction: row;
@@ -240,6 +248,7 @@ html[data-theme="light"] .work-card {
   .work-card {
     aspect-ratio: auto;
     height: clamp(384px, 37.5vw, 540px);
+    --work-art-h: 58%;
   }
 }
 .work__dots {
