@@ -96,7 +96,7 @@
   right:  clamp(2rem, 4vw, 3rem);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: var(--fw-bold);
-  color: var(--color-brand-white);
+  color: var(--color-on-brand);
   line-height: 1.15;
   letter-spacing: -0.02em;
   white-space: pre-line;
@@ -113,7 +113,7 @@
   font-weight: var(--fw-regular);
   line-height: 1.45;
   text-align: left;
-  color: var(--color-brand-white);
+  color: var(--color-on-brand);
   opacity: 0;
   transform: translateY(-8px);
   transition: opacity 400ms var(--ease-standard), transform 400ms var(--ease-standard);

@@ -69,7 +69,7 @@ html[data-lang="ES"] .hero__h1--lang-en { display:none; }
 .cta__label { font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em; }
 .cta__icon { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard); }
 .cta:hover .cta__icon, .cta:focus-visible .cta__icon { background:var(--color-purple-hover); }
-.cta__icon svg { width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-brand-white); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.cta__icon svg { width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
 button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 

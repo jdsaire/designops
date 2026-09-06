@@ -1,6 +1,9 @@
 /* shared/section-extras.css — SHARED SECTION EXTRAS — split from main.css lines 912-967. See docs/ for the reorg record. */
 /* ============================================================ SHARED SECTION EXTRAS ============================================================ */
 .section--alt { background: var(--surface-sunken); }
+/* Light mode drops the tint: on a white ground the sunken band read as an
+   unexplained grey slab beside its white neighbours. No divider replaces it. */
+html[data-theme="light"] .section--alt { background: var(--color-brand-black); border: none; }
 
 /* WORK + SERVICES + TICKER HEADER — mirrors .about__header pattern */
 .work__header,

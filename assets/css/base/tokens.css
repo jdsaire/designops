@@ -37,6 +37,11 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
      and rgba(var(--ground),.68) and flip with the theme automatically. */
   --ink:    255,255,255;
   --ground: 0,0,0;
+  /* Content sitting ON a brand fill — the purple CTA squares, type on the
+     About cards' red/blue/indigo. Brand fills do not lighten with the theme,
+     so their content must not darken. Deliberately absent from the light
+     block: this one never flips. */
+  --color-on-brand: #FFFFFF;
   /* ── Elevation ladder. The seven surface greys that were literals.
      Named by role, following the reference deck's --notes-bg precedent. */
   --surface-sunken:   #050505;

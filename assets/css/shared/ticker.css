@@ -106,6 +106,13 @@
   opacity: 1;
 }
 
+/* The logo files are pure white marks on transparency — roughly 95% of every
+   file is fully transparent — so on a light ground they disappear and leave
+   only their anti-aliased edges. Inverting flips the mark to black and leaves
+   alpha untouched, which keeps the seamless look the dark theme has rather
+   than boxing the lanes in a black band. */
+html[data-theme="light"] .ticker__logo { filter: invert(1); }
+
 /* Keyframes — shift by exactly one base-group width (integer px set by JS) */
 @keyframes ticker-left {
   from { transform: translate3d(0, 0, 0); }

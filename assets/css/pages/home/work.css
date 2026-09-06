@@ -56,6 +56,25 @@
   background-color: var(--surface-elevated);
   z-index: 0;
 }
+
+/* The work cards are media tiles: each is carried by a dark, colour-led
+   photograph, and card 01 by the brand's deep purple (#21102F). Those grounds
+   do not lighten with the theme, so the type on them must not darken either.
+   Re-pinning the channels and surfaces on the card keeps the whole tile in its
+   dark treatment in light mode — the alternative, inverting the art, turns the
+   brand purple green. Everything inside inherits, so no rule below changes. */
+html[data-theme="light"] .work-card {
+  --ink: 255,255,255;
+  --ground: 0,0,0;
+  --color-brand-white:   #FFFFFF;
+  --color-brand-black:   #000000;
+  --color-text-muted:    rgba(255,255,255,0.60);
+  --color-text-dim:      rgba(255,255,255,0.50);
+  --color-border-faint:  rgba(255,255,255,0.06);
+  --color-border-soft:   rgba(255,255,255,0.10);
+  --surface-hover:       #1A1A1A;
+  --surface-elevated:    #1E1E1E;
+}
 .work-card__bg-img {
   position: absolute;
   inset: 0;
