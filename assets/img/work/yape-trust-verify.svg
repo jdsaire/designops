@@ -34,7 +34,7 @@
   <g transform="translate(320 168)">
     <circle r="34" fill="#A100FF"/>
     <circle r="34" fill="none" stroke="#C2A3FF" stroke-width="2.5"/>
-    <path d="M 0 -19 L 0 19 M -11 -10 C -11 -19, 11 -19, 11 -12 C 11 -4, -11 -4, -11 4 C -11 12, 11 12, 11 3"
+    <path d="M 0 -19 L 0 19 M 11 -10 C 11 -19, -11 -19, -11 -12 C -11 -4, 11 -4, 11 4 C 11 12, -11 12, -11 3"
           fill="none" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
   </g>
   <path d="M 380 214 L 398 230 L 382 248" fill="none" stroke="#A100FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
