@@ -43,18 +43,37 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  background: #1a1a1a;
+  background: var(--surface-hover);
   box-shadow:
-    0 2px 8px  rgba(0, 0, 0, 0.45),
-    0 8px 32px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    0 2px 8px  var(--shadow-1),
+    0 8px 32px var(--shadow-2),
+    inset 0 1px 0 rgba(var(--ink), 0.10),
+    inset 0 0 0 1px rgba(var(--ink), 0.05);
 }
 .work-card__bg {
   position: absolute;
   inset: 0;
-  background-color: #1E1E1E;
+  background-color: var(--surface-elevated);
   z-index: 0;
+}
+
+/* The work cards are media tiles: each is carried by a dark, colour-led
+   photograph, and card 01 by the brand's deep purple (#21102F). Those grounds
+   do not lighten with the theme, so the type on them must not darken either.
+   Re-pinning the channels and surfaces on the card keeps the whole tile in its
+   dark treatment in light mode — the alternative, inverting the art, turns the
+   brand purple green. Everything inside inherits, so no rule below changes. */
+html[data-theme="light"] .work-card {
+  --ink: 255,255,255;
+  --ground: 0,0,0;
+  --color-brand-white:   #FFFFFF;
+  --color-brand-black:   #000000;
+  --color-text-muted:    rgba(255,255,255,0.60);
+  --color-text-dim:      rgba(255,255,255,0.50);
+  --color-border-faint:  rgba(255,255,255,0.06);
+  --color-border-soft:   rgba(255,255,255,0.10);
+  --surface-hover:       #1A1A1A;
+  --surface-elevated:    #1E1E1E;
 }
 .work-card__bg-img {
   position: absolute;
@@ -79,8 +98,8 @@
     clamp(1.5rem,  2.25vw, 2.25rem);
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.72) 0%,
-    rgba(0,0,0,0.14) 55%,
+    rgba(var(--ground),0.72) 0%,
+    rgba(var(--ground),0.14) 55%,
     transparent 100%
   );
   transition:
@@ -102,7 +121,7 @@
   font-size: clamp(0.9rem, 1.0vw, 1.0rem);
   font-weight: var(--fw-regular);
   line-height: 1.65;
-  color: rgba(255,255,255,0.82);
+  color: rgba(var(--ink),0.82);
   opacity: 0;
   transform: translateX(12px);
   transition:
@@ -144,7 +163,7 @@
   .work-card:hover .work-card__default,
   .work-card:focus-within .work-card__default { opacity: 0; pointer-events: none; }
   .work-card:hover .work-card__hover,
-  .work-card:focus-within .work-card__hover { opacity: 1; background: rgba(0,0,0,0.68); }
+  .work-card:focus-within .work-card__hover { opacity: 1; background: rgba(var(--ground),0.68); }
   .work-card:hover .work-card__summary,
   .work-card:focus-within .work-card__summary { opacity: 1; transform: translateX(0); }
   .work-card:hover .work-card__cta,
@@ -155,7 +174,7 @@
 /* Touch: work.js toggles .is-active, and .work-card__close dismisses it. That
    handler survived the S4 flattening untouched, so no JS changes here. */
 .work-card.is-active .work-card__default { opacity: 0; pointer-events: none; }
-.work-card.is-active .work-card__hover { opacity: 1; background: rgba(0,0,0,0.68); }
+.work-card.is-active .work-card__hover { opacity: 1; background: rgba(var(--ground),0.68); }
 .work-card.is-active .work-card__summary { opacity: 1; transform: translateX(0); }
 .work-card.is-active .work-card__cta { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .work-card.is-active .work-card__close { opacity: 1; transform: translateX(0); pointer-events: auto; }
@@ -232,7 +251,7 @@
 .work__dot {
   width: 0.45rem;
   height: 0.45rem;
-  background: rgba(255,255,255,0.22);
+  background: rgba(var(--ink),0.22);
   border: none;
   cursor: pointer;
   transition:
@@ -251,7 +270,7 @@
    ============================================================ */
 .work-card--spotlight {
   box-shadow:
-    0 2px 8px   rgba(0, 0, 0, 0.45),
+    0 2px 8px   var(--shadow-1),
     0 12px 44px rgba(161, 0, 255, 0.30),
     inset 0 0 0 1px rgba(161, 0, 255, 0.55);
 }
@@ -284,8 +303,8 @@
   line-height: 1.2;
   margin-bottom: 0.875rem;
 }
-.work-card__category { color: rgba(255,255,255,0.65); }
-.work-card__hover-category { color: rgba(255,255,255,0.55); }
+.work-card__category { color: rgba(var(--ink),0.65); }
+.work-card__hover-category { color: rgba(var(--ink),0.65); } /* was .55: 4.45:1 in light, 0.05 short of AA. Matches its sibling above. */
 .work-card__hover {
   position: absolute;
   inset: 0;
@@ -298,7 +317,7 @@
     clamp(1.5rem,  2.25vw, 2.25rem)
     clamp(1.5rem,  2.25vw, 2.25rem)
     clamp(1.5rem,  2.25vw, 2.25rem);
-  background: rgba(0,0,0,0);
+  background: rgba(var(--ground),0);
   pointer-events: none;
   opacity: 0;
   transition:
@@ -322,7 +341,7 @@
   right: clamp(1rem, 1.5vw, 1.25rem);
   z-index: 5;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.30);
+  border: 1px solid rgba(var(--ink),0.30);
   color: var(--color-brand-white);
   font-family: var(--font-primary);
   font-size: 1rem;
