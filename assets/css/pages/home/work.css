@@ -44,22 +44,37 @@
   overflow: hidden;
   aspect-ratio: 4 / 5;
   background: var(--surface-hover);
-  /* The card art is seated below the three-line headline and runs off the
-     base, the card's own overflow doing the clip. Held as custom properties
-     because the headline block bottoms out at a different fraction of card
-     height per breakpoint — ~47% at mobile, ~36% at tablet, ~35% desktop. */
-  --work-art-h:     50%;
-  --work-art-bleed: -10%;
+  /* --work-art-top is where the card art begins, and the single value the
+     surface gradient and the image both derive from, so the two cannot drift.
+     It clears the three-line headline, which bottoms out at a different
+     fraction of card height per breakpoint — ~47% mobile, ~36% tablet, ~35%
+     desktop. --work-art-bleed is how far the art runs past the base; the
+     card's own overflow does the clip. */
+  --work-art-top:   60%;
+  --work-art-bleed: 10%;
+  /* The section ground is pure black, so the drop shadows below it are
+     invisible and cannot carry elevation on their own. The purple lift and
+     the brightened hairlines are what separate the tile from the page. */
   box-shadow:
-    0 2px 8px  var(--shadow-1),
-    0 8px 32px var(--shadow-2),
-    inset 0 1px 0 rgba(var(--ink), 0.10),
-    inset 0 0 0 1px rgba(var(--ink), 0.05);
+    0 2px 8px   var(--shadow-1),
+    0 12px 44px rgba(161, 0, 255, 0.22),
+    inset 0 1px 0   rgba(var(--ink), 0.14),
+    inset 0 0 0 1px rgba(var(--ink), 0.12);
 }
+/* The surface fills the whole card and resolves to the artwork's own ground
+   exactly where the artwork begins, so the two read as one continuous tile
+   rather than a panel with a picture stuck to its base. Literals, not tokens,
+   for the same reason the light-mode block below exists: this surface must
+   not lighten with the theme. */
 .work-card__bg {
   position: absolute;
   inset: 0;
-  background-color: var(--surface-elevated);
+  background: linear-gradient(
+    to bottom,
+    #2A1240 0%,
+    #150B20 34%,
+    #0A0A0A var(--work-art-top)
+  );
   z-index: 0;
 }
 
@@ -83,9 +98,12 @@ html[data-theme="light"] .work-card {
 }
 .work-card__bg-img {
   position: absolute;
-  inset: auto 0 var(--work-art-bleed) 0;
+  top: var(--work-art-top);
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--work-art-bleed));
   width: 100%;
-  height: var(--work-art-h);
+  height: auto;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -225,7 +243,7 @@ html[data-theme="light"] .work-card {
   .work__dots { display: flex; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  .work-card { --work-art-h: 56%; }
+  .work-card { --work-art-top: 54%; }
   .work__track {
     display: flex;
     flex-direction: row;
@@ -248,7 +266,7 @@ html[data-theme="light"] .work-card {
   .work-card {
     aspect-ratio: auto;
     height: clamp(384px, 37.5vw, 540px);
-    --work-art-h: 58%;
+    --work-art-top: 52%;
   }
 }
 .work__dots {
