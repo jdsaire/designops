@@ -44,22 +44,44 @@
   overflow: hidden;
   aspect-ratio: 4 / 5;
   background: var(--surface-hover);
+  /* --work-art-top is where the card art begins, and the single value the
+     surface gradient and the image both derive from, so the two cannot drift.
+     It clears the three-line headline, which bottoms out at a different
+     fraction of card height per breakpoint — ~47% mobile, ~36% tablet, ~35%
+     desktop. --work-art-bleed is how far the art runs past the base; the
+     card's own overflow does the clip. */
+  --work-art-top:   60%;
+  --work-art-bleed: 10%;
+  --work-type-gap:  0.875rem;
+  /* The section ground is pure black, so the drop shadows below it are
+     invisible and cannot carry elevation on their own. The purple lift and
+     the brightened hairlines are what separate the tile from the page. */
   box-shadow:
-    0 2px 8px  var(--shadow-1),
-    0 8px 32px var(--shadow-2),
-    inset 0 1px 0 rgba(var(--ink), 0.10),
-    inset 0 0 0 1px rgba(var(--ink), 0.05);
+    0 2px 8px   var(--shadow-1),
+    0 12px 44px rgba(161, 0, 255, 0.22),
+    inset 0 1px 0   rgba(var(--ink), 0.14),
+    inset 0 0 0 1px rgba(var(--ink), 0.12);
 }
+/* The surface fills the whole card and resolves to the artwork's own ground
+   exactly where the artwork begins, so the two read as one continuous tile
+   rather than a panel with a picture stuck to its base. Literals, not tokens,
+   for the same reason the light-mode block below exists: this surface must
+   not lighten with the theme. */
 .work-card__bg {
   position: absolute;
   inset: 0;
-  background-color: var(--surface-elevated);
+  background: linear-gradient(
+    to bottom,
+    #2A1240 0%,
+    #150B20 34%,
+    #0A0A0A var(--work-art-top)
+  );
   z-index: 0;
 }
 
-/* The work cards are media tiles: each is carried by a dark, colour-led
-   photograph, and card 01 by the brand's deep purple (#21102F). Those grounds
-   do not lighten with the theme, so the type on them must not darken either.
+/* The work cards are media tiles: all four are carried by a dark, colour-led
+   photograph. Those grounds do not lighten with the theme, so the type on them
+   must not darken either.
    Re-pinning the channels and surfaces on the card keeps the whole tile in its
    dark treatment in light mode — the alternative, inverting the art, turns the
    brand purple green. Everything inside inherits, so no rule below changes. */
@@ -77,10 +99,14 @@ html[data-theme="light"] .work-card {
 }
 .work-card__bg-img {
   position: absolute;
-  inset: 0;
+  top: var(--work-art-top);
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--work-art-bleed));
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: filter var(--duration-ui) var(--ease-standard);
 }
@@ -107,6 +133,7 @@ html[data-theme="light"] .work-card {
     transform var(--duration-ui) var(--ease-standard);
 }
 .work-card__title {
+  margin: 0;
   font-size: clamp(1.375rem, 1.6vw, 1.575rem);
   font-weight: var(--fw-semibold);
   line-height: 1.25;
@@ -118,6 +145,7 @@ html[data-theme="light"] .work-card {
   overflow: hidden;
 }
 .work-card__summary {
+  margin: 0;
   font-size: clamp(0.9rem, 1.0vw, 1.0rem);
   font-weight: var(--fw-regular);
   line-height: 1.65;
@@ -218,6 +246,7 @@ html[data-theme="light"] .work-card {
   .work__dots { display: flex; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
+  .work-card { --work-art-top: 54%; }
   .work__track {
     display: flex;
     flex-direction: row;
@@ -240,6 +269,7 @@ html[data-theme="light"] .work-card {
   .work-card {
     aspect-ratio: auto;
     height: clamp(384px, 37.5vw, 540px);
+    --work-art-top: 52%;
   }
 }
 .work__dots {
@@ -264,25 +294,13 @@ html[data-theme="light"] .work-card {
 
 /* ============================================================
    A14 · SPOTLIGHT — the AccreditaPass card is the lead artefact.
-   Bounded to visual differentiation: a brand-purple edge, a deeper
-   lift and a slightly larger title. No autoplay, no motion-driven
-   navigation, no scroll-jacking, and nothing that moves on its own.
+   The purple treatments that carried it — the container tint, the
+   default-face wash, the brand-purple edge and outer glow — were
+   removed by direction: Card 1 now renders on the same surface as the
+   rest of the set. A slightly larger title is what remains. No
+   autoplay, no motion-driven navigation, no scroll-jacking, and
+   nothing that moves on its own.
    ============================================================ */
-.work-card--spotlight {
-  box-shadow:
-    0 2px 8px   var(--shadow-1),
-    0 12px 44px rgba(161, 0, 255, 0.30),
-    inset 0 0 0 1px rgba(161, 0, 255, 0.55);
-}
-.work-card--spotlight .work-card__bg { background-color: #21102F; }
-.work-card--spotlight .work-card__default {
-  background: linear-gradient(
-    to bottom,
-    rgba(33, 16, 47, 0.86) 0%,
-    rgba(33, 16, 47, 0.34) 55%,
-    rgba(33, 16, 47, 0.10) 100%
-  );
-}
 .work-card--spotlight .work-card__title { font-size: clamp(1.5rem, 1.85vw, 1.8rem); }
 @media (max-width: 767px) {
   .work-card--spotlight .work-card__title { font-size: clamp(1.25rem, 5vw, 1.5rem); }
@@ -294,6 +312,12 @@ html[data-theme="light"] .work-card {
    and adds the summary. S4 flattened this into one always-visible
    face, which is why the two states looked identical.
    ============================================================ */
+/* The card's type block is locked to one rhythm: --work-type-gap between
+   label and heading, and the same between heading and body. Both gaps used
+   to come from the UA's margin: 1em 0 on the h3 and p — the reset only
+   touches body and a — so they measured ~37px and ~39px and drifted with
+   each element's own clamp() font-size across breakpoints. Zeroing those
+   margins and stating the gap is what makes the block deterministic. */
 .work-card__category,
 .work-card__hover-category {
   font-size: 1rem;
@@ -301,7 +325,7 @@ html[data-theme="light"] .work-card {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   line-height: 1.2;
-  margin-bottom: 0.875rem;
+  margin: 0 0 var(--work-type-gap);
 }
 .work-card__category { color: rgba(var(--ink),0.65); }
 .work-card__hover-category { color: rgba(var(--ink),0.65); } /* was .55: 4.45:1 in light, 0.05 short of AA. Matches its sibling above. */
@@ -325,6 +349,7 @@ html[data-theme="light"] .work-card {
     background var(--duration-ui) var(--ease-standard);
 }
 .work-card__hover-title {
+  margin: 0 0 var(--work-type-gap);
   font-size: clamp(1.375rem, 1.6vw, 1.575rem);
   font-weight: var(--fw-semibold);
   line-height: 1.25;

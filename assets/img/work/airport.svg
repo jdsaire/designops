@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512" preserveAspectRatio="xMidYMid meet" version="1.0">
+  <title>Airport</title>
+  <defs>
+    <radialGradient id="w3-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#A100FF" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="w3-plane" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#8C00D9"/>
+      <stop offset="1" stop-color="#C2A3FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="512" fill="#0A0A0A"/>
+  <circle cx="320" cy="256" r="215" fill="url(#w3-glow)"/>
+
+  <!-- ground -->
+  <path d="M 40 434 L 600 434" stroke="#C2A3FF" stroke-width="2" opacity="0.28" fill="none"/>
+  <g stroke="#C2A3FF" stroke-width="3" opacity="0.22" fill="none">
+    <path d="M 72 452 L 128 452 M 168 452 L 224 452 M 264 452 L 320 452 M 360 452 L 416 452 M 456 452 L 512 452"/>
+  </g>
+
+  <!-- control tower -->
+  <g transform="translate(430 150)">
+    <path d="M 34 284 L 46 116 L 86 116 L 98 284 Z" fill="none" stroke="#C2A3FF" stroke-width="3"/>
+    <g stroke="#C2A3FF" stroke-width="2" opacity="0.4" fill="none">
+      <path d="M 40 200 L 92 200 M 37 244 L 95 244"/>
+    </g>
+    <path d="M 28 116 L 104 116" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 22 62 L 110 62 L 100 112 L 32 112 Z" fill="#A100FF"/>
+    <path d="M 22 62 L 110 62 L 100 112 L 32 112 Z" fill="none" stroke="#C2A3FF" stroke-width="2.5"/>
+    <g stroke="#0A0A0A" stroke-width="3" opacity="0.45" fill="none">
+      <path d="M 51 62 L 47 112 M 81 62 L 85 112"/>
+    </g>
+    <path d="M 66 62 L 66 30" stroke="#C2A3FF" stroke-width="3" fill="none"/>
+    <circle cx="66" cy="22" r="9" fill="#C2A3FF"/>
+    <!-- signal arcs -->
+    <g fill="none" stroke="#A100FF" stroke-linecap="round">
+      <path d="M 40 6 A 36 36 0 0 1 92 6"   stroke-width="3.5" opacity="0.85"/>
+      <path d="M 20 -14 A 64 64 0 0 1 112 -14" stroke-width="3"   opacity="0.5"/>
+      <path d="M 0 -34 A 92 92 0 0 1 132 -34"  stroke-width="2.5" opacity="0.28"/>
+    </g>
+  </g>
+
+  <!-- aircraft, climbing out -->
+  <g transform="translate(232 214) rotate(-18)">
+    <path d="M -150 0 C -110 -20, -20 -30, 96 -30 C 128 -30, 150 -18, 150 0 C 150 18, 128 30, 96 30 C -20 30, -110 20, -150 0 Z" fill="url(#w3-plane)"/>
+    <path d="M 14 -26 L -46 -104 L -8 -104 L 74 -26 Z" fill="#A100FF"/>
+    <path d="M 14 26 L -46 104 L -8 104 L 74 26 Z" fill="#8C00D9"/>
+    <path d="M -112 -12 L -152 -60 L -128 -60 L -84 -14 Z" fill="#C2A3FF" opacity="0.85"/>
+    <circle cx="104" cy="-2" r="9" fill="#0A0A0A" opacity="0.5"/>
+    <g fill="#0A0A0A" opacity="0.4">
+      <circle cx="30" cy="-2" r="6"/><circle cx="0" cy="-2" r="6"/><circle cx="-30" cy="-2" r="6"/><circle cx="-60" cy="-2" r="6"/>
+    </g>
+  </g>
+</svg>

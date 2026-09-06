@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512" preserveAspectRatio="xMidYMid meet" version="1.0">
+  <title>Trust and Verify</title>
+  <defs>
+    <radialGradient id="w2-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#A100FF" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="w2-arc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8C00D9"/>
+      <stop offset="0.5" stop-color="#C2A3FF"/>
+      <stop offset="1" stop-color="#A100FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="512" fill="#0A0A0A"/>
+  <circle cx="320" cy="256" r="215" fill="url(#w2-glow)"/>
+
+  <!-- sending phone -->
+  <g transform="translate(74 128)">
+    <rect x="0" y="0" width="132" height="248" rx="20" fill="none" stroke="#C2A3FF" stroke-width="3"/>
+    <rect x="14" y="20" width="104" height="208" rx="8" fill="#A100FF" opacity="0.14"/>
+    <path d="M 52 10 L 80 10" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <g stroke="#C2A3FF" stroke-width="3" opacity="0.55" fill="none">
+      <path d="M 32 52 L 100 52 M 32 72 L 78 72"/>
+    </g>
+    <rect x="32" y="104" width="68" height="44" rx="8" fill="#A100FF"/>
+    <path d="M 52 126 L 80 126 M 70 116 L 80 126 L 70 136" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <g stroke="#C2A3FF" stroke-width="3" opacity="0.4" fill="none">
+      <path d="M 32 178 L 100 178 M 32 198 L 88 198"/>
+    </g>
+  </g>
+
+  <!-- value in transit -->
+  <path d="M 224 232 C 288 150, 352 150, 416 232" fill="none" stroke="url(#w2-arc)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 16"/>
+  <g transform="translate(320 168)">
+    <circle r="34" fill="#A100FF"/>
+    <circle r="34" fill="none" stroke="#C2A3FF" stroke-width="2.5"/>
+    <path d="M 0 -19 L 0 19 M 11 -10 C 11 -19, -11 -19, -11 -12 C -11 -4, 11 -4, 11 4 C 11 12, -11 12, -11 3"
+          fill="none" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <path d="M 380 214 L 398 230 L 382 248" fill="none" stroke="#A100FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- receiving phone, verified -->
+  <g transform="translate(434 128)">
+    <rect x="0" y="0" width="132" height="248" rx="20" fill="none" stroke="#C2A3FF" stroke-width="3"/>
+    <rect x="14" y="20" width="104" height="208" rx="8" fill="#A100FF" opacity="0.14"/>
+    <path d="M 52 10 L 80 10" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <circle cx="66" cy="118" r="38" fill="none" stroke="#A100FF" stroke-width="5"/>
+    <path d="M 48 118 L 61 132 L 86 104" fill="none" stroke="#C2A3FF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g stroke="#C2A3FF" stroke-width="3" opacity="0.5" fill="none">
+      <path d="M 32 182 L 100 182 M 44 202 L 88 202"/>
+    </g>
+  </g>
+</svg>
