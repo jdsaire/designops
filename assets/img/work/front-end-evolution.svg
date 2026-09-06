@@ -1,106 +1,96 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512" preserveAspectRatio="xMidYMid meet" version="1.0">
   <title>Front-End Evolution</title>
   <defs>
-    <radialGradient id="w4-glow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#A100FF" stop-opacity="0.26"/>
-      <stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
+    <radialGradient id="fe-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#A100FF" stop-opacity="0.24"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="w4-core" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#C2A3FF"/>
-      <stop offset="0.5" stop-color="#A100FF"/>
-      <stop offset="1" stop-color="#8C00D9"/>
+    <linearGradient id="fe-hit" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/>
     </linearGradient>
-    <linearGradient id="w4-screen" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#A100FF"/>
-      <stop offset="1" stop-color="#8C00D9"/>
+    <linearGradient id="fe-shell" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C2A3FF"/><stop offset="0.55" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/>
     </linearGradient>
   </defs>
   <rect width="640" height="512" fill="#0A0A0A"/>
-  <circle cx="320" cy="248" r="222" fill="url(#w4-glow)"/>
+  <circle cx="320" cy="256" r="224" fill="url(#fe-glow)"/>
 
-  <!-- the alien -->
-  <g transform="translate(196 236)">
-    <!-- eye stalks -->
-    <g fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round">
-      <path d="M -40 -58 C -52 -84, -58 -98, -64 -112"/>
-      <path d="M  40 -58 C  52 -84,  58 -98,  64 -112"/>
+  <!-- composed inside the card's visible band: the frame crops to x 70-570 at desktop -->
+  <g transform="translate(320 256) scale(0.88) translate(-329 -250)">
+
+  <!-- editor window -->
+  <g>
+    <rect x="52" y="96" width="452" height="308" rx="18" fill="#A100FF" fill-opacity="0.07" stroke="#C2A3FF" stroke-width="3"/>
+    <path d="M 52 138 L 504 138" stroke="#C2A3FF" stroke-width="2" opacity="0.42" fill="none"/>
+    <g fill="#C2A3FF" opacity="0.55">
+      <circle cx="78" cy="117" r="6"/><circle cx="100" cy="117" r="6"/><circle cx="122" cy="117" r="6"/>
     </g>
-    <circle cx="-64" cy="-118" r="8" fill="#C2A3FF"/>
-    <circle cx="64"  cy="-118" r="8" fill="#C2A3FF"/>
-
-    <!-- shell -->
-    <path d="M -86 16 C -86 -38, -48 -70, 0 -70 C 48 -70, 86 -38, 86 16
-             L 86 42 C 86 56, 74 68, 60 68 L -60 68 C -74 68, -86 56, -86 42 Z"
-          fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
-    <path d="M -74 26 C -40 40, 40 40, 74 26" fill="none" stroke="#C2A3FF" stroke-width="2" opacity="0.42"/>
-    <path d="M -64 48 C -34 58, 34 58, 64 48" fill="none" stroke="#C2A3FF" stroke-width="2" opacity="0.28"/>
-
-    <!-- visor -->
-    <rect x="-60" y="-40" width="120" height="42" rx="21" fill="url(#w4-core)"/>
-    <rect x="-60" y="-40" width="120" height="42" rx="21" fill="none" stroke="#C2A3FF" stroke-width="2" opacity="0.6"/>
-    <circle cx="-26" cy="-19" r="10" fill="#0A0A0A" opacity="0.72"/>
-    <circle cx="26"  cy="-19" r="10" fill="#0A0A0A" opacity="0.72"/>
-    <circle cx="-29" cy="-23" r="3.4" fill="#C2A3FF"/>
-    <circle cx="23"  cy="-23" r="3.4" fill="#C2A3FF"/>
-
-    <!-- limbs -->
-    <g fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round">
-      <path d="M -58 68 C -70 88, -78 100, -86 118"/>
-      <path d="M -22 68 C -26 90, -28 102, -30 120"/>
-      <path d="M  22 68 C  26 90,  28 102,  30 120"/>
-      <path d="M  58 68 C  70 88,  78 100,  86 118"/>
+    <path d="M 104 138 L 104 404" stroke="#C2A3FF" stroke-width="2" opacity="0.28" fill="none"/>
+    <g fill="#C2A3FF" opacity="0.34">
+      <rect x="72" y="168" width="14" height="6" rx="3"/><rect x="72" y="200" width="14" height="6" rx="3"/>
+      <rect x="72" y="232" width="14" height="6" rx="3"/><rect x="72" y="296" width="14" height="6" rx="3"/>
+      <rect x="72" y="328" width="14" height="6" rx="3"/><rect x="72" y="360" width="14" height="6" rx="3"/>
     </g>
-    <g fill="#C2A3FF" opacity="0.85">
-      <circle cx="-86" cy="122" r="5"/><circle cx="-30" cy="124" r="5"/>
-      <circle cx="30"  cy="124" r="5"/><circle cx="86"  cy="122" r="5"/>
+    <!-- code lines -->
+    <g fill="#C2A3FF">
+      <rect x="126" y="164" width="176" height="9" rx="4.5" opacity="0.46"/>
+      <rect x="316" y="164" width="72"  height="9" rx="4.5" opacity="0.28"/>
+      <rect x="148" y="196" width="118" height="9" rx="4.5" opacity="0.40"/>
+      <rect x="280" y="196" width="146" height="9" rx="4.5" opacity="0.26"/>
+      <rect x="148" y="228" width="88"  height="9" rx="4.5" opacity="0.34"/>
+      <rect x="126" y="356" width="150" height="9" rx="4.5" opacity="0.40"/>
+      <rect x="290" y="356" width="66"  height="9" rx="4.5" opacity="0.24"/>
+      <rect x="126" y="324" width="104" height="9" rx="4.5" opacity="0.30"/>
+    </g>
+    <!-- the failing line -->
+    <rect x="112" y="252" width="382" height="34" rx="8" fill="url(#fe-hit)" opacity="0.20"/>
+    <rect x="112" y="252" width="382" height="34" rx="8" fill="none" stroke="#A100FF" stroke-width="2"/>
+    <g fill="#C2A3FF">
+      <rect x="148" y="264" width="96" height="9" rx="4.5" opacity="0.85"/>
+      <rect x="392" y="264" width="74" height="9" rx="4.5" opacity="0.6"/>
     </g>
   </g>
 
-  <!-- the developer -->
-  <g transform="translate(452 236)">
-    <!-- antenna -->
-    <path d="M 0 -108 L 0 -86" fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="0" cy="-116" r="9" fill="#C2A3FF"/>
-
-    <!-- head -->
-    <rect x="-62" y="-86" width="124" height="92" rx="22" fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
-    <rect x="-46" y="-70" width="92" height="58" rx="10" fill="url(#w4-screen)"/>
-    <path d="M -28 -56 L -14 -41 L -28 -26" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
-    <path d="M -4 -26 L 26 -26"             fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linecap="round" opacity="0.75"/>
-
-    <!-- neck, then torso -->
-    <path d="M -16 2 L -16 30 M 16 2 L 16 30" fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
-    <rect x="-66" y="26" width="132" height="98" rx="20" fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
-    <rect x="-40" y="44" width="80" height="46" rx="8" fill="url(#w4-screen)"/>
-    <g stroke="#0A0A0A" stroke-width="3" stroke-linecap="round" opacity="0.5">
-      <path d="M -26 58 L 12 58 M -26 70 L 2 70 M -26 80 L 20 80"/>
+  <!-- the bug, sitting on the failing line -->
+  <g transform="translate(300 262) scale(0.62)">
+    <g fill="none" stroke="#C2A3FF" stroke-width="4.5" stroke-linecap="round">
+      <path d="M -14 -74 C -24 -90, -32 -98, -44 -108"/>
+      <path d="M  14 -74 C  24 -90,  32 -98,  44 -108"/>
+      <path d="M -28 -34 C -54 -46, -70 -54, -88 -68"/>
+      <path d="M -40 -2 C -68 -4, -84 -2, -104 4"/>
+      <path d="M -36 30 C -62 44, -78 56, -94 74"/>
+      <path d="M  28 -34 C  54 -46,  70 -54,  88 -68"/>
+      <path d="M  40 -2 C  68 -4,  84 -2, 104 4"/>
+      <path d="M  36 30 C  62 44,  78 56,  94 74"/>
     </g>
-    <circle cx="26" cy="60" r="5" fill="#0A0A0A" opacity="0.5"/>
-    <path d="M -34 104 L 34 104" stroke="#C2A3FF" stroke-width="2" opacity="0.32" fill="none"/>
-
-    <!-- arms -->
-    <g fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M -66 46 L -92 62 L -92 92"/>
-      <path d="M  66 46 L  92 62 L  92 92"/>
+    <g fill="#C2A3FF"><circle cx="-44" cy="-112" r="7"/><circle cx="44" cy="-112" r="7"/></g>
+    <ellipse cy="-62" rx="25" ry="19" fill="url(#fe-shell)"/>
+    <ellipse cy="-62" rx="25" ry="19" fill="none" stroke="#C2A3FF" stroke-width="3" opacity="0.6"/>
+    <circle cx="-10" cy="-66" r="5" fill="#0A0A0A" opacity="0.75"/>
+    <circle cx="10"  cy="-66" r="5" fill="#0A0A0A" opacity="0.75"/>
+    <ellipse cy="18" rx="44" ry="58" fill="#150B20" stroke="#C2A3FF" stroke-width="4.5"/>
+    <g fill="none" stroke="#C2A3FF" stroke-width="3" opacity="0.5">
+      <path d="M 0 -40 L 0 74"/>
+      <path d="M -40 -6 C -18 6, 18 6, 40 -6"/>
+      <path d="M -34 24 C -14 36, 14 36, 34 24"/>
     </g>
-    <circle cx="-92" cy="98" r="7" fill="#C2A3FF"/>
-    <circle cx="92"  cy="98" r="7" fill="#C2A3FF"/>
-
-    <!-- legs -->
-    <rect x="-42" y="124" width="30" height="42" rx="10" fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
-    <rect x="12"  y="124" width="30" height="42" rx="10" fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
   </g>
 
-  <!-- the ladder they stand on: nine rungs, one per repository -->
-  <g stroke="#A100FF" stroke-width="4" stroke-linecap="round" fill="none">
-    <path d="M 72 446 L 96 446" opacity="0.3"/>
-    <path d="M 108 438 L 132 438" opacity="0.39"/>
-    <path d="M 144 430 L 168 430" opacity="0.47"/>
-    <path d="M 180 422 L 204 422" opacity="0.56"/>
-    <path d="M 216 414 L 240 414" opacity="0.65"/>
-    <path d="M 252 406 L 276 406" opacity="0.74"/>
-    <path d="M 288 398 L 312 398" opacity="0.82"/>
-    <path d="M 324 390 L 348 390" opacity="0.91"/>
-    <path d="M 360 382 L 384 382" opacity="1.0"/>
+  <!-- the developer, reaching in -->
+  <g transform="translate(556 258)">
+    <path d="M 0 -104 L 0 -84" fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="0" cy="-112" r="8" fill="#C2A3FF"/>
+    <rect x="-48" y="-84" width="96" height="72" rx="18" fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
+    <rect x="-34" y="-70" width="68" height="44" rx="8" fill="url(#fe-hit)"/>
+    <g stroke="#0A0A0A" stroke-width="4" stroke-linecap="round" opacity="0.6">
+      <path d="M -22 -56 L 6 -56 M -22 -44 L 18 -44 M -22 -34 L -6 -34"/>
+    </g>
+    <path d="M -12 -12 L -12 8 M 12 -12 L 12 8" fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+    <rect x="-50" y="6" width="100" height="82" rx="18" fill="#A100FF" fill-opacity="0.10" stroke="#C2A3FF" stroke-width="3"/>
+    <g stroke="#C2A3FF" stroke-width="2" opacity="0.34" fill="none">
+      <path d="M -30 30 L 18 30 M -30 46 L 4 46 M -30 62 L 26 62"/>
+    </g>
+    <path d="M -50 24 L -84 34 L -104 20" fill="none" stroke="#C2A3FF" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="-110" cy="16" r="7" fill="#C2A3FF"/>
+  </g>
   </g>
 </svg>
