@@ -4,7 +4,7 @@
 /* ============================================================ NAVBAR ============================================================ */
 .nav {
   position:fixed; top:0; left:0; width:100%; height:var(--nav-height);
-  z-index:100; background:rgba(0,0,0,0.88);
+  z-index:100; background:rgba(var(--ground),0.88);
   backdrop-filter:blur(1rem); -webkit-backdrop-filter:blur(1rem);
   border-bottom:1px solid var(--color-border-faint);
   transition:transform 350ms var(--ease-standard);
@@ -62,7 +62,7 @@
 .nav__work-trigger[aria-expanded="true"] .nav__work-caret { transform:rotate(180deg); }
 .nav__work-menu {
   position:absolute; top:100%; left:0; margin-top:0.5rem; min-width:15rem;
-  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
+  background:var(--surface-panel); border:1px solid var(--color-border-soft);
   padding:0.3rem 0; display:flex; flex-direction:column; z-index:101;
 }
 .nav__work-menu[hidden] { display:none; }
@@ -78,54 +78,52 @@
 
 .nav__utility { display:flex; align-items:center; justify-content:flex-end; gap:clamp(0.75rem,1.25vw,1.25rem); }
 
-/* Language selector (SwapLang — unchanged behaviour) */
-.nav__lang { position:relative; display:inline-flex; align-items:center; }
-.nav__lang-btn {
-  background:transparent; border:none; cursor:pointer;
-  color:var(--color-text-dim); font-size:0.875rem; font-weight:var(--fw-medium);
-  font-family:var(--font-primary);
-  display:inline-flex; align-items:center; gap:0.35rem; padding:0.375rem 0.25rem;
-  transition:color var(--duration-ui) var(--ease-standard); letter-spacing:0.03em;
+/* ============================================================
+   SEGMENTED SWITCH — one component, two instances (theme, language).
+   Both options stay visible and the active one is filled purple, so the
+   current state is readable at rest rather than inferred from an icon
+   that changes meaning. Replaces the old hover-dropdown language panel
+   and the single-glyph theme button, neither of which showed state.
+   ============================================================ */
+.nav__switch {
+  display:inline-flex; align-items:stretch; flex-shrink:0;
+  border:1px solid var(--color-border-soft);
+  background:transparent;
 }
-.nav__lang-btn:hover, .nav__lang:hover .nav__lang-btn { color:var(--color-brand-white); }
-.nav__lang-btn svg { width:1.05rem; height:1.05rem; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.nav__lang-panel {
-  position:absolute; top:100%; right:0; min-width:4.5rem;
-  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
-  padding:0.3rem 0; opacity:0; pointer-events:none;
-  transform:translateY(-0.25rem);
-  transition:opacity var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);
-}
-@media (hover: hover) {
-  .nav__lang:hover .nav__lang-panel { opacity:1; pointer-events:auto; transform:translateY(0); }
-}
-.nav__lang--panel-open .nav__lang-panel { opacity:1; pointer-events:auto; transform:translateY(0); }
-.nav__lang-option {
-  display:block; width:100%; background:transparent; border:none; cursor:pointer;
-  font-family:var(--font-primary); font-size:0.875rem; font-weight:var(--fw-medium);
-  letter-spacing:0.03em; color:var(--color-text-muted); padding:0.45rem 1rem; text-align:left;
-  transition:color var(--duration-ui) var(--ease-standard);
-}
-.nav__lang-option--active, .nav__lang-option:hover { color:var(--color-brand-white); }
-.nav__lang-option--active { font-weight:var(--fw-bold); }
-@media (max-width:767px) { .nav__lang-panel { top:calc(100% + 0.5rem); right:0; } }
-
-/* Contact CTA — label + purple square chevron, reusing the hero CTA grammar
-   (2rem purple square, > polyline, purple-hover). hero.css is Home-only, so the
-   declarations are reproduced here nav-scoped for all five pages. */
-.nav__cta { display:inline-flex; align-items:center; gap:0.6rem; cursor:pointer; }
-.nav__cta-label {
-  font-size:0.9rem; font-weight:var(--fw-bold); color:var(--color-brand-white);
-  letter-spacing:0.005em;
-  transition:color var(--duration-ui) var(--ease-standard);
-}
-.nav__cta-icon {
+.nav__switch > button {
   display:inline-flex; align-items:center; justify-content:center;
-  width:2rem; height:2rem; background:var(--color-brand-purple); flex-shrink:0;
-  transition:background var(--duration-ui) var(--ease-standard);
+  background:transparent; border:none; cursor:pointer;
+  color:var(--color-text-muted);
+  font-family:var(--font-primary); font-size:0.7rem; font-weight:var(--fw-semibold);
+  letter-spacing:0.08em; line-height:1;
+  padding:0.4rem 0.55rem; min-width:2.1rem; min-height:1.85rem;
+  transition:background var(--duration-ui) var(--ease-standard),
+             color var(--duration-ui) var(--ease-standard);
 }
-.nav__cta:hover .nav__cta-icon, .nav__cta:focus-visible .nav__cta-icon { background:var(--color-purple-hover); }
-.nav__cta-icon svg { width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-brand-white); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.nav__switch > button + button { border-left:1px solid var(--color-border-soft); }
+.nav__switch > button:hover { color:var(--color-brand-white); }
+.nav__switch > button svg {
+  width:0.95rem; height:0.95rem; display:block;
+  fill:none; stroke:currentColor; stroke-width:1.9;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+/* Active segment. #FFFFFF is literal, not --color-brand-white: that token
+   inverts to near-black in light mode, and black on brand purple measures
+   3.96:1. White on purple is 5.30:1 and holds in both themes. */
+.nav__switch > .nav__lang-option--active,
+.nav__switch > .nav__overlay-lang-option--active,
+.nav__switch > [aria-pressed="true"] {
+  background:var(--color-brand-purple);
+  color:#FFFFFF;
+}
+.nav__switch > .nav__lang-option--active:hover,
+.nav__switch > .nav__overlay-lang-option--active:hover,
+.nav__switch > [aria-pressed="true"]:hover {
+  background:var(--color-purple-hover); color:#FFFFFF;
+}
+.nav__switch > button:focus-visible {
+  outline:2px solid var(--color-brand-purple); outline-offset:2px;
+}
 
 /* Hamburger — hidden at desktop/tablet, real display at ≤767px */
 .nav__hamburger { display:none; flex-direction:column; gap:0.3rem; width:1.5rem; background:none; border:none; cursor:pointer; padding:0; }
@@ -195,28 +193,24 @@
 .nav__overlay-subitem:hover, .nav__overlay-subitem:focus-visible { color:var(--color-brand-white); }
 
 .nav__overlay-lang {
-  display:flex; align-items:center; gap:0.5rem;
+  display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
   padding:1.25rem var(--gutter); flex-shrink:0;
   border-top:1px solid var(--color-border-faint);
 }
-.nav__overlay-lang-option {
-  background:transparent; border:1px solid var(--color-border-soft); cursor:pointer;
-  font-family:var(--font-primary); font-size:0.9rem; font-weight:var(--fw-medium);
-  letter-spacing:0.03em; color:var(--color-text-muted); padding:0.4rem 0.9rem;
-  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);
+/* The overlay's two switches use the same component as the navbar's, one
+   step larger for touch: 44px of height clears the minimum target size. */
+.nav__overlay-lang .nav__switch > button {
+  font-size:0.85rem; padding:0.7rem 1.1rem; min-height:2.75rem; min-width:3rem;
 }
-.nav__overlay-lang-option:hover { color:var(--color-brand-white); }
-.nav__overlay-lang-option--active { color:var(--color-brand-white); font-weight:var(--fw-bold); border-color:var(--color-brand-purple); }
+.nav__overlay-lang .nav__switch > button svg { width:1.15rem; height:1.15rem; }
 
 /* ============================================================ TABLET ============================================================ */
 @media (min-width:768px) and (max-width:1023px) {
   .nav__inner { grid-template-columns:1fr auto 1fr; gap:0.75rem; }
   .nav__link { padding:0.5rem 0.5rem; font-size:0.85rem; }
-  .nav__utility { gap:0.75rem; }
-  .nav__cta-label { font-size:0.85rem; }
+  .nav__utility { gap:0.5rem; }
   .nav__hamburger { display:none; }
   .nav__center { display:flex; }
-  .nav__lang { display:inline-flex; }
 }
 
 /* ============================================================ MOBILE ============================================================ */
@@ -283,7 +277,7 @@
   min-width: 18rem;
   padding: 0.4rem 0;
   border-radius: 2px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 12px 32px var(--shadow-3);
 }
 /* One line per label — 01 · ACCREDITAPASS · SPORTS is the longest at 27
    characters and was wrapping against the old 15rem floor. */

@@ -39,9 +39,9 @@
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.10)   0%,
-    rgba(0, 0, 0, 0.45)  40%,
-    rgba(0, 0, 0, 0.90) 100%
+    rgba(var(--ground), 0.10)   0%,
+    rgba(var(--ground), 0.45)  40%,
+    rgba(var(--ground), 0.90) 100%
   );
 }
 
@@ -148,8 +148,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(10, 10, 10, 0.75);
-    color: #ffffff;
+    background: rgba(var(--ground), 0.75);
+    color: var(--color-brand-white);
     font-family: var(--font-primary, sans-serif);
     font-size: 0.75rem;
     font-weight: var(--fw-light, 300);

@@ -19,12 +19,12 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(var(--ink),0.12);
   padding: 0;
 }
 
 .ticker__band:last-child {
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(var(--ink),0.12);
 }
 
 /* Edge fade masks — emerge from black on both sides */
@@ -41,12 +41,12 @@
 
 .ticker__band::before {
   left: 0;
-  background: linear-gradient(to right, #000000 0%, transparent 100%);
+  background: linear-gradient(to right, var(--color-brand-black) 0%, transparent 100%);
 }
 
 .ticker__band::after {
   right: 0;
-  background: linear-gradient(to left, #000000 0%, transparent 100%);
+  background: linear-gradient(to left, var(--color-brand-black) 0%, transparent 100%);
 }
 
 /* Scrolling tracks — JS clones the base group to fill the viewport */
@@ -105,6 +105,13 @@
 .ticker__logo:focus {
   opacity: 1;
 }
+
+/* The logo files are pure white marks on transparency — roughly 95% of every
+   file is fully transparent — so on a light ground they disappear and leave
+   only their anti-aliased edges. Inverting flips the mark to black and leaves
+   alpha untouched, which keeps the seamless look the dark theme has rather
+   than boxing the lanes in a black band. */
+html[data-theme="light"] .ticker__logo { filter: invert(1); }
 
 /* Keyframes — shift by exactly one base-group width (integer px set by JS) */
 @keyframes ticker-left {
