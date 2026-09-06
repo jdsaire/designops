@@ -245,25 +245,13 @@
 
 /* ============================================================
    A14 · SPOTLIGHT — the AccreditaPass card is the lead artefact.
-   Bounded to visual differentiation: a brand-purple edge, a deeper
-   lift and a slightly larger title. No autoplay, no motion-driven
-   navigation, no scroll-jacking, and nothing that moves on its own.
+   The purple treatments that carried it — the container tint, the
+   default-face wash, the brand-purple edge and outer glow — were
+   removed by direction: Card 1 now renders on the same surface as the
+   rest of the set. A slightly larger title is what remains. No
+   autoplay, no motion-driven navigation, no scroll-jacking, and
+   nothing that moves on its own.
    ============================================================ */
-.work-card--spotlight {
-  box-shadow:
-    0 2px 8px   rgba(0, 0, 0, 0.45),
-    0 12px 44px rgba(161, 0, 255, 0.30),
-    inset 0 0 0 1px rgba(161, 0, 255, 0.55);
-}
-.work-card--spotlight .work-card__bg { background-color: #21102F; }
-.work-card--spotlight .work-card__default {
-  background: linear-gradient(
-    to bottom,
-    rgba(33, 16, 47, 0.86) 0%,
-    rgba(33, 16, 47, 0.34) 55%,
-    rgba(33, 16, 47, 0.10) 100%
-  );
-}
 .work-card--spotlight .work-card__title { font-size: clamp(1.5rem, 1.85vw, 1.8rem); }
 @media (max-width: 767px) {
   .work-card--spotlight .work-card__title { font-size: clamp(1.25rem, 5vw, 1.5rem); }
