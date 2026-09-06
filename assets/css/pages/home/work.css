@@ -285,7 +285,7 @@
   margin-bottom: 0.875rem;
 }
 .work-card__category { color: rgba(var(--ink),0.65); }
-.work-card__hover-category { color: rgba(var(--ink),0.55); }
+.work-card__hover-category { color: rgba(var(--ink),0.65); } /* was .55: 4.45:1 in light, 0.05 short of AA. Matches its sibling above. */
 .work-card__hover {
   position: absolute;
   inset: 0;

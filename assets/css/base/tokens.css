@@ -8,7 +8,11 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
   --color-brand-black:   #000000;
   --color-brand-white:   #FFFFFF;
   --color-text-muted:    rgba(255,255,255,0.6);
-  --color-text-dim:      rgba(255,255,255,0.45);
+  /* 0.45 measured 4.41:1 on black — 0.09 short of AA, on 49 elements across
+     all eight pages. 0.50 clears it at 5.28:1. Bundled here because G1's
+     fourth condition requires BOTH themes to pass and this is the same
+     token the light block re-points. */
+  --color-text-dim:      rgba(255,255,255,0.50);
   --color-border-faint:  rgba(255,255,255,0.06);
   --color-border-soft:   rgba(255,255,255,0.10);
   --font-primary:        'Graphik', Arial, sans-serif;
@@ -63,7 +67,13 @@ html[data-theme="light"] {
   --color-brand-black:   #FFFFFF;
   --color-brand-white:   #0A0A0A;
   --color-text-muted:    rgba(0,0,0,0.60);
-  --color-text-dim:      rgba(0,0,0,0.42);
+  /* 0.42 mirrored the dark 0.45, but black-on-white is the dimmer pairing:
+     it measured 3.04:1 against white. 0.55 restores AA at 4.76:1. */
+  --color-text-dim:      rgba(0,0,0,0.55);
+  /* --color-purple-light is an accent that reads on black, not on white
+     (2.10:1). Light mode borrows the palette's own darker purple, 6.74:1,
+     rather than introducing a hue the brand does not already own. */
+  --color-purple-light:  #8C00D9;
   --color-border-faint:  rgba(0,0,0,0.06);
   --color-border-soft:   rgba(0,0,0,0.10);
   --ink:    0,0,0;
