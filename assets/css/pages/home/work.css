@@ -52,6 +52,7 @@
      card's own overflow does the clip. */
   --work-art-top:   60%;
   --work-art-bleed: 10%;
+  --work-type-gap:  0.875rem;
   /* The section ground is pure black, so the drop shadows below it are
      invisible and cannot carry elevation on their own. The purple lift and
      the brightened hairlines are what separate the tile from the page. */
@@ -132,6 +133,7 @@ html[data-theme="light"] .work-card {
     transform var(--duration-ui) var(--ease-standard);
 }
 .work-card__title {
+  margin: 0;
   font-size: clamp(1.375rem, 1.6vw, 1.575rem);
   font-weight: var(--fw-semibold);
   line-height: 1.25;
@@ -143,6 +145,7 @@ html[data-theme="light"] .work-card {
   overflow: hidden;
 }
 .work-card__summary {
+  margin: 0;
   font-size: clamp(0.9rem, 1.0vw, 1.0rem);
   font-weight: var(--fw-regular);
   line-height: 1.65;
@@ -309,6 +312,12 @@ html[data-theme="light"] .work-card {
    and adds the summary. S4 flattened this into one always-visible
    face, which is why the two states looked identical.
    ============================================================ */
+/* The card's type block is locked to one rhythm: --work-type-gap between
+   label and heading, and the same between heading and body. Both gaps used
+   to come from the UA's margin: 1em 0 on the h3 and p — the reset only
+   touches body and a — so they measured ~37px and ~39px and drifted with
+   each element's own clamp() font-size across breakpoints. Zeroing those
+   margins and stating the gap is what makes the block deterministic. */
 .work-card__category,
 .work-card__hover-category {
   font-size: 1rem;
@@ -316,7 +325,7 @@ html[data-theme="light"] .work-card {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   line-height: 1.2;
-  margin-bottom: 0.875rem;
+  margin: 0 0 var(--work-type-gap);
 }
 .work-card__category { color: rgba(var(--ink),0.65); }
 .work-card__hover-category { color: rgba(var(--ink),0.65); } /* was .55: 4.45:1 in light, 0.05 short of AA. Matches its sibling above. */
@@ -340,6 +349,7 @@ html[data-theme="light"] .work-card {
     background var(--duration-ui) var(--ease-standard);
 }
 .work-card__hover-title {
+  margin: 0 0 var(--work-type-gap);
   font-size: clamp(1.375rem, 1.6vw, 1.575rem);
   font-weight: var(--fw-semibold);
   line-height: 1.25;
