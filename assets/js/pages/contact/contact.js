@@ -38,18 +38,52 @@ function init() {
     }
   };
 
+  /* The submit handler used to preventDefault and open the success modal
+     without sending anything, so every visitor was shown a confirmation for
+     a message that went nowhere. It now posts to the form's real action and
+     confirms only on a genuine success.
+
+     On a network or endpoint failure it falls back to a native submit rather
+     than reporting an error inline: the page has no failure-state markup and
+     authoring one is a copy decision, not this run's. The native post lands
+     on the handler's own response page, so the visitor still learns what
+     happened and their message still reaches its destination. */
+  let sending = false;
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (sending) return;
     const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
     let valid = true;
     fields.forEach((f) => { if (!validateField(f)) valid = false; });
-    if (valid) {
-      openModal();
-      form.reset();
-    } else {
+    if (!valid) {
       const firstError = form.querySelector('.has-error input, .has-error select, .has-error textarea');
       if (firstError) firstError.focus();
+      return;
     }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    sending = true;
+    if (submitBtn) submitBtn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        openModal();
+        form.reset();
+      })
+      .catch(() => {
+        /* Let the browser post the form the ordinary way. */
+        HTMLFormElement.prototype.submit.call(form);
+      })
+      .finally(() => {
+        sending = false;
+        if (submitBtn) submitBtn.disabled = false;
+      });
   });
 
   form.addEventListener('change', (e) => {

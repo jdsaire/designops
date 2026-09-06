@@ -163,8 +163,16 @@
     <div class="section__inner">
       <div class="contact-form-box">
         <form id="contactForm" class="contact-form"
-              action="https://formspree.io/f/YOUR_FORM_ID"
+              action="https://api.web3forms.com/submit"
               method="POST" novalidate>
+
+          <!-- Web3Forms access key. Public by design: it identifies the
+               destination inbox and carries no account privileges. -->
+          <input type="hidden" name="access_key" value="8d674d44-4ff0-47e2-9dda-5aba3caac89c">
+          <input type="hidden" name="subject" value="New enquiry from jdsaire.com">
+          <input type="hidden" name="from_name" value="jdsaire.com contact form">
+          <!-- Honeypot. Real people never see it; bots fill it and are dropped. -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
 
           <div class="form-group" id="field-engagement">
             <label class="form-label" for="engagementType">
