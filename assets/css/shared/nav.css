@@ -4,7 +4,7 @@
 /* ============================================================ NAVBAR ============================================================ */
 .nav {
   position:fixed; top:0; left:0; width:100%; height:var(--nav-height);
-  z-index:100; background:rgba(0,0,0,0.88);
+  z-index:100; background:rgba(var(--ground),0.88);
   backdrop-filter:blur(1rem); -webkit-backdrop-filter:blur(1rem);
   border-bottom:1px solid var(--color-border-faint);
   transition:transform 350ms var(--ease-standard);
@@ -62,7 +62,7 @@
 .nav__work-trigger[aria-expanded="true"] .nav__work-caret { transform:rotate(180deg); }
 .nav__work-menu {
   position:absolute; top:100%; left:0; margin-top:0.5rem; min-width:15rem;
-  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
+  background:var(--surface-panel); border:1px solid var(--color-border-soft);
   padding:0.3rem 0; display:flex; flex-direction:column; z-index:101;
 }
 .nav__work-menu[hidden] { display:none; }
@@ -91,7 +91,7 @@
 .nav__lang-btn svg { width:1.05rem; height:1.05rem; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 .nav__lang-panel {
   position:absolute; top:100%; right:0; min-width:4.5rem;
-  background:rgba(8,8,8,0.97); border:1px solid var(--color-border-soft);
+  background:var(--surface-panel); border:1px solid var(--color-border-soft);
   padding:0.3rem 0; opacity:0; pointer-events:none;
   transform:translateY(-0.25rem);
   transition:opacity var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);
@@ -283,7 +283,7 @@
   min-width: 18rem;
   padding: 0.4rem 0;
   border-radius: 2px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 12px 32px var(--shadow-3);
 }
 /* One line per label — 01 · ACCREDITAPASS · SPORTS is the longest at 27
    characters and was wrapping against the old 15rem floor. */

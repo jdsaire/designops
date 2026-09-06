@@ -1,6 +1,6 @@
 /* shared/section-extras.css — SHARED SECTION EXTRAS — split from main.css lines 912-967. See docs/ for the reorg record. */
 /* ============================================================ SHARED SECTION EXTRAS ============================================================ */
-.section--alt { background: #050505; }
+.section--alt { background: var(--surface-sunken); }
 
 /* WORK + SERVICES + TICKER HEADER — mirrors .about__header pattern */
 .work__header,

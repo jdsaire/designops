@@ -42,7 +42,7 @@
   aspect-ratio: 3 / 2;
   width: 100%;
   overflow: hidden;
-  background: #0A0A0A;
+  background: var(--surface-card);
 }
 .services__image {
   width: 100%;
@@ -155,7 +155,7 @@
 .services__dot {
   width: 0.45rem;
   height: 0.45rem;
-  background: rgba(255,255,255,0.22);
+  background: rgba(var(--ink),0.22);
   border: none;
   cursor: pointer;
   transition:

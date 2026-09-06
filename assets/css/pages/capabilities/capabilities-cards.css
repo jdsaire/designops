@@ -1,6 +1,6 @@
 /* home/capabilities-cards.css — CAPABILITIES info cards/map (banner: CAPABILITIES) — split from main.css lines 1250-1476. See docs/ for the reorg record. */
 /* ============================================================ CAPABILITIES ============================================================ */
-.section--capabilities { background: #000; }
+.section--capabilities { background: var(--color-brand-black); }
 
 .section__inner--capabilities {
   display: grid;
@@ -30,8 +30,8 @@
 }
 
 .capabilities__img-slot {
-  background: #0A0A0A;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--surface-card);
+  border: 1px solid rgba(var(--ink),0.08);
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
 /* Right column — mental map canvas */
 .capabilities__right {
   position: relative;
-  background: #000;
+  background: var(--color-brand-black);
   overflow: hidden;
 }
 
@@ -109,7 +109,7 @@
   position: absolute;
   top: 10px; right: 12px;
   background: transparent; border: none; cursor: pointer;
-  color: rgba(255,255,255,0.50); font-size: 1rem; line-height: 1;
+  color: rgba(var(--ink),0.50); font-size: 1rem; line-height: 1;
   padding: 2px 4px;
   transition: color var(--duration-ui) var(--ease-standard);
 }
@@ -120,7 +120,7 @@
   display: none;
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  background: #0a0a0a;
+  background: var(--surface-card);
   border-top: 3px solid var(--color-brand-purple);
   padding: 24px 24px 40px;
   z-index: 200;
@@ -137,13 +137,13 @@
 }
 .cap-bottom-sheet__handle {
   width: 36px; height: 3px;
-  background: rgba(255,255,255,0.20);
+  background: rgba(var(--ink),0.20);
   margin: 0;
 }
 .cap-bottom-sheet__close {
   position: absolute; right: 0; top: -6px;
   background: transparent; border: none; cursor: pointer;
-  color: rgba(255,255,255,0.50); font-size: 1.25rem; line-height: 1;
+  color: rgba(var(--ink),0.50); font-size: 1.25rem; line-height: 1;
   padding: 4px 8px;
   transition: color var(--duration-ui) var(--ease-standard);
 }
@@ -169,7 +169,7 @@
   position: fixed;
   inset: 0;
   z-index: 150;
-  background: rgba(0,0,0,0.55);
+  background: rgba(var(--ground),0.55);
 }
 .cap-backdrop.visible { display: block; }
 
