@@ -96,16 +96,19 @@ function init(opts) {
   let curLang = 'ES';
   try { curLang = localStorage.getItem('jds-lang') || 'ES'; } catch (e) {}
 
+  /* The disclosure survives for any page still shipping the old dropdown
+     (langBtn + panel + wrapper). The navbar's language control is now a
+     segmented switch with no trigger button, so this simply does not run
+     there — every lookup stays guarded, as the rest of this module is. */
+  let langDisc = null;
   if (langBtn && langPanel && langSel) {
-    const langDisc = {
+    langDisc = {
       setOpen(open) {
         langSel.classList.toggle('nav__lang--panel-open', open);
         langBtn.setAttribute('aria-expanded', String(open));
       }
     };
     disclosures.push(langDisc);
-    if (langLabel) langLabel.textContent = curLang;
-    setLangActive(langPanel, curLang);
     langBtn.setAttribute('aria-expanded', 'false');
     langBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -113,15 +116,22 @@ function init(opts) {
       closeAllExcept(langDisc);
       langDisc.setOpen(!open);
     });
-    langPanel.addEventListener('click', (e) => e.stopPropagation());
     langSel.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 'Esc') { langDisc.setOpen(false); langBtn.focus(); }
     });
+  }
+
+  /* Option binding is independent of the disclosure: the switch has options
+     but no trigger, and previously these handlers only bound when a trigger
+     existed, which would have left the new control inert. */
+  if (langPanel) {
+    if (langLabel) langLabel.textContent = curLang;
+    setLangActive(langPanel, curLang);
+    langPanel.addEventListener('click', (e) => e.stopPropagation());
     langPanel.querySelectorAll('.nav__lang-option').forEach(opt => {
       opt.addEventListener('click', () => {
-        const lang = opt.dataset.lang;
-        setLang(lang);
-        langDisc.setOpen(false);
+        setLang(opt.dataset.lang);
+        if (langDisc) langDisc.setOpen(false);
       });
     });
   }

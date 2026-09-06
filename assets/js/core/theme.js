@@ -21,19 +21,19 @@ function stored() {
 }
 
 /* Every lookup is guarded: this module runs unchanged on a page with no
-   theme control at all, matching navchrome.js's contract. */
-function controls() {
-  return [
-    document.getElementById('themeBtn'),
-    document.getElementById('overlayThemeBtn')
-  ].filter(Boolean);
+   theme control at all, matching navchrome.js's contract. Both the navbar
+   and the mobile overlay carry a switch, so this returns every option
+   button on the page rather than a single toggle. */
+function options() {
+  return Array.prototype.slice.call(document.querySelectorAll('[data-theme-opt]'));
 }
 
+/* The switch shows state rather than implying it: the active half is
+   pressed, and CSS fills it purple. */
 function reflect(light) {
-  controls().forEach(btn => {
-    btn.setAttribute('aria-pressed', String(light));
-    const icon = btn.querySelector('.nav__theme-icon');
-    if (icon) icon.textContent = light ? '◐' : '◑';
+  options().forEach(btn => {
+    const on = (btn.getAttribute('data-theme-opt') === 'light') === light;
+    btn.setAttribute('aria-pressed', String(on));
   });
 }
 
@@ -54,11 +54,10 @@ function init() {
   else       document.documentElement.removeAttribute('data-theme');
   reflect(light);
 
-  controls().forEach(btn => {
+  options().forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      swapTheme(isLight ? 'dark' : 'light');
+      swapTheme(btn.getAttribute('data-theme-opt'));
     });
   });
 }
