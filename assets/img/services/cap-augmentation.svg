@@ -1,50 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768" viewBox="0 0 768 576" preserveAspectRatio="xMidYMid meet" version="1.0">
   <title>Augmentation</title>
   <defs>
-    <linearGradient id="g-solid" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#A100FF"/>
-      <stop offset="1" stop-color="#8C00D9"/>
+    <linearGradient id="x-curve" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#8C00D9"/>
+      <stop offset="0.55" stop-color="#A100FF"/>
+      <stop offset="1" stop-color="#C2A3FF"/>
     </linearGradient>
-    <radialGradient id="g-glow" cx="0.5" cy="0.5" r="0.5">
+    <radialGradient id="x-glow" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="#A100FF" stop-opacity="0.20"/>
       <stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <rect width="768" height="576" fill="#0A0A0A"/>
-  <circle cx="430" cy="288" r="225" fill="url(#g-glow)"/>
+  <circle cx="470" cy="300" r="230" fill="url(#x-glow)"/>
 
-  <!-- single input -->
-  <rect x="120" y="268" width="40" height="40" rx="4" fill="url(#g-solid)"/>
+  <!-- baseline -->
+  <path d="M 96 452 L 672 452" stroke="#C2A3FF" stroke-width="1.5" opacity="0.22" fill="none"/>
 
-  <!-- multiplication -->
-  <g fill="none" stroke="#A100FF" stroke-width="1.5" opacity="0.42">
-    <path d="M 160 288 L 508 136"/>
-    <path d="M 160 288 L 508 187"/>
-    <path d="M 160 288 L 508 238"/>
-    <path d="M 160 288 L 508 288"/>
-    <path d="M 160 288 L 508 338"/>
-    <path d="M 160 288 L 508 389"/>
-    <path d="M 160 288 L 508 440"/>
-  </g>
-
-  <!-- multiplied output -->
-  <g fill="none" stroke="#C2A3FF" stroke-width="1.5">
-    <rect x="508" y="123" width="26" height="26" rx="3" opacity="0.42"/>
-    <rect x="508" y="174" width="26" height="26" rx="3" opacity="0.54"/>
-    <rect x="508" y="225" width="26" height="26" rx="3" opacity="0.68"/>
-    <rect x="508" y="275" width="26" height="26" rx="3" opacity="0.82"/>
-    <rect x="508" y="325" width="26" height="26" rx="3" opacity="0.68"/>
-    <rect x="508" y="376" width="26" height="26" rx="3" opacity="0.54"/>
-    <rect x="508" y="427" width="26" height="26" rx="3" opacity="0.42"/>
+  <!-- doubling cascade: 1 → 2 → 4 → 8 -->
+  <g fill="none" stroke="#A100FF" stroke-width="1.5" opacity="0.40">
+    <path d="M 140 428 L 268 372 M 140 428 L 268 428"/>
+    <path d="M 268 372 L 396 300 M 268 372 L 396 344 M 268 428 L 396 388 M 268 428 L 396 432"/>
+    <path d="M 396 300 L 524 232 M 396 300 L 524 262 M 396 344 L 524 292 M 396 344 L 524 322"/>
+    <path d="M 396 388 L 524 352 M 396 388 L 524 382 M 396 432 L 524 412 M 396 432 L 524 442"/>
   </g>
   <g fill="#A100FF">
-    <rect x="550" y="132" width="46"  height="8" rx="4" opacity="0.30"/>
-    <rect x="550" y="183" width="72"  height="8" rx="4" opacity="0.42"/>
-    <rect x="550" y="234" width="98"  height="8" rx="4" opacity="0.56"/>
-    <rect x="550" y="284" width="124" height="8" rx="4" opacity="0.70"/>
-    <rect x="550" y="334" width="98"  height="8" rx="4" opacity="0.56"/>
-    <rect x="550" y="385" width="72"  height="8" rx="4" opacity="0.42"/>
-    <rect x="550" y="436" width="46"  height="8" rx="4" opacity="0.30"/>
+    <rect x="132" y="420" width="16" height="16" rx="3"/>
+    <rect x="260" y="364" width="16" height="16" rx="3" opacity="0.9"/><rect x="260" y="420" width="16" height="16" rx="3" opacity="0.9"/>
   </g>
+  <g fill="#0A0A0A" stroke="#C2A3FF" stroke-width="2">
+    <rect x="389" y="293" width="14" height="14" rx="3"/><rect x="389" y="337" width="14" height="14" rx="3"/>
+    <rect x="389" y="381" width="14" height="14" rx="3"/><rect x="389" y="425" width="14" height="14" rx="3"/>
+  </g>
+  <g fill="#C2A3FF" opacity="0.9">
+    <rect x="518" y="226" width="12" height="12" rx="2.5"/><rect x="518" y="256" width="12" height="12" rx="2.5"/>
+    <rect x="518" y="286" width="12" height="12" rx="2.5"/><rect x="518" y="316" width="12" height="12" rx="2.5"/>
+    <rect x="518" y="346" width="12" height="12" rx="2.5"/><rect x="518" y="376" width="12" height="12" rx="2.5"/>
+    <rect x="518" y="406" width="12" height="12" rx="2.5"/><rect x="518" y="436" width="12" height="12" rx="2.5"/>
+  </g>
+
+  <!-- the accelerating curve over the cascade -->
+  <path d="M 140 452 C 300 450, 430 420, 530 320 C 596 254, 626 186, 640 128"
+        fill="none" stroke="url(#x-curve)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 640 128 L 636 172 M 640 128 L 598 138" stroke="#C2A3FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 </svg>
