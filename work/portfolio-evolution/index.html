@@ -310,6 +310,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .gantt__chart{border-left:0; border-right:0;}
 }
 
+/* ---- Category filter (Act 04, Act 06) — chips inherited from the schedule ---- */
+.cardfilter{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-bottom:clamp(1.1rem,2vw,1.5rem);}
+.card[hidden],.evidence[hidden]{display:none !important;}
+
 /* ---- Evidence bar (Act 3) ---- */
 .evidence{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
   border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem) clamp(1.2rem,2.2vw,1.8rem); margin-top:1.4rem;}
@@ -688,7 +692,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 04 · THE ARCHITECTURE — 4 merged cards, enriched reveals, zero figures ================= -->
+<!-- ================= ACT 04 · THE ARCHITECTURE — 6 cards behind a category filter ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head io">
@@ -696,56 +700,91 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">The evidence is public — and you're standing in it.</h2>
-      <p class="scan" data-i18n="act3_lede">This is not a case about a product I once touched. The evidence is the site itself: live, versioned, and open to inspection. Four claims, each one checkable.</p>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Two architectures, one standard. The differences are decisions, not accidents.</h2>
+      <p class="scan" data-i18n="act3_lede">Some decisions carried across both builds. Others belong to one. Filter to see which.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2 io">
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c1_t">Ten building blocks, one standard</h3>
-        <p class="card__x" data-i18n="act3_c1_x">Every section of this site is built from reusable components under one standard — so nothing drifts, and new pages inherit quality instead of reinventing it.</p>
+    <!-- Multi-select category filter. Inherits the .gantt__chip mechanism: a real
+         button carrying aria-pressed, keyboard operable, no custom widget role.
+         All three start pressed, so all six cards are shown by default. -->
+    <div class="cardfilter io" role="group" aria-label="Filter architecture decisions by build">
+      <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
+      <button class="gantt__chip" type="button" data-cat-filter="foundational" aria-pressed="true" data-i18n="act3_f1">Foundational</button>
+      <button class="gantt__chip" type="button" data-cat-filter="single" aria-pressed="true" data-i18n="act3_f2">Single-page</button>
+      <button class="gantt__chip" type="button" data-cat-filter="multi" aria-pressed="true" data-i18n="act3_f3">Multi-page</button>
+      <p class="visually-hidden" id="act3FilterStatus" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="cardgrid cardgrid--2 io" id="act3Cards">
+      <article class="card" data-cat="foundational">
+        <h3 class="card__t" data-i18n="act3_c1_t">Vanilla HTML/CSS/JavaScript</h3>
+        <p class="card__x" data-i18n="act3_c1_x">No framework, no build step, no dependency I cannot read end to end.</p>
         <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Ten building blocks" data-i18n="act3_c1_rv_btn">What the blocks are</button>
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Vanilla HTML/CSS/JavaScript" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
           <div class="reveal__body" id="rv-a3c1" hidden>
-            <p data-i18n="act3_c1_rv_txt1">Ten reusable organisms — navigation, hero, work cards, capability carousel, timeline, contact, and footer among them — each held to correct adoption of the global token layer. The structure beneath is semantic: header, nav, main, section, and footer landmarks, a single top-level heading, and a clean hierarchy below it, so browsers, assistive technologies, and other developers read the same order a visitor sees.</p>
-            <p data-i18n="act3_c1_rv_txt2">Design rules are declared once at the root as custom properties and referenced everywhere — change a token, and the change propagates. Layout runs on Flexbox and Grid with one consistent type scale. All interface copy is dictionary-driven, so a new language enters as a data file, not a rewrite.</p>
+            <p data-i18n="act3_c1_rv_txt">Nothing to migrate when a major version lands. No security-patch treadmill. A payload small enough to stay fast on a mid-range phone over Peruvian mobile data — which is what most recruiters will use to open it.</p>
           </div>
         </div>
       </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c2_t">Built to last</h3>
-        <p class="card__x" data-i18n="act3_c2_x">Nothing to patch, nothing to migrate, nothing borrowed — no rented platform, no stack of dependencies rotting quietly while you're not looking.</p>
+      <article class="card" data-cat="foundational">
+        <h3 class="card__t" data-i18n="act3_c2_t">Accessibility &amp; responsiveness</h3>
+        <p class="card__x" data-i18n="act3_c2_x">WCAG AA held as a build gate, usable with screen readers and keyboards.</p>
         <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Built to last" data-i18n="act3_c2_rv_btn">The framework rule</button>
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Accessibility and responsiveness" data-i18n="act3_c2_rv_btn">MADE FOR EVERYONE</button>
           <div class="reveal__body" id="rv-a3c2" hidden>
-            <p data-i18n="act3_c2_rv_txt">Hand-authored HTML, CSS, and JavaScript with no framework I couldn't justify, and no build tooling. Every style rule lives in one external system — no inline patches, no exceptions — which is what keeps the standard enforceable. No third-party dependencies means no forced migrations, no security-patch treadmill, and a payload small enough to stay fast without optimization theater.</p>
+            <p data-i18n="act3_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
+            <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up. Those are the three the stylesheets actually declare, not a convention borrowed from a framework.</p>
           </div>
         </div>
       </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c3_t">Accessible by default</h3>
-        <p class="card__x" data-i18n="act3_c3_x">Usable with screen readers and keyboards, held to a recognized international standard from the first line of code — a requirement, not a repair.</p>
+      <article class="card" data-cat="single">
+        <h3 class="card__t" data-i18n="act3_c3_t">Grid and layout, one page</h3>
+        <p class="card__x" data-i18n="act3_c3_x">Ten sections, one type scale, Flexbox and Grid throughout.</p>
         <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Accessible by default" data-i18n="act3_c3_rv_btn">The standard, named</button>
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Grid and layout, one page" data-i18n="act3_c3_rv_btn">INFORMATION ARCHITECTURE — EXTENDED</button>
           <div class="reveal__body" id="rv-a3c3" hidden>
-            <p data-i18n="act3_c3_rv_txt">WCAG AA held as a build gate: every meaningful image described in alt text, every form control paired with its label, landmarks distinguished with aria labels, visible focus styles so keyboard users always know where they are, and text contrast held at the 4.5:1 floor. Accessibility claims sit on this very page — which means they can be tested against it.</p>
+            <p data-i18n="act3_c3_rv_txt1">The ontology: ten reusable organisms, each owning one job — navigation, hero, work cards, capability carousel, contact.</p>
+            <p data-i18n="act3_c3_rv_txt2">The taxonomy: design rules declared once at the root as custom properties, inherited everywhere, overridden nowhere.</p>
+            <p data-i18n="act3_c3_rv_txt3">The choreography: one scroll, one order, every visitor served the same sequence whether or not it was the one they came for.</p>
           </div>
         </div>
       </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c4_t">Governed, end to end</h3>
-        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me. Every build session runs under written rules and approval gates before anything ships.</p>
+      <article class="card" data-cat="single">
+        <h3 class="card__t" data-i18n="act3_c4_t">Orchestration in Claude</h3>
+        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me. Workflows orchestrated with Claude and Claude Code, early 2026.</p>
         <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Governed, end to end" data-i18n="act3_c4_rv_btn">How the build actually runs</button>
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Orchestration in Claude" data-i18n="act3_c4_rv_btn">HOW CLAUDE WAS USED</button>
           <div class="reveal__body" id="rv-a3c4" hidden>
             <p data-i18n="act3_c4_rv_txt1">Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.</p>
-            <p data-i18n="act3_c4_rv_txt2">And when a stubborn spacing defect in the site's contact form outlasted the primary environment, a second AI tool, Gemini, rebuilt the component cleanly from zero for reintegration into the master codebase — the right tool, invoked when needed, under the same standard.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-cat="multi">
+        <h3 class="card__t" data-i18n="act3_c5_t">Grid and layout, eight pages</h3>
+        <p class="card__x" data-i18n="act3_c5_x">The same type scale and token layer, now carried across a shared page chassis.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c5" data-panel-title="Grid and layout, eight pages" data-i18n="act3_c5_rv_btn">WHAT THE SPLIT BOUGHT</button>
+          <div class="reveal__body" id="rv-a3c5" hidden>
+            <p data-i18n="act3_c5_rv_txt">Each case gets its own route, its own dictionary and its own entry point, so a recruiter can be sent to one page rather than to a scroll position. The cost is a chassis that must stay identical across eight pages — and one defect in it is eight defects.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-cat="multi">
+        <h3 class="card__t" data-i18n="act3_c6_t">Orchestration under a scope freeze</h3>
+        <p class="card__x" data-i18n="act3_c6_x">The second build runs against a signed, enumerated scope with exit conditions.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act3_c6_rv_btn">HOW THE SECOND BUILD IS GOVERNED</button>
+          <div class="reveal__body" id="rv-a3c6" hidden>
+            <p data-i18n="act3_c6_rv_txt">Every stage is dispatched as a written prompt with preflight checks, approval gates and a completion report. Improvements that fall outside the list are logged in one line and not built. The discipline is the deliverable as much as the site is.</p>
           </div>
         </div>
       </article>
     </div>
 
-    <div class="evidence io">
+    <!-- Evidence bar — HIDDEN, not deleted. Hiding it removes the last repository
+         hyperlink on the page, so sch_note and dash_foot name both repositories in
+         prose instead. All three remain public and reachable; nothing is concealed. -->
+    <div class="evidence io" hidden>
       <span class="evidence__label" data-i18n="act3_ev_label">Source, live</span>
       <div class="evidence__links">
         <a class="evidence__link" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener" data-i18n="act3_ev_repo">github.com/jdsaire/designops</a>
@@ -1390,6 +1429,38 @@ tabs.forEach(tab=>{
     if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
     syncToggleAll();
   });
+})();
+
+/* ============ Act 04 · category filter ============
+   Multi-select: each chip owns one category and every chip starts pressed, so
+   all six cards are shown until the reader narrows. Turning the last chip off
+   would blank the section, so the last pressed chip cannot be unpressed — the
+   filter narrows the set, it never empties it. ============ */
+(function act3Filter(){
+  var grid = document.getElementById('act3Cards');
+  if(!grid) return;
+  var chips  = Array.prototype.slice.call(document.querySelectorAll('[data-cat-filter]'));
+  var cards  = Array.prototype.slice.call(grid.querySelectorAll('.card'));
+  var status = document.getElementById('act3FilterStatus');
+  function on(c){ return c.getAttribute('aria-pressed') === 'true'; }
+  function apply(){
+    var live = chips.filter(on).map(function(c){ return c.getAttribute('data-cat-filter'); });
+    var shown = 0;
+    cards.forEach(function(card){
+      var vis = live.indexOf(card.getAttribute('data-cat')) !== -1;
+      card.hidden = !vis;
+      if(vis) shown++;
+    });
+    if(status) status.textContent = shown + ' of ' + cards.length + ' decisions shown.';
+  }
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      if(on(chip) && chips.filter(on).length === 1) return;   /* never empty the set */
+      chip.setAttribute('aria-pressed', String(!on(chip)));
+      apply();
+    });
+  });
+  apply();
 })();
 
 /* ============ Count-up (once per element, reduced-motion aware) ============ */
