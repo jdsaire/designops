@@ -293,8 +293,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt .layer-off{visibility:hidden;}
 .gantt [hidden]{display:none !important;}
 /* Provenance badge — the one row sourced to the principal rather than the record. */
+/* Text colour is the light-purple token, not brand purple: brand purple on the
+   task row measures 3.84:1 in dark, which is below AA for text this size. The
+   token flips to #8C00D9 in light, so both themes clear 4.5:1 — 9.68 and 6.45. */
 .gantt__badge{font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; font-weight:var(--fw-bold);
-  color:var(--color-brand-purple); border:1px solid var(--color-brand-purple); padding:.05rem .35rem; white-space:nowrap;}
+  color:var(--color-purple-light); border:1px solid var(--color-brand-purple); padding:.05rem .35rem; white-space:nowrap;}
 /* Info affordance — a real button, not a hover tooltip. Reachable by keyboard, stays
    open while the pointer travels onto the note, dismissed with Escape without moving
    focus. A hover-only tooltip fails G5. */
