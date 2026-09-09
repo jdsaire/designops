@@ -333,6 +333,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
 .dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
 .dash__panel[hidden]{display:none;}
+.dash__build[hidden]{display:none;}
+/* Which-build tabs sit above the level tabs and read as the outer choice. */
+.dash__tabs--build .dash__tab{font-size:.78rem; letter-spacing:.06em;}
+.dash__tabs--build{border-bottom-width:2px;}
+/* A pending figure carries its label and no number. Never a placeholder, never a
+   zero, never a guess: B4 requires the definitive i18n total measured at closure,
+   and S9 is the only thing permitted to fill it. */
+.dcell--pending .dcell__pending{font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+  font-weight:var(--fw-semibold); color:var(--color-text-dim); border-left:2px solid var(--color-brand-purple);
+  padding-left:.5rem; margin-top:.15rem;}
 .dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
 .dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
 .dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
@@ -794,7 +804,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — all figures debut here ================= -->
+<!-- ================= ACT 05 · THE DASHBOARD — one column per build ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
     <div class="act__head io">
@@ -802,71 +812,92 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 05 · The Dashboard</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Running today, governed daily, by me alone.</h2>
-      <p class="scan" data-i18n="act4_insight">The number that matters is the ratio: <strong>nothing I ship lands without passing a gate I set for myself.</strong> The page you're reading is the evidence.</p>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Two builds, one measure each. The gap is the point.</h2>
+      <p class="scan" data-i18n="act4_insight">Thirty-two active build-days on the single page. Seventeen on the multi-page, after finishing the Microsoft Front-End certificate. Same person, roughly half the days.</p>
     </div>
 
-    <div class="dash io">
-      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
-        <button class="dash__tab" role="tab" id="tab-m" aria-selected="true" aria-controls="dp-m" data-i18n="dash_tab1">Measured</button>
-        <button class="dash__tab" role="tab" id="tab-d" aria-selected="false" aria-controls="dp-d" data-i18n="dash_tab2">Derived</button>
-        <button class="dash__tab" role="tab" id="tab-r" aria-selected="false" aria-controls="dp-r" data-i18n="dash_tab3">The read</button>
+    <!-- One-of-n choice between the two builds. Mutually exclusive, so a tablist —
+         the same role the level tabs below already use and which is already
+         keyboard-wired. Defaults to the multi-page build, which is this page's
+         subject. Each build panel owns its own level tablist so no id collides. -->
+    <div class="dash io" id="dash">
+      <div class="dash__tabs dash__tabs--build" role="tablist" aria-label="Which build">
+        <button class="dash__tab" role="tab" id="tab-sp" aria-selected="false" aria-controls="build-sp" data-i18n="dash_pick1">Single page</button>
+        <button class="dash__tab" role="tab" id="tab-mp" aria-selected="true"  aria-controls="build-mp" data-i18n="dash_pick2">Multi page</button>
       </div>
 
-      <!-- LEVEL 1 · MEASURED -->
-      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
+      <div class="dash__build" id="build-sp" role="tabpanel" aria-labelledby="tab-sp" hidden>
+      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
+        <button class="dash__tab" role="tab" id="tab-sp-m" aria-selected="true"  aria-controls="dp-sp-m" data-i18n="dash_tab1">Measured</button>
+        <button class="dash__tab" role="tab" id="tab-sp-d" aria-selected="false" aria-controls="dp-sp-d" data-i18n="dash_tab2">Derived</button>
+        <button class="dash__tab" role="tab" id="tab-sp-r" aria-selected="false" aria-controls="dp-sp-r" data-i18n="dash_tab3">The read</button>
+      </div>
+
+      <div class="dash__panel" id="dp-sp-m" role="tabpanel" aria-labelledby="tab-sp-m">
         <div class="dash__grid">
           <div class="dcell"><span class="dcell__n" data-count="10">10</span><span class="dcell__l" data-i18n="dash_m1">Building blocks</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="175">175</span><span class="dcell__l" data-i18n="dash_m2">Dictionary keys</span></div>
+          <div class="dcell dcell--pending"><span class="dcell__l" data-i18n="dash_m2">Dictionary keys</span><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
           <div class="dcell"><span class="dcell__n" data-count="2">2</span><span class="dcell__l" data-i18n="dash_m3">Languages engineered</span></div>
           <div class="dcell"><span class="dcell__n" data-i18n="dash_m4_n">AA</span><span class="dcell__l" data-i18n="dash_m4">Accessibility standard</span></div>
           <div class="dcell"><span class="dcell__n" data-count="0">0</span><span class="dcell__l" data-i18n="dash_m5">Frameworks / dependencies</span></div>
           <div class="dcell"><span class="dcell__n" data-count="286">286</span><span class="dcell__l" data-i18n="dash_m6">Commits</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="49">49</span><span class="dcell__l" data-i18n="dash_m7">Pull requests</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="52">52</span><span class="dcell__l" data-i18n="dash_m7">Pull requests</span></div>
           <div class="dcell"><span class="dcell__n" data-count="73">73</span><span class="dcell__l" data-i18n="dash_m8">Days of public history</span></div>
         </div>
       </div>
 
-      <!-- LEVEL 2 · DERIVED -->
-      <div class="dash__panel" id="dp-d" role="tabpanel" aria-labelledby="tab-d" hidden>
+      <div class="dash__panel" id="dp-sp-d" role="tabpanel" aria-labelledby="tab-sp-d" hidden>
         <div class="dash__grid dash__grid--derived">
-          <div class="dcell">
-            <span class="dcell__n" data-count="3.9">3.9</span>
-            <span class="dcell__l" data-i18n="dash_d1">Commits per day, sustained</span>
-            <span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 73 days</span>
-            <span class="dcell__bar" aria-hidden="true"><i style="--v:.65"></i></span>
-          </div>
-          <div class="dcell">
-            <span class="dcell__n" data-count="4.7">4.7</span>
-            <span class="dcell__l" data-i18n="dash_d2">Pull requests per week</span>
-            <span class="dcell__p" data-i18n="dash_d2_p">49 PRs ÷ 10.4 weeks</span>
-            <span class="dcell__bar" aria-hidden="true"><i style="--v:.78"></i></span>
-          </div>
-          <div class="dcell">
-            <span class="dcell__n" data-count="5.8">5.8</span>
-            <span class="dcell__l" data-i18n="dash_d3">Commits per review gate</span>
-            <span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 49 PRs</span>
-            <span class="dcell__bar" aria-hidden="true"><i style="--v:.97"></i></span>
-          </div>
-          <div class="dcell">
-            <span class="dcell__n" data-count="49">49</span>
-            <span class="dcell__l" data-i18n="dash_d4">Review gates in 73 days</span>
-            <span class="dcell__p" data-i18n="dash_d4_p">A gate roughly every 6 commits</span>
-            <span class="dcell__bar" aria-hidden="true"><i style="--v:.67"></i></span>
-          </div>
+          <div class="dcell"><span class="dcell__n" data-count="3.9">3.9</span><span class="dcell__l" data-i18n="dash_d1">Commits per day, sustained</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 73 days</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.65"></i></span></div>
+          <div class="dcell"><span class="dcell__n" data-count="5.0">5.0</span><span class="dcell__l" data-i18n="dash_d2">Pull requests per week</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.4 weeks</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.78"></i></span></div>
+          <div class="dcell"><span class="dcell__n" data-count="5.5">5.5</span><span class="dcell__l" data-i18n="dash_d3">Commits per review gate</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.97"></i></span></div>
+          <div class="dcell"><span class="dcell__n" data-count="52">52</span><span class="dcell__l" data-i18n="dash_d4">Review gates in 73 days</span><span class="dcell__p" data-i18n="dash_d4_p">A gate roughly every 6 commits</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.67"></i></span></div>
         </div>
       </div>
 
-      <!-- LEVEL 3 · THE READ -->
-      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
+      <div class="dash__panel" id="dp-sp-r" role="tabpanel" aria-labelledby="tab-sp-r" hidden>
         <div class="dash__read">
-          <p class="dash__readline" data-i18n="dash_r1"><strong>The signal isn't the volume. It's the ratio.</strong> 286 commits mean momentum; 49 pull requests mean restraint. A review gate roughly every six commits is the cadence design organizations try to install in whole teams — I run it on myself.</p>
+          <p class="dash__readline" data-i18n="dash_r1">The signal isn't the volume. It's the ratio. 286 commits mean momentum; 52 pull requests mean the momentum was reviewed.</p>
           <p class="dash__readsub" data-i18n="dash_r2">Beneath the numbers sits a qualitative floor: the build meets a graded professional rubric for semantic structure, accessibility, styling discipline, interactivity, and responsive behavior.</p>
           <p class="dash__reco" data-i18n="dash_r3">What transfers to your team isn't my code. It's this operating habit.</p>
         </div>
       </div>
 
-      <p class="dash__foot" data-i18n="dash_foot">Method: public GitHub history, 24 Apr – 06 Jul 2026 (73 days). Rates are simple averages — 286÷73, 49÷10.4, 286÷49. Figures verifiable at the repository linked above.</p>
+      <p class="dash__foot" data-i18n="dash_foot">Method: public commit history of github.com/jdsaire/jdigital and github.com/jdsaire/legacy-desops, summed across both, 24 Apr – 06 Jul 2026 (73 days). Rates are simple averages — 286÷73, 52÷10.4, 286÷52.</p>
+      </div>
+
+      <div class="dash__build" id="build-mp" role="tabpanel" aria-labelledby="tab-mp">
+      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
+        <button class="dash__tab" role="tab" id="tab-mp-m" aria-selected="true"  aria-controls="dp-mp-m" data-i18n="dash_tab1">Measured</button>
+        <button class="dash__tab" role="tab" id="tab-mp-d" aria-selected="false" aria-controls="dp-mp-d" data-i18n="dash_tab2">Derived</button>
+        <button class="dash__tab" role="tab" id="tab-mp-r" aria-selected="false" aria-controls="dp-mp-r" data-i18n="dash_tab3">The read</button>
+      </div>
+
+      <div class="dash__panel" id="dp-mp-m" role="tabpanel" aria-labelledby="tab-mp-m">
+        <div class="dash__grid">
+          <div class="dcell"><span class="dcell__n" data-count="8">8</span><span class="dcell__l" data-i18n="dash_m1">Building blocks</span></div>
+          <div class="dcell dcell--pending"><span class="dcell__l" data-i18n="dash_m2">Dictionary keys</span><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="103">103</span><span class="dcell__l" data-i18n="dash_m6">Commits</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="20">20</span><span class="dcell__l" data-i18n="dash_m7">Pull requests</span></div>
+          <div class="dcell"><span class="dcell__n" data-count="60">60</span><span class="dcell__l" data-i18n="dash_m8">Days of public history</span></div>
+        </div>
+      </div>
+
+      <div class="dash__panel" id="dp-mp-d" role="tabpanel" aria-labelledby="tab-mp-d" hidden>
+        <div class="dash__grid dash__grid--derived">
+          <div class="dcell"><span class="dcell__n" data-count="6.1">6.1</span><span class="dcell__l" data-i18n="dash2_d1">Commits per active day</span><span class="dcell__p" data-i18n="dash2_d1_p">103 ÷ 17</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.61"></i></span></div>
+          <div class="dcell"><span class="dcell__n" data-count="5.2">5.2</span><span class="dcell__l" data-i18n="dash2_d3">Commits per gate</span><span class="dcell__p" data-i18n="dash2_d3_p">103 ÷ 20</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.52"></i></span></div>
+        </div>
+      </div>
+
+      <div class="dash__panel" id="dp-mp-r" role="tabpanel" aria-labelledby="tab-mp-r" hidden>
+        <div class="dash__read">
+          <p class="dash__readline" data-i18n="dash2_r1">Half the days, and a defect inventory instead of a fresh start. The second build spends its time differently: less authoring, more governing.</p>
+        </div>
+      </div>
+
+      <p class="dash__foot" data-i18n="dash2_foot">Method: public commit history of github.com/jdsaire/designops, 10 Jul – 08 Sep 2026. Anything dated after 06 Sep is forecast and badged as such.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1075,17 +1106,36 @@ next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:
 function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
 track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
 
-/* ============ Dashboard tabs ============ */
-const tabs = [...document.querySelectorAll(".dash__tab")];
-const panels = { "tab-m":"dp-m", "tab-d":"dp-d", "tab-r":"dp-r" };
-tabs.forEach(tab=>{
-  tab.addEventListener("click", ()=>{
+/* ============ Dashboard tabs ============
+   Two tiers now: which build, and which level within it. Both are one-of-n, so
+   both are tablists, and each resolves its panel from aria-controls rather than
+   from a hardcoded id map — the build panels each own a level tablist, and a map
+   would have to know about both tiers. Arrow keys move between tabs in the same
+   list, which is the pattern the role expects. ============ */
+document.querySelectorAll('[role="tablist"]').forEach(list=>{
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  function select(tab){
     tabs.forEach(t=>{
-      const sel = t===tab;
+      const sel = t === tab;
       t.setAttribute("aria-selected", String(sel));
-      document.getElementById(panels[t.id]).hidden = !sel;
+      t.tabIndex = sel ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      if(panel) panel.hidden = !sel;
     });
-    runCounts(document.getElementById(panels[tab.id]));
+    const panel = document.getElementById(tab.getAttribute("aria-controls"));
+    if(panel) runCounts(panel);
+  }
+  tabs.forEach((tab,i)=>{
+    tab.tabIndex = tab.getAttribute("aria-selected") === "true" ? 0 : -1;
+    tab.addEventListener("click", ()=> select(tab));
+    tab.addEventListener("keydown", e=>{
+      let nx = null;
+      if(e.key === "ArrowRight") nx = tabs[(i+1) % tabs.length];
+      if(e.key === "ArrowLeft")  nx = tabs[(i-1+tabs.length) % tabs.length];
+      if(e.key === "Home")       nx = tabs[0];
+      if(e.key === "End")        nx = tabs[tabs.length-1];
+      if(nx){ e.preventDefault(); nx.focus(); select(nx); }
+    });
   });
 });
 
