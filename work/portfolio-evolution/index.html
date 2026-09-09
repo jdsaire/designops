@@ -224,33 +224,90 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     color:var(--color-brand-white); font-weight:var(--fw-light);}
 }
 
-/* ---- Schedule · dated build timeline (Act 03) — static, single-gesture-safe, no reveals ---- */
-.sched{--sched-label:clamp(9rem,22vw,13rem); border:1px solid var(--color-border-soft); overflow:hidden;}
-.sched__axis{position:relative; height:1.9rem; margin-left:var(--sched-label);
-  border-bottom:1px solid var(--color-border-soft);}
-.sched__mo{position:absolute; top:0; bottom:0; padding-left:.4rem; display:flex; align-items:center;
-  font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase;
-  color:var(--color-text-dim); border-left:1px solid var(--color-border-faint);}
-.sched__mile{position:absolute; top:0; bottom:0; width:1px; background:var(--color-brand-purple); opacity:.55;}
-.sched__mile::before{content:""; position:absolute; top:.2rem; left:50%; transform:translateX(-50%);
-  width:.36rem; height:.36rem; background:var(--color-brand-purple);}
-.srow{display:grid; grid-template-columns:var(--sched-label) 1fr; align-items:stretch;
-  border-top:1px solid var(--color-border-faint);}
-.srow__label{padding:.8rem clamp(.9rem,1.5vw,1.2rem); display:flex; flex-direction:column; gap:.22rem;
-  justify-content:center; border-right:1px solid var(--color-border-faint);}
-.srow__t{font-size:.88rem; font-weight:var(--fw-semibold); letter-spacing:-0.01em; line-height:1.25;}
-.srow__m{font-size:.66rem; font-weight:var(--fw-light); color:var(--color-text-dim); letter-spacing:.02em;}
-.srow__track{position:relative; min-height:2.5rem;}
-.sbar{position:absolute; top:50%; transform:translateY(-50%); height:.9rem;
-  left:calc(var(--l) * 1%); width:calc(var(--w) * 1%); min-width:.5rem; background:var(--color-brand-purple);}
-.sbar--close{background:var(--color-purple-light);}
-.sched__legend{margin-top:1rem; display:flex; flex-wrap:wrap; gap:.35rem 1.4rem;
-  font-size:.72rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+/* ---- Schedule · days-axis Gantt (Act 03). Component inherited from the Verify App
+        brief (work/yape-trust-verify-brief/index.html): epic rows with disclosure,
+        task sub-rows, chips, SVG overlay, milestones, totals column. The axis is
+        calendar time here, not cumulative story points, so rows carry real dates and
+        are free to leave gaps — the two dormant stretches are the point. ---- */
+.gantt{--g-border:var(--color-border-soft);}
+.gantt *{border-radius:0; box-shadow:none;}
+.gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
+.gantt__action{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-medium);
+  color:var(--color-brand-white); background:none; border:1px solid var(--g-border);
+  padding:.55rem 1rem; min-height:44px; cursor:pointer; transition:background 160ms var(--ease-standard), color 160ms var(--ease-standard);}
+.gantt__action:hover{background:var(--color-brand-white); color:var(--color-brand-black);}
+.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
+.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
+.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
+  color:var(--color-text-muted); background:none; border:1px solid var(--g-border);
+  padding:.45rem .85rem; min-height:44px; cursor:pointer; transition:color 160ms var(--ease-standard), border-color 160ms var(--ease-standard);}
+.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
+.gantt__chip[aria-pressed="true"]::before{content:"\2713\A0"; color:var(--color-brand-purple);}
+.gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
+.gantt__grid{min-width:820px;}
+.gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+  border-bottom:1px solid var(--g-border); font-size:.75rem; color:var(--color-text-muted);}
+.gantt__axis > div{padding:.75rem 1rem;}
+.gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem; white-space:nowrap;}
+.gantt__axis-summary{text-align:right;}
+.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+  border-top:1px solid var(--g-border); align-items:stretch;}
+.gantt__task-row{background:rgba(var(--ink),0.02);}
+.gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
+.gantt__task-label{padding:.5rem 1rem .5rem 2.4rem; color:var(--color-text-muted); font-size:.875rem;
+  display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; position:relative;}
+.gantt__row-field,.gantt__task-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__row-field{min-height:3.25rem;}
+.gantt__task-field{min-height:2.5rem;}
+.gantt__row-summary,.gantt__task-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
+  text-align:right; font-size:.78rem; color:var(--color-text-muted); gap:.15rem;}
+.gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.gantt__days{color:var(--color-text-dim);}
+.gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
+.gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
+  color:var(--color-brand-white); background:none; border:0; padding:0; cursor:pointer; text-align:left;
+  display:flex; align-items:center; gap:.5rem; min-height:44px;}
+.gantt__toggle .gantt__marker{display:inline-block; width:.8em; color:var(--color-text-muted); font-weight:var(--fw-regular);
+  transition:transform 160ms var(--ease-standard);}
+.gantt__toggle[aria-expanded="true"] .gantt__marker{transform:rotate(90deg);}
+.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__row-label{border-left:3px solid var(--color-brand-purple);}
+.gantt__epic:hover .gantt__bar--epic,.gantt__epic:has(.gantt__toggle:focus-visible) .gantt__bar--epic{border-color:var(--color-brand-purple);}
+.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); background:var(--g-border);
+  border:1px solid var(--color-brand-purple); display:flex; align-items:center; padding:0 .4rem; min-width:.35rem;}
+.gantt__bar--epic{height:1.625rem; background:var(--color-brand-purple);}
+.gantt__bar--task{height:1rem;}
+.gantt__bar--principal{background:transparent; border-style:dotted;}
+.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); white-space:nowrap;}
+.gantt__bar--epic .gantt__span{color:var(--color-on-brand);}
+.gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
+  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;}
+.gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
+  font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
+.gantt__overlay{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:2;}
+.gantt__overlay path{fill:none; stroke:var(--color-brand-purple); stroke-width:1.5; stroke-dasharray:5 4;}
+.gantt__overlay .gantt__dep-head{fill:var(--color-brand-purple); stroke:none;}
+.gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
+  margin-top:1rem; max-width:70ch; line-height:1.6;}
+.gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+.gantt .layer-off{visibility:hidden;}
+.gantt [hidden]{display:none !important;}
+/* Provenance badge — the one row sourced to the principal rather than the record. */
+.gantt__badge{font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; font-weight:var(--fw-bold);
+  color:var(--color-brand-purple); border:1px solid var(--color-brand-purple); padding:.05rem .35rem; white-space:nowrap;}
+/* Info affordance — a real button, not a hover tooltip. Reachable by keyboard, stays
+   open while the pointer travels onto the note, dismissed with Escape without moving
+   focus. A hover-only tooltip fails G5. */
+.gantt__info{font-family:inherit; font-size:.68rem; font-weight:var(--fw-bold); line-height:1;
+  width:1.4rem; height:1.4rem; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  color:var(--color-text-dim); background:none; border:1px solid var(--g-border); cursor:pointer;}
+.gantt__info:hover,.gantt__info[aria-expanded="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
+.gantt__note{flex:1 1 100%; font-size:.75rem; font-weight:var(--fw-light); line-height:1.5;
+  color:var(--color-text-muted); border-left:2px solid var(--color-brand-purple);
+  padding:.35rem 0 .35rem .6rem; margin:.15rem 0 .1rem;}
+.gantt__note[hidden]{display:none !important;}
 @media (max-width:767px){
-  .sched__axis{display:none;}
-  .srow{grid-template-columns:1fr;}
-  .srow__label{border-right:0; border-bottom:1px solid var(--color-border-faint);}
-  .srow__track{min-height:2rem; margin:.6rem clamp(.9rem,1.5vw,1.2rem);}
+  .gantt__chart{border-left:0; border-right:0;}
 }
 
 /* ---- Evidence bar (Act 3) ---- */
@@ -590,7 +647,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SCHEDULE — dated build timeline · static, no lateral gesture, no reveals ================= -->
+<!-- ================= ACT 03 · THE SCHEDULE — days-axis Gantt over both builds ================= -->
 <section class="act" id="sched" aria-labelledby="vsch">
   <div class="container">
     <div class="act__head io">
@@ -598,99 +655,36 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Seventy-three days, in public, gate by gate.</h2>
-      <p class="scan" data-i18n="sch_lede">The reinvention has a paper trail. Every epic below is reconstructed from the public commit history — from the day I adopted the AI-governed build workflow to the day the repository was cleansed and handed off. Dates and planned days appear here, and nowhere else on this page.</p>
+      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Seventy-three days on the first build. Seventeen on the second.</h2>
+      <p class="scan" data-i18n="sch_lede">Each epic below is reconstructed from the public commit history of both single-page repositories. Planned-capacity days appear here and nowhere else on this page.</p>
     </div>
 
-    <div class="sched io">
-      <div class="sched__axis" aria-hidden="true">
-        <span class="sched__mo" style="left:0%">Apr</span>
-        <span class="sched__mo" style="left:9.6%">May</span>
-        <span class="sched__mo" style="left:52.1%">Jun</span>
-        <span class="sched__mo" style="left:93.2%">Jul</span>
-        <span class="sched__mile" style="left:45.2%"></span>
-        <span class="sched__mile" style="left:58.9%"></span>
-        <span class="sched__mile" style="left:97.3%"></span>
+    <div class="gantt io" id="gantt">
+      <div class="gantt__tools">
+        <button class="gantt__action" id="ganttToggleAll" type="button" aria-expanded="false" data-i18n="gantt_expand">Expand all epics</button>
+        <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
+          <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
+          <button class="gantt__chip" type="button" data-filter="days" aria-pressed="true" data-i18n="gantt_f_days">Timeframe in days</button>
+          <button class="gantt__chip" type="button" data-filter="seq" aria-pressed="true" data-i18n="gantt_f_seq">Sequence</button>
+        </div>
       </div>
 
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e1_t">Workflow adoption & foundation</span>
-          <span class="srow__m" data-i18n="sch_e1_m">24–28 Apr · 5 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:0.0;--w:5.5" aria-hidden="true"></span></div>
+      <div class="visually-hidden" id="ganttSeqList" data-i18n="gantt_seq_text">
+        Sequence: the jdigital repository ran first, then legacy-desops, then designops. This is the order the three repositories were worked in, not a chain of blocking dependencies.
       </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e2_t">Capabilities & about system</span>
-          <span class="srow__m" data-i18n="sch_e2_m">30 Apr – 06 May · 5 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:8.2;--w:8.2" aria-hidden="true"></span></div>
+
+      <div class="gantt__chart" id="ganttChart">
+        <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
+        <div class="gantt__grid" id="ganttGrid" role="tree"
+             aria-label="Both builds on a calendar axis: three repository epics with task rows, sized in days. The order the repositories were worked in is listed before this chart."
+             aria-describedby="ganttSeqList"></div>
       </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e3_t">CTAs & contact form</span>
-          <span class="srow__m" data-i18n="sch_e3_m">07–12 May · 5 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:17.8;--w:6.9" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e4_t">Contact integration & i18n stabilization</span>
-          <span class="srow__m" data-i18n="sch_e4_m">19–28 May · 4 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:34.2;--w:12.4" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e5_t">Bridges & positioning refactor</span>
-          <span class="srow__m" data-i18n="sch_e5_m">30–31 May · 2 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:49.3;--w:2.0" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e6_t">Pages pipeline & i18n v2</span>
-          <span class="srow__m" data-i18n="sch_e6_m">03–07 Jun · 5 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:54.8;--w:5.5" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e7_t">DesignOps variant baseline</span>
-          <span class="srow__m" data-i18n="sch_e7_m">26–27 Jun · 2 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:86.3;--w:2.0" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e8_t">ES localization & mobile UX</span>
-          <span class="srow__m" data-i18n="sch_e8_m">29–30 Jun · 2 days</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:90.4;--w:2.0" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e9_t">Repo cleanse, backup & Brief handoff</span>
-          <span class="srow__m" data-i18n="sch_e9_m">04 Jul · 1 day</span>
-        </div>
-        <div class="srow__track"><span class="sbar" style="--l:95.3;--w:2.0" aria-hidden="true"></span></div>
-      </div>
-      <div class="srow">
-        <div class="srow__label">
-          <span class="srow__t" data-i18n="sch_e10_t">Ground Zero reorganization</span>
-          <span class="srow__m" data-i18n="sch_e10_m">06 Jul · 1 day</span>
-        </div>
-        <div class="srow__track"><span class="sbar sbar--close" style="--l:98.0;--w:2.0" aria-hidden="true"></span></div>
-      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Every window it draws is also stated in the note below.</p></noscript>
+
+      <p class="gantt__caption" id="ganttCaption"><b data-i18n="gantt_caption">How to read this.</b> <span data-i18n="gantt_caption_body">Bars are calendar spans, not effort. A gap is a real gap: nothing was committed on those days. Each row carries an information button naming that row's window and where it came from. The dotted row is my own account rather than a commit. The record ends on 06 September 2026 and nothing is drawn past it — four further stages are dispatched and carry no date to draw: this one, the Spanish layer, the repository README and the closing audit.</span></p>
     </div>
 
-    <p class="sched__legend io">
-      <span data-i18n="sch_lg1">Bar — calendar span.</span>
-      <span data-i18n="sch_lg2">Number — planned-capacity days.</span>
-      <span data-i18n="sch_lg3">Marks — 27 May i18n stabilized · 06 Jun pipeline live · 04 Jul Brief handoff.</span>
-    </p>
-    <p class="dash__foot io" data-i18n="sch_note" style="border-top:0; padding-left:0;">Reconstructed from public GitHub history, 24 Apr – 06 Jul 2026 — 32 active build-days across the window. The closing Ground Zero reorganization (~1 day) is documented for completeness. No task appears that the commit record cannot support.</p>
+    <p class="dash__foot io" data-i18n="sch_note" style="border-top:0; padding-left:0;">Reconstructed from the public commit history of github.com/jdsaire/jdigital and github.com/jdsaire/legacy-desops, summed across both — 24 Apr – 06 Jul 2026. 32 active build-days; three further dates in June carried document uploads rather than site code and are excluded. The closing Ground Zero reorganization (06 Jul, ~1 day) is my own account, not a commit. No task appears that the record cannot support.</p>
   </div>
 </section>
 
@@ -1055,6 +1049,348 @@ tabs.forEach(tab=>{
     runCounts(document.getElementById(panels[tab.id]));
   });
 });
+
+/* ============================================================
+   ACT 03 · SCHEDULE ORGANISM — data-driven, calendar-scaled.
+   Instantiation contract: only the DATA object is edited per
+   brief; markup, CSS and logic are the organism's own.
+
+   Converted from the Verify App brief's roadmap organism, whose
+   axis was cumulative story points and whose layout made every
+   task contiguous (cursor += t.sp). Neither build here has story
+   points recorded, so the axis is calendar time: every row
+   carries a real start and end date, rows may leave gaps, and
+   the gaps are load-bearing — 19–25 Jun and the 34-day dormant
+   stretch from 25 Jul to 28 Aug are facts the chart must show.
+
+   Sources: E1a and E1b from the public commit history of
+   jdsaire/jdigital and jdsaire/legacy-desops. E2 from this
+   repository's own merged pull-request spine, #6–#25. The one
+   row not sourced to a commit is badged on its face.
+   ============================================================ */
+(function scheduleOrganism(){
+  'use strict';
+
+  var AXIS_START = '2026-04-24';
+  var AXIS_END   = '2026-09-08';
+  /* The record stops here. Nothing is drawn past it: the four dispatched stages
+     that follow carry no date, and drawing them would invent one. The caption
+     names them and the milestone marks the boundary. */
+  var MEASURED_TO = '2026-09-06';
+
+  var DATA = {
+    epics: [
+      { id:'e1a', name:'jdigital', meta:'240 commits · 48 PRs', start:'2026-04-24', end:'2026-06-18',
+        info:'24 Apr – 18 Jun 2026. jdigital\'s public commit history.',
+        tasks:[
+          { id:'sch_e1', window:"24–28 Apr · 5 days",  name:'Workflow adoption & foundation',        start:'2026-04-24', end:'2026-04-28',
+            info:'24–28 Apr. jdigital commit history.' },
+          { id:'sch_e2', window:"30 Apr – 06 May · 5 days",  name:'Capabilities & about system',           start:'2026-04-30', end:'2026-05-06',
+            info:'30 Apr – 6 May. jdigital commit history.' },
+          { id:'sch_e3', window:"07–12 May · 5 days",  name:'CTAs & contact form',                   start:'2026-05-07', end:'2026-05-12',
+            info:'7–12 May. jdigital commit history.' },
+          { id:'sch_e4', window:"19–28 May · 4 days",  name:'Contact integration & i18n stabilization', start:'2026-05-19', end:'2026-05-28',
+            info:'19–28 May. jdigital commit history.' },
+          { id:'sch_e5', window:"30–31 May · 2 days",  name:'Bridges & positioning refactor',        start:'2026-05-30', end:'2026-05-31',
+            info:'30–31 May. jdigital commit history.' },
+          { id:'sch_e6', window:"03–07 Jun · 5 days",  name:'Pages pipeline & i18n v2',              start:'2026-06-03', end:'2026-06-07',
+            info:'3–7 Jun. jdigital commit history, its last stretch of site code.' }
+        ]},
+      { id:'e1b', name:'legacy-desops', meta:'46 commits · 4 PRs', start:'2026-06-26', end:'2026-07-06',
+        info:'26 Jun – 6 Jul 2026. legacy-desops commit history, plus one closing day I supply myself.',
+        tasks:[
+          { id:'sch_e7', window:"26–27 Jun · 2 days",  name:'DesignOps variant baseline',            start:'2026-06-26', end:'2026-06-27',
+            info:'26–27 Jun. legacy-desops commit history.' },
+          { id:'sch_e8', window:"29–30 Jun · 2 days",  name:'ES localization & mobile UX',           start:'2026-06-29', end:'2026-06-30',
+            info:'29–30 Jun. legacy-desops commit history.' },
+          { id:'sch_e9', window:"04 Jul · 1 day",  name:'Repo cleanse, backup & Brief handoff',  start:'2026-07-04', end:'2026-07-04',
+            info:'4 Jul. The last date with commits in legacy-desops.' },
+          { id:'sch_e10', window:"06 Jul · 1 day", name:'Ground Zero reorganization',            start:'2026-07-06', end:'2026-07-06',
+            flag:'principal',
+            info:'6 Jul. My own account, not a commit — no repository records it.' }
+        ]},
+      { id:'e2', name:'designops', meta:'103 commits · 20 PRs · 17 active days', start:'2026-07-10', end:'2026-09-08',
+        info:'10 Jul – 8 Sep 2026. This repository\'s merged pull requests.',
+        tasks:[
+          { id:'e2t0',  name:'Ground Zero: per-organism reorganization', start:'2026-07-10', end:'2026-07-11', commits:2,
+            info:'10–11 Jul. Two commits: the history reset that opened this repository.' },
+          { id:'e2t1',  name:'Wave 4 · Brief 01 and the multi-page migration', start:'2026-07-12', end:'2026-07-12', commits:4,
+            info:'12 Jul. Pull requests 6 and 7.' },
+          { id:'e2t2',  name:'Wave 4 · Banking express build',          start:'2026-07-13', end:'2026-07-16', commits:8,
+            info:'13–16 Jul. Pull request 8.' },
+          { id:'e2t3',  name:'Wave 5 · IA migration, brief pages, ES keys', start:'2026-07-18', end:'2026-07-19', commits:18,
+            info:'18–19 Jul. Pull requests 9 to 14.' },
+          { id:'e2t4',  name:'Wave 6 · Surgical refinements',           start:'2026-07-20', end:'2026-07-21', commits:3,
+            info:'20–21 Jul. Pull request 15.' },
+          { id:'e2t5',  name:'Wave 6 · Chrome structural pass',         start:'2026-07-25', end:'2026-07-25', commits:5,
+            info:'25 Jul. Pull requests 16 and 17. Nothing was committed for 34 days after this.' },
+          { id:'e2t6',  name:'S1 · Defect inventory',                   start:'2026-08-28', end:'2026-08-29', commits:2,
+            info:'28–29 Aug. Pull request 18.' },
+          { id:'e2t7',  name:'S3 · AccreditaPass brief',                start:'2026-08-30', end:'2026-08-30', commits:14,
+            info:'30 Aug. Pull request 19.' },
+          { id:'e2t8',  name:'S4 · Home reallocation and directed changes', start:'2026-08-31', end:'2026-08-31', commits:13,
+            info:'31 Aug. Pull requests 20 and 21.' },
+          { id:'e2t9',  name:'S5 · Trust-Verify relink',                start:'2026-09-01', end:'2026-09-01', commits:4,
+            info:'1 Sep. Pull request 22.' },
+          { id:'e2t10', name:'S6 · Airport brief · S8 · Global mechanisms', start:'2026-09-05', end:'2026-09-05', commits:20,
+            info:'5 Sep. Pull requests 23 and 24.' },
+          { id:'e2t11', name:'S7 · Assets',                             start:'2026-09-06', end:'2026-09-06', commits:10,
+            info:'6 Sep. Pull request 25.' },
+        ]}
+    ],
+    /* Milestones sit on measured dates only. */
+    milestones: [
+      { epic:'e1b', at:'2026-07-04', name:'Brief handoff' },
+      { epic:'e2',  at:'2026-07-10', name:'History reset' },
+      { epic:'e2',  at:MEASURED_TO, name:'Record ends' }
+    ],
+    /* Chronological order of the three repositories. Order, not causation:
+       pull request 13 merged before 12, and a 34-day gap breaks any
+       adjacency inference, so no blocking dependency is claimed or drawn. */
+    sequence: [
+      { from:'e1a', to:'e1b' },
+      { from:'e1b', to:'e2'  }
+    ]
+  };
+
+  var root = document.getElementById('gantt');
+  if(!root) return;
+
+  /* ---------- Derived layout: calendar days ---------- */
+  var DAY = 86400000;
+  function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
+  function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
+  var TOTAL_DAYS = offset(AXIS_END) + 1;
+
+  /* An end date is inclusive, so a one-day task is one day wide, not zero. */
+  function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
+  function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
+
+  DATA.epics.forEach(function(epic){
+    var starts = epic.tasks.map(function(t){ return offset(t.start); });
+    var ends   = epic.tasks.map(function(t){ return offset(t.end); });
+    epic.startOff = Math.min.apply(null, starts);
+    epic.endOff   = Math.max.apply(null, ends);
+    /* A band's window is declared from the copy lock, not derived from its task
+       rows: jdigital's repository ran to 18 Jun while its last three dates carried
+       document uploads rather than site code and hold no task. The drawn bar still
+       has to contain every task it owns, so it spans whichever runs later — which is
+       how legacy-desops' bar reaches 06 Jul to hold the one row I supply myself. */
+    epic.startOff = Math.min(epic.startOff, offset(epic.start));
+    epic.endOff   = Math.max(epic.endOff,   offset(epic.end));
+    epic.days     = epic.endOff - epic.startOff + 1;
+    epic.commits  = epic.tasks.reduce(function(a,t){ return a + (t.commits || 0); }, 0);
+    epic.taskDays = epic.tasks.reduce(function(a,t){ return a + spanOf(t); }, 0);
+  });
+
+  var grid    = document.getElementById('ganttGrid');
+  var chart   = document.getElementById('ganttChart');
+  var overlay = document.getElementById('ganttOverlay');
+
+  var MONTHS = ['2026-05-01','2026-06-01','2026-07-01','2026-08-01','2026-09-01'];
+  var MNAME  = { '05':'May', '06':'Jun', '07':'Jul', '08':'Aug', '09':'Sep' };
+
+  function ticksHtml(){
+    var h = '<span class="gantt__tick" data-layer="days" style="left:0">Apr</span>' +
+            '<span class="gantt__gridline" style="left:0"></span>';
+    MONTHS.forEach(function(iso){
+      var l = pct(offset(iso));
+      h += '<span class="gantt__tick" data-layer="days" style="left:' + l + '">' + MNAME[iso.slice(5,7)] + '</span>';
+      h += '<span class="gantt__gridline" style="left:' + l + '"></span>';
+    });
+    return h;
+  }
+
+  function fmt(iso){
+    var p = iso.split('-'), mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return p[2].replace(/^0/,'') + ' ' + mn[+p[1]-1];
+  }
+  function window_(item){
+    return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end);
+  }
+
+  function barHtml(item, cls, id, isEpic){
+    var days = isEpic ? item.days : spanOf(item);
+    var left = isEpic ? item.startOff : offset(item.start);
+    var mod  = '';
+    if(item.flag === 'principal') mod = ' gantt__bar--principal';
+    var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
+    var label = '<span class="gantt__span" data-layer="days">' + days + 'd</span>';
+    return '<div class="gantt__bar ' + cls + mod + '" data-bar="' + id + '"' +
+           (item.flag ? ' data-flag="' + item.flag + '"' : '') +
+           ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
+           item.name + ', ' + window_(item) + ' 2026, ' + days + ' days' + provenance + '">' + label + '</div>';
+  }
+  /* The ten E1 rows carry their windows as locked dictionary keys (sch_e1_m …
+     sch_e10_m). Those keys stay live and translatable rather than being replaced
+     by a computed string that would say the same thing in English only. */
+  function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
+  function summaryHtml(item, isEpic){
+    var days = isEpic ? item.days : spanOf(item);
+    if(!isEpic && isLocked(item)){
+      return '<b data-layer="days" data-i18n="' + item.id + '_m">' + item.window + '</b>';
+    }
+    /* A band states its declared window and its record, never a derived day count:
+       legacy-desops' bar is drawn wider than its window so it can hold the 06 Jul
+       row I supply myself, and a computed figure there would disagree with the
+       window printed beside it. Task rows keep their day count, which is exact. */
+    if(isEpic) return '<b>' + window_(item) + '</b><span class="gantt__days">' + item.meta + '</span>';
+    var h = '<b>' + window_(item) + '</b>' +
+            '<span class="gantt__days" data-layer="days">' + days + ' days</span>';
+    if(item.commits) h += '<span class="gantt__days">' + item.commits + ' commits</span>';
+    return h;
+  }
+
+  var html = '<div class="gantt__axis" aria-hidden="true"><div>Repository</div>' +
+             '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
+             '<div class="gantt__axis-summary">Window</div></div>';
+
+  DATA.epics.forEach(function(epic){
+    html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
+      '<div class="gantt__row">' +
+        '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
+          '<span class="gantt__marker" aria-hidden="true">›</span>' + epic.name + '</button></div>' +
+        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id, true) +
+          '<span data-ms-slot="' + epic.id + '"></span></div>' +
+        '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + window_(epic) + ' 2026, ' + epic.meta + '">' + summaryHtml(epic, true) + '</div>' +
+      '</div>' +
+      '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
+    epic.tasks.forEach(function(t){
+      var noteId = 'gnote-' + t.id;
+      var badge = t.flag === 'principal'
+        ? ' <span class="gantt__badge" data-i18n="gantt_badge_principal">My own account</span>' : '';
+      html += '<li class="gantt__task-row" data-task="' + t.id + '">' +
+        '<span class="gantt__task-label">' +
+          '<span' + (isLocked(t) ? ' data-i18n="' + t.id + '_t"' : '') + '>' + t.name + '</span>' + badge +
+          '<button class="gantt__info" type="button" aria-expanded="false" aria-controls="' + noteId + '" ' +
+            'aria-label="About: ' + t.name + '">i</button>' +
+          '<span class="gantt__note" id="' + noteId + '" role="note" hidden>' + t.info + '</span>' +
+        '</span>' +
+        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id, false) + '</span>' +
+        '<span class="gantt__task-summary">' + summaryHtml(t, false) + '</span></li>';
+    });
+    html += '</ul></div>';
+  });
+  grid.innerHTML = html;
+
+  DATA.milestones.forEach(function(m){
+    var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
+    if(!slot) return;
+    var l = pct(offset(m.at));
+    slot.outerHTML = '<span data-layer="milestones">' +
+      '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="Milestone: ' +
+      m.name + ', ' + window_({start:m.at, end:m.at}) + ' 2026"></span>' +
+      '<span class="gantt__milestone-label" style="left:' + l + '">' + m.name + '</span></span>';
+  });
+
+  /* ---------- Zoom: expand / collapse ---------- */
+  var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+  var toggleAll = document.getElementById('ganttToggleAll');
+  function setExpanded(btn, expanded){
+    btn.setAttribute('aria-expanded', String(expanded));
+    var list = document.getElementById(btn.getAttribute('aria-controls'));
+    if(list) list.hidden = !expanded;
+  }
+  function syncToggleAll(){
+    var allOpen = toggles.every(function(b){ return b.getAttribute('aria-expanded') === 'true'; });
+    toggleAll.setAttribute('aria-expanded', String(allOpen));
+    toggleAll.textContent = allOpen ? (toggleAll.dataset.collapse || 'Collapse all epics')
+                                    : (toggleAll.dataset.expand || 'Expand all epics');
+  }
+  toggles.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
+      syncToggleAll(); drawConnectors();
+    });
+    btn.addEventListener('keydown', function(e){
+      var nx = null;
+      if(e.key === 'ArrowDown') nx = toggles[i+1];
+      if(e.key === 'ArrowUp')   nx = toggles[i-1];
+      if(e.key === 'Home')      nx = toggles[0];
+      if(e.key === 'End')       nx = toggles[toggles.length-1];
+      if(nx){ e.preventDefault(); nx.focus(); }
+    });
+  });
+  toggleAll.addEventListener('click', function(){
+    var open = toggleAll.getAttribute('aria-expanded') !== 'true';
+    toggles.forEach(function(b){ setExpanded(b, open); });
+    syncToggleAll(); drawConnectors();
+  });
+
+  /* ---------- Info affordance ----------
+     Focusable, toggled by click or Enter/Space as any button is, and closed by
+     Escape from either the button or the note itself — so it is dismissible
+     without moving focus. The note is a sibling in normal flow, so a pointer
+     travelling from the button onto it never crosses dead space. */
+  Array.prototype.slice.call(grid.querySelectorAll('.gantt__info')).forEach(function(btn){
+    var note = document.getElementById(btn.getAttribute('aria-controls'));
+    function set(open){ btn.setAttribute('aria-expanded', String(open)); note.hidden = !open; drawConnectors(); }
+    btn.addEventListener('click', function(){ set(btn.getAttribute('aria-expanded') !== 'true'); });
+    btn.addEventListener('mouseenter', function(){ set(true); });
+    btn.parentNode.addEventListener('mouseleave', function(){
+      if(!btn.matches(':focus')) set(false);
+    });
+    btn.addEventListener('keydown', function(e){ if(e.key === 'Escape' || e.key === 'Esc') set(false); });
+    note.addEventListener('keydown', function(e){ if(e.key === 'Escape' || e.key === 'Esc') set(false); });
+  });
+
+  /* ---------- Filters: progressive disclosure ---------- */
+  var FILTERS = { days:true, seq:true, milestones:true };
+  Array.prototype.slice.call(root.querySelectorAll('.gantt__chip')).forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var key = chip.getAttribute('data-filter');
+      FILTERS[key] = !FILTERS[key];
+      chip.setAttribute('aria-pressed', String(FILTERS[key]));
+      applyFilters();
+    });
+  });
+  function applyFilters(){
+    ['days','milestones'].forEach(function(key){
+      Array.prototype.slice.call(root.querySelectorAll('[data-layer="' + key + '"]')).forEach(function(el){
+        el.hidden = !FILTERS[key];
+      });
+    });
+    overlay.classList.toggle('layer-off', !FILTERS.seq);
+    drawConnectors();
+  }
+
+  /* ---------- Sequence connectors ----------
+     Draws the order the three repositories were worked in. Order only: no
+     blocking relationship is claimed, because none can be derived. */
+  function rectOf(id){
+    var el = chart.querySelector('[data-bar="' + id + '"]');
+    if(!el || el.offsetParent === null) return null;
+    return el.getBoundingClientRect();
+  }
+  function drawConnectors(){
+    if(!FILTERS.seq){ overlay.innerHTML = ''; return; }
+    var base = chart.getBoundingClientRect();
+    overlay.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
+    var svg = '';
+    DATA.sequence.forEach(function(edge){
+      var from = rectOf(edge.from), to = rectOf(edge.to);
+      if(!from || !to) return;
+      var x1 = from.right - base.left, y1 = from.top + from.height/2 - base.top;
+      var x2 = to.left  - base.left,   y2 = to.top  + to.height/2  - base.top;
+      var midX = x1 + Math.max(10, (x2 - x1)/2);
+      svg += '<path d="M' + x1 + ' ' + y1 + ' H' + midX + ' V' + y2 + ' H' + (x2 - 5) + '"/>';
+      svg += '<rect class="gantt__dep-head" x="' + (x2-5) + '" y="' + (y2-3) + '" width="5" height="6"/>';
+    });
+    overlay.innerHTML = svg;
+  }
+  window.addEventListener('resize', drawConnectors);
+  drawConnectors();
+
+  /* Keep the toggle-all label translatable: cache both strings up front. */
+  toggleAll.dataset.expand = toggleAll.textContent.trim();
+  toggleAll.dataset.collapse = 'Collapse all epics';
+  document.addEventListener('i18n:changed', function(e){
+    var d = e.detail && e.detail.dict; if(!d) return;
+    if(d.gantt_expand)   toggleAll.dataset.expand   = d.gantt_expand;
+    if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
+    syncToggleAll();
+  });
+})();
 
 /* ============ Count-up (once per element, reduced-motion aware) ============ */
 const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
