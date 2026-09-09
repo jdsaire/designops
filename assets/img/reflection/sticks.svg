@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512" preserveAspectRatio="xMidYMid meet" version="1.0">
+  <title>House of sticks</title>
+  <defs>
+    <radialGradient id="r2-glow" cx="0.5" cy="0.58" r="0.56">
+      <stop offset="0" stop-color="#A100FF" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="r2-beam" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C2A3FF"/>
+      <stop offset="1" stop-color="#A100FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="512" fill="#0A0A0A"/>
+  <ellipse cx="320" cy="300" rx="238" ry="186" fill="url(#r2-glow)"/>
+  <g stroke="url(#r2-beam)" stroke-width="9" stroke-linecap="square" fill="none">
+    <path d="M164 404 L200 148"/>
+    <path d="M476 404 L446 148"/>
+    <path d="M200 148 L446 148"/>
+    <path d="M182 276 L462 276"/>
+  </g>
+  <g stroke="#8C00D9" stroke-width="7" stroke-linecap="square" fill="none" opacity="0.88">
+    <path d="M200 148 L462 276"/>
+    <path d="M446 148 L182 276"/>
+    <path d="M182 276 L476 404"/>
+    <path d="M462 276 L164 404"/>
+  </g>
+  <g fill="#C2A3FF" opacity="0.95">
+    <rect x="194" y="142" width="13" height="13"/>
+    <rect x="440" y="142" width="13" height="13"/>
+    <rect x="176" y="270" width="13" height="13"/>
+    <rect x="456" y="270" width="13" height="13"/>
+  </g>
+  <rect x="120" y="400" width="400" height="6" fill="#A100FF" opacity="0.75"/>
+</svg>

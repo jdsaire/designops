@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512" preserveAspectRatio="xMidYMid meet" version="1.0">
+  <title>House of straw</title>
+  <defs>
+    <radialGradient id="r1-glow" cx="0.5" cy="0.62" r="0.58">
+      <stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#A100FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="r1-straw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C2A3FF"/>
+      <stop offset="1" stop-color="#8C00D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="512" fill="#0A0A0A"/>
+  <ellipse cx="320" cy="330" rx="240" ry="180" fill="url(#r1-glow)"/>
+  <g stroke="url(#r1-straw)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.92">
+    <path d="M150 402 L214 214"/>
+    <path d="M186 402 L232 236"/>
+    <path d="M222 402 L268 198"/>
+    <path d="M262 402 L296 244"/>
+    <path d="M300 402 L342 206"/>
+    <path d="M340 402 L370 250"/>
+    <path d="M380 402 L438 220"/>
+    <path d="M420 402 L452 258"/>
+    <path d="M458 402 L502 212"/>
+  </g>
+  <g stroke="#C2A3FF" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.55">
+    <path d="M132 356 L246 330"/>
+    <path d="M168 300 L318 272"/>
+    <path d="M214 250 L392 232"/>
+  </g>
+  <g stroke="#8C00D9" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.72">
+    <path d="M494 300 L588 250"/>
+    <path d="M508 336 L604 306"/>
+    <path d="M470 262 L556 196"/>
+    <path d="M524 380 L616 366"/>
+  </g>
+  <rect x="96" y="400" width="448" height="5" fill="#A100FF" opacity="0.65"/>
+</svg>

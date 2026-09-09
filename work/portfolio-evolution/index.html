@@ -310,6 +310,33 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .gantt__chart{border-left:0; border-right:0;}
 }
 
+/* ---- Reflection figures (Act 06) — the Home work-card treatment, inherited.
+        assets/css/pages/home/work.css blurs .work-card__bg-img on hover, on
+        :focus-within and on .is-active, revealing the content over it. Same
+        mechanism here, same reduced-motion escape. ---- */
+.house--fig{position:relative; overflow:hidden; min-height:16rem; justify-content:flex-end;}
+.house__bg{position:absolute; inset:0; z-index:0;}
+.house__bg-img{width:100%; height:100%; object-fit:cover; opacity:.5;
+  transition:filter 280ms var(--ease-standard), opacity 280ms var(--ease-standard);}
+.house__body{position:relative; z-index:1;}
+.house__list{list-style:none; display:flex; flex-direction:column; gap:.45rem; margin-top:.75rem;}
+.house__list li{font-size:.9rem; font-weight:var(--fw-light); color:var(--color-text-muted);
+  padding-left:.9rem; position:relative; line-height:1.35;}
+.house__list li::before{content:""; position:absolute; left:0; top:.55em;
+  width:.32rem; height:.32rem; background:var(--color-brand-purple);}
+.house--fig .house__list{opacity:.34; transition:opacity 280ms var(--ease-standard);}
+.house--fig:hover .house__bg-img,
+.house--fig:focus-visible .house__bg-img,
+.house--fig:focus-within .house__bg-img,
+.house--fig.is-active .house__bg-img{filter:blur(6px); opacity:.22;}
+.house--fig:hover .house__list,
+.house--fig:focus-visible .house__list,
+.house--fig:focus-within .house__list,
+.house--fig.is-active .house__list{opacity:1;}
+@media (prefers-reduced-motion:reduce){
+  .house__bg-img,.house--fig .house__list{transition:none;}
+}
+
 /* ---- Category filter (Act 04, Act 06) — chips inherited from the schedule ---- */
 .cardfilter{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-bottom:clamp(1.1rem,2vw,1.5rem);}
 .card[hidden],.evidence[hidden]{display:none !important;}
@@ -902,7 +929,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE REFLECTION — three houses ================= -->
+<!-- ================= ACT 06 · THE REFLECTION — three cards per build ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head io">
@@ -910,26 +937,94 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 06 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What fell, what bent, what stands.</h2>
-      <p class="scan" data-i18n="act5_intro">The story reads clean in hindsight. It wasn't. Here is the journey in three houses, in the order I built them.</p>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What worked, what didn't, what I'd keep.</h2>
+      <p class="scan" data-i18n="act5_intro">The story reads clean in hindsight. It wasn't. Here is each build, honestly.</p>
     </div>
 
-    <div class="cardgrid cardgrid--3 io">
-      <article class="card house">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act5_h1_tag">House of straw</span><span data-i18n="act5_h1_t">What collapsed first</span></h3>
-        <p class="card__x" data-i18n="act5_h1_x">My first prompts were plain text and good intentions. They decayed as builds grew, I chased every flag to closure, and template shortcuts gave me speed without ownership. It blew down — and falling taught me exactly what a foundation is for.</p>
-      </article>
-      <article class="card house">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act5_h2_tag">House of sticks</span><span data-i18n="act5_h2_t">What held, but bent</span></h3>
-        <p class="card__x" data-i18n="act5_h2_x">Iteration cycles ate whole sessions. One bug outlasted my main environment and needed a second tool. My documentation lived scattered across chats before a system existed. The structure held, barely — and every bend showed me where the next wall belonged.</p>
-      </article>
-      <article class="card house">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act5_h3_tag">House of bricks</span><span data-i18n="act5_h3_t">What stands</span></h3>
-        <p class="card__x" data-i18n="act5_h3_x">Versioned dispatches with approval gates. Skills that turn my intent into build-grade prompts. Project knowledge as the order I had historically lacked. Previews before code lands. And the habit of letting best judgment close the small flags — instead of overthinking them.</p>
-      </article>
+    <!-- One-of-n choice between the builds, same pattern as the dashboard, defaulting
+         to the multi-page build. Each build shows three cards with its own closing line. -->
+    <div class="dash__tabs dash__tabs--build io" role="tablist" aria-label="Which build">
+      <button class="dash__tab" role="tab" id="tab-r5sp" aria-selected="false" aria-controls="r5-sp" data-i18n="act5_pick1">Single page</button>
+      <button class="dash__tab" role="tab" id="tab-r5mp" aria-selected="true"  aria-controls="r5-mp" data-i18n="act5_pick2">Multi page</button>
     </div>
 
-    <p class="sequel io" data-i18n="act5_sequel"><strong>The sequel is already dispatched:</strong> per-case pages, the Spanish layer, and the next product rebuild. The houses get neighbors.</p>
+    <div class="dash__build" id="r5-sp" role="tabpanel" aria-labelledby="tab-r5sp" hidden>
+      <!-- The three single-page cards carry a figure each, inheriting the Home work-card
+           treatment: the background blurs on hover, on keyboard focus and on tap, and the
+           content reads over it. Focus plus progressive disclosure, keyboard operable. -->
+      <div class="cardgrid cardgrid--3">
+      <article class="card house house--fig" data-build="single" tabindex="0">
+        <div class="house__bg" aria-hidden="true">
+          <img src="../../assets/img/reflection/straw.svg" alt="" class="house__bg-img">
+        </div>
+        <div class="house__body">
+          <h3 class="card__t"><span class="house__tag" data-i18n="act5_h1_tag">House of straw</span><span data-i18n="act5_h1_t">What collapsed first</span></h3>
+          <ul class="house__list">
+            <li data-i18n="act5_h1_b1">Plain-text prompts, no structure.</li>
+            <li data-i18n="act5_h1_b2">Every session started over.</li>
+            <li data-i18n="act5_h1_b3">Good intentions, no record.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="card house house--fig" data-build="single" tabindex="0">
+        <div class="house__bg" aria-hidden="true">
+          <img src="../../assets/img/reflection/sticks.svg" alt="" class="house__bg-img">
+        </div>
+        <div class="house__body">
+          <h3 class="card__t"><span class="house__tag" data-i18n="act5_h2_tag">House of sticks</span><span data-i18n="act5_h2_t">What held, but bent</span></h3>
+          <ul class="house__list">
+            <li data-i18n="act5_h2_b1">Iteration ate whole sessions.</li>
+            <li data-i18n="act5_h2_b2">One bug outlasted my main environment.</li>
+            <li data-i18n="act5_h2_b3">Fixes held; the process didn't.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="card house house--fig" data-build="single" tabindex="0">
+        <div class="house__bg" aria-hidden="true">
+          <img src="../../assets/img/reflection/bricks.svg" alt="" class="house__bg-img">
+        </div>
+        <div class="house__body">
+          <h3 class="card__t"><span class="house__tag" data-i18n="act5_h3_tag">House of bricks</span><span data-i18n="act5_h3_t">What stands</span></h3>
+          <ul class="house__list">
+            <li data-i18n="act5_h3_b1">Versioned dispatches with approval gates.</li>
+            <li data-i18n="act5_h3_b2">Skills that carry intent between sessions.</li>
+            <li data-i18n="act5_h3_b3">A written scope that can say no.</li>
+          </ul>
+        </div>
+      </article>
+      </div>
+      <p class="sequel" data-i18n="act5_sequel">The sequel is already dispatched: the Spanish layer, the closing audit, and a second brief series before 2026 ends.</p>
+    </div>
+
+    <div class="dash__build" id="r5-mp" role="tabpanel" aria-labelledby="tab-r5mp">
+      <div class="cardgrid cardgrid--3">
+      <article class="card house" data-build="multi">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act5_m1_tag">What I'd redo</span><span data-i18n="act5_m1_t">The migration</span></h3>
+        <ul class="house__list">
+          <li data-i18n="act5_m1_b1">Moved organisms before deciding where they belonged.</li>
+          <li data-i18n="act5_m1_b2">Two sections became stubs; one stayed too heavy.</li>
+          <li data-i18n="act5_m1_b3">Allocation, not architecture, was the mistake.</li>
+        </ul>
+      </article>
+      <article class="card house" data-build="multi">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act5_m2_tag">What bent</span><span data-i18n="act5_m2_t">The chassis</span></h3>
+        <ul class="house__list">
+          <li data-i18n="act5_m2_b1">Eight pages share one navigation layer.</li>
+          <li data-i18n="act5_m2_b2">Two missing tokens broke it on four of them.</li>
+          <li data-i18n="act5_m2_b3">Static checks passed; the browser didn't.</li>
+        </ul>
+      </article>
+      <article class="card house" data-build="multi">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act5_m3_tag">What stands</span><span data-i18n="act5_m3_t">The freeze</span></h3>
+        <ul class="house__list">
+          <li data-i18n="act5_m3_b1">An enumerated scope with exit conditions.</li>
+          <li data-i18n="act5_m3_b2">Improvements logged in one line, not argued.</li>
+          <li data-i18n="act5_m3_b3">The project can end, which it previously could not.</li>
+        </ul>
+      </article>
+      </div>
+      <p class="sequel" data-i18n="act5_m_sequel">The sequel: applications sent, and the parking lot read once — after the fifth one.</p>
+    </div>
 
     <!-- Terminal conversion unit — unchanged -->
     <div class="convert io" id="convert">
@@ -1478,6 +1573,23 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     if(d.gantt_expand)   toggleAll.dataset.expand   = d.gantt_expand;
     if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
     syncToggleAll();
+  });
+})();
+
+/* ============ Act 06 · reflection figures ============
+   Same contract as the Home work cards: the figure blurs and the bullets come
+   forward on hover, on keyboard focus and on tap. CSS carries hover and focus;
+   this only adds the tap toggle and an Escape that clears it, so the card is
+   operable by pointer, touch and keyboard alike. ============ */
+(function reflectionFigures(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.house--fig'));
+  if(!cards.length) return;
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){ card.classList.toggle('is-active'); });
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('is-active'); }
+      if(e.key === 'Escape' || e.key === 'Esc'){ card.classList.remove('is-active'); }
+    });
   });
 })();
 
