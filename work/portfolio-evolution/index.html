@@ -131,6 +131,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .act__head{display:flex; flex-direction:column; gap:1rem; margin-bottom:clamp(2rem,4vw,3.25rem); max-width:60rem;}
 
 /* ---- Contrast card (Act 1) ---- */
+/* .contrast* — retired at S10-A. The Describe/Build block it styled was deleted
+   with act1_c1_*, act1_c2_* and act1_bridge. Rules kept, unreferenced, rather than
+   removed in a copy commit; logged for a later sweep. */
 .contrast{display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--color-border-soft); margin-bottom:clamp(1.75rem,3vw,2.5rem);}
 .contrast__face{padding:clamp(1.4rem,2.5vw,2.25rem); display:flex; flex-direction:column; gap:.7rem;}
 .contrast__face + .contrast__face{border-left:1px solid var(--color-border-soft);}
@@ -307,6 +310,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert__cta:hover{background:var(--color-brand-purple);}
 .temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
   border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
+.convert [hidden]{display:none !important;}
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
@@ -497,20 +501,22 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
     </div>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">A design system I built and govern end to end.</h1>
-    <p class="hero__deck" data-i18n="hero_deck">Discover how I stopped handing off my designs and started building the front-end myself, governed daily.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">From one page to eight, and what that cost.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">How this portfolio became a multi-page site — and what the commit record shows about both builds.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
       <span class="kw" role="listitem" data-i18n="kw1">Web Development</span>
       <span class="kw" role="listitem" data-i18n="kw2">Front-end</span>
       <span class="kw" role="listitem" data-i18n="kw3">DesignOps</span>
+      <span class="kw" role="listitem" data-i18n="kw4">HTML/CSS/JS</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Information Architecture</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
       <!-- canonical: this copy supersedes work_card1_body upstream (pending designops Fable-5 pass) -->
       <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">I refused to stop at the slide. I learned front-end development, put AI under my standard, and shipped the system you are reading, governed daily by me alone.</p>
+        <p data-i18n="hero_rv_txt">I refused to stop at the slide. I learned front-end development, then rebuilt the result as eight pages under a written scope.</p>
       </div>
     </div>
   </div>
@@ -525,28 +531,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Most strategy dies at the slide.</h2>
-    </div>
-
-    <div class="contrast io" role="group" aria-label="The handoff, split in two">
-      <div class="contrast__face">
-        <span class="contrast__tag" data-i18n="act1_c1_tag">Describe</span>
-        <p class="contrast__txt" data-i18n="act1_c1_txt">Someone describes a product —</p>
-      </div>
-      <div class="contrast__face contrast__face--build">
-        <span class="contrast__tag" data-i18n="act1_c2_tag">Build</span>
-        <p class="contrast__txt" data-i18n="act1_c2_txt">— and someone else, months later, builds a lesser version of it.</p>
-      </div>
-      <p class="contrast__bridge" data-i18n="act1_bridge">The distance between the two is <strong>where good work goes to die.</strong></p>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">The page was not the problem. What it could not separate was.</h2>
     </div>
 
     <div class="scanstack io">
-      <p class="scan" data-i18n="act1_scan1"
-         data-full="I spent the first part of my career on the describing side of that handoff — trained in the early 2010s, when building software was simply not part of a strategist's education, and treating code as a specialist's territory I would never enter.">
-         I spent the first part of my career on the describing side of that handoff.</p>
-      <p class="scan" data-i18n="act1_scan2"
-         data-full="Then AI removed the old barriers to building, and there were two honest options: watch it happen to my profession, or take it by the horns. High risk, high reward, no way back. This case documents the second option.">
-         Then AI removed the barriers. Two honest options: watch it happen to my profession — <strong>or take it by the horns.</strong></p>
+      <p class="scan" data-i18n="act1_scan1">One page held everything. Every visitor got the same scroll.</p>
+      <p class="scan" data-i18n="act1_scan2">Eight pages let each case be found on its own — and made the architecture the work.</p>
     </div>
 
     <div class="rolestrip io" aria-label="Role and scope">
@@ -554,29 +544,23 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <span data-i18n="act1_role2"><b>Duration</b> — 2025 to present</span>
       <span data-i18n="act1_role3"><b>Scope</b> — Strategy → design → build → operation</span>
     </div>
-
-    <div class="reveal io" data-act="act1">
-      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a1" data-panel-title="Why a picture can't prove this" data-i18n="act1_rv_btn">Why a picture can't prove this</button>
-      <div class="reveal__body" id="rv-a1" hidden>
-        <p data-i18n="act1_rv_txt">A design file cannot misbehave — it sits still and looks perfect. Only a live product can drift, break, age, or hold. That is why this case's evidence is a running system rather than a picture of one: it is the only format in which governance claims can actually fail, and therefore the only format in which they mean something.</p>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- ================= ACT 02 · THE REINVENTION — 3 stops, the single lateral gesture ================= -->
+<!-- ================= ACT 02 · THE EVOLUTION — 4 stops, the single lateral gesture ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Reinvention</span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Evolution</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">I learned to build — then made building answer to my standard.</h2>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">I learned to build — then made building answer to a standard I wrote down.</h2>
+      <p class="scan" data-i18n="act2_lede">Four stops, from designing pictures of software to building it.</p>
     </div>
 
     <div class="timeline io">
-      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The reinvention, in three stops">
+      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The evolution, in four stops">
         <article class="stop">
           <span class="stop__n" data-i18n="act2_s1_n">Stop 1</span>
           <h3 class="stop__t" data-i18n="act2_s1_t">The picture era</h3>
@@ -589,8 +573,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         </article>
         <article class="stop">
           <span class="stop__n" data-i18n="act2_s3_n">Stop 3</span>
-          <h3 class="stop__t" data-i18n="act2_s3_t">The new method</h3>
-          <p class="stop__x" data-i18n="act2_s3_x">I direct AI to build what I design. AI is my senior developer. The vision and authorship stay mine.</p>
+          <h3 class="stop__t" data-i18n="act2_s3_t">The first portfolio</h3>
+          <p class="stop__x" data-i18n="act2_s3_x">The first portfolio wasn't a portfolio. It was jdigital.pe, a brand site — re-pointed once I knew what I actually had to show.</p>
+        </article>
+        <article class="stop">
+          <span class="stop__n" data-i18n="act2_s4_n">Stop 4</span>
+          <h3 class="stop__t" data-i18n="act2_s4_t">The multi-page build</h3>
+          <p class="stop__x" data-i18n="act2_s4_x">Eight pages replaced the scroll. Each case got its own route, and the architecture became part of what the work shows.</p>
         </article>
       </div>
       <div class="timeline__nav">
@@ -880,21 +869,23 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <!-- Terminal conversion unit — unchanged -->
     <div class="convert io" id="convert">
-      <!-- [TEMPORAL] contact — principal swaps address before publish -->
-      <a class="convert__cta" data-temporal="contact-email" href="mailto:confirm-before-publish@temporal.invalid">
+      <!-- [TEMPORAL] contact — HIDDEN, not deleted. Patch A18 rules that no contact form
+           renders and the address is still pending; the markup stays so a later stage can
+           unhide it in one attribute rather than re-author it. -->
+      <a class="convert__cta" data-temporal="contact-email" href="mailto:confirm-before-publish@temporal.invalid" hidden>
         <span data-i18n="convert_cta">Start a conversation</span>
-      </a><span class="temporal" data-i18n="convert_temporal">Temporal · email pending</span>
+      </a><span class="temporal" data-i18n="convert_temporal" hidden>Temporal · email pending</span>
 
       <div class="convert__next">
-        <p class="convert__nextlabel" data-i18n="convert_next_label">Continue the work</p>
+        <p class="convert__nextlabel" data-i18n="convert_next_label">Similar work</p>
         <div class="cardgrid cardgrid--2">
-          <a class="card card--continuity" href="../../#work" data-nav-link="#work">
-            <h3 class="card__t" data-i18n="convert_c1_t">TUUA Transfer</h3>
-            <p class="card__x" data-i18n="convert_c1_x">A payment platform designed, prototyped, and evaluated — now serving 130,000+ passengers monthly.</p>
+          <a class="card card--continuity" href="../accreditapass/">
+            <h3 class="card__t" data-i18n="convert_c1_t">AccreditaPass</h3>
+            <p class="card__x" data-i18n="convert_c1_x">A media-accreditation platform with a full UX dossier and 545 tests behind it.</p>
           </a>
-          <a class="card card--continuity" href="../../#work" data-nav-link="#work">
-            <h3 class="card__t" data-i18n="convert_c2_t">LimaFly</h3>
-            <p class="card__x" data-i18n="convert_c2_x">The complete passenger journey, prototyped on a scalable system.</p>
+          <a class="card card--continuity" href="../yape-trust-verify-brief/">
+            <h3 class="card__t" data-i18n="convert_c2_t">Verify App</h3>
+            <p class="card__x" data-i18n="convert_c2_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
           </a>
         </div>
       </div>
