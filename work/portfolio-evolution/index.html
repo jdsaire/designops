@@ -174,28 +174,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* ---- Timeline carousel (Act 2 — the single lateral gesture, 3 stops) ---- */
 .timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
-.timeline__track{display:grid; grid-auto-flow:column; grid-auto-columns:calc(100% - var(--peek-width));
-  gap:var(--slide-gap); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem; scrollbar-width:none;}
-.timeline__track::-webkit-scrollbar{display:none;}
-.stop{scroll-snap-align:start; border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2vw,1.8rem);
-  display:flex; flex-direction:column; gap:.75rem; background:var(--color-brand-black); position:relative;}
-.stop::before{content:""; position:absolute; top:0; left:0; width:2.25rem; height:3px; background:var(--color-brand-purple);}
-.stop__n{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; color:var(--color-text-dim); text-transform:uppercase;}
-.stop__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
-.stop__x{font-size:.95rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
-.timeline__nav{display:flex; gap:.6rem; margin-top:1rem;}
-.timeline__btn{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center;
-  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
-.timeline__btn:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
-.timeline__btn:disabled{opacity:.3; cursor:default;}
+/* Three versions are placed, not paged: the track is a plain grid at every width.
+   Below 768px it stacks equally and the numbering carries the progression; above,
+   the cards rise. The nav drove a scroller that no longer exists. */
+.timeline__track{display:grid; grid-auto-flow:row; grid-template-columns:1fr;
+  gap:var(--slide-gap); padding-bottom:0;}
+/* The stagger. Version 1 sits lowest and version 3 highest, so the row reads as a
+   climb rather than as three peers. The step is --slide-gap, the spacing token the
+   track already uses — no new primitive, and deliberately no viewport-relative
+   height: the grid grows by two steps and --act-pad absorbs the difference. */
+@media (min-width:768px){
+  .timeline__track{grid-template-columns:repeat(3,1fr); align-items:start;}
+  .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 2);}
+  .timeline__track > .card:nth-child(2){margin-top:var(--slide-gap);}
+  .timeline__track > .card:nth-child(3){margin-top:0;}
+}
 @media (min-width:1024px){
-  .timeline__track{grid-auto-flow:row; grid-template-columns:repeat(3,1fr); grid-auto-columns:unset; overflow:visible; padding-bottom:0;}
-  .timeline__nav{display:none;}
+  /* A wider canvas takes a longer step: one and a half gaps instead of one. */
+  .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 3);}
+  .timeline__track > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
   .timeline::before{content:""; position:absolute; top:-1.1rem; left:0; right:0; height:1px;
     background:linear-gradient(90deg, var(--color-brand-purple), var(--color-border-soft));}
-}
-@media (min-width:768px) and (max-width:1023px){
-  .timeline__track{grid-auto-columns:calc(50% - var(--slide-gap)/2);}
 }
 
 /* ---- Cards ---- */
@@ -434,8 +433,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
   .io{opacity:1; transform:none;}
   .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
-  .timeline__nav{display:none;}
-  .dcell__bar i{transform:scaleX(var(--v,0));}
+    .dcell__bar i{transform:scaleX(var(--v,0));}
 }
 
 /* ================= MOTION · D7 NATIVE LAYER (progressive enhancement, compositor-only) =================
@@ -677,7 +675,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 02 · THE EVOLUTION — 4 stops, the single lateral gesture ================= -->
+<!-- ================= ACT 02 · THE EVOLUTION — 3 versions on a stepped layout ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
     <div class="act__head io">
@@ -685,36 +683,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Evolution</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">I learned to build — then made building answer to a standard I wrote down.</h2>
-      <p class="scan" data-i18n="act2_lede">Four stops, from designing pictures of software to building it.</p>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Three portfolio versions, all in code.</h2>
+      <p class="scan" data-i18n="act2_lede">Watch the shift from renting a template to writing every line.</p>
     </div>
 
     <div class="timeline io">
-      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The evolution, in four stops">
-        <article class="stop">
-          <span class="stop__n" data-i18n="act2_s1_n">Stop 1</span>
-          <h3 class="stop__t" data-i18n="act2_s1_t">The picture era</h3>
-          <p class="stop__x" data-i18n="act2_s1_x">I designed for years in Canva, Figma, and Framer while builders like Webflow, Wix, and WordPress stayed someone else's system.</p>
+      <div class="timeline__track" id="tlTrack" role="group" aria-label="The evolution, in three versions">
+        <article class="card">
+          <p class="catlabel" data-i18n="act2_s1_n">Version 1</p>
+          <h3 class="card__t" data-i18n="act2_s1_t">The Template era</h3>
+          <p class="card__x" data-i18n="act2_s1_x">My first portfolios ran on Canva and Framer. Both were faster than code, and neither could build what I had already designed in Figma.</p>
         </article>
-        <article class="stop">
-          <span class="stop__n" data-i18n="act2_s2_n">Stop 2</span>
-          <h3 class="stop__t" data-i18n="act2_s2_t">The decision · late 2025</h3>
-          <p class="stop__x" data-i18n="act2_s2_x">I chose to learn front-end development itself, not coding in the abstract, with a Microsoft specialization laying the foundations.</p>
+        <article class="card">
+          <p class="catlabel" data-i18n="act2_s2_n">Version 2</p>
+          <h3 class="card__t" data-i18n="act2_s2_t">The Single-Page</h3>
+          <p class="card__x" data-i18n="act2_s2_x">A landing page to test the concept: beginner front-end, my first AI-orchestrated workflow, and every section inside one scroll.</p>
         </article>
-        <article class="stop">
-          <span class="stop__n" data-i18n="act2_s3_n">Stop 3</span>
-          <h3 class="stop__t" data-i18n="act2_s3_t">The first portfolio</h3>
-          <p class="stop__x" data-i18n="act2_s3_x">The first portfolio wasn't a portfolio. It was jdigital.pe, a brand site — re-pointed once I knew what I actually had to show.</p>
+        <article class="card">
+          <p class="catlabel" data-i18n="act2_s3_n">Version 3</p>
+          <h3 class="card__t" data-i18n="act2_s3_t">The Multi-Page</h3>
+          <p class="card__x" data-i18n="act2_s3_x">My most capable front-end to date: the Microsoft specialization finished, and four case briefs carrying the recent work.</p>
         </article>
-        <article class="stop">
-          <span class="stop__n" data-i18n="act2_s4_n">Stop 4</span>
-          <h3 class="stop__t" data-i18n="act2_s4_t">The multi-page build</h3>
-          <p class="stop__x" data-i18n="act2_s4_x">Eight pages replaced the scroll. Each case got its own route, and the architecture became part of what the work shows.</p>
-        </article>
-      </div>
-      <div class="timeline__nav">
-        <button class="timeline__btn" id="tlPrev" aria-label="Previous stop">←</button>
-        <button class="timeline__btn" id="tlNext" aria-label="Next stop">→</button>
       </div>
     </div>
   </div>
@@ -1211,15 +1200,6 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
   });
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
-
-/* ============ Timeline carousel nav (≤1023) ============ */
-const track = document.getElementById("tlTrack");
-const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
-function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
-prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:"smooth"}));
-next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:"smooth"}));
-function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
-track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
 
 /* ============ Dashboard tabs ============
    Two tiers now: which build, and which level within it. Both are one-of-n, so
