@@ -143,8 +143,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .contrast__bridge{grid-column:1 / -1; border-top:1px solid var(--color-border-soft); padding:1rem clamp(1.4rem,2.5vw,2.25rem);
   font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+/* .scanstack — retired at the iteration. act1_scan1/2 were deleted with no replacement
+   and the problem grid took their place. Rule kept, unreferenced, rather than removed
+   in a copy commit; logged for a later sweep alongside .contrast. */
 .scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
 /* Role strip — three stacked lines */
+/* ---- Problem cards (Act 01) — the Act 04 card chassis, four up.
+        Heading, body and reveal all inherit their type from the components they copy:
+        .card__t and .card__x from the architecture cards, and the --poster modifier
+        from the editorial's short version. The only local rule is the heading colour
+        and the ordinal, which is a counter rather than copy because Act 01 has six
+        characters of headroom against its ceiling. ---- */
+.pcards{counter-reset:pcard;}
+.pcard .pcard__t::before{counter-increment:pcard; content:counter(pcard) ") ";}
+/* No colour rule: .card__t inherits the body's brand-white, which is the point —
+   the heading is Act 04's heading, unmodified except for its ordinal. */
+
+/* ---- Category label — introduced here, reused by the architecture cards (Act 04). ---- */
+/* Light-purple token, not brand purple: brand purple on the card ground measures
+   3.96:1 in dark, below the 4.5:1 floor for text this size. The token flips to
+   #8C00D9 under the light theme, so both clear it — 12.16 and 6.74. */
+.catlabel{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase;
+  color:var(--color-purple-light); margin-bottom:.15rem;}
+
 .rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
   border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-faint);
   margin-bottom:clamp(1.5rem,2.5vw,2rem);}
@@ -567,20 +588,25 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <span class="section__eyebrow-bar"></span>
       <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
     </div>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">From one page to eight, and what that cost.</h1>
-    <p class="hero__deck" data-i18n="hero_deck">How this portfolio became a multi-page site — and what the commit record shows about both builds.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">From template to system.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">Follow one portfolio across three versions, from a template I rented to a system I wrote.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
       <span class="kw" role="listitem" data-i18n="kw1">Web Development</span>
       <span class="kw" role="listitem" data-i18n="kw2">Front-end</span>
       <span class="kw" role="listitem" data-i18n="kw3">DesignOps</span>
       <span class="kw" role="listitem" data-i18n="kw4">HTML/CSS/JS</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Information Architecture</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Design Systems</span>
+    </div>
+    <div class="rolestrip" aria-label="Role and scope">
+      <span data-i18n="act1_role1"><b>Role</b> — Sole owner</span>
+      <span data-i18n="act1_role2"><b>Duration</b> — 2025 to present</span>
+      <span data-i18n="act1_role3"><b>Scope</b> — Strategy → design → build → operation</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
       <!-- canonical: this copy supersedes work_card1_body upstream (pending designops Fable-5 pass) -->
       <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">I refused to stop at the slide. I learned front-end development, then rebuilt the result as eight pages under a written scope.</p>
+        <p data-i18n="hero_rv_txt">I began with templates I could not bend, and ended by building it myself — design, code and the case for the work now sit in one asset I control end to end.</p>
       </div>
     </div>
   </div>
@@ -595,19 +621,59 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">The page was not the problem. What it could not separate was.</h2>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Qualified on paper, unfamiliar in the room.</h2>
+      <p class="scan" data-i18n="act1_lede">Start with the problem: good work nobody can place.</p>
     </div>
 
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act1_scan1">One page held everything. Every visitor got the same scroll.</p>
-      <p class="scan" data-i18n="act1_scan2">Eight pages let each case be found on its own — and made the architecture the work.</p>
+    <!-- Four cards on the Act 04 chassis. The context is the card body; the implication
+         sits behind the reveal, so the two are told apart by structure rather than by
+         a reader noticing which column they are in. data-act groups them, so opening
+         one closes the others. The ordinals are a CSS counter, not copy: Act 01 has six
+         characters of headroom and a numbered string would spend more than that. -->
+    <div class="cardgrid cardgrid--2 pcards io">
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g1_cat">The reading</h3>
+        <p class="card__x" data-i18n="act1_g1_l">I apply for roles whose posts list what a candidate must have. No post lists what a candidate is expected to sound like.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c1" data-panel-title="The reading" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c1" hidden>
+            <p data-i18n="act1_g1_r">Meeting every requirement is what gets an application considered; being understood is what gets it believed, and only the first is ever written down.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g2_cat">The credential</h3>
+        <p class="card__x" data-i18n="act1_g2_l">My own credentials are an MBA, a MicroMasters and a Microsoft specialization. Not one of them showed what I can actually build.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c2" data-panel-title="The credential" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c2" hidden>
+            <p data-i18n="act1_g2_r">Research estimates work sample predicts job performance at about 3× more than education. A running page shows what I did with the diplomas</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g3_cat">The claim</h3>
+        <p class="card__x" data-i18n="act1_g3_l">Three in four hiring teams say they receive AI-written applications – turning openings into odysseys for qualified candidates.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c3" data-panel-title="The claim" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c3" hidden>
+            <p data-i18n="act1_g3_r">65% of hiring managers say skills are harder to verify as anybody can generate a fluent claim in seconds. Every figure here is backed up in public commit history.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g4_cat">The market</h3>
+        <p class="card__x" data-i18n="act1_g4_l">Employment in Lima, Peru has grown 22% since 2019, while the share of it held by workers under 25 has fallen by about a third.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c4" data-panel-title="The market" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c4" hidden>
+            <p data-i18n="act1_g4_r">Instead of contracting, local market is moving toward work that cannot be automated. That is the direction this website is built toward.</p>
+          </div>
+        </div>
+      </article>
     </div>
 
-    <div class="rolestrip io" aria-label="Role and scope">
-      <span data-i18n="act1_role1"><b>Role</b> — Sole owner</span>
-      <span data-i18n="act1_role2"><b>Duration</b> — 2025 to present</span>
-      <span data-i18n="act1_role3"><b>Scope</b> — Strategy → design → build → operation</span>
-    </div>
+    <p class="sequel io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026; INEI Encuesta Permanente de Empleo Nacional, May–July 2026.</p>
   </div>
 </section>
 
