@@ -313,33 +313,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .gantt__chart{border-left:0; border-right:0;}
 }
 
-/* ---- Reflection figures (Act 06) — the Home work-card treatment, inherited.
-        assets/css/pages/home/work.css blurs .work-card__bg-img on hover, on
-        :focus-within and on .is-active, revealing the content over it. Same
-        mechanism here, same reduced-motion escape. ---- */
-.house--fig{position:relative; overflow:hidden; min-height:16rem; justify-content:flex-end;}
-.house__bg{position:absolute; inset:0; z-index:0;}
-.house__bg-img{width:100%; height:100%; object-fit:cover; opacity:.5;
-  transition:filter 280ms var(--ease-standard), opacity 280ms var(--ease-standard);}
-.house__body{position:relative; z-index:1;}
-.house__list{list-style:none; display:flex; flex-direction:column; gap:.45rem; margin-top:.75rem;}
-.house__list li{font-size:.9rem; font-weight:var(--fw-light); color:var(--color-text-muted);
-  padding-left:.9rem; position:relative; line-height:1.35;}
-.house__list li::before{content:""; position:absolute; left:0; top:.55em;
-  width:.32rem; height:.32rem; background:var(--color-brand-purple);}
-.house--fig .house__list{opacity:.34; transition:opacity 280ms var(--ease-standard);}
-.house--fig:hover .house__bg-img,
-.house--fig:focus-visible .house__bg-img,
-.house--fig:focus-within .house__bg-img,
-.house--fig.is-active .house__bg-img{filter:blur(6px); opacity:.22;}
-.house--fig:hover .house__list,
-.house--fig:focus-visible .house__list,
-.house--fig:focus-within .house__list,
-.house--fig.is-active .house__list{opacity:1;}
-@media (prefers-reduced-motion:reduce){
-  .house__bg-img,.house--fig .house__list{transition:none;}
-}
-
 /* ---- Category filter (Act 04, Act 06) — chips inherited from the schedule ---- */
 .cardfilter{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-bottom:clamp(1.1rem,2vw,1.5rem);}
 .card[hidden],.evidence[hidden]{display:none !important;}
@@ -942,14 +915,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <div class="dash__build" id="r5-sp" role="tabpanel" aria-labelledby="tab-r5sp" hidden>
-      <!-- The three single-page cards carry a figure each, inheriting the Home work-card
-           treatment: the background blurs on hover, on keyboard focus and on tap, and the
-           content reads over it. Focus plus progressive disclosure, keyboard operable. -->
       <div class="cardgrid cardgrid--3">
-      <article class="card house house--fig" data-build="single" tabindex="0">
-        <div class="house__bg" aria-hidden="true">
-          <img src="../../assets/img/reflection/straw.svg" alt="" class="house__bg-img">
-        </div>
+      <article class="card house" data-build="single">
         <div class="house__body">
           <h3 class="card__t"><span class="house__tag" data-i18n="act5_h1_tag">House of straw</span><span data-i18n="act5_h1_t">What collapsed first</span></h3>
           <ul class="house__list">
@@ -959,10 +926,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           </ul>
         </div>
       </article>
-      <article class="card house house--fig" data-build="single" tabindex="0">
-        <div class="house__bg" aria-hidden="true">
-          <img src="../../assets/img/reflection/sticks.svg" alt="" class="house__bg-img">
-        </div>
+      <article class="card house" data-build="single">
         <div class="house__body">
           <h3 class="card__t"><span class="house__tag" data-i18n="act5_h2_tag">House of sticks</span><span data-i18n="act5_h2_t">What held, but bent</span></h3>
           <ul class="house__list">
@@ -972,10 +936,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           </ul>
         </div>
       </article>
-      <article class="card house house--fig" data-build="single" tabindex="0">
-        <div class="house__bg" aria-hidden="true">
-          <img src="../../assets/img/reflection/bricks.svg" alt="" class="house__bg-img">
-        </div>
+      <article class="card house" data-build="single">
         <div class="house__body">
           <h3 class="card__t"><span class="house__tag" data-i18n="act5_h3_tag">House of bricks</span><span data-i18n="act5_h3_t">What stands</span></h3>
           <ul class="house__list">
@@ -1566,23 +1527,6 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     if(d.gantt_expand)   toggleAll.dataset.expand   = d.gantt_expand;
     if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
     syncToggleAll();
-  });
-})();
-
-/* ============ Act 06 · reflection figures ============
-   Same contract as the Home work cards: the figure blurs and the bullets come
-   forward on hover, on keyboard focus and on tap. CSS carries hover and focus;
-   this only adds the tap toggle and an Escape that clears it, so the card is
-   operable by pointer, touch and keyboard alike. ============ */
-(function reflectionFigures(){
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.house--fig'));
-  if(!cards.length) return;
-  cards.forEach(function(card){
-    card.addEventListener('click', function(){ card.classList.toggle('is-active'); });
-    card.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('is-active'); }
-      if(e.key === 'Escape' || e.key === 'Esc'){ card.classList.remove('is-active'); }
-    });
   });
 })();
 
