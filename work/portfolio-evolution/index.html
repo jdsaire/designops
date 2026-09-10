@@ -466,16 +466,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 @keyframes sig-draw{ from{transform:scaleX(0); opacity:.35;} to{transform:scaleX(1); opacity:1;} }
 
-/* S6 — depth: subtle preserve-3d lift on the Architecture (#act3) evidence cards, hover/focus only */
-@media (prefers-reduced-motion:no-preference){
-  @supports (transform-style:preserve-3d){
-    #act3 .cardgrid--2{ perspective:1100px; }
-    #act3 .card{ transform-style:preserve-3d; transition:transform 260ms var(--ease-standard), border-color var(--duration-ui) var(--ease-standard); }
-    #act3 .card__t{ transition:transform 260ms var(--ease-standard); }
-    #act3 .card:hover, #act3 .card:focus-within{ transform:rotateX(2deg) translateZ(8px); }
-    #act3 .card:hover .card__t, #act3 .card:focus-within .card__t{ transform:translateZ(14px); }
-  }
-}
 
 /* FOOTER HIDDEN — pending redesign; rules above retained for restoration. */
 .footer{display:none;}
