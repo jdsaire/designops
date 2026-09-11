@@ -233,4 +233,7 @@ would change every reveal on the site. **Flagged for S11 rather than touched.**
 every condition, so manual merge is the only outcome. The pull request is open and unmerged; the
 principal merges.
 
-**Pull request:** PR_URL_PLACEHOLDER
+**Pull request:** https://github.com/jdsaire/designops/pull/26 — open, unmerged.
+
+The previous run's report closed by asserting a pull request that was never opened. This one prints
+the URL so the claim is checkable rather than taken on trust, which was the point of N7.
