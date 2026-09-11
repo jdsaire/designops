@@ -251,13 +251,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         are free to leave gaps — the two dormant stretches are the point. ---- */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
-.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
-.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
-.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
-  color:var(--color-text-muted); background:none; border:1px solid var(--g-border);
-  padding:.45rem .85rem; min-height:44px; cursor:pointer; transition:color 160ms var(--ease-standard), border-color 160ms var(--ease-standard);}
-.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
-.gantt__chip[aria-pressed="true"]::before{content:"\2713\A0"; color:var(--color-brand-purple);}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
 .gantt__grid{min-width:820px;}
 .gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
@@ -308,7 +301,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 
 /* ---- Category filter (Act 04, Act 06) — chips inherited from the schedule ---- */
-.cardfilter{display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-bottom:clamp(1.1rem,2vw,1.5rem);}
 .card[hidden],.evidence[hidden]{display:none !important;}
 
 /* ---- Evidence bar (Act 3) ---- */
@@ -340,6 +332,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dcell--pending .dcell__pending{font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
   font-weight:var(--fw-semibold); color:var(--color-text-dim); border-left:2px solid var(--color-brand-purple);
   padding-left:.5rem; margin-top:.15rem;}
+/* ---- Paired rows: one metric per row, one value slot per build. Both builds are
+        legible without operating anything, which a tablist could not offer. ---- */
+.drows{display:flex; flex-direction:column;}
+.drow{display:grid; grid-template-columns:minmax(9rem,1.4fr) 1fr 1fr; gap:clamp(.75rem,2vw,1.75rem);
+  align-items:baseline; padding:clamp(.8rem,1.5vw,1.1rem) 0;
+  border-bottom:1px solid var(--color-border-faint);}
+.drow--head{padding-top:0; border-bottom:1px solid var(--color-border-soft);}
+.drow--head .drow__v{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.18em;
+  text-transform:uppercase; color:var(--color-text-dim);}
+.drow__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--color-text-muted);}
+.drow__v{display:flex; flex-direction:column; gap:.25rem;}
+.drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem);}
+/* A metric that exists for one build only prints a dash rather than a zero. */
+.drow__v--none{color:var(--color-text-dim); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-light);}
+@media (max-width:767px){
+  .drow{grid-template-columns:1fr 1fr; gap:.35rem .75rem;}
+  .drow__l{grid-column:1 / -1;}
+  .drow--head .drow__l{display:none;}
+}
+
 .dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
 .dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
 .dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
@@ -709,7 +722,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 04 · THE ARCHITECTURE — 6 cards behind a category filter ================= -->
+<!-- ================= ACT 04 · THE ARCHITECTURE — 6 numbered cards, each labelled by category ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head io">
@@ -717,81 +730,75 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Two architectures, one standard. The differences are decisions, not accidents.</h2>
-      <p class="scan" data-i18n="act3_lede">Some decisions carried across both builds. Others belong to one. Filter to see which.</p>
-    </div>
-
-    <!-- Multi-select category filter. Inherits the .gantt__chip mechanism: a real
-         button carrying aria-pressed, keyboard operable, no custom widget role.
-         All three start pressed, so all six cards are shown by default. -->
-    <div class="cardfilter io" role="group" aria-label="Filter architecture decisions by build">
-      <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
-      <button class="gantt__chip" type="button" data-cat-filter="foundational" aria-pressed="true" data-i18n="act3_f1">Foundational</button>
-      <button class="gantt__chip" type="button" data-cat-filter="single" aria-pressed="true" data-i18n="act3_f2">Single-page</button>
-      <button class="gantt__chip" type="button" data-cat-filter="multi" aria-pressed="true" data-i18n="act3_f3">Multi-page</button>
-      <p class="visually-hidden" id="act3FilterStatus" role="status" aria-live="polite"></p>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Two architectures, six decisions.</h2>
+      <p class="scan" data-i18n="act3_lede">Compare what carried across both builds vs what's unique to each one.</p>
     </div>
 
     <div class="cardgrid cardgrid--2 io" id="act3Cards">
-      <article class="card" data-cat="foundational">
-        <h3 class="card__t" data-i18n="act3_c1_t">Vanilla HTML/CSS/JavaScript</h3>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f1">Foundational</p>
+        <h3 class="card__t" data-i18n="act3_c1_t">1) Vanilla HTML/CSS/JavaScript</h3>
         <p class="card__x" data-i18n="act3_c1_x">No framework, no build step, no dependency I cannot read end to end.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Vanilla HTML/CSS/JavaScript" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body" id="rv-a3c1" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c1" hidden>
             <p data-i18n="act3_c1_rv_txt">Nothing to migrate when a major version lands. No security-patch treadmill. A payload small enough to stay fast on a mid-range phone over Peruvian mobile data — which is what most recruiters will use to open it.</p>
           </div>
         </div>
       </article>
-      <article class="card" data-cat="foundational">
-        <h3 class="card__t" data-i18n="act3_c2_t">Accessibility &amp; responsiveness</h3>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f1">Foundational</p>
+        <h3 class="card__t" data-i18n="act3_c2_t">2) Accessibility &amp; responsiveness</h3>
         <p class="card__x" data-i18n="act3_c2_x">WCAG AA held as a build gate, usable with screen readers and keyboards.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Accessibility and responsiveness" data-i18n="act3_c2_rv_btn">MADE FOR EVERYONE</button>
-          <div class="reveal__body" id="rv-a3c2" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c2" hidden>
             <p data-i18n="act3_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
             <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up. Those are the three the stylesheets actually declare, not a convention borrowed from a framework.</p>
           </div>
         </div>
       </article>
-      <article class="card" data-cat="single">
-        <h3 class="card__t" data-i18n="act3_c3_t">Grid and layout, one page</h3>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f2">Single-page</p>
+        <h3 class="card__t" data-i18n="act3_c3_t">3) Grid and layout, one page</h3>
         <p class="card__x" data-i18n="act3_c3_x">Ten sections, one type scale, Flexbox and Grid throughout.</p>
         <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Grid and layout, one page" data-i18n="act3_c3_rv_btn">INFORMATION ARCHITECTURE — EXTENDED</button>
-          <div class="reveal__body" id="rv-a3c3" hidden>
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Grid and layout, one page" data-i18n="act3_c3_rv_btn">MORE ON INFORMATION ARCHITECTURE</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c3" hidden>
             <p data-i18n="act3_c3_rv_txt1">The ontology: ten reusable organisms, each owning one job — navigation, hero, work cards, capability carousel, contact.</p>
-            <p data-i18n="act3_c3_rv_txt2">The taxonomy: design rules declared once at the root as custom properties, inherited everywhere, overridden nowhere.</p>
             <p data-i18n="act3_c3_rv_txt3">The choreography: one scroll, one order, every visitor served the same sequence whether or not it was the one they came for.</p>
           </div>
         </div>
       </article>
-      <article class="card" data-cat="single">
-        <h3 class="card__t" data-i18n="act3_c4_t">Orchestration in Claude</h3>
-        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me. Workflows orchestrated with Claude and Claude Code, early 2026.</p>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f2">Single-page</p>
+        <h3 class="card__t" data-i18n="act3_c4_t">4) Orchestration in Claude</h3>
+        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Orchestration in Claude" data-i18n="act3_c4_rv_btn">HOW CLAUDE WAS USED</button>
-          <div class="reveal__body" id="rv-a3c4" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c4" hidden>
             <p data-i18n="act3_c4_rv_txt1">Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.</p>
           </div>
         </div>
       </article>
-      <article class="card" data-cat="multi">
-        <h3 class="card__t" data-i18n="act3_c5_t">Grid and layout, eight pages</h3>
-        <p class="card__x" data-i18n="act3_c5_x">The same type scale and token layer, now carried across a shared page chassis.</p>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f3">Multi-page</p>
+        <h3 class="card__t" data-i18n="act3_c5_t">5) Grid and layout, eight pages</h3>
+        <p class="card__x" data-i18n="act3_c5_x">The same token layer, now carried across a shared chassis.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c5" data-panel-title="Grid and layout, eight pages" data-i18n="act3_c5_rv_btn">WHAT THE SPLIT BOUGHT</button>
-          <div class="reveal__body" id="rv-a3c5" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c5" hidden>
             <p data-i18n="act3_c5_rv_txt">Each case gets its own route, its own dictionary and its own entry point, so a recruiter can be sent to one page rather than to a scroll position. The cost is a chassis that must stay identical across eight pages — and one defect in it is eight defects.</p>
           </div>
         </div>
       </article>
-      <article class="card" data-cat="multi">
-        <h3 class="card__t" data-i18n="act3_c6_t">Orchestration under a scope freeze</h3>
-        <p class="card__x" data-i18n="act3_c6_x">The second build runs against a signed, enumerated scope with exit conditions.</p>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f3">Multi-page</p>
+        <h3 class="card__t" data-i18n="act3_c6_t">6) Orchestration under a scope freeze</h3>
+        <p class="card__x" data-i18n="act3_c6_x">This build runs under a locked scope against overthinking.</p>
         <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act3_c6_rv_btn">HOW THE SECOND BUILD IS GOVERNED</button>
-          <div class="reveal__body" id="rv-a3c6" hidden>
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act3_c6_rv_btn">HOW GOVERNANCE IS APPLIED</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c6" hidden>
             <p data-i18n="act3_c6_rv_txt">Every stage is dispatched as a written prompt with preflight checks, approval gates and a completion report. Improvements that fall outside the list are logged in one line and not built. The discipline is the deliverable as much as the site is.</p>
           </div>
         </div>
@@ -811,7 +818,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — one column per build ================= -->
+<!-- ================= ACT 05 · THE DASHBOARD — paired values per metric ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
     <div class="act__head io">
@@ -819,92 +826,98 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 05 · The Dashboard</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Two builds, one measure each. The gap is the point.</h2>
-      <p class="scan" data-i18n="act4_insight">Thirty-two active build-days on the single page. Seventeen on the multi-page, after finishing the Microsoft Front-End certificate. Same person, roughly half the days.</p>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Both builds, side by side.</h2>
+      <p class="scan" data-i18n="act4_lede">Read every measure of both builds in one place, single page against multi.</p>
     </div>
 
-    <!-- One-of-n choice between the two builds. Mutually exclusive, so a tablist —
-         the same role the level tabs below already use and which is already
-         keyboard-wired. Defaults to the multi-page build, which is this page's
-         subject. Each build panel owns its own level tablist so no id collides. -->
+    <p class="scan io" data-i18n="act4_insight">Thirty-two active build-days on the first build. Seventeen on the second, after the Microsoft Front-End certificate. Same person, roughly half the days.</p>
+
+    <!-- Paired values per metric. Both builds sit on one surface with no control to
+         operate: a tablist made each column a click away from the other, which is the
+         opposite of a comparison. A dash means the metric exists for one build only. -->
     <div class="dash io" id="dash">
-      <div class="dash__tabs dash__tabs--build" role="tablist" aria-label="Which build">
-        <button class="dash__tab" role="tab" id="tab-sp" aria-selected="false" aria-controls="build-sp" data-i18n="dash_pick1">Single page</button>
-        <button class="dash__tab" role="tab" id="tab-mp" aria-selected="true"  aria-controls="build-mp" data-i18n="dash_pick2">Multi page</button>
-      </div>
-
-      <div class="dash__build" id="build-sp" role="tabpanel" aria-labelledby="tab-sp" hidden>
       <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
-        <button class="dash__tab" role="tab" id="tab-sp-m" aria-selected="true"  aria-controls="dp-sp-m" data-i18n="dash_tab1">Measured</button>
-        <button class="dash__tab" role="tab" id="tab-sp-d" aria-selected="false" aria-controls="dp-sp-d" data-i18n="dash_tab2">Derived</button>
-        <button class="dash__tab" role="tab" id="tab-sp-r" aria-selected="false" aria-controls="dp-sp-r" data-i18n="dash_tab3">The read</button>
+        <button class="dash__tab" role="tab" id="tab-m" aria-selected="true"  aria-controls="dp-m" data-i18n="dash_tab1">Measured</button>
+        <button class="dash__tab" role="tab" id="tab-d" aria-selected="false" aria-controls="dp-d" data-i18n="dash_tab2">Derived</button>
+        <button class="dash__tab" role="tab" id="tab-r" aria-selected="false" aria-controls="dp-r" data-i18n="dash_tab3">Insights</button>
       </div>
 
-      <div class="dash__panel" id="dp-sp-m" role="tabpanel" aria-labelledby="tab-sp-m">
-        <div class="dash__grid">
-          <div class="dcell"><span class="dcell__n" data-count="10">10</span><span class="dcell__l" data-i18n="dash_m1">Building blocks</span></div>
-          <div class="dcell dcell--pending"><span class="dcell__l" data-i18n="dash_m2">Dictionary keys</span><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="2">2</span><span class="dcell__l" data-i18n="dash_m3">Languages engineered</span></div>
-          <div class="dcell"><span class="dcell__n" data-i18n="dash_m4_n">AA</span><span class="dcell__l" data-i18n="dash_m4">Accessibility standard</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="0">0</span><span class="dcell__l" data-i18n="dash_m5">Frameworks / dependencies</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="286">286</span><span class="dcell__l" data-i18n="dash_m6">Commits</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="52">52</span><span class="dcell__l" data-i18n="dash_m7">Pull requests</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="73">73</span><span class="dcell__l" data-i18n="dash_m8">Days of public history</span></div>
+      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
+        <div class="drows">
+          <div class="drow drow--head" aria-hidden="true">
+            <div class="drow__l"></div><div class="drow__v">Single page</div><div class="drow__v">Multi page</div>
+          </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m6">Commits</div>
+        <div class="drow__v"><span class="dcell__n" data-count="286">286</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="103">103</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m7">Pull requests</div>
+        <div class="drow__v"><span class="dcell__n" data-count="52">52</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="20">20</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m8">Days of public history</div>
+        <div class="drow__v"><span class="dcell__n" data-count="71">71</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="60">60</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m1">Building blocks</div>
+        <div class="drow__v"><span class="dcell__n" data-count="10">10</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="8">8</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m3">Languages engineered</div>
+        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m2">Dictionary keys</div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+      </div>
         </div>
       </div>
 
-      <div class="dash__panel" id="dp-sp-d" role="tabpanel" aria-labelledby="tab-sp-d" hidden>
-        <div class="dash__grid dash__grid--derived">
-          <div class="dcell"><span class="dcell__n" data-count="3.9">3.9</span><span class="dcell__l" data-i18n="dash_d1">Commits per day, sustained</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 73 days</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.65"></i></span></div>
-          <div class="dcell"><span class="dcell__n" data-count="5.0">5.0</span><span class="dcell__l" data-i18n="dash_d2">Pull requests per week</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.4 weeks</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.78"></i></span></div>
-          <div class="dcell"><span class="dcell__n" data-count="5.5">5.5</span><span class="dcell__l" data-i18n="dash_d3">Commits per review gate</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.97"></i></span></div>
-          <div class="dcell"><span class="dcell__n" data-count="52">52</span><span class="dcell__l" data-i18n="dash_d4">Review gates in 73 days</span><span class="dcell__p" data-i18n="dash_d4_p">A gate roughly every 6 commits</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.67"></i></span></div>
+      <div class="dash__panel" id="dp-d" role="tabpanel" aria-labelledby="tab-d" hidden>
+        <div class="drows">
+          <div class="drow drow--head" aria-hidden="true">
+            <div class="drow__l"></div><div class="drow__v">Single page</div><div class="drow__v">Multi page</div>
+          </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d1">Commits per day, sustained</div>
+        <div class="drow__v"><span class="dcell__n" data-count="4.0">4.0</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 71 days</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="6.1">6.1</span><span class="dcell__p" data-i18n="dash2_d1_p">103 ÷ 17</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d2">Pull requests per week</div>
+        <div class="drow__v"><span class="dcell__n" data-count="5.1">5.1</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.1 weeks</span></div>
+        <div class="drow__v drow__v--none" aria-label="not measured for this build">—</div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d3">Commits per review gate</div>
+        <div class="drow__v"><span class="dcell__n" data-count="5.5">5.5</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="5.2">5.2</span><span class="dcell__p" data-i18n="dash2_d3_p">103 ÷ 20</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d4">Review gates in 71 days</div>
+        <div class="drow__v"><span class="dcell__n" data-count="52">52</span><span class="dcell__p" data-i18n="dash_d4_p">A gate roughly every 6 commits</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="20">20</span></div>
+      </div>
         </div>
       </div>
 
-      <div class="dash__panel" id="dp-sp-r" role="tabpanel" aria-labelledby="tab-sp-r" hidden>
+      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
         <div class="dash__read">
           <p class="dash__readline" data-i18n="dash_r1">The signal isn't the volume. It's the ratio. 286 commits mean momentum; 52 pull requests mean the momentum was reviewed.</p>
+          <p class="dash__readline" data-i18n="dash2_r1">Half the days, and a defect inventory instead of a fresh start. The second build spends its time differently: less authoring, more governing.</p>
           <p class="dash__readsub" data-i18n="dash_r2">Beneath the numbers sits a qualitative floor: the build meets a graded professional rubric for semantic structure, accessibility, styling discipline, interactivity, and responsive behavior.</p>
           <p class="dash__reco" data-i18n="dash_r3">What transfers to your team isn't my code. It's this operating habit.</p>
         </div>
       </div>
 
-      <p class="dash__foot" data-i18n="dash_foot">Method: public commit history of github.com/jdsaire/jdigital and github.com/jdsaire/legacy-desops, summed across both, 24 Apr – 06 Jul 2026 (73 days). Rates are simple averages — 286÷73, 52÷10.4, 286÷52.</p>
-      </div>
-
-      <div class="dash__build" id="build-mp" role="tabpanel" aria-labelledby="tab-mp">
-      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
-        <button class="dash__tab" role="tab" id="tab-mp-m" aria-selected="true"  aria-controls="dp-mp-m" data-i18n="dash_tab1">Measured</button>
-        <button class="dash__tab" role="tab" id="tab-mp-d" aria-selected="false" aria-controls="dp-mp-d" data-i18n="dash_tab2">Derived</button>
-        <button class="dash__tab" role="tab" id="tab-mp-r" aria-selected="false" aria-controls="dp-mp-r" data-i18n="dash_tab3">The read</button>
-      </div>
-
-      <div class="dash__panel" id="dp-mp-m" role="tabpanel" aria-labelledby="tab-mp-m">
-        <div class="dash__grid">
-          <div class="dcell"><span class="dcell__n" data-count="8">8</span><span class="dcell__l" data-i18n="dash_m1">Building blocks</span></div>
-          <div class="dcell dcell--pending"><span class="dcell__l" data-i18n="dash_m2">Dictionary keys</span><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="103">103</span><span class="dcell__l" data-i18n="dash_m6">Commits</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="20">20</span><span class="dcell__l" data-i18n="dash_m7">Pull requests</span></div>
-          <div class="dcell"><span class="dcell__n" data-count="60">60</span><span class="dcell__l" data-i18n="dash_m8">Days of public history</span></div>
-        </div>
-      </div>
-
-      <div class="dash__panel" id="dp-mp-d" role="tabpanel" aria-labelledby="tab-mp-d" hidden>
-        <div class="dash__grid dash__grid--derived">
-          <div class="dcell"><span class="dcell__n" data-count="6.1">6.1</span><span class="dcell__l" data-i18n="dash2_d1">Commits per active day</span><span class="dcell__p" data-i18n="dash2_d1_p">103 ÷ 17</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.61"></i></span></div>
-          <div class="dcell"><span class="dcell__n" data-count="5.2">5.2</span><span class="dcell__l" data-i18n="dash2_d3">Commits per gate</span><span class="dcell__p" data-i18n="dash2_d3_p">103 ÷ 20</span><span class="dcell__bar" aria-hidden="true"><i style="--v:.52"></i></span></div>
-        </div>
-      </div>
-
-      <div class="dash__panel" id="dp-mp-r" role="tabpanel" aria-labelledby="tab-mp-r" hidden>
-        <div class="dash__read">
-          <p class="dash__readline" data-i18n="dash2_r1">Half the days, and a defect inventory instead of a fresh start. The second build spends its time differently: less authoring, more governing.</p>
-        </div>
-      </div>
-
-      <p class="dash__foot" data-i18n="dash2_foot">Method: public commit history of github.com/jdsaire/designops, 10 Jul – 08 Sep 2026. Anything dated after 06 Sep is forecast and badged as such.</p>
-      </div>
+      <p class="dash__foot" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days); designops, 10 Jul – 08 Sep 2026 (60 days). Rates are simple averages; anything after 06 Sep is forecast.</p>
     </div>
   </div>
 </section>
@@ -1397,38 +1410,6 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       if(nx){ e.preventDefault(); nx.focus(); }
     });
   });
-})();
-
-/* ============ Act 04 · category filter ============
-   Multi-select: each chip owns one category and every chip starts pressed, so
-   all six cards are shown until the reader narrows. Turning the last chip off
-   would blank the section, so the last pressed chip cannot be unpressed — the
-   filter narrows the set, it never empties it. ============ */
-(function act3Filter(){
-  var grid = document.getElementById('act3Cards');
-  if(!grid) return;
-  var chips  = Array.prototype.slice.call(document.querySelectorAll('[data-cat-filter]'));
-  var cards  = Array.prototype.slice.call(grid.querySelectorAll('.card'));
-  var status = document.getElementById('act3FilterStatus');
-  function on(c){ return c.getAttribute('aria-pressed') === 'true'; }
-  function apply(){
-    var live = chips.filter(on).map(function(c){ return c.getAttribute('data-cat-filter'); });
-    var shown = 0;
-    cards.forEach(function(card){
-      var vis = live.indexOf(card.getAttribute('data-cat')) !== -1;
-      card.hidden = !vis;
-      if(vis) shown++;
-    });
-    if(status) status.textContent = shown + ' of ' + cards.length + ' decisions shown.';
-  }
-  chips.forEach(function(chip){
-    chip.addEventListener('click', function(){
-      if(on(chip) && chips.filter(on).length === 1) return;   /* never empty the set */
-      chip.setAttribute('aria-pressed', String(!on(chip)));
-      apply();
-    });
-  });
-  apply();
 })();
 
 /* ============ Count-up (once per element, reduced-motion aware) ============ */
