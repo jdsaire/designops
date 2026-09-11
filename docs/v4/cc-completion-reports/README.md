@@ -6,3 +6,5 @@ Completion reports for v4 and later deployments, one per executed run.
 | S6 · Airport brief | `s6-airport-brief-completion-report.md` |
 | S7 · Assets | `s7-assets-completion-report.md` |
 | S8 · Global mechanisms | `s8-global-mechanisms-completion-report.md` |
+| S10-A · Portfolio Evolution | `s10a-portfolio-evolution-completion-report.md` |
+| S10-A · Iteration | `s10a-iteration-completion-report.md` |

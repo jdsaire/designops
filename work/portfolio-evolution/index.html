@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en" data-nav-context="brief" data-nav-depth="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A design system I built and govern end to end · Juan Diego Saire</title>
+<meta name="description" content="Discover how I stopped handing off my strategy and built the product myself — a live design system, governed end to end.">
+<!-- ============================================================
+     DEPLOY-F1-Brief1-SiteBuild-v2_0 · Brief 1 ONLY · EN
+     Iteration 1: bridge · redundancies · structure · eyebrows
+     Acts: The Problem · The Reinvention · The Architecture ·
+           The Dashboard · The Reflection
+     ES keys (future): El Problema · La Reinvención · La
+           Arquitectura · El Dashboard · La Reflexión — FULL PARITY
+     Gate K keywords: AI-native · Front-end · DesignOps
+     [TEMPORAL]: contact mailto (data-temporal="contact-email")
+     ============================================================ -->
+<script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/shared/nav.css">
+<link rel="stylesheet" href="../../assets/css/shared/progress.css">
+<style>
+/* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
+html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:root{
+  --color-brand-purple:#A100FF;
+  --color-purple-hover:#8C00D9;
+  --color-purple-light:#C2A3FF;
+  --color-brand-black:#000000;
+  --color-brand-white:#FFFFFF;
+  --color-text-muted:rgba(255,255,255,0.6);
+  --color-text-dim:rgba(255,255,255,0.50);
+  --color-border-faint:rgba(255,255,255,0.06);
+  --color-border-soft:rgba(255,255,255,0.10);
+  --font-primary:'Graphik',Arial,sans-serif;
+  --fw-light:300; --fw-regular:400; --fw-medium:500;
+  --fw-semibold:600; --fw-bold:700; --fw-black:900;
+  --max-content-width:1440px;
+  --gutter:clamp(1rem,3.5vw,5rem);
+  --nav-height:clamp(3.5rem,4vw,4rem);
+  --peek-width:clamp(3rem,8vw,6rem);
+  --slide-gap:clamp(1.25rem,2vw,2rem);
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-decelerate:cubic-bezier(0,0,0.2,1);
+  --duration-ui:250ms;
+  --act-pad:clamp(4rem,8vw,8rem);
+  --panel-w:min(430px,36vw);
+}
+
+/* ================= LIGHT THEME =================
+   Peer of assets/css/base/tokens.css. This chassis carries its own :root
+   copy because the brief pages do not link tokens.css, so the theme layer
+   is declared here too. Dark carries no attribute and stays the default;
+   light re-points the same six neutrals. --ink/--ground carry the alpha
+   literals that have no token of their own. */
+:root{
+  --ink:255,255,255; --ground:0,0,0;
+  --color-on-brand:#FFFFFF;   /* content on a brand fill; never flips */
+  --surface-sunken:#050505; --surface-card:#0A0A0A; --surface-raised:#111111;
+  /* Consumed by shared/nav.css — .nav__work-menu's fill (line 65) and its
+     drop shadow (line 280). Without them the Work dropdown renders
+     transparent on this page, which does not link tokens.css. */
+  --surface-panel:rgba(8,8,8,0.97); --shadow-3:rgba(0,0,0,0.55);
+}
+html[data-theme="light"]{
+  --color-brand-black:#FFFFFF;
+  --color-brand-white:#0A0A0A;
+  --color-text-muted:rgba(0,0,0,0.60);
+  --color-text-dim:rgba(0,0,0,0.55);
+  --color-purple-light:#8C00D9;
+  --color-border-faint:rgba(0,0,0,0.06);
+  --color-border-soft:rgba(0,0,0,0.10);
+  --ink:0,0,0; --ground:255,255,255;
+  --surface-sunken:#F7F7F7; --surface-card:#F2F2F2; --surface-raised:#EDEDED;
+  --surface-panel:rgba(250,250,250,0.97); --shadow-3:rgba(0,0,0,0.16);
+}
+html{transition:background-color 200ms var(--ease-standard);}
+@media (prefers-reduced-motion:reduce){ html{transition:none;} }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--color-brand-black); color:var(--color-brand-white);
+  font-family:var(--font-primary); font-weight:var(--fw-regular);
+  line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img,svg{display:block;}
+a{color:inherit; text-decoration:none;}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
+::selection{background:var(--color-brand-purple); color:var(--color-on-brand);}
+:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:3px;}
+.container{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+
+/* Cross-document View Transitions — same-origin navigation cross-fade;
+   non-supporting browsers navigate plainly. Reduced-motion disables it. */
+@view-transition{ navigation:auto; }
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*){ animation:none !important; }
+}
+
+/* Scroll progress bar — moved to shared assets/css/shared/progress.css (P-5). */
+
+/* NAV — promoted to shared assets/css/shared/nav.css (task 6.2.1). */
+
+/* ================= SECTION EYEBROW — inherited from live designops main.css, verbatim ================= */
+.section__eyebrow{display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem;
+  margin-bottom:clamp(1.5rem,2.5vw,2.5rem);}
+.section__eyebrow-bar{width:2.5rem; height:3px; background:var(--color-brand-purple);}
+.section__eyebrow-text{font-size:0.8rem; font-weight:var(--fw-semibold); letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--color-brand-white);}
+.section__eyebrow-text .dim{color:var(--color-text-dim);}
+
+/* ================= TYPE ROLES ================= */
+.verdict{font-size:clamp(1.75rem,4vw,3.25rem); font-weight:var(--fw-black); line-height:1.08; letter-spacing:-0.02em;}
+.scan{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:34em;}
+.scan strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
+
+/* ================= HERO — full-width heading, no metrics ================= */
+.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-height) + 3px); position:relative;}
+.hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
+.hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
+.hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
+.kwrow{display:flex; flex-wrap:wrap; gap:.6rem;}
+.kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
+  color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
+.scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
+.scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
+
+/* ================= ACTS ================= */
+.act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
+.act__head{display:flex; flex-direction:column; gap:1rem; margin-bottom:clamp(2rem,4vw,3.25rem); max-width:60rem;}
+
+/* ---- Contrast card (Act 1) ---- */
+/* .contrast* — retired at S10-A. The Describe/Build block it styled was deleted
+   with act1_c1_*, act1_c2_* and act1_bridge. Rules kept, unreferenced, rather than
+   removed in a copy commit; logged for a later sweep. */
+.contrast{display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--color-border-soft); margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+.contrast__face{padding:clamp(1.4rem,2.5vw,2.25rem); display:flex; flex-direction:column; gap:.7rem;}
+.contrast__face + .contrast__face{border-left:1px solid var(--color-border-soft);}
+.contrast__tag{font-size:.66rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim);}
+.contrast__face--build .contrast__tag{color:var(--color-brand-purple);}
+.contrast__txt{font-size:clamp(.98rem,1.2vw,1.1rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+.contrast__bridge{grid-column:1 / -1; border-top:1px solid var(--color-border-soft); padding:1rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+/* .scanstack — retired at the iteration. act1_scan1/2 were deleted with no replacement
+   and the problem grid took their place. Rule kept, unreferenced, rather than removed
+   in a copy commit; logged for a later sweep alongside .contrast. */
+.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+/* Role strip — three stacked lines */
+/* ---- Problem cards (Act 01) — the Act 04 card chassis, four up.
+        Heading, body and reveal all inherit their type from the components they copy:
+        .card__t and .card__x from the architecture cards, and the --poster modifier
+        from the editorial's short version. The only local rule is the heading colour
+        and the ordinal, which is a counter rather than copy because Act 01 has six
+        characters of headroom against its ceiling. ---- */
+.pcards{counter-reset:pcard;}
+.pcard .pcard__t::before{counter-increment:pcard; content:counter(pcard) ") ";}
+/* No colour rule: .card__t inherits the body's brand-white, which is the point —
+   the heading is Act 04's heading, unmodified except for its ordinal. */
+
+/* ---- Category label — introduced here, reused by the architecture cards (Act 04). ---- */
+/* Light-purple token, not brand purple: brand purple on the card ground measures
+   3.96:1 in dark, below the 4.5:1 floor for text this size. The token flips to
+   #8C00D9 under the light theme, so both clear it — 12.16 and 6.74. */
+.catlabel{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase;
+  color:var(--color-purple-light); margin-bottom:.15rem;}
+
+.rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
+  border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-faint);
+  margin-bottom:clamp(1.5rem,2.5vw,2rem);}
+.rolestrip span{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-muted); font-weight:var(--fw-medium);}
+.rolestrip b{color:var(--color-brand-purple); font-weight:var(--fw-bold);}
+
+/* ---- Timeline carousel (Act 2 — the single lateral gesture, 3 stops) ---- */
+.timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
+/* Three versions are placed, not paged: the track is a plain grid at every width.
+   Below 768px it stacks equally and the numbering carries the progression; above,
+   the cards rise. The nav drove a scroller that no longer exists. */
+.timeline__track{display:grid; grid-auto-flow:row; grid-template-columns:1fr;
+  gap:var(--slide-gap); padding-bottom:0;}
+/* The stagger. Version 1 sits lowest and version 3 highest, so the row reads as a
+   climb rather than as three peers. The step is --slide-gap, the spacing token the
+   track already uses — no new primitive, and deliberately no viewport-relative
+   height: the grid grows by two steps and --act-pad absorbs the difference. */
+@media (min-width:768px){
+  .timeline__track{grid-template-columns:repeat(3,1fr); align-items:start;}
+  .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 2);}
+  .timeline__track > .card:nth-child(2){margin-top:var(--slide-gap);}
+  .timeline__track > .card:nth-child(3){margin-top:0;}
+}
+@media (min-width:1024px){
+  /* A wider canvas takes a longer step: one and a half gaps instead of one. */
+  .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 3);}
+  .timeline__track > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
+}
+
+/* ---- Cards ---- */
+.cardgrid{display:grid; gap:1rem;}
+.cardgrid--3{grid-template-columns:repeat(3,1fr);}
+.cardgrid--2{grid-template-columns:repeat(2,1fr);}
+.card{border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2.2vw,1.9rem); display:flex; flex-direction:column; gap:.75rem;
+  transition:border-color var(--duration-ui) var(--ease-standard);}
+.card:hover{border-color:var(--color-brand-purple);}
+.card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
+.card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+@media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
+@media (max-width:767px){
+  .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
+  .contrast{grid-template-columns:1fr;}
+  .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
+}
+
+/* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
+.reveal{margin-top:auto;}
+.reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
+  transition:color var(--duration-ui) var(--ease-standard); min-height:44px;}
+.reveal__btn::before{content:"⊕"; font-size:1rem;}
+.reveal__btn[aria-expanded="true"]::before{content:"⊖";}
+.reveal__btn:hover{color:var(--color-purple-light);}
+.reveal__body{border-left:2px solid var(--color-brand-purple); padding:.9rem 0 .2rem 1rem; margin-top:.6rem;}
+.reveal__body[hidden]{display:none;}
+.reveal__body p{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted); margin-bottom:.7rem;}
+.reveal__body p:last-child{margin-bottom:0;}
+
+/* Side panel (desktop) */
+.panel{position:fixed; top:calc(var(--nav-height) + 3px); right:0; bottom:0; width:var(--panel-w); z-index:70;
+  background:var(--surface-sunken); border-left:1px solid var(--color-border-soft); padding:1.5rem 1.6rem 2rem;
+  overflow-y:auto; transform:translateX(102%); transition:transform 320ms var(--ease-decelerate);
+  display:flex; flex-direction:column; gap:1rem;}
+.panel.is-open{transform:none;}
+.panel__head{display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  border-bottom:1px solid var(--color-border-faint); padding-bottom:.9rem;}
+.panel__title{font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-brand-purple);}
+.panel__close{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center; font-size:1rem;}
+.panel__close:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
+.panel__slot .reveal__body{border-left:0; padding-left:0; margin-top:0;}
+/* Short Version — poster read in desktop panel: enlarged, solid white */
+@media (min-width:1024px){
+  .panel__slot .reveal__body--poster p{font-size:clamp(1.35rem,1.7vw,1.8rem); line-height:1.4;
+    color:var(--color-brand-white); font-weight:var(--fw-light);}
+}
+
+/* ---- Schedule · days-axis Gantt (Act 03). Component inherited from the Verify App
+        brief (work/yape-trust-verify-brief/index.html): epic rows with disclosure,
+        task sub-rows, chips, SVG overlay, milestones, totals column. The axis is
+        calendar time here, not cumulative story points, so rows carry real dates and
+        are free to leave gaps — the two dormant stretches are the point. ---- */
+.gantt{--g-border:var(--color-border-soft);}
+.gantt *{border-radius:0; box-shadow:none;}
+.gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
+.gantt__grid{min-width:820px;}
+.gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+  border-bottom:1px solid var(--g-border); font-size:.75rem; color:var(--color-text-muted);}
+.gantt__axis > div{padding:.75rem 1rem;}
+.gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem; white-space:nowrap;}
+.gantt__axis-summary{text-align:right;}
+.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+  border-top:1px solid var(--g-border); align-items:stretch;}
+.gantt__task-row{background:rgba(var(--ink),0.02);}
+.gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
+.gantt__task-label{padding:.5rem 1rem .5rem 2.4rem; color:var(--color-text-muted); font-size:.875rem;
+  display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; position:relative;}
+.gantt__row-field,.gantt__task-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__row-field{min-height:3.25rem;}
+.gantt__task-field{min-height:2.5rem;}
+.gantt__row-summary,.gantt__task-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
+  text-align:right; font-size:.78rem; color:var(--color-text-muted); gap:.15rem;}
+.gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.gantt__days{color:var(--color-text-dim);}
+.gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
+.gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
+  color:var(--color-brand-white); background:none; border:0; padding:0; cursor:pointer; text-align:left;
+  display:flex; align-items:center; gap:.5rem; min-height:44px;}
+.gantt__toggle .gantt__marker{display:inline-block; width:.8em; color:var(--color-text-muted); font-weight:var(--fw-regular);
+  transition:transform 160ms var(--ease-standard);}
+.gantt__toggle[aria-expanded="true"] .gantt__marker{transform:rotate(90deg);}
+.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__row-label{border-left:3px solid var(--color-brand-purple);}
+.gantt__epic:hover .gantt__bar--epic,.gantt__epic:has(.gantt__toggle:focus-visible) .gantt__bar--epic{border-color:var(--color-brand-purple);}
+.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); background:var(--g-border);
+  border:1px solid var(--color-brand-purple); display:flex; align-items:center; padding:0 .4rem; min-width:.35rem;}
+.gantt__bar--epic{height:1.625rem; background:var(--color-brand-purple);}
+.gantt__bar--task{height:1rem;}
+.gantt__bar--principal{background:transparent; border-style:dotted;}
+.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); white-space:nowrap;}
+.gantt__bar--epic .gantt__span{color:var(--color-on-brand);}
+.gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
+  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;}
+.gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
+  font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
+.gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
+  margin-top:1rem; max-width:70ch; line-height:1.6;}
+.gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+.gantt [hidden]{display:none !important;}
+@media (max-width:767px){
+  .gantt__chart{border-left:0; border-right:0;}
+}
+
+/* ---- Ladder, descending (Act 06). The same mechanism Act 02 climbs with and the
+        same steps, inverted: phase one sits highest and phase three lowest, so the
+        section falls as the story moves forward. No viewport-relative height. ---- */
+@media (min-width:768px){
+  .ladder-down{align-items:start;}
+  .ladder-down > .card:nth-child(1){margin-top:0;}
+  .ladder-down > .card:nth-child(2){margin-top:var(--slide-gap);}
+  .ladder-down > .card:nth-child(3){margin-top:calc(var(--slide-gap) * 2);}
+}
+@media (min-width:1024px){
+  .ladder-down > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
+  .ladder-down > .card:nth-child(3){margin-top:calc(var(--slide-gap) * 3);}
+}
+
+.card[hidden],.evidence[hidden]{display:none !important;}
+
+/* ---- Evidence bar (Act 3) ---- */
+.evidence{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
+  border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem) clamp(1.2rem,2.2vw,1.8rem); margin-top:1.4rem;}
+.evidence__label{font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold);}
+.evidence__links{display:flex; gap:1.4rem; flex-wrap:wrap;}
+.evidence__link{font-weight:var(--fw-semibold); font-size:.95rem; border-bottom:1px solid var(--color-brand-purple);
+  padding-bottom:.15rem; transition:color var(--duration-ui) var(--ease-standard);}
+.evidence__link:hover{color:var(--color-brand-purple);}
+
+/* ---- ACT 04 · THE DASHBOARD — master dashboard ---- */
+.dash{border:1px solid var(--color-border-soft);}
+.dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
+.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
+  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+.dash__tab:hover{color:var(--color-brand-white);}
+.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
+.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
+.dash__panel[hidden]{display:none;}
+/* A pending figure carries its label and no number. Never a placeholder, never a
+   zero, never a guess: B4 requires the definitive i18n total measured at closure,
+   and S9 is the only thing permitted to fill it. */
+.dcell--pending .dcell__pending{font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+  font-weight:var(--fw-semibold); color:var(--color-text-dim); border-left:2px solid var(--color-brand-purple);
+  padding-left:.5rem; margin-top:.15rem;}
+/* ---- Paired rows: one metric per row, one value slot per build. Both builds are
+        legible without operating anything, which a tablist could not offer. ---- */
+.drows{display:flex; flex-direction:column;}
+.drow{display:grid; grid-template-columns:minmax(9rem,1.4fr) 1fr 1fr; gap:clamp(.75rem,2vw,1.75rem);
+  align-items:baseline; padding:clamp(.8rem,1.5vw,1.1rem) 0;
+  border-bottom:1px solid var(--color-border-faint);}
+.drow--head{padding-top:0; border-bottom:1px solid var(--color-border-soft);}
+.drow--head .drow__v{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.18em;
+  text-transform:uppercase; color:var(--color-text-dim);}
+.drow__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--color-text-muted);}
+.drow__v{display:flex; flex-direction:column; gap:.25rem;}
+.drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem);}
+/* A metric that exists for one build only prints a dash rather than a zero. */
+.drow__v--none{color:var(--color-text-dim); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-light);}
+@media (max-width:767px){
+  .drow{grid-template-columns:1fr 1fr; gap:.35rem .75rem;}
+  .drow__l{grid-column:1 / -1;}
+  .drow--head .drow__l{display:none;}
+}
+
+.dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
+.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
+.dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
+.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
+.dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
+.dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
+  transition:transform 900ms var(--ease-decelerate);}
+/* Three across at tablet as well as desktop: the default cardgrid--3 drops to two
+   columns below 1024, which would leave this row of three as two-and-one. */
+@media (min-width:768px) and (max-width:1023px){
+  .cardgrid--hold{grid-template-columns:repeat(3,1fr);}
+}
+.dash__foot{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+@media (max-width:1023px){ .dash__grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:767px){
+  .dash__grid{grid-template-columns:1fr 1fr;}
+  .dash__grid--derived{grid-template-columns:1fr;}
+  .dash__tab{font-size:.6rem; letter-spacing:.1em;}
+}
+
+/* ---- ACT 05 · THE REFLECTION ---- */
+.sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+
+/* ---- Conversion ---- */
+.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
+  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
+  transition:background var(--duration-ui) var(--ease-standard);}
+.convert__cta:hover{background:var(--color-brand-purple);}
+.temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
+  border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
+.convert [hidden]{display:none !important;}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
+
+/* ================= FOOTER (unified structure — P-7) ================= */
+.footer{border-top:1px solid var(--color-border-faint); padding:clamp(4rem,6vw,6rem) 0 clamp(2rem,3vw,2.5rem); margin-top:var(--act-pad);}
+.footer__inner{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+.footer__grid{display:grid; grid-template-columns:1fr; gap:clamp(2rem,4vw,3rem);}
+.footer__content{display:flex; flex-direction:column; gap:1.5rem;}
+.footer__tagline{font-size:clamp(1.875rem,3.6vw,3rem); font-weight:var(--fw-bold); line-height:1.1; letter-spacing:-0.02em; color:var(--color-brand-white); white-space:nowrap;}
+.footer__tagline .purple{color:var(--color-brand-purple); display:block;}
+.footer .cta{display:inline-flex; align-items:center; gap:0.6rem; color:var(--color-brand-purple);}
+.footer .cta:hover,.footer .cta:focus-visible{color:var(--color-purple-hover);}
+.cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.footer__linkedin-icon{display:inline-block; width:1.25rem; height:1.25rem; flex-shrink:0; vertical-align:middle;}
+.footer__strip{padding-top:0.75rem; border-top:1px solid var(--color-border-faint); margin-top:clamp(2rem,4vw,3rem);}
+.footer__meta{display:flex; flex-wrap:wrap; gap:1.25rem; font-size:0.8rem; color:var(--color-text-dim);}
+@media (min-width:768px) and (max-width:1023px){ .footer__grid{grid-template-columns:1fr;} }
+@media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__tagline{white-space:normal;} }
+
+/* ================= MOTION ================= */
+.io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
+.io.is-in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important; transition:none!important;}
+  .io{opacity:1; transform:none;}
+  .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
+    .dcell__bar i{transform:scaleX(var(--v,0));}
+}
+
+/* ================= MOTION · D7 NATIVE LAYER (progressive enhancement, compositor-only) =================
+   All effects gate behind prefers-reduced-motion:no-preference + @supports; the reduced-motion block
+   above (animation:none!important; .io reset) is the authoritative static end-state for every effect.
+   Radius 0 / shadow none / purple-accent-only held; no property here carries or recolors body text. */
+
+/* S1 — scroll choreography: layer a view()-linked entrance over the JS .is-in fade (fallback intact) */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
+  }
+}
+@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
+
+/* S5 — compositing signature: the hero eyebrow accent draws in with a blended flourish (decorative bar) */
+@media (prefers-reduced-motion:no-preference){
+  @supports (mix-blend-mode:difference){
+    .hero .section__eyebrow-bar{ transform-origin:left center; mix-blend-mode:difference;
+      animation:sig-draw 900ms var(--ease-decelerate) both; }
+  }
+}
+@keyframes sig-draw{ from{transform:scaleX(0); opacity:.35;} to{transform:scaleX(1); opacity:1;} }
+
+
+/* FOOTER HIDDEN — pending redesign; rules above retained for restoration. */
+.footer{display:none;}
+</style>
+</head>
+<body id="top">
+
+<!-- Scroll progress — above nav, grows L→R, reverses on upscroll -->
+<div class="progress" aria-hidden="true"><div class="progress__fill" id="progressFill"></div></div>
+
+<!-- ================= NAV — routes BACK to designops home ================= -->
+<header class="nav" id="navbar">
+    <nav class="nav__inner" role="navigation" aria-label="Primary">
+
+      <button class="nav__hamburger" id="hamburger" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="../../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+
+      <!-- CENTER nav links -->
+      <div class="nav__center">
+        <div class="nav__dropdown">
+          <button class="nav__link nav__work-trigger" id="workTrigger" type="button"
+                  aria-expanded="false" aria-controls="workMenu">
+            <span data-i18n="nav_work">Work</span>
+            <span class="nav__work-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
+            <a class="nav__work-item" role="menuitem" href="../accreditapass/"      data-nav-work="accreditapass/"      data-i18n="work_card1_label">Design system · Front-end</a>
+            <a class="nav__work-item" role="menuitem" href="../yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="work_card2_label">Product · Payments</a>
+            <a class="nav__work-item" role="menuitem" href="../airport/"             data-nav-work="airport/"             data-i18n="work_card3_label">Prototype · User journey</a>
+            <a class="nav__work-item" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="work_card4_label">Front-end · Banking</a>
+          </div>
+        </div>
+        <a href="../../capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
+        <a href="../../about/"    data-nav-page="about/"    class="nav__link" data-i18n="nav_evolution">About</a>
+        <a href="../../contact/" data-nav-page="contact/" class="nav__link" data-i18n="nav_cta">Contact</a>
+      </div>
+
+      <!-- RIGHT utility -->
+      <div class="nav__utility">
+        <!-- Theme — segmented switch, active option filled purple -->
+        <div class="nav__switch" role="group" aria-label="Theme">
+          <button class="nav__theme-opt" id="themeDark" type="button" data-theme-opt="dark"
+                  aria-pressed="true" aria-label="Dark theme" title="Dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.4A8.5 8.5 0 1 1 10.6 3.5a6.8 6.8 0 0 0 9.9 9.9z"/></svg></button>
+          <button class="nav__theme-opt" id="themeLight" type="button" data-theme-opt="light"
+                  aria-pressed="false" aria-label="Light theme" title="Light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2M12 19.6v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.4 12h2M19.6 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></button>
+        </div>
+        <!-- SwapLang — same switch component, both languages visible -->
+        <div class="nav__switch" id="langPanel" role="listbox" aria-label="Language">
+          <button class="nav__lang-option nav__lang-option--active" type="button"
+                  role="option" aria-selected="true" data-lang="ES">ES</button>
+          <button class="nav__lang-option" type="button"
+                  role="option" aria-selected="false" data-lang="EN">EN</button>
+        </div>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+
+    <div class="nav__overlay-header">
+      <a href="../../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      </a>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
+    </div>
+
+    <nav class="nav__overlay-links" aria-label="Mobile navigation">
+      <div class="nav__overlay-group">
+        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                aria-expanded="false" aria-controls="overlayWorkMenu">
+          <span data-i18n="nav_work">Work</span>
+          <span class="nav__overlay-link-chevron">&#8250;</span>
+        </button>
+        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
+          <a class="nav__overlay-subitem" role="menuitem" href="../accreditapass/"      data-nav-work="accreditapass/"      data-i18n="work_card1_label">Design system · Front-end</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="work_card2_label">Product · Payments</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../airport/"             data-nav-work="airport/"             data-i18n="work_card3_label">Prototype · User journey</a>
+          <a class="nav__overlay-subitem" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="work_card4_label">Front-end · Banking</a>
+        </div>
+      </div>
+      <a href="../../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
+        <span data-i18n="nav_capabilities">Capabilities</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../../about/"    data-nav-page="about/"    class="nav__overlay-link">
+        <span data-i18n="nav_evolution">About</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+      <a href="../../contact/"      data-nav-page="contact/"      class="nav__overlay-link">
+        <span data-i18n="nav_cta">Contact</span>
+        <span class="nav__overlay-link-chevron">&#8250;</span>
+      </a>
+    </nav>
+
+    <div class="nav__overlay-lang">
+      <div class="nav__switch" id="overlayLang" role="listbox" aria-label="Language">
+        <button class="nav__overlay-lang-option nav__overlay-lang-option--active" type="button"
+                role="option" aria-selected="true" data-lang="ES">ES</button>
+        <button class="nav__overlay-lang-option" type="button"
+                role="option" aria-selected="false" data-lang="EN">EN</button>
+      </div>
+      <div class="nav__switch" role="group" aria-label="Theme">
+        <button class="nav__theme-opt" id="overlayThemeDark" type="button" data-theme-opt="dark"
+                aria-pressed="true" aria-label="Dark theme" title="Dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.4A8.5 8.5 0 1 1 10.6 3.5a6.8 6.8 0 0 0 9.9 9.9z"/></svg></button>
+        <button class="nav__theme-opt" id="overlayThemeLight" type="button" data-theme-opt="light"
+                aria-pressed="false" aria-label="Light theme" title="Light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2M12 19.6v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.4 12h2M19.6 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></button>
+      </div>
+    </div>
+
+  </div>
+
+<main>
+
+<!-- ================= HERO — bridge from the designops work card ================= -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="container hero__inner">
+    <div class="section__eyebrow" style="margin-bottom:0;">
+      <span class="section__eyebrow-bar"></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
+    </div>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">From template to system.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">Follow one portfolio across three versions, from a template I rented to a system I wrote.</p>
+    <div class="kwrow" role="list" aria-label="Case keywords">
+      <span class="kw" role="listitem" data-i18n="kw1">Web Development</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Front-end</span>
+      <span class="kw" role="listitem" data-i18n="kw3">DesignOps</span>
+      <span class="kw" role="listitem" data-i18n="kw4">HTML/CSS/JS</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Design Systems</span>
+    </div>
+    <div class="rolestrip" aria-label="Role and scope">
+      <span data-i18n="act1_role1"><b>Role</b> — Sole owner</span>
+      <span data-i18n="act1_role2"><b>Duration</b> — 2025 to present</span>
+      <span data-i18n="act1_role3"><b>Scope</b> — Strategy → design → build → operation</span>
+    </div>
+    <div class="reveal" data-act="hero">
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
+      <!-- canonical: this copy supersedes work_card1_body upstream (pending designops Fable-5 pass) -->
+      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
+        <p data-i18n="hero_rv_txt">I began with templates I could not bend, and ended by building it myself — design, code and the case for the work now sit in one asset I control end to end.</p>
+      </div>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
+</section>
+
+<!-- ================= ACT 01 · THE PROBLEM ================= -->
+<section class="act" id="act1" aria-labelledby="v1">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
+      </div>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Qualified on paper, unfamiliar in the room.</h2>
+      <p class="scan" data-i18n="act1_lede">Start with the problem: good work nobody can place.</p>
+    </div>
+
+    <!-- Four cards on the Act 04 chassis. The context is the card body; the implication
+         sits behind the reveal, so the two are told apart by structure rather than by
+         a reader noticing which column they are in. data-act groups them, so opening
+         one closes the others. The ordinals are a CSS counter, not copy: Act 01 has six
+         characters of headroom and a numbered string would spend more than that. -->
+    <div class="cardgrid cardgrid--2 pcards io">
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g1_cat">The reading</h3>
+        <p class="card__x" data-i18n="act1_g1_l">I apply for roles whose posts list what a candidate must have. No post lists what a candidate is expected to sound like.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c1" data-panel-title="The reading" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c1" hidden>
+            <p data-i18n="act1_g1_r">Meeting every requirement is what gets an application considered; being understood is what gets it believed, and only the first is ever written down.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g2_cat">The credential</h3>
+        <p class="card__x" data-i18n="act1_g2_l">My own credentials are an MBA, a MicroMasters and a Microsoft specialization. Not one of them showed what I can actually build.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c2" data-panel-title="The credential" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c2" hidden>
+            <p data-i18n="act1_g2_r">Research estimates work sample predicts job performance at about 3× more than education. A running page shows what I did with the diplomas</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g3_cat">The claim</h3>
+        <p class="card__x" data-i18n="act1_g3_l">Three in four hiring teams say they receive AI-written applications – turning openings into odysseys for qualified candidates.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c3" data-panel-title="The claim" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c3" hidden>
+            <p data-i18n="act1_g3_r">65% of hiring managers say skills are harder to verify as anybody can generate a fluent claim in seconds. Every figure here is backed up in public commit history.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="act1_g4_cat">The market</h3>
+        <p class="card__x" data-i18n="act1_g4_l">Employment in Lima, Peru has grown 22% since 2019, while the share of it held by workers under 25 has fallen by about a third.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c4" data-panel-title="The market" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c4" hidden>
+            <p data-i18n="act1_g4_r">Instead of contracting, local market is moving toward work that cannot be automated. That is the direction this website is built toward.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <p class="sequel io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026; INEI Encuesta Permanente de Empleo Nacional, May–July 2026.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 02 · THE EVOLUTION — 3 versions on a stepped layout ================= -->
+<section class="act" id="act2" aria-labelledby="v2">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Evolution</span>
+      </div>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Three portfolio versions, all in code.</h2>
+      <p class="scan" data-i18n="act2_lede">Watch the shift from renting a template to writing every line.</p>
+    </div>
+
+    <div class="timeline io">
+      <div class="timeline__track" id="tlTrack" role="group" aria-label="The evolution, in three versions">
+        <article class="card">
+          <p class="catlabel" data-i18n="act2_s1_n">Version 1</p>
+          <h3 class="card__t" data-i18n="act2_s1_t">The Template era</h3>
+          <p class="card__x" data-i18n="act2_s1_x">My first portfolios ran on Canva and Framer. Both were faster than code, and neither could build what I had already designed in Figma.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act2_s2_n">Version 2</p>
+          <h3 class="card__t" data-i18n="act2_s2_t">The Single-Page</h3>
+          <p class="card__x" data-i18n="act2_s2_x">A landing page to test the concept: beginner front-end, my first AI-orchestrated workflow, and every section inside one scroll.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act2_s3_n">Version 3</p>
+          <h3 class="card__t" data-i18n="act2_s3_t">The Multi-Page</h3>
+          <p class="card__x" data-i18n="act2_s3_x">My most capable front-end to date: the Microsoft specialization finished, and four case briefs carrying the recent work.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 03 · THE SCHEDULE — days-axis Gantt over both builds ================= -->
+<section class="act" id="sched" aria-labelledby="vsch">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
+      </div>
+      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">49 build days across five months.</h2>
+      <p class="scan" data-i18n="sch_lede">Move through epics – from v1 to the current web.</p>
+    </div>
+
+    <div class="gantt io" id="gantt">
+      <div class="gantt__chart" id="ganttChart">
+        <div class="gantt__grid" id="ganttGrid" role="tree"
+             aria-label="Both builds on a calendar axis: three phases with task rows, sized in days."
+             ></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Every window it draws is also stated in the note below.</p></noscript>
+
+    </div>
+
+    <p class="dash__foot io" data-i18n="sch_note" style="border-top:0; padding-left:0;">Reconstructed from public commit history: github.com/jdsaire/jdigital and github.com/jdsaire/legacy-desops summed, 24 Apr – 04 Jul 2026; github.com/jdsaire/designops, 10 Jul – 08 Sep 2026. 32 active build-days on the first build — three further June dates carried document uploads, not site code, and are excluded. Nothing was committed between 25 July and 28 August.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 04 · THE ARCHITECTURE — 6 numbered cards, each labelled by category ================= -->
+<section class="act" id="act3" aria-labelledby="v3">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 04 · The Architecture</span>
+      </div>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Two architectures, six decisions.</h2>
+      <p class="scan" data-i18n="act3_lede">Compare what carried across both builds vs what's unique to each one.</p>
+    </div>
+
+    <div class="cardgrid cardgrid--2 io" id="act3Cards">
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f1">Foundational</p>
+        <h3 class="card__t" data-i18n="act3_c1_t">1) Vanilla HTML/CSS/JavaScript</h3>
+        <p class="card__x" data-i18n="act3_c1_x">No framework, no build step, no dependency I cannot read end to end.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Vanilla HTML/CSS/JavaScript" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c1" hidden>
+            <p data-i18n="act3_c1_rv_txt">Nothing to migrate when a major version lands. No security-patch treadmill. A payload small enough to stay fast on a mid-range phone over Peruvian mobile data — which is what most recruiters will use to open it.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f1">Foundational</p>
+        <h3 class="card__t" data-i18n="act3_c2_t">2) Accessibility &amp; responsiveness</h3>
+        <p class="card__x" data-i18n="act3_c2_x">WCAG AA held as a build gate, usable with screen readers and keyboards.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Accessibility and responsiveness" data-i18n="act3_c2_rv_btn">MADE FOR EVERYONE</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c2" hidden>
+            <p data-i18n="act3_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
+            <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up. Those are the three the stylesheets actually declare, not a convention borrowed from a framework.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f2">Single-page</p>
+        <h3 class="card__t" data-i18n="act3_c3_t">3) Grid and layout, one page</h3>
+        <p class="card__x" data-i18n="act3_c3_x">Ten sections, one type scale, Flexbox and Grid throughout.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Grid and layout, one page" data-i18n="act3_c3_rv_btn">MORE ON INFORMATION ARCHITECTURE</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c3" hidden>
+            <p data-i18n="act3_c3_rv_txt1">The ontology: ten reusable organisms, each owning one job — navigation, hero, work cards, capability carousel, contact.</p>
+            <p data-i18n="act3_c3_rv_txt3">The choreography: one scroll, one order, every visitor served the same sequence whether or not it was the one they came for.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f2">Single-page</p>
+        <h3 class="card__t" data-i18n="act3_c4_t">4) Orchestration in Claude</h3>
+        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Orchestration in Claude" data-i18n="act3_c4_rv_btn">HOW CLAUDE WAS USED</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c4" hidden>
+            <p data-i18n="act3_c4_rv_txt1">Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f3">Multi-page</p>
+        <h3 class="card__t" data-i18n="act3_c5_t">5) Grid and layout, eight pages</h3>
+        <p class="card__x" data-i18n="act3_c5_x">The same token layer, now carried across a shared chassis.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c5" data-panel-title="Grid and layout, eight pages" data-i18n="act3_c5_rv_btn">WHAT THE SPLIT BOUGHT</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c5" hidden>
+            <p data-i18n="act3_c5_rv_txt">Each case gets its own route, its own dictionary and its own entry point, so a recruiter can be sent to one page rather than to a scroll position. The cost is a chassis that must stay identical across eight pages — and one defect in it is eight defects.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act3_f3">Multi-page</p>
+        <h3 class="card__t" data-i18n="act3_c6_t">6) Orchestration under a scope freeze</h3>
+        <p class="card__x" data-i18n="act3_c6_x">This build runs under a locked scope against overthinking.</p>
+        <div class="reveal" data-act="act3">
+          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act3_c6_rv_btn">HOW GOVERNANCE IS APPLIED</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c6" hidden>
+            <p data-i18n="act3_c6_rv_txt">Every stage is dispatched as a written prompt with preflight checks, approval gates and a completion report. Improvements that fall outside the list are logged in one line and not built. The discipline is the deliverable as much as the site is.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Evidence bar — HIDDEN, not deleted. Hiding it removes the last repository
+         hyperlink on the page, so sch_note and dash_foot name both repositories in
+         prose instead. All three remain public and reachable; nothing is concealed. -->
+    <div class="evidence io" hidden>
+      <span class="evidence__label" data-i18n="act3_ev_label">Source, live</span>
+      <div class="evidence__links">
+        <a class="evidence__link" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener" data-i18n="act3_ev_repo">github.com/jdsaire/designops</a>
+        <a class="evidence__link" href="https://jdsaire.github.io/designops/" target="_blank" rel="noopener" data-i18n="act3_ev_site">Open the live site</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 05 · THE DASHBOARD — paired values per metric ================= -->
+<section class="act" id="act4" aria-labelledby="v4">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 05 · The Dashboard</span>
+      </div>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Both builds, side by side.</h2>
+      <p class="scan" data-i18n="act4_lede">Read every measure of both builds in one place, single page against multi.</p>
+    </div>
+
+
+    <!-- Paired values per metric. Both builds sit on one surface with no control to
+         operate: a tablist made each column a click away from the other, which is the
+         opposite of a comparison. A dash means the metric exists for one build only. -->
+    <div class="dash io" id="dash">
+      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
+        <button class="dash__tab" role="tab" id="tab-m" aria-selected="true"  aria-controls="dp-m" data-i18n="dash_tab1">Measured</button>
+        <button class="dash__tab" role="tab" id="tab-d" aria-selected="false" aria-controls="dp-d" data-i18n="dash_tab2">Derived</button>
+        <button class="dash__tab" role="tab" id="tab-r" aria-selected="false" aria-controls="dp-r" data-i18n="dash_tab3">Insights</button>
+      </div>
+
+      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
+        <div class="drows">
+          <div class="drow drow--head" aria-hidden="true">
+            <div class="drow__l"></div><div class="drow__v">Single page</div><div class="drow__v">Multi page</div>
+          </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m6">Commits</div>
+        <div class="drow__v"><span class="dcell__n" data-count="286">286</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="103">103</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m7">Pull requests</div>
+        <div class="drow__v"><span class="dcell__n" data-count="52">52</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="20">20</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m8">Days of public history</div>
+        <div class="drow__v"><span class="dcell__n" data-count="71">71</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="60">60</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m9">Active build-days</div>
+        <div class="drow__v"><span class="dcell__n" data-count="32">32</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="17">17</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m1">Building blocks</div>
+        <div class="drow__v"><span class="dcell__n" data-count="10">10</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="8">8</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m3">Languages engineered</div>
+        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_m2">Dictionary keys</div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+      </div>
+        </div>
+      </div>
+
+      <div class="dash__panel" id="dp-d" role="tabpanel" aria-labelledby="tab-d" hidden>
+        <div class="drows">
+          <div class="drow drow--head" aria-hidden="true">
+            <div class="drow__l"></div><div class="drow__v">Single page</div><div class="drow__v">Multi page</div>
+          </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d1">Commits per day, sustained</div>
+        <div class="drow__v"><span class="dcell__n" data-count="4.0">4.0</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 71 days</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="6.1">6.1</span><span class="dcell__p" data-i18n="dash2_d1_p">103 ÷ 17</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d2">Pull requests per week</div>
+        <div class="drow__v"><span class="dcell__n" data-count="5.1">5.1</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.1 weeks</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="2.3">2.3</span><span class="dcell__p" data-i18n="dash2_d2_p">20 PRs ÷ 8.6 weeks</span></div>
+      </div>
+      <div class="drow">
+        <div class="drow__l" data-i18n="dash_d3">Commits per review gate</div>
+        <div class="drow__v"><span class="dcell__n" data-count="5.5">5.5</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="5.2">5.2</span><span class="dcell__p" data-i18n="dash2_d3_p">103 ÷ 20</span></div>
+      </div>
+        </div>
+      </div>
+
+      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
+        <!-- Three cards on the Act 02 chassis, read left to right: what the ratio was,
+             what the second build did with it, and what of that transfers. No label and
+             no ladder here — this row is a sequence, not a climb. -->
+        <div class="cardgrid cardgrid--3 cardgrid--hold">
+          <article class="card">
+            <h3 class="card__t" data-i18n="dash_r1_t">Reviewed, not rushed</h3>
+            <p class="card__x" data-i18n="dash_r1">286 commits went through 52 review gates. Nothing shipped without passing a check I set for myself first.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__t" data-i18n="dash2_r1_t">Half the time</h3>
+            <p class="card__x" data-i18n="dash2_r1">The second build kept that habit in half the days, starting from a written list of known defects rather than nothing.</p>
+          </article>
+          <article class="card">
+            <h3 class="card__t" data-i18n="dash_r3_t">What transfers</h3>
+            <p class="card__x" data-i18n="dash_r3">What a team gains is not this code. It is the way of working that made the second build cheaper.</p>
+          </article>
+        </div>
+      </div>
+
+      <p class="dash__foot" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days); designops, 10 Jul – 08 Sep 2026 (60 days). Rates are simple averages; anything after 06 Sep is forecast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE REFLECTION — three phase cards, descending ================= -->
+<section class="act" id="act5" aria-labelledby="v5">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 06 · The Reflection</span>
+      </div>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What each phase left behind.</h2>
+      <p class="scan" data-i18n="act5_lede">Look at what three phases taught.</p>
+    </div>
+
+    <!-- Three cards on the Act 04 chassis, one per phase, descending. The schedule
+         runs the same three phases across the page; this section runs them down it,
+         so the ladder falls where Act 02's climbs. -->
+    <div class="cardgrid cardgrid--3 ladder-down io">
+      <article class="card">
+        <p class="catlabel" data-i18n="act5_p1_cat">Single-page</p>
+        <h3 class="card__t" data-i18n="act5_p1_t">Speed without memory</h3>
+        <p class="card__x" data-i18n="act5_p1_x">Prompts were plain text and every session began from nothing. I moved fast and rebuilt the same decisions repeatedly.</p>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act5_p2_cat">Repo hygiene</p>
+        <h3 class="card__t" data-i18n="act5_p2_t">History worth keeping</h3>
+        <p class="card__x" data-i18n="act5_p2_x">Nine days spent cleaning a repository taught me that a history you can read is worth more than the code it holds.</p>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="act5_p3_cat">Multi-page</p>
+        <h3 class="card__t" data-i18n="act5_p3_t">Scope before speed</h3>
+        <p class="card__x" data-i18n="act5_p3_x">A written scope with exit conditions ended the overthinking. The discipline turned out to matter as much as anything it produced.</p>
+      </article>
+    </div>
+
+    <!-- Terminal conversion unit — unchanged -->
+    <div class="convert io" id="convert">
+      <!-- [TEMPORAL] contact — HIDDEN, not deleted. Patch A18 rules that no contact form
+           renders and the address is still pending; the markup stays so a later stage can
+           unhide it in one attribute rather than re-author it. -->
+      <a class="convert__cta" data-temporal="contact-email" href="mailto:confirm-before-publish@temporal.invalid" hidden>
+        <span data-i18n="convert_cta">Start a conversation</span>
+      </a><span class="temporal" data-i18n="convert_temporal" hidden>Temporal · email pending</span>
+
+      <div class="convert__next">
+        <p class="convert__nextlabel" data-i18n="convert_next_label">Similar work</p>
+        <div class="cardgrid cardgrid--2">
+          <a class="card card--continuity" href="../accreditapass/">
+            <h3 class="card__t" data-i18n="convert_c1_t">AccreditaPass</h3>
+            <p class="card__x" data-i18n="convert_c1_x">A media-accreditation platform with a full UX dossier and 545 tests behind it.</p>
+          </a>
+          <a class="card card--continuity" href="../yape-trust-verify-brief/">
+            <h3 class="card__t" data-i18n="convert_c2_t">Verify App</h3>
+            <p class="card__x" data-i18n="convert_c2_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER — live organism strings, verbatim ================= -->
+<footer class="footer" id="pageFooter">
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div class="footer__content">
+        <p class="footer__tagline">
+          <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
+        </p>
+        <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
+           class="cta" aria-label="Connect with Juan Diego on LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
+          </svg>
+          <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer__strip">
+      <div class="footer__meta">
+        <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= DESKTOP SIDE PANEL ================= -->
+<aside class="panel" id="panel" aria-label="Detail panel" aria-hidden="true">
+  <div class="panel__head">
+    <span class="panel__title" id="panelTitle"></span>
+    <button class="panel__close" id="panelClose" aria-label="Close detail panel">✕</button>
+  </div>
+  <div class="panel__slot" id="panelSlot"></div>
+</aside>
+
+<script>
+/* ============================================================
+   i18n — CHROME/BODY split, mirrors skeleton convention.
+   CHROME → assets/i18n/{en,es}.json (site chrome, shared)
+   BODY   → this page's own i18n/designops.{en,es}.json (page-scoped)
+   EN ships. ES staged — key parity FULL:
+   act1 El Problema · act2 La Reinvención · act3 La Arquitectura ·
+   act4 El Dashboard · act5 La Reflexión
+   ============================================================ */
+/* i18n loader — fetches + merges the shared CHROME dict and the
+   per-page BODY dict at runtime, then applies the same sweep the
+   home engine (assets/js/core/i18n.js) uses. Language persists via
+   localStorage 'jds-lang' (shared with home); default ES sitewide.
+   CHROME → ../../assets/i18n/{lang}.json  (shared, site root)
+   BODY   → i18n/designops.{lang}.json     (page-scoped, colocated) */
+const I18N_BASE = "../../assets/i18n/";
+const BODY_BASE = "i18n/";
+const chromeCache = {}, bodyCache = {};
+function fetchDict(url){
+  return fetch(url)
+    .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
+    .catch(err => { console.warn("i18n fetch failed for " + url + ":", err); return null; });
+}
+function loadMerged(lang){
+  const lc = lang === "ES" ? "es" : "en";
+  const c = chromeCache[lc] || (chromeCache[lc] = fetchDict(I18N_BASE + lc + ".json"));
+  const b = bodyCache[lc]   || (bodyCache[lc]   = fetchDict(BODY_BASE + "designops." + lc + ".json"));
+  return Promise.all([c, b]).then(([cd, bd]) => ({ ...(cd || {}), ...(bd || {}) }));
+}
+let curLang = "ES";
+try { curLang = localStorage.getItem("jds-lang") || "ES"; } catch(e) {}
+function applyI18n(lang){
+  return loadMerged(lang).then(d => {
+    if(curLang !== lang) return;
+    document.documentElement.setAttribute("lang", lang === "ES" ? "es" : "en");
+    document.documentElement.setAttribute("data-lang", lang);
+    document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.getAttribute("data-i18n"); if(d[k]!==undefined && el.children.length===0) el.textContent=d[k]; });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ const k=el.getAttribute("data-i18n-aria"); if(d[k]!==undefined) el.setAttribute("aria-label",d[k]); });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ const k=el.getAttribute("data-i18n-placeholder"); if(d[k]!==undefined) el.placeholder=d[k]; });
+    document.querySelectorAll("[data-i18n-alt]").forEach(el=>{ const k=el.getAttribute("data-i18n-alt"); if(d[k]!==undefined) el.alt=d[k]; });
+    document.dispatchEvent(new CustomEvent("i18n:changed",{ detail:{ lang, dict:d } }));
+  });
+}
+function swapLang(lang){ curLang=lang; try{ localStorage.setItem("jds-lang",lang); }catch(e){} applyI18n(lang); }
+applyI18n(curLang);
+
+/* Nav chrome (href rewrite + SwapLang panel) — promoted to core/navchrome.js (task 6.2.1). */
+
+/* Scroll progress bar — moved to shared assets/js/core/progress.js (P-5), loaded via the module bootstrap at the end of the page (P-5). */
+
+/* ============ Reveal system: accordion ≤1023 / side-panel ≥1024 (approved) ============ */
+const mqDesktop = window.matchMedia("(min-width:1024px)");
+const panel = document.getElementById("panel");
+const panelSlot = document.getElementById("panelSlot");
+const panelTitle = document.getElementById("panelTitle");
+const panelClose = document.getElementById("panelClose");
+let panelHome = null, panelTrigger = null;
+
+function closePanel(){
+  if(panelHome && panelSlot.firstElementChild){
+    const body = panelSlot.firstElementChild;
+    body.hidden = true;
+    panelHome.replaceWith(body);
+    panelHome = null;
+  }
+  panel.classList.remove("is-open");
+  panel.setAttribute("aria-hidden","true");
+  if(panelTrigger){ panelTrigger.setAttribute("aria-expanded","false"); panelTrigger.focus(); panelTrigger=null; }
+}
+panelClose.addEventListener("click", closePanel);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && panel.classList.contains("is-open")) closePanel(); });
+
+function closeAccordionsIn(actName, except){
+  document.querySelectorAll('.reveal[data-act="'+actName+'"] .reveal__btn').forEach(btn=>{
+    if(btn!==except && btn.getAttribute("aria-expanded")==="true"){
+      btn.setAttribute("aria-expanded","false");
+      document.getElementById(btn.getAttribute("aria-controls")).hidden = true;
+    }
+  });
+}
+document.querySelectorAll(".reveal__btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const body = document.getElementById(btn.getAttribute("aria-controls"));
+    const act = btn.closest(".reveal").getAttribute("data-act");
+    const isOpen = btn.getAttribute("aria-expanded")==="true";
+    if(mqDesktop.matches){
+      if(isOpen){ closePanel(); return; }
+      closePanel();
+      closeAccordionsIn(act, btn);
+      panelHome = document.createComment("panel-home");
+      body.replaceWith(panelHome); panelSlot.replaceChildren(body);
+      body.hidden = false;
+      panelTitle.textContent = btn.getAttribute("data-panel-title") || "";
+      panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
+      btn.setAttribute("aria-expanded","true");
+      panelTrigger = btn; panelClose.focus();
+    } else {
+      closeAccordionsIn(act, btn);
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      body.hidden = isOpen;
+    }
+  });
+});
+mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
+
+/* ============ Dashboard tabs ============
+   Two tiers now: which build, and which level within it. Both are one-of-n, so
+   both are tablists, and each resolves its panel from aria-controls rather than
+   from a hardcoded id map — the build panels each own a level tablist, and a map
+   would have to know about both tiers. Arrow keys move between tabs in the same
+   list, which is the pattern the role expects. ============ */
+document.querySelectorAll('[role="tablist"]').forEach(list=>{
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  function select(tab){
+    tabs.forEach(t=>{
+      const sel = t === tab;
+      t.setAttribute("aria-selected", String(sel));
+      t.tabIndex = sel ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      if(panel) panel.hidden = !sel;
+    });
+    const panel = document.getElementById(tab.getAttribute("aria-controls"));
+    if(panel) runCounts(panel);
+  }
+  tabs.forEach((tab,i)=>{
+    tab.tabIndex = tab.getAttribute("aria-selected") === "true" ? 0 : -1;
+    tab.addEventListener("click", ()=> select(tab));
+    tab.addEventListener("keydown", e=>{
+      let nx = null;
+      if(e.key === "ArrowRight") nx = tabs[(i+1) % tabs.length];
+      if(e.key === "ArrowLeft")  nx = tabs[(i-1+tabs.length) % tabs.length];
+      if(e.key === "Home")       nx = tabs[0];
+      if(e.key === "End")        nx = tabs[tabs.length-1];
+      if(nx){ e.preventDefault(); nx.focus(); select(nx); }
+    });
+  });
+});
+
+/* ============================================================
+   ACT 03 · SCHEDULE ORGANISM — data-driven, calendar-scaled.
+   Instantiation contract: only the DATA object is edited per
+   brief; markup, CSS and logic are the organism's own.
+
+   Converted from the Verify App brief's roadmap organism, whose
+   axis was cumulative story points and whose layout made every
+   task contiguous (cursor += t.sp). Neither build here has story
+   points recorded, so the axis is calendar time: every row
+   carries a real start and end date, rows may leave gaps, and
+   the gaps are load-bearing — 19–25 Jun and the 34-day dormant
+   stretch from 25 Jul to 28 Aug are facts the chart must show.
+
+   Sources: E1a and E1b from the public commit history of
+   jdsaire/jdigital and jdsaire/legacy-desops. E2 from this
+   repository's own merged pull-request spine, #6–#25. The one
+   row not sourced to a commit is badged on its face.
+   ============================================================ */
+(function scheduleOrganism(){
+  'use strict';
+
+  var AXIS_START = '2026-04-24';
+  var AXIS_END   = '2026-09-08';
+  /* The record stops here. Nothing is drawn past it: the four dispatched stages
+     that follow carry no date, and drawing them would invent one. The caption
+     names them and the milestone marks the boundary. */
+  var MEASURED_TO = '2026-09-06';
+
+  var DATA = {
+    epics: [
+      { id:'e1a', name:'01 Single Page', commits:'240 commits', prs:'48 PRs', start:'2026-04-24', end:'2026-06-18', tasks:[
+          { id:'sch_e1', window:"24–28 Apr · 5 days", name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
+          { id:'sch_e2', window:"30 Apr – 06 May · 5 days", name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
+          { id:'sch_e3', window:"07–12 May · 5 days", name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
+          { id:'sch_e4', window:"19–28 May · 4 days", name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
+          { id:'sch_e5', window:"30–31 May · 2 days", name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
+          { id:'sch_e6', window:"03–07 Jun · 5 days", name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
+        ]},
+      { id:'e1b', name:'02 Repo Hygiene', commits:'46 commits', prs:'4 PRs', start:'2026-06-26', end:'2026-07-04', tasks:[
+          { id:'sch_e7', window:"26–27 Jun · 2 days", name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
+          { id:'sch_e8', window:"29–30 Jun · 2 days", name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
+          { id:'sch_e9', window:"04 Jul · 1 day", name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
+        ]},
+      { id:'e2', name:'03 Multi Page', commits:'103 commits', prs:'20 PRs', start:'2026-07-10', end:'2026-09-08', tasks:[
+          { id:'e2t0', name:"History reset and per-organism rebuild", start:'2026-07-10', end:'2026-07-11', commits:2 },
+          { id:'e2t1', name:"Multi-page strategy runs", start:'2026-07-12', end:'2026-07-25', commits:38 },
+          { id:'e2t6', name:"Defect inventory", start:'2026-08-28', end:'2026-08-29', commits:2 },
+          { id:'e2t7', name:"AccreditaPass brief", start:'2026-08-30', end:'2026-08-30', commits:14 },
+          { id:'e2t8', name:"Home reallocation", start:'2026-08-31', end:'2026-08-31', commits:13 },
+          { id:'e2t9', name:"Trust-Verify relink", start:'2026-09-01', end:'2026-09-01', commits:4 },
+          { id:'e2t10', name:"Airport brief and global mechanisms", start:'2026-09-05', end:'2026-09-05', commits:20 },
+          { id:'e2t11', name:"Vector asset pass", start:'2026-09-06', end:'2026-09-06', commits:10 }
+        ]}
+    ],
+    /* Milestones sit on measured dates only. */
+    milestones: [
+      { epic:'e1b', at:'2026-07-04', name:'Brief handoff' },
+      { epic:'e2',  at:'2026-07-10', name:'History reset' },
+      { epic:'e2',  at:MEASURED_TO, name:'Record ends' }
+    ]
+  };
+
+
+  var root = document.getElementById('gantt');
+  if(!root) return;
+
+  /* ---------- Derived layout: calendar days ---------- */
+  var DAY = 86400000;
+  function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
+  function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
+  var TOTAL_DAYS = offset(AXIS_END) + 1;
+
+  /* An end date is inclusive, so a one-day task is one day wide, not zero. */
+  function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
+  function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
+
+  DATA.epics.forEach(function(epic){
+    var starts = epic.tasks.map(function(t){ return offset(t.start); });
+    var ends   = epic.tasks.map(function(t){ return offset(t.end); });
+    epic.startOff = Math.min.apply(null, starts);
+    epic.endOff   = Math.max.apply(null, ends);
+    /* A band's window is declared from the copy lock, not derived from its task
+       rows: jdigital's repository ran to 18 Jun while its last three dates carried
+       document uploads rather than site code and hold no task. The drawn bar still
+       has to contain every task it owns, so it spans whichever runs later — which is
+       how legacy-desops' bar reaches 06 Jul to hold the one row I supply myself. */
+    epic.startOff = Math.min(epic.startOff, offset(epic.start));
+    epic.endOff   = Math.max(epic.endOff,   offset(epic.end));
+    epic.days = epic.endOff - epic.startOff + 1;
+    /* Derived sums, kept as the internal record and deliberately NOT displayed:
+       they are named apart from epic.commits, which is the declared cell string.
+       Band 03's rowCommits is the invariant — it must total 103. */
+    epic.rowCommits = epic.tasks.reduce(function(a,t){ return a + (t.commits || 0); }, 0);
+    epic.taskDays   = epic.tasks.reduce(function(a,t){ return a + spanOf(t); }, 0);
+  });
+
+  var grid    = document.getElementById('ganttGrid');
+  var chart   = document.getElementById('ganttChart');
+
+  var MONTHS = ['2026-05-01','2026-06-01','2026-07-01','2026-08-01','2026-09-01'];
+  var MNAME  = { '05':'May', '06':'Jun', '07':'Jul', '08':'Aug', '09':'Sep' };
+
+  function ticksHtml(){
+    var h = '<span class="gantt__tick" style="left:0">Apr</span>' +
+            '<span class="gantt__gridline" style="left:0"></span>';
+    MONTHS.forEach(function(iso){
+      var l = pct(offset(iso));
+      h += '<span class="gantt__tick" style="left:' + l + '">' + MNAME[iso.slice(5,7)] + '</span>';
+      h += '<span class="gantt__gridline" style="left:' + l + '"></span>';
+    });
+    return h;
+  }
+
+  function fmt(iso){
+    var p = iso.split('-'), mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return p[2].replace(/^0/,'') + ' ' + mn[+p[1]-1];
+  }
+  function window_(item){
+    return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end);
+  }
+
+  function barHtml(item, cls, id, isEpic){
+    var days = isEpic ? item.days : spanOf(item);
+    var left = isEpic ? item.startOff : offset(item.start);
+    var mod  = '';
+    if(item.flag === 'principal') mod = ' gantt__bar--principal';
+    var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
+    var label = '<span class="gantt__span">' + days + 'd</span>';
+    return '<div class="gantt__bar ' + cls + mod + '" data-bar="' + id + '"' +
+           (item.flag ? ' data-flag="' + item.flag + '"' : '') +
+           ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
+           item.name + ', ' + window_(item) + ' 2026, ' + days + ' days' + provenance + '">' + label + '</div>';
+  }
+  function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
+  /* One shape per level, so no two cells in the column carry different fields.
+     An epic states its window, its commits and its pull requests, one per line.
+     A task states its window and nothing else: the day counts and per-row commit
+     totals it used to print were derived differently per band and disagreed with
+     the bar beside them. Both still live in the DATA object as the record. */
+  function summaryHtml(item, isEpic){
+    if(isEpic) return '<b>' + window_(item) + '</b>' +
+                      '<span class="gantt__days">' + item.commits + '</span>' +
+                      '<span class="gantt__days">' + item.prs + '</span>';
+    return '<b>' + window_(item) + '</b>';
+  }
+
+  var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div>' +
+             '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
+             '<div class="gantt__axis-summary">Window</div></div>';
+
+  DATA.epics.forEach(function(epic){
+    html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
+      '<div class="gantt__row">' +
+        '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
+          '<span class="gantt__marker" aria-hidden="true">›</span>' + epic.name + '</button></div>' +
+        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id, true) +
+          '<span data-ms-slot="' + epic.id + '"></span></div>' +
+        '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + window_(epic) + ' 2026, ' + epic.commits + ', ' + epic.prs + '">' + summaryHtml(epic, true) + '</div>' +
+      '</div>' +
+      '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
+    epic.tasks.forEach(function(t){
+      html += '<li class="gantt__task-row" data-task="' + t.id + '">' +
+        '<span class="gantt__task-label">' +
+          '<span' + (isLocked(t) ? ' data-i18n="' + t.id + '_t"' : '') + '>' + t.name + '</span>' +
+        '</span>' +
+        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id, false) + '</span>' +
+        '<span class="gantt__task-summary">' + summaryHtml(t, false) + '</span></li>';
+    });
+    html += '</ul></div>';
+  });
+  grid.innerHTML = html;
+
+  DATA.milestones.forEach(function(m){
+    var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
+    if(!slot) return;
+    var l = pct(offset(m.at));
+    slot.outerHTML = '<span>' +
+      '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="Milestone: ' +
+      m.name + ', ' + window_({start:m.at, end:m.at}) + ' 2026"></span>' +
+      '<span class="gantt__milestone-label" style="left:' + l + '">' + m.name + '</span></span>';
+  });
+
+  /* ---------- Zoom: expand / collapse ---------- */
+  var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+  /* No expand-all control: its two strings retire with the rail, and N6 makes
+     individual disclosure the only mechanism. Epics stay collapsed until opened. */
+  function setExpanded(btn, expanded){
+    btn.setAttribute('aria-expanded', String(expanded));
+    var list = document.getElementById(btn.getAttribute('aria-controls'));
+    if(list) list.hidden = !expanded;
+  }
+  toggles.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
+    });
+    btn.addEventListener('keydown', function(e){
+      var nx = null;
+      if(e.key === 'ArrowDown') nx = toggles[i+1];
+      if(e.key === 'ArrowUp')   nx = toggles[i-1];
+      if(e.key === 'Home')      nx = toggles[0];
+      if(e.key === 'End')       nx = toggles[toggles.length-1];
+      if(nx){ e.preventDefault(); nx.focus(); }
+    });
+  });
+})();
+
+/* ============ Count-up (once per element, reduced-motion aware) ============ */
+const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+function runCounts(scope){
+  (scope||document).querySelectorAll("[data-count]").forEach(el=>{
+    if(el.dataset.done || el.closest("[hidden]")) return; el.dataset.done="1";
+    const raw = el.dataset.count, target = parseFloat(raw), dec = raw.includes(".") ? 1 : 0;
+    if(reduce || target===0){ el.textContent = target.toFixed(dec); return; }
+    let t0=null; const dur=700;
+    const step=(ts)=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1);
+      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec); if(p<1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ============ Entrance (once) ============ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    en.target.classList.add("is-in");
+    runCounts(en.target);
+    io.unobserve(en.target);
+  });
+},{threshold:0.18});
+document.querySelectorAll(".io").forEach(el=>io.observe(el));
+</script>
+<script type="module">
+  import { init as initProgress } from "../../assets/js/core/progress.js";
+  import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
+  import { init as initTheme }    from "../../assets/js/core/theme.js";
+  initTheme();
+  initProgress();
+  initNavChrome({ swapLang: window.swapLang });
+</script>
+</body>
+</html>
