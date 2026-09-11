@@ -97,8 +97,6 @@
   "dash2_d2_p": "20 PRs ÷ 8.6 weeks",
   "dash_d3": "Commits per review gate",
   "dash_d3_p": "286 commits ÷ 52 PRs",
-  "dash_d4": "Review gates in 71 days",
-  "dash_d4_p": "A gate roughly every 6 commits",
   "dash_r1_t": "Reviewed, not rushed",
   "dash_r1": "286 commits went through 52 review gates. Nothing shipped without passing a check I set for myself first.",
   "dash_r3_t": "What transfers",
