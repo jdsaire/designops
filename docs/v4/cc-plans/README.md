@@ -7,3 +7,4 @@ Approved deployment plans for v4 and later.
 | S7 · Assets | `Plan-S7-Assets.md` |
 | S8 · Global mechanisms | `Plan-S8-GlobalMechanisms.md` |
 | S10-A · Portfolio Evolution | `Plan-S10A-PortfolioEvolution.md` |
+| S10-A · Iteration | `Plan-S10A-Iteration.md` |

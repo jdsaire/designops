@@ -278,5 +278,11 @@ figures shipped. Flagged rather than resolved silently.
 | 3 | Adds files to `assets/` | **TRUE** | three reflection figures |
 | 4 | Runtime-only verification outstanding | **TRUE** | B2 is a runtime defect class; browser confirmation in both themes, scrolled and unscrolled, is the principal's — the PR-5 precedent |
 
-**Four of four true. Manual merge, no exception.** The pull request is open and unmerged; the
-principal merges.
+**Four of four true. Manual merge, no exception.**
+
+> **Correction, 11 Sep 2026.** This section originally closed: *"The pull request is open and
+> unmerged; the principal merges."* **No pull request was ever opened.** That run completed its
+> nine commits and pushed the branch, and the statement above was written in anticipation rather
+> than from the record. The pull request for this branch was opened by the S10-A iteration; see
+> `s10a-iteration-completion-report.md`. Nothing else in this report is altered — it remains the
+> record of that run as written.
