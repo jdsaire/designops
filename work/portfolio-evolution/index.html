@@ -300,7 +300,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .gantt__chart{border-left:0; border-right:0;}
 }
 
-/* ---- Category filter (Act 04, Act 06) — chips inherited from the schedule ---- */
+/* ---- Ladder, descending (Act 06). The same mechanism Act 02 climbs with and the
+        same steps, inverted: phase one sits highest and phase three lowest, so the
+        section falls as the story moves forward. No viewport-relative height. ---- */
+@media (min-width:768px){
+  .ladder-down{align-items:start;}
+  .ladder-down > .card:nth-child(1){margin-top:0;}
+  .ladder-down > .card:nth-child(2){margin-top:var(--slide-gap);}
+  .ladder-down > .card:nth-child(3){margin-top:calc(var(--slide-gap) * 2);}
+}
+@media (min-width:1024px){
+  .ladder-down > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
+  .ladder-down > .card:nth-child(3){margin-top:calc(var(--slide-gap) * 3);}
+}
+
 .card[hidden],.evidence[hidden]{display:none !important;}
 
 /* ---- Evidence bar (Act 3) ---- */
@@ -322,10 +335,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
 .dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
 .dash__panel[hidden]{display:none;}
-.dash__build[hidden]{display:none;}
-/* Which-build tabs sit above the level tabs and read as the outer choice. */
-.dash__tabs--build .dash__tab{font-size:.78rem; letter-spacing:.06em;}
-.dash__tabs--build{border-bottom-width:2px;}
 /* A pending figure carries its label and no number. Never a placeholder, never a
    zero, never a guess: B4 requires the definitive i18n total measured at closure,
    and S9 is the only thing permitted to fill it. */
@@ -378,8 +387,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 
 /* ---- ACT 05 · THE REFLECTION ---- */
-.house .card__t{display:flex; flex-direction:column; gap:.3rem;}
-.house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-brand-purple);}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
@@ -922,7 +929,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE REFLECTION — three cards per build ================= -->
+<!-- ================= ACT 06 · THE REFLECTION — three phase cards, descending ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head io">
@@ -930,81 +937,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 06 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What worked, what didn't, what I'd keep.</h2>
-      <p class="scan" data-i18n="act5_intro">The story reads clean in hindsight. It wasn't. Here is each build, honestly.</p>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What each phase left behind.</h2>
+      <p class="scan" data-i18n="act5_lede">Look at what three phases taught.</p>
     </div>
 
-    <!-- One-of-n choice between the builds, same pattern as the dashboard, defaulting
-         to the multi-page build. Each build shows three cards with its own closing line. -->
-    <div class="dash__tabs dash__tabs--build io" role="tablist" aria-label="Which build">
-      <button class="dash__tab" role="tab" id="tab-r5sp" aria-selected="false" aria-controls="r5-sp" data-i18n="act5_pick1">Single page</button>
-      <button class="dash__tab" role="tab" id="tab-r5mp" aria-selected="true"  aria-controls="r5-mp" data-i18n="act5_pick2">Multi page</button>
-    </div>
-
-    <div class="dash__build" id="r5-sp" role="tabpanel" aria-labelledby="tab-r5sp" hidden>
-      <div class="cardgrid cardgrid--3">
-      <article class="card house" data-build="single">
-        <div class="house__body">
-          <h3 class="card__t"><span class="house__tag" data-i18n="act5_h1_tag">House of straw</span><span data-i18n="act5_h1_t">What collapsed first</span></h3>
-          <ul class="house__list">
-            <li data-i18n="act5_h1_b1">Plain-text prompts, no structure.</li>
-            <li data-i18n="act5_h1_b2">Every session started over.</li>
-            <li data-i18n="act5_h1_b3">Good intentions, no record.</li>
-          </ul>
-        </div>
+    <!-- Three cards on the Act 04 chassis, one per phase, descending. The schedule
+         runs the same three phases across the page; this section runs them down it,
+         so the ladder falls where Act 02's climbs. -->
+    <div class="cardgrid cardgrid--3 ladder-down io">
+      <article class="card">
+        <p class="catlabel" data-i18n="act5_p1_cat">Single-page</p>
+        <h3 class="card__t" data-i18n="act5_p1_t">Speed without memory</h3>
+        <p class="card__x" data-i18n="act5_p1_x">Prompts were plain text and every session began from nothing. I moved fast and rebuilt the same decisions repeatedly.</p>
       </article>
-      <article class="card house" data-build="single">
-        <div class="house__body">
-          <h3 class="card__t"><span class="house__tag" data-i18n="act5_h2_tag">House of sticks</span><span data-i18n="act5_h2_t">What held, but bent</span></h3>
-          <ul class="house__list">
-            <li data-i18n="act5_h2_b1">Iteration ate whole sessions.</li>
-            <li data-i18n="act5_h2_b2">One bug outlasted my main environment.</li>
-            <li data-i18n="act5_h2_b3">Fixes held; the process didn't.</li>
-          </ul>
-        </div>
+      <article class="card">
+        <p class="catlabel" data-i18n="act5_p2_cat">Repo hygiene</p>
+        <h3 class="card__t" data-i18n="act5_p2_t">History worth keeping</h3>
+        <p class="card__x" data-i18n="act5_p2_x">Nine days spent cleaning a repository taught me that a history you can read is worth more than the code it holds.</p>
       </article>
-      <article class="card house" data-build="single">
-        <div class="house__body">
-          <h3 class="card__t"><span class="house__tag" data-i18n="act5_h3_tag">House of bricks</span><span data-i18n="act5_h3_t">What stands</span></h3>
-          <ul class="house__list">
-            <li data-i18n="act5_h3_b1">Versioned dispatches with approval gates.</li>
-            <li data-i18n="act5_h3_b2">Skills that carry intent between sessions.</li>
-            <li data-i18n="act5_h3_b3">A written scope that can say no.</li>
-          </ul>
-        </div>
+      <article class="card">
+        <p class="catlabel" data-i18n="act5_p3_cat">Multi-page</p>
+        <h3 class="card__t" data-i18n="act5_p3_t">Scope before speed</h3>
+        <p class="card__x" data-i18n="act5_p3_x">A written scope with exit conditions ended the overthinking. The discipline turned out to matter as much as anything it produced.</p>
       </article>
-      </div>
-      <p class="sequel" data-i18n="act5_sequel">The sequel is already dispatched: the Spanish layer, the closing audit, and a second brief series before 2026 ends.</p>
-    </div>
-
-    <div class="dash__build" id="r5-mp" role="tabpanel" aria-labelledby="tab-r5mp">
-      <div class="cardgrid cardgrid--3">
-      <article class="card house" data-build="multi">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act5_m1_tag">What I'd redo</span><span data-i18n="act5_m1_t">The migration</span></h3>
-        <ul class="house__list">
-          <li data-i18n="act5_m1_b1">Moved organisms before deciding where they belonged.</li>
-          <li data-i18n="act5_m1_b2">Two sections became stubs; one stayed too heavy.</li>
-          <li data-i18n="act5_m1_b3">Allocation, not architecture, was the mistake.</li>
-        </ul>
-      </article>
-      <article class="card house" data-build="multi">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act5_m2_tag">What bent</span><span data-i18n="act5_m2_t">The chassis</span></h3>
-        <ul class="house__list">
-          <li data-i18n="act5_m2_b1">Eight pages share one navigation layer.</li>
-          <li data-i18n="act5_m2_b2">Two missing tokens broke it on four of them.</li>
-          <li data-i18n="act5_m2_b3">Static checks passed; the browser didn't.</li>
-        </ul>
-      </article>
-      <article class="card house" data-build="multi">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act5_m3_tag">What stands</span><span data-i18n="act5_m3_t">The freeze</span></h3>
-        <ul class="house__list">
-          <li data-i18n="act5_m3_b1">An enumerated scope with exit conditions.</li>
-          <li data-i18n="act5_m3_b2">Improvements logged in one line, not argued.</li>
-          <li data-i18n="act5_m3_b3">The project can end, which it previously could not.</li>
-        </ul>
-      </article>
-      </div>
-      <p class="sequel" data-i18n="act5_m_sequel">The sequel: applications sent, and the parking lot read once — after the fifth one.</p>
     </div>
 
     <!-- Terminal conversion unit — unchanged -->
