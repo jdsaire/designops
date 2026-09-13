@@ -245,8 +245,15 @@ html[data-theme="light"] .work-card {
   .work-card { flex: 0 0 78vw; max-width: 320px; scroll-snap-align: center; }
   .work__dots { display: flex; }
 }
+/* Carousel cards keep the desktop tile's proportion (S10C). At 4 / 5 the
+   card was too short for its art: the 640x512 artwork sizes by card width
+   from --work-art-top down, so the card's overflow clipped 72-96px of every
+   image below 1024px. Desktop runs ~1.69x tall with the art from 52%, which
+   shows it whole; 10 / 17 with the same art top does the same here. */
+@media (max-width: 1023px) {
+  .work-card { aspect-ratio: 10 / 17; --work-art-top: 52%; }
+}
 @media (min-width: 768px) and (max-width: 1023px) {
-  .work-card { --work-art-top: 54%; }
   .work__track {
     display: flex;
     flex-direction: row;
