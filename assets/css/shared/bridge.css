@@ -105,24 +105,15 @@
 
 /* ── Tablet + Desktop: spatial split, no overlay ──────────── */
 @media (min-width: 768px) {
-  /* S10C: the bridge opens about/ beneath the fixed nav. Both halves start
-     below it and centre on the same band, so the heading and the portrait
-     sit middle-aligned rather than top-anchored. */
   .bridge {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding-top: var(--nav-height);
-    box-sizing: border-box;
   }
   .bridge__media {
-    top: var(--nav-height);
     left: auto;
     right: 0;
     width: 50%;
-  }
-  .bridge__image {
-    object-position: center center;
   }
   .bridge__overlay {
     display: none;
