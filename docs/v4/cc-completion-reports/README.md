@@ -8,3 +8,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | S8 · Global mechanisms | `s8-global-mechanisms-completion-report.md` |
 | S10-A · Portfolio Evolution | `s10a-portfolio-evolution-completion-report.md` |
 | S10-A · Iteration | `s10a-iteration-completion-report.md` |
+| S10-C · Main organism hygiene | `s10c-main-organism-hygiene-completion-report.md` |
