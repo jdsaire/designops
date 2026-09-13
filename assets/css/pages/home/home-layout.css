@@ -23,6 +23,11 @@
   #about .section__inner { text-align: center; }
 }
 #about .cta { margin-top: clamp(0.5rem, 1vw, 1rem); }
+/* CTA to ticker lanes (S10C): two thirds of the stacked default, the .cta's
+   2rem bottom margin plus the lanes' clamp(2.5rem, 4vw, 4rem) top margin,
+   carried by the lanes alone so the ratio holds at every breakpoint. */
+#about .cta { margin-bottom: 0; }
+#about .ticker__lanes { margin-top: calc((2rem + clamp(2.5rem, 4vw, 4rem)) * 2 / 3); }
 
 /* ---- CONTACT · centred at desktop and tablet ----
    Mirrors the header contract in shared/designops-variant.css. Scoped to Main
