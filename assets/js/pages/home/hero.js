@@ -12,11 +12,11 @@ function init() {
   (function heroBuild() {
     var left = document.querySelector('.hero__left');
     if (!left || prefersReducedMotion) return;
-    var badge = left.querySelector('.hero__badge');
     var h1 = Array.prototype.slice.call(left.querySelectorAll('.hero__h1'))
       .filter(function (el) { return el.offsetParent !== null; })[0];
+    var meta = left.querySelector('.hero__meta');
     var cta = left.querySelector('.cta');
-    var seq = [badge, h1, cta].filter(Boolean);
+    var seq = [h1, meta, cta].filter(Boolean);
     if (!seq.length || typeof seq[0].animate !== 'function') return;
     seq.forEach(function (el, i) {
       el.animate(
