@@ -26,9 +26,9 @@
    The 62fr/38fr split carried no right column, so it collapses to one. */
 .hero__left { display:flex; flex-direction:column; align-items:center; text-align:center; gap:clamp(1rem,1.75vw,1.75rem); }
 
-/* Meta row below the headline: badge beside the attribution, wrapping to
-   two centred lines where the width runs out. */
-.hero__meta { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:0.25rem clamp(1rem,2vw,1.75rem); }
+/* Meta stack below the headline: the attribution, with the badge on its
+   own centred line beneath it. */
+.hero__meta { display:flex; flex-direction:column; align-items:center; gap:0.25rem; }
 /* Attribution relocated from the onboarding bridge; its type carries over
    from .bridge__attribution in shared/bridge.css, margins reset for the row. */
 .hero__attribution {
