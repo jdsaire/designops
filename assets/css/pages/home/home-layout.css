@@ -50,6 +50,11 @@
    forms are display:none, so assistive tech meets each pillar once. */
 @media (max-width: 767px) {
   #capabilities .teaser__triptych { display: none; }
+  /* The chassis bleeds its track into the right gutter, a peek device from
+     the desktop carousel. With one full-width slide it only pushed each slide
+     to the screen edge: 0px right margin against the gutter on the left, the
+     next button flush with the edge, long lines running into it. */
+  #capabilities .services__carousel { margin-right: 0; }
 }
 @media (min-width: 768px) {
   #capabilities .services__carousel-outer,
