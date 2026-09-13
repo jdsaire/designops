@@ -97,6 +97,17 @@ html[data-theme="light"] .work-card {
   --surface-hover:       #1A1A1A;
   --surface-elevated:    #1E1E1E;
 }
+/* On a white ground the purple lift reads as a lavender haze around each tile
+   in the phone carousel, so light mode drops it there (S10C). The neutral
+   drop shadow and the hairlines stay; tablet and desktop keep the lift. */
+@media (max-width: 767px) {
+  html[data-theme="light"] .work-card {
+    box-shadow:
+      0 2px 8px   var(--shadow-1),
+      inset 0 1px 0   rgba(var(--ink), 0.14),
+      inset 0 0 0 1px rgba(var(--ink), 0.12);
+  }
+}
 .work-card__bg-img {
   position: absolute;
   top: var(--work-art-top);
