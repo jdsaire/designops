@@ -1,4 +1,5 @@
-/* home/hero.js — HERO S3 sequenced build (O-1) + track-record stat count-up.
+/* home/hero.js — HERO S3 sequenced build (O-1).
+   The track-record stat count-up left with its organism for about/stats.js (S10C).
 
    O-1: the hero entrance is a spec-capability-03 sequenced timeline built
    with the Web Animations API (transform + opacity only, per-element
@@ -28,33 +29,6 @@ function init() {
       );
     });
   })();
-
-  /* ── track-record stat count-up ── */
-  var counters = document.querySelectorAll('.stat__number[data-target]');
-  function renderFinal(el) {
-    el.textContent = parseInt(el.dataset.target, 10).toLocaleString() + (el.dataset.suffix || '');
-  }
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    counters.forEach(renderFinal);
-  } else {
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.dataset.target, 10);
-        const suffix = el.dataset.suffix || '';
-        const steps = 40, interval = 1200 / steps;
-        let step = 0;
-        const t = setInterval(() => {
-          step++;
-          el.textContent = Math.round(target * (step / steps)).toLocaleString() + suffix;
-          if (step >= steps) { clearInterval(t); renderFinal(el); }
-        }, interval);
-        obs.unobserve(el);
-      });
-    }, { threshold: 0.3 });
-    counters.forEach(el => io.observe(el));
-  }
 }
 
 export { init };

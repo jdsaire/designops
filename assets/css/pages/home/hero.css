@@ -76,8 +76,6 @@ html[data-lang="ES"] .hero__h1--lang-en { display:none; }
 .hero__eyebrow { display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem; font-size:0.8rem; font-weight:var(--fw-semibold); letter-spacing:0.12em; color:var(--color-brand-white); text-transform:uppercase; }
 .hero__eyebrow-bar { width:2.5rem; height:3px; background:var(--color-brand-purple); flex-shrink:0; }
 .hero__stats { display:grid; grid-template-columns:1fr 1fr; gap:clamp(1rem,1.8vw,1.75rem) clamp(1rem,2vw,2rem); }
-.stat__number { font-size:clamp(1.875rem,2.8vw,2.75rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em; color:var(--color-brand-white); }
-.stat__label { margin-top:0.4rem; font-size:0.78rem; font-weight:var(--fw-regular); line-height:1.5; color:var(--color-text-muted); }
 
 .cta { display:inline-flex; align-items:center; gap:0.75rem; cursor:pointer; width:fit-content; padding:0.125rem 0; margin-bottom:2rem; }
 .cta__label { font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em; }

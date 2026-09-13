@@ -199,3 +199,29 @@
   }
 }
 
+/* ---- TRACK RECORD · relocated from Main (S10C) ----
+   The organism moved here from index.html, and these rules moved with it
+   from pages/home/home-layout.css. about/ links shared/designops-variant.css
+   after this file, so each override is scoped to #track-record to win on
+   specificity rather than on load order. */
+
+/* Fifth figure hidden (S4D · F3.8). The bilingual-engine key count goes
+   stale every time the dictionaries grow or shrink. Hidden rather than
+   maintained; markup and both dictionary values are retained, and deleting
+   this rule restores it. */
+#track-record .track-record__stats .stat:nth-child(5) { display: none; }
+
+/* Grid after the fifth figure was hidden (S4D-fix). The shared grid is
+   repeat(5, 1fr); hiding the fifth stat left its column standing empty.
+   Four columns close the gap. */
+@media (min-width: 901px) {
+  #track-record .track-record__stats { grid-template-columns: repeat(4, 1fr); }
+}
+/* Two-column band: keep the columns, left-align the text inside each.
+   Below 480px the shared staircase drops to one column and already
+   left-aligns, so the treatment is consistent across both. */
+@media (max-width: 900px) {
+  #track-record .track-record__stats .stat,
+  #track-record .track-record__stats .stat__number,
+  #track-record .track-record__stats .stat__label { text-align: left; }
+}

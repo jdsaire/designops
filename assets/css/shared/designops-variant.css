@@ -175,6 +175,9 @@
   margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }
 .track-record__stats .stat { text-align: center; }
+/* Figure type, relocated from home/hero.css with the organism (S10C). */
+.stat__number { font-size:clamp(1.875rem,2.8vw,2.75rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em; color:var(--color-brand-white); }
+.stat__label { margin-top:0.4rem; font-size:0.78rem; font-weight:var(--fw-regular); line-height:1.5; color:var(--color-text-muted); }
 /* P-11: 900px/480px are RETAINED (not migrated to the canonical 767/1023
    hinges). They are the column-count staircase for the five-stat track
    record grid (5 → 2 → 1), load-bearing for this specific grid rather than
