@@ -43,6 +43,20 @@
    CTA: the shared header margin-bottom plus #about .cta's margin-top. */
 #contact .cta { margin-top: clamp(2rem, 3.5vw, 3.5rem); }
 
+/* ---- CAPABILITIES · slide carousel on mobile, triptych above (S10C) ----
+   Main carries both forms of the three pillars. At 767px and below, the
+   legacy slide chassis (capabilities.css) replaces the vertical stack;
+   from tablet up, the triptych stays and the carousel is withheld. Hidden
+   forms are display:none, so assistive tech meets each pillar once. */
+@media (max-width: 767px) {
+  #capabilities .teaser__triptych { display: none; }
+}
+@media (min-width: 768px) {
+  #capabilities .services__carousel-outer,
+  #capabilities .services__controls,
+  #capabilities .services__dots { display: none; }
+}
+
 /* ---- CAPABILITIES · per-vertical CTAs hidden (S4D · F3.6) ----
    Main's Contact organism already carries a conversation CTA, which makes
    three more redundant. Markup and cap_slide_cta are retained: the key stays
