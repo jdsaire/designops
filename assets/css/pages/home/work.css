@@ -97,6 +97,17 @@ html[data-theme="light"] .work-card {
   --surface-hover:       #1A1A1A;
   --surface-elevated:    #1E1E1E;
 }
+/* On a white ground the purple lift reads as a lavender haze around each tile
+   in the phone carousel, so light mode drops it there (S10C). The neutral
+   drop shadow and the hairlines stay; tablet and desktop keep the lift. */
+@media (max-width: 767px) {
+  html[data-theme="light"] .work-card {
+    box-shadow:
+      0 2px 8px   var(--shadow-1),
+      inset 0 1px 0   rgba(var(--ink), 0.14),
+      inset 0 0 0 1px rgba(var(--ink), 0.12);
+  }
+}
 .work-card__bg-img {
   position: absolute;
   top: var(--work-art-top);
@@ -160,19 +171,16 @@ html[data-theme="light"] .work-card {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* The CTA takes the Contact organism's .cta form, label plus purple icon
+   square (S10C); this rule only places and reveals it. .cta's 2rem bottom
+   margin is for flow layout and has no place on an absolute element. */
 .work-card__cta {
   position: absolute;
   bottom: clamp(1.5rem, 2.25vw, 2.25rem);
   right:  clamp(1.5rem, 2.25vw, 2.25rem);
   z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 1.125rem;
-  font-weight: var(--fw-bold);
-  color: var(--color-brand-white);
+  margin-bottom: 0;
   text-decoration: none;
-  letter-spacing: -0.01em;
   opacity: 0;
   transform: translateY(8px);
   transition:
@@ -186,7 +194,6 @@ html[data-theme="light"] .work-card {
   outline: 2px solid var(--color-brand-purple);
   outline-offset: 4px;
 }
-.work-card__cta-icon { font-size: 1.1em; line-height: 1; font-style: normal; }
 @media (hover: hover) and (pointer: fine) {
   .work-card:hover .work-card__default,
   .work-card:focus-within .work-card__default { opacity: 0; pointer-events: none; }
@@ -245,8 +252,15 @@ html[data-theme="light"] .work-card {
   .work-card { flex: 0 0 78vw; max-width: 320px; scroll-snap-align: center; }
   .work__dots { display: flex; }
 }
+/* Carousel cards keep the desktop tile's proportion (S10C). At 4 / 5 the
+   card was too short for its art: the 640x512 artwork sizes by card width
+   from --work-art-top down, so the card's overflow clipped 72-96px of every
+   image below 1024px. Desktop runs ~1.69x tall with the art from 52%, which
+   shows it whole; 10 / 17 with the same art top does the same here. */
+@media (max-width: 1023px) {
+  .work-card { aspect-ratio: 10 / 17; --work-art-top: 52%; }
+}
 @media (min-width: 768px) and (max-width: 1023px) {
-  .work-card { --work-art-top: 54%; }
   .work__track {
     display: flex;
     flex-direction: row;

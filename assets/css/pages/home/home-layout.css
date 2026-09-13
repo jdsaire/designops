@@ -23,17 +23,48 @@
   #about .section__inner { text-align: center; }
 }
 #about .cta { margin-top: clamp(0.5rem, 1vw, 1rem); }
+/* CTA to ticker lanes (S10C): two thirds of the stacked default, the .cta's
+   2rem bottom margin plus the lanes' clamp(2.5rem, 4vw, 4rem) top margin,
+   carried by the lanes alone so the ratio holds at every breakpoint. */
+#about .cta { margin-bottom: 0; }
+#about .ticker__lanes { margin-top: calc((2rem + clamp(2.5rem, 4vw, 4rem)) * 2 / 3); }
 
 /* ---- CONTACT · centred at desktop and tablet ----
    Mirrors the header contract in shared/designops-variant.css. Scoped to Main
    because contact/index.html carries its own #contact section. The eyebrow is
-   a flex column pinned to flex-start, and the lede has max-width:36rem, so
-   both need an explicit override; the headline and the inline-flex CTA follow
-   text-align. Mobile keeps the untouched left alignment. */
+   a flex column pinned to flex-start, so it needs an explicit override; the
+   headline and the inline-flex CTA follow text-align. The lede left in S10C,
+   and its centring rule with it. Mobile keeps the untouched left alignment. */
 @media (min-width: 768px) {
   #contact .section__inner  { text-align: center; }
   #contact .section__eyebrow { align-items: center; }
-  #contact .section__lede    { margin-left: auto; margin-right: auto; }
+}
+/* CTA in the lede's former place (S10C). The gap matches About's headline to
+   CTA: the shared header margin-bottom plus #about .cta's margin-top. */
+#contact .cta { margin-top: clamp(2rem, 3.5vw, 3.5rem); }
+
+/* ---- CAPABILITIES · slide carousel on mobile, triptych above (S10C) ----
+   Main carries both forms of the three pillars. At 767px and below, the
+   legacy slide chassis (capabilities.css) replaces the vertical stack;
+   from tablet up, the triptych stays and the carousel is withheld. Hidden
+   forms are display:none, so assistive tech meets each pillar once. */
+@media (max-width: 767px) {
+  #capabilities .teaser__triptych { display: none; }
+  /* The chassis bleeds its track into the right gutter, a peek device from
+     the desktop carousel. With one full-width slide it only pushed each slide
+     to the screen edge: 0px right margin against the gutter on the left, the
+     next button flush with the edge, long lines running into it. */
+  #capabilities .services__carousel { margin-right: 0; }
+  /* The chassis boxes the art at 4:3 on mobile, but the pillar art is 3:2
+     (768x512), so contain left a band above and below it. The slot now
+     hugs the image; the art keeps its rendered size. */
+  #capabilities .services__image-slot { aspect-ratio: auto; }
+  #capabilities .services__image { height: auto; }
+}
+@media (min-width: 768px) {
+  #capabilities .services__carousel-outer,
+  #capabilities .services__controls,
+  #capabilities .services__dots { display: none; }
 }
 
 /* ---- CAPABILITIES · per-vertical CTAs hidden (S4D · F3.6) ----
@@ -43,12 +74,6 @@
    Deleting this one rule restores all three. */
 .teaser__triptych .services__cta { display: none; }
 
-/* ---- TRACK RECORD · fifth figure hidden (S4D · F3.8) ----
-   The bilingual-engine key count goes stale every time the dictionaries
-   grow or shrink. Hidden rather than maintained; markup and both
-   dictionary values are retained, and deleting this rule restores it. */
-.track-record__stats .stat:nth-child(5) { display: none; }
-
 /* ---- CAPABILITIES · lede centring (S4D-fix) ----
    shared/designops-variant.css gives auto margins to .evolution__header and
    .track-record__header ledes but omits .capabilities__header, so this lede
@@ -56,21 +81,4 @@
    the sole page carrying .capabilities__header. */
 @media (min-width: 768px) {
   #capabilities .section__lede { margin-left: auto; margin-right: auto; }
-}
-
-/* ---- TRACK RECORD · grid after the fifth figure was hidden (S4D-fix) ----
-   The shared grid is repeat(5, 1fr); hiding the fifth stat left its column
-   standing empty. Four columns close the gap. Home-only: index.html is the
-   sole page carrying .track-record__stats, so the shared 5→2→1 staircase is
-   untouched for any other consumer. */
-@media (min-width: 901px) {
-  .track-record__stats { grid-template-columns: repeat(4, 1fr); }
-}
-/* Two-column band: keep the columns, left-align the text inside each.
-   Below 480px the shared staircase drops to one column and already
-   left-aligns, so the treatment is consistent across both. */
-@media (max-width: 900px) {
-  .track-record__stats .stat,
-  .track-record__stats .stat__number,
-  .track-record__stats .stat__label { text-align: left; }
 }

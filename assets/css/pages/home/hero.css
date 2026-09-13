@@ -20,9 +20,26 @@
 .hero__inner {
   position:relative; z-index:1; width:100%; max-width:var(--max-content-width);
   margin:0 auto; padding:clamp(2rem,4vw,3rem) var(--gutter);
-  display:grid; grid-template-columns:62fr 38fr; gap:clamp(2rem,4vw,4rem); align-items:center;
+  display:grid; grid-template-columns:1fr; gap:clamp(2rem,4vw,4rem); align-items:center;
 }
-.hero__left { display:flex; flex-direction:column; gap:clamp(1rem,1.75vw,1.75rem); }
+/* S10C: the headline and its meta row are centred at every breakpoint.
+   The 62fr/38fr split carried no right column, so it collapses to one. */
+.hero__left { display:flex; flex-direction:column; align-items:center; text-align:center; gap:clamp(1rem,1.75vw,1.75rem); }
+
+/* Meta stack below the headline: the attribution, with the badge on its
+   own centred line beneath it. */
+.hero__meta { display:flex; flex-direction:column; align-items:center; gap:0.25rem; }
+/* Headline to meta stack: the column's own gap again as margin, doubling the
+   spacing at every breakpoint (the mobile gap is overridden below). */
+.hero__meta { margin-top:clamp(1rem,1.75vw,1.75rem); }
+/* Attribution relocated from the onboarding bridge; its type carries over
+   from .bridge__attribution in shared/bridge.css, margins reset for the row.
+   Colour follows the headline's token: solid white on dark, ink on light. */
+.hero__attribution {
+  font-family:var(--font-primary); font-weight:var(--fw-light);
+  color:var(--color-brand-white); letter-spacing:0.02em;
+  margin:0; font-size:0.875rem; line-height:1.4;
+}
 
 .hero__badge {
   display:inline-flex; align-items:center; gap:0.5rem;
@@ -62,8 +79,6 @@ html[data-lang="ES"] .hero__h1--lang-en { display:none; }
 .hero__eyebrow { display:flex; flex-direction:column; align-items:flex-start; gap:0.75rem; font-size:0.8rem; font-weight:var(--fw-semibold); letter-spacing:0.12em; color:var(--color-brand-white); text-transform:uppercase; }
 .hero__eyebrow-bar { width:2.5rem; height:3px; background:var(--color-brand-purple); flex-shrink:0; }
 .hero__stats { display:grid; grid-template-columns:1fr 1fr; gap:clamp(1rem,1.8vw,1.75rem) clamp(1rem,2vw,2rem); }
-.stat__number { font-size:clamp(1.875rem,2.8vw,2.75rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em; color:var(--color-brand-white); }
-.stat__label { margin-top:0.4rem; font-size:0.78rem; font-weight:var(--fw-regular); line-height:1.5; color:var(--color-text-muted); }
 
 .cta { display:inline-flex; align-items:center; gap:0.75rem; cursor:pointer; width:fit-content; padding:0.125rem 0; margin-bottom:2rem; }
 .cta__label { font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em; }
@@ -73,6 +88,9 @@ html[data-lang="ES"] .hero__h1--lang-en { display:none; }
 button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 
+@media (min-width:768px) {
+  .hero__attribution { font-size:1rem; }
+}
 @media (min-width:768px) and (max-width:1023px) {
   .hero__inner { grid-template-columns:1fr; gap:2.25rem; }
   .hero__right { padding-top:1.5rem; border-top:1px solid var(--color-border-faint); }
@@ -81,6 +99,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   .hero { padding-top:var(--nav-height); }
   .hero__inner { grid-template-columns:1fr; gap:1.75rem; padding:3rem var(--gutter) 5rem; align-content:center; }
   .hero__left { gap:1rem; }
+  .hero__meta { margin-top:1rem; }
   .hero__h1 { font-size:clamp(2.25rem,11vw,3.5rem); }
   .hero__tags { display:none; }
   .hero__right { padding-top:1.5rem; border-top:1px solid var(--color-border-faint); gap:1.25rem; }
