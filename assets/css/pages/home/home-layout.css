@@ -55,6 +55,11 @@
      to the screen edge: 0px right margin against the gutter on the left, the
      next button flush with the edge, long lines running into it. */
   #capabilities .services__carousel { margin-right: 0; }
+  /* The chassis boxes the art at 4:3 on mobile, but the pillar art is 3:2
+     (768x512), so contain left a band above and below it. The slot now
+     hugs the image; the art keeps its rendered size. */
+  #capabilities .services__image-slot { aspect-ratio: auto; }
+  #capabilities .services__image { height: auto; }
 }
 @media (min-width: 768px) {
   #capabilities .services__carousel-outer,
