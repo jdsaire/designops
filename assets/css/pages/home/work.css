@@ -160,19 +160,16 @@ html[data-theme="light"] .work-card {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* The CTA takes the Contact organism's .cta form, label plus purple icon
+   square (S10C); this rule only places and reveals it. .cta's 2rem bottom
+   margin is for flow layout and has no place on an absolute element. */
 .work-card__cta {
   position: absolute;
   bottom: clamp(1.5rem, 2.25vw, 2.25rem);
   right:  clamp(1.5rem, 2.25vw, 2.25rem);
   z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 1.125rem;
-  font-weight: var(--fw-bold);
-  color: var(--color-brand-white);
+  margin-bottom: 0;
   text-decoration: none;
-  letter-spacing: -0.01em;
   opacity: 0;
   transform: translateY(8px);
   transition:
@@ -186,7 +183,6 @@ html[data-theme="light"] .work-card {
   outline: 2px solid var(--color-brand-purple);
   outline-offset: 4px;
 }
-.work-card__cta-icon { font-size: 1.1em; line-height: 1; font-style: normal; }
 @media (hover: hover) and (pointer: fine) {
   .work-card:hover .work-card__default,
   .work-card:focus-within .work-card__default { opacity: 0; pointer-events: none; }
