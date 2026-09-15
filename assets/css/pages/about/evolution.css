@@ -310,3 +310,11 @@
   #evolution .jr-meta { gap: 0.4rem; }
   #evolution .timeline__item { padding-bottom: clamp(1.25rem, 4vw, 1.75rem); }
 }
+
+/* The logo files are pure white on transparent, so they disappear on the light
+   theme's white ground. shared/ticker.css line 114 already solves this for the
+   same eight files on Main by inverting them in light mode; the sequence takes
+   the same treatment. This is a display filter, not an edit: the asset itself
+   is untouched, which is what C2-b′'s "no mark is re-rendered, recoloured or
+   cropped" protects. */
+html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
