@@ -241,3 +241,72 @@
   max-width: 5.5rem;
   object-fit: contain;
 }
+
+/* ---- JOURNEY · sequence layout (S10-B) ----
+   Every value below resolves to a token already defined in base/tokens.css,
+   in both themes. The organism keeps the .timeline rail, marker and chevron
+   from shared/designops-variant.css; these rules are scoped to #evolution so
+   they win on specificity rather than on load order (the #track-record
+   precedent), and so no other page that links the shared file is touched.
+   No new hue, no radius: the universal border-radius:0 holds. */
+
+/* The collapsed item states what it is and when, before the control is used. */
+#evolution .jr-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+#evolution .jr-class {
+  font-size: 0.625rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-soft);
+  padding: 0.1rem 0.4rem;
+}
+#evolution .jr-period {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Heading row: the whole row is the control's hit area. */
+#evolution .timeline__toggle { align-items: flex-start; }
+#evolution .jr-head { flex: 1; }
+#evolution .timeline__chevron { margin-top: 0.4rem; }
+#evolution .jr-sub {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Outbound links inside a body — Build artifacts and credential pages. */
+#evolution .jr-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.55rem;
+}
+#evolution .jr-link {
+  font-size: 0.8rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-purple-light);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-ui) var(--ease-standard);
+}
+#evolution .jr-link:hover { color: var(--color-brand-white); }
+#evolution .jr-link:focus-visible {
+  outline: 2px solid var(--color-brand-purple);
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  #evolution .jr-meta { gap: 0.4rem; }
+  #evolution .timeline__item { padding-bottom: clamp(1.25rem, 4vw, 1.75rem); }
+}
