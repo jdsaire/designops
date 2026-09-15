@@ -225,3 +225,19 @@
   #track-record .track-record__stats .stat__number,
   #track-record .track-record__stats .stat__label { text-align: left; }
 }
+
+/* ---- JOURNEY · institution marks (S10-B) ----
+   The eight files in assets/img/logos/ are shared with Main's ticker, which
+   renders them at up to 235x176 CSS px. They are reused here unmodified and
+   sized down by CSS: re-rendering them would degrade the ticker, and a
+   resized copy would be a new institution asset, which F9-b forbids. */
+#evolution .jr-mark {
+  display: inline-flex;
+  align-items: center;
+}
+#evolution .jr-mark__img {
+  height: 1.75rem;
+  width: auto;
+  max-width: 5.5rem;
+  object-fit: contain;
+}
