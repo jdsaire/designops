@@ -457,7 +457,8 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   #evolution .jr-count { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #evolution .jr-chip { transition: none; }
+  #evolution .jr-chip,
+  #evolution .jr-link { transition: none; }
 }
 
 /* ---- JOURNEY · the credential marks (S10-B) ----
