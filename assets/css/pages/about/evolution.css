@@ -243,6 +243,8 @@
    of a credential mark. */
 #evolution .jr-mark {
   --h: 1.26rem;   /* locked to the Maastricht wordmark's height */
+  --cvw: 1024;    /* the file's own canvas; overridden per mark where it differs */
+  --cvh: 768;
   display: inline-block;
   overflow: hidden;
   height: var(--h);
@@ -251,8 +253,8 @@
 }
 #evolution .jr-mark__img {
   display: block;
-  height: calc(var(--h) * 768 / var(--ch));
-  width: calc(var(--h) * 1024 / var(--ch));
+  height: calc(var(--h) * var(--cvh) / var(--ch));
+  width: calc(var(--h) * var(--cvw) / var(--ch));
   max-width: none;
   margin-left: calc(-1 * var(--h) * var(--cl) / var(--ch));
   margin-top: calc(-1 * var(--h) * var(--ct) / var(--ch));
@@ -263,7 +265,7 @@
 #evolution .jr-mark[data-mark="um"]      { --cl:49;  --ct:315; --cw:927; --ch:138; }
 #evolution .jr-mark[data-mark="hunt"]    { --cl:138; --ct:281; --cw:743; --ch:198; }
 #evolution .jr-mark[data-mark="lap"]     { --cl:201; --ct:197; --cw:616; --ch:374; }
-#evolution .jr-mark[data-mark="hec"]     { --cl:49;  --ct:325; --cw:927; --ch:124; }
+#evolution .jr-mark[data-mark="hec"]     { --cvw:1127; --cvh:1127; --cl:0; --ct:0; --cw:1127; --ch:1127; }
 #evolution .jr-mark[data-mark="utec"]    { --cl:205; --ct:239; --cw:613; --ch:290; }
 
 /* The logo files are white on transparent and vanish on the light ground.
@@ -277,15 +279,15 @@ html[data-theme="light"] #evolution .jr-mark:not(.jr-mark--platform) .jr-mark__i
 #evolution .jr-mark--platform {
   overflow: visible;
   width: auto;
-  height: 2rem;
+  height: 1.6rem;   /* 20% under the credential marks, principal's direction at G5 */
 }
 #evolution .jr-mark--platform .jr-mark__img {
-  height: 2rem;
+  height: 1.6rem;
   width: auto;
-  max-width: 2rem;
+  max-width: 1.6rem;
   margin: 0;
 }
-#evolution .jr-mark--platform[data-mark="figma"] .jr-mark__img { max-width: 1.4rem; }
+#evolution .jr-mark--platform[data-mark="figma"] .jr-mark__img { max-width: 1.12rem; }
 #evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: invert(1); }
 html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: none; }
 
