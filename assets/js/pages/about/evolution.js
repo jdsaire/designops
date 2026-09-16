@@ -26,6 +26,22 @@ function init() {
   var current = null;
   var ticking = 0;
 
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.jr-chip'));
+  var sortBtn = document.getElementById('jr-sort');
+  var countEl = document.getElementById('jr-count');
+  var emptyEl = document.getElementById('jr-empty');
+  var filter = 'all';
+  var order = 'asc';
+  /* Strings the script writes are dictionary-backed. The markup carries the EN
+     value as the fallback, and the live dictionary replaces it on
+     i18n:changed — a key missing from the active language keeps the fallback
+     rather than printing a key name. */
+  var dict = null;
+
+  function t(key, fallback) {
+    return (dict && dict[key] !== undefined) ? dict[key] : fallback;
+  }
+
   function visible() {
     return items.filter(function (n) { return !n.hidden; });
   }
@@ -138,6 +154,72 @@ function init() {
     if (item && !item.hidden && seq.contains(item)) paint(item);
   });
 
+  /* ---- filters and sort ---------------------------------------------- */
+
+  function renderControls() {
+    var v = visible();
+    if (countEl) {
+      countEl.textContent = t('about_jr_count', '{n} of {total}')
+        .replace('{n}', v.length).replace('{total}', items.length);
+    }
+    if (sortBtn) {
+      sortBtn.textContent = order === 'asc'
+        ? t(sortBtn.dataset.keyAsc, 'Oldest → newest')
+        : t(sortBtn.dataset.keyDesc, 'Newest → oldest');
+    }
+    if (emptyEl) emptyEl.hidden = v.length > 0;
+  }
+
+  /* The same nodes are hidden and reordered in place: nothing is cloned, and
+     no item is ever rendered from a template, so the DOM always holds exactly
+     one node per item. */
+  function apply(resetScroll) {
+    closeOpen();
+    items.forEach(function (n) {
+      n.hidden = (filter !== 'all' && n.dataset.class !== filter);
+    });
+    var v = visible();
+    v.slice().sort(function (a, b) {
+      var d = Number(a.dataset.sort) - Number(b.dataset.sort);
+      if (d === 0) d = Number(a.dataset.ord) - Number(b.dataset.ord);
+      return order === 'asc' ? d : -d;
+    }).forEach(function (n) { seq.appendChild(n); });
+    items.filter(function (n) { return n.hidden; })
+      .forEach(function (n) { seq.appendChild(n); });
+
+    renderControls();
+    current = null;
+    if (v.length) paint(v[0]);
+    if (fill && !v.length) fill.style.height = '0px';
+
+    if (resetScroll) {
+      var top = document.getElementById('evolution').getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top, behavior: prefersReducedMotion ? 'instant' : 'auto' });
+    }
+    advance();
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      filter = chip.dataset.filter;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+      apply(true);
+    });
+  });
+
+  if (sortBtn) {
+    sortBtn.addEventListener('click', function () {
+      order = order === 'asc' ? 'desc' : 'asc';
+      apply(true);
+    });
+  }
+
+  document.addEventListener('i18n:changed', function (e) {
+    dict = e.detail && e.detail.dict;
+    renderControls();
+  });
+
+  renderControls();
   paint(visible()[0]);
   advance();
 }

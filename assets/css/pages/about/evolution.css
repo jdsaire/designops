@@ -358,3 +358,88 @@ html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
   #evolution .jr-fill,
   #evolution .jr-item .timeline__marker { transition: none; }
 }
+
+/* ---- JOURNEY · category filters and sort (S10-B) ----
+   Square by the universal reset, tokens in both themes, and no colour is
+   asked to carry the category: the chip's own word does that. */
+#evolution .jr-controls {
+  max-width: 46rem;
+  margin: 0 auto clamp(1.25rem, 2.5vw, 2rem);
+}
+#evolution .jr-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+#evolution .jr-chip {
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border-soft);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: color var(--duration-ui) var(--ease-standard),
+              border-color var(--duration-ui) var(--ease-standard),
+              background-color var(--duration-ui) var(--ease-standard);
+}
+#evolution .jr-chip:hover { color: var(--color-brand-white); }
+#evolution .jr-chip[aria-pressed="true"] {
+  color: var(--color-brand-white);
+  background: var(--surface-card);
+  border-color: var(--color-brand-purple);
+}
+#evolution .jr-chip:focus-visible,
+#evolution .jr-sort:focus-visible {
+  outline: 2px solid var(--color-brand-purple);
+  outline-offset: 3px;
+}
+#evolution .jr-sortrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+#evolution .jr-sort-label {
+  font-size: 0.6875rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+#evolution .jr-sort {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-brand-white);
+  background: none;
+  border: 1px solid var(--color-border-soft);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: border-color var(--duration-ui) var(--ease-standard);
+}
+#evolution .jr-sort:hover { border-color: var(--color-brand-purple); }
+#evolution .jr-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+#evolution .jr-empty {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  padding: 1rem 0 0.5rem;
+}
+#evolution .jr-empty[hidden] { display: none; }
+
+@media (max-width: 767px) {
+  #evolution .jr-count { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #evolution .jr-chip,
+  #evolution .jr-sort { transition: none; }
+}

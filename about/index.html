@@ -227,6 +227,23 @@
         <p class="section__lede" data-i18n="evolution_lede">I came down from strategy and picked up the build. Here’s the arc.</p>
       </div>
 
+      <div class="jr-controls">
+        <div class="jr-filters" role="group" aria-label="Filter by category"
+             data-i18n-aria="about_jr_filter_group_label">
+          <button class="jr-chip" type="button" data-filter="all" aria-pressed="true" data-i18n="about_jr_filter_all">All</button>
+          <button class="jr-chip" type="button" data-filter="formation" aria-pressed="false" data-i18n="about_jr_filter_formation">Formation</button>
+          <button class="jr-chip" type="button" data-filter="work" aria-pressed="false" data-i18n="about_jr_filter_work">Work</button>
+          <button class="jr-chip" type="button" data-filter="build" aria-pressed="false" data-i18n="about_jr_filter_build">Build</button>
+          <button class="jr-chip" type="button" data-filter="credential" aria-pressed="false" data-i18n="about_jr_filter_credential">Credential</button>
+        </div>
+        <div class="jr-sortrow">
+          <span class="jr-sort-label" data-i18n="about_jr_sort_label">Order</span>
+          <button class="jr-sort" type="button" id="jr-sort"
+                  data-key-asc="about_jr_sort_asc" data-key-desc="about_jr_sort_desc">Oldest &#8594; newest</button>
+          <p class="jr-count" id="jr-count" role="status" aria-live="polite" data-key="about_jr_count">25 of 25</p>
+        </div>
+      </div>
+
       <div class="jr-track">
         <span class="jr-fill" aria-hidden="true"></span>
         <ol class="timeline jr-sequence" id="jr-sequence" role="list">
@@ -814,6 +831,7 @@
           </div>
         </li>
         </ol>
+        <p class="jr-empty" id="jr-empty" hidden data-i18n="about_jr_empty">No items in this category.</p>
       </div>
 
     </div>
