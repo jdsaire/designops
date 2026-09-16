@@ -234,10 +234,12 @@
 
    --cl/--ct/--cw/--ch are the region the principal framed at Gate G5, in the
    file's own pixels; --cvw/--cvh are that file's canvas. Every region he
-   framed is square, so the seven marks render as one square badge each, --s
-   on a side, matching a credential mark's height. HEC Montreal keeps the
-   wordmark it already had - nothing re-framed, nothing re-treated - scaled
-   to Lima Airport's width, which is what the principal asked for. */
+   framed is square, so each logo mark renders as a square badge, --s on a
+   side. Five sit at a credential mark's height; Hunt, Lima Airport and HEC
+   Montreal are 50% wider by the principal's direction, and being square that
+   makes them 50% taller too - the proportions are kept, not stretched. HEC
+   keeps the wordmark it already had, nothing re-framed or re-treated, at
+   that same width. */
 #evolution .jr-mark {
   --s: 2rem;        /* one height for every mark, a credential mark's own */
   --cvw: 1024;
@@ -256,17 +258,18 @@
   margin-left: calc(-1 * var(--s) * var(--cl) / var(--cw));
   margin-top: calc(-1 * var(--s) * var(--ct) / var(--ch));
 }
-#evolution .jr-mark[data-mark="esan"]    { --cl:117; --ct:138; --cw:207; --ch:207; }
+#evolution .jr-mark[data-mark="esan"]    { --cl:158; --ct:280; --cw:213; --ch:213; }
 #evolution .jr-mark[data-mark="centrum"] { --cl:118; --ct:267; --cw:234; --ch:234; }
 #evolution .jr-mark[data-mark="uvic"]    { --cl:125; --ct:246; --cw:273; --ch:273; }
 #evolution .jr-mark[data-mark="um"]      { --cl:7;   --ct:295; --cw:185; --ch:185; }
-#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:-4;  --cw:771; --ch:771; }
+#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:-4;  --cw:771; --ch:771; --s: 3rem; }
 #evolution .jr-mark[data-mark="utec"]    { --cl:587; --ct:227; --cw:270; --ch:270; }
-#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:67;  --cw:626; --ch:626; }
+#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:67;  --cw:626; --ch:626; --s: 3rem; }
 
 /* HEC Montreal: the institution's own mark with its plate removed and its
    viewBox trimmed to the letterforms, so there is nothing left to crop. */
 #evolution .jr-mark[data-mark="hec"] {
+  --s: 3rem;         /* 50% wider than the square badges, as directed */
   width: var(--s);
   overflow: visible;
   display: inline-flex;
