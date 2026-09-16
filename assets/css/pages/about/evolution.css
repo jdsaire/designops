@@ -227,55 +227,61 @@
 }
 
 /* ---- JOURNEY · institution and platform marks (S10-B) ----
-   The eight logo files are 1024x768 canvases carrying their wordmark on
-   15-29% of that area, centred in transparent padding. Sized by height alone
-   the wordmark rendered about 4.5px tall for the widest of them. Each mark is
-   therefore shown through its own measured content box: the box clips, the
-   image is scaled so that the content fills it, and the file itself is
-   untouched - no asset is re-rendered, recoloured or cropped, and Main's
-   ticker, which shares these eight files, is unaffected.
+   Each mark is shown through a window onto its own file: the box clips, the
+   image is scaled so the chosen region fills it, and the file itself is never
+   touched - no asset is re-rendered, recoloured or cropped, and Main's
+   ticker, which shares the eight logo files, is unaffected.
 
-   --cl/--ct/--cw/--ch are the content box measured in the file's own pixels.
-   Every Formation and Work mark renders at one locked height - Maastricht
-   University's, 1.26rem, chosen by the principal at Gate G4 - so the marks
-   read as one set down the column. Widths therefore differ with each
-   wordmark's own proportions, which is accepted. No mark reaches the height
-   of a credential mark. */
+   --cl/--ct/--cw/--ch are the region the principal framed at Gate G5, in the
+   file's own pixels; --cvw/--cvh are that file's canvas. Every region is
+   square, so every mark renders at one size, --s, matching a credential
+   mark's height. HEC Montreal is the exception: its mark is a wordmark at
+   2.15:1, so it keeps the height and takes the width its letterforms need. */
 #evolution .jr-mark {
-  --h: 1.26rem;   /* locked to the Maastricht wordmark's height */
-  --cvw: 1024;    /* the file's own canvas; overridden per mark where it differs */
+  --s: 2rem;        /* one height for every mark, a credential mark's own */
+  --ar: 1;          /* the framed region's aspect; width follows from it */
+  --cvw: 1024;
   --cvh: 768;
   display: inline-block;
   overflow: hidden;
-  height: var(--h);
-  width: calc(var(--h) * var(--cw) / var(--ch));
+  height: var(--s);
+  width: calc(var(--s) * var(--ar));
   flex: 0 0 auto;
 }
 #evolution .jr-mark__img {
   display: block;
-  height: calc(var(--h) * var(--cvh) / var(--ch));
-  width: calc(var(--h) * var(--cvw) / var(--ch));
+  width: calc(var(--s) * var(--ar) * var(--cvw) / var(--cw));
+  height: calc(var(--s) * var(--cvh) / var(--ch));
   max-width: none;
-  margin-left: calc(-1 * var(--h) * var(--cl) / var(--ch));
-  margin-top: calc(-1 * var(--h) * var(--ct) / var(--ch));
+  margin-left: calc(-1 * var(--s) * var(--ar) * var(--cl) / var(--cw));
+  margin-top: calc(-1 * var(--s) * var(--ct) / var(--ch));
 }
-#evolution .jr-mark[data-mark="esan"]    { --cl:169; --ct:292; --cw:674; --ch:193; }
-#evolution .jr-mark[data-mark="centrum"] { --cl:133; --ct:283; --cw:757; --ch:201; }
-#evolution .jr-mark[data-mark="uvic"]    { --cl:163; --ct:261; --cw:699; --ch:246; }
-#evolution .jr-mark[data-mark="um"]      { --cl:49;  --ct:315; --cw:927; --ch:138; }
-#evolution .jr-mark[data-mark="hunt"]    { --cl:138; --ct:281; --cw:743; --ch:198; }
-#evolution .jr-mark[data-mark="lap"]     { --cl:201; --ct:197; --cw:616; --ch:374; }
-#evolution .jr-mark[data-mark="hec"]     { --cvw:1127; --cvh:1127; --cl:0; --ct:0; --cw:1127; --ch:1127; }
-#evolution .jr-mark[data-mark="utec"]    { --cl:205; --ct:239; --cw:613; --ch:290; }
+#evolution .jr-mark[data-mark="esan"]    { --cl:118; --ct:138; --cw:205; --ch:207; --ar:1.029; }
+#evolution .jr-mark[data-mark="centrum"] { --cl:125; --ct:267; --cw:220; --ch:234; --ar:0.939; }
+#evolution .jr-mark[data-mark="uvic"]    { --cl:98;  --ct:85;  --cw:225; --ch:273; --ar:0.824; }
+#evolution .jr-mark[data-mark="um"]      { --cl:26;  --ct:295; --cw:148; --ch:185; --ar:0.797; }
+#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:258; --cw:771; --ch:248; --ar:3.103; }
+#evolution .jr-mark[data-mark="utec"]    { --cl:573; --ct:88;  --cw:209; --ch:270; --ar:0.773; }
+#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:181; --cw:626; --ch:398; --ar:1.570; }
 
-/* The logo files are white on transparent and vanish on the light ground.
-   shared/ticker.css line 114 already inverts the same eight files on Main;
-   the sequence takes the same display-level treatment, assets untouched. */
-html[data-theme="light"] #evolution .jr-mark:not(.jr-mark--platform) .jr-mark__img { filter: invert(1); }
+/* HEC Montreal: the institution's own mark with its plate removed and its
+   viewBox trimmed to the letterforms, so there is nothing left to crop. */
+#evolution .jr-mark[data-mark="hec"] { width: auto; overflow: visible; }
+#evolution .jr-mark[data-mark="hec"] .jr-mark__img {
+  height: var(--s);
+  width: auto;
+  margin: 0;
+}
 
-/* Platform marks on the Build items: vector, square-ish, no content box to
-   clip. GitHub's mark is near-black (#1B1F23) and needs the inverse
-   treatment - it disappears on the dark ground, not the light one. */
+/* The logo files are white on transparent and vanish on the light ground;
+   shared/ticker.css already inverts the same files on Main. HEC's letterforms
+   are black, so they take the opposite treatment - the one GitHub needs. */
+html[data-theme="light"] #evolution .jr-mark:not(.jr-mark--platform):not([data-mark="hec"]) .jr-mark__img { filter: invert(1); }
+#evolution .jr-mark[data-mark="hec"] .jr-mark__img { filter: invert(1); }
+html[data-theme="light"] #evolution .jr-mark[data-mark="hec"] .jr-mark__img { filter: none; }
+
+/* Platform marks on the Build items: vector, nothing to clip. GitHub's mark
+   is near-black and disappears on the dark ground, not the light one. */
 #evolution .jr-mark--platform {
   overflow: visible;
   width: auto;
