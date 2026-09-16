@@ -5,6 +5,8 @@
    this organism extends; what is gone is the nested "go deeper" reveal,
    whose content is merged into the single body.
 
+   Order is fixed oldest to newest; the sort toggle was removed at G3.
+
    Reading position: the item nearest a line at 38% of the viewport is
    current, items above it are past, and the rail fills from the first
    visible item to the current one. It is recomputed on scroll and on
@@ -27,11 +29,12 @@ function init() {
   var ticking = 0;
 
   var chips = Array.prototype.slice.call(document.querySelectorAll('.jr-chip'));
-  var sortBtn = document.getElementById('jr-sort');
   var countEl = document.getElementById('jr-count');
   var emptyEl = document.getElementById('jr-empty');
   var filter = 'all';
-  var order = 'asc';
+  /* Order is fixed oldest to newest. The toggle was removed at Gate G3 by the
+     principal; the ascending key order it defaulted to is what ships. */
+  var ORDER_ASC = true;
   /* Strings the script writes are dictionary-backed. The markup carries the EN
      value as the fallback, and the live dictionary replaces it on
      i18n:changed — a key missing from the active language keeps the fallback
@@ -154,18 +157,13 @@ function init() {
     if (item && !item.hidden && seq.contains(item)) paint(item);
   });
 
-  /* ---- filters and sort ---------------------------------------------- */
+  /* ---- filters ------------------------------------------------------- */
 
   function renderControls() {
     var v = visible();
     if (countEl) {
       countEl.textContent = t('about_jr_count', '{n} of {total}')
         .replace('{n}', v.length).replace('{total}', items.length);
-    }
-    if (sortBtn) {
-      sortBtn.textContent = order === 'asc'
-        ? t(sortBtn.dataset.keyAsc, 'Oldest → newest')
-        : t(sortBtn.dataset.keyDesc, 'Newest → oldest');
     }
     if (emptyEl) emptyEl.hidden = v.length > 0;
   }
@@ -182,7 +180,7 @@ function init() {
     v.slice().sort(function (a, b) {
       var d = Number(a.dataset.sort) - Number(b.dataset.sort);
       if (d === 0) d = Number(a.dataset.ord) - Number(b.dataset.ord);
-      return order === 'asc' ? d : -d;
+      return ORDER_ASC ? d : -d;
     }).forEach(function (n) { seq.appendChild(n); });
     items.filter(function (n) { return n.hidden; })
       .forEach(function (n) { seq.appendChild(n); });
@@ -206,13 +204,6 @@ function init() {
       apply(true);
     });
   });
-
-  if (sortBtn) {
-    sortBtn.addEventListener('click', function () {
-      order = order === 'asc' ? 'desc' : 'asc';
-      apply(true);
-    });
-  }
 
   document.addEventListener('i18n:changed', function (e) {
     dict = e.detail && e.detail.dict;
