@@ -323,7 +323,12 @@ html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
    The rail itself is .timeline::before from the shared stylesheet. The fill
    is a sibling of the list rather than a child, so the <ol> keeps only <li>
    children and the markup stays valid. */
-#evolution .jr-track { position: relative; }
+#evolution .jr-track {
+  position: relative;
+  max-width: 46rem;   /* the list's own measure, so the fill sits on the rail
+                         rather than at the section's left edge */
+  margin: 0 auto;
+}
 #evolution .jr-fill {
   position: absolute;
   left: 0;
