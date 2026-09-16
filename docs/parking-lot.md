@@ -82,3 +82,6 @@ Wave-4 Brief 01 edits changed EN-only surfaces. The following ES counterparts ar
 - Redesign and restore the site-wide footer; the hide is a holding action, markup retained in source.
 - Include Credly badges (Microsoft, Google, Claude, McKinsey) to populate the About child.
 - Amendment F3 (signed 31-08-2026) executed six previously parked Home items and killed three; they are settled, not dropped.
+- Rebuild about/ as a single vertical-scroll journey carrying the institution logos and the credential badges, from graduation to the multipage release.
+- Add IBM, McKinsey, Google and Microsoft brand marks to Main's credential ticker, widening both lanes from five logos to six.
+- Give the Front-End specialization its own write-up article, reachable from the front-end journey and linking the six course repositories, possibly as a CMS artifact.
