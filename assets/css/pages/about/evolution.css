@@ -225,3 +225,277 @@
   #track-record .track-record__stats .stat__number,
   #track-record .track-record__stats .stat__label { text-align: left; }
 }
+
+/* ---- JOURNEY · institution and platform marks (S10-B) ----
+   Each mark is shown through a window onto its own file: the box clips, the
+   image is scaled so the chosen region fills it, and the file itself is never
+   touched - no asset is re-rendered, recoloured or cropped, and Main's
+   ticker, which shares the eight logo files, is unaffected.
+
+   --cl/--ct/--cw/--ch are the region the principal framed at Gate G5, in the
+   file's own pixels; --cvw/--cvh are that file's canvas. Every region he
+   framed is square, so each logo mark renders as a square badge, --s on a
+   side. Five sit at a credential mark's height; Hunt, Lima Airport and HEC
+   Montreal are 50% wider by the principal's direction, and being square that
+   makes them 50% taller too - the proportions are kept, not stretched. HEC
+   keeps the wordmark it already had, nothing re-framed or re-treated, at
+   that same width. */
+#evolution .jr-mark {
+  --s: 2rem;        /* one height for every mark, a credential mark's own */
+  --cvw: 1024;
+  --cvh: 768;
+  display: inline-block;
+  overflow: hidden;
+  height: var(--s);
+  width: var(--s);
+  flex: 0 0 auto;
+}
+#evolution .jr-mark__img {
+  display: block;
+  width: calc(var(--s) * var(--cvw) / var(--cw));
+  height: calc(var(--s) * var(--cvh) / var(--ch));
+  max-width: none;
+  margin-left: calc(-1 * var(--s) * var(--cl) / var(--cw));
+  margin-top: calc(-1 * var(--s) * var(--ct) / var(--ch));
+}
+#evolution .jr-mark[data-mark="esan"]    { --cl:158; --ct:280; --cw:213; --ch:213; }
+#evolution .jr-mark[data-mark="centrum"] { --cl:118; --ct:267; --cw:234; --ch:234; }
+#evolution .jr-mark[data-mark="uvic"]    { --cl:125; --ct:246; --cw:273; --ch:273; }
+#evolution .jr-mark[data-mark="um"]      { --cl:7;   --ct:295; --cw:185; --ch:185; }
+#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:-4;  --cw:771; --ch:771; --s: 3rem; }
+#evolution .jr-mark[data-mark="utec"]    { --cl:587; --ct:227; --cw:270; --ch:270; }
+#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:67;  --cw:626; --ch:626; --s: 3rem; }
+
+/* HEC Montreal: the institution's own mark with its plate removed and its
+   viewBox trimmed to the letterforms, so there is nothing left to crop. */
+#evolution .jr-mark[data-mark="hec"] {
+  --s: 3rem;         /* 50% wider than the square badges, as directed */
+  width: var(--s);
+  overflow: visible;
+  display: inline-flex;
+  align-items: center;   /* the wordmark is shorter than the square; centre it */
+}
+#evolution .jr-mark[data-mark="hec"] .jr-mark__img {
+  width: var(--s);   /* Lima Airport's width; the height follows the wordmark */
+  height: auto;
+  margin: 0;
+}
+
+/* The logo files are white on transparent and vanish on the light ground;
+   shared/ticker.css already inverts the same files on Main. HEC's letterforms
+   are black, so they take the opposite treatment - the one GitHub needs. */
+html[data-theme="light"] #evolution .jr-mark:not(.jr-mark--platform):not([data-mark="hec"]) .jr-mark__img { filter: invert(1); }
+#evolution .jr-mark[data-mark="hec"] .jr-mark__img { filter: invert(1); }
+html[data-theme="light"] #evolution .jr-mark[data-mark="hec"] .jr-mark__img { filter: none; }
+
+/* Platform marks on the Build items: vector, nothing to clip. GitHub's mark
+   is near-black and disappears on the dark ground, not the light one. */
+#evolution .jr-mark--platform {
+  overflow: visible;
+  width: auto;
+  height: 1.6rem;   /* 20% under the credential marks, principal's direction at G5 */
+}
+#evolution .jr-mark--platform .jr-mark__img {
+  height: 1.6rem;
+  width: auto;
+  max-width: 1.6rem;
+  margin: 0;
+}
+#evolution .jr-mark--platform[data-mark="figma"] .jr-mark__img { max-width: 1.12rem; }
+#evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: invert(1); }
+html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: none; }
+
+/* ---- JOURNEY · sequence layout (S10-B) ----
+   Every value below resolves to a token already defined in base/tokens.css,
+   in both themes. The organism keeps the .timeline rail, marker and chevron
+   from shared/designops-variant.css; these rules are scoped to #evolution so
+   they win on specificity rather than on load order (the #track-record
+   precedent), and so no other page that links the shared file is touched.
+   No new hue, no radius: the universal border-radius:0 holds. */
+
+/* The collapsed item states what it is and when, before the control is used. */
+#evolution .jr-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+#evolution .jr-class {
+  font-size: 0.625rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-soft);
+  padding: 0.1rem 0.4rem;
+}
+#evolution .jr-period {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Heading row: the whole row is the control's hit area. */
+#evolution .timeline__toggle { align-items: flex-start; }
+#evolution .jr-head { flex: 1; }
+#evolution .timeline__chevron { margin-top: 0.4rem; }
+#evolution .jr-sub {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Outbound links inside a body — Build artifacts and credential pages. */
+#evolution .jr-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.55rem;
+}
+#evolution .jr-link {
+  font-size: 0.8rem;
+  font-weight: var(--fw-medium);
+  color: var(--color-purple-light);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-ui) var(--ease-standard);
+}
+#evolution .jr-link:hover { color: var(--color-brand-white); }
+#evolution .jr-link:focus-visible {
+  outline: 2px solid var(--color-brand-purple);
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  #evolution .jr-meta { gap: 0.4rem; }
+  #evolution .timeline__item { padding-bottom: clamp(1.25rem, 4vw, 1.75rem); }
+}
+
+
+/* ---- JOURNEY · rail, reading position and disclosure states (S10-B) ----
+   The rail itself is .timeline::before from the shared stylesheet. The fill
+   is a sibling of the list rather than a child, so the <ol> keeps only <li>
+   children and the markup stays valid. */
+#evolution .jr-track {
+  position: relative;
+  max-width: 46rem;   /* the list's own measure, so the fill sits on the rail
+                         rather than at the section's left edge */
+  margin: 0 auto;
+}
+#evolution .jr-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: var(--color-brand-purple);
+  transition: height var(--duration-ui) var(--ease-decelerate);
+}
+
+/* State is carried by the rail and the node, never by dimming the text.
+   Measured: dropping an upcoming item to the prototype's 0.42 opacity takes
+   muted body copy to about 2.3:1 on the dark ground, which G1's AA condition
+   forbids. The node states carry the same information at no contrast cost. */
+#evolution .jr-item .timeline__marker {
+  background: var(--color-border-soft);
+  transition: background var(--duration-ui) var(--ease-standard),
+              transform var(--duration-ui) var(--ease-decelerate);
+}
+#evolution .jr-item.is-past .timeline__marker { background: var(--color-purple-light); }
+#evolution .jr-item.is-current .timeline__marker {
+  background: var(--color-brand-purple);
+  transform: translateX(-50%) scale(1.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #evolution .jr-fill,
+  #evolution .jr-item .timeline__marker { transition: none; }
+}
+
+/* ---- JOURNEY · category filters and sort (S10-B) ----
+   Square by the universal reset, tokens in both themes, and no colour is
+   asked to carry the category: the chip's own word does that. */
+#evolution .jr-controls {
+  max-width: 46rem;
+  margin: 0 auto clamp(1.25rem, 2.5vw, 2rem);
+}
+#evolution .jr-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+#evolution .jr-chip {
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border-soft);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: color var(--duration-ui) var(--ease-standard),
+              border-color var(--duration-ui) var(--ease-standard),
+              background-color var(--duration-ui) var(--ease-standard);
+}
+#evolution .jr-chip:hover { color: var(--color-brand-white); }
+#evolution .jr-chip[aria-pressed="true"] {
+  color: var(--color-brand-white);
+  background: var(--surface-card);
+  border-color: var(--color-brand-purple);
+}
+#evolution .jr-chip:focus-visible {
+  outline: 2px solid var(--color-brand-purple);
+  outline-offset: 3px;
+}
+#evolution .jr-countrow {
+  display: flex;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+#evolution .jr-count {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+#evolution .jr-empty {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  padding: 1rem 0 0.5rem;
+}
+#evolution .jr-empty[hidden] { display: none; }
+
+@media (max-width: 767px) {
+  #evolution .jr-count { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #evolution .jr-chip,
+  #evolution .jr-link { transition: none; }
+}
+
+/* ---- JOURNEY · the credential marks (S10-B) ----
+   The mark fills its own box: no plate ground, no border, no padding, so
+   nothing blank sits between the artwork and the edge of the badge area. The
+   box shrink-wraps each mark at one shared height, which keeps the row
+   rhythm even while the widths differ - and keeps the Beta Gamma Sigma
+   ribbon uncropped, which F11 section F11-d requires.
+
+   This retires the uniform plate that SPEC-AboutJourney section 4 and
+   SPEC-Badges section 3.1(b) specified. Principal's direction at Gate G4.
+   The files themselves are trimmed to their own content box; no mark is
+   recoloured, and the white inside the Microsoft frame's rounded corners is
+   the issuer's own artwork and stays. */
+#evolution .jr-plate {
+  display: inline-flex;
+  align-items: center;
+}
+#evolution .jr-plate__img {
+  height: 2rem;
+  width: auto;
+  max-width: 4.5rem;
+  object-fit: contain;
+}
