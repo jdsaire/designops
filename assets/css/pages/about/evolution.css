@@ -233,43 +233,48 @@
    ticker, which shares the eight logo files, is unaffected.
 
    --cl/--ct/--cw/--ch are the region the principal framed at Gate G5, in the
-   file's own pixels; --cvw/--cvh are that file's canvas. Every region is
-   square, so every mark renders at one size, --s, matching a credential
-   mark's height. HEC Montreal is the exception: its mark is a wordmark at
-   2.15:1, so it keeps the height and takes the width its letterforms need. */
+   file's own pixels; --cvw/--cvh are that file's canvas. Every region he
+   framed is square, so the seven marks render as one square badge each, --s
+   on a side, matching a credential mark's height. HEC Montreal keeps the
+   wordmark it already had - nothing re-framed, nothing re-treated - scaled
+   to Lima Airport's width, which is what the principal asked for. */
 #evolution .jr-mark {
   --s: 2rem;        /* one height for every mark, a credential mark's own */
-  --ar: 1;          /* the framed region's aspect; width follows from it */
   --cvw: 1024;
   --cvh: 768;
   display: inline-block;
   overflow: hidden;
   height: var(--s);
-  width: calc(var(--s) * var(--ar));
+  width: var(--s);
   flex: 0 0 auto;
 }
 #evolution .jr-mark__img {
   display: block;
-  width: calc(var(--s) * var(--ar) * var(--cvw) / var(--cw));
+  width: calc(var(--s) * var(--cvw) / var(--cw));
   height: calc(var(--s) * var(--cvh) / var(--ch));
   max-width: none;
-  margin-left: calc(-1 * var(--s) * var(--ar) * var(--cl) / var(--cw));
+  margin-left: calc(-1 * var(--s) * var(--cl) / var(--cw));
   margin-top: calc(-1 * var(--s) * var(--ct) / var(--ch));
 }
-#evolution .jr-mark[data-mark="esan"]    { --cl:118; --ct:138; --cw:205; --ch:207; --ar:1.029; }
-#evolution .jr-mark[data-mark="centrum"] { --cl:125; --ct:267; --cw:220; --ch:234; --ar:0.939; }
-#evolution .jr-mark[data-mark="uvic"]    { --cl:98;  --ct:85;  --cw:225; --ch:273; --ar:0.824; }
-#evolution .jr-mark[data-mark="um"]      { --cl:26;  --ct:295; --cw:148; --ch:185; --ar:0.797; }
-#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:258; --cw:771; --ch:248; --ar:3.103; }
-#evolution .jr-mark[data-mark="utec"]    { --cl:573; --ct:88;  --cw:209; --ch:270; --ar:0.773; }
-#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:181; --cw:626; --ch:398; --ar:1.570; }
+#evolution .jr-mark[data-mark="esan"]    { --cl:117; --ct:138; --cw:207; --ch:207; }
+#evolution .jr-mark[data-mark="centrum"] { --cl:118; --ct:267; --cw:234; --ch:234; }
+#evolution .jr-mark[data-mark="uvic"]    { --cl:125; --ct:246; --cw:273; --ch:273; }
+#evolution .jr-mark[data-mark="um"]      { --cl:7;   --ct:295; --cw:185; --ch:185; }
+#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:-4;  --cw:771; --ch:771; }
+#evolution .jr-mark[data-mark="utec"]    { --cl:587; --ct:227; --cw:270; --ch:270; }
+#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:67;  --cw:626; --ch:626; }
 
 /* HEC Montreal: the institution's own mark with its plate removed and its
    viewBox trimmed to the letterforms, so there is nothing left to crop. */
-#evolution .jr-mark[data-mark="hec"] { width: auto; overflow: visible; }
+#evolution .jr-mark[data-mark="hec"] {
+  width: var(--s);
+  overflow: visible;
+  display: inline-flex;
+  align-items: center;   /* the wordmark is shorter than the square; centre it */
+}
 #evolution .jr-mark[data-mark="hec"] .jr-mark__img {
-  height: var(--s);
-  width: auto;
+  width: var(--s);   /* Lima Airport's width; the height follows the wordmark */
+  height: auto;
   margin: 0;
 }
 
