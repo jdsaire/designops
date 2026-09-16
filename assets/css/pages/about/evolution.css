@@ -318,3 +318,38 @@
    is untouched, which is what C2-b′'s "no mark is re-rendered, recoloured or
    cropped" protects. */
 html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
+
+/* ---- JOURNEY · rail, reading position and disclosure states (S10-B) ----
+   The rail itself is .timeline::before from the shared stylesheet. The fill
+   is a sibling of the list rather than a child, so the <ol> keeps only <li>
+   children and the markup stays valid. */
+#evolution .jr-track { position: relative; }
+#evolution .jr-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: var(--color-brand-purple);
+  transition: height var(--duration-ui) var(--ease-decelerate);
+}
+
+/* State is carried by the rail and the node, never by dimming the text.
+   Measured: dropping an upcoming item to the prototype's 0.42 opacity takes
+   muted body copy to about 2.3:1 on the dark ground, which G1's AA condition
+   forbids. The node states carry the same information at no contrast cost. */
+#evolution .jr-item .timeline__marker {
+  background: var(--color-border-soft);
+  transition: background var(--duration-ui) var(--ease-standard),
+              transform var(--duration-ui) var(--ease-decelerate);
+}
+#evolution .jr-item.is-past .timeline__marker { background: var(--color-purple-light); }
+#evolution .jr-item.is-current .timeline__marker {
+  background: var(--color-brand-purple);
+  transform: translateX(-50%) scale(1.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #evolution .jr-fill,
+  #evolution .jr-item .timeline__marker { transition: none; }
+}
