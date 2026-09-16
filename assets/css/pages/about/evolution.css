@@ -226,21 +226,65 @@
   #track-record .track-record__stats .stat__label { text-align: left; }
 }
 
-/* ---- JOURNEY · institution marks (S10-B) ----
-   The eight files in assets/img/logos/ are shared with Main's ticker, which
-   renders them at up to 235x176 CSS px. They are reused here unmodified and
-   sized down by CSS: re-rendering them would degrade the ticker, and a
-   resized copy would be a new institution asset, which F9-b forbids. */
+/* ---- JOURNEY · institution and platform marks (S10-B) ----
+   The eight logo files are 1024x768 canvases carrying their wordmark on
+   15-29% of that area, centred in transparent padding. Sized by height alone
+   the wordmark rendered about 4.5px tall for the widest of them. Each mark is
+   therefore shown through its own measured content box: the box clips, the
+   image is scaled so that the content fills it, and the file itself is
+   untouched - no asset is re-rendered, recoloured or cropped, and Main's
+   ticker, which shares these eight files, is unaffected.
+
+   --cl/--ct/--cw/--ch are the content box measured in the file's own pixels;
+   --h is the rendered height, capped so no mark is taller than a credential
+   mark (2rem) and no mark is wider than 8.5rem. The two ultra-wide wordmarks
+   (Maastricht, HEC Montreal) are width-bound and so render shorter. */
 #evolution .jr-mark {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
+  overflow: hidden;
+  height: var(--h, 2rem);
+  width: calc(var(--h, 2rem) * var(--cw) / var(--ch));
+  flex: 0 0 auto;
 }
 #evolution .jr-mark__img {
-  height: 1.75rem;
-  width: auto;
-  max-width: 5.5rem;
-  object-fit: contain;
+  display: block;
+  height: calc(var(--h, 2rem) * 768 / var(--ch));
+  width: calc(var(--h, 2rem) * 1024 / var(--ch));
+  max-width: none;
+  margin-left: calc(-1 * var(--h, 2rem) * var(--cl) / var(--ch));
+  margin-top: calc(-1 * var(--h, 2rem) * var(--ct) / var(--ch));
 }
+#evolution .jr-mark[data-mark="esan"]    { --cl:169; --ct:292; --cw:674; --ch:193; }
+#evolution .jr-mark[data-mark="centrum"] { --cl:133; --ct:283; --cw:757; --ch:201; }
+#evolution .jr-mark[data-mark="uvic"]    { --cl:163; --ct:261; --cw:699; --ch:246; }
+#evolution .jr-mark[data-mark="um"]      { --cl:49;  --ct:315; --cw:927; --ch:138; --h: 1.26rem; }
+#evolution .jr-mark[data-mark="hunt"]    { --cl:138; --ct:281; --cw:743; --ch:198; }
+#evolution .jr-mark[data-mark="lap"]     { --cl:201; --ct:197; --cw:616; --ch:374; }
+#evolution .jr-mark[data-mark="hec"]     { --cl:49;  --ct:325; --cw:927; --ch:124; --h: 1.13rem; }
+#evolution .jr-mark[data-mark="utec"]    { --cl:205; --ct:239; --cw:613; --ch:290; }
+
+/* The logo files are white on transparent and vanish on the light ground.
+   shared/ticker.css line 114 already inverts the same eight files on Main;
+   the sequence takes the same display-level treatment, assets untouched. */
+html[data-theme="light"] #evolution .jr-mark:not(.jr-mark--platform) .jr-mark__img { filter: invert(1); }
+
+/* Platform marks on the Build items: vector, square-ish, no content box to
+   clip. GitHub's mark is near-black (#1B1F23) and needs the inverse
+   treatment - it disappears on the dark ground, not the light one. */
+#evolution .jr-mark--platform {
+  overflow: visible;
+  width: auto;
+  height: 2rem;
+}
+#evolution .jr-mark--platform .jr-mark__img {
+  height: 2rem;
+  width: auto;
+  max-width: 2rem;
+  margin: 0;
+}
+#evolution .jr-mark--platform[data-mark="figma"] .jr-mark__img { max-width: 1.4rem; }
+#evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: invert(1); }
+html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: none; }
 
 /* ---- JOURNEY · sequence layout (S10-B) ----
    Every value below resolves to a token already defined in base/tokens.css,
@@ -311,13 +355,6 @@
   #evolution .timeline__item { padding-bottom: clamp(1.25rem, 4vw, 1.75rem); }
 }
 
-/* The logo files are pure white on transparent, so they disappear on the light
-   theme's white ground. shared/ticker.css line 114 already solves this for the
-   same eight files on Main by inverting them in light mode; the sequence takes
-   the same treatment. This is a display filter, not an edit: the asset itself
-   is untouched, which is what C2-b′'s "no mark is re-rendered, recoloured or
-   cropped" protects. */
-html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
 
 /* ---- JOURNEY · rail, reading position and disclosure states (S10-B) ----
    The rail itself is .timeline::before from the shared stylesheet. The fill
