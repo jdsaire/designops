@@ -417,5 +417,29 @@ html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
   #evolution .jr-count { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #evolution .jr-chip,
-  
+  #evolution .jr-chip { transition: none; }
+}
+
+/* ---- JOURNEY · the credential plate (S10-B) ----
+   One ground, one padding, one size for all eleven marks, so two opaque slabs
+   (microsoft-front, ibm-design), a near-opaque one (forward), three cropped
+   nonagons on their own ground and five transparent marks read as one set.
+   --surface-card is defined in :root and again under html[data-theme="light"],
+   so the plate flips with the theme instead of relying on one value. */
+#evolution .jr-plate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.2rem;
+  background: var(--surface-card);
+  border: 1px solid var(--color-border-soft);
+}
+#evolution .jr-plate__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
