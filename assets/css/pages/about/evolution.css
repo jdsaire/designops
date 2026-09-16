@@ -235,32 +235,35 @@
    untouched - no asset is re-rendered, recoloured or cropped, and Main's
    ticker, which shares these eight files, is unaffected.
 
-   --cl/--ct/--cw/--ch are the content box measured in the file's own pixels;
-   --h is the rendered height, capped so no mark is taller than a credential
-   mark (2rem) and no mark is wider than 8.5rem. The two ultra-wide wordmarks
-   (Maastricht, HEC Montreal) are width-bound and so render shorter. */
+   --cl/--ct/--cw/--ch are the content box measured in the file's own pixels.
+   Every Formation and Work mark renders at one locked height - Maastricht
+   University's, 1.26rem, chosen by the principal at Gate G4 - so the marks
+   read as one set down the column. Widths therefore differ with each
+   wordmark's own proportions, which is accepted. No mark reaches the height
+   of a credential mark. */
 #evolution .jr-mark {
+  --h: 1.26rem;   /* locked to the Maastricht wordmark's height */
   display: inline-block;
   overflow: hidden;
-  height: var(--h, 2rem);
-  width: calc(var(--h, 2rem) * var(--cw) / var(--ch));
+  height: var(--h);
+  width: calc(var(--h) * var(--cw) / var(--ch));
   flex: 0 0 auto;
 }
 #evolution .jr-mark__img {
   display: block;
-  height: calc(var(--h, 2rem) * 768 / var(--ch));
-  width: calc(var(--h, 2rem) * 1024 / var(--ch));
+  height: calc(var(--h) * 768 / var(--ch));
+  width: calc(var(--h) * 1024 / var(--ch));
   max-width: none;
-  margin-left: calc(-1 * var(--h, 2rem) * var(--cl) / var(--ch));
-  margin-top: calc(-1 * var(--h, 2rem) * var(--ct) / var(--ch));
+  margin-left: calc(-1 * var(--h) * var(--cl) / var(--ch));
+  margin-top: calc(-1 * var(--h) * var(--ct) / var(--ch));
 }
 #evolution .jr-mark[data-mark="esan"]    { --cl:169; --ct:292; --cw:674; --ch:193; }
 #evolution .jr-mark[data-mark="centrum"] { --cl:133; --ct:283; --cw:757; --ch:201; }
 #evolution .jr-mark[data-mark="uvic"]    { --cl:163; --ct:261; --cw:699; --ch:246; }
-#evolution .jr-mark[data-mark="um"]      { --cl:49;  --ct:315; --cw:927; --ch:138; --h: 1.26rem; }
+#evolution .jr-mark[data-mark="um"]      { --cl:49;  --ct:315; --cw:927; --ch:138; }
 #evolution .jr-mark[data-mark="hunt"]    { --cl:138; --ct:281; --cw:743; --ch:198; }
 #evolution .jr-mark[data-mark="lap"]     { --cl:201; --ct:197; --cw:616; --ch:374; }
-#evolution .jr-mark[data-mark="hec"]     { --cl:49;  --ct:325; --cw:927; --ch:124; --h: 1.13rem; }
+#evolution .jr-mark[data-mark="hec"]     { --cl:49;  --ct:325; --cw:927; --ch:124; }
 #evolution .jr-mark[data-mark="utec"]    { --cl:205; --ct:239; --cw:613; --ch:290; }
 
 /* The logo files are white on transparent and vanish on the light ground.
