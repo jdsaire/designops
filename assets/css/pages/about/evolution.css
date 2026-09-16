@@ -420,26 +420,25 @@ html[data-theme="light"] #evolution .jr-mark__img { filter: invert(1); }
   #evolution .jr-chip { transition: none; }
 }
 
-/* ---- JOURNEY · the credential plate (S10-B) ----
-   One ground, one padding, one size for all eleven marks, so two opaque slabs
-   (microsoft-front, ibm-design), a near-opaque one (forward), three cropped
-   nonagons on their own ground and five transparent marks read as one set.
-   --surface-card is defined in :root and again under html[data-theme="light"],
-   so the plate flips with the theme instead of relying on one value. */
+/* ---- JOURNEY · the credential marks (S10-B) ----
+   The mark fills its own box: no plate ground, no border, no padding, so
+   nothing blank sits between the artwork and the edge of the badge area. The
+   box shrink-wraps each mark at one shared height, which keeps the row
+   rhythm even while the widths differ - and keeps the Beta Gamma Sigma
+   ribbon uncropped, which F11 section F11-d requires.
+
+   This retires the uniform plate that SPEC-AboutJourney section 4 and
+   SPEC-Badges section 3.1(b) specified. Principal's direction at Gate G4.
+   The files themselves are trimmed to their own content box; no mark is
+   recoloured, and the white inside the Microsoft frame's rounded corners is
+   the issuer's own artwork and stays. */
 #evolution .jr-plate {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0.2rem;
-  background: var(--surface-card);
-  border: 1px solid var(--color-border-soft);
 }
 #evolution .jr-plate__img {
-  max-width: 100%;
-  max-height: 100%;
+  height: 2rem;
   width: auto;
-  height: auto;
+  max-width: 4.5rem;
   object-fit: contain;
 }
