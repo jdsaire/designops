@@ -331,8 +331,89 @@ body.modal-open {
   margin: 0;
 }
 
+/* ── Page layout — option C, scoped to this page ───────────────
+   The shared .pagehero sets min-height:100svh, which made an eyebrow,
+   three words and a one-line lede fill the whole viewport and pushed the
+   first form field a screen down. The floor is lifted through a modifier
+   class, so shared/page-hero.css stays intact for capabilities/, which
+   carries the bare .pagehero. */
+.pagehero--contact {
+  min-height: 0;
+  align-items: flex-start;
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.pagehero--contact .pagehero__inner {
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+/* Channels: one per line at every width, with real separation. The
+   shared .cta is inline-flex, which is what set the LinkedIn label
+   against the GitHub icon with 4-5px between them. */
+.contact-channels .cta {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.contact-channels .cta:last-child {
+  margin-bottom: 0;
+}
+
+/* The form section's own top padding. The shared .section pays
+   clamp(4rem, 7vw, 7.5rem), which is dead space now that the hero no
+   longer reserves a screen. Scoped to #contact; .section elsewhere is
+   untouched. */
+#contact.section {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* ---- Desktop and tablet (>= 768px) ---- */
+@media (min-width: 768px) {
+  /* Editorial left, channels right, reading as one band. */
+  .pagehero--contact .pagehero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(2.5rem, 6vw, 7.5rem);
+    align-items: end;
+  }
+
+  /* The mobile-only line belongs to mobile alone. */
+  #contact .contact-form-eyebrow { display: none; }
+
+  /* The box was centred while the editorial was left-aligned to the
+     gutter, so the two read as different pages. It now shares the
+     editorial's alignment line. */
+  #contact .contact-form-box {
+    max-width: min(100%, 1120px);
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  /* Fields paired so the whole form is reachable without a second
+     screen: the select, then name and email, in column one; the message
+     beside them; the actions across both. */
+  #contact .contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
+    row-gap: 1.5rem;
+  }
+  #contact #field-engagement { grid-column: 1; grid-row: 1; }
+  #contact .form-row {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: 1fr;
+  }
+  #contact #field-message { grid-column: 2; grid-row: 1 / span 2; }
+  #contact #footerActions { grid-column: 1 / -1; }
+  #contact .form-textarea { flex: 1; }
+}
+
 /* ── Responsive Adaptation ──────────────────────────────────── */
 @media (max-width: 767px) {
+  /* D3 — on mobile the lede and the channels heading are not displayed;
+     the new line between the GitHub link and the form stands instead. */
+  .pagehero--contact .pagehero__deck { display: none; }
+  .pagehero--contact .contact-channels__head { display: none; }
+
   #contact .contact-header {
     text-align: left;
     align-items: flex-start;
