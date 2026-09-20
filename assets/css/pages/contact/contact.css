@@ -24,48 +24,6 @@ body.modal-open {
   overflow: hidden;
 }
 
-/* ── Editorial Header (Centered Layout) ────────────────────── */
-#contact .contact-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  max-width: 60rem;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-#contact .header-bar {
-  width: 2.5rem;
-  height: 3px;
-  background: var(--color-brand-purple);
-  margin-bottom: 1rem;
-}
-#contact .header-eyebrow {
-  font-size: 0.8rem;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-white);
-  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
-}
-#contact .header-headline {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: var(--fw-bold);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--color-brand-white);
-  margin-bottom: 1rem;
-}
-#contact .header-lede {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  font-weight: var(--fw-light);
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  max-width: 32rem;
-}
-
 /* ── Form Container Box ────────────────────────────────────── */
 #contact .contact-form-box {
   width: 100%;
@@ -414,10 +372,6 @@ body.modal-open {
   .pagehero--contact .pagehero__deck { display: none; }
   .pagehero--contact .contact-channels__head { display: none; }
 
-  #contact .contact-header {
-    text-align: left;
-    align-items: flex-start;
-  }
   #contact .form-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
