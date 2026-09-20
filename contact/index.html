@@ -192,15 +192,15 @@
 
           <div class="form-group" id="field-engagement">
             <label class="form-label" for="engagementType">
-              <span data-i18n="contact_engagement_label">The engagement</span>
+              <span data-i18n="contact_engagement_label">Theme of interest</span>
               <span class="asterisk">*</span>
             </label>
             <div class="select-wrapper">
               <select class="form-select" id="engagementType" name="engagementType" required aria-describedby="hint-engagement">
                 <option value="" disabled selected hidden data-i18n="contact_engagement_placeholder">Select one</option>
-                <option value="viable" data-i18n="contact_engagement_opt1">A viable product to ship</option>
-                <option value="govern" data-i18n="contact_engagement_opt2">One design standard to govern</option>
-                <option value="multiplier" data-i18n="contact_engagement_opt3">An AI capability multiplier</option>
+                <option value="viable" data-i18n="contact_engagement_opt1">Prototype – Digital builds</option>
+                <option value="govern" data-i18n="contact_engagement_opt2">Adoption – Design systems</option>
+                <option value="multiplier" data-i18n="contact_engagement_opt3">Method – AI ways of working</option>
                 <option value="other" data-i18n="contact_engagement_opt4">Something else</option>
               </select>
             </div>
@@ -214,7 +214,7 @@
                 <span class="asterisk">*</span>
               </label>
               <input class="form-input" type="text" id="contactName" name="fullName"
-                     placeholder="Applicant" required aria-describedby="hint-name"
+                     placeholder="Your name" required aria-describedby="hint-name"
                      data-i18n-placeholder="contact_name_placeholder">
               <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="contact_err_name">Full name is required.</span>
             </div>
@@ -236,7 +236,7 @@
               <span class="asterisk">*</span>
             </label>
             <textarea class="form-textarea" id="contactMessage" name="message"
-                      placeholder="Describe the scope, the expected role, and the timeline. The precision of these details will determine whether the engagement is viable."
+                      placeholder="Describe basic scope, expected role, and timeline. These details will determine whether the engagement is viable."
                       required aria-describedby="hint-message"
                       data-i18n-placeholder="contact_msg_placeholder"></textarea>
             <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="contact_err_msg">A message is required.</span>
@@ -274,8 +274,8 @@
 
       <img src="../assets/img/jdigital-logo-mini2.svg" alt="JD Icon" class="modal-logo" onerror="this.style.display='none'">
 
-      <h3 class="modal-headline" id="modalHeadline" data-i18n="contact_success_headline">Thanks — message received.</h3>
-      <p class="modal-body" id="modalBody" aria-live="polite" aria-atomic="true" data-i18n="contact_success_body">I'll reply within 48 hours.</p>
+      <h3 class="modal-headline" id="modalHeadline" data-i18n="contact_success_headline">Message received.</h3>
+      <p class="modal-body" id="modalBody" aria-live="polite" aria-atomic="true" data-i18n="contact_success_body">I'll reply within 48 hours, thank you.</p>
     </div>
   </div>
 
