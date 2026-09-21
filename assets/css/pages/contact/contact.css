@@ -17,10 +17,10 @@
   --color-modal-muted:   rgba(var(--ground), 0.6);
   --color-modal-overlay: var(--scrim-modal);
 
-  /* One source for both vertical rhythms, so the gap above the form can
-     never drift from the gap between the heading and the first link. */
+  /* One rhythm for the whole page, at every breakpoint: the gap between
+     the heading and the first link is the same value as the gap above the
+     form, and it scales with the viewport rather than switching. */
   --contact-stack-gap: clamp(2rem, 4vw, 3rem);
-  --contact-band-gap:  clamp(3rem, 6vw, 5rem);
 }
 
 /* Scroll-lock while the contact modal is open. Global by design —
@@ -294,12 +294,16 @@ body.modal-open {
   margin: 0;
 }
 
-/* ── Page layout — option C, scoped to this page ───────────────
+/* ── Page layout — one column at every breakpoint ──────────────
    The shared .pagehero sets min-height:100svh, which made an eyebrow and
    three words fill the whole viewport and pushed the first form field a
    screen down. The floor is lifted through a modifier class, so
    shared/page-hero.css stays intact for capabilities/, which carries the
-   bare .pagehero. */
+   bare .pagehero.
+
+   The page stacks identically at 390, 768 and 1440: eyebrow, headline,
+   LinkedIn, GitHub, the eyebrow that opens the form, then the form. Only
+   the form's own fields pair up once there is room for them. */
 .pagehero--contact {
   min-height: 0;
   align-items: flex-start;
@@ -317,9 +321,9 @@ body.modal-open {
   display: none;
 }
 
-/* Channels: one per line at every width, with real separation. The shared
-   .cta is inline-flex, which is what set the LinkedIn label against the
-   GitHub icon with 4-5px between them. */
+/* Destinations: one per line, left-aligned to the same gutter as the
+   heading. The shared .cta is inline-flex, which is what set the LinkedIn
+   label against the GitHub icon with 4-5px between them. */
 .contact-channels .cta {
   display: flex;
   margin-bottom: 1rem;
@@ -328,53 +332,26 @@ body.modal-open {
   margin-bottom: 0;
 }
 
-/* The single separation between the opening band and the form. The shared
-   .section pays clamp(4rem, 7vw, 7.5rem) here, which reads as a chasm now
-   that the hero no longer reserves a screen. Scoped to #contact; .section
+/* The one separation between the opening stack and the form, the same
+   token that spaces the heading from the first link. The shared .section
+   pays clamp(4rem, 7vw, 7.5rem) here, which reads as a chasm now that the
+   hero no longer reserves a screen. Scoped to #contact; .section
    elsewhere is untouched. */
 #contact.section {
   padding-top: var(--contact-stack-gap);
 }
 
-/* ---- Desktop and tablet (>= 768px) ---- */
+/* ---- Desktop and tablet (>= 768px) ----
+   The page-level stack is unchanged. Only two things differ: the form box
+   holds the content width instead of centring at 820px, and the fields
+   pair so the whole form stays reachable without a second screen. */
 @media (min-width: 768px) {
-  /* Heading left, the two destinations top right. Their position states
-     what they are without a label having to say it. */
-  .pagehero--contact .pagehero__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: clamp(2.5rem, 6vw, 7.5rem);
-    align-items: start;
-  }
-  .contact-channels {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
-  }
-
-  /* A wider band than the mobile stack, so the form reads as the next
-     move rather than a detached section. */
-  #contact.section {
-    padding-top: var(--contact-band-gap);
-  }
-
-  /* The mobile-only line belongs to mobile alone. */
-  #contact .contact-form-eyebrow { display: none; }
-
-  /* The box was centred while the heading was left-aligned to the gutter,
-     so the two read as different pages. It now spans the same content
-     width the band above it uses: heading top left, destinations top
-     right, form across both. */
   #contact .contact-form-box {
     max-width: none;
     margin-left: 0;
     margin-right: 0;
   }
 
-  /* Fields paired so the whole form is reachable without a second screen:
-     the select, then name and email, in column one; the message beside
-     them; the actions across both. */
   #contact .contact-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
