@@ -11,10 +11,19 @@ function init() {
   /* The modal's logo used to hide itself through an inline onerror
      attribute. A script hash cannot cover an inline handler, so admitting
      one would have meant opening script-src to 'unsafe-inline' for the
-     whole page. Bound here instead; the behaviour is unchanged. */
+     whole page. Bound here instead.
+
+     The attribute fired at parse time; this runs at DOMContentLoaded, by
+     which point a failed image has already dispatched its error event and
+     the listener would never hear it. So the already-failed case is
+     checked directly: an image that finished loading with no intrinsic
+     width did not load. Without this the broken-image box survives inside
+     the success modal. */
   const modalLogo = modalOverlay && modalOverlay.querySelector('.modal-logo');
   if (modalLogo) {
-    modalLogo.addEventListener('error', () => { modalLogo.style.display = 'none'; });
+    const hideLogo = () => { modalLogo.style.display = 'none'; };
+    modalLogo.addEventListener('error', hideLogo);
+    if (modalLogo.complete && modalLogo.naturalWidth === 0) hideLogo();
   }
 
   const validateField = (el) => {
