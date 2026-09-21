@@ -16,6 +16,11 @@
   --color-modal-text:    var(--color-brand-black);
   --color-modal-muted:   rgba(var(--ground), 0.6);
   --color-modal-overlay: var(--scrim-modal);
+
+  /* One source for both vertical rhythms, so the gap above the form can
+     never drift from the gap between the heading and the first link. */
+  --contact-stack-gap: clamp(2rem, 4vw, 3rem);
+  --contact-band-gap:  clamp(3rem, 6vw, 5rem);
 }
 
 /* Scroll-lock while the contact modal is open. Global by design —
@@ -290,23 +295,31 @@ body.modal-open {
 }
 
 /* ── Page layout — option C, scoped to this page ───────────────
-   The shared .pagehero sets min-height:100svh, which made an eyebrow,
-   three words and a one-line lede fill the whole viewport and pushed the
-   first form field a screen down. The floor is lifted through a modifier
-   class, so shared/page-hero.css stays intact for capabilities/, which
-   carries the bare .pagehero. */
+   The shared .pagehero sets min-height:100svh, which made an eyebrow and
+   three words fill the whole viewport and pushed the first form field a
+   screen down. The floor is lifted through a modifier class, so
+   shared/page-hero.css stays intact for capabilities/, which carries the
+   bare .pagehero. */
 .pagehero--contact {
   min-height: 0;
   align-items: flex-start;
-  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: 0;
 }
 .pagehero--contact .pagehero__inner {
-  gap: clamp(2rem, 4vw, 3rem);
+  gap: var(--contact-stack-gap);
 }
 
-/* Channels: one per line at every width, with real separation. The
-   shared .cta is inline-flex, which is what set the LinkedIn label
-   against the GitHub icon with 4-5px between them. */
+/* The lede and the channels heading are not displayed at any breakpoint.
+   The markup and both keys stay, so the decision is reversible and the
+   page's key inventory is unchanged — only the rendering is withheld. */
+.pagehero--contact .pagehero__deck,
+.contact-channels__head {
+  display: none;
+}
+
+/* Channels: one per line at every width, with real separation. The shared
+   .cta is inline-flex, which is what set the LinkedIn label against the
+   GitHub icon with 4-5px between them. */
 .contact-channels .cta {
   display: flex;
   margin-bottom: 1rem;
@@ -315,39 +328,53 @@ body.modal-open {
   margin-bottom: 0;
 }
 
-/* The form section's own top padding. The shared .section pays
-   clamp(4rem, 7vw, 7.5rem), which is dead space now that the hero no
-   longer reserves a screen. Scoped to #contact; .section elsewhere is
-   untouched. */
+/* The single separation between the opening band and the form. The shared
+   .section pays clamp(4rem, 7vw, 7.5rem) here, which reads as a chasm now
+   that the hero no longer reserves a screen. Scoped to #contact; .section
+   elsewhere is untouched. */
 #contact.section {
-  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-top: var(--contact-stack-gap);
 }
 
 /* ---- Desktop and tablet (>= 768px) ---- */
 @media (min-width: 768px) {
-  /* Editorial left, channels right, reading as one band. */
+  /* Heading left, the two destinations top right. Their position states
+     what they are without a label having to say it. */
   .pagehero--contact .pagehero__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: clamp(2.5rem, 6vw, 7.5rem);
-    align-items: end;
+    align-items: start;
+  }
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  /* A wider band than the mobile stack, so the form reads as the next
+     move rather than a detached section. */
+  #contact.section {
+    padding-top: var(--contact-band-gap);
   }
 
   /* The mobile-only line belongs to mobile alone. */
   #contact .contact-form-eyebrow { display: none; }
 
-  /* The box was centred while the editorial was left-aligned to the
-     gutter, so the two read as different pages. It now shares the
-     editorial's alignment line. */
+  /* The box was centred while the heading was left-aligned to the gutter,
+     so the two read as different pages. It now spans the same content
+     width the band above it uses: heading top left, destinations top
+     right, form across both. */
   #contact .contact-form-box {
-    max-width: min(100%, 1120px);
+    max-width: none;
     margin-left: 0;
-    margin-right: auto;
+    margin-right: 0;
   }
 
-  /* Fields paired so the whole form is reachable without a second
-     screen: the select, then name and email, in column one; the message
-     beside them; the actions across both. */
+  /* Fields paired so the whole form is reachable without a second screen:
+     the select, then name and email, in column one; the message beside
+     them; the actions across both. */
   #contact .contact-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -367,11 +394,6 @@ body.modal-open {
 
 /* ── Responsive Adaptation ──────────────────────────────────── */
 @media (max-width: 767px) {
-  /* D3 — on mobile the lede and the channels heading are not displayed;
-     the new line between the GitHub link and the form stands instead. */
-  .pagehero--contact .pagehero__deck { display: none; }
-  .pagehero--contact .contact-channels__head { display: none; }
-
   #contact .form-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
