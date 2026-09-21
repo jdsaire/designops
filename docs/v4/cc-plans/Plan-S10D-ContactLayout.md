@@ -2,7 +2,7 @@
 
 **Run:** `P-CC-S10D-ContactLayout-v1_0.xml` · **Brief:** `BRIEF-CC-S10D-v1_0.md`
 **Repo:** `jdsaire/designops` @ `f5efe10` · **Branch to create:** `deploy/v16-s10d-contact-layout`
-**Model:** Opus 5, high effort, Auto Mode · **Merge:** manual, by the principal
+**Merge:** manual, by the principal
 
 ---
 

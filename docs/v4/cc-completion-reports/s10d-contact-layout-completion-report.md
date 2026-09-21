@@ -188,7 +188,7 @@ after the archival commit — baseline was 0/0 resolving before the run. The thr
 run adds cite paths in backticks, following the repository's existing convention, so the count is
 unchanged. No link was broken because none exists to break.
 
-**Code review.** `/code-review` at high effort over the branch diff returned one confirmed finding,
+**Code review.** `/code-review` over the branch diff returned one confirmed finding,
 fixed in `677a78e`: the modal logo's error listener was bound at `DOMContentLoaded`, too late to
 catch an image that had already failed, silently dropping the fallback the inline `onerror` had
 provided. Verified by aborting the request — before the fix the broken-image box survived inside the
