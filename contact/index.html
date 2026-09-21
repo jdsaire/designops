@@ -215,6 +215,7 @@
               </label>
               <input class="form-input" type="text" id="contactName" name="fullName"
                      placeholder="Your name" required aria-describedby="hint-name"
+                     maxlength="100" autocomplete="name"
                      data-i18n-placeholder="contact_name_placeholder">
               <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="contact_err_name">Full name is required.</span>
             </div>
@@ -225,6 +226,7 @@
               </label>
               <input class="form-input" type="email" id="contactEmail" name="email"
                      placeholder="name@company.com" required aria-describedby="hint-email"
+                     maxlength="150" autocomplete="email"
                      data-i18n-placeholder="contact_email_placeholder">
               <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="contact_err_email">A valid email is required.</span>
             </div>
@@ -238,6 +240,7 @@
             <textarea class="form-textarea" id="contactMessage" name="message"
                       placeholder="Describe basic scope, expected role, and timeline. These details will determine whether the engagement is viable."
                       required aria-describedby="hint-message"
+                      maxlength="2000"
                       data-i18n-placeholder="contact_msg_placeholder"></textarea>
             <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="contact_err_msg">A message is required.</span>
           </div>
