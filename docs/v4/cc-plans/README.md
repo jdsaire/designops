@@ -10,3 +10,4 @@ Approved deployment plans for v4 and later.
 | S10-A · Iteration | `Plan-S10A-Iteration.md` |
 | S10-C · Main organism hygiene | `Plan-S10C-MainOrganismHygiene.md` |
 | S10-B · About journey | `Plan-S10B-AboutJourney.md` |
+| S10-D · Contact organism | `Plan-S10D-ContactLayout.md` |

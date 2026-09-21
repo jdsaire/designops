@@ -77,8 +77,7 @@ html[data-theme="light"] .section--alt { background: var(--color-brand-black); b
     .section--work .work__header,
     .section--capabilities .capabilities__header,
     .section--evolution .evolution__header,
-    .section--track-record .track-record__header,
-    #contact .contact-header {
+    .section--track-record .track-record__header {
       animation: sectionRise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 45%;

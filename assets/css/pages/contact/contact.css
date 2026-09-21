@@ -16,54 +16,23 @@
   --color-modal-text:    var(--color-brand-black);
   --color-modal-muted:   rgba(var(--ground), 0.6);
   --color-modal-overlay: var(--scrim-modal);
+
+  /* One rhythm for the whole page, at every breakpoint: the gap between
+     the heading and the first link is the same value as the gap above the
+     form, and it scales with the viewport rather than switching. */
+  --contact-stack-gap: clamp(2rem, 4vw, 3rem);
+}
+
+/* The bot trap. Real people never see it; bots fill it and are dropped.
+   It carries no inline style, so the content policy need not admit one. */
+.botcheck {
+  display: none;
 }
 
 /* Scroll-lock while the contact modal is open. Global by design —
    needed for the body overflow lock. */
 body.modal-open {
   overflow: hidden;
-}
-
-/* ── Editorial Header (Centered Layout) ────────────────────── */
-#contact .contact-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  max-width: 60rem;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-#contact .header-bar {
-  width: 2.5rem;
-  height: 3px;
-  background: var(--color-brand-purple);
-  margin-bottom: 1rem;
-}
-#contact .header-eyebrow {
-  font-size: 0.8rem;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-brand-white);
-  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
-}
-#contact .header-headline {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: var(--fw-bold);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--color-brand-white);
-  margin-bottom: 1rem;
-}
-#contact .header-lede {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  font-weight: var(--fw-light);
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  max-width: 32rem;
 }
 
 /* ── Form Container Box ────────────────────────────────────── */
@@ -331,12 +300,83 @@ body.modal-open {
   margin: 0;
 }
 
+/* ── Page layout — one column at every breakpoint ──────────────
+   The shared .pagehero sets min-height:100svh, which made an eyebrow and
+   three words fill the whole viewport and pushed the first form field a
+   screen down. The floor is lifted through a modifier class, so
+   shared/page-hero.css stays intact for capabilities/, which carries the
+   bare .pagehero.
+
+   The page stacks identically at 390, 768 and 1440: eyebrow, headline,
+   LinkedIn, GitHub, the eyebrow that opens the form, then the form. Only
+   the form's own fields pair up once there is room for them. */
+.pagehero--contact {
+  min-height: 0;
+  align-items: flex-start;
+  padding-bottom: 0;
+}
+.pagehero--contact .pagehero__inner {
+  gap: var(--contact-stack-gap);
+}
+
+/* The lede and the channels heading are not displayed at any breakpoint.
+   The markup and both keys stay, so the decision is reversible and the
+   page's key inventory is unchanged — only the rendering is withheld. */
+.pagehero--contact .pagehero__deck,
+.contact-channels__head {
+  display: none;
+}
+
+/* Destinations: one per line, left-aligned to the same gutter as the
+   heading. The shared .cta is inline-flex, which is what set the LinkedIn
+   label against the GitHub icon with 4-5px between them. */
+.contact-channels .cta {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.contact-channels .cta:last-child {
+  margin-bottom: 0;
+}
+
+/* The one separation between the opening stack and the form, the same
+   token that spaces the heading from the first link. The shared .section
+   pays clamp(4rem, 7vw, 7.5rem) here, which reads as a chasm now that the
+   hero no longer reserves a screen. Scoped to #contact; .section
+   elsewhere is untouched. */
+#contact.section {
+  padding-top: var(--contact-stack-gap);
+}
+
+/* ---- Desktop and tablet (>= 768px) ----
+   The page-level stack is unchanged. Only two things differ: the form box
+   holds the content width instead of centring at 820px, and the fields
+   pair so the whole form stays reachable without a second screen. */
+@media (min-width: 768px) {
+  #contact .contact-form-box {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #contact .contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
+    row-gap: 1.5rem;
+  }
+  #contact #field-engagement { grid-column: 1; grid-row: 1; }
+  #contact .form-row {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: 1fr;
+  }
+  #contact #field-message { grid-column: 2; grid-row: 1 / span 2; }
+  #contact #footerActions { grid-column: 1 / -1; }
+  #contact .form-textarea { flex: 1; }
+}
+
 /* ── Responsive Adaptation ──────────────────────────────────── */
 @media (max-width: 767px) {
-  #contact .contact-header {
-    text-align: left;
-    align-items: flex-start;
-  }
   #contact .form-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;

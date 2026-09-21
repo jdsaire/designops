@@ -116,9 +116,9 @@
   "contact_lede": "Cuénteme sobre su proyecto.",
   "contact_engagement_label": "Vertical de interés",
   "contact_engagement_placeholder": "Seleccione una",
-  "contact_engagement_opt1": "Producción – Desarrollos digitales",
+  "contact_engagement_opt1": "Prototipo – Desarrollos digitales",
   "contact_engagement_opt2": "Adopción – Sistemas de diseño",
-  "contact_engagement_opt3": "Amplificación – Soluciones de IA",
+  "contact_engagement_opt3": "Método – Formas de trabajo con IA",
   "contact_engagement_opt4": "Otra",
   "contact_name_label": "Nombre completo",
   "contact_name_placeholder": "Su nombre",
@@ -153,5 +153,6 @@
   "about_cv_head": "La versión de una página.",
   "about_cv_cta": "Descargar CV (PDF)",
   "contact_github": "Ver el código en GitHub",
-  "contact_elsewhere_head": "O encuéntreme aquí."
+  "contact_elsewhere_head": "O encuéntreme aquí.",
+  "contact_form_head": "O envíe su consulta."
 }
