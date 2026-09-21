@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Content policy, derived from what this page actually loads: nine
+       same-origin stylesheets, one same-origin module graph, three local
+       SVGs, no web font, and two network destinations - the i18n
+       dictionaries on this origin and the form handler. The hash covers
+       the theme bootstrap below; changing one byte of it invalidates the
+       hash and the page then loads unthemed. GitHub Pages serves no
+       response headers we control, so this meta tag is the only vehicle,
+       and frame-ancestors cannot be carried in one. Scoped to this page
+       (S10D D7); the other seven are a CC-3 line. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-z/L/xVjXibIZ7gMDFCNXZVuBILZDkxu+3TrsJz5BwxY='; style-src 'self'; img-src 'self'; font-src 'none'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
   <title>Contact · Juan Diego Saire — DesignOps</title>
   <meta name="description" content="Tell me about the team and the challenge. One form, a reply within 48 hours.">
   <link rel="icon" type="image/svg+xml" href="../logos/jdigital-logo-default.svg">
