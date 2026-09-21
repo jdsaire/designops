@@ -8,6 +8,15 @@ function init() {
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   let lastFocusedElement = null;
 
+  /* The modal's logo used to hide itself through an inline onerror
+     attribute. A script hash cannot cover an inline handler, so admitting
+     one would have meant opening script-src to 'unsafe-inline' for the
+     whole page. Bound here instead; the behaviour is unchanged. */
+  const modalLogo = modalOverlay && modalOverlay.querySelector('.modal-logo');
+  if (modalLogo) {
+    modalLogo.addEventListener('error', () => { modalLogo.style.display = 'none'; });
+  }
+
   const validateField = (el) => {
     const group = el.closest('.form-group');
     if (!group) return true;

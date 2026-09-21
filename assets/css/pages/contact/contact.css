@@ -23,6 +23,12 @@
   --contact-stack-gap: clamp(2rem, 4vw, 3rem);
 }
 
+/* The bot trap. Real people never see it; bots fill it and are dropped.
+   It carries no inline style, so the content policy need not admit one. */
+.botcheck {
+  display: none;
+}
+
 /* Scroll-lock while the contact modal is open. Global by design —
    needed for the body overflow lock. */
 body.modal-open {
