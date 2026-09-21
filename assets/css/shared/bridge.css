@@ -86,11 +86,6 @@
           box-decoration-break: clone;
   display: inline;
 }
-/* Force the second sentence onto its own line, keeping the inline highlight. */
-.bridge__heading-line2::before {
-  content: "\A";
-  white-space: pre;
-}
 
 .bridge__attribution {
   font-family: var(--font-primary);
