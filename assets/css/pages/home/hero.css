@@ -65,7 +65,7 @@
 .hero__h1-line { display:block; }
 /* W1: the two headline lines sat on the 0.95 leading alone and read as one
    block. A half-em of air between them separates the claim from its promise. */
-.hero__h1-line + .hero__h1-line { margin-top:0.5em; }
+.hero__h1-line + .hero__h1-line { margin-top:0.375em; }
 .hero__h1 .purple { color:var(--color-brand-purple); }
 
 .hero__tags {
