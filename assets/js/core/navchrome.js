@@ -64,9 +64,9 @@ function init(opts) {
        away. Smooth scrolling made it worse: the settle at the end of a wheel
        gesture overshoots and eases back DOWN — measured at 37px on about/ —
        which any small downward threshold reads as a new downward scroll.
-       So direction is accumulated travel, reset whenever it reverses: 64px of
-       downward travel hides the bar, 8px upward brings it straight back, and
-       an easing tail can no longer hide anything. */
+       So direction is accumulated travel, reset whenever it reverses: see the
+       two constants below. An easing tail can no longer hide anything, and any
+       real upward movement brings the bar straight back. */
     const HIDE_AFTER = 120;  /* accumulated downward travel before hiding; clears
                                 the largest measured smooth-scroll settle (57px) */
     const SHOW_AFTER = 8;    /* any real upward travel brings it straight back */

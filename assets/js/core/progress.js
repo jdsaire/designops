@@ -28,11 +28,16 @@ function revealGuard() {
   }
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.intersectionRatio < 0.99) return;
+      /* Fully on screen, OR taller than the viewport and covering most of it:
+         a header longer than the screen can never reach a ratio of 0.99, and
+         without the second test it would never be pinned at all. */
+      var root = e.rootBounds;
+      var tall = root && e.isIntersecting && e.intersectionRect.height >= root.height * 0.6;
+      if (e.intersectionRatio < 0.99 && !tall) return;
       e.target.classList.add('is-revealed');
       io.unobserve(e.target);
     });
-  }, { threshold: [0.99] });
+  }, { threshold: [0, 0.25, 0.5, 0.75, 0.99] });
   Array.prototype.forEach.call(headers, function (el) { io.observe(el); });
 }
 
