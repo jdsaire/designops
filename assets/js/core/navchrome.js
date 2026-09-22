@@ -38,6 +38,21 @@ function init(opts) {
     if (a.tagName === 'A') a.setAttribute('href', rootPrefix + 'work/' + a.getAttribute('data-nav-work'));
   });
 
+  /* ── Current page, in the mobile overlay (visibility of system status). ──
+     Runs after the href rewrite above, so every link carries its final path.
+     One row matches: Home on Main, About, Contact, or the brief you are in. */
+  (function markCurrent() {
+    const here = location.pathname.replace(/index\.html$/, '');
+    document.querySelectorAll('.nav__overlay-link[href], .nav__overlay-subitem[href]').forEach(a => {
+      let target;
+      try { target = new URL(a.getAttribute('href'), location.href).pathname.replace(/index\.html$/, ''); }
+      catch (e) { return; }
+      if (target !== here) return;
+      a.classList.add('is-current');
+      a.setAttribute('aria-current', 'page');
+    });
+  })();
+
   /* ── Hide-on-scroll bar (P-6c focus-within return). Needs #navbar. ── */
   const nav = document.getElementById('navbar');
   if (nav) {

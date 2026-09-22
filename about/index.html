@@ -97,11 +97,13 @@
     <nav class="nav__overlay-links" aria-label="Mobile navigation">
       <section class="nav__overlay-section" aria-labelledby="ovSitemap">
         <p class="nav__overlay-eyebrow" id="ovSitemap" data-i18n="nav_group_sitemap">SITEMAP</p>
-        <div class="nav__overlay-group">
+        <a href="#top" data-nav-link="#top" class="nav__overlay-link">
+        <span data-i18n="nav_home">Home</span>
+      </a>
+      <div class="nav__overlay-group">
           <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
                   aria-expanded="false" aria-controls="overlayWorkMenu">
             <span data-i18n="nav_work">Work</span>
-            <span class="nav__overlay-link-chevron">&#8250;</span>
           </button>
           <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work">
             <a class="nav__overlay-subitem" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
@@ -112,15 +114,12 @@
         </div>
         <a href="../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
           <span data-i18n="nav_capabilities">Capabilities</span>
-          <span class="nav__overlay-link-chevron">&#8250;</span>
         </a>
         <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
           <span data-i18n="nav_evolution">About</span>
-          <span class="nav__overlay-link-chevron">&#8250;</span>
         </a>
         <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
           <span data-i18n="nav_cta">Contact</span>
-          <span class="nav__overlay-link-chevron">&#8250;</span>
         </a>
       </section>
 

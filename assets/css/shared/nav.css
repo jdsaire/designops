@@ -175,12 +175,6 @@
 }
 .nav__overlay-group:first-child .nav__overlay-link:first-child,
 .nav__overlay-links > .nav__overlay-link:first-child { border-top:1px solid var(--color-border-faint); }
-.nav__overlay-link-chevron {
-  font-size:1em; line-height:1; color:var(--color-text-dim);
-  transition:color var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);
-}
-.nav__overlay-link:hover .nav__overlay-link-chevron { color:var(--color-brand-purple); transform:translateX(3px); }
-.nav__overlay-work-trigger[aria-expanded="true"] .nav__overlay-link-chevron { transform:rotate(90deg); color:var(--color-brand-purple); }
 
 .nav__overlay-submenu { display:flex; flex-direction:column; }
 .nav__overlay-submenu[hidden] { display:none; }
@@ -196,6 +190,20 @@
    each opened by its own eyebrow. The switches keep the shared .nav__switch
    component; only their placement changes. */
 .nav__overlay-section { display:flex; flex-direction:column; align-items:flex-start; }
+/* A 2px rule divides the three groups; the row borders inside a group stay at
+   1px faint, so the group boundary reads as the stronger line. */
+.nav__overlay-section + .nav__overlay-section {
+  border-top:2px solid var(--color-border-soft); margin-top:0.75rem;
+}
+/* Visibility of system status: the row for the page you are on carries the
+   brand rule on its left edge and a filled container. The purple tint reads
+   on both the black and the white surface, so one value serves both themes. */
+.nav__overlay-link.is-current,
+.nav__overlay-subitem.is-current {
+  background:rgba(161, 0, 255, 0.14);
+  box-shadow:inset 3px 0 0 var(--color-brand-purple);
+  color:var(--color-brand-white);
+}
 .nav__overlay-eyebrow {
   margin:0; padding:1.5rem var(--gutter) 0.5rem;
   font-family:var(--font-primary); font-size:0.62rem; font-weight:var(--fw-medium);
