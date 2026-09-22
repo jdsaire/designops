@@ -41,12 +41,33 @@ function init(opts) {
   /* ── Hide-on-scroll bar (P-6c focus-within return). Needs #navbar. ── */
   const nav = document.getElementById('navbar');
   if (nav) {
-    let lastScroll = 0, ticking = false;
+    /* W1 fix: the rAF throttle drops the trailing events of a scroll run, so
+       lastScroll could keep an old, smaller value. Comparing the next sample
+       against it read an upward scroll as downward and left the bar hidden
+       until another upward event beat the stale value — reported in the field
+       as the bar vanishing on a brief and staying gone until you navigated
+       away. Smooth scrolling made it worse: the settle at the end of a wheel
+       gesture overshoots and eases back DOWN — measured at 37px on about/ —
+       which any small downward threshold reads as a new downward scroll.
+       So direction is accumulated travel, reset whenever it reverses: 64px of
+       downward travel hides the bar, 8px upward brings it straight back, and
+       an easing tail can no longer hide anything. */
+    const HIDE_AFTER = 120;  /* accumulated downward travel before hiding; clears
+                                the largest measured smooth-scroll settle (57px) */
+    const SHOW_AFTER = 8;    /* any real upward travel brings it straight back */
+    let lastScroll = Math.max(0, window.scrollY), travel = 0, ticking = false;
     function onScroll() {
-      const cur = window.scrollY;
+      const cur = Math.max(0, window.scrollY);
+      const delta = cur - lastScroll;
+      lastScroll = cur;
+      if (delta === 0) { ticking = false; return; }
+      /* Direction changed: start measuring the new direction from zero. */
+      if ((delta > 0) !== (travel > 0)) travel = 0;
+      travel += delta;
       const keepVisible = nav.contains(document.activeElement);
-      nav.classList.toggle('nav--hidden', !keepVisible && cur > lastScroll && cur > 80);
-      lastScroll = cur; ticking = false;
+      if (travel <= -SHOW_AFTER || cur <= 80 || keepVisible) nav.classList.remove('nav--hidden');
+      else if (travel >= HIDE_AFTER && cur > 80) nav.classList.add('nav--hidden');
+      ticking = false;
     }
     window.addEventListener('scroll', () => {
       if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
@@ -177,6 +198,7 @@ function init(opts) {
   function openOverlay() {
     if (!overlay) return;
     overlay.classList.add('nav__overlay--open');
+    if (nav) nav.classList.remove('nav--hidden');
     if (hamburger) { hamburger.setAttribute('aria-expanded', 'true'); hamburger.classList.add('nav__hamburger--open'); }
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
