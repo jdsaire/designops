@@ -38,15 +38,51 @@ function init(opts) {
     if (a.tagName === 'A') a.setAttribute('href', rootPrefix + 'work/' + a.getAttribute('data-nav-work'));
   });
 
+  /* ── Current page, in the mobile overlay (visibility of system status). ──
+     Runs after the href rewrite above, so every link carries its final path.
+     One row matches: Home on Main, About, Contact, or the brief you are in. */
+  (function markCurrent() {
+    const here = location.pathname.replace(/index\.html$/, '');
+    document.querySelectorAll('.nav__overlay-link[href], .nav__overlay-subitem[href]').forEach(a => {
+      let target;
+      try { target = new URL(a.getAttribute('href'), location.href).pathname.replace(/index\.html$/, ''); }
+      catch (e) { return; }
+      if (target !== here) return;
+      a.classList.add('is-current');
+      a.setAttribute('aria-current', 'page');
+    });
+  })();
+
   /* ── Hide-on-scroll bar (P-6c focus-within return). Needs #navbar. ── */
   const nav = document.getElementById('navbar');
   if (nav) {
-    let lastScroll = 0, ticking = false;
+    /* W1 fix: the rAF throttle drops the trailing events of a scroll run, so
+       lastScroll could keep an old, smaller value. Comparing the next sample
+       against it read an upward scroll as downward and left the bar hidden
+       until another upward event beat the stale value — reported in the field
+       as the bar vanishing on a brief and staying gone until you navigated
+       away. Smooth scrolling made it worse: the settle at the end of a wheel
+       gesture overshoots and eases back DOWN — measured at 37px on about/ —
+       which any small downward threshold reads as a new downward scroll.
+       So direction is accumulated travel, reset whenever it reverses: see the
+       two constants below. An easing tail can no longer hide anything, and any
+       real upward movement brings the bar straight back. */
+    const HIDE_AFTER = 120;  /* accumulated downward travel before hiding; clears
+                                the largest measured smooth-scroll settle (57px) */
+    const SHOW_AFTER = 8;    /* any real upward travel brings it straight back */
+    let lastScroll = Math.max(0, window.scrollY), travel = 0, ticking = false;
     function onScroll() {
-      const cur = window.scrollY;
+      const cur = Math.max(0, window.scrollY);
+      const delta = cur - lastScroll;
+      lastScroll = cur;
+      if (delta === 0) { ticking = false; return; }
+      /* Direction changed: start measuring the new direction from zero. */
+      if ((delta > 0) !== (travel > 0)) travel = 0;
+      travel += delta;
       const keepVisible = nav.contains(document.activeElement);
-      nav.classList.toggle('nav--hidden', !keepVisible && cur > lastScroll && cur > 80);
-      lastScroll = cur; ticking = false;
+      if (travel <= -SHOW_AFTER || cur <= 80 || keepVisible) nav.classList.remove('nav--hidden');
+      else if (travel >= HIDE_AFTER && cur > 80) nav.classList.add('nav--hidden');
+      ticking = false;
     }
     window.addEventListener('scroll', () => {
       if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
@@ -55,13 +91,13 @@ function init(opts) {
   }
 
   /* ── A small disclosure helper mirroring tagfilter.js's contract. ── */
-  function wireDisclosure(trigger, menu, onOutside) {
+  function wireDisclosure(trigger, menu, onOutside, initialOpen) {
     if (!trigger || !menu) return null;
     function setOpen(open) {
       trigger.setAttribute('aria-expanded', String(open));
       if (open) { menu.hidden = false; } else { menu.hidden = true; }
     }
-    setOpen(false);
+    setOpen(!!initialOpen);
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = trigger.getAttribute('aria-expanded') === 'true';
@@ -177,6 +213,7 @@ function init(opts) {
   function openOverlay() {
     if (!overlay) return;
     overlay.classList.add('nav__overlay--open');
+    if (nav) nav.classList.remove('nav--hidden');
     if (hamburger) { hamburger.setAttribute('aria-expanded', 'true'); hamburger.classList.add('nav__hamburger--open'); }
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -192,7 +229,9 @@ function init(opts) {
     /* Nested Work disclosure inside the overlay. */
     const overlayWorkTrigger = document.getElementById('overlayWorkTrigger');
     const overlayWorkMenu = document.getElementById('overlayWorkMenu');
-    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null);
+    /* W1: the overlay's Work group opens expanded — the sitemap shows every
+       destination at once, and the chevron collapses it. */
+    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null, true);
     /* Flat links close the overlay on navigation; Work items too. */
     overlay.querySelectorAll('.nav__overlay-link, .nav__overlay-subitem').forEach(el => {
       el.addEventListener('click', () => { if (el.tagName === 'A') closeOverlay(); });

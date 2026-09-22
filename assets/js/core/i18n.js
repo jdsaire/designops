@@ -49,7 +49,7 @@ function swapLang(lang) {
     /* alt swap for images */
     document.querySelectorAll('[data-i18n-alt]').forEach(el => {
       const key = el.dataset.i18nAlt;
-      if (dict[key] !== undefined) el.alt = dict[key];
+      if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
     });
 
     document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang, dict } }));

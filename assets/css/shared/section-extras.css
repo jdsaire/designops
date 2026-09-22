@@ -82,6 +82,19 @@ html[data-theme="light"] .section--alt { background: var(--color-brand-black); b
       animation-timeline: view();
       animation-range: entry 0% entry 45%;
     }
+    /* Reveal guard (W1). core/progress.js adds .is-revealed once a header is
+       fully on screen, i.e. once its entrance has played out. Dropping the
+       animation there pins the resting state: if the view() timeline ever
+       stops advancing, the header can no longer be left on the animation's
+       opening frame (opacity 0) until the page is reloaded. */
+    .section--work .work__header.is-revealed,
+    .section--capabilities .capabilities__header.is-revealed,
+    .section--evolution .evolution__header.is-revealed,
+    .section--track-record .track-record__header.is-revealed {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 

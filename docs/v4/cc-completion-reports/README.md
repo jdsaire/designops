@@ -11,3 +11,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | S10-C · Main organism hygiene | `s10c-main-organism-hygiene-completion-report.md` |
 | S10-B · About journey | `s10b-about-journey-completion-report.md` |
 | S10-D · Contact organism | `s10d-contact-layout-completion-report.md` |
+| W1 · Copy injection, Main and About | `w1-copy-injection-completion-report.md` |

@@ -52,10 +52,10 @@
             <span class="nav__work-caret" aria-hidden="true"></span>
           </button>
           <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
-            <a class="nav__work-item" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="work_card1_label">Design system · Front-end</a>
-            <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="work_card2_label">Product · Payments</a>
-            <a class="nav__work-item" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="work_card3_label">Prototype · User journey</a>
-            <a class="nav__work-item" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="work_card4_label">Front-end · Banking</a>
+            <a class="nav__work-item" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
+            <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
+            <a class="nav__work-item" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · AIRPORT SAGA · AVIATION</a>
+            <a class="nav__work-item" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
           </div>
         </div>
         <a href="../capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
@@ -95,47 +95,54 @@
     </div>
 
     <nav class="nav__overlay-links" aria-label="Mobile navigation">
+      <section class="nav__overlay-section" aria-labelledby="ovSitemap">
+        <p class="nav__overlay-eyebrow" id="ovSitemap" data-i18n="nav_group_sitemap">SITEMAP</p>
+        <a href="#top" data-nav-link="#top" class="nav__overlay-link">
+        <span data-i18n="nav_home">Home</span>
+      </a>
       <div class="nav__overlay-group">
-        <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
-                aria-expanded="false" aria-controls="overlayWorkMenu">
-          <span data-i18n="nav_work">Work</span>
-          <span class="nav__overlay-link-chevron">&#8250;</span>
-        </button>
-        <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work" hidden>
-          <a class="nav__overlay-subitem" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="work_card1_label">Design system · Front-end</a>
-          <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="work_card2_label">Product · Payments</a>
-          <a class="nav__overlay-subitem" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="work_card3_label">Prototype · User journey</a>
-          <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="work_card4_label">Front-end · Banking</a>
+          <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
+                  aria-expanded="false" aria-controls="overlayWorkMenu">
+            <span data-i18n="nav_work">Work</span>
+          </button>
+          <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work">
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · AIRPORT SAGA · AVIATION</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
+          </div>
         </div>
-      </div>
-      <a href="../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
-        <span data-i18n="nav_capabilities">Capabilities</span>
-        <span class="nav__overlay-link-chevron">&#8250;</span>
-      </a>
-      <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
-        <span data-i18n="nav_evolution">About</span>
-        <span class="nav__overlay-link-chevron">&#8250;</span>
-      </a>
-      <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
-        <span data-i18n="nav_cta">Contact</span>
-        <span class="nav__overlay-link-chevron">&#8250;</span>
-      </a>
-    </nav>
+        <a href="../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
+          <span data-i18n="nav_capabilities">Capabilities</span>
+        </a>
+        <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
+          <span data-i18n="nav_evolution">About</span>
+        </a>
+        <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
+          <span data-i18n="nav_cta">Contact</span>
+        </a>
+      </section>
 
-    <div class="nav__overlay-lang">
-      <div class="nav__switch" id="overlayLang" role="listbox" aria-label="Language">
-        <button class="nav__overlay-lang-option nav__overlay-lang-option--active" type="button"
-                role="option" aria-selected="true" data-lang="ES">ES</button>
-        <button class="nav__overlay-lang-option" type="button"
-                role="option" aria-selected="false" data-lang="EN">EN</button>
-      </div>
-      <div class="nav__switch" role="group" aria-label="Theme">
-        <button class="nav__theme-opt" id="overlayThemeDark" type="button" data-theme-opt="dark"
-                aria-pressed="true" aria-label="Dark theme" title="Dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.4A8.5 8.5 0 1 1 10.6 3.5a6.8 6.8 0 0 0 9.9 9.9z"/></svg></button>
-        <button class="nav__theme-opt" id="overlayThemeLight" type="button" data-theme-opt="light"
-                aria-pressed="false" aria-label="Light theme" title="Light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2M12 19.6v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.4 12h2M19.6 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></button>
-      </div>
-    </div>
+      <section class="nav__overlay-section" aria-labelledby="ovTheme">
+        <p class="nav__overlay-eyebrow" id="ovTheme" data-i18n="nav_group_theme">THEME</p>
+        <div class="nav__switch" role="group" aria-label="Theme">
+          <button class="nav__theme-opt" id="overlayThemeDark" type="button" data-theme-opt="dark"
+                  aria-pressed="true" aria-label="Dark theme" title="Dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.4A8.5 8.5 0 1 1 10.6 3.5a6.8 6.8 0 0 0 9.9 9.9z"/></svg></button>
+          <button class="nav__theme-opt" id="overlayThemeLight" type="button" data-theme-opt="light"
+                  aria-pressed="false" aria-label="Light theme" title="Light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2M12 19.6v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.4 12h2M19.6 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></button>
+        </div>
+      </section>
+
+      <section class="nav__overlay-section" aria-labelledby="ovLanguage">
+        <p class="nav__overlay-eyebrow" id="ovLanguage" data-i18n="nav_group_language">LANGUAGE</p>
+        <div class="nav__switch" id="overlayLang" role="listbox" aria-label="Language">
+          <button class="nav__overlay-lang-option nav__overlay-lang-option--active" type="button"
+                  role="option" aria-selected="true" data-lang="ES">ES</button>
+          <button class="nav__overlay-lang-option" type="button"
+                  role="option" aria-selected="false" data-lang="EN">EN</button>
+        </div>
+      </section>
+    </nav>
 
   </div>
 
@@ -148,12 +155,12 @@
        ============================================================ -->
   <section class="bridge" id="bridge1-onboarding" aria-labelledby="bridge1-onboarding-heading">
     <div class="bridge__media">
-      <span class="img-alt-host" alt="Juan Diego Saire, JDigital founder and digital product management strategist based in Lima Peru">
+      <span class="img-alt-host" alt="Juan Diego Saire — AI Product &amp; Experience Engineer, Lima, Peru." data-i18n-alt="about_hero_portrait_caption">
         <img
           class="bridge__image"
           src="../assets/img/bridge1_onboarding.svg"
           alt=""
-          data-i18n-alt="bridge1_onboarding_image_alt"
+          data-i18n-alt="about_hero_image_alt"
           loading="eager"
           decoding="async"
           width="900"
@@ -169,7 +176,7 @@
         <h1
           class="bridge__heading"
           id="bridge1-onboarding-heading"
-        ><span data-i18n="bridge1_onboarding_heading">I take products past the workshops and journey maps and into production.</span><span class="bridge__heading-line2" data-i18n="bridge1_onboarding_heading_2">A strategist who reads the code, runs the repo, and directs the build.</span></h1>
+        ><span data-i18n="about_hero_heading">I’m a digital architect of products, agents and experiences – combining engineering with advanced AI to direct, refine, and deploy the solutions that your team demands.</span></h1>
       </div>
     </div>
   </section>
@@ -184,32 +191,32 @@
       <div class="track-record__header">
         <div class="section__eyebrow">
           <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="tr_eyebrow">TRACK RECORD</p>
+          <p class="section__eyebrow-text" data-i18n="about_tr_eyebrow">TRACK RECORD</p>
         </div>
-        <h2 class="section__headline" data-i18n="tr_heading">Figures don't lie.</h2>
-        <p class="section__lede" data-i18n="tr_lede">Real work leaves real numbers.</p>
+        <h2 class="section__headline" data-i18n="about_tr_heading">Figures don't lie.</h2>
+        <p class="section__lede" data-i18n="about_tr_lede">Real work leaves real numbers.</p>
       </div>
 
       <div class="track-record__stats">
         <div class="stat">
           <div class="stat__number" data-target="130000" data-suffix="+">0+</div>
-          <div class="stat__label" data-i18n="tr_stat1_label">Monthly international-transfer passengers (TUUA)</div>
+          <div class="stat__label" data-i18n="about_tr_stat1_label">Monthly international-transfer passengers (TUUA)</div>
         </div>
         <div class="stat">
           <div class="stat__number" data-target="70" data-suffix="">0</div>
-          <div class="stat__label" data-i18n="tr_stat2_label">Staff trained, at 3.88/4</div>
+          <div class="stat__label" data-i18n="about_tr_stat2_label">Staff trained, at 3.88/4</div>
         </div>
         <div class="stat">
           <div class="stat__number" data-target="1200" data-suffix="+">0+</div>
-          <div class="stat__label" data-i18n="tr_stat3_label">Students taught</div>
+          <div class="stat__label" data-i18n="about_tr_stat3_label">Students taught</div>
         </div>
         <div class="stat">
           <div class="stat__number" data-target="29" data-suffix="">0</div>
-          <div class="stat__label" data-i18n="tr_stat4_label">Project teams mentored</div>
+          <div class="stat__label" data-i18n="about_tr_stat4_label">Project teams mentored</div>
         </div>
         <div class="stat">
           <div class="stat__number" data-target="175" data-suffix="">0</div>
-          <div class="stat__label" data-i18n="tr_stat5_label">Keys in the bilingual engine I built and run</div>
+          <div class="stat__label" data-i18n="about_tr_stat5_label">Keys in the bilingual engine I built and run</div>
         </div>
       </div>
     </div>
@@ -221,10 +228,10 @@
       <div class="evolution__header">
         <div class="section__eyebrow">
           <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="evolution_eyebrow">EVOLUTION</p>
+          <p class="section__eyebrow-text" data-i18n="about_jr_eyebrow">EVOLUTION</p>
         </div>
-        <h2 class="section__headline" id="evolution-heading" data-i18n="evolution_heading">The making of the operator.</h2>
-        <p class="section__lede" data-i18n="evolution_lede">I came down from strategy and picked up the build. Here’s the arc.</p>
+        <h2 class="section__headline" id="evolution-heading" data-i18n="about_jr_heading">About Juan Diego.</h2>
+        <p class="section__lede" data-i18n="about_jr_lede">My history – from ideator to builder.</p>
       </div>
 
       <div class="jr-controls">

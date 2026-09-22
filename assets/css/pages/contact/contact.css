@@ -319,11 +319,10 @@ body.modal-open {
   gap: var(--contact-stack-gap);
 }
 
-/* The lede and the channels heading are not displayed at any breakpoint.
-   The markup and both keys stay, so the decision is reversible and the
-   page's key inventory is unchanged — only the rendering is withheld. */
-.pagehero--contact .pagehero__deck,
-.contact-channels__head {
+/* The lede is not displayed at any breakpoint. Its markup and key stay, so
+   the decision is reversible — only the rendering is withheld. The channels
+   heading that shared this rule was removed with its key in W1. */
+.pagehero--contact .pagehero__deck {
   display: none;
 }
 
