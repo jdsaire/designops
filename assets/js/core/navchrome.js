@@ -55,13 +55,13 @@ function init(opts) {
   }
 
   /* ── A small disclosure helper mirroring tagfilter.js's contract. ── */
-  function wireDisclosure(trigger, menu, onOutside) {
+  function wireDisclosure(trigger, menu, onOutside, initialOpen) {
     if (!trigger || !menu) return null;
     function setOpen(open) {
       trigger.setAttribute('aria-expanded', String(open));
       if (open) { menu.hidden = false; } else { menu.hidden = true; }
     }
-    setOpen(false);
+    setOpen(!!initialOpen);
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = trigger.getAttribute('aria-expanded') === 'true';
@@ -192,7 +192,9 @@ function init(opts) {
     /* Nested Work disclosure inside the overlay. */
     const overlayWorkTrigger = document.getElementById('overlayWorkTrigger');
     const overlayWorkMenu = document.getElementById('overlayWorkMenu');
-    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null);
+    /* W1: the overlay's Work group opens expanded — the sitemap shows every
+       destination at once, and the chevron collapses it. */
+    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null, true);
     /* Flat links close the overlay on navigation; Work items too. */
     overlay.querySelectorAll('.nav__overlay-link, .nav__overlay-subitem').forEach(el => {
       el.addEventListener('click', () => { if (el.tagName === 'A') closeOverlay(); });

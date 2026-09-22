@@ -192,17 +192,22 @@
 }
 .nav__overlay-subitem:hover, .nav__overlay-subitem:focus-visible { color:var(--color-brand-white); }
 
-.nav__overlay-lang {
-  display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
-  padding:1.25rem var(--gutter); flex-shrink:0;
-  border-top:1px solid var(--color-border-faint);
+/* W1: the overlay is three left-aligned groups — SITEMAP, THEME, LANGUAGE —
+   each opened by its own eyebrow. The switches keep the shared .nav__switch
+   component; only their placement changes. */
+.nav__overlay-section { display:flex; flex-direction:column; align-items:flex-start; }
+.nav__overlay-eyebrow {
+  margin:0; padding:1.5rem var(--gutter) 0.5rem;
+  font-family:var(--font-primary); font-size:0.62rem; font-weight:var(--fw-medium);
+  letter-spacing:0.14em; text-transform:uppercase; color:var(--color-text-muted);
 }
+.nav__overlay-section > .nav__switch { margin:0.25rem var(--gutter) 0.5rem; }
 /* The overlay's two switches use the same component as the navbar's, one
    step larger for touch: 44px of height clears the minimum target size. */
-.nav__overlay-lang .nav__switch > button {
+.nav__overlay-section > .nav__switch > button {
   font-size:0.85rem; padding:0.7rem 1.1rem; min-height:2.75rem; min-width:3rem;
 }
-.nav__overlay-lang .nav__switch > button svg { width:1.15rem; height:1.15rem; }
+.nav__overlay-section > .nav__switch > button svg { width:1.15rem; height:1.15rem; }
 
 /* ============================================================ TABLET ============================================================ */
 @media (min-width:768px) and (max-width:1023px) {
