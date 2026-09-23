@@ -6,21 +6,14 @@
 <title>Know before the gate. · Juan Diego Saire</title>
 <meta name="description" content="AccreditaPass tells a reporter covering the 2026 World Cup what their press pass allows, before a gate turns them away.">
 <!-- ============================================================
-     Brief 05 · AccreditaPass · media-accreditation record · EN
-     Copy verbatim per the S3 copy record, which is held outside this
-     repository and is both the copy record and the specification.
-     Acts: 00 The Context · 01 The Problem · 02 The Research ·
-           03 The Concept · 04 The Build · 05 The Evidence ·
-           06 The Reflection
+     Brief 01 · AccreditaPass · media-accreditation record · EN
+     Chassis and density follow Brief 04 (work/portfolio-evolution/):
+     Hero (continues Main's work card 01; build links under The short
+     version) · 01 The Problem · 02 The Simulated Pass · 03 The Schedule ·
+     04 The Build · 05 The Evidence · 06 The Reflection · Similar work.
      Route depth: work/accreditapass/ — nav paths ../../
-     Two standing badges on the hero; the simulated-research badge
-     repeats at the head of Act 02 and Act 05.
-     Act 06 rows Claim..Forward-looking are a locked calibration
-     block and are kept visibly distinct from the Origin row.
-     The Brief 01 cross-reference ships as prose with no href —
-     Brief 01 now resolves at work/portfolio-evolution/, but its
-     ladder narrative relocates to about/ under F6-b, so the
-     destination for this reference is settled there, not here.
+     Progressive enhancement: every body is readable without script;
+     script folds the reveals, fades sections in and draws the Gantt.
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script>document.documentElement.classList.add('js');</script>
@@ -152,25 +145,19 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
 .act__head{display:flex; flex-direction:column; gap:1rem; margin-bottom:clamp(2rem,4vw,3.25rem); max-width:60rem;}
 
-.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
-
 /* ---- Cards ---- */
 .cardgrid{display:grid; gap:1rem;}
 .cardgrid--3{grid-template-columns:repeat(3,1fr);}
 .cardgrid--2{grid-template-columns:repeat(2,1fr);}
-/* Act 06 grew 3 → 4 cards: its own 2×2 variant, never forced into the 3-col rule */
-.cardgrid--4{grid-template-columns:repeat(2,1fr);}
 .card{border:1px solid var(--color-border-soft); padding:clamp(1.3rem,2.2vw,1.9rem); display:flex; flex-direction:column; gap:.75rem;
   transition:border-color var(--duration-ui) var(--ease-standard);}
 .card:hover{border-color:var(--color-brand-purple);}
 .card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
 @media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
-/* Phone chassis (W2A-Q1, Brief 04's rule list): every card grid is one column below 768,
-   and the movement table scrolls inside its own box without side borders. */
+/* Phone chassis (W2A-Q1, Brief 04's rule list): every card grid is one column below 768. */
 @media (max-width:767px){
-  .cardgrid--3,.cardgrid--2,.cardgrid--4{grid-template-columns:1fr;}
-  .movement__wrap{border-left:0; border-right:0;}
+  .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
   .hero{padding-bottom:4.5rem;}   /* the two disclosure badges push the hero past one screen; keep the scroll cue below them */
 }
 /* ---- Numbered problem cards (Brief 04's .pcards): the ordinal is a CSS counter, not copy. ---- */
@@ -262,6 +249,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .drow--head .drow__l{display:block;}
 }
 .sequel{margin-top:clamp(1.25rem,2vw,1.6rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
+/* ---- Descending ladder (Brief 04, Act 06): claim highest, next lowest. One column on phones. ---- */
+@media (min-width:768px){
+  .ladder-down{align-items:start;}
+  .ladder-down > .card:nth-child(2){margin-top:var(--slide-gap);}
+  .ladder-down > .card:nth-child(3){margin-top:calc(var(--slide-gap) * 2);}
+}
+@media (min-width:1024px){
+  .ladder-down > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
+  .ladder-down > .card:nth-child(3){margin-top:calc(var(--slide-gap) * 3);}
+}
+/* ---- Similar work — Brief 04's continuity cards. ---- */
+.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -292,17 +293,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     color:var(--color-brand-white); font-weight:var(--fw-light);}
 }
 
-/* ---- Conversion ---- */
-.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
-.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
-  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard);}
-.convert__cta:hover{background:var(--color-brand-purple);}
-/* ---- Fields synthesis — prose, not a table (Act 04 terminal) ---- */
-.synthesis{border-left:3px solid var(--color-brand-purple); padding:.2rem 0 .2rem 1.15rem;
-  margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;
-  font-size:clamp(1rem,1.2vw,1.12rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
-.synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
 /* ================= STANDING BADGES — two on the hero, one repeated at act level =================
    Both are [BADGE] in the copy record: always visible, not dismissible, never behind a reveal
@@ -311,12 +301,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
    the shared loop skips any element that has element children. */
 .badges{display:flex; flex-direction:column; gap:.6rem; max-width:44em;}
 .independence--sim{border:1px solid var(--color-border-soft); border-left:3px solid var(--color-brand-purple);}
-.act .independence--sim{margin-bottom:clamp(1.75rem,3vw,2.5rem); max-width:52rem;}
-
-/* ---- Pull quote (Act 01) ---- */
-.pull{font-size:clamp(1.35rem,2.6vw,2.1rem); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.02em;
-  max-width:22em; margin:clamp(1.75rem,3vw,2.5rem) 0; padding-left:1.15rem;
-  border-left:3px solid var(--color-brand-purple);}
 
 /* ---- Question callout (Act 02) — the open design question, quoted from the ideation gate ---- */
 .question{border:1px solid var(--color-border-soft); padding:clamp(1.4rem,2.5vw,2rem);
@@ -324,40 +308,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   font-size:clamp(1.1rem,1.7vw,1.45rem); font-weight:var(--fw-light); font-style:italic; line-height:1.4;
   color:var(--color-brand-white);}
 
-/* ---- Boundary card (Act 03) — the concept's stated edges ---- */
-.card--boundary{border-left:3px solid var(--color-brand-purple); margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;}
 
-/* ================= ACT 05 · MOVEMENT TABLE =================
-   Two measurements on the same instruments. Scrolls inside its own container so the page body
-   never scrolls horizontally; the required footnote carries both build stamps. */
-.movement__wrap{overflow-x:auto; border:1px solid var(--color-border-soft); margin:clamp(1.5rem,2.5vw,2rem) 0;}
-.movement{border-collapse:collapse; width:100%; min-width:34rem;}
-.movement th,.movement td{padding:.85rem clamp(.9rem,1.6vw,1.35rem); text-align:left; vertical-align:top;
-  border-bottom:1px solid var(--color-border-faint);}
-.movement thead th{font-size:.66rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
-  color:var(--color-text-dim); border-bottom:1px solid var(--color-border-soft); white-space:nowrap;}
-.movement tbody th{font-size:.92rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); width:34%;}
-.movement tbody td{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
-.movement tbody td:last-child{color:var(--color-brand-white); font-weight:var(--fw-medium);}
-.movement tbody tr:last-child th,.movement tbody tr:last-child td{border-bottom:0;}
-.tblnote{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.6;
-  max-width:52rem; font-style:italic;}
 
-/* ================= ACT 06 · TWO ZONES, NOT MERGED =================
-   .reflect__origin is ordinary sourced copy. .locked is the calibration block: no artefact may
-   state more or less than it, so it is rendered as its own bounded group rather than folded into
-   the surrounding prose. The two never become one paragraph. */
-.reflect{display:flex; flex-direction:column; gap:clamp(1.5rem,2.5vw,2rem); max-width:52rem;}
-.reflect__origin{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
-.locked{border:1px solid var(--color-border-soft); border-left:3px solid var(--color-brand-purple);
-  padding:clamp(1.4rem,2.5vw,2rem); display:flex; flex-direction:column; gap:1rem;}
-.locked p{font-size:clamp(1rem,1.3vw,1.15rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
-.closing{font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold); line-height:1.3; letter-spacing:-0.01em;
-  max-width:30em; margin-top:clamp(1.5rem,2.5vw,2rem);}
 
-/* ---- The two closing calls to action ---- */
-.ctarow{display:flex; flex-wrap:wrap; gap:1rem; margin-top:clamp(1.5rem,2.5vw,2rem);}
-@media (max-width:767px){ .ctarow .convert__cta{width:100%; justify-content:center;} }
 
 /* ================= FOOTER (unified structure — P-7) ================= */
 .footer{border-top:1px solid var(--color-border-faint); padding:clamp(4rem,6vw,6rem) 0 clamp(2rem,3vw,2.5rem); margin-top:var(--act-pad);}
@@ -515,7 +468,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">9 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Know before the gate.</h1>
     <p class="hero__deck" data-i18n="hero_deck">AccreditaPass tells a reporter covering the 2026 World Cup what their press pass allows, before a gate turns them away.</p>
@@ -783,7 +736,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE REFLECTION — two zones, never merged ================= -->
+<!-- ================= ACT 06 · THE REFLECTION — claim, limit, next, on a descending ladder ================= -->
 <section class="act" id="act6" aria-labelledby="v6">
   <div class="container">
     <div class="act__head io">
@@ -791,31 +744,39 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">What this build entitles me to say, and what it does not.</h2>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">What this build lets me say.</h2>
+      <p class="scan" data-i18n="act6_lede">And where it stops.</p>
     </div>
-
-    <div class="reflect io">
-
-      <!-- Zone 1 — ordinary sourced copy. Brief 01 is named in prose with NO href:
-           Brief 01 resolves at work/portfolio-evolution/ as of S10-A, but F6-b moves the
-           ladder narrative this sentence points at to about/, so the href waits for S10-B. -->
-      <p class="reflect__origin" data-i18n="act6_origin">This started from the structure of a Blazor course capstone and became my own adaptation — the wider ladder it sits on is told in Brief 01, Front-End Evolution.</p>
-
-      <!-- Zone 2 — the locked calibration block. No artefact may state more or less than these
-           rows, so they stay bounded and visibly attached to the lock that governs them. -->
-      <div class="locked">
-        <p data-i18n="act6_claim">I completed Back-End Development with .NET, and its capstone shipped as its own repository.</p>
-        <p data-i18n="act6_notclaimed">I do not claim the Full-Stack certificate. I began Full-Stack Integration and set it aside: it needs more dedication than I expected, and those skills would still be forming when this portfolio goes live.</p>
-        <p data-i18n="act6_stated">I am learning front-to-back integration. For an experienced full-stack developer that is basic; for a front-end practitioner it is a real gain. I am at that stage and I embrace it.</p>
-        <p data-i18n="act6_context">I came to programming from outside it in higher education, and I learn by building rather than by enrolling.</p>
-        <p data-i18n="act6_forward">Future backend capstones, and a second part to this brief series, will tell how that unfolds before 2026 closes.</p>
+    <div class="cardgrid cardgrid--3 ladder-down io">
+      <article class="card">
+        <p class="catlabel" data-i18n="r1_n">The claim</p>
+        <h3 class="card__t" data-i18n="r1_t">A back-end course, completed</h3>
+        <p class="card__x" data-i18n="r1_x">I completed Back-End Development with .NET, and its capstone shipped as its own repository.</p>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="r2_n">The limit</p>
+        <h3 class="card__t" data-i18n="r2_t">Not a full-stack claim</h3>
+        <p class="card__x" data-i18n="r2_x">I set Full-Stack Integration aside, and every study on this page ran on simulated participants.</p>
+      </article>
+      <article class="card">
+        <p class="catlabel" data-i18n="r3_n">Next</p>
+        <h3 class="card__t" data-i18n="r3_t">Front to back, in progress</h3>
+        <p class="card__x" data-i18n="r3_x">I am learning front-to-back integration, and a second part of this series will show it before 2026 closes.</p>
+      </article>
+    </div>
+    <!-- Terminal unit: no "Start a conversation" CTA (matches Brief 04); the build links live under The short version. -->
+    <div class="convert io">
+      <p class="convert__nextlabel" data-i18n="sim_label">Similar work</p>
+      <div class="cardgrid cardgrid--2">
+        <a class="card card--continuity" href="../yape-trust-verify-brief/">
+          <h3 class="card__t" data-i18n="sim_c1_t">Verify App</h3>
+          <p class="card__x" data-i18n="sim_c1_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+        </a>
+        <a class="card card--continuity" href="../portfolio-evolution/">
+          <h3 class="card__t" data-i18n="sim_c2_t">DesignOps System</h3>
+          <p class="card__x" data-i18n="sim_c2_x">The system this brief is published on — built, governed, and operated end to end.</p>
+        </a>
       </div>
-
-    </div>
-
-    <p class="closing io" data-i18n="act6_closing">The dossiers came first and the application came second, and that order is the argument.</p>
-
-    <div class="convert" id="convert">
     </div>
   </div>
 </section>
