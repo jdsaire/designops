@@ -240,6 +240,28 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light); margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt [hidden]{display:none !important;}
 .dash__foot{border-top:0; padding:.9rem 0 0; font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light); max-width:70ch; line-height:1.6;}
+/* ---- Evidence dashboard — Brief 04's paired rows, mobile first: label on its own line,
+        two values beneath; from 768 the label takes the first column. ---- */
+.dash{border:1px solid var(--color-border-soft);}
+.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
+.dash__note{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
+  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.6;}
+.drows{display:flex; flex-direction:column; margin-top:.9rem;}
+.drow{display:grid; grid-template-columns:1fr 1fr; gap:.35rem .75rem; align-items:baseline;
+  padding:clamp(.8rem,1.5vw,1.1rem) 0; border-bottom:1px solid var(--color-border-faint);}
+.drow__l{grid-column:1 / -1; font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
+.drow--head{padding-top:0; border-bottom:1px solid var(--color-border-soft);}
+.drow--head .drow__l{display:none;}
+.drow--head .drow__v{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim);}
+.drow__v{display:flex; flex-direction:column; gap:.25rem;}
+.drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
+.drow__t{font-size:.95rem; font-weight:var(--fw-medium); color:var(--color-brand-white);}
+@media (min-width:768px){
+  .drow{grid-template-columns:minmax(9rem,1.4fr) 1fr 1fr; gap:clamp(.75rem,2vw,1.75rem);}
+  .drow__l{grid-column:auto;}
+  .drow--head .drow__l{display:block;}
+}
+.sequel{margin-top:clamp(1.25rem,2vw,1.6rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -646,7 +668,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 04 · THE BUILD ================= -->
+<!-- ================= ACT 04 · THE BUILD — four numbered cards, detail behind the reveal ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
     <div class="act__head io">
@@ -654,40 +676,55 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Build</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Then I built it, and made the app admit what it is.</h2>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Built to say what it is.</h2>
+      <p class="scan" data-i18n="act4_lede">Blazor on .NET 10, in three languages.</p>
     </div>
-
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act4_scan1">A Blazor WebAssembly client in C#, an ASP.NET Core Web API it can read from, SignalR between them, .NET 10 throughout — plus a deliberately narrow TypeScript layer of exactly two files, theme storage and locale storage.</p>
-      <p class="scan" data-i18n="act4_scan2">The API is optional and off by default. The app ships with no API configured and runs on an in-memory mock, so the live site works whether or not a server is running anywhere.</p>
-      <p class="scan" data-i18n="act4_scan3">Three locales — English, Spanish, Portuguese — at exact parity: 339 entries each, 308 of them interface strings. Language and theme are independent of each other and of the session, so changing either never signs you out.</p>
-      <p class="scan" data-i18n="act4_scan4">A fixture that hasn't been played never names its teams, on any screen, in any of the three languages. The schedule the app reads is a record of a completed tournament, and the app is built not to read ahead.</p>
+    <div class="cardgrid cardgrid--2 pcards io">
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="b1_t">The client</h3>
+        <p class="card__x" data-i18n="b1_x">A Blazor WebAssembly client runs on an in-memory mock, so the live site works with no server behind it.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b1" data-panel-title="The client" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-b1">
+            <p data-i18n="b1_r">An ASP.NET Core Web API ships in the repository, switched off by default. When it runs, SignalR pushes each new change to the open record.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="b2_t">The languages</h3>
+        <p class="card__x" data-i18n="b2_x">English, Spanish and Portuguese carry 339 entries each, at exact parity.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b2" data-panel-title="The languages" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-b2">
+            <p data-i18n="b2_r">Language and theme are independent of each other and of the session, so changing either never signs you out.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="b3_t">The honesty</h3>
+        <p class="card__x" data-i18n="b3_x">The sign-in prints its own passwords, and the API token is a fixed string in the repository.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b3" data-panel-title="The honesty" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-b3">
+            <p data-i18n="b3_r">Neither secures anything, and both say so wherever a reader could mistake them for real. A fixture that has not been played never names its teams, in any language.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="b4_t">The record</h3>
+        <p class="card__x" data-i18n="b4_x">Seven routes, and the record is gated because an access record is personal.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b4" data-panel-title="The record" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-b4">
+            <p data-i18n="b4_r">Requesting access writes a new entry to your record instead of showing a separate confirmation screen. The schedule and the help page stay public.</p>
+          </div>
+        </div>
+      </article>
     </div>
-
-    <div class="cardgrid cardgrid--4 io">
-      <article class="card">
-        <h3 class="card__t" data-i18n="act4_c1_t">Honest about being fake</h3>
-        <p class="card__x" data-i18n="act4_c1_x">The sign-in publishes its own passwords on screen; the API's token is a fixed string printed in the repository. Neither secures anything, and both say so wherever a reader could mistake them for real.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act4_c2_t">The record, not the status</h3>
-        <p class="card__x" data-i18n="act4_c2_x">Seven routes. The record is gated because an access record is personal by definition; the schedule and the help page are public. Requesting access writes a new, animated-in entry to your record rather than showing a separate confirmation screen.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act4_c3_t">A pipeline with an order</h3>
-        <p class="card__x" data-i18n="act4_c3_x">The API's middleware runs in a stated order — CORS, error handling, token authentication, request logging — and the backend documentation set explains why the order is the design, not an accident.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act4_c4_t">Proof, counted</h3>
-        <p class="card__x" data-i18n="act4_c4_x">512 front-end test cases across 36 files and 33 back-end tests, in xUnit and bUnit.</p>
-      </article>
-    </div>
-
-    <p class="synthesis io" data-i18n="act4_folders">backend/ is documentation; src/backend/ is the code. Two folders, similar names, entirely different contents — the documentation folder is prose that never compiles, deliberately parallel to ux-ui/, which documents the front end's design without containing any of it.</p>
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE EVIDENCE — opens with the simulated-research badge ================= -->
+<!-- ================= ACT 05 · THE EVIDENCE — paired rows, first audit against re-audit ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head io">
@@ -695,67 +732,54 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evidence</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Two measurements, the same instruments, and the movement between them.</h2>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Measured twice, on the same instruments.</h2>
+      <p class="scan" data-i18n="act5_lede">The re-audit ran against the shipped build.</p>
     </div>
-
-    <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page. Survey and interview datasets, workshop participants and task-attempts were authored, not recruited. Each dossier states in its own scope and limitations files what it can and cannot establish.</span></p>
-
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act5_scan1">The re-audit had something the first one did not: six task-attempts run against the shipped build rather than derived from source in the abstract. Six of six completed. It is still not real usability testing — no person sat down with this app — and the dossier says so at every gate that matters.</p>
+    <div class="dash io">
+      <div class="dash__panel">
+        <p class="catlabel" data-i18n="act5_sim">Simulated task-attempts · no human user</p>
+        <div class="drows" role="table" aria-label="First audit against re-audit">
+        <div class="drow drow--head">
+          <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
+          <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
+          <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+        </div>
+        <div class="drow">
+          <div class="drow__l" data-i18n="act5_tbl_r1_m">Critical findings</div>
+          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_a">4</span></div>
+          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_b">1</span></div>
+        </div>
+        <div class="drow">
+          <div class="drow__l" data-i18n="act5_tbl_r2_m">Major findings</div>
+          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_a">12</span></div>
+          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_b">2</span></div>
+        </div>
+        <div class="drow">
+          <div class="drow__l" data-i18n="act5_tbl_r3_m">Minor findings</div>
+          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_a">10</span></div>
+          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_b">2</span></div>
+        </div>
+        <div class="drow">
+          <div class="drow__l" data-i18n="act5_tbl_r4_m">Nielsen's ten heuristics</div>
+          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r4_a">5 fail · 4 partial · 1 pass</span></div>
+          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r4_b">2 fail · 1 partial · 7 pass</span></div>
+        </div>
+        <div class="drow">
+          <div class="drow__l" data-i18n="act5_tbl_r5_m">WCAG 2.2 AA</div>
+          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r5_a">8 pass · 12 fail · 3 open</span></div>
+          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r5_b">18 pass · 1 fail · 3 open</span></div>
+        </div>
+        <div class="drow">
+          <div class="drow__l" data-i18n="act5_tbl_r6_m">Task success</div>
+          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r6_a">no tasks existed</span></div>
+          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r6_b">6 of 6</span></div>
+        </div>
+        </div>
+      </div>
+      <p class="dash__note" data-i18n="act5_footnote">First audit measured the pre-reframing app at commit 0653b4e. Re-audit measured the build at b37066d. Both used simulated task-attempts and authored participants; neither involved a human user.</p>
     </div>
-
-    <div class="movement__wrap io">
-      <table class="movement">
-        <thead>
-          <tr>
-            <th scope="col" data-i18n="act5_tbl_h1">Measure</th>
-            <th scope="col" data-i18n="act5_tbl_h2">First audit</th>
-            <th scope="col" data-i18n="act5_tbl_h3">Re-audit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" data-i18n="act5_tbl_r1_m">Critical findings</th>
-            <td data-i18n="act5_tbl_r1_a">4</td>
-            <td data-i18n="act5_tbl_r1_b">1</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="act5_tbl_r2_m">Major findings</th>
-            <td data-i18n="act5_tbl_r2_a">12</td>
-            <td data-i18n="act5_tbl_r2_b">2</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="act5_tbl_r3_m">Minor findings</th>
-            <td data-i18n="act5_tbl_r3_a">10</td>
-            <td data-i18n="act5_tbl_r3_b">2</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="act5_tbl_r4_m">Nielsen's ten heuristics</th>
-            <td data-i18n="act5_tbl_r4_a">5 fail · 4 partial · 1 pass</td>
-            <td data-i18n="act5_tbl_r4_b">2 fail · 1 partial · 7 pass</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="act5_tbl_r5_m">WCAG 2.2 AA</th>
-            <td data-i18n="act5_tbl_r5_a">8 pass · 12 fail · 3 open</td>
-            <td data-i18n="act5_tbl_r5_b">18 pass · 1 fail · 3 open</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="act5_tbl_r6_m">Task success</th>
-            <td data-i18n="act5_tbl_r6_a">no tasks existed</td>
-            <td data-i18n="act5_tbl_r6_b">6 of 6</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="tblnote io" data-i18n="act5_footnote">First audit measured the pre-reframing app at commit 0653b4e. Re-audit measured the build at b37066d. Both used simulated task-attempts and authored participants; neither involved a human user.</p>
-
-    <div class="scanstack io" style="margin-top:clamp(1.75rem,3vw,2.5rem);">
-      <p class="scan" data-i18n="act5_scan2">All 26 findings from the first audit received an explicit disposition — 18 fixed, 5 not applicable, 2 still open, 1 partially fixed. None was silently dropped. Five new findings were raised, and one critical finding accounts for most of what remains.</p>
-      <p class="scan" data-i18n="act5_scan3">Two findings were deliberately left out of the remediation sequence rather than resolved, and flagged as such — one needing a demo record that does not exist, one needing a render the dossier could not produce.</p>
-      <p class="scan" data-i18n="act5_scan4">A fifth mandate read a separate reference application — ShopEase, my own e-commerce build from the certificate's final front-end course — and realigned this one's navigation, settings, front door, sign-in and match list against it. Six places where that overturned a decision this codebase argues for in its own comments were opened as numbered reversals and closed with the reasoning that resolved them. None was closed by preference alone.</p>
-      <p class="scan" data-i18n="act5_scan5">One reversal was closed by being wrong: the premise behind it was factually impossible against the app's own simulated clock. It is recorded that way rather than quietly dropped.</p>
-    </div>
+    <p class="sequel io" data-i18n="ev_disposition">All 26 first-audit findings got a disposition: 18 fixed, 5 not applicable, 2 open and 1 partly fixed.</p>
+    <p class="sequel io" data-i18n="ev_tests">512 front-end and 33 back-end automated tests, in xUnit and bUnit.</p>
   </div>
 </section>
 
