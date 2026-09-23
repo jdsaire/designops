@@ -150,6 +150,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
 @media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
+/* Phone chassis (W2A-Q1, Brief 04's rule list): every card grid is one column below 768,
+   and the movement table scrolls inside its own box without side borders. */
+@media (max-width:767px){
+  .cardgrid--3,.cardgrid--2,.cardgrid--4{grid-template-columns:1fr;}
+  .movement__wrap{border-left:0; border-right:0;}
+}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
