@@ -1,6 +1,9 @@
 /* core/i18n.js — i18n engine.
-   Dictionaries are loaded asynchronously from assets/i18n/{lang}.json
-   on first use of each language; subsequent calls hit the cache.
+   Dictionaries are loaded asynchronously on first use of each language;
+   subsequent calls hit the cache. Each language merges two files: the
+   shared chrome in assets/i18n/{lang}.json and the page's own dictionary,
+   named by the page entry through setPage() before init(). When a key
+   exists in both, the page's value wins.
    swapLang(lang)'s public signature is unchanged — callers
    fire-and-forget. The HTML's default English markup is the
    render fallback during the brief async fetch window. */
@@ -9,14 +12,22 @@ import { rootPrefix } from './paths.js';
 const i18nDicts   = { EN: null, ES: null };
 const i18nLoading = { EN: null, ES: null };
 let   i18nCurrent = 'EN';
+let   i18nPage    = null;   /* page dictionary base, root-relative, no .{lang}.json suffix */
+
+function setPage(base) { i18nPage = base; }
+
+function fetchJSON(url) {
+  return fetch(url).then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)));
+}
 
 function loadDict(lang) {
   if (i18nDicts[lang])   return Promise.resolve(i18nDicts[lang]);
   if (i18nLoading[lang]) return i18nLoading[lang];
-  const file = lang === 'ES' ? 'es.json' : 'en.json';
-  i18nLoading[lang] = fetch(rootPrefix + 'assets/i18n/' + file)
-    .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
-    .then(dict => { i18nDicts[lang] = dict; return dict; })
+  const sfx = lang === 'ES' ? 'es' : 'en';
+  const chrome = fetchJSON(rootPrefix + 'assets/i18n/' + sfx + '.json');
+  const page   = i18nPage ? fetchJSON(rootPrefix + i18nPage + '.' + sfx + '.json') : Promise.resolve({});
+  i18nLoading[lang] = Promise.all([chrome, page])
+    .then(([c, p]) => { const dict = Object.assign({}, c, p); i18nDicts[lang] = dict; return dict; })
     .catch(err => { console.warn('i18n fetch failed for ' + lang + ':', err); return null; });
   return i18nLoading[lang];
 }
@@ -69,4 +80,4 @@ function init() {
   });
 }
 
-export { loadDict, swapLang, init };
+export { loadDict, swapLang, init, setPage };
