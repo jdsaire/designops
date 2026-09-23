@@ -306,6 +306,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
 .gantt__chip[aria-pressed="true"]::before{content:"✓ "; color:var(--color-brand-purple);}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
+@media (max-width:767px){ .gantt__chart{border-left:0; border-right:0;} }
 .gantt__grid{min-width:820px;}
 .gantt__axis{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
   border-bottom:1px solid var(--g-border); color:var(--color-text-muted); font-size:.8125rem;}
