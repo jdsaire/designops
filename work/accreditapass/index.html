@@ -191,6 +191,55 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 3);}
   .timeline__track > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
 }
+/* ---- Schedule · calendar-axis Gantt — Brief 04's organism, carried inline, mobile first:
+        the chart scrolls inside its own box, and gains side borders from 768. ---- */
+.gantt{--g-border:var(--color-border-soft);}
+.gantt *{border-radius:0; box-shadow:none;}
+.gantt__chart{position:relative; border-top:1px solid var(--g-border); border-bottom:1px solid var(--g-border); overflow-x:auto;}
+@media (min-width:768px){ .gantt__chart{border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);} }
+.gantt__grid{min-width:820px;}
+.gantt__task-list{list-style:none;}
+.gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+  border-bottom:1px solid var(--g-border); font-size:.75rem; color:var(--color-text-muted);}
+.gantt__axis > div{padding:.75rem 1rem;}
+.gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem; white-space:nowrap;}
+.gantt__tick--first{transform:none;}
+.gantt__axis-summary{text-align:right;}
+.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+  border-top:1px solid var(--g-border); align-items:stretch;}
+.gantt__task-row{background:rgba(var(--ink),0.02);}
+.gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
+.gantt__task-label{padding:.5rem 1rem .5rem 2.4rem; color:var(--color-text-muted); font-size:.875rem;
+  display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; position:relative;}
+.gantt__row-field,.gantt__task-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__row-field{min-height:3.25rem;}
+.gantt__task-field{min-height:2.5rem;}
+.gantt__row-summary,.gantt__task-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
+  text-align:right; font-size:.78rem; color:var(--color-text-muted); gap:.15rem;}
+.gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.gantt__days{color:var(--color-text-dim);}
+.gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
+.gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
+  color:var(--color-brand-white); background:none; border:0; padding:0; cursor:pointer; text-align:left;
+  display:flex; align-items:center; gap:.5rem; min-height:44px;}
+.gantt__toggle .gantt__marker{display:inline-block; width:.8em; color:var(--color-text-muted); font-weight:var(--fw-regular);
+  transition:transform 160ms var(--ease-standard);}
+.gantt__toggle[aria-expanded="true"] .gantt__marker{transform:rotate(90deg);}
+.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__row-label{border-left:3px solid var(--color-brand-purple);}
+.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); background:var(--g-border);
+  border:1px solid var(--color-brand-purple); display:flex; align-items:center; padding:0 .4rem; min-width:.35rem;}
+.gantt__bar--epic{height:1.625rem; background:var(--color-brand-purple);}
+.gantt__bar--task{height:1rem;}
+.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); white-space:nowrap;}
+.gantt__bar--epic .gantt__span{color:var(--color-on-brand);}
+.gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
+  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;}
+.gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
+  font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
+.gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light); margin-top:1rem; max-width:70ch; line-height:1.6;}
+.gantt [hidden]{display:none !important;}
+.dash__foot{border-top:0; padding:.9rem 0 0; font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light); max-width:70ch; line-height:1.6;}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -576,6 +625,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
+<!-- ================= ACT 03 · THE SCHEDULE — five weeks on a calendar axis, epics collapsed ================= -->
+<section class="act" id="sched" aria-labelledby="vsch">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
+      </div>
+      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Five weeks, and the research went first.</h2>
+      <p class="scan" data-i18n="sch_lede">Every bar comes from the commit history.</p>
+    </div>
+    <div class="gantt io" id="gantt">
+      <div class="gantt__chart" id="ganttChart">
+        <div class="gantt__grid" id="ganttGrid" role="tree" aria-label="The build on a calendar axis: six phases with their runs, sized in days."></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript. Every window it shows is also stated in the note below.</p></noscript>
+    </div>
+    <p class="dash__foot io" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+  </div>
+</section>
+
 <!-- ================= ACT 04 · THE BUILD ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
@@ -872,6 +942,111 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
 
+
+/* ============ Schedule (Act 03) — Brief 04's Gantt organism, fed by this repository ============
+   Sources: the public commit history of jdsaire/accreditapass (206 commits, 28 Jul – 30 Aug 2026),
+   grouped by run folder (handoff/v1 … v16). Each task row is one run; an epic is a phase of runs.
+   The dossier runs mark the day each dossier entered the repository, not when it was written. */
+(function scheduleOrganism(){
+  'use strict';
+  var root = document.getElementById('gantt'); if(!root) return;
+  var AXIS_START = '2026-07-28', AXIS_END = '2026-08-30';
+  var DATA = { epics: [
+      { id:'e1', key:'ge1', name:"01 Course build", commits:28, tasks:[
+          { id:'v1', key:'gt_v1', name:"Course capstone, three activities", start:'2026-07-28', end:'2026-07-28' },
+          { id:'v2', key:'gt_v2', name:"Plain-language docs and live deploy", start:'2026-07-29', end:'2026-07-29' }
+      ]},
+      { id:'e2', key:'ge2', name:"02 Audit and fixes", commits:24, tasks:[
+          { id:'v3', key:'gt_v3', name:"Usability and accessibility audit, then fixes", start:'2026-07-30', end:'2026-07-31' }
+      ]},
+      { id:'e3', key:'ge3', name:"03 Simulated passes", commits:39, tasks:[
+          { id:'v4', key:'gt_v4', name:"Reframed for press accreditation", start:'2026-08-11', end:'2026-08-11' },
+          { id:'v5', key:'gt_v5', name:"Research dossier", start:'2026-08-11', end:'2026-08-11' },
+          { id:'v6', key:'gt_v6', name:"Ideation dossier", start:'2026-08-11', end:'2026-08-11' },
+          { id:'v7', key:'gt_v7', name:"Namespace rename", start:'2026-08-12', end:'2026-08-12' },
+          { id:'v8', key:'gt_v8', name:"Specification dossier", start:'2026-08-14', end:'2026-08-14' }
+      ]},
+      { id:'e4', key:'ge4', name:"04 Access Record build", commits:51, tasks:[
+          { id:'v9', key:'gt_v9', name:"Access Record front end", start:'2026-08-14', end:'2026-08-14' },
+          { id:'v10', key:'gt_v10', name:"Course correction and first tests", start:'2026-08-16', end:'2026-08-16' },
+          { id:'v11', key:'gt_v11', name:"Design addendum", start:'2026-08-16', end:'2026-08-16' },
+          { id:'v12', key:'gt_v12', name:"Theme, session and three languages", start:'2026-08-17', end:'2026-08-17' }
+      ]},
+      { id:'e5', key:'ge5', name:"05 Evaluation and back end", commits:56, tasks:[
+          { id:'v13', key:'gt_v13', name:"Evaluation and remediation", start:'2026-08-18', end:'2026-08-18' },
+          { id:'v14', key:'gt_v14', name:"Iteration against a reference app", start:'2026-08-20', end:'2026-08-20' },
+          { id:'v15', key:'gt_v15', name:"Back-end API and SignalR", start:'2026-08-20', end:'2026-08-20' }
+      ]},
+      { id:'e6', key:'ge6', name:"06 Launch", commits:8, tasks:[
+          { id:'v16', key:'gt_v16', name:"Renamed AccreditaPass, live URL", start:'2026-08-29', end:'2026-08-30' }
+      ]}
+    ],
+    milestones: [
+      { epic:'e6', at:'2026-08-30', key:'gms_live', name:'Live' }
+    ]
+  };
+  var DAY = 86400000;
+  function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
+  function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
+  var TOTAL = offset(AXIS_END) + 1;
+  function spanOf(t){ return offset(t.end) - offset(t.start) + 1; }
+  function pct(n){ return (n / TOTAL * 100).toFixed(3) + '%'; }
+  var MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + MN[+p[1]-1]; }
+  function win(t){ return t.start === t.end ? fmt(t.start) : fmt(t.start) + ' – ' + fmt(t.end); }
+  DATA.epics.forEach(function(e){
+    e.start = e.tasks.map(function(t){ return t.start; }).sort()[0];
+    e.end   = e.tasks.map(function(t){ return t.end; }).sort().slice(-1)[0];
+  });
+  function bar(item, cls){
+    var days = spanOf(item);
+    return '<div class="gantt__bar ' + cls + '" style="left:' + pct(offset(item.start)) + '; width:' + pct(days) + ';" role="img" aria-label="' +
+      item.name + ', ' + win(item) + ' 2026, ' + days + (days === 1 ? ' day' : ' days') + '"><span class="gantt__span">' + days + 'd</span></div>';
+  }
+  var ticks = '';
+  ['2026-07-28','2026-08-04','2026-08-11','2026-08-18','2026-08-25'].forEach(function(iso, i){
+    ticks += '<span class="gantt__tick' + (i ? '' : ' gantt__tick--first') + '" style="left:' + pct(offset(iso)) + '">' + fmt(iso) + '</span>' +
+             '<span class="gantt__gridline" style="left:' + pct(offset(iso)) + '"></span>';
+  });
+  var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div><div class="gantt__axis-units">' + ticks +
+             '</div><div class="gantt__axis-summary">Window</div></div>';
+  DATA.epics.forEach(function(e){
+    var runs = e.tasks.length;
+    html += '<div class="gantt__epic" data-epic="' + e.id + '"><div class="gantt__row">' +
+      '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + e.id + '" role="treeitem">' +
+        '<span class="gantt__marker" aria-hidden="true">›</span><span data-i18n="' + e.key + '">' + e.name + '</span></button></div>' +
+      '<div class="gantt__row-field">' + bar(e, 'gantt__bar--epic') + '<span data-ms-slot="' + e.id + '"></span></div>' +
+      '<div class="gantt__row-summary"><b>' + win(e) + '</b><span class="gantt__days">' + e.commits + ' commits</span>' +
+        '<span class="gantt__days">' + runs + (runs === 1 ? ' run' : ' runs') + '</span></div>' +
+      '</div><ul class="gantt__task-list" id="gtasks-' + e.id + '" hidden role="group">';
+    e.tasks.forEach(function(t){
+      html += '<li class="gantt__task-row"><span class="gantt__task-label"><span data-i18n="' + t.key + '">' + t.name + '</span></span>' +
+        '<span class="gantt__task-field">' + bar(t, 'gantt__bar--task') + '</span>' +
+        '<span class="gantt__task-summary"><b>' + win(t) + '</b></span></li>';
+    });
+    html += '</ul></div>';
+  });
+  var grid = document.getElementById('ganttGrid');
+  grid.innerHTML = html;
+  DATA.milestones.forEach(function(m){
+    var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]'); if(!slot) return;
+    var l = pct(offset(m.at) + 0.5);
+    slot.outerHTML = '<span><span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="Milestone: ' + m.name + ', ' + fmt(m.at) + ' 2026"></span>' +
+      '<span class="gantt__milestone-label" style="left:' + l + '" data-i18n="' + m.key + '">' + m.name + '</span></span>';
+  });
+  var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+  toggles.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+    });
+    btn.addEventListener('keydown', function(e){
+      var nx = e.key === 'ArrowDown' ? toggles[i+1] : e.key === 'ArrowUp' ? toggles[i-1] : e.key === 'Home' ? toggles[0] : e.key === 'End' ? toggles[toggles.length-1] : null;
+      if(nx){ e.preventDefault(); nx.focus(); }
+    });
+  });
+})();
 
 /* ============ Entrance (once) ============ */
 const io = new IntersectionObserver(entries=>{
