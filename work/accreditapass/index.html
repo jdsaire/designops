@@ -173,6 +173,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .movement__wrap{border-left:0; border-right:0;}
   .hero{padding-bottom:4.5rem;}   /* the two disclosure badges push the hero past one screen; keep the scroll cue below them */
 }
+/* ---- Numbered problem cards (Brief 04's .pcards): the ordinal is a CSS counter, not copy. ---- */
+.pcards{counter-reset:pcard;}
+.pcard .pcard__t::before{counter-increment:pcard; content:counter(pcard) ") ";}
+/* ---- Category label — light-purple token clears 4.5:1 in both themes (Brief 04). ---- */
+.catlabel{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase;
+  color:var(--color-purple-light); margin-bottom:.15rem;}
+/* ---- Ascending ladder (Brief 04's timeline track): one column on phones, a climb from 768. ---- */
+.timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
+.timeline__track{display:grid; grid-template-columns:1fr; gap:var(--slide-gap);}
+@media (min-width:768px){
+  .timeline__track{grid-template-columns:repeat(3,1fr); align-items:start;}
+  .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 2);}
+  .timeline__track > .card:nth-child(2){margin-top:var(--slide-gap);}
+}
+@media (min-width:1024px){
+  .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 3);}
+  .timeline__track > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
+}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -468,43 +486,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
 </section>
 
-<!-- ================= ACT 00 · THE CONTEXT ================= -->
-<section class="act" id="act0" aria-labelledby="v0">
-  <div class="container">
-    <div class="act__head io">
-      <div class="section__eyebrow">
-        <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
-      </div>
-      <h2 class="verdict" id="v0" data-i18n="act0_verdict">Accreditation is a permission that keeps moving after it is granted.</h2>
-    </div>
-
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act0_scan1"
-         data-full="A journalist covering a tournament holds a credential that resolves to a set of permissions: which stadiums, which zones inside them, which fixtures. That set is not settled at issue. It moves with capacity, with reallocation, with a knockout bracket nobody has played yet. The holder is the last to know, and the place they usually find out is a gate.">
-         A media accreditation is not a ticket. It is a standing permission — which venues, which zones, which fixtures — and it can be narrowed, widened or withdrawn after it has been granted.</p>
-      <p class="scan" data-i18n="act0_scan2">The research pass framed the moment precisely: what a journalist needs to be told, and how fast, when their access falls apart after they thought it was settled.</p>
-      <p class="scan" data-i18n="act0_scan3">So the question I took was not "how do I show a status." It was: what would a record have to do so that being refused is never how you learn.</p>
-    </div>
-
-    <div class="cardgrid cardgrid--3 io">
-      <article class="card">
-        <h3 class="card__t" data-i18n="act0_c1_t">The permission moves</h3>
-        <p class="card__x" data-i18n="act0_c1_x">Rejection, mid-tournament reallocation, a denial at the gate — three different events, one experience: the holder finds out last.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act0_c2_t">The status page is the wrong shape</h3>
-        <p class="card__x" data-i18n="act0_c2_x">A page that shows what you hold today answers the wrong question. What a holder needs is what changed, when, why, and what to do about it.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act0_c3_t">Some of it hasn't happened yet</h3>
-        <p class="card__x" data-i18n="act0_c3_x">Access to a knockout fixture depends on a result nobody has played. Wording that sounds settled turns a warning into a promise the service cannot keep.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ACT 01 · THE PROBLEM ================= -->
+<!-- ================= ACT 01 · THE PROBLEM — four numbered cards, detail behind the reveal ================= -->
 <section class="act" id="act1" aria-labelledby="v1">
   <div class="container">
     <div class="act__head io">
@@ -512,69 +494,85 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">I started by auditing the app I already had, and it failed on one thing, twice.</h2>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Granted once, changed all tournament.</h2>
+      <p class="scan" data-i18n="act1_lede">The holder is the last to know.</p>
     </div>
-
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act1_scan1">The first pass was a usability and accessibility audit of the app as it stood before any reframing: 26 findings — 4 critical, 12 major, 10 minor — and 12 things it did genuinely well, recorded because an audit that lists only defects misrepresents what was built.</p>
-      <p class="scan" data-i18n="act1_scan2">The useful finding was not the total. Six of the ten usability principles failed for the same underlying reason: one component that had only an editable presentation, reused on every page. One structural fix addressed most of them at once.</p>
-      <p class="scan" data-i18n="act1_scan3"
-         data-full="Nine checks were left OPEN rather than counted as passing: reflow on a phone, tap-target comfort, whether a screen reader completes the journey end to end. No browser rendered the app during that audit and no screen reader was used. That is a boundary, and it is stated rather than worked around.">
-         Every finding cited the file and line it lived at. A claim that could not be pointed at a place in the source was left out rather than stated — which is why the total is 26 and not a rounder, larger number.</p>
+    <div class="cardgrid cardgrid--2 pcards io">
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="p1_t">The permission</h3>
+        <p class="card__x" data-i18n="p1_x">A press pass resolves to venues, zones and fixtures, and any of them can change after it is issued.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p1" data-panel-title="The permission" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-p1">
+            <p data-i18n="p1_r">Rejection, a mid-tournament reallocation and a denial at the gate are three different events with one experience: the holder learns last, often at the gate itself.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="p2_t">The status page</h3>
+        <p class="card__x" data-i18n="p2_x">A page that shows what you hold today answers the wrong question.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p2" data-panel-title="The status page" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-p2">
+            <p data-i18n="p2_r">A holder needs what changed, when, why and what to do next — a history with reasons, not a snapshot.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="p3_t">The unplayed match</h3>
+        <p class="card__x" data-i18n="p3_x">Access to a knockout fixture depends on a result nobody has played yet.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p3" data-panel-title="The unplayed match" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-p3">
+            <p data-i18n="p3_r">Wording that sounds settled turns a warning into a promise the service cannot keep, so every conditional right is written as a condition.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card pcard">
+        <h3 class="card__t pcard__t" data-i18n="p4_t">The app I started with</h3>
+        <p class="card__x" data-i18n="p4_x">My own course app returned 26 audit findings, 4 of them critical.</p>
+        <div class="reveal" data-act="act1">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p4" data-panel-title="The app I started with" data-i18n="rv_implications">Know the implications</button>
+          <div class="reveal__body reveal__body--poster" id="rv-p4">
+            <p data-i18n="p4_r">Most traced back to one component that could only be edited, reused on every page. Every finding cites its file and line, and the fix list ran to 19 commits.</p>
+          </div>
+        </div>
+      </article>
     </div>
-
-    <p class="pull io" data-i18n="act1_pull">A working app and a usable app are not the same thing.</p>
-
-    <p class="synthesis io" data-i18n="act1_outcome">The audit produced a fix list, not a verdict: 26 findings sequenced into 19 commits, each naming the files it touches.</p>
   </div>
 </section>
 
-<!-- ================= ACT 02 · THE RESEARCH — opens with the simulated-research badge ================= -->
+<!-- ================= ACT 02 · THE SIMULATED PASS — three passes on an ascending ladder ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Research</span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Simulated Pass</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">No real journalist was interviewed. I built the study so a reader can see exactly what that costs.</h2>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">No journalist was interviewed. The study says so.</h2>
+      <p class="scan" data-i18n="act2_lede">Three passes before the record was built.</p>
     </div>
-
-    <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page. Survey and interview datasets, workshop participants and task-attempts were authored, not recruited. Each dossier states in its own scope and limitations files what it can and cannot establish.</span></p>
-
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act2_scan1">Eight gates, in order: scope lock, research plan, instruments, a simulation methodology note, analysis, artifacts, design brief, limitations. Two datasets — a 30-respondent survey and five interviews — both synthetic, both declared as such in their own gate.</p>
-      <p class="scan" data-i18n="act2_scan2">It is not empirical evidence about real journalists. It is a documented chain of reasoning from a sourced evidence base to a set of design decisions, each traceable back to its source and labelled by how much weight it can carry.</p>
-      <p class="scan" data-i18n="act2_scan3">It produced two personas, an empathy map, three scenarios and a service blueprint of the accreditation-to-matchday lifecycle — and one design question it deliberately left open.</p>
+    <div class="timeline io">
+      <div class="timeline__track" role="group" aria-label="The simulated pass, in three steps">
+        <article class="card">
+          <p class="catlabel" data-i18n="l1_n">Pass 1 · Simulated</p>
+          <h3 class="card__t" data-i18n="l1_t">Research</h3>
+          <p class="card__x" data-i18n="l1_x">A 30-respondent survey and five interviews, both synthetic, produced two personas and a service blueprint.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="l2_n">Pass 2 · Simulated</p>
+          <h3 class="card__t" data-i18n="l2_t">Ideation</h3>
+          <p class="card__x" data-i18n="l2_x">Six authored participants argued 32 ideas down to a shortlist of eight, then to one: Access Record.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="l3_n">Pass 3 · Simulated</p>
+          <h3 class="card__t" data-i18n="l3_t">Specification</h3>
+          <p class="card__x" data-i18n="l3_x">Nine gates fixed the information architecture, WCAG 2.2 AA tokens and the build brief before any interface code.</p>
+        </article>
+      </div>
     </div>
-
     <p class="question io" data-i18n="act2_question">How might we tell a journalist that their access has changed before they discover it by being refused?</p>
-
-    <p class="synthesis io" data-i18n="act2_method">Every scope decision is defended in its own file, and each dossier states plainly what it does and does not support. The disclosure is a gate deliverable, not a footnote.</p>
-  </div>
-</section>
-
-<!-- ================= ACT 03 · THE CONCEPT ================= -->
-<section class="act" id="act3" aria-labelledby="v3">
-  <div class="container">
-    <div class="act__head io">
-      <div class="section__eyebrow">
-        <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · The Concept</span>
-      </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Thirty-two ideas, ranked and argued down to one: Access Record.</h2>
-    </div>
-
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act3_scan1">A second eight-gate mandate turned the open question into a buildable concept. Six participants were authored, not recruited, and every vote, coalition and objection recorded is one person's simulation of a documented method. That is stated at the top of the folder, not buried in it.</p>
-      <p class="scan" data-i18n="act3_scan2">Divergence produced 18 risk-sorted assumptions, then 14 more with feasibility suspended — a 32-idea pool. Convergence ran two prioritization matrices and a Buy a Feature round against the whole pool and closed on a ranked shortlist of eight.</p>
-      <p class="scan" data-i18n="act3_scan3">The concept that survived: an append-only record where every change carries a reason and a next step, and anything depending on an unplayed result is worded as a condition rather than a decision already taken.</p>
-      <p class="scan" data-i18n="act3_scan4">A third mandate — nine gates plus a four-file addendum — turned that concept into a specification: benchmarking, an information architecture from a simulated card sort with ten choreography rules, design tokens verified against WCAG 2.2 AA in both themes, screen states, a data model, and a build brief. No application code was written in it.</p>
-    </div>
-
-    <article class="card card--boundary io">
-      <p class="card__x" data-i18n="act3_boundary">Concept, not evidence, and not interface. The folder names the edges where the concept will disappoint before anything was built against it.</p>
-    </article>
   </div>
 </section>
 
