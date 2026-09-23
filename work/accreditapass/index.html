@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>You find out at the gate. This one tells you first. · Juan Diego Saire</title>
-<meta name="description" content="A journalist's accreditation can change without anyone saying so. I researched, specified and built the record that says so — six documented UX mandates, then a Blazor application, in three languages.">
+<title>Know before the gate. · Juan Diego Saire</title>
+<meta name="description" content="AccreditaPass tells a reporter covering the 2026 World Cup what their press pass allows, before a gate turns them away.">
 <!-- ============================================================
      Brief 05 · AccreditaPass · media-accreditation record · EN
      Copy verbatim per the S3 copy record, which is held outside this
@@ -23,6 +23,7 @@
      destination for this reference is settled there, not here.
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>document.documentElement.classList.add('js');</script>
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <style>
@@ -123,6 +124,21 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .kwrow{display:flex; flex-wrap:wrap; gap:.6rem; max-width:44em;}
 .kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
   color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
+/* Role strip — Brief 04's, verbatim. */
+.rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
+  border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-faint);}
+.rolestrip span{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-muted); font-weight:var(--fw-medium);}
+.rolestrip b{color:var(--color-brand-purple); font-weight:var(--fw-bold);}
+/* Build links — Main's "Access Brief" CTA (assets/css/pages/home/hero.css .cta), carried inline.
+   Stacked on phones; side by side from 768. Each link is a 44px tap target. */
+.ctaset{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;}
+.ctaset .cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; width:fit-content;}
+.ctaset .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
+.ctaset .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+  background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard);}
+.ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
+.ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+@media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
 .scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
   font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
 .scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
@@ -271,12 +287,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__tagline{white-space:normal;} }
 
 /* ================= MOTION ================= */
-.io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
-.io.is-in{opacity:1; transform:none;}
+/* Content is visible by default; only a page whose script runs hides it until it scrolls in. */
+.js .io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
+.js .io.is-in{opacity:1; transform:none;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .io{opacity:1; transform:none;}
+  .js .io{opacity:1; transform:none;}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
 
@@ -404,33 +421,48 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 <main>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO — continues Main's work card 01 ================= -->
 <section class="hero" aria-labelledby="heroTitle">
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 05</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">9 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">9 min read</span></span>
     </div>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">You find out at the gate. This one tells you first.</h1>
-    <p class="hero__deck" data-i18n="hero_deck">A journalist's accreditation can change without anyone saying so. I researched, specified and built the record that says so — six documented UX mandates, then a Blazor application, in three languages.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Know before the gate.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">AccreditaPass tells a reporter covering the 2026 World Cup what their press pass allows, before a gate turns them away.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
       <span class="kw" role="listitem" data-i18n="kw1">Design Research</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Design Systems</span>
-      <span class="kw" role="listitem" data-i18n="kw3">Accessibility</span>
-      <span class="kw" role="listitem" data-i18n="kw4">Blazor</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Accessibility</span>
+      <span class="kw" role="listitem" data-i18n="kw3">Blazor</span>
+      <span class="kw" role="listitem" data-i18n="kw4">.NET</span>
       <span class="kw" role="listitem" data-i18n="kw5">Internationalization</span>
+    </div>
+    <div class="rolestrip" aria-label="Role and scope">
+      <span data-i18n="hero_role1"><b>Role</b> — Sole owner</span>
+      <span data-i18n="hero_role2"><b>Duration</b> — Five weeks · 28 Jul – 30 Aug 2026</span>
+      <span data-i18n="hero_role3"><b>Scope</b> — Audit → research → specification → build → re-audit</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
-      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">Access changes quietly and gets discovered at a gate. Six documented mandates — audit, research, ideation, specification, evaluation, iteration — converge on one concept: an append-only record where every change carries a reason and a next step. Then I built it.</p>
+      <div class="reveal__body reveal__body--poster" id="rv-hero">
+        <p data-i18n="hero_rv_txt">Picture 104 matches in 16 stadiums across three countries, with every press pass still moving after it is issued. A venue swaps, a zone narrows, a knockout seat waits on a result nobody has played. Without a record, the holder finds out at a turnstile. AccreditaPass keeps one record per journalist that says what changed, why, and what to do next. I audited, researched, specified and built it in five weeks, as a portfolio demonstration rather than a product.</p>
       </div>
+    </div>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_live">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+      <a class="cta" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
 
     <!-- The two standing notices. Both always visible, neither dismissible. -->
     <div class="badges">
       <p class="independence"><strong data-i18n="badge_independence_lead">An independent portfolio demonstration.</strong> <span data-i18n="badge_independence_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</span></p>
-      <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page. Survey and interview datasets, workshop participants and task-attempts were authored, not recruited. Each dossier states in its own scope and limitations files what it can and cannot establish.</span></p>
+      <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</span></p>
     </div>
   </div>
   <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
@@ -692,10 +724,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <p class="closing io" data-i18n="act6_closing">The dossiers came first and the application came second, and that order is the argument.</p>
 
     <div class="convert" id="convert">
-      <div class="ctarow">
-        <a class="convert__cta" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer" data-i18n="cta_repo">Read the repository</a>
-        <a class="convert__cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer" data-i18n="cta_live">Open the running application</a>
-      </div>
     </div>
   </div>
 </section>
@@ -796,6 +824,8 @@ const panelSlot = document.getElementById("panelSlot");
 const panelTitle = document.getElementById("panelTitle");
 const panelClose = document.getElementById("panelClose");
 let panelHome = null, panelTrigger = null;
+/* Reveal bodies ship open in the markup so the page reads without script; script folds them. */
+document.querySelectorAll(".reveal__body").forEach(b=>{ b.hidden = true; });
 
 function closePanel(){
   if(panelHome && panelSlot.firstElementChild){
