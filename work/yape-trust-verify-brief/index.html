@@ -208,6 +208,17 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
 }
 
+/* Build links — Main's "Access Brief" CTA (assets/css/pages/home/hero.css .cta), carried inline as in Brief 01.
+   Stacked on phones; side by side from 768. Each link is a 44px tap target. */
+.ctaset{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;}
+.act__foot{margin:clamp(2rem,3.5vw,2.75rem) 0 1rem;}
+.ctaset .cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; width:fit-content;}
+.ctaset .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
+.ctaset .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+  background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard);}
+.ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
+.ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+@media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -550,27 +561,42 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 <main>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO — continues Main's work card 02 ================= -->
 <section class="hero" aria-labelledby="heroTitle">
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 04</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">7 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="brief_read">7 min read</span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The screenshot says paid. My app asks the bank.</h1>
-    <p class="hero__deck" data-i18n="hero_deck">Peru's favorite payment app has a counterfeit problem. To close it, I entered a stack I had never touched — and set one rule: prove every claim.</p>
+    <p class="hero__deck" data-i18n="hero_lede">Trust &amp; Verify lets a merchant check that a Yape payment on a customer's screen is real, before the goods leave the counter.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="kw1">Front-end</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Banking</span>
-      <span class="kw" role="listitem" data-i18n="kw3">Mobile</span>
-      <span class="kw" role="listitem" data-i18n="kw4">React</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Security</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag1">Fintech</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag2">Fraud Prevention</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag3">Front-end</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag4">Security</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag5">Mobile</span>
+    </div>
+    <div class="rolestrip" aria-label="Role and scope">
+      <span data-i18n="hero_role1"><b>Roles</b> — Product designer · Front-end developer · Test lead</span>
+      <span data-i18n="hero_role2"><b>Duration</b> — Under a week · July 2026</span>
+      <span data-i18n="hero_role3"><b>Scope</b> — Research → UX design → development → security → testing</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
-      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">Yape receipts can be faked field by field — except one. I entered app development to build the merchant-side check that reads it: React, TypeScript, banking-grade security discipline, and a test protocol that proves the claim held.</p>
+      <div class="reveal__body reveal__body--poster" id="rv-hero">
+        <p data-i18n="hero_short">Picture a queue at a Lima market stall: a customer holds up a phone that says the payment went through, and the merchant has seconds to decide. Every field on that confirmation can be faked except one, the operation number the bank writes itself. Trust &amp; Verify checks that number before the goods change hands, with banking-grade safeguards on every tap and six test scenarios proving the check holds. I researched, designed and built it in under a week, in a stack I had never used.</p>
       </div>
+    </div>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_live">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+      <a class="cta" href="https://github.com/jdsaire/trust-verify" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
     <p class="independence" data-i18n="independence"><strong>An independent case study.</strong> Not affiliated with, endorsed by, or connected to Yape or BCP. Built against fabricated fixtures. No real payment, account, or ledger is involved.</p>
   </div>
@@ -651,15 +677,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
              A security code shipped to close it. <strong>The public guidance still does not mention the code.</strong></p>
         </div>
 
-        <div class="rolestrip io" aria-label="Role and scope">
-          <span data-i18n="act1_role1"><b>Role</b> — Sole author</span>
-          <span data-i18n="act1_role2"><b>Duration</b> — July 2026, one build cycle</span>
-          <span data-i18n="act1_role3"><b>Scope</b> — Research → selection → front-end build → test</span>
-        </div>
 
         <div class="reveal io" data-act="act1">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a1" data-panel-title="Why I chose this problem" data-i18n="act1_rv_btn">Why I chose this problem</button>
-          <div class="reveal__body" id="rv-a1" hidden>
+          <div class="reveal__body" id="rv-a1">
             <p data-i18n="act1_rv_txt">I benchmarked three innovation-centre banks in markets comparable to Peru — Nubank, Nequi, Attijariwafa. All three treat verifiable payment trust as a core product surface, so the gap here is real, not invented. Two other candidates lost: merchant finance tools are a crowded, solved space, and onboarding flows drift into regulated identity territory. Payment trust won because it is real, urgent, and answerable in front-end code alone.</p>
           </div>
         </div>
@@ -770,7 +791,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act4_c1_x">React draws every screen from the app's data, never the reverse — so what the merchant sees always matches what the app knows. In a trust tool, that guarantee is the product.</p>
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c1" data-panel-title="Why React, and not vanilla or Angular" data-i18n="act4_c1_rv_btn">Why React, and not vanilla or Angular</button>
-          <div class="reveal__body" id="rv-a4c1" hidden>
+          <div class="reveal__body" id="rv-a4c1">
             <p data-i18n="act4_c1_rv_txt">The one failure a verification tool cannot survive is a stale screen — "verified" still showing for a check the operator cancelled. React is built for exactly this: the interface is a function of state, read through its supported mechanism for stores that live outside the framework, so a verdict cannot tear under rapid updates. Vanilla — how this entire site is built — would mean hand-wiring every listener and owning every teardown, and this build's one real defect was precisely a missed listener. Angular would work, but brings a large, opinionated framework surface to a deliberately small single-job build; a smaller surface is faster to get right. That the banking sector's own job postings name React is convenient corroboration — the natural tool for the problem happens to be the one the industry already builds in.</p>
           </div>
         </div>
@@ -781,7 +802,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act4_c2_x">TypeScript is JavaScript with a strict proofreader: it catches whole classes of mistakes before the code runs. In a tool that tells a merchant to trust a payment, that net is not optional.</p>
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c2" data-panel-title="What the safety layer buys" data-i18n="act4_c2_rv_btn">What the safety layer buys</button>
-          <div class="reveal__body" id="rv-a4c2" hidden>
+          <div class="reveal__body" id="rv-a4c2">
             <p data-i18n="act4_c2_rv_txt">Every receipt field, verdict state, and API response has a declared shape, so a malformed record cannot silently flow into a verdict. The compiler runs as a CI gate on every push — the same discipline production banking code expects: typed contracts, automated checks, continuous integration.</p>
           </div>
         </div>
@@ -792,7 +813,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act4_c3_x">Think of the security layer as a film set: the heavy bank infrastructure is painted scenery, openly staged, while every lock the merchant actually touches is real, working, and tested.</p>
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c3" data-panel-title="What is scenery, what is the lock" data-i18n="act4_c3_rv_btn">What is scenery, what is the lock</button>
-          <div class="reveal__body" id="rv-a4c3" hidden>
+          <div class="reveal__body" id="rv-a4c3">
             <p data-i18n="act4_c3_rv_txt">The scenery demonstrates the sector's security vocabulary — TLS 1.2 encrypted exchanges, RSA-2048 key pairs, mutual certificate authentication, adaptive risk scoring — against fabricated material, badged SIMULATED throughout so no one mistakes a painted server for a real one. The lock is everything the merchant touches: an in-app keypad no third-party keyboard can read, digits that shuffle to defeat a watching eye, an execution lock against double-taps, a blocking overlay while the check runs, and privacy masking on every name and number. Neither side ever borrows credibility from the other.</p>
           </div>
         </div>
@@ -803,7 +824,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act4_c4_x">Before trusting the build, I wrote a six-scenario testing protocol drawn from the case research: can it tell a fake from a real payment, and does it refuse to misfire under pressure?</p>
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c4" data-panel-title="What the six scenarios check" data-i18n="act4_c4_rv_btn">What the six scenarios check</button>
-          <div class="reveal__body" id="rv-a4c4" hidden>
+          <div class="reveal__body" id="rv-a4c4">
             <p data-i18n="act4_c4_rv_txt">1: a forged amount on a real operation number is caught and named. 2: a verdict stays reachable even when the user has never heard of the security code — an unreadable field is never scored as a mismatch. 3: a double-tap or mid-flight cancel can never fire the check twice or record a verdict the operator backed out of. 4: the action stays inert until its preconditions hold. 5: the busy overlay truly blocks the page. 6: privacy masking never leaks a full name or number. Results live in the dashboard below.</p>
           </div>
         </div>
@@ -1055,6 +1076,8 @@ const panelSlot = document.getElementById("panelSlot");
 const panelTitle = document.getElementById("panelTitle");
 const panelClose = document.getElementById("panelClose");
 let panelHome = null, panelTrigger = null;
+/* Reveal bodies ship open in the markup so the page reads without script; script folds them. */
+document.querySelectorAll(".reveal__body").forEach(b=>{ b.hidden = true; });
 
 function closePanel(){
   if(panelHome && panelSlot.firstElementChild){
