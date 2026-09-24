@@ -134,18 +134,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
    starts its content at one fixed distance below the nav, so every brief opens at the same height. */
 .hero{min-height:100svh; display:flex; align-items:flex-start; position:relative;
   padding-top:calc(var(--nav-height) + 3px + clamp(2.5rem,6vh,4.5rem)); padding-bottom:5.5rem;}
-/* The short version reads as a solid panel over the hero; the scroll cue steps aside while it is open. */
+/* The short version reads as a solid panel over the hero. */
 .hero .reveal__body{background:var(--color-brand-black); position:relative; z-index:1;}
-.hero:has(.reveal__btn[aria-expanded="true"]) .scrollcue{display:none;}
 .hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
 .hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
 .hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
 .kwrow{display:flex; flex-wrap:wrap; gap:.6rem;}
 .kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
   color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
-.scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
-  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
-.scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
 
 /* ================= ACTS ================= */
 .act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
@@ -635,7 +631,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
   </div>
-  <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
 </section>
 
 <!-- ================= PROLOGUE ================= -->
