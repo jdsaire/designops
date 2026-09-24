@@ -110,7 +110,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .scan strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
 
 /* ================= HERO ================= */
-.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-height) + 3px); position:relative;}
+/* Hero chassis — standard on all four briefs (W2A-G3-Q2): fills the viewport at every width and
+   starts its content at one fixed distance below the nav, so every brief opens at the same height. */
+.hero{min-height:100svh; display:flex; align-items:flex-start; position:relative;
+  padding-top:calc(var(--nav-height) + 3px + clamp(2.5rem,6vh,4.5rem)); padding-bottom:5.5rem;}
+/* The short version reads as a solid panel over the hero; the scroll cue steps aside while it is open. */
+.hero .reveal__body{background:var(--color-brand-black); position:relative; z-index:1;}
+.hero:has(.reveal__btn[aria-expanded="true"]) .scrollcue{display:none;}
 .hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
 .hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
 .hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
@@ -160,7 +166,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* Phone chassis (W2A-Q1, Brief 04's rule list): every card grid is one column below 768. */
 @media (max-width:767px){
   .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
-  .hero{padding-bottom:4.5rem;}   /* keep the scroll cue below the build links when the hero runs past one screen */
 }
 /* ---- Numbered problem cards (Brief 04's .pcards): the ordinal is a CSS counter, not copy. ---- */
 .pcards{counter-reset:pcard;}
@@ -327,6 +332,21 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .js .io{opacity:1; transform:none;}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
+
+/* ================= MOTION · D7 NATIVE LAYER — Brief 04's, verbatim (progressive enhancement, compositor-only) ================= */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
+  }
+}
+@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
+@media (prefers-reduced-motion:no-preference){
+  @supports (mix-blend-mode:difference){
+    .hero .section__eyebrow-bar{ transform-origin:left center; mix-blend-mode:difference;
+      animation:sig-draw 900ms var(--ease-decelerate) both; }
+  }
+}
+@keyframes sig-draw{ from{transform:scaleX(0); opacity:.35;} to{transform:scaleX(1); opacity:1;} }
 
 /* FOOTER HIDDEN — pending redesign; rules above retained for restoration. */
 .footer{display:none;}
