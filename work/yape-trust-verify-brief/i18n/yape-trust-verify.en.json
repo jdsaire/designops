@@ -109,13 +109,6 @@
   "act6_h4_t": "One problem, not a redesign",
   "act6_h4_x": "Banking is too wide to enter everywhere at once. A short, focused study pointed at one real fraud mechanism — approached purely through front-end eyes, not as UX, redesign, or innovation theatre.",
   "act6_sequel": "The gap I did not close: this app checks a fabricated record. The same check, against a bank's real one, is a backend conversation",
-  "convert_cta": "Start a conversation Pending",
-  "convert_temporal": "Pending",
-  "convert_nextlabel": "Keep reading",
-  "convert_c1_t": "DesignOps System",
-  "convert_c1_x": "The system this brief is published on — built, governed, and operated end to end.",
-  "convert_c2_t": "Airport Apps",
-  "convert_c2_x": "Three positions on one airport, including the paid engagement: a payment platform designed, prototyped and handed to engineering.",
   "act1_receipt_alt": "A Yape payment confirmation screen showing an amount in soles, a recipient name, a date and time, a three-digit security code, and an operation number.",
   "gantt_collapse": "Collapse all phases",
   "brief_eyebrow": "Work brief",
@@ -134,5 +127,12 @@
   "hero_role3": "Scope — Research → UX design → development → security → testing",
   "disclosure_label": "Disclosure notes",
   "arch_foot": "For more on the architecture, read the repository's README, browse my GitHub profile or open the live app.",
-  "cta_github": "Browse my GitHub"
+  "cta_github": "Browse my GitHub",
+  "close_eyebrow": "Next steps",
+  "contact_cta": "Start a conversation",
+  "sim_label": "Keep exploring",
+  "sim_c1_t": "AccreditaPass",
+  "sim_c1_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
+  "sim_c2_t": "DesignOps System",
+  "sim_c2_x": "The story behind this multi-page website."
 }

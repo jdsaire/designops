@@ -13,7 +13,7 @@
            03 The Build Shape · 04 The Architecture ·
            05 The Dashboard · 06 The Reflection
      Route depth: work/yape-trust-verify-brief/ — nav paths ../../
-     [TEMPORAL]: contact mailto (data-temporal="contact-email")
+     Close: Next steps · contact CTA (../../contact/) · Keep exploring (W2A-G3-Q2)
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script>document.documentElement.classList.add('js');</script>
@@ -128,9 +128,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
 
 /* ================= INDEPENDENCE NOTICE — non-affiliation, always visible ================= */
-.independence{border:1px dashed var(--color-border-soft); padding:.75rem 1rem; font-size:.72rem;
-  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:44em;}
-.independence strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 
 /* ================= ACTS ================= */
 .act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
@@ -228,6 +225,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .note{border-left:3px solid var(--color-brand-purple); padding:.35rem 0 .35rem 1rem; font-size:.72rem; line-height:1.6;
   color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
 .note strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+/* ---- Close — standard on all four briefs (W2A-G3-Q2): Next steps, Main's contact CTA, two related briefs. ---- */
+.close{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.close .section__eyebrow{margin-bottom:clamp(1.25rem,2vw,1.75rem);}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -390,14 +393,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
-/* ---- Conversion ---- */
-.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
-.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
-  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard);}
-.convert__cta:hover{background:var(--color-brand-purple);}
-.temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
-  border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
@@ -989,24 +984,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <!-- ================= CONVERSION — temporal mailto + two continuity cards ================= -->
-    <div class="convert" id="convert">
-      <div class="container" style="padding:0;">
-        <a class="convert__cta" href="mailto:" data-temporal="contact-email" data-i18n="convert_cta">
-          Start a conversation <span class="temporal" data-i18n="convert_temporal">Pending</span>
+    <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
+    <div class="close io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="close_eyebrow">Next steps</span>
+      </div>
+      <div class="ctaset">
+        <a class="cta" href="../../contact/" data-nav-page="contact/">
+          <span class="cta__label" data-i18n="contact_cta">Start a conversation</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
         </a>
-        <div class="convert__next">
-          <p class="convert__nextlabel" data-i18n="convert_nextlabel">Keep reading</p>
-          <div class="cardgrid cardgrid--2">
-            <a class="card card--continuity" href="../portfolio-evolution/">
-              <h3 class="card__t" data-i18n="convert_c1_t">DesignOps System</h3>
-              <p class="card__x" data-i18n="convert_c1_x">The system this brief is published on — built, governed, and operated end to end.</p>
-            </a>
-            <a class="card card--continuity" href="../airport/">
-              <h3 class="card__t" data-i18n="convert_c2_t">Airport Apps</h3>
-              <p class="card__x" data-i18n="convert_c2_x">Three positions on one airport, including the paid engagement: a payment platform designed, prototyped and handed to engineering.</p>
-            </a>
-          </div>
+      </div>
+      <div class="convert__next">
+        <p class="convert__nextlabel" data-i18n="sim_label">Keep exploring</p>
+        <div class="cardgrid cardgrid--2">
+          <a class="card card--continuity" href="../accreditapass/">
+            <h3 class="card__t" data-i18n="sim_c1_t">AccreditaPass</h3>
+            <p class="card__x" data-i18n="sim_c1_x">A live record that tells World Cup reporters what their pass allows, before security turns them away.</p>
+          </a>
+          <a class="card card--continuity" href="../portfolio-evolution/">
+            <h3 class="card__t" data-i18n="sim_c2_t">DesignOps System</h3>
+            <p class="card__x" data-i18n="sim_c2_x">The story behind this multi-page website.</p>
+          </a>
         </div>
       </div>
     </div>
