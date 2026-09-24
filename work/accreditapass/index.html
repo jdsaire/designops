@@ -295,11 +295,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 
 
-/* ---- Question callout (Act 02) — the open design question, quoted from the ideation gate ---- */
-.question{border:1px solid var(--color-border-soft); padding:clamp(1.4rem,2.5vw,2rem);
-  margin:clamp(1.5rem,2.5vw,2rem) 0; max-width:52rem;
-  font-size:clamp(1.1rem,1.7vw,1.45rem); font-weight:var(--fw-light); font-style:italic; line-height:1.4;
-  color:var(--color-brand-white);}
 
 
 
@@ -553,37 +548,68 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 02 · THE SIMULATED PASS — three passes on an ascending ladder ================= -->
+<!-- ================= ACT 02 · UX SIMULATION — three runs on an ascending ladder, then the question they answered ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Simulated Pass</span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · UX Simulation</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">No journalist was interviewed. The study says so.</h2>
-      <p class="scan" data-i18n="act2_lede">Three passes before the record was built.</p>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Designed from their side, not ours.</h2>
+      <p class="scan" data-i18n="act2_lede">Review the three runs that settled each UX decision before the build.</p>
     </div>
     <div class="timeline io">
-      <div class="timeline__track" role="group" aria-label="The simulated pass, in three steps">
+      <div class="timeline__track" role="group" aria-label="The UX simulation, in three runs">
         <article class="card">
-          <p class="catlabel" data-i18n="l1_n">Pass 1 · Simulated</p>
-          <h3 class="card__t" data-i18n="l1_t">Research</h3>
-          <p class="card__x" data-i18n="l1_x">A 30-respondent survey and five interviews, both synthetic, produced two personas and a service blueprint.</p>
+          <p class="catlabel" data-i18n="l1_n">Run 1 · Research</p>
+          <h3 class="card__t" data-i18n="l1_t">Silence hurts more than a no</h3>
+          <p class="card__x" data-i18n="l1_x">Journalists can live with bad news; what breaks trust is a change with no reason and no warning.</p>
+          <div class="reveal" data-act="act2">
+            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l1" data-panel-title="Run 1 · Research" data-i18n="act2_cta">See the protocol</button>
+            <div class="reveal__body reveal__body--poster" id="rv-l1">
+              <p data-i18n="l1_r">Eight gates took the research from scope to design brief: a research plan, instruments, a simulation note, analysis, artifacts and a limitations file. A 30-respondent survey and five interviews, both synthetic and declared as such, produced two personas, an empathy map, three scenarios and a service blueprint of the accreditation-to-matchday lifecycle. Three themes survived analysis: the silence, the lag, and the badge that is not a ticket.</p>
+            </div>
+          </div>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="l2_n">Pass 2 · Simulated</p>
-          <h3 class="card__t" data-i18n="l2_t">Ideation</h3>
-          <p class="card__x" data-i18n="l2_x">Six authored participants argued 32 ideas down to a shortlist of eight, then to one: Access Record.</p>
+          <p class="catlabel" data-i18n="l2_n">Run 2 · Ideation</p>
+          <h3 class="card__t" data-i18n="l2_t">A record, not a status</h3>
+          <p class="card__x" data-i18n="l2_x">Every change becomes an entry that says what changed, why, and what to do next, sent before it matters.</p>
+          <div class="reveal" data-act="act2">
+            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l2" data-panel-title="Run 2 · Ideation" data-i18n="act2_cta">See the protocol</button>
+            <div class="reveal__body reveal__body--poster" id="rv-l2">
+              <p data-i18n="l2_r">A two-day workshop with six authored participants ran divergence twice: 18 risk-sorted assumptions, then 14 more with feasibility suspended, for a pool of 32 ideas. Two prioritization matrices and a Buy a Feature round narrowed it to a ranked shortlist of eight. The concept that survived, Access Record, sends each entry to the journalist and to the venue gate at once, and scales how much each person hears to how much help they already have.</p>
+            </div>
+          </div>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="l3_n">Pass 3 · Simulated</p>
-          <h3 class="card__t" data-i18n="l3_t">Specification</h3>
-          <p class="card__x" data-i18n="l3_x">Nine gates fixed the information architecture, WCAG 2.2 AA tokens and the build brief before any interface code.</p>
+          <p class="catlabel" data-i18n="l3_n">Run 3 · Prototyping</p>
+          <h3 class="card__t" data-i18n="l3_t">Every screen decided before code</h3>
+          <p class="card__x" data-i18n="l3_x">Tasks, screens and the data model were fixed first, so development built against a plan rather than a guess.</p>
+          <div class="reveal" data-act="act2">
+            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l3" data-panel-title="Run 3 · Prototyping" data-i18n="act2_cta">See the protocol</button>
+            <div class="reveal__body reveal__body--poster" id="rv-l3">
+              <p data-i18n="l3_r">Nine gates turned the concept into a buildable specification: competitive benchmarking, an information architecture from a simulated six-participant card sort with ten rules for how the record behaves over time, design tokens verified against WCAG 2.2 AA in light and dark, three task flows, full screen specifications, a data model and a build brief. A four-file addendum later settled the dark palette, sign-in and three-language support.</p>
+            </div>
+          </div>
         </article>
       </div>
     </div>
-    <p class="question io" data-i18n="act2_question">How might we tell a journalist that their access has changed before they discover it by being refused?</p>
+    <!-- The how-might-we the runs produced, and its answer — on the Similar-work chassis. -->
+    <div class="convert io" id="hmw">
+      <p class="convert__nextlabel" data-i18n="hmw_label">What the runs asked, and answered</p>
+      <div class="cardgrid cardgrid--2">
+        <article class="card">
+          <h3 class="card__t" data-i18n="hmw_q_t">The question</h3>
+          <p class="card__x" data-i18n="act2_question">How might we tell a journalist that their access has changed before they discover it by being refused?</p>
+        </article>
+        <article class="card">
+          <h3 class="card__t" data-i18n="hmw_a_t">The answer: Access Record</h3>
+          <p class="card__x" data-i18n="hmw_a_x">Turn accreditation into a live record: every change is written down with its reason and next step, and reaches the journalist and the venue gate before it matters.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
