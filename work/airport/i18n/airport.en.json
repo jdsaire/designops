@@ -58,7 +58,7 @@
   "act1_dn_closing": "One journey is wired end to end because that journey is the argument. Four of the five tabs do nothing, and you read that here before you find it out there.",
   "act2_eyebrow": "Chapter 02 · The lounges case",
   "act2_meta": "Q2 2025 · written for the Lima Airport selection process",
-  "act2_notice": "<strong>Case-exercise figures.</strong> Every number in this chapter comes from a selection-process exercise: the airport's own case prompt, public sources, and my modelling on top of them. None of it is live Lima Airport financial data and none of it should be read as such.",
+  "act2_notice": "<strong>Case-exercise figures.</strong> Every number in the VIP-lounges chapter comes from a selection-process exercise: the airport's own case prompt, public sources, and my modelling on top of them. None of it is live Lima Airport financial data and none of it should be read as such.",
   "act2_verdict": "The case asked how to fix a booking platform. I answered with what the defect was costing.",
   "act2_scan1": "The brief was the digital experience across the airport's services platform. I narrowed it to one product — pay-per-use VIP lounge reservations — on commercial potential and implementation feasibility, and treated the reservations platform as a non-aeronautical revenue asset rather than a website.",
   "act2_scan2": "Then I built the funnel from public figures: 27.44M passengers projected for 2025, 14.27M of them relevant, 2.14M lounge users, 0.713M paying per use. At a 58% conversion rate, abandonment costs $4.04M a year — $1.44M of it attributable to usability and $2.6M to technical failure.",
@@ -75,7 +75,7 @@
   "act2_synth": "This is the only chapter written to a brief the airport set, and the only one where someone else decided what the problem was.",
   "act3_eyebrow": "Chapter 03 · TUUA Transfer",
   "act3_meta": "May 2025 – Oct 2025 · Especialista en Procesos e Innovación, Lima Airport Partners",
-  "act3_notice": "He understands the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.",
+  "act3_notice": "<strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.",
   "act3_verdict": "A fee the airport had never charged, through a channel that did not exist. I designed the channel and handed it over.",
   "act3_scan1": "TUUA Transfer is a charge on international-transfer passengers at Jorge Chávez and a new line of airport revenue. It runs today against more than 130,000 of them a month.",
   "act3_scan2": "Five divisions each held a piece of it — Finanzas, Operaciones Aeroportuarias, TI, Comercial and Reputación — and engineering was waiting on a definition.",
@@ -152,5 +152,6 @@
   "dash_c8_l": "Attributable to technical failure",
   "hero_role1": "Roles — UX researcher · UX/UI designer · Usability tester",
   "hero_role2": "Duration — 2024 – 2025",
-  "hero_role3": "Scope — UX research → UX design → prototyping → usability testing → handoff"
+  "hero_role3": "Scope — UX research → UX design → prototyping → usability testing → handoff",
+  "disclosure_label": "Disclosure notes"
 }

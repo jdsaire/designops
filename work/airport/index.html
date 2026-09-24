@@ -222,6 +222,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
 .ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 @media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
+/* ---- Disclosure notes — footnotes before the close, standard on all four briefs (W2A-G3-Q2):
+        Brief 02's small notice type with a purple rule on the left; two columns from 768 when there are two. ---- */
+.notes{margin-top:clamp(2.5rem,5vw,4rem); scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
+.notes__label{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.notes__grid{display:grid; grid-template-columns:1fr; gap:1rem;}
+@media (min-width:768px){ .notes__grid--2{grid-template-columns:1fr 1fr;} }
+.note{border-left:3px solid var(--color-brand-purple); padding:.35rem 0 .35rem 1rem; font-size:.72rem; line-height:1.6;
+  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
+.note strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -904,7 +913,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
            and deliberately not in the hero: it scopes this chapter alone. It
            sits directly above the figures it governs. -->
       <div class="badges">
-        <p class="independence independence--sim" data-i18n-html="act2_notice"><strong>Case-exercise figures.</strong> Every number in this chapter comes from a selection-process exercise: the airport's own case prompt, public sources, and my modelling on top of them. None of it is live Lima Airport financial data and none of it should be read as such.</p>
       </div>
 
       <h2 class="verdict" id="v2" data-i18n="act2_verdict">The case asked how to fix a booking platform. I answered with what the defect was costing.</h2>
@@ -998,7 +1006,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <!-- Locked scope-of-credit sentence. Verbatim, never re-approved, and
            it ships in the third person on a first-person page by design. -->
       <div class="badges">
-        <p class="independence" data-i18n="act3_notice">He understands the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.</p>
       </div>
 
       <h2 class="verdict" id="v3" data-i18n="act3_verdict">A fee the airport had never charged, through a channel that did not exist. I designed the channel and handed it over.</h2>
@@ -1077,6 +1084,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <p class="closing io" data-i18n="act4_pull">Every claim on this page is the smallest one the evidence supports.</p>
+
+    <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
+    <div class="notes io" id="disclosure">
+      <p class="notes__label" data-i18n="disclosure_label">Disclosure notes</p>
+      <div class="notes__grid notes__grid--2">
+        <p class="note" data-i18n-html="act2_notice"><strong>Case-exercise figures.</strong> Every number in the VIP-lounges chapter comes from a selection-process exercise: the airport's own case prompt, public sources, and my modelling on top of them. None of it is live Lima Airport financial data and none of it should be read as such.</p>
+        <p class="note" data-i18n-html="act3_notice"><strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.</p>
+      </div>
+    </div>
 
     <div class="convert" id="convert">
       <div class="ctarow">
