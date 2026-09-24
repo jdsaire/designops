@@ -134,7 +134,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 @media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
 /* Footnote marker on the hero lede — points to the Disclosure notes. */
-.fnref{color:var(--color-brand-purple); font-weight:var(--fw-bold); margin-left:.1em; text-decoration:none;}
+.fnref{color:var(--color-brand-purple); font-weight:var(--fw-bold); text-decoration:none;
+  display:inline-block; padding:1rem .55rem; margin:-1rem -.55rem -1rem -.45rem; line-height:1;}   /* 44px tap area, no layout shift */
 .fnref:hover,.fnref:focus-visible{color:var(--color-purple-light);}
 #disclosure{scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
 .scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
@@ -456,7 +457,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">8 min read</span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Never miss a match</h1>
     <p class="hero__deck"><span data-i18n="hero_deck">AccreditaPass tells reporters covering the 2026 World Cup what their press pass allows, before security turns them away.</span><a class="fnref" href="#disclosure" aria-label="Read the disclosure notes">*</a></p>
