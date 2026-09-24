@@ -68,9 +68,6 @@
   "act4_c4_rv_btn": "What the six scenarios check",
   "act4_c4_rv_txt": "1: a forged amount on a real operation number is caught and named. 2: a verdict stays reachable even when the user has never heard of the security code — an unreadable field is never scored as a mismatch. 3: a double-tap or mid-flight cancel can never fire the check twice or record a verdict the operator backed out of. 4: the action stays inert until its preconditions hold. 5: the busy overlay truly blocks the page. 6: privacy masking never leaks a full name or number. Results live in the dashboard below.",
   "act4_synthesis": "Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. Treating it as proof is the trap the tool exists to close.",
-  "evidence_label": "The running build",
-  "evidence_l1": "Open the app",
-  "evidence_l2": "Read the source",
   "act5_eyebrow": "Act 05 · The Dashboard",
   "act5_verdict": "The numbers a technical lead can verify at the source.",
   "act5_tab_m": "Measured",
@@ -135,5 +132,7 @@
   "hero_role1": "Roles — Product designer · Front-end developer · Test lead",
   "hero_role2": "Duration — Under a week · July 2026",
   "hero_role3": "Scope — Research → UX design → development → security → testing",
-  "disclosure_label": "Disclosure notes"
+  "disclosure_label": "Disclosure notes",
+  "arch_foot": "For more on the architecture, read the repository's README, browse my GitHub profile or open the live app.",
+  "cta_github": "Browse my GitHub"
 }
