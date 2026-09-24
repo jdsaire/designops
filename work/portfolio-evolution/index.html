@@ -218,6 +218,17 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
 }
 
+/* Build links — Main's "Access Brief" CTA (assets/css/pages/home/hero.css .cta), carried inline as in Brief 01.
+   Stacked on phones; side by side from 768. Each link is a 44px tap target. */
+.ctaset{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;}
+.act__foot{margin:clamp(2rem,3.5vw,2.75rem) 0 1rem;}
+.ctaset .cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; width:fit-content;}
+.ctaset .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
+.ctaset .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+  background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard);}
+.ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
+.ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+@media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -589,25 +600,35 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">From template to system.</h1>
-    <p class="hero__deck" data-i18n="hero_deck">Follow one portfolio across three versions, from a template I rented to a system I wrote.</p>
+    <p class="hero__deck" data-i18n="hero_lede">Follow one portfolio from a template I rented to a bilingual system I wrote, in five months.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="kw1">Web Development</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Front-end</span>
-      <span class="kw" role="listitem" data-i18n="kw3">DesignOps</span>
-      <span class="kw" role="listitem" data-i18n="kw4">HTML/CSS/JS</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Design Systems</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag1">Web Development</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag2">Front-end</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag3">Design Systems</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag4">Internationalization</span>
+      <span class="kw" role="listitem" data-i18n="hero_tag5">DesignOps</span>
     </div>
     <div class="rolestrip" aria-label="Role and scope">
-      <span data-i18n="act1_role1"><b>Role</b> — Sole owner</span>
-      <span data-i18n="act1_role2"><b>Duration</b> — 2025 to present</span>
-      <span data-i18n="act1_role3"><b>Scope</b> — Strategy → design → build → operation</span>
+      <span data-i18n="hero_role1"><b>Roles</b> — Product owner · UX designer · Front-end developer</span>
+      <span data-i18n="hero_role2"><b>Duration</b> — Five months · Apr – Sep 2026</span>
+      <span data-i18n="hero_role3"><b>Scope</b> — UX strategy → design system → development → operation</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
       <!-- canonical: this copy supersedes work_card1_body upstream (pending designops Fable-5 pass) -->
-      <div class="reveal__body reveal__body--poster" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">I began with templates I could not bend, and ended by building it myself — design, code and the case for the work now sit in one asset I control end to end.</p>
+      <div class="reveal__body reveal__body--poster" id="rv-hero">
+        <p data-i18n="hero_short">Picture a portfolio that outgrew two homes. Templates on Canva and Framer could not build what I had designed, so I moved to a single page I coded with AI, then rebuilt it as this bilingual multi-page site with its own design system and four case briefs. Every step sits in public commit history, and the page you are reading is the result.</p>
       </div>
+    </div>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/designops/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_live">Open the live site</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+      <a class="cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </div>
   <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
@@ -636,7 +657,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act1_g1_l">I apply for roles whose posts list what a candidate must have. No post lists what a candidate is expected to sound like.</p>
         <div class="reveal" data-act="act1">
           <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c1" data-panel-title="The reading" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c1" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c1">
             <p data-i18n="act1_g1_r">Meeting every requirement is what gets an application considered; being understood is what gets it believed, and only the first is ever written down.</p>
           </div>
         </div>
@@ -646,7 +667,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act1_g2_l">My own credentials are an MBA, a MicroMasters and a Microsoft specialization. Not one of them showed what I can actually build.</p>
         <div class="reveal" data-act="act1">
           <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c2" data-panel-title="The credential" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c2" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c2">
             <p data-i18n="act1_g2_r">Research estimates work sample predicts job performance at about 3× more than education. A running page shows what I did with the diplomas</p>
           </div>
         </div>
@@ -656,7 +677,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act1_g3_l">Three in four hiring teams say they receive AI-written applications – turning openings into odysseys for qualified candidates.</p>
         <div class="reveal" data-act="act1">
           <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c3" data-panel-title="The claim" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c3" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c3">
             <p data-i18n="act1_g3_r">65% of hiring managers say skills are harder to verify as anybody can generate a fluent claim in seconds. Every figure here is backed up in public commit history.</p>
           </div>
         </div>
@@ -666,7 +687,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act1_g4_l">Employment in Lima, Peru has grown 22% since 2019, while the share of it held by workers under 25 has fallen by about a third.</p>
         <div class="reveal" data-act="act1">
           <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c4" data-panel-title="The market" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c4" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a1c4">
             <p data-i18n="act1_g4_r">Instead of contracting, local market is moving toward work that cannot be automated. That is the direction this website is built toward.</p>
           </div>
         </div>
@@ -756,7 +777,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act3_c1_x">No framework, no build step, no dependency I cannot read end to end.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Vanilla HTML/CSS/JavaScript" data-i18n="act3_c1_rv_btn">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c1" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c1">
             <p data-i18n="act3_c1_rv_txt">Nothing to migrate when a major version lands. No security-patch treadmill. A payload small enough to stay fast on a mid-range phone over Peruvian mobile data — which is what most recruiters will use to open it.</p>
           </div>
         </div>
@@ -767,7 +788,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act3_c2_x">WCAG AA held as a build gate, usable with screen readers and keyboards.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Accessibility and responsiveness" data-i18n="act3_c2_rv_btn">MADE FOR EVERYONE</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c2" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c2">
             <p data-i18n="act3_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
             <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up. Those are the three the stylesheets actually declare, not a convention borrowed from a framework.</p>
           </div>
@@ -779,7 +800,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act3_c3_x">Ten sections, one type scale, Flexbox and Grid throughout.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Grid and layout, one page" data-i18n="act3_c3_rv_btn">MORE ON INFORMATION ARCHITECTURE</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c3" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c3">
             <p data-i18n="act3_c3_rv_txt1">The ontology: ten reusable organisms, each owning one job — navigation, hero, work cards, capability carousel, contact.</p>
             <p data-i18n="act3_c3_rv_txt3">The choreography: one scroll, one order, every visitor served the same sequence whether or not it was the one they came for.</p>
           </div>
@@ -791,7 +812,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Orchestration in Claude" data-i18n="act3_c4_rv_btn">HOW CLAUDE WAS USED</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c4" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c4">
             <p data-i18n="act3_c4_rv_txt1">Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.</p>
           </div>
         </div>
@@ -802,7 +823,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act3_c5_x">The same token layer, now carried across a shared chassis.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c5" data-panel-title="Grid and layout, eight pages" data-i18n="act3_c5_rv_btn">WHAT THE SPLIT BOUGHT</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c5" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c5">
             <p data-i18n="act3_c5_rv_txt">Each case gets its own route, its own dictionary and its own entry point, so a recruiter can be sent to one page rather than to a scroll position. The cost is a chassis that must stay identical across eight pages — and one defect in it is eight defects.</p>
           </div>
         </div>
@@ -813,7 +834,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="act3_c6_x">This build runs under a locked scope against overthinking.</p>
         <div class="reveal" data-act="act3">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act3_c6_rv_btn">HOW GOVERNANCE IS APPLIED</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c6" hidden>
+          <div class="reveal__body reveal__body--poster" id="rv-a3c6">
             <p data-i18n="act3_c6_rv_txt">Every stage is dispatched as a written prompt with preflight checks, approval gates and a completion report. Improvements that fall outside the list are logged in one line and not built. The discipline is the deliverable as much as the site is.</p>
           </div>
         </div>
@@ -1098,6 +1119,8 @@ const panelSlot = document.getElementById("panelSlot");
 const panelTitle = document.getElementById("panelTitle");
 const panelClose = document.getElementById("panelClose");
 let panelHome = null, panelTrigger = null;
+/* Reveal bodies ship open in the markup so the page reads without script; script folds them. */
+document.querySelectorAll(".reveal__body").forEach(b=>{ b.hidden = true; });
 
 function closePanel(){
   if(panelHome && panelSlot.firstElementChild){
