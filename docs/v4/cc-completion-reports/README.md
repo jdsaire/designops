@@ -12,3 +12,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | S10-B · About journey | `s10b-about-journey-completion-report.md` |
 | S10-D · Contact organism | `s10d-contact-layout-completion-report.md` |
 | W1 · Copy injection, Main and About | `w1-copy-injection-completion-report.md` |
+| W2A · i18n split, brief standardisation, About | `w2a-i18n-split-mobile-chassis-completion-report.md` |

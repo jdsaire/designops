@@ -30,6 +30,7 @@
      copy spells it "Chávez". Both are deliberate and neither is corrected.
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>document.documentElement.classList.add('js');</script>
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <style>
@@ -129,16 +130,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .scan strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
 
 /* ================= HERO — full-width heading, no metrics ================= */
-.hero{min-height:100svh; display:flex; align-items:center; padding-top:calc(var(--nav-height) + 3px); position:relative;}
+/* Hero chassis — standard on all four briefs (W2A-G3-Q2): fills the viewport at every width and
+   starts its content at one fixed distance below the nav, so every brief opens at the same height. */
+.hero{min-height:100svh; display:flex; align-items:flex-start; position:relative;
+  padding-top:calc(var(--nav-height) + 3px + clamp(2.5rem,6vh,4.5rem)); padding-bottom:5.5rem;}
+/* The short version reads as a solid panel over the hero. */
+.hero .reveal__body{background:var(--color-brand-black); position:relative; z-index:1;}
 .hero__inner{width:100%; display:flex; flex-direction:column; gap:clamp(1.2rem,2vw,1.9rem);}
 .hero__h1{font-size:clamp(2.4rem,5.6vw,5rem); font-weight:var(--fw-black); line-height:1.02; letter-spacing:-0.03em; max-width:16em;}
 .hero__deck{font-size:clamp(1.1rem,1.6vw,1.45rem); font-weight:var(--fw-light); color:var(--color-text-muted); max-width:32em;}
 .kwrow{display:flex; flex-wrap:wrap; gap:.6rem;}
 .kw{display:inline-block; font-size:.64rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase;
   color:var(--color-brand-black); background:var(--color-brand-purple); padding:.32rem .7rem;}
-.scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
-  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
-.scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
 
 /* ================= ACTS ================= */
 .act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
@@ -204,6 +207,32 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
 }
 
+/* Build links — Main's "Access Brief" CTA (assets/css/pages/home/hero.css .cta), carried inline as in Brief 01.
+   Stacked on phones; side by side from 768. Each link is a 44px tap target. */
+.ctaset{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;}
+.act__foot{margin:clamp(2rem,3.5vw,2.75rem) 0 1rem;}
+.ctaset .cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; width:fit-content;}
+.ctaset .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
+.ctaset .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+  background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard);}
+.ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
+.ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+@media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
+/* ---- Disclosure notes — footnotes before the close, standard on all four briefs (W2A-G3-Q2):
+        Brief 02's small notice type with a purple rule on the left; two columns from 768 when there are two. ---- */
+.notes{margin-top:clamp(2.5rem,5vw,4rem); scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
+.notes__label{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.notes__grid{display:grid; grid-template-columns:1fr; gap:1rem;}
+@media (min-width:768px){ .notes__grid--2{grid-template-columns:1fr 1fr;} }
+.note{border-left:3px solid var(--color-brand-purple); padding:.35rem 0 .35rem 1rem; font-size:.72rem; line-height:1.6;
+  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
+.note strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+/* ---- Close — standard on all four briefs (W2A-G3-Q2): Next steps, Main's contact CTA, two related briefs. ---- */
+.close{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.close .section__eyebrow{margin-bottom:clamp(1.25rem,2vw,1.75rem);}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -313,14 +342,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
-/* ---- Conversion ---- */
-.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
-.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
-  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard);}
-.convert__cta:hover{background:var(--color-brand-purple);}
-.temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
-  border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
@@ -342,12 +363,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__tagline{white-space:normal;} }
 
 /* ================= MOTION ================= */
-.io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
-.io.is-in{opacity:1; transform:none;}
+/* Content is visible by default; only a page whose script runs hides it until it scrolls in. */
+.js .io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
+.js .io.is-in{opacity:1; transform:none;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .io{opacity:1; transform:none;}
+  .js .io{opacity:1; transform:none;}
   .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
   .timeline__nav{display:none;}
   .dcell__bar i{transform:scaleX(var(--v,0));}
@@ -391,29 +413,19 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* ===== CARRIED FORWARD from work/accreditapass/ — rules this chassis lacks
    and the locked copy depends on: both standing notices, the pull quotes,
    the synthesis blocks, the closing lines and the two-CTA row. ===== */
-.independence{border:1px dashed var(--color-border-soft); padding:.75rem 1rem; font-size:.72rem;
-  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:44em;}
-.independence strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 .synthesis{border-left:3px solid var(--color-brand-purple); padding:.2rem 0 .2rem 1.15rem;
   margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;
   font-size:clamp(1rem,1.2vw,1.12rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
 .synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .badges{display:flex; flex-direction:column; gap:.6rem; max-width:44em;}
-.independence--sim{border:1px solid var(--color-border-soft); border-left:3px solid var(--color-brand-purple);}
-.act .independence--sim{margin-bottom:clamp(1.75rem,3vw,2.5rem); max-width:52rem;}
-.pull{font-size:clamp(1.35rem,2.6vw,2.1rem); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.02em;
+.act .pull{font-size:clamp(1.35rem,2.6vw,2.1rem); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.02em;
   max-width:22em; margin:clamp(1.75rem,3vw,2.5rem) 0; padding-left:1.15rem;
   border-left:3px solid var(--color-brand-purple);}
 .closing{font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold); line-height:1.3; letter-spacing:-0.01em;
   max-width:30em; margin-top:clamp(1.5rem,2.5vw,2rem);}
-.ctarow{display:flex; flex-wrap:wrap; gap:1rem; margin-top:clamp(1.5rem,2.5vw,2rem);}
 .cardgrid--4{grid-template-columns:repeat(2,1fr);}
-@media (max-width:767px){ .ctarow .convert__cta{width:100%; justify-content:center;} }
 
 /* ================= AIRPORT ADDITIONS ================= */
-/* Hero category — the E6 string, byte-identical to work_card3_label. */
-.hero__cat{font-size:.78rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase;
-  color:var(--color-purple-light); margin-bottom:.9rem;}
 
 /* Chapter meta — period, position, terms of engagement. */
 .meta{font-size:.9rem; font-weight:var(--fw-light); color:var(--color-text-dim);
@@ -505,7 +517,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <a class="nav__work-item" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
           </div>
         </div>
-        <a href="../../capabilities/" data-nav-page="capabilities/" class="nav__link" data-i18n="nav_capabilities">Capabilities</a>
         <a href="../../about/"    data-nav-page="about/"    class="nav__link" data-i18n="nav_evolution">About</a>
         <a href="../../contact/" data-nav-page="contact/" class="nav__link" data-i18n="nav_cta">Contact</a>
       </div>
@@ -559,9 +570,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <a class="nav__overlay-subitem" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
           </div>
         </div>
-        <a href="../../capabilities/" data-nav-page="capabilities/" class="nav__overlay-link">
-          <span data-i18n="nav_capabilities">Capabilities</span>
-        </a>
         <a href="../../about/"    data-nav-page="about/"    class="nav__overlay-link">
           <span data-i18n="nav_evolution">About</span>
         </a>
@@ -595,31 +603,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 <main>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO — continues Main's work card 03 ================= -->
 <section class="hero" aria-labelledby="heroTitle">
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 03</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">15 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">1 min read</span></span>
     </div>
-    <p class="hero__cat" data-i18n="hero_category">03 · AIRPORT APPS · AVIATION</p>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The Airport Trilogy: Apps for Jorge Chavez International</h1>
-    <p class="hero__deck" data-i18n="hero_deck">A prototype I built for myself in 2024. A redesign written for the selection process that hired me in 2025. Then the real platform, from a desk inside the terminal. Three positions on one airport, and what each one could see that the others could not.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The Airport Saga: three projects, one terminal.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">Follow one airport from three positions: a passenger app I prototyped, a lounge-booking redesign I proposed, and a payment platform live today.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="kw1">Design Research</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Design Systems</span>
-      <span class="kw" role="listitem" data-i18n="kw3">Figma</span>
+      <span class="kw" role="listitem" data-i18n="kw1">Aviation</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Passenger Experience</span>
+      <span class="kw" role="listitem" data-i18n="kw3">UX Research</span>
       <span class="kw" role="listitem" data-i18n="kw4">Usability Testing</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Program Management</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Service Design</span>
+    </div>
+    <div class="rolestrip" aria-label="Role and scope">
+      <span data-i18n="hero_role1"><b>Roles</b> — UX researcher · UX/UI designer · Usability tester</span>
+      <span data-i18n="hero_role2"><b>Duration</b> — 2024 – 2025</span>
+      <span data-i18n="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → usability testing → handoff</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
-      <div class="reveal__body" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">Three airport products, designed across 2024 and 2025 from three different distances — as an outsider with no brief, as a candidate answering a case, and as an employee with a seat inside the terminal. LimaFly was the app I built for myself: a passenger's whole airport day, from packing at home to boarding, and four people tested it before I had set foot in the industry. The lounges case was the airport's own hiring exercise — fix the booking experience for its pay-per-use VIP lounges — which I answered by working out what the bad experience was costing in lost sales. TUUA Transfer is the real one, live today: a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.</p>
+      <div class="reveal__body reveal__body--poster" id="rv-hero">
+        <p data-i18n="hero_rv_txt">Imagine one airport seen from three distances. First as an outsider: LimaFly, a passenger app for the whole airport day, which four people tested before I worked in the industry. Then as a candidate: a lounge-booking redesign that priced what the bad experience was costing in lost sales. Finally from inside the terminal: TUUA Transfer, a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.</p>
       </div>
     </div>
   </div>
-  <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
 </section>
 
 <!-- ================= PROLOGUE ================= -->
@@ -888,7 +899,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
            and deliberately not in the hero: it scopes this chapter alone. It
            sits directly above the figures it governs. -->
       <div class="badges">
-        <p class="independence independence--sim" data-i18n-html="act2_notice"><strong>Case-exercise figures.</strong> Every number in this chapter comes from a selection-process exercise: the airport's own case prompt, public sources, and my modelling on top of them. None of it is live Lima Airport financial data and none of it should be read as such.</p>
       </div>
 
       <h2 class="verdict" id="v2" data-i18n="act2_verdict">The case asked how to fix a booking platform. I answered with what the defect was costing.</h2>
@@ -982,7 +992,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <!-- Locked scope-of-credit sentence. Verbatim, never re-approved, and
            it ships in the third person on a first-person page by design. -->
       <div class="badges">
-        <p class="independence" data-i18n="act3_notice">He understands the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.</p>
       </div>
 
       <h2 class="verdict" id="v3" data-i18n="act3_verdict">A fee the airport had never charged, through a channel that did not exist. I designed the channel and handed it over.</h2>
@@ -1062,10 +1071,47 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <p class="closing io" data-i18n="act4_pull">Every claim on this page is the smallest one the evidence supports.</p>
 
-    <div class="convert" id="convert">
-      <div class="ctarow">
-        <a class="convert__cta" href="https://www.figma.com/proto/eKUnb9I5927kDrdXbYrFCJ/LimaFly-Mockup?node-id=3210-4511&amp;starting-point-node-id=3358%3A1824&amp;page-id=2949%3A3524" target="_blank" rel="noopener noreferrer" data-i18n="cta_proto" aria-label="Open the LimaFly prototype">Open the LimaFly prototype</a>
-        <a class="convert__cta" href="https://pagotuua.lima-airport.com/" target="_blank" rel="noopener noreferrer" data-i18n="cta_live" aria-label="Open the live TUUA platform">Open the live TUUA platform</a>
+    <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
+    <div class="notes io" id="disclosure">
+      <p class="notes__label" data-i18n="disclosure_label">Disclosure notes</p>
+      <div class="notes__grid notes__grid--2">
+        <p class="note" data-i18n-html="act2_notice"><strong>Case-exercise figures.</strong> Every number in the VIP-lounges chapter comes from a selection-process exercise: the airport's own case prompt, public sources, and my modelling on top of them. None of it is live Lima Airport financial data and none of it should be read as such.</p>
+        <p class="note" data-i18n-html="act3_notice"><strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.</p>
+      </div>
+    </div>
+
+    <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
+    <div class="close io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="close_eyebrow">Next steps</span>
+      </div>
+      <div class="ctaset">
+        <a class="cta" href="https://www.figma.com/proto/eKUnb9I5927kDrdXbYrFCJ/LimaFly-Mockup?node-id=3210-4511&amp;starting-point-node-id=3358%3A1824&amp;page-id=2949%3A3524" target="_blank" rel="noopener noreferrer">
+          <span class="cta__label" data-i18n="cta_proto">Open the LimaFly prototype</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+        <a class="cta" href="https://pagotuua.lima-airport.com/" target="_blank" rel="noopener noreferrer">
+          <span class="cta__label" data-i18n="cta_live">Open the live TUUA platform</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+        <a class="cta" href="../../contact/" data-nav-page="contact/">
+          <span class="cta__label" data-i18n="contact_cta">Start a conversation</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+      </div>
+      <div class="convert__next">
+        <p class="convert__nextlabel" data-i18n="sim_label">Keep exploring</p>
+        <div class="cardgrid cardgrid--2">
+          <a class="card card--continuity" href="../accreditapass/">
+            <h3 class="card__t" data-i18n="sim_c1_t">AccreditaPass</h3>
+            <p class="card__x" data-i18n="sim_c1_x">A live record that tells World Cup reporters what their pass allows, before security turns them away.</p>
+          </a>
+          <a class="card card--continuity" href="../yape-trust-verify-brief/">
+            <h3 class="card__t" data-i18n="sim_c2_t">Verify App</h3>
+            <p class="card__x" data-i18n="sim_c2_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1176,6 +1222,8 @@ const panelSlot = document.getElementById("panelSlot");
 const panelTitle = document.getElementById("panelTitle");
 const panelClose = document.getElementById("panelClose");
 let panelHome = null, panelTrigger = null;
+/* Reveal bodies ship open in the markup so the page reads without script; script folds them. */
+document.querySelectorAll(".reveal__body").forEach(b=>{ b.hidden = true; });
 
 function closePanel(){
   if(panelHome && panelSlot.firstElementChild){

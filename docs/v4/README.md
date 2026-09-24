@@ -11,8 +11,7 @@ this is the next version folder per the pattern `v1`/`v2`/`v3` establish.
 - `cc-plans/` — the approved plan(s) for these deployments.
 - `cc-completion-reports/` — the completion report for each executed run.
 
-The most recent run archived here is **W1 · Copy injection** (deploy v17, PR #30): the
-approved wave-1 copy for Main and About in both languages, the mobile overlay rebuilt as
-sitemap / theme / language groups, and two chrome fixes — section headers that could be
-left invisible by a stalled scroll animation, and the navigation bar that stayed hidden
-after scrolling back up.
+The most recent run archived here is **W2A · i18n split, brief standardisation, About** (deploy
+v18, PR #31): the shared dictionaries reduced to chrome, with Main, About and Contact on their own
+page files; the hidden Capabilities page deleted; About aligned with POSITIONING-v1_2; Brief 01
+rebuilt to Brief 04's standard; and one hero, notice treatment and close across all four briefs.
