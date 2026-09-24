@@ -251,6 +251,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
+/* ---- Test tabs — Brief 04's dashboard tablist. Without script every panel shows, stacked,
+        each under its own caption; the tablist appears only when script can drive it. ---- */
+.dash__tabs{display:none; border-bottom:1px solid var(--color-border-soft);}
+.js .dash__tabs{display:flex;}
+.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.6rem; font-weight:var(--fw-semibold);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim);
+  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+@media (min-width:768px){ .dash__tab{font-size:.7rem; letter-spacing:.16em;} }
+.dash__tab:hover{color:var(--color-brand-white);}
+.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
+.dash__panel[hidden]{display:none;}
+.dash__panel + .dash__panel{border-top:1px solid var(--color-border-faint);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -698,56 +710,96 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE EVIDENCE — paired rows, first audit against re-audit ================= -->
+<!-- ================= ACT 05 · THE TEST — first version against final, in three tabs (Brief 04's dashboard) ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evidence</span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Test</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Measured twice, on the same instruments.</h2>
-      <p class="scan" data-i18n="act5_lede">The re-audit ran against the shipped build.</p>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Tested at the start, tested again at the end.</h2>
+      <p class="scan" data-i18n="act5_lede">Compare the first and final versions across three kinds of test.</p>
     </div>
     <div class="dash io">
-      <div class="dash__panel">
-        <p class="catlabel" data-i18n="act5_sim">Simulated task-attempts · no human user</p>
-        <div class="drows" role="table" aria-label="First audit against re-audit">
-        <div class="drow drow--head">
-          <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
-          <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
-          <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+      <div class="dash__tabs" role="tablist" aria-label="Test figures">
+        <button class="dash__tab" role="tab" id="tab-1" aria-selected="true" aria-controls="dp-1" data-i18n="dash_tab1">Findings</button>
+        <button class="dash__tab" role="tab" id="tab-2" aria-selected="false" aria-controls="dp-2" data-i18n="dash_tab2">Heuristics</button>
+        <button class="dash__tab" role="tab" id="tab-3" aria-selected="false" aria-controls="dp-3" data-i18n="dash_tab3">Accessibility</button>
+      </div>
+      <div class="dash__panel" id="dp-1" role="tabpanel" aria-labelledby="tab-1">
+        <p class="catlabel" data-i18n="t1_cap">Evaluation findings by severity</p>
+        <div class="drows">
+          <div class="drow drow--head">
+            <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
+            <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
+            <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="act5_tbl_r1_m">Critical findings</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_a">4</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_b">1</span></div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="act5_tbl_r2_m">Major findings</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_a">12</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_b">2</span></div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="act5_tbl_r3_m">Minor findings</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_a">10</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_b">2</span></div>
+          </div>
         </div>
-        <div class="drow">
-          <div class="drow__l" data-i18n="act5_tbl_r1_m">Critical findings</div>
-          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_a">4</span></div>
-          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_b">1</span></div>
+      </div>
+      <div class="dash__panel" id="dp-2" role="tabpanel" aria-labelledby="tab-2">
+        <p class="catlabel" data-i18n="act5_tbl_r4_m">Nielsen's ten heuristics</p>
+        <div class="drows">
+          <div class="drow drow--head">
+            <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
+            <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
+            <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="t2_r1_m">Fail</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r1_a">5</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r1_b">2</span></div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="t2_r2_m">Partial</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r2_a">4</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r2_b">1</span></div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="t2_r3_m">Pass</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r3_a">1</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r3_b">7</span></div>
+          </div>
         </div>
-        <div class="drow">
-          <div class="drow__l" data-i18n="act5_tbl_r2_m">Major findings</div>
-          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_a">12</span></div>
-          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_b">2</span></div>
-        </div>
-        <div class="drow">
-          <div class="drow__l" data-i18n="act5_tbl_r3_m">Minor findings</div>
-          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_a">10</span></div>
-          <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_b">2</span></div>
-        </div>
-        <div class="drow">
-          <div class="drow__l" data-i18n="act5_tbl_r4_m">Nielsen's ten heuristics</div>
-          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r4_a">5 fail · 4 partial · 1 pass</span></div>
-          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r4_b">2 fail · 1 partial · 7 pass</span></div>
-        </div>
-        <div class="drow">
-          <div class="drow__l" data-i18n="act5_tbl_r5_m">WCAG 2.2 AA</div>
-          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r5_a">8 pass · 12 fail · 3 open</span></div>
-          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r5_b">18 pass · 1 fail · 3 open</span></div>
-        </div>
-        <div class="drow">
-          <div class="drow__l" data-i18n="act5_tbl_r6_m">Task success</div>
-          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r6_a">no tasks existed</span></div>
-          <div class="drow__v"><span class="drow__t" data-i18n="act5_tbl_r6_b">6 of 6</span></div>
-        </div>
+      </div>
+      <div class="dash__panel" id="dp-3" role="tabpanel" aria-labelledby="tab-3">
+        <p class="catlabel" data-i18n="act5_tbl_r5_m">WCAG 2.2 AA</p>
+        <div class="drows">
+          <div class="drow drow--head">
+            <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
+            <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
+            <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="t3_r1_m">Pass</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r1_a">8</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r1_b">18</span></div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="t3_r2_m">Fail</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r2_a">12</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r2_b">1</span></div>
+          </div>
+          <div class="drow">
+            <div class="drow__l" data-i18n="t3_r3_m">Open</div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r3_a">3</span></div>
+            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r3_b">3</span></div>
+          </div>
         </div>
       </div>
       <p class="dash__note" data-i18n="act5_footnote">First audit measured the pre-reframing app at commit 0653b4e. Re-audit measured the build at b37066d. Both used simulated task-attempts and authored participants; neither involved a human user.</p>
@@ -1015,6 +1067,28 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
       '<span class="gantt__milestone-label" style="left:' + l + '" data-i18n="' + m.key + '">' + m.name + '</span></span>';
   });
 })();
+
+/* ============ Test tabs (Act 05) — Brief 04's tablist; panels ship open, script folds the unselected ============ */
+document.querySelectorAll('[role="tablist"]').forEach(list=>{
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  function select(tab){
+    tabs.forEach(t=>{
+      const sel = t === tab;
+      t.setAttribute("aria-selected", String(sel));
+      t.tabIndex = sel ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      if(panel) panel.hidden = !sel;
+    });
+  }
+  tabs.forEach((tab,i)=>{
+    tab.addEventListener("click", ()=> select(tab));
+    tab.addEventListener("keydown", e=>{
+      const nx = e.key === "ArrowRight" ? tabs[(i+1) % tabs.length] : e.key === "ArrowLeft" ? tabs[(i-1+tabs.length) % tabs.length] : null;
+      if(nx){ e.preventDefault(); select(nx); nx.focus(); }
+    });
+  });
+  select(tabs.find(t=>t.getAttribute("aria-selected")==="true") || tabs[0]);
+});
 
 /* ============ Entrance (once) ============ */
 const io = new IntersectionObserver(entries=>{
