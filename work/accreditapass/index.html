@@ -125,6 +125,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* Build links — Main's "Access Brief" CTA (assets/css/pages/home/hero.css .cta), carried inline.
    Stacked on phones; side by side from 768. Each link is a 44px tap target. */
 .ctaset{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;}
+.act__foot{margin:clamp(2rem,3.5vw,2.75rem) 0 1rem;}
 .ctaset .cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; width:fit-content;}
 .ctaset .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
 .ctaset .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
@@ -621,58 +622,78 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 04 · THE BUILD — four numbered cards, detail behind the reveal ================= -->
+<!-- ================= ACT 04 · THE ARCHITECTURE — four decisions, plain on the card, technical in the panel ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Build</span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Built to say what it is.</h2>
-      <p class="scan" data-i18n="act4_lede">Blazor on .NET 10, in three languages.</p>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">From approval to final whistle, in three languages.</h2>
+      <p class="scan" data-i18n="act4_lede">Review the four decisions that hold the build together.</p>
     </div>
     <div class="cardgrid cardgrid--2 pcards io">
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="b1_t">The client</h3>
-        <p class="card__x" data-i18n="b1_x">A Blazor WebAssembly client runs on an in-memory mock, so the live site works with no server behind it.</p>
+        <p class="catlabel" data-i18n="b1_n">Front-end decisions</p>
+        <h3 class="card__t pcard__t" data-i18n="b1_t">Runs in your pocket</h3>
+        <p class="card__x" data-i18n="b1_x">The whole app lives in the browser, so a journalist can open it on any phone, even with nothing running behind it.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b1" data-panel-title="The client" data-i18n="rv_implications">Know the implications</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b1" data-panel-title="Front-end decisions" data-i18n="b1_cta">Inside the front end</button>
           <div class="reveal__body reveal__body--poster" id="rv-b1">
-            <p data-i18n="b1_r">An ASP.NET Core Web API ships in the repository, switched off by default. When it runs, SignalR pushes each new change to the open record.</p>
+            <p data-i18n="b1_r">Blazor WebAssembly on .NET 10, written in C#, with a narrow TypeScript layer of two files for theme and locale storage. The app runs on an in-memory provider behind one interface, so every page reads the mock or the API without changing a line. Seven routes; the record is gated because it is personal, while the match schedule and help stay public. English, Spanish and Portuguese run at exact parity, 339 entries each, and switching language or theme never signs you out.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="b2_t">The languages</h3>
-        <p class="card__x" data-i18n="b2_x">English, Spanish and Portuguese carry 339 entries each, at exact parity.</p>
+        <p class="catlabel" data-i18n="b2_n">Back-end decisions</p>
+        <h3 class="card__t pcard__t" data-i18n="b2_t">News that finds you</h3>
+        <p class="card__x" data-i18n="b2_x">When something changes, the record updates on its own, with no refresh and no support call.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b2" data-panel-title="The languages" data-i18n="rv_implications">Know the implications</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b2" data-panel-title="Back-end decisions" data-i18n="b2_cta">Inside the back end</button>
           <div class="reveal__body reveal__body--poster" id="rv-b2">
-            <p data-i18n="b2_r">Language and theme are independent of each other and of the session, so changing either never signs you out.</p>
+            <p data-i18n="b2_r">An ASP.NET Core Web API with validated CRUD endpoints and an in-memory store, switched off by default so the live site never depends on it. Its middleware runs in a stated order: CORS, error handling, token authentication, request logging. SignalR carries each change notification to the client. It is a basic layer that proves the contract, not a production back end.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="b3_t">The honesty</h3>
-        <p class="card__x" data-i18n="b3_x">The sign-in prints its own passwords, and the API token is a fixed string in the repository.</p>
+        <p class="catlabel" data-i18n="b3_n">Design system</p>
+        <h3 class="card__t pcard__t" data-i18n="b3_t">One look, day or night</h3>
+        <p class="card__x" data-i18n="b3_x">Every screen shares the same colours, spacing and type, in a light theme and a true-black dark one.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b3" data-panel-title="The honesty" data-i18n="rv_implications">Know the implications</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b3" data-panel-title="Design system" data-i18n="b3_cta">Inside the system</button>
           <div class="reveal__body reveal__body--poster" id="rv-b3">
-            <p data-i18n="b3_r">Neither secures anything, and both say so wherever a reader could mistake them for real. A fixture that has not been played never names its teams, in any language.</p>
+            <p data-i18n="b3_r">Dual-theme design tokens were defined in the specification run and verified against WCAG 2.2 AA in both themes. The dark palette was re-derived against a #000000 anchor rather than inverted. The access card, change row, foreseeable badge and stale indicator share one token set, and appearance follows a three-way setting: light, dark or system.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="b4_t">The record</h3>
-        <p class="card__x" data-i18n="b4_x">Seven routes, and the record is gated because an access record is personal.</p>
+        <p class="catlabel" data-i18n="b4_n">Accessibility</p>
+        <h3 class="card__t pcard__t" data-i18n="b4_t">Readable by everyone</h3>
+        <p class="card__x" data-i18n="b4_x">It works by keyboard and screen reader, with contrast that holds, and passes more than twice the accessibility checks it started with.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b4" data-panel-title="The record" data-i18n="rv_implications">Know the implications</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b4" data-panel-title="Accessibility" data-i18n="b4_cta">Inside the access</button>
           <div class="reveal__body reveal__body--poster" id="rv-b4">
-            <p data-i18n="b4_r">Requesting access writes a new entry to your record instead of showing a separate confirmation screen. The schedule and the help page stay public.</p>
+            <p data-i18n="b4_r">A new change is announced to assistive technology the moment it arrives. Every input carries a label, validation errors are announced, focus stays visible and a skip link jumps to the content. Help sections and change rows use two-layer disclosure, so detail never floods a screen reader. A match that has not been played never names its teams, in any language.</p>
           </div>
         </div>
       </article>
+    </div>
+    <!-- The build links again, where a technical reader wants them. -->
+    <p class="scan act__foot io" data-i18n="act4_foot">For more on the architecture, read the repository's README, browse my GitHub profile or open the live app.</p>
+    <div class="ctaset io">
+      <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_live">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+      <a class="cta" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+      <a class="cta" href="https://github.com/jdsaire" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="cta_github">Browse my GitHub</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
