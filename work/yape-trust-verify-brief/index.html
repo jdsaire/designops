@@ -219,6 +219,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
 .ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 @media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
+/* ---- Disclosure notes — footnotes before the close, standard on all four briefs (W2A-G3-Q2):
+        Brief 02's small notice type with a purple rule on the left; two columns from 768 when there are two. ---- */
+.notes{margin-top:clamp(2.5rem,5vw,4rem); scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
+.notes__label{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.notes__grid{display:grid; grid-template-columns:1fr; gap:1rem;}
+@media (min-width:768px){ .notes__grid--2{grid-template-columns:1fr 1fr;} }
+.note{border-left:3px solid var(--color-brand-purple); padding:.35rem 0 .35rem 1rem; font-size:.72rem; line-height:1.6;
+  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
+.note strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -598,7 +607,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
     </div>
-    <p class="independence" data-i18n="independence"><strong>An independent case study.</strong> Not affiliated with, endorsed by, or connected to Yape or BCP. Built against fabricated fixtures. No real payment, account, or ledger is involved.</p>
   </div>
   <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
 </section>
@@ -963,6 +971,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <p class="sequel io" data-i18n="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong> — and the next thing I intend to be able to prove.</p>
+
+    <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
+    <div class="notes io" id="disclosure">
+      <p class="notes__label" data-i18n="disclosure_label">Disclosure notes</p>
+      <div class="notes__grid">
+        <p class="note" data-i18n="independence"><strong>An independent case study.</strong> Not affiliated with, endorsed by, or connected to Yape or BCP. Built against fabricated fixtures. No real payment, account, or ledger is involved.</p>
+      </div>
+    </div>
 
     <!-- ================= CONVERSION — temporal mailto + two continuity cards ================= -->
     <div class="convert" id="convert">
