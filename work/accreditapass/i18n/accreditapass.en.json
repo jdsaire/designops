@@ -88,7 +88,7 @@
   "act6_eyebrow": "Act 06 · The Close",
   "act6_verdict": "What this build lets me say.",
   "act6_lede": "Review what this build achieved, what it did not, and what comes next.",
-  "sim_label": "Similar work",
+  "sim_label": "Keep exploring",
   "r1_n": "The claim",
   "r1_t": "From concept to working interface",
   "r1_x": "I conceived, led and shipped this interface in a stack I had never used, directing the code and debugging it until it held.",
@@ -154,5 +154,7 @@
   "t3_r2_b": "1",
   "t3_r3_m": "Open",
   "t3_r3_a": "3",
-  "t3_r3_b": "3"
+  "t3_r3_b": "3",
+  "close_eyebrow": "Next steps",
+  "contact_cta": "Start a conversation"
 }

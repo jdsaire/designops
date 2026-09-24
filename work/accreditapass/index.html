@@ -277,6 +277,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .note{border-left:3px solid var(--color-brand-purple); padding:.35rem 0 .35rem 1rem; font-size:.72rem; line-height:1.6;
   color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
 .note strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
+/* ---- Close — standard on all four briefs (W2A-G3-Q2): Next steps, Main's contact CTA, two related briefs. ---- */
+.close{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.close .section__eyebrow{margin-bottom:clamp(1.25rem,2vw,1.75rem);}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -874,18 +880,30 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="note"><strong data-i18n="disclosure2_lead">Simulated research.</strong> <span data-i18n="disclosure2_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</span></p>
       </div>
     </div>
-    <!-- Terminal unit: no "Start a conversation" CTA (matches Brief 04); the build links live under The short version. -->
-    <div class="convert io">
-      <p class="convert__nextlabel" data-i18n="sim_label">Similar work</p>
-      <div class="cardgrid cardgrid--2">
-        <a class="card card--continuity" href="../yape-trust-verify-brief/">
-          <h3 class="card__t" data-i18n="sim_c1_t">Verify App</h3>
-          <p class="card__x" data-i18n="sim_c1_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+    <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
+    <div class="close io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="close_eyebrow">Next steps</span>
+      </div>
+      <div class="ctaset">
+        <a class="cta" href="../../contact/" data-nav-page="contact/">
+          <span class="cta__label" data-i18n="contact_cta">Start a conversation</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
         </a>
-        <a class="card card--continuity" href="../portfolio-evolution/">
-          <h3 class="card__t" data-i18n="sim_c2_t">DesignOps System</h3>
-          <p class="card__x" data-i18n="sim_c2_x">The story behind this multi-page website.</p>
-        </a>
+      </div>
+      <div class="convert__next">
+        <p class="convert__nextlabel" data-i18n="sim_label">Keep exploring</p>
+        <div class="cardgrid cardgrid--2">
+          <a class="card card--continuity" href="../yape-trust-verify-brief/">
+            <h3 class="card__t" data-i18n="sim_c1_t">Verify App</h3>
+            <p class="card__x" data-i18n="sim_c1_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+          </a>
+          <a class="card card--continuity" href="../portfolio-evolution/">
+            <h3 class="card__t" data-i18n="sim_c2_t">DesignOps System</h3>
+            <p class="card__x" data-i18n="sim_c2_x">The story behind this multi-page website.</p>
+          </a>
+        </div>
       </div>
     </div>
   </div>
