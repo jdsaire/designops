@@ -143,7 +143,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .fnref{color:var(--color-brand-purple); font-weight:var(--fw-bold); text-decoration:none;
   display:inline-block; padding:1rem .55rem; margin:-1rem -.55rem -1rem -.45rem; line-height:1;}   /* 44px tap area, no layout shift */
 .fnref:hover,.fnref:focus-visible{color:var(--color-purple-light);}
-#disclosure{scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
 .scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
   font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
 .scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
@@ -269,6 +268,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
 .dash__panel[hidden]{display:none;}
 .dash__panel + .dash__panel{border-top:1px solid var(--color-border-faint);}
+/* ---- Disclosure notes — footnotes before the close, standard on all four briefs (W2A-G3-Q2):
+        Brief 02's small notice type with a purple rule on the left; two columns from 768 when there are two. ---- */
+.notes{margin-top:clamp(2.5rem,5vw,4rem); scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
+.notes__label{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.notes__grid{display:grid; grid-template-columns:1fr; gap:1rem;}
+@media (min-width:768px){ .notes__grid--2{grid-template-columns:1fr 1fr;} }
+.note{border-left:3px solid var(--color-brand-purple); padding:.35rem 0 .35rem 1rem; font-size:.72rem; line-height:1.6;
+  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
+.note strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -858,18 +866,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="card__x" data-i18n="r3_x">Next, I bring this way of building to the digital team of an established company, as an AI Product &amp; Experience Engineer.</p>
       </article>
     </div>
-    <!-- Disclosure notes — the two standing notices, on the Similar-work chassis. The hero lede's * points here. -->
-    <div class="convert io" id="disclosure">
-      <p class="convert__nextlabel" data-i18n="disclosure_label">Disclosure notes</p>
-      <div class="cardgrid cardgrid--2">
-        <article class="card">
-          <h3 class="card__t" data-i18n="disclosure1_lead">An independent portfolio demonstration.</h3>
-          <p class="card__x" data-i18n="disclosure1_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</p>
-        </article>
-        <article class="card">
-          <h3 class="card__t" data-i18n="disclosure2_lead">Simulated research.</h3>
-          <p class="card__x" data-i18n="disclosure2_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</p>
-        </article>
+    <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
+    <div class="notes io" id="disclosure">
+      <p class="notes__label" data-i18n="disclosure_label">Disclosure notes</p>
+      <div class="notes__grid notes__grid--2">
+        <p class="note"><strong data-i18n="disclosure1_lead">An independent portfolio demonstration.</strong> <span data-i18n="disclosure1_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</span></p>
+        <p class="note"><strong data-i18n="disclosure2_lead">Simulated research.</strong> <span data-i18n="disclosure2_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</span></p>
       </div>
     </div>
     <!-- Terminal unit: no "Start a conversation" CTA (matches Brief 04); the build links live under The short version. -->
