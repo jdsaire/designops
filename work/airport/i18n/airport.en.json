@@ -153,5 +153,12 @@
   "hero_role1": "Roles — UX researcher · UX/UI designer · Usability tester",
   "hero_role2": "Duration — 2024 – 2025",
   "hero_role3": "Scope — UX research → UX design → prototyping → usability testing → handoff",
-  "disclosure_label": "Disclosure notes"
+  "disclosure_label": "Disclosure notes",
+  "close_eyebrow": "Next steps",
+  "contact_cta": "Start a conversation",
+  "sim_label": "Keep exploring",
+  "sim_c1_t": "AccreditaPass",
+  "sim_c1_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
+  "sim_c2_t": "Verify App",
+  "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence."
 }
