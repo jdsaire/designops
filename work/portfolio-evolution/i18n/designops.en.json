@@ -131,7 +131,6 @@
   "gantt_noscript": "This component renders from its data object and requires JavaScript. Every window it draws is also stated in the note below.",
   "hero_lede": "Follow one portfolio from a template I rented to a bilingual system I wrote, in five months.",
   "hero_short": "Picture a portfolio that outgrew two homes. Templates on Canva and Framer could not build what I had designed, so I moved to a single page I coded with AI, then rebuilt it as this bilingual multi-page site with its own design system and four case briefs. Every step sits in public commit history, and the page you are reading is the result.",
-  "cta_live": "Open the live site",
   "cta_repo": "Read the repository",
   "hero_tag1": "Web Development",
   "hero_tag2": "Front-end",
@@ -141,7 +140,7 @@
   "hero_role1": "Roles — Product owner · UX designer · Front-end developer",
   "hero_role2": "Duration — Five months · Apr – Sep 2026",
   "hero_role3": "Scope — UX strategy → design system → development → operation",
-  "arch_foot": "For more on the architecture, read the repository's README, browse my GitHub profile or open the live site.",
+  "arch_foot": "For more on the architecture, read the repository's README or browse my GitHub profile. You are reading the live site right now.",
   "cta_github": "Browse my GitHub",
   "close_eyebrow": "Next steps",
   "contact_cta": "Start a conversation",
@@ -150,5 +149,6 @@
   "sim_c1_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
   "sim_c2_t": "Verify App",
   "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence.",
-  "brief_read": "6 min read"
+  "brief_read": "6 min read",
+  "hero_live_note": "You are reading the live site right now."
 }
