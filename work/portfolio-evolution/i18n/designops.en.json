@@ -1,6 +1,5 @@
 {
   "hero_eyebrow": "Work brief",
-  "hero_read": "5 min read",
   "hero_title": "From template to system.",
   "hero_rv_btn": "The short version",
   "hero_cue": "The story",
@@ -151,5 +150,6 @@
   "sim_c1_t": "AccreditaPass",
   "sim_c1_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
   "sim_c2_t": "Verify App",
-  "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence."
+  "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence.",
+  "brief_read": "6 min read"
 }

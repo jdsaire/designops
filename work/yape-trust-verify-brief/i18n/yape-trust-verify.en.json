@@ -112,7 +112,7 @@
   "act1_receipt_alt": "A Yape payment confirmation screen showing an amount in soles, a recipient name, a date and time, a three-digit security code, and an operation number.",
   "gantt_collapse": "Collapse all phases",
   "brief_eyebrow": "Work brief",
-  "brief_read": "7 min read",
+  "brief_read": "9 min read",
   "hero_lede": "Trust & Verify lets a merchant check that a Yape payment on a customer's screen is real, before the goods leave the counter.",
   "hero_short": "Picture a queue at a Lima market stall: a customer holds up a phone that says the payment went through, and the merchant has seconds to decide. Every field on that confirmation can be faked except one, the operation number the bank writes itself. Trust & Verify checks that number before the goods change hands, with banking-grade safeguards on every tap and six test scenarios proving the check holds. I researched, designed and built it in under a week, in a stack I had never used.",
   "cta_live": "Open the running application",
