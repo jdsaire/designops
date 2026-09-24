@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Know before the gate. · Juan Diego Saire</title>
-<meta name="description" content="AccreditaPass tells a reporter covering the 2026 World Cup what their press pass allows, before a gate turns them away.">
+<title>Never miss a match · Juan Diego Saire</title>
+<meta name="description" content="AccreditaPass tells reporters covering the 2026 World Cup what their press pass allows, before security turns them away.">
 <!-- ============================================================
      Brief 01 · AccreditaPass · media-accreditation record · EN
      Chassis and density follow Brief 04 (work/portfolio-evolution/):
@@ -132,14 +132,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
 .ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 @media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
+/* Footnote marker on the hero lede — points to the Disclosure notes. */
+.fnref{color:var(--color-brand-purple); font-weight:var(--fw-bold); margin-left:.1em; text-decoration:none;}
+.fnref:hover,.fnref:focus-visible{color:var(--color-purple-light);}
+#disclosure{scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
 .scrollcue{position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%); color:var(--color-text-dim);
   font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.5rem;}
 .scrollcue::after{content:""; width:1px; height:2.2rem; background:linear-gradient(var(--color-brand-purple), transparent);}
 
-/* ================= INDEPENDENCE NOTICE — non-affiliation, always visible ================= */
-.independence{border:1px dashed var(--color-border-soft); padding:.75rem 1rem; font-size:.72rem;
-  color:var(--color-text-dim); font-weight:var(--fw-light); max-width:44em;}
-.independence strong{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 
 /* ================= ACTS ================= */
 .act{padding:var(--act-pad) 0; border-top:1px solid var(--color-border-faint); position:relative;}
@@ -158,7 +158,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* Phone chassis (W2A-Q1, Brief 04's rule list): every card grid is one column below 768. */
 @media (max-width:767px){
   .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
-  .hero{padding-bottom:4.5rem;}   /* the two disclosure badges push the hero past one screen; keep the scroll cue below them */
+  .hero{padding-bottom:4.5rem;}   /* keep the scroll cue below the build links when the hero runs past one screen */
 }
 /* ---- Numbered problem cards (Brief 04's .pcards): the ordinal is a CSS counter, not copy. ---- */
 .pcards{counter-reset:pcard;}
@@ -294,13 +294,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 
 
-/* ================= STANDING BADGES — two on the hero, one repeated at act level =================
-   Both are [BADGE] in the copy record: always visible, not dismissible, never behind a reveal
-   and never in the footer. --sim marks the simulated-research disclosure, which repeats at the
-   head of Act 02 and Act 05. Each badge is two keyed spans so both halves stay translatable —
-   the shared loop skips any element that has element children. */
-.badges{display:flex; flex-direction:column; gap:.6rem; max-width:44em;}
-.independence--sim{border:1px solid var(--color-border-soft); border-left:3px solid var(--color-brand-purple);}
 
 /* ---- Question callout (Act 02) — the open design question, quoted from the ideation gate ---- */
 .question{border:1px solid var(--color-border-soft); padding:clamp(1.4rem,2.5vw,2rem);
@@ -470,24 +463,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <span class="section__eyebrow-bar"></span>
       <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 01</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">5 min read</span></span>
     </div>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Know before the gate.</h1>
-    <p class="hero__deck" data-i18n="hero_deck">AccreditaPass tells a reporter covering the 2026 World Cup what their press pass allows, before a gate turns them away.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Never miss a match</h1>
+    <p class="hero__deck"><span data-i18n="hero_deck">AccreditaPass tells reporters covering the 2026 World Cup what their press pass allows, before security turns them away.</span><a class="fnref" href="#disclosure" aria-label="Read the disclosure notes">*</a></p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="kw1">Design Research</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Accessibility</span>
-      <span class="kw" role="listitem" data-i18n="kw3">Blazor</span>
-      <span class="kw" role="listitem" data-i18n="kw4">.NET</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Internationalization</span>
+      <span class="kw" role="listitem" data-i18n="kw1">Sports Management</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Media Relations</span>
+      <span class="kw" role="listitem" data-i18n="kw3">UX Design</span>
+      <span class="kw" role="listitem" data-i18n="kw4">Front-end</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Accessibility</span>
     </div>
     <div class="rolestrip" aria-label="Role and scope">
-      <span data-i18n="hero_role1"><b>Role</b> — Sole owner</span>
+      <span data-i18n="hero_role1"><b>Roles</b> — UX lead · Product designer · Front-end developer</span>
       <span data-i18n="hero_role2"><b>Duration</b> — Five weeks · 28 Jul – 30 Aug 2026</span>
-      <span data-i18n="hero_role3"><b>Scope</b> — Audit → research → specification → build → re-audit</span>
+      <span data-i18n="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → development → usability testing</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
       <div class="reveal__body reveal__body--poster" id="rv-hero">
-        <p data-i18n="hero_rv_txt">Picture 104 matches in 16 stadiums across three countries, with every press pass still moving after it is issued. A venue swaps, a zone narrows, a knockout seat waits on a result nobody has played. Without a record, the holder finds out at a turnstile. AccreditaPass keeps one record per journalist that says what changed, why, and what to do next. I audited, researched, specified and built it in five weeks, as a portfolio demonstration rather than a product.</p>
+        <p data-i18n="hero_rv_txt">Imagine covering up to 104 matches in 16 stadiums across three countries, with every press pass permit still changing after it is issued. A venue swaps, a zone narrows, a knockout seat waits on a result nobody has played. Without a record, the holder finds out at a turnstile. AccreditaPass keeps one record per journalist that says what changed, why, and what to do next. I audited, researched, specified and built it in five weeks.</p>
       </div>
     </div>
     <div class="ctaset">
@@ -499,12 +492,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
-    </div>
-
-    <!-- The two standing notices. Both always visible, neither dismissible. -->
-    <div class="badges">
-      <p class="independence"><strong data-i18n="badge_independence_lead">An independent portfolio demonstration.</strong> <span data-i18n="badge_independence_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</span></p>
-      <p class="independence independence--sim"><strong data-i18n="badge_simulated_lead">Simulated research.</strong> <span data-i18n="badge_simulated_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</span></p>
     </div>
   </div>
   <div class="scrollcue" aria-hidden="true"><span data-i18n="hero_cue">The story</span></div>
@@ -763,6 +750,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <h3 class="card__t" data-i18n="r3_t">Front to back, in progress</h3>
         <p class="card__x" data-i18n="r3_x">I am learning front-to-back integration, and a second part of this series will show it before 2026 closes.</p>
       </article>
+    </div>
+    <!-- Disclosure notes — the two standing notices, on the Similar-work chassis. The hero lede's * points here. -->
+    <div class="convert io" id="disclosure">
+      <p class="convert__nextlabel" data-i18n="disclosure_label">Disclosure notes</p>
+      <div class="cardgrid cardgrid--2">
+        <article class="card">
+          <h3 class="card__t" data-i18n="disclosure1_lead">An independent portfolio demonstration.</h3>
+          <p class="card__x" data-i18n="disclosure1_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__t" data-i18n="disclosure2_lead">Simulated research.</h3>
+          <p class="card__x" data-i18n="disclosure2_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</p>
+        </article>
+      </div>
     </div>
     <!-- Terminal unit: no "Start a conversation" CTA (matches Brief 04); the build links live under The short version. -->
     <div class="convert io">
