@@ -211,6 +211,17 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .contrast__face + .contrast__face{border-left:0; border-top:1px solid var(--color-border-soft);}
 }
 
+/* Build links — Main's "Access Brief" CTA (assets/css/pages/home/hero.css .cta), carried inline as in Brief 01.
+   Stacked on phones; side by side from 768. Each link is a 44px tap target. */
+.ctaset{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem;}
+.act__foot{margin:clamp(2rem,3.5vw,2.75rem) 0 1rem;}
+.ctaset .cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; width:fit-content;}
+.ctaset .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
+.ctaset .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+  background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard);}
+.ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
+.ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+@media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -419,9 +430,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (max-width:767px){ .ctarow .convert__cta{width:100%; justify-content:center;} }
 
 /* ================= AIRPORT ADDITIONS ================= */
-/* Hero category — the E6 string, byte-identical to work_card3_label. */
-.hero__cat{font-size:.78rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase;
-  color:var(--color-purple-light); margin-bottom:.9rem;}
 
 /* Chapter meta — period, position, terms of engagement. */
 .meta{font-size:.9rem; font-weight:var(--fw-light); color:var(--color-text-dim);
@@ -599,27 +607,31 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 <main>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO — continues Main's work card 03 ================= -->
 <section class="hero" aria-labelledby="heroTitle">
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief · 03</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">15 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">1 min read</span></span>
     </div>
-    <p class="hero__cat" data-i18n="hero_category">03 · AIRPORT APPS · AVIATION</p>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The Airport Trilogy: Apps for Jorge Chavez International</h1>
-    <p class="hero__deck" data-i18n="hero_deck">A prototype I built for myself in 2024. A redesign written for the selection process that hired me in 2025. Then the real platform, from a desk inside the terminal. Three positions on one airport, and what each one could see that the others could not.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The Airport Saga: three projects, one terminal.</h1>
+    <p class="hero__deck" data-i18n="hero_deck">Follow one airport from three positions: a passenger app I prototyped, a lounge-booking redesign I proposed, and a payment platform live today.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="kw1">Design Research</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Design Systems</span>
-      <span class="kw" role="listitem" data-i18n="kw3">Figma</span>
+      <span class="kw" role="listitem" data-i18n="kw1">Aviation</span>
+      <span class="kw" role="listitem" data-i18n="kw2">Passenger Experience</span>
+      <span class="kw" role="listitem" data-i18n="kw3">UX Research</span>
       <span class="kw" role="listitem" data-i18n="kw4">Usability Testing</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Program Management</span>
+      <span class="kw" role="listitem" data-i18n="kw5">Service Design</span>
+    </div>
+    <div class="rolestrip" aria-label="Role and scope">
+      <span data-i18n="hero_role1"><b>Roles</b> — UX researcher · UX/UI designer · Usability tester</span>
+      <span data-i18n="hero_role2"><b>Duration</b> — 2024 – 2025</span>
+      <span data-i18n="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → usability testing → handoff</span>
     </div>
     <div class="reveal" data-act="hero">
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
-      <div class="reveal__body" id="rv-hero" hidden>
-        <p data-i18n="hero_rv_txt">Three airport products, designed across 2024 and 2025 from three different distances — as an outsider with no brief, as a candidate answering a case, and as an employee with a seat inside the terminal. LimaFly was the app I built for myself: a passenger's whole airport day, from packing at home to boarding, and four people tested it before I had set foot in the industry. The lounges case was the airport's own hiring exercise — fix the booking experience for its pay-per-use VIP lounges — which I answered by working out what the bad experience was costing in lost sales. TUUA Transfer is the real one, live today: a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.</p>
+      <div class="reveal__body reveal__body--poster" id="rv-hero">
+        <p data-i18n="hero_rv_txt">Imagine one airport seen from three distances. First as an outsider: LimaFly, a passenger app for the whole airport day, which four people tested before I worked in the industry. Then as a candidate: a lounge-booking redesign that priced what the bad experience was costing in lost sales. Finally from inside the terminal: TUUA Transfer, a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.</p>
       </div>
     </div>
   </div>
@@ -1180,6 +1192,8 @@ const panelSlot = document.getElementById("panelSlot");
 const panelTitle = document.getElementById("panelTitle");
 const panelClose = document.getElementById("panelClose");
 let panelHome = null, panelTrigger = null;
+/* Reveal bodies ship open in the markup so the page reads without script; script folds them. */
+document.querySelectorAll(".reveal__body").forEach(b=>{ b.hidden = true; });
 
 function closePanel(){
   if(panelHome && panelSlot.firstElementChild){
