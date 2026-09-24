@@ -108,13 +108,6 @@
   "act5_p3_cat": "Multi-page",
   "act5_p3_t": "Scope before speed",
   "act5_p3_x": "A written scope with exit conditions ended the overthinking. The discipline turned out to matter as much as anything it produced.",
-  "convert_cta": "Start a conversation",
-  "convert_temporal": "Temporal · email pending",
-  "convert_next_label": "Similar work",
-  "convert_c1_t": "AccreditaPass",
-  "convert_c1_x": "A media-accreditation platform with a full UX dossier and 545 tests behind it.",
-  "convert_c2_t": "Verify App",
-  "convert_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence.",
   "sch_eyebrow": "Act 03 · The Schedule",
   "sch_verdict": "49 build days across five months.",
   "sch_lede": "Move through epics – from v1 to the current web.",
@@ -151,5 +144,12 @@
   "hero_role2": "Duration — Five months · Apr – Sep 2026",
   "hero_role3": "Scope — UX strategy → design system → development → operation",
   "arch_foot": "For more on the architecture, read the repository's README, browse my GitHub profile or open the live site.",
-  "cta_github": "Browse my GitHub"
+  "cta_github": "Browse my GitHub",
+  "close_eyebrow": "Next steps",
+  "contact_cta": "Start a conversation",
+  "sim_label": "Keep exploring",
+  "sim_c1_t": "AccreditaPass",
+  "sim_c1_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
+  "sim_c2_t": "Verify App",
+  "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence."
 }

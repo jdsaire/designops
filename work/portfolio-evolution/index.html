@@ -13,7 +13,7 @@
      ES keys (future): El Problema · La Reinvención · La
            Arquitectura · El Dashboard · La Reflexión — FULL PARITY
      Gate K keywords: AI-native · Front-end · DesignOps
-     [TEMPORAL]: contact mailto (data-temporal="contact-email")
+     Close: Next steps · contact CTA (../../contact/) · Keep exploring (W2A-G3-Q2)
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script>document.documentElement.classList.add('js');</script>
@@ -229,6 +229,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .ctaset .cta:hover .cta__icon,.ctaset .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
 .ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 @media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
+/* ---- Close — standard on all four briefs (W2A-G3-Q2): Next steps, Main's contact CTA, two related briefs. ---- */
+.close{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
+.close .section__eyebrow{margin-bottom:clamp(1.25rem,2vw,1.75rem);}
+.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
+.convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
+.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -405,15 +411,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
-/* ---- Conversion ---- */
-.convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
-.convert__cta{display:inline-flex; align-items:center; gap:.7rem; font-size:clamp(1.15rem,1.8vw,1.5rem); font-weight:var(--fw-bold);
-  border:1px solid var(--color-brand-purple); padding:1rem 1.6rem; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard);}
-.convert__cta:hover{background:var(--color-brand-purple);}
-.temporal{font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple);
-  border:1px dashed var(--color-brand-purple); padding:.2rem .45rem; vertical-align:middle; margin-left:.6rem;}
-.convert [hidden]{display:none !important;}
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
@@ -1007,25 +1004,28 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <!-- Terminal conversion unit — unchanged -->
-    <div class="convert io" id="convert">
-      <!-- [TEMPORAL] contact — HIDDEN, not deleted. Patch A18 rules that no contact form
-           renders and the address is still pending; the markup stays so a later stage can
-           unhide it in one attribute rather than re-author it. -->
-      <a class="convert__cta" data-temporal="contact-email" href="mailto:confirm-before-publish@temporal.invalid" hidden>
-        <span data-i18n="convert_cta">Start a conversation</span>
-      </a><span class="temporal" data-i18n="convert_temporal" hidden>Temporal · email pending</span>
-
+    <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
+    <div class="close io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="close_eyebrow">Next steps</span>
+      </div>
+      <div class="ctaset">
+        <a class="cta" href="../../contact/" data-nav-page="contact/">
+          <span class="cta__label" data-i18n="contact_cta">Start a conversation</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+        </a>
+      </div>
       <div class="convert__next">
-        <p class="convert__nextlabel" data-i18n="convert_next_label">Similar work</p>
+        <p class="convert__nextlabel" data-i18n="sim_label">Keep exploring</p>
         <div class="cardgrid cardgrid--2">
           <a class="card card--continuity" href="../accreditapass/">
-            <h3 class="card__t" data-i18n="convert_c1_t">AccreditaPass</h3>
-            <p class="card__x" data-i18n="convert_c1_x">A media-accreditation platform with a full UX dossier and 545 tests behind it.</p>
+            <h3 class="card__t" data-i18n="sim_c1_t">AccreditaPass</h3>
+            <p class="card__x" data-i18n="sim_c1_x">A live record that tells World Cup reporters what their pass allows, before security turns them away.</p>
           </a>
           <a class="card card--continuity" href="../yape-trust-verify-brief/">
-            <h3 class="card__t" data-i18n="convert_c2_t">Verify App</h3>
-            <p class="card__x" data-i18n="convert_c2_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+            <h3 class="card__t" data-i18n="sim_c2_t">Verify App</h3>
+            <p class="card__x" data-i18n="sim_c2_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
           </a>
         </div>
       </div>
