@@ -1,14 +1,7 @@
 {
-  "hero_eyebrow": "Work brief",
   "hero_read": "1 min read",
   "hero_title": "The Airport Saga: three projects, one terminal.",
   "hero_deck": "Follow one airport from three positions: a passenger app I prototyped, a lounge-booking redesign I proposed, and a payment platform live today.",
-  "kw1": "Aviation",
-  "kw2": "Passenger Experience",
-  "kw3": "UX Research",
-  "kw4": "Usability Testing",
-  "kw5": "Service Design",
-  "hero_rv_btn": "The short version",
   "hero_rv_txt": "Imagine one airport seen from three distances. First as an outsider: LimaFly, a passenger app for the whole airport day, which four people tested before I worked in the industry. Then as a candidate: a lounge-booking redesign that priced what the bad experience was costing in lost sales. Finally from inside the terminal: TUUA Transfer, a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.",
   "act0_eyebrow": "Prologue · One airport, three vantage points",
   "act0_verdict": "I saw the same airport from three positions, and the position changed what was visible.",
@@ -150,13 +143,5 @@
   "dash_c8_l": "Attributable to technical failure",
   "hero_role1": "Roles — UX researcher · UX/UI designer · Usability tester",
   "hero_role2": "Duration — 2024 – 2025",
-  "hero_role3": "Scope — UX research → UX design → prototyping → usability testing → handoff",
-  "disclosure_label": "Disclosure notes",
-  "close_eyebrow": "Next steps",
-  "contact_cta": "Start a conversation",
-  "sim_label": "Keep exploring",
-  "sim_c1_t": "AccreditaPass",
-  "sim_c1_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
-  "sim_c2_t": "Verify App",
-  "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence."
+  "hero_role3": "Scope — UX research → UX design → prototyping → usability testing → handoff"
 }
