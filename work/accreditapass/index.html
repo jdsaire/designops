@@ -964,13 +964,23 @@ function fetchDict(url){
 }
 function fetchBody(lc){
   return fetchDict(BODY_BASE + BODY_SLUG + "." + lc + ".json")
-    .then(d => (d || lc === "en") ? d : fetchDict(BODY_BASE + BODY_SLUG + ".en.json"));
+    .then(d => (d || lc === "en") ? { d, lc } : fetchDict(BODY_BASE + BODY_SLUG + ".en.json").then(d => ({ d, lc: "en" })));
+}
+/* Regional layer (WB-Q8): strings shared by the briefs live once in
+   ../../assets/i18n/briefs/. Merge order: chrome → regional → body. */
+const REGIONAL_BASE = "../../assets/i18n/briefs/";
+const REGIONAL_FILES = ["briefs-ui", "tags", "related"];
+const regionalCache = {};
+function fetchRegional(lc){
+  return regionalCache[lc] || (regionalCache[lc] = Promise.all(REGIONAL_FILES.map(f => fetchDict(REGIONAL_BASE + f + "." + lc + ".json")))
+    .then(ds => Object.assign({}, ...ds.map(d => d || {}))));
 }
 function loadMerged(lang){
   const lc = lang === "ES" ? "es" : "en";
   const c = chromeCache[lc] || (chromeCache[lc] = fetchDict(I18N_BASE + lc + ".json"));
   const b = bodyCache[lc]   || (bodyCache[lc]   = fetchBody(lc));
-  return Promise.all([c, b]).then(([cd, bd]) => ({ ...(cd || {}), ...(bd || {}) }));
+  return b.then(bo => Promise.all([c, fetchRegional(bo.lc)])
+    .then(([cd, rd]) => ({ ...(cd || {}), ...rd, ...(bo.d || {}) })));
 }
 let curLang = "ES";
 try { curLang = localStorage.getItem("jds-lang") || "ES"; } catch(e) {}
