@@ -1369,14 +1369,52 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   });
   grid.innerHTML = html;
 
+  var drawnMs = [];
   DATA.milestones.forEach(function(m){
     var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
     if(!slot) return;
+    drawnMs.push(m);
     var l = pct(offset(m.at));
     slot.outerHTML = '<span>' +
       '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="Milestone: ' +
       m.name + ', ' + window_({start:m.at, end:m.at}) + ' 2026"></span>' +
       '<span class="gantt__milestone-label" style="left:' + l + '">' + m.name + '</span></span>';
+  });
+
+  /* ---------- Assistive labels in the active language ----------
+     The labels above are drawn in English at load. On every i18n:changed the
+     loader hands over the merged dictionary, and the labels are rebuilt from its
+     sch_aria_* templates, so a screen reader hears the language on screen.
+     Visible text is not touched. */
+  function relabel(d){
+    if(!d.sch_aria_bar || !d.sch_aria_months) return;
+    var mon = d.sch_aria_months.split(' ');
+    function fmtL(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
+    function winL(item){ return item.start === item.end ? fmtL(item.start) : fmtL(item.start) + ' – ' + fmtL(item.end); }
+    function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
+    function bar(item, isEpic){
+      var el = grid.querySelector('[data-bar="' + item.id + '"]');
+      if(!el) return;
+      var days = isEpic ? item.days : spanOf(item);
+      var name = (!isEpic && isLocked(item) && d[item.id + '_t']) || item.name;
+      var tpl = days === 1 && d.sch_aria_bar1 ? d.sch_aria_bar1 : d.sch_aria_bar;
+      var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
+      el.setAttribute('aria-label', fill(tpl, { name:name, window:winL(item), days:days }) + provenance);
+    }
+    DATA.epics.forEach(function(epic){
+      bar(epic, true);
+      var sum = grid.querySelector('[data-epic="' + epic.id + '"] .gantt__row-summary');
+      if(sum && d.sch_aria_totals) sum.setAttribute('aria-label',
+        fill(d.sch_aria_totals, { name:epic.name, window:winL(epic), commits:epic.commits, prs:epic.prs }));
+      epic.tasks.forEach(function(t){ bar(t, false); });
+    });
+    if(d.sch_aria_ms) Array.prototype.forEach.call(grid.querySelectorAll('.gantt__milestone'), function(el, i){
+      var m = drawnMs[i];
+      if(m) el.setAttribute('aria-label', fill(d.sch_aria_ms, { name:m.name, date:fmtL(m.at) }));
+    });
+  }
+  document.addEventListener('i18n:changed', function(e){
+    var d = e.detail && e.detail.dict; if(d) relabel(d);
   });
 
   /* ---------- Zoom: expand / collapse ---------- */

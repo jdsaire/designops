@@ -139,5 +139,10 @@
   "sim_c2_t": "Verify App",
   "sim_c2_x": "A payment-verification flow rebuilt as an operator-legible sequence.",
   "brief_read": "6 min read",
-  "hero_live_note": "You are reading the live site right now."
+  "hero_live_note": "You are reading the live site right now.",
+  "sch_aria_bar": "{name}, {window} 2026, {days} days",
+  "sch_aria_bar1": "{name}, {window} 2026, {days} day",
+  "sch_aria_totals": "{name} totals: {window} 2026, {commits}, {prs}",
+  "sch_aria_ms": "Milestone: {name}, {date} 2026",
+  "sch_aria_months": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
 }

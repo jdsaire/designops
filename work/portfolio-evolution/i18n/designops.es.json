@@ -139,5 +139,10 @@
   "sim_c2_t": "Verify App",
   "sim_c2_x": "Un flujo de verificación de pagos reconstruido como una secuencia que el operador puede leer.",
   "brief_read": "6 min de lectura",
-  "hero_live_note": "Usted está leyendo el sitio en vivo ahora mismo."
+  "hero_live_note": "Usted está leyendo el sitio en vivo ahora mismo.",
+  "sch_aria_bar": "{name}, {window} de 2026, {days} días",
+  "sch_aria_bar1": "{name}, {window} de 2026, {days} día",
+  "sch_aria_totals": "Totales de {name}: {window} de 2026, {commits}, {prs}",
+  "sch_aria_ms": "Hito: {name}, {date} de 2026",
+  "sch_aria_months": "ene feb mar abr may jun jul ago sep oct nov dic"
 }
