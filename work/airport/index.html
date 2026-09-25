@@ -1275,11 +1275,14 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
 /* ============ Timeline carousel nav (≤1023) ============ */
 const track = document.getElementById("tlTrack");
 const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
+/* The carousel markup was retired; guard so the rest of this script still runs. */
+if(track && prev && next){
 function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
 prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:"smooth"}));
 next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:"smooth"}));
 function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
 track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
+}
 
 /* ============ Dashboard tabs ============ */
 const tabs = [...document.querySelectorAll(".dash__tab")];
