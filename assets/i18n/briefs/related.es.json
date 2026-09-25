@@ -1,0 +1,8 @@
+{
+  "rel_accreditapass_t": "AccreditaPass",
+  "rel_accreditapass_x": "Un registro vivo que le dice al periodista del Mundial qué permite su acreditación, antes de que seguridad le niegue el paso.",
+  "rel_verify_t": "Verify App",
+  "rel_verify_x": "Un flujo de verificación de pagos reconstruido como una secuencia que el operador puede leer.",
+  "rel_designops_t": "DesignOps System",
+  "rel_designops_x": "La historia detrás de este sitio web multipágina."
+}
