@@ -1,6 +1,6 @@
 {
   "brief_read": "9 min",
-  "hero_title": "The screenshot says paid. The app checks the operation number.",
+  "hero_title": "Fighting fraudulent payments",
   "hero_lede": "Trust & Verify lets a merchant check that a Yape payment on a customer's screen is real, before the goods leave the counter.",
   "hero_role1": "<b>Roles</b> — Product designer · Front-end developer · Tester",
   "hero_role2": "<b>Duration</b> — Under a week · July 2026",
@@ -22,7 +22,7 @@
   "act1_c1_tag": "What you see",
   "act1_c1_txt": "<strong>A payment confirmation</strong>, on a phone, held up at your counter —",
   "act1_c2_tag": "What it is",
-  "act1_c2_txt": "— an image, where every field is text that can be forged.",
+  "act1_c2_txt": "an image, where <strong>every field is text that can be forged</strong>.",
   "act1_bridge": "The fake reproduces exactly what you are looking at. <strong>That is why staring harder fails.</strong>",
   "act1_scan1": "Peru's wallet boom outran its trust infrastructure, and <strong>the fake receipt is the hole it left</strong>.",
   "act1_scan2": "A security code shipped to close it. <strong>The public guidance still does not mention the code.</strong>",
