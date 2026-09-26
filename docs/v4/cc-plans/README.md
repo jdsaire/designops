@@ -13,3 +13,4 @@ Approved deployment plans for v4 and later.
 | S10-D · Contact organism | `Plan-S10D-ContactLayout.md` |
 | W1 · Copy injection, Main and About | `Plan-W1-CopyInjection.md` |
 | W2A · i18n split, brief standardisation, About | `Plan-W2A-I18nSplitMobileChassis.md` |
+| Dispatch B · brief Spanish, three-level i18n | `Plan-WB-BriefSpanish.md` |

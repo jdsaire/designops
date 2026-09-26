@@ -11,7 +11,7 @@ this is the next version folder per the pattern `v1`/`v2`/`v3` establish.
 - `cc-plans/` — the approved plan(s) for these deployments.
 - `cc-completion-reports/` — the completion report for each executed run.
 
-The most recent run archived here is **W2A · i18n split, brief standardisation, About** (deploy
-v18, PR #31): the shared dictionaries reduced to chrome, with Main, About and Contact on their own
-page files; the hidden Capabilities page deleted; About aligned with POSITIONING-v1_2; Brief 01
-rebuilt to Brief 04's standard; and one hero, notice treatment and close across all four briefs.
+The most recent run archived here is **Dispatch B · brief Spanish, three-level i18n** (deploy
+v19, PR #32): all four briefs render in Spanish; brief dictionaries split into global, regional and
+local levels; Brief 01's English re-locked and Brief 02's mirrored to their approved Spanish; side
+panels and inline-bold lines follow the active language; and Brief 03's load error fixed.

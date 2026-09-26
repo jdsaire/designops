@@ -1,0 +1,18 @@
+{
+  "ui_brief_eyebrow": "Brief de proyecto",
+  "ui_ten_sec_version": "Versión de 10 segundos",
+  "ui_next_steps": "Próximos pasos",
+  "ui_contact_cta": "Iniciar conversación",
+  "ui_keep_exploring": "Explorar más",
+  "ui_cta_github": "Visitar mi GitHub",
+  "ui_cta_repo": "Ver el repositorio",
+  "ui_cta_live_app": "Abrir la aplicación",
+  "ui_disclosure_label": "Notas de transparencia",
+  "ui_arch_foot": "Para más detalles, acceda al repositorio.",
+  "ui_tab_measure": "Medición",
+  "ui_act01_problem": "Acto 01 · El Problema",
+  "ui_act03_schedule": "Acto 03 · El Cronograma",
+  "ui_act04_architecture": "Acto 04 · La Arquitectura",
+  "ui_act05_dashboard": "Acto 05 · El Dashboard",
+  "ui_act06_reflection": "Acto 06 · La Reflexión"
+}

@@ -222,12 +222,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
 .dash__note{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
   font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.6;}
-.drows{display:flex; flex-direction:column; margin-top:.9rem;}
+.drows{display:flex; flex-direction:column;}
 .drow{display:grid; grid-template-columns:1fr 1fr; gap:.35rem .75rem; align-items:baseline;
   padding:clamp(.8rem,1.5vw,1.1rem) 0; border-bottom:1px solid var(--color-border-faint);}
 .drow__l{grid-column:1 / -1; font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
 .drow--head{padding-top:0; border-bottom:1px solid var(--color-border-soft);}
 .drow--head .drow__l{display:none;}
+/* The panel label sits in the header cell, visible at every width. */
+.drow--head .drow__l--cap{display:block;}
 .drow--head .drow__v{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim);}
 .drow__v{display:flex; flex-direction:column; gap:.25rem;}
 .drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
@@ -487,36 +489,36 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="hero_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">8 min read</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="hero_read">8 min</span></span>
     </div>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Never miss a match</h1>
-    <p class="hero__deck"><span data-i18n="hero_deck">AccreditaPass tells reporters covering the 2026 World Cup what their press pass allows, before security turns them away.</span><a class="fnref" href="#disclosure" aria-label="Read the disclosure notes">*</a></p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The World Cup like never before</h1>
+    <p class="hero__deck"><span data-i18n="hero_deck">AccreditaPass tells press teams what their accreditation allows across the tournament, from approval to the final whistle.</span></p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="kw1">Sports Management</span>
-      <span class="kw" role="listitem" data-i18n="kw2">Media Relations</span>
-      <span class="kw" role="listitem" data-i18n="kw3">UX Design</span>
-      <span class="kw" role="listitem" data-i18n="kw4">Front-end</span>
-      <span class="kw" role="listitem" data-i18n="kw5">Accessibility</span>
+      <span class="kw" role="listitem" data-i18n="tag_sports_management">Sports Management</span>
+      <span class="kw" role="listitem" data-i18n="tag_media">Media</span>
+      <span class="kw" role="listitem" data-i18n="tag_ux_design">UX Design</span>
+      <span class="kw" role="listitem" data-i18n="tag_front_end">Front-end</span>
+      <span class="kw" role="listitem" data-i18n="tag_accessibility">Accessibility</span>
     </div>
     <div class="rolestrip" aria-label="Role and scope">
-      <span data-i18n="hero_role1"><b>Roles</b> — UX lead · Product designer · Front-end developer</span>
-      <span data-i18n="hero_role2"><b>Duration</b> — Five weeks · 28 Jul – 30 Aug 2026</span>
-      <span data-i18n="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → development → usability testing</span>
+      <span data-i18n-html="hero_role1"><b>Roles</b> — UX researcher · Product designer · Front-end developer</span>
+      <span data-i18n-html="hero_role2"><b>Duration</b> — Five weeks · 28 Jul – 30 Aug 2026</span>
+      <span data-i18n-html="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → development</span>
     </div>
     <div class="ctaset">
       <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
-        <span class="cta__label" data-i18n="cta_live">Open the running application</span>
+        <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
       <a class="cta" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">
-        <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
+        <span class="cta__label" data-i18n="ui_cta_repo">Read the repository</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
     </div>
     <div class="reveal" data-act="hero">
-      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="hero_rv_btn">The short version</button>
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The 10 sec version" data-i18n="ui_ten_sec_version" data-panel-title-key="ui_ten_sec_version">The 10 sec version</button>
       <div class="reveal__body reveal__body--poster" id="rv-hero">
-        <p data-i18n="hero_rv_txt">Imagine covering up to 104 matches in 16 stadiums across three countries, with every press pass permit still changing after it is issued. A venue swaps, a zone narrows, a knockout seat waits on a result nobody has played. Without a record, the holder finds out at a turnstile. AccreditaPass keeps one record per journalist that says what changed, why, and what to do next. I audited, researched, specified and built it in five weeks.</p>
+        <p data-i18n="hero_rv_txt">104 matches, 16 stadiums and three countries, with no guarantee a press pass is valid for every match. Venues change, spaces shrink and knockout quotas hang on a goal nobody has scored. Without timely notice, journalists run into reality at the stadium gate. AccreditaPass removes that friction: a personal record that shows what changed, why, and the action plan for the best coverage.</p>
       </div>
     </div>
   </div>
@@ -528,49 +530,49 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act1_eyebrow">Act 01 · The Problem</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">The pass changes. Nobody tells the journalist.</h2>
-      <p class="scan" data-i18n="act1_lede">Walk through the four failures that turn a valid pass into a wasted trip.</p>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Access changes. Reporters don't know.</h2>
+      <p class="scan" data-i18n="act1_lede">Four failures that turn a valid pass into a wasted trip.</p>
     </div>
     <div class="cardgrid cardgrid--2 pcards io">
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="p1_t">Refused without a reason</h3>
-        <p class="card__x" data-i18n="p1_x">A request stalls or comes back denied with no cause attached, so the journalist cannot tell a fixable gap from a final no.</p>
+        <h3 class="card__t pcard__t" data-i18n="p1_t">Refusals with no reason</h3>
+        <p class="card__x" data-i18n="p1_x">Access withdrawn without a reason breaks the journalist's logistics and leaves no way to respond.</p>
         <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p1" data-panel-title="Refused without a reason" data-i18n="act1_cta">See what it costs</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p1" data-panel-title="Refused without a reason" data-i18n="act1_cta" data-panel-title-key="p1_t">Details</button>
           <div class="reveal__body reveal__body--poster" id="rv-p1">
-            <p data-i18n="p1_r">The research runs found that journalists object less to bad news than to unexplained news. A refusal with a cause is information: it can be appealed, fixed or planned around. A refusal without one is a closed door with nobody behind it. The cost falls hardest on freelancers and small outlets with no press officer to call, who end up learning more from colleagues than from the system that decided.</p>
+            <p data-i18n="p1_r">A journalist prepares the kit, plans the coverage and meets a closed gate with nobody behind it. The simulated research rounds found that a refusal with a clear reason is manageable: it can be appealed, worked around or turned into a new angle. A silent one leaves the journalist in the dark. It falls hardest on freelancers and small outlets, who end up relying on corridor talk instead of an official answer.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="p2_t">The news arrives after the damage</h3>
-        <p class="card__x" data-i18n="p2_x">Access changes before anyone is told, so the first notice is often a failed scan at the gate.</p>
+        <h3 class="card__t pcard__t" data-i18n="p2_t">Late news</h3>
+        <p class="card__x" data-i18n="p2_x">Access changes travel slowly and surface when the pass fails outside the stadium.</p>
         <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p2" data-panel-title="The news arrives after the damage" data-i18n="act1_cta">See what it costs</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p2" data-panel-title="The news arrives after the damage" data-i18n="act1_cta" data-panel-title-key="p2_t">Details</button>
           <div class="reveal__body reveal__body--poster" id="rv-p2">
-            <p data-i18n="p2_r">Quotas are recalculated when a team is eliminated, and positions are reassigned between matchdays, but the change travels slower than its consequence. The cost lands in that gap: a wasted flight, twenty minutes at a barrier before kickoff, gate staff reading a list that is hours out of date. Change itself is expected in the job; the failure is that it never reaches the journalist or the gate in time.</p>
+            <p data-i18n="p2_r">Teams go out and press positions are reassigned between matchdays: that is the nature of the tournament. The failure is when the paperwork moves slower than the journalist. A reporter pays for a flight, rushes to the stadium and is held twenty minutes before kickoff because gate staff are reading an outdated list. The problem is never the change itself, but the delay in telling the person already standing at the barrier.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="p3_t">A pass is not a ticket</h3>
-        <p class="card__x" data-i18n="p3_x">Accreditation grants a working position, not entry to a match, and many only learn the difference at the barrier.</p>
+        <h3 class="card__t pcard__t" data-i18n="p3_t">The access delusion</h3>
+        <p class="card__x" data-i18n="p3_x">Many learn the hard way that an approved accreditation does not guarantee getting through the turnstiles.</p>
         <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p3" data-panel-title="A pass is not a ticket" data-i18n="act1_cta">See what it costs</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p3" data-panel-title="A pass is not a ticket" data-i18n="act1_cta" data-panel-title-key="p3_t">Details</button>
           <div class="reveal__body reveal__body--poster" id="rv-p3">
-            <p data-i18n="p3_r">The split between the media badge and the match ticket is rarely understood from the guidance; it is understood the first time someone is stopped. Even an experienced reporter who read the rules closely can be turned back. Saying it plainly at the moment of approval, on the confirmation itself, costs almost nothing and takes the surprise away from the one place it does the most damage.</p>
+            <p data-i18n="p3_r">It is usually learned at the worst moment: a press credential does not automatically secure entry to the venue. Even veterans who read the fine print get caught by it. One plain line on the confirmation itself would spare the turnstile surprise and save both the day's coverage and the reporter's standing.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="p4_t">The match nobody has played</h3>
-        <p class="card__x" data-i18n="p4_x">Access to a knockout match depends on results that do not exist yet, so any promise made today can break tomorrow.</p>
+        <h3 class="card__t pcard__t" data-i18n="p4_t">Fragile promises</h3>
+        <p class="card__x" data-i18n="p4_x">A journalist needs to know the real conditions of knockout-round coverage before buying a flight.</p>
         <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p4" data-panel-title="The match nobody has played" data-i18n="act1_cta">See what it costs</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-p4" data-panel-title="The match nobody has played" data-i18n="act1_cta" data-panel-title-key="p4_t">Details</button>
           <div class="reveal__body reveal__body--poster" id="rv-p4">
-            <p data-i18n="p4_r">Round-of-32 seats, quarter-final zones and final-day positions all hang on who advances. Wording that sounds settled turns a warning into a promise the service cannot keep. Every conditional right has to read as a condition, naming the result it waits on, so a journalist can book travel around what is likely rather than what was assumed.</p>
+            <p data-i18n="p4_r">In the knockout rounds everything hangs on the next win. Quarter-final and final positions depend on matches not yet played. When the rules sound settled, a logistical possibility passes for a promise that will break. Stated as conditions from the first day, they would let journalists book flights and hotels on what is likely, not on costly assumptions.</p>
           </div>
         </div>
       </article>
@@ -586,41 +588,41 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · UX Simulation</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Designed from their side, not ours.</h2>
-      <p class="scan" data-i18n="act2_lede">Review the three runs that settled each UX decision before the build.</p>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Smart hypotheses, not imposed designs.</h2>
+      <p class="scan" data-i18n="act2_lede">The design research runs that turned doubts into decisions before any code.</p>
     </div>
     <div class="timeline io">
       <div class="timeline__track" role="group" aria-label="The UX simulation, in three runs">
         <article class="card">
-          <p class="catlabel" data-i18n="l1_n">Run 1 · Research</p>
-          <h3 class="card__t" data-i18n="l1_t">Silence hurts more than a no</h3>
-          <p class="card__x" data-i18n="l1_x">Journalists can live with bad news; what breaks trust is a change with no reason and no warning.</p>
+          <p class="catlabel" data-i18n="l1_n">Round 1 · Research</p>
+          <h3 class="card__t" data-i18n="l1_t">Silence breaks trust</h3>
+          <p class="card__x" data-i18n="l1_x">A journalist can take bad news; what breaks trust is no explanation and late notice.</p>
           <div class="reveal" data-act="act2">
-            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l1" data-panel-title="Run 1 · Research" data-i18n="act2_cta">See the protocol</button>
+            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l1" data-panel-title="Run 1 · Research" data-i18n="act2_cta" data-panel-title-key="l1_n">See the protocol</button>
             <div class="reveal__body reveal__body--poster" id="rv-l1">
-              <p data-i18n="l1_r">Eight gates took the research from scope to design brief: a research plan, instruments, a simulation note, analysis, artifacts and a limitations file. A 30-respondent survey and five interviews, both synthetic and declared as such, produced two personas, an empathy map, three scenarios and a service blueprint of the accreditation-to-matchday lifecycle. Three themes survived analysis: the silence, the lag, and the badge that is not a ticket.</p>
+              <p data-i18n="l1_r">Eight stages took the research to a design brief. Simulated survey and interview data, declared as such, and a service blueprint mapped the journalist's journey through tournament coverage. Three problems stood out: institutional silence, late notice, and the belief that a credential equals entry.</p>
             </div>
           </div>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="l2_n">Run 2 · Ideation</p>
-          <h3 class="card__t" data-i18n="l2_t">A record, not a status</h3>
-          <p class="card__x" data-i18n="l2_x">Every change becomes an entry that says what changed, why, and what to do next, sent before it matters.</p>
+          <p class="catlabel" data-i18n="l2_n">Round 2 · Ideation</p>
+          <h3 class="card__t" data-i18n="l2_t">Real-time tracking</h3>
+          <p class="card__x" data-i18n="l2_x">Every change shows what changed, why, and what to do next, delivered before it hurts.</p>
           <div class="reveal" data-act="act2">
-            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l2" data-panel-title="Run 2 · Ideation" data-i18n="act2_cta">See the protocol</button>
+            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l2" data-panel-title="Run 2 · Ideation" data-i18n="act2_cta" data-panel-title-key="l2_n">See the protocol</button>
             <div class="reveal__body reveal__body--poster" id="rv-l2">
-              <p data-i18n="l2_r">A two-day workshop with six authored participants ran divergence twice: 18 risk-sorted assumptions, then 14 more with feasibility suspended, for a pool of 32 ideas. Two prioritization matrices and a Buy a Feature round narrowed it to a ranked shortlist of eight. The concept that survived, Access Record, sends each entry to the journalist and to the venue gate at once, and scales how much each person hears to how much help they already have.</p>
+              <p data-i18n="l2_r">A simulated two-day workshop produced 32 ideas, narrowed through feasibility and prioritisation matrices to a ranked shortlist of eight. The concept that won syncs each update between the journalist and gate staff at once, and scales how much each person hears to how much help they already have.</p>
             </div>
           </div>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="l3_n">Run 3 · Prototyping</p>
-          <h3 class="card__t" data-i18n="l3_t">Every screen decided before code</h3>
-          <p class="card__x" data-i18n="l3_x">Tasks, screens and the data model were fixed first, so development built against a plan rather than a guess.</p>
+          <p class="catlabel" data-i18n="l3_n">Round 3 · Prototyping</p>
+          <h3 class="card__t" data-i18n="l3_t">Architecture decided before code</h3>
+          <p class="card__x" data-i18n="l3_x">Flows and screens were locked first, so dev followed a solid structure rather than a guess.</p>
           <div class="reveal" data-act="act2">
-            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l3" data-panel-title="Run 3 · Prototyping" data-i18n="act2_cta">See the protocol</button>
+            <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-l3" data-panel-title="Run 3 · Prototyping" data-i18n="act2_cta" data-panel-title-key="l3_n">See the protocol</button>
             <div class="reveal__body reveal__body--poster" id="rv-l3">
-              <p data-i18n="l3_r">Nine gates turned the concept into a buildable specification: competitive benchmarking, an information architecture from a simulated six-participant card sort with ten rules for how the record behaves over time, design tokens verified against WCAG 2.2 AA in light and dark, three task flows, full screen specifications, a data model and a build brief. A four-file addendum later settled the dark palette, sign-in and three-language support.</p>
+              <p data-i18n="l3_r">Nine stages turned the concept into a build-ready specification: an information architecture from a simulated card sort, design tokens verified against WCAG 2.2 AA in light and dark, task flows and a data model. It also settled sign-in and support for three languages.</p>
             </div>
           </div>
         </article>
@@ -628,15 +630,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
     <!-- The how-might-we the runs produced, and its answer — on the Similar-work chassis. -->
     <div class="convert io" id="hmw">
-      <p class="convert__nextlabel" data-i18n="hmw_label">What the runs asked, and answered</p>
+      <p class="convert__nextlabel" data-i18n="hmw_label">The design challenge</p>
       <div class="cardgrid cardgrid--2">
         <article class="card">
-          <h3 class="card__t" data-i18n="hmw_q_t">The question</h3>
-          <p class="card__x" data-i18n="act2_question">How might we tell a journalist that their access has changed before they discover it by being refused?</p>
+          <h3 class="card__t" data-i18n="hmw_q_t">How Might We</h3>
+          <p class="card__x" data-i18n="act2_question">How might we soften the impact of an access change on journalists?</p>
         </article>
         <article class="card">
-          <h3 class="card__t" data-i18n="hmw_a_t">The answer: Access Record</h3>
-          <p class="card__x" data-i18n="hmw_a_x">Turn accreditation into a live record: every change is written down with its reason and next step, and reaches the journalist and the venue gate before it matters.</p>
+          <h3 class="card__t" data-i18n="hmw_a_t">Answer</h3>
+          <p class="card__x" data-i18n="hmw_a_x">Turn accreditation into a live record: every change reaches the journalist and the venue gate in real time, with its reason and the next step.</p>
         </article>
       </div>
     </div>
@@ -649,16 +651,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Five weeks, right after the final whistle.</h2>
-      <p class="scan" data-i18n="sch_lede">Follow the seven phases that took it from blank page to live app.</p>
+      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Five weeks, right after the final.</h2>
+      <p class="scan" data-i18n="sch_lede">Seven phases from sketch to finished build.</p>
     </div>
     <div class="gantt io" id="gantt">
       <div class="gantt__chart" id="ganttChart">
         <div class="gantt__grid" id="ganttGrid" role="list" aria-label="The build on a calendar axis: seven phases, sized in days."></div>
       </div>
-      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript. Every window it shows is also stated in the note below.</p></noscript>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
     </div>
     <p class="dash__foot io" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
   </div>
@@ -670,29 +672,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Architecture</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">From approval to final whistle, in three languages.</h2>
-      <p class="scan" data-i18n="act4_lede">Review the four decisions that hold the build together.</p>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">One journey, three languages.</h2>
+      <p class="scan" data-i18n="act4_lede">The four pillars that hold the build's architecture together.</p>
     </div>
     <div class="cardgrid cardgrid--2 pcards io">
       <article class="card pcard">
         <p class="catlabel" data-i18n="b1_n">Front-end decisions</p>
-        <h3 class="card__t pcard__t" data-i18n="b1_t">Runs in your pocket</h3>
-        <p class="card__x" data-i18n="b1_x">The whole app lives in the browser, so a journalist can open it on any phone, even with nothing running behind it.</p>
+        <h3 class="card__t pcard__t" data-i18n="b1_t">Runs entirely in the browser</h3>
+        <p class="card__x" data-i18n="b1_x">The app lives entirely client-side, so a journalist can open it on any phone without depending on a server behind it.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b1" data-panel-title="Front-end decisions" data-i18n="b1_cta">Inside the front end</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b1" data-panel-title="Front-end decisions" data-i18n="b1_cta" data-panel-title-key="b1_n">Technical details</button>
           <div class="reveal__body reveal__body--poster" id="rv-b1">
-            <p data-i18n="b1_r">Blazor WebAssembly on .NET 10, written in C#, with a narrow TypeScript layer of two files for theme and locale storage. The app runs on an in-memory provider behind one interface, so every page reads the mock or the API without changing a line. Seven routes; the record is gated because it is personal, while the match schedule and help stay public. English, Spanish and Portuguese run at exact parity, 339 entries each, and switching language or theme never signs you out.</p>
+            <p data-i18n="b1_r">Blazor WebAssembly on .NET 10, written in C#, with a narrow TypeScript layer of two files for theme and locale storage. The app runs on an in-memory provider behind one interface, so every page reads the mock or the API without changing a line. Seven routes; the record is gated because it is personal, while the match schedule and help stay public. English, Spanish and Portuguese run at exact parity, 339 keys each, and switching language or theme never signs you out.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
         <p class="catlabel" data-i18n="b2_n">Back-end decisions</p>
-        <h3 class="card__t pcard__t" data-i18n="b2_t">News that finds you</h3>
+        <h3 class="card__t pcard__t" data-i18n="b2_t">Real-time updates</h3>
         <p class="card__x" data-i18n="b2_x">When something changes, the record updates on its own, with no refresh and no support call.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b2" data-panel-title="Back-end decisions" data-i18n="b2_cta">Inside the back end</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b2" data-panel-title="Back-end decisions" data-i18n="b2_cta" data-panel-title-key="b2_n">Technical details</button>
           <div class="reveal__body reveal__body--poster" id="rv-b2">
             <p data-i18n="b2_r">An ASP.NET Core Web API with validated CRUD endpoints and an in-memory store, switched off by default so the live site never depends on it. Its middleware runs in a stated order: CORS, error handling, token authentication, request logging. SignalR carries each change notification to the client. It is a basic layer that proves the contract, not a production back end.</p>
           </div>
@@ -700,40 +702,40 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
       <article class="card pcard">
         <p class="catlabel" data-i18n="b3_n">Design system</p>
-        <h3 class="card__t pcard__t" data-i18n="b3_t">One look, day or night</h3>
-        <p class="card__x" data-i18n="b3_x">Every screen shares the same colours, spacing and type, in a light theme and a true-black dark one.</p>
+        <h3 class="card__t pcard__t" data-i18n="b3_t">A structure that scales</h3>
+        <p class="card__x" data-i18n="b3_x">Every screen shares one set of design tokens, tuned for a light and a dark theme.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b3" data-panel-title="Design system" data-i18n="b3_cta">Inside the system</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b3" data-panel-title="Design system" data-i18n="b3_cta" data-panel-title-key="b3_n">Technical details</button>
           <div class="reveal__body reveal__body--poster" id="rv-b3">
-            <p data-i18n="b3_r">Dual-theme design tokens were defined in the specification run and verified against WCAG 2.2 AA in both themes. The dark palette was re-derived against a #000000 anchor rather than inverted. The access card, change row, foreseeable badge and stale indicator share one token set, and appearance follows a three-way setting: light, dark or system.</p>
+            <p data-i18n="b3_r">Dual-theme design tokens were defined in the prototyping round and verified against WCAG 2.2 AA in both themes. The dark palette was re-derived against a #000000 anchor rather than inverted. The access card, change row, foreseeable badge and stale indicator share one token set, and appearance follows a three-way setting: light, dark or system.</p>
           </div>
         </div>
       </article>
       <article class="card pcard">
         <p class="catlabel" data-i18n="b4_n">Accessibility</p>
-        <h3 class="card__t pcard__t" data-i18n="b4_t">Readable by everyone</h3>
-        <p class="card__x" data-i18n="b4_x">It works by keyboard and screen reader, with contrast that holds, and passes more than twice the accessibility checks it started with.</p>
+        <h3 class="card__t pcard__t" data-i18n="b4_t">Inclusive by default</h3>
+        <p class="card__x" data-i18n="b4_x">Smooth keyboard navigation and screen-reader support, passing more than twice the accessibility checks it started with.</p>
         <div class="reveal" data-act="act4">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b4" data-panel-title="Accessibility" data-i18n="b4_cta">Inside the access</button>
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-b4" data-panel-title="Accessibility" data-i18n="b4_cta" data-panel-title-key="b4_n">Technical details</button>
           <div class="reveal__body reveal__body--poster" id="rv-b4">
-            <p data-i18n="b4_r">A new change is announced to assistive technology the moment it arrives. Every input carries a label, validation errors are announced, focus stays visible and a skip link jumps to the content. Help sections and change rows use two-layer disclosure, so detail never floods a screen reader. A match that has not been played never names its teams, in any language.</p>
+            <p data-i18n="b4_r">A new change is announced to assistive technology the moment it happens. Skip links, visible focus at all times and clear labels with input validation are built in. To avoid flooding screen readers, help sections and change rows use progressive disclosure, showing detail only when the user asks for it.</p>
           </div>
         </div>
       </article>
     </div>
     <!-- The build links again, where a technical reader wants them. -->
-    <p class="scan act__foot io" data-i18n="act4_foot">For more on the architecture, read the repository's README, browse my GitHub profile or open the live app.</p>
+    <p class="scan act__foot io" data-i18n="ui_arch_foot">For more, access the repository.</p>
     <div class="ctaset io">
       <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
-        <span class="cta__label" data-i18n="cta_live">Open the running application</span>
+        <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
       <a class="cta" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">
-        <span class="cta__label" data-i18n="cta_repo">Read the repository</span>
+        <span class="cta__label" data-i18n="ui_cta_repo">Read the repository</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
       <a class="cta" href="https://github.com/jdsaire" target="_blank" rel="noopener noreferrer">
-        <span class="cta__label" data-i18n="cta_github">Browse my GitHub</span>
+        <span class="cta__label" data-i18n="ui_cta_github">Browse my GitHub</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
       </a>
     </div>
@@ -746,49 +748,50 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Test</span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evaluation</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Tested at the start, tested again at the end.</h2>
-      <p class="scan" data-i18n="act5_lede">Compare the first and final versions across three kinds of test.</p>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Two audits to improve usability.</h2>
+      <p class="scan" data-i18n="act5_lede">Compare the results across three kinds of test.</p>
     </div>
     <div class="dash io">
       <div class="dash__tabs" role="tablist" aria-label="Test figures">
-        <button class="dash__tab" role="tab" id="tab-1" aria-selected="true" aria-controls="dp-1" data-i18n="dash_tab1">Findings</button>
+        <button class="dash__tab" role="tab" id="tab-1" aria-selected="true" aria-controls="dp-1" data-i18n="dash_tab1">Severity</button>
         <button class="dash__tab" role="tab" id="tab-2" aria-selected="false" aria-controls="dp-2" data-i18n="dash_tab2">Heuristics</button>
         <button class="dash__tab" role="tab" id="tab-3" aria-selected="false" aria-controls="dp-3" data-i18n="dash_tab3">Accessibility</button>
       </div>
       <div class="dash__panel" id="dp-1" role="tabpanel" aria-labelledby="tab-1">
-        <p class="catlabel" data-i18n="t1_cap">Evaluation findings by severity</p>
         <div class="drows">
           <div class="drow drow--head">
-            <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
-            <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
-            <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+            <div class="drow__l drow__l--cap"><div class="reveal" data-act="act5"><button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-t1" data-panel-title="Severity details" data-panel-title-key="act5_t1_cta" data-i18n="act5_t1_cta">Severity details</button></div></div>
+            <div class="drow__v" data-i18n="act5_tbl_h2">Audit 1</div>
+            <div class="drow__v" data-i18n="act5_tbl_h3">Audit 2</div>
           </div>
           <div class="drow">
-            <div class="drow__l" data-i18n="act5_tbl_r1_m">Critical findings</div>
+            <div class="drow__l" data-i18n="act5_tbl_r1_m">Critical</div>
             <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_a">4</span></div>
             <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_b">1</span></div>
           </div>
           <div class="drow">
-            <div class="drow__l" data-i18n="act5_tbl_r2_m">Major findings</div>
+            <div class="drow__l" data-i18n="act5_tbl_r2_m">Major</div>
             <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_a">12</span></div>
             <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_b">2</span></div>
           </div>
           <div class="drow">
-            <div class="drow__l" data-i18n="act5_tbl_r3_m">Minor findings</div>
+            <div class="drow__l" data-i18n="act5_tbl_r3_m">Minor</div>
             <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_a">10</span></div>
             <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_b">2</span></div>
           </div>
         </div>
+        <div class="reveal__body reveal__body--poster" id="rv-t1">
+            <p data-i18n="act5_t1_r">Audit 1: 26 findings. Moving from editable forms to read-only EventCards resolved half of the critical findings; labelled inputs and relative links closed the rest, alongside 15 fixes across major and minor findings. Audit 2 raised one new critical (false "Access withdrawn" states on unplayed matches), fixed in v13 by bounding status to changes already in effect, a release that also shipped the withdraw action and aria-live announcements for new changes. v13 was not re-audited.</p>
+        </div>
       </div>
       <div class="dash__panel" id="dp-2" role="tabpanel" aria-labelledby="tab-2">
-        <p class="catlabel" data-i18n="act5_tbl_r4_m">Nielsen's ten heuristics</p>
         <div class="drows">
           <div class="drow drow--head">
-            <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
-            <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
-            <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+            <div class="drow__l drow__l--cap"><div class="reveal" data-act="act5"><button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-t2" data-panel-title="Heuristics details" data-panel-title-key="act5_t2_cta" data-i18n="act5_t2_cta">Heuristics details</button></div></div>
+            <div class="drow__v" data-i18n="act5_tbl_h2">Audit 1</div>
+            <div class="drow__v" data-i18n="act5_tbl_h3">Audit 2</div>
           </div>
           <div class="drow">
             <div class="drow__l" data-i18n="t2_r1_m">Fail</div>
@@ -806,14 +809,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <div class="drow__v"><span class="dcell__n" data-i18n="t2_r3_b">7</span></div>
           </div>
         </div>
+        <div class="reveal__body reveal__body--poster" id="rv-t2">
+            <p data-i18n="act5_t2_r">From 5 fails at the first evaluation to 7 passes at the second. Match with the real world (read-only cards), recognition over recall (previous values in view) and flexibility (search, filters and skip links) now pass, as do error prevention and error recovery. User control and consistency were addressed in v13, which lets pending requests be withdrawn and unifies how their status is displayed, without a re-audit.</p>
+        </div>
       </div>
       <div class="dash__panel" id="dp-3" role="tabpanel" aria-labelledby="tab-3">
-        <p class="catlabel" data-i18n="act5_tbl_r5_m">WCAG 2.2 AA</p>
         <div class="drows">
           <div class="drow drow--head">
-            <div class="drow__l" data-i18n="act5_tbl_h1">Measure</div>
-            <div class="drow__v" data-i18n="act5_tbl_h2">First audit</div>
-            <div class="drow__v" data-i18n="act5_tbl_h3">Re-audit</div>
+            <div class="drow__l drow__l--cap"><div class="reveal" data-act="act5"><button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-t3" data-panel-title="WCAG details" data-panel-title-key="act5_t3_cta" data-i18n="act5_t3_cta">WCAG details</button></div></div>
+            <div class="drow__v" data-i18n="act5_tbl_h2">Audit 1</div>
+            <div class="drow__v" data-i18n="act5_tbl_h3">Audit 2</div>
           </div>
           <div class="drow">
             <div class="drow__l" data-i18n="t3_r1_m">Pass</div>
@@ -831,11 +836,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <div class="drow__v"><span class="dcell__n" data-i18n="t3_r3_b">3</span></div>
           </div>
         </div>
+        <div class="reveal__body reveal__body--poster" id="rv-t3">
+            <p data-i18n="act5_t3_r">From 12 initial fails to 18 passes. Fixes covered explicit label-for pairing, skip links, visible focus rings, alert roles for errors and recomputed contrast (up to 8.32:1 in dark mode). The one remaining fail (4.1.3, on the conditional status) was fixed in v13. Target size, reflow at 320 px and the Spanish sign-out row stay open because neither audit ran in a browser.</p>
+        </div>
       </div>
-      <p class="dash__note" data-i18n="act5_footnote">First audit measured the pre-reframing app at commit 0653b4e. Re-audit measured the build at b37066d. Both used simulated task-attempts and authored participants; neither involved a human user.</p>
+      <p class="dash__note" data-i18n="act5_footnote_audits">Audit 1 measured the pre-reframing app at commit 0653b4e. Audit 2 measured the build at b37066d. Both used simulated task-attempts and participants; neither involved a real user.</p>
+      <p class="dash__note" data-i18n="act5_footnote_disposition">All 26 first-audit findings got a disposition: 18 fixed, 5 not applicable, 2 open and 1 partly fixed.</p>
+      <p class="dash__note" data-i18n="act5_footnote_tests">512 front-end and 33 back-end automated tests, in xUnit and bUnit.</p>
     </div>
-    <p class="sequel io" data-i18n="ev_disposition">All 26 first-audit findings got a disposition: 18 fixed, 5 not applicable, 2 open and 1 partly fixed.</p>
-    <p class="sequel io" data-i18n="ev_tests">512 front-end and 33 back-end automated tests, in xUnit and bUnit.</p>
   </div>
 </section>
 
@@ -847,56 +855,56 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Close</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">What this build lets me say.</h2>
-      <p class="scan" data-i18n="act6_lede">Review what this build achieved, what it did not, and what comes next.</p>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">What this app lets me say.</h2>
+      <p class="scan" data-i18n="act6_lede">What it solved, where its technical limits sit, and what comes next.</p>
     </div>
     <div class="cardgrid cardgrid--3 ladder-down io">
       <article class="card">
-        <p class="catlabel" data-i18n="r1_n">The claim</p>
+        <p class="catlabel" data-i18n="r1_n">The milestone</p>
         <h3 class="card__t" data-i18n="r1_t">From concept to working interface</h3>
-        <p class="card__x" data-i18n="r1_x">I conceived, led and shipped this interface in a stack I had never used, directing the code and debugging it until it held.</p>
+        <p class="card__x" data-i18n="r1_x">I conceived, designed and shipped this interface in a stack I had never used, directing the code and debugging it until it held.</p>
       </article>
       <article class="card">
         <p class="catlabel" data-i18n="r2_n">The limit</p>
-        <h3 class="card__t" data-i18n="r2_t">The systems behind it stay basic</h3>
-        <p class="card__x" data-i18n="r2_x">The data store, sign-in and live server are a demonstration layer: enough to prove the contract, not to carry real accreditations.</p>
+        <h3 class="card__t" data-i18n="r2_t">A proof-of-concept architecture</h3>
+        <p class="card__x" data-i18n="r2_x">The data store, sign-in and server run as a proof of concept: enough to prove the product logic, not built for production.</p>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="r3_n">Next</p>
-        <h3 class="card__t" data-i18n="r3_t">Building for a digital team next</h3>
-        <p class="card__x" data-i18n="r3_x">Next, I bring this way of building to the digital team of an established company, as an AI Product &amp; Experience Engineer.</p>
+        <p class="catlabel" data-i18n="r3_n">Next step</p>
+        <h3 class="card__t" data-i18n="r3_t">Impact on a digital team</h3>
+        <p class="card__x" data-i18n="r3_x">Next, I bring this end-to-end way of building to the digital team of an established company, as an AI Product &amp; Experience Engineer.</p>
       </article>
     </div>
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
     <div class="notes io" id="disclosure">
-      <p class="notes__label" data-i18n="disclosure_label">Disclosure notes</p>
+      <p class="notes__label" data-i18n="ui_disclosure_label">Disclosure notes</p>
       <div class="notes__grid notes__grid--2">
-        <p class="note"><strong data-i18n="disclosure1_lead">An independent portfolio demonstration.</strong> <span data-i18n="disclosure1_body">Not affiliated with, endorsed by, or connected to FIFA. All accreditation data is simulated for the browser session and nothing is persisted. The match schedule is the one real thing in it.</span></p>
-        <p class="note"><strong data-i18n="disclosure2_lead">Simulated research.</strong> <span data-i18n="disclosure2_body">No human participants took part in any study on this page: every dataset, workshop participant and task-attempt was authored, not recruited.</span></p>
+        <p class="note"><strong data-i18n="disclosure1_lead">An independent portfolio project.</strong> <span data-i18n="disclosure1_body">No affiliation, endorsement or institutional link with FIFA. Accreditation data runs as a local simulation in the browser session and is never stored. The match schedule is the only real asset.</span></p>
+        <p class="note"><strong data-i18n="disclosure2_lead">Simulated design research.</strong> <span data-i18n="disclosure2_body">The studies documented here involved no real users. Every dataset, workshop participant and usability test is a synthetic artifact created to demonstrate the method, not the result of recruitment.</span></p>
       </div>
     </div>
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
     <div class="close io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="close_eyebrow">Next steps</span>
+        <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
       </div>
       <div class="ctaset">
         <a class="cta" href="../../contact/" data-nav-page="contact/">
-          <span class="cta__label" data-i18n="contact_cta">Start a conversation</span>
+          <span class="cta__label" data-i18n="ui_contact_cta">Start a conversation</span>
           <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
         </a>
       </div>
       <div class="convert__next">
-        <p class="convert__nextlabel" data-i18n="sim_label">Keep exploring</p>
+        <p class="convert__nextlabel" data-i18n="ui_keep_exploring">Keep exploring</p>
         <div class="cardgrid cardgrid--2">
           <a class="card card--continuity" href="../yape-trust-verify-brief/">
-            <h3 class="card__t" data-i18n="sim_c1_t">Verify App</h3>
-            <p class="card__x" data-i18n="sim_c1_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+            <h3 class="card__t" data-i18n="rel_verify_t">Verify App</h3>
+            <p class="card__x" data-i18n="rel_verify_x">Check if your money transfer is legitimate.</p>
           </a>
           <a class="card card--continuity" href="../portfolio-evolution/">
-            <h3 class="card__t" data-i18n="sim_c2_t">DesignOps System</h3>
-            <p class="card__x" data-i18n="sim_c2_x">The story behind this multi-page website.</p>
+            <h3 class="card__t" data-i18n="rel_designops_t">DesignOps System</h3>
+            <p class="card__x" data-i18n="rel_designops_x">Know the story behind this multi-page website.</p>
           </a>
         </div>
       </div>
@@ -964,13 +972,23 @@ function fetchDict(url){
 }
 function fetchBody(lc){
   return fetchDict(BODY_BASE + BODY_SLUG + "." + lc + ".json")
-    .then(d => (d || lc === "en") ? d : fetchDict(BODY_BASE + BODY_SLUG + ".en.json"));
+    .then(d => (d || lc === "en") ? { d, lc } : fetchDict(BODY_BASE + BODY_SLUG + ".en.json").then(d => ({ d, lc: "en" })));
+}
+/* Regional layer (WB-Q8): strings shared by the briefs live once in
+   ../../assets/i18n/briefs/. Merge order: chrome → regional → body. */
+const REGIONAL_BASE = "../../assets/i18n/briefs/";
+const REGIONAL_FILES = ["briefs-ui", "tags", "related"];
+const regionalCache = {};
+function fetchRegional(lc){
+  return regionalCache[lc] || (regionalCache[lc] = Promise.all(REGIONAL_FILES.map(f => fetchDict(REGIONAL_BASE + f + "." + lc + ".json")))
+    .then(ds => Object.assign({}, ...ds.map(d => d || {}))));
 }
 function loadMerged(lang){
   const lc = lang === "ES" ? "es" : "en";
   const c = chromeCache[lc] || (chromeCache[lc] = fetchDict(I18N_BASE + lc + ".json"));
   const b = bodyCache[lc]   || (bodyCache[lc]   = fetchBody(lc));
-  return Promise.all([c, b]).then(([cd, bd]) => ({ ...(cd || {}), ...(bd || {}) }));
+  return b.then(bo => Promise.all([c, fetchRegional(bo.lc)])
+    .then(([cd, rd]) => ({ ...(cd || {}), ...rd, ...(bo.d || {}) })));
 }
 let curLang = "ES";
 try { curLang = localStorage.getItem("jds-lang") || "ES"; } catch(e) {}
@@ -983,6 +1001,7 @@ function applyI18n(lang){
     document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ const k=el.getAttribute("data-i18n-aria"); if(d[k]!==undefined) el.setAttribute("aria-label",d[k]); });
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ const k=el.getAttribute("data-i18n-placeholder"); if(d[k]!==undefined) el.placeholder=d[k]; });
     document.querySelectorAll("[data-i18n-alt]").forEach(el=>{ const k=el.getAttribute("data-i18n-alt"); if(d[k]!==undefined) el.alt=d[k]; });
+    document.querySelectorAll("[data-i18n-html]").forEach(el=>{ const k=el.getAttribute("data-i18n-html"); if(d[k]!==undefined) el.innerHTML=d[k]; });
     document.dispatchEvent(new CustomEvent("i18n:changed",{ detail:{ lang, dict:d } }));
   });
 }
@@ -1025,6 +1044,15 @@ function closeAccordionsIn(actName, except){
     }
   });
 }
+/* Panel titles follow the active language (WB-Q20): read the rendered text of the
+   button's title key rather than the literal data-panel-title, which stays as a fallback. */
+function panelTitleFor(btn){
+  const k = btn.getAttribute("data-panel-title-key");
+  const src = k && document.querySelector('[data-i18n="'+k+'"],[data-i18n-html="'+k+'"]');
+  const t = src ? src.textContent.trim().replace(/^\d+\)\s*/, "") : "";
+  return t || btn.getAttribute("data-panel-title") || "";
+}
+document.addEventListener("i18n:changed", ()=>{ if(panelTrigger) panelTitle.textContent = panelTitleFor(panelTrigger); });
 document.querySelectorAll(".reveal__btn").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     const body = document.getElementById(btn.getAttribute("aria-controls"));
@@ -1037,7 +1065,7 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
       panelHome = document.createComment("panel-home");
       body.replaceWith(panelHome); panelSlot.replaceChildren(body);
       body.hidden = false;
-      panelTitle.textContent = btn.getAttribute("data-panel-title") || "";
+      panelTitle.textContent = panelTitleFor(btn);
       panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
       btn.setAttribute("aria-expanded","true");
       panelTrigger = btn; panelClose.focus();
