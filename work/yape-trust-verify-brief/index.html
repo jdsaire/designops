@@ -151,9 +151,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* ---- Act 01 two-column: text left, receipt right (≥1024) ---- */
 .split{display:grid; grid-template-columns:1fr; gap:clamp(1.75rem,3vw,3rem); align-items:start;}
 @media (min-width:1024px){ .split{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:clamp(2rem,4vw,4rem); align-items:stretch;}
-  /* The receipt follows the text column: the image keeps its bottom (the fields that matter) and loses its top band. */
+  /* The receipt follows the text column: every text row of the card stays visible (rows 623-1756 of 1915); the crop falls on the bottom purple band and the card's padding. */
   .split .receipt{min-height:0;}
-  .split .receipt img{flex:1 1 0; min-height:0; height:0; object-fit:cover; object-position:bottom;} }
+  .split .receipt img{flex:1 1 0; min-height:0; height:0; object-fit:cover; object-position:50% 86%;} }
 .receipt{border:1px solid var(--color-border-soft); padding:clamp(.75rem,1.5vw,1.1rem);
   display:flex; flex-direction:column; gap:.75rem;}
 .receipt img{width:100%; height:auto; max-width:23rem; margin:0 auto;}
@@ -680,7 +680,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <div class="reveal io" data-act="act1">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a1" data-panel-title="Why I chose this problem" data-i18n="act1_rv_btn" data-panel-title-key="act1_rv_btn">Why I chose this problem</button>
           <div class="reveal__body reveal__body--poster" id="rv-a1">
-            <p data-i18n="act1_rv_txt">I benchmarked three innovation-centre banks in markets comparable to Peru — Nubank, Nequi, Attijariwafa. All three treat verifiable payment trust as a core product surface, so the gap here is real, not invented. Two other candidates lost: merchant finance tools are a crowded, solved space, and onboarding flows drift into regulated identity territory. Payment trust won because it is real, urgent, and answerable in front-end code alone.</p>
+            <p data-i18n-html="act1_rv_txt">I benchmarked three innovation-centre banks in markets like Peru: Nubank, Nequi and Attijariwafa. All three treat verifiable payment trust as core product, so <strong>the gap is real</strong>. Merchant finance tools were a crowded space and onboarding drifts into regulated identity; <strong>payment trust won</strong> because it is urgent and solvable in front-end alone.</p>
           </div>
         </div>
       </div>
@@ -748,9 +748,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five phases, sized by effort.</h2>
       <div class="reveal" data-act="act3">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to use the chart" data-panel-title-key="act3_rv_btn" data-i18n="act3_rv_btn">How to use the chart</button>
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to use the chart" data-panel-title-key="act3_rv_btn" data-i18n="act3_rv_btn">How to read the chart</button>
         <div class="reveal__body reveal__body--poster" id="rv-a3">
-          <p data-i18n-html="act3_rv_txt">Each bar is a phase, sized by story points. <strong>Click a phase</strong>, or use Arrow Up/Down, Home and End, to open its tasks; Expand all opens every phase. <strong>The chips switch layers</strong> on and off: story points, planned hours, milestones and dependencies.</p>
+          <p data-i18n-html="act3_rv_txt">The five phases and their tasks are reconstructed from this build's plan and completion record. <strong>Story points measure relative effort</strong> between phases, not a recorded sprint. Hours are planned-capacity estimates, off by default. There is no progress percentage: <strong>a finished build has nothing left to forecast</strong>.</p>
         </div>
       </div>
     </div>
@@ -776,8 +776,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
              aria-describedby="ganttDepList"></div>
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript.</p></noscript>
-
-      <p class="gantt__caption" data-i18n-html="gantt_caption"><b>How to read this.</b> The five phases and their tasks are reconstructed from this build's own plan and completion record. Story points express relative effort between phases, not a recorded sprint artifact — this build was not run as a pointed sprint. Hours are planned-capacity estimates, off by default. No progress or completion percentage is shown, because a finished build has nothing left to forecast.</p>
     </div>
   </div>
 </section>
@@ -801,7 +799,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c1" data-panel-title="Why React, and not vanilla or Angular" data-i18n="act4_c1_rv_btn" data-panel-title-key="act4_c1_rv_btn">Why React, and not vanilla or Angular</button>
           <div class="reveal__body reveal__body--poster" id="rv-a4c1">
-            <p data-i18n="act4_c1_rv_txt">The one failure a verification tool cannot survive is a stale screen — "verified" still showing for a check the operator cancelled. React is built for exactly this: the interface is a function of state, read through its supported mechanism for stores that live outside the framework, so a verdict cannot tear under rapid updates. Vanilla — how this entire site is built — would mean hand-wiring every listener and owning every teardown, and this build's one real defect was precisely a missed listener. Angular would work, but brings a large, opinionated framework surface to a deliberately small single-job build; a smaller surface is faster to get right. That the banking sector's own job postings name React is convenient corroboration — the natural tool for the problem happens to be the one the industry already builds in.</p>
+            <p data-i18n-html="act4_c1_rv_txt">The one failure a verification tool can't survive is <strong>a stale screen</strong> showing "verified" for a cancelled check. In React the interface is a function of state, so a verdict can't tear under rapid updates. Vanilla would mean hand-wiring every listener, and <strong>this build's one real defect was a missed listener</strong>. Angular would work, but adds a large framework to a single-job build.</p>
           </div>
         </div>
       </article>
@@ -818,23 +816,23 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
 
       <article class="card">
-        <h3 class="card__t" data-i18n="act4_c3_t">Security — a film set with one real lock</h3>
+        <h3 class="card__t" data-i18n="act4_c3_t">Security — the film set</h3>
         <p class="card__x" data-i18n-html="act4_c3_x">The security layer works like a film set: the heavy bank infrastructure is openly staged scenery, while <strong>every lock the merchant touches is real, working and tested</strong>.</p>
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c3" data-panel-title="What is scenery, what is the lock" data-i18n="act4_c3_rv_btn" data-panel-title-key="act4_c3_rv_btn">What is scenery, what is the lock</button>
           <div class="reveal__body reveal__body--poster" id="rv-a4c3">
-            <p data-i18n="act4_c3_rv_txt">The scenery demonstrates the sector's security vocabulary — TLS 1.2 encrypted exchanges, RSA-2048 key pairs, mutual certificate authentication, adaptive risk scoring — against fabricated material, badged SIMULATED throughout so no one mistakes a painted server for a real one. The lock is everything the merchant touches: an in-app keypad no third-party keyboard can read, digits that shuffle to defeat a watching eye, an execution lock against double-taps, a blocking overlay while the check runs, and privacy masking on every name and number. Neither side ever borrows credibility from the other.</p>
+            <p data-i18n-html="act4_c3_rv_txt">The scenery shows the sector's security vocabulary (TLS 1.2, RSA-2048 key pairs, mutual certificate authentication, adaptive risk scoring) on fabricated material, <strong>badged SIMULATED throughout</strong>. <strong>The lock is what the merchant touches</strong>: an in-app keypad no third-party keyboard can read, shuffling digits, an execution lock, a blocking overlay and privacy masking.</p>
           </div>
         </div>
       </article>
 
       <article class="card">
-        <h3 class="card__t" data-i18n="act4_c4_t">Six scenarios — the proof the build answers to</h3>
+        <h3 class="card__t" data-i18n="act4_c4_t">Six scenarios — rigorous tests</h3>
         <p class="card__x" data-i18n-html="act4_c4_x">Before trusting the build, I wrote a <strong>six-scenario test protocol</strong> from the case research: does it tell a fake from a real payment, and does it avoid misfiring under pressure?</p>
         <div class="reveal" data-act="act4">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a4c4" data-panel-title="What the six scenarios check" data-i18n="act4_c4_rv_btn" data-panel-title-key="act4_c4_rv_btn">What the six scenarios check</button>
           <div class="reveal__body reveal__body--poster" id="rv-a4c4">
-            <p data-i18n="act4_c4_rv_txt">1: a forged amount on a real operation number is caught and named. 2: a verdict stays reachable even when the user has never heard of the security code — an unreadable field is never scored as a mismatch. 3: a double-tap or mid-flight cancel can never fire the check twice or record a verdict the operator backed out of. 4: the action stays inert until its preconditions hold. 5: the busy overlay truly blocks the page. 6: privacy masking never leaks a full name or number. Results live in the dashboard below.</p>
+            <p data-i18n-html="act4_c4_rv_txt">1: a forged amount on a real operation number is <strong>caught and named</strong>. 2: an unreadable security code never counts as a mismatch. 3: a double-tap or mid-flight cancel <strong>never fires the check twice</strong>. 4: the action stays inert until its preconditions hold. 5: the busy overlay truly blocks the page. 6: privacy masking never leaks a full name or number.</p>
           </div>
         </div>
       </article>
@@ -964,6 +962,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
       </div>
       <h2 class="verdict" id="v6" data-i18n="act6_verdict">My fastest build wasn't the impossible one.</h2>
+      <p class="scan" data-i18n="act6_lede">Four lessons this build left behind.</p>
     </div>
 
     <div class="cardgrid cardgrid--4 io">
@@ -977,7 +976,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_h3_tag">The tools</span><span data-i18n="act6_h3_t">Knowing what each tool is for</span></h3>
-        <p class="card__x" data-i18n-html="act6_h3_x">Gemini compiled fifteen app screenshots into one master flow file and out-synthesised NotebookLM on the CEO interview. <strong>Claude Code ran deployment prompts I wrote as reusable skills</strong>, each run directed, reviewed and mine.</p>
+        <p class="card__x" data-i18n-html="act6_h3_x">Gemini compiled fifteen app screenshots into one master flow file. <strong>Claude Code ran deployment prompts I wrote as reusable skills</strong>, each run directed, reviewed and mine.</p>
       </article>
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_h4_tag">The choice</span><span data-i18n="act6_h4_t">One problem, not a redesign</span></h3>
@@ -985,7 +984,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="sequel io" data-i18n-html="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong> — and the next thing I intend to be able to prove.</p>
+    <p class="sequel io" data-i18n-html="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong>.</p>
 
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
     <div class="notes io" id="disclosure">
