@@ -1,8 +1,8 @@
 {
   "rel_accreditapass_t": "AccreditaPass",
-  "rel_accreditapass_x": "A live record that tells World Cup reporters what their pass allows, before security turns them away.",
+  "rel_accreditapass_x": "Meet the tracker built for World Cup reporters.",
   "rel_verify_t": "Verify App",
-  "rel_verify_x": "A payment-verification flow rebuilt as an operator-legible sequence.",
+  "rel_verify_x": "Check if your money transfer is legitimate.",
   "rel_designops_t": "DesignOps System",
-  "rel_designops_x": "The story behind this multi-page website."
+  "rel_designops_x": "Know the story behind this multi-page website."
 }
