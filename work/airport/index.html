@@ -613,19 +613,19 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The Airport Saga: three projects, one terminal.</h1>
     <p class="hero__deck" data-i18n="hero_deck">Follow one airport from three positions: a passenger app I prototyped, a lounge-booking redesign I proposed, and a payment platform live today.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
-      <span class="kw" role="listitem" data-i18n="tag_aviation">Aviation</span>
-      <span class="kw" role="listitem" data-i18n="tag_passenger_experience">Passenger Experience</span>
+      <span class="kw" role="listitem" data-i18n="tag_airport_operations">Airport Operations</span>
+      <span class="kw" role="listitem" data-i18n="tag_customer_experience">Customer Experience</span>
       <span class="kw" role="listitem" data-i18n="tag_ux_research">UX Research</span>
       <span class="kw" role="listitem" data-i18n="tag_usability_testing">Usability Testing</span>
       <span class="kw" role="listitem" data-i18n="tag_service_design">Service Design</span>
     </div>
     <div class="rolestrip" aria-label="Role and scope">
-      <span data-i18n="hero_role1"><b>Roles</b> — UX researcher · UX/UI designer · Usability tester</span>
-      <span data-i18n="hero_role2"><b>Duration</b> — 2024 – 2025</span>
-      <span data-i18n="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → usability testing → handoff</span>
+      <span data-i18n-html="hero_role1"><b>Roles</b> — UX researcher · UX/UI designer · Usability tester</span>
+      <span data-i18n-html="hero_role2"><b>Duration</b> — 2024 – 2025</span>
+      <span data-i18n-html="hero_role3"><b>Scope</b> — UX research → UX design → prototyping → usability testing → handoff</span>
     </div>
     <div class="reveal" data-act="hero">
-      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="ui_short_version">The short version</button>
+      <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The short version" data-i18n="ui_short_version" data-panel-title-key="ui_short_version">The short version</button>
       <div class="reveal__body reveal__body--poster" id="rv-hero">
         <p data-i18n="hero_rv_txt">Imagine one airport seen from three distances. First as an outsider: LimaFly, a passenger app for the whole airport day, which four people tested before I worked in the industry. Then as a candidate: a lounge-booking redesign that priced what the bad experience was costing in lost sales. Finally from inside the terminal: TUUA Transfer, a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.</p>
       </div>
@@ -1105,11 +1105,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <div class="cardgrid cardgrid--2">
           <a class="card card--continuity" href="../accreditapass/">
             <h3 class="card__t" data-i18n="rel_accreditapass_t">AccreditaPass</h3>
-            <p class="card__x" data-i18n="rel_accreditapass_x">A live record that tells World Cup reporters what their pass allows, before security turns them away.</p>
+            <p class="card__x" data-i18n="rel_accreditapass_x">Meet the tracker built for World Cup reporters.</p>
           </a>
           <a class="card card--continuity" href="../yape-trust-verify-brief/">
             <h3 class="card__t" data-i18n="rel_verify_t">Verify App</h3>
-            <p class="card__x" data-i18n="rel_verify_x">A payment-verification flow rebuilt as an operator-legible sequence.</p>
+            <p class="card__x" data-i18n="rel_verify_x">Check if your money transfer is legitimate.</p>
           </a>
         </div>
       </div>
@@ -1257,6 +1257,15 @@ function closeAccordionsIn(actName, except){
     }
   });
 }
+/* Panel titles follow the active language (WB-Q20): read the rendered text of the
+   button's title key rather than the literal data-panel-title, which stays as a fallback. */
+function panelTitleFor(btn){
+  const k = btn.getAttribute("data-panel-title-key");
+  const src = k && document.querySelector('[data-i18n="'+k+'"],[data-i18n-html="'+k+'"]');
+  const t = src ? src.textContent.trim().replace(/^\d+\)\s*/, "") : "";
+  return t || btn.getAttribute("data-panel-title") || "";
+}
+document.addEventListener("i18n:changed", ()=>{ if(panelTrigger) panelTitle.textContent = panelTitleFor(panelTrigger); });
 document.querySelectorAll(".reveal__btn").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     const body = document.getElementById(btn.getAttribute("aria-controls"));
@@ -1269,7 +1278,7 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
       panelHome = document.createComment("panel-home");
       body.replaceWith(panelHome); panelSlot.replaceChildren(body);
       body.hidden = false;
-      panelTitle.textContent = btn.getAttribute("data-panel-title") || "";
+      panelTitle.textContent = panelTitleFor(btn);
       panel.classList.add("is-open"); panel.setAttribute("aria-hidden","false");
       btn.setAttribute("aria-expanded","true");
       panelTrigger = btn; panelClose.focus();
