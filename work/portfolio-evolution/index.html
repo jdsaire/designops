@@ -754,16 +754,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SCHEDULE — two days-axis Gantts, one per build ================= -->
+<!-- ================= ACT 03 · THE MULTIPAGE SCHEDULE — one days-axis Gantt; the first schedule in a panel ================= -->
 <section class="act" id="sched" aria-labelledby="vsch">
   <div class="container">
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Multipage Schedule</span>
       </div>
-      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Two builds, each on its own calendar.</h2>
-      <p class="scan" data-i18n="sch_lede">Two charts: the single-page epics first, then the multi-page work as pull requests.</p>
+      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">How this site came together.</h2>
+      <p class="scan" data-i18n="sch_lede">Open any stage to see what went into it.</p>
     </div>
 
     <div class="sched__ctas io">
@@ -793,7 +793,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <div class="gantt__chart" id="gantt2Chart">
         <div class="gantt__grid" id="gantt2Grid" role="tree" data-i18n-aria="sch_g2_aria"
-             aria-label="The multi-page build on a calendar axis: five clusters, each pull request a diamond on its merge date."
+             aria-label="The multi-page build on a calendar axis: five stages, each opening onto its pull requests, with a diamond on each merge date."
              ></div>
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Each chart's reading guide states the window it draws and its source.</p></noscript>
@@ -1304,7 +1304,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
   var DAY = 86400000;
   var EN = {
-    sch_axis_cluster:'Cluster', sch_axis_window:'Window',
+    sch_axis_cluster:'Stage', sch_axis_window:'Window',
     sch_aria_months:'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec',
     sch_commits_1:'{n} commit', sch_commits_n:'{n} commits',
     sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
