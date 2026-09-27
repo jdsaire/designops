@@ -308,9 +308,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); white-space:nowrap;}
 .gantt__bar--epic .gantt__span{color:var(--color-on-brand);}
 .gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
-  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;}
+  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;
+  outline:2px solid var(--color-brand-black);}
 .gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
   font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
+.gantt__milestone-label--below{top:auto; bottom:.1rem;}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
@@ -1250,7 +1252,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     sch_span_days:'{n}d',
     sch_aria_bar:'{name}, {window} 2026, {days} days', sch_aria_bar1:'{name}, {window} 2026, {days} day',
     sch_aria_totals:'{name} totals: {window} 2026, {commits}, {prs}',
-    sch_aria_ms:'Milestone: {name}, {date} 2026'
+    sch_aria_ms:'Milestone: {name}, {date} 2026',
+    sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {cluster}, merged {date} 2026'
   };
   function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
   function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
@@ -1320,6 +1323,33 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
                '<span class="gantt__span">' + esc(fill(t('sch_span_days'), { n:days })) + '</span></div>';
       }
 
+      /* Milestones: any number per row, each at the centre of its day. Diamonds that
+         share a day stack vertically on that day and share one label; consecutive
+         labels on a row alternate above and below so neighbours never collide. A
+         pull request's label is its number alone. */
+      function milestonesHtml(rowId, rowName){
+        var groups = {}, dates = [];
+        DATA.milestones.forEach(function(m){
+          if(m.row !== rowId) return;
+          if(!groups[m.at]){ groups[m.at] = []; dates.push(m.at); }
+          groups[m.at].push(m);
+        });
+        dates.sort();
+        return dates.map(function(at, gi){
+          var ms = groups[at], n = ms.length, l = pct(offset(at) + 0.5);
+          var diamonds = ms.map(function(m, i){
+            var dy = (i - (n - 1) / 2) * 1.25;
+            var aria = m.pr ? fill(t('sch_aria_pr'), { n:m.pr, cluster:rowName, date:fmt(at) })
+                            : fill(t('sch_aria_ms'), { name:nameOf(m), date:fmt(at) });
+            return '<span class="gantt__milestone" style="left:' + l + (dy ? '; top:calc(50% + ' + dy + 'rem)' : '') +
+                   '" role="img" aria-label="' + esc(aria) + '"></span>';
+          }).join('');
+          var label = ms.map(function(m){ return m.pr ? fill(t('sch_ms_pr'), { n:m.pr }) : nameOf(m); }).join(' · ');
+          return diamonds + '<span class="gantt__milestone-label' + (gi % 2 ? ' gantt__milestone-label--below' : '') +
+                 '" style="left:' + l + '" aria-hidden="true">' + esc(label) + '</span>';
+        }).join('');
+      }
+
       var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t('sch_axis_phase')) + '</div>' +
                  '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
                  '<div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
@@ -1333,7 +1363,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
             '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
               '<span class="gantt__marker" aria-hidden="true">›</span>' + esc(name) + '</button></div>' +
             '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', name, true) +
-              '<span data-ms-slot="' + epic.id + '"></span></div>' +
+              milestonesHtml(epic.id, name) + '</div>' +
             '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_totals'), { name:name, window:win(epic), commits:commits, prs:prs })) + '">' +
               '<b>' + win(epic) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span></div>' +
           '</div>' +
@@ -1361,15 +1391,6 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         if(b) setExpanded(b, true);
       });
 
-      DATA.milestones.forEach(function(m){
-        var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
-        if(!slot) return;
-        var l = pct(offset(m.at)), mn = nameOf(m);
-        slot.outerHTML = '<span>' +
-          '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="' +
-          esc(fill(t('sch_aria_ms'), { name:mn, date:fmt(m.at) })) + '"></span>' +
-          '<span class="gantt__milestone-label" style="left:' + l + '">' + esc(mn) + '</span></span>';
-      });
     }
 
     /* ---------- Zoom: expand / collapse ----------
@@ -1435,9 +1456,9 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         ],
         /* Milestones sit on measured dates only. */
         milestones: [
-          { epic:'e1b', at:'2026-07-04', key:'sch_ms_handoff', name:'Brief handoff' },
-          { epic:'e2',  at:'2026-07-10', name:'History reset' },
-          { epic:'e2',  at:MEASURED_TO, name:'Record ends' }
+          { row:'e1b', at:'2026-07-04', key:'sch_ms_handoff', name:'Brief handoff' },
+          { row:'e2',  at:'2026-07-10', name:'History reset' },
+          { row:'e2',  at:MEASURED_TO, name:'Record ends' }
         ]
       }
     })
