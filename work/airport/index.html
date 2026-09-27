@@ -735,32 +735,43 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= CHAPTER 03 · TUUA TRANSFER — THE INSIDER ================= -->
-<section class="act" id="tuua-legacy">
+<!-- ================= ACT 06 · THE CONTRAST ================= -->
+<section class="act" id="act6" aria-labelledby="v6">
   <div class="container">
-
-    <!-- ---- The contrast pass — a sub-section of this chapter, not a peer ---- -->
-    <div class="subhead io">
-      <div class="subeyebrow">
-        <span class="subeyebrow__text" data-i18n="act3_cp_eyebrow">A year later, I walked the live platform against my own proposal</span>
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
       </div>
-      <h3 class="verdict verdict--sub" id="v3b" data-i18n="act3_cp_verdict">The platform is live, it is not mine, and the difference between what I proposed and what shipped is public.</h3>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">The platform is live, it is not mine, and the difference between what I proposed and what shipped is public.</h2>
+      <p class="scan" data-i18n="act6_lede">A year later, I reviewed the live platform against my own proposal.</p>
     </div>
 
-    <p class="synthesis io" data-i18n="act3_cp_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
+    <p class="synthesis io" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
+
+    <div class="contrast io">
+      <div class="contrast__face">
+        <span class="contrast__tag" data-i18n="act6_f1_tag">My proposal</span>
+        <p class="contrast__txt" data-i18n="act6_f1_txt">Personal data first: name and email, a validation code, then payment and the ticket.</p>
+      </div>
+      <div class="contrast__face contrast__face--build">
+        <span class="contrast__tag" data-i18n="act6_f2_tag">Live today</span>
+        <p class="contrast__txt" data-i18n="act6_f2_txt">The flight first: an eligibility self-declaration, flight details with the fee, then customer details before the payment control.</p>
+      </div>
+      <p class="contrast__bridge" data-i18n-html="act6_bridge"><strong>Reordered, not removed.</strong> Personal-data capture now follows the flight lookup, and I measured it doing exactly that on the customer-details screen. I read the reordering as intuitive and do not contest it.</p>
+    </div>
 
     <div class="scanstack io">
-      <p class="scan" data-i18n="act3_cp_scan1">Four screens are reachable before the payment control itself: the homepage, an eligibility self-declaration, a flight-details screen carrying the fee, and a customer-details screen. The pass stops there, deliberately, one control short of paying.</p>
-      <p class="scan" data-i18n="act3_cp_scan2">Personal-data capture was not removed from my proposal — it was reordered to follow the flight lookup rather than precede it, and I measured it doing exactly that on the customer-details screen. I read the reordering as intuitive and do not contest it.</p>
-      <p class="scan" data-i18n="act3_cp_scan3">The fee is settled at $11.86, shown a full screen earlier than I proposed, and consistent between its two appearances — $23.72 for two passengers. Fee-setting was never my decision, so the live figure is the correct reference rather than a delta against the $11.32 in my mockup.</p>
+      <p class="scan" data-i18n="act6_scan1">Four screens are reachable before the payment control itself: the homepage, an eligibility self-declaration, a flight-details screen carrying the fee, and a customer-details screen. The pass stops there, deliberately, one control short of paying.</p>
+      <p class="scan" data-i18n="act6_scan2">The fee is set at $11.86, shown a full screen earlier than I proposed and consistent between its two appearances: $23.72 for two passengers. Fee-setting was never my decision.</p>
     </div>
 
     <div class="scanstack io">
-      <p class="scan" data-i18n-html="act3_cp_scan4">Eligibility is gated by a self-declaration click — <em>"Soy ese tipo de pasajero"</em> — rather than the automatic agreement check the technical scope specified. To my own knowledge of the build, that check was never implemented as written. This pass could not see past its own boundary to confirm it.</p>
-      <p class="scan" data-i18n-html="act3_cp_findings">Six findings: one major, five minor, none critical. The major one is a screen headed <em>"Ingresa tus datos personales y de tu vuelo"</em> whose only fields are flight data.</p>
+      <p class="scan" data-i18n-html="act6_scan3">Eligibility is gated by a self-declaration click — <em>"Soy ese tipo de pasajero"</em> — rather than the automatic agreement check the technical scope specified. To my own knowledge of the build, that check was never implemented as written. This pass could not see past its own boundary to confirm it.</p>
+      <p class="scan" data-i18n-html="act6_findings">Six findings: one major, five minor, none critical. The major one is a screen headed <em>"Ingresa tus datos personales y de tu vuelo"</em> whose only fields are flight data.</p>
     </div>
 
-    <p class="synthesis io" data-i18n="act3_cp_synth">I can read the gap between proposal and build in public, which is a better position than having to describe it.</p>
+    <p class="synthesis io" data-i18n="act6_synth">I can read the gap between proposal and build in public, which is a better position than having to describe it.</p>
   </div>
 </section>
 
