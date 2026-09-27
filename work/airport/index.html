@@ -368,6 +368,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .still img{display:block; width:100%; height:auto; border:1px solid var(--color-border-soft);}
 .still__cap{margin-top:.65rem; font-size:.88rem; font-weight:var(--fw-light); line-height:1.5;
   color:var(--color-text-muted);}
+.stills--4{grid-template-columns:repeat(4,1fr);}
+@media (max-width:767px){ .stills--4{grid-template-columns:repeat(2,1fr);} }
+.stills--1{grid-template-columns:1fr;}
 
 </style>
 </head>
@@ -645,6 +648,61 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <p class="synthesis io" data-i18n="act3_synth">The closure mail listed all five on 4 August 2025: scope defined, deliverables handed over, work package closed.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 04 · THE DESIGN ================= -->
+<section class="act" id="act4" aria-labelledby="v4">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Design</span>
+      </div>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Four screens, from sign-up to ticket.</h2>
+      <p class="scan" data-i18n="act4_lede">The payment flow I designed, as I proposed it.</p>
+    </div>
+
+    <!-- Real captures of the proposed screens, framed (PM-7, WD-Q17, WD-Q22). -->
+    <div class="stills stills--4 io">
+      <figure class="still">
+        <img src="img/tuua-mockup-screen1.jpg" width="565" height="1227" loading="lazy" decoding="async"
+             alt="Proposed screen 1, Personal data: name and email fields and a Register button, filled with dummy data." data-i18n-alt="act4_s1_alt">
+        <figcaption class="still__cap" data-i18n-html="act4_s1_cap"><b>1 · Personal data.</b> Name and email to begin.</figcaption>
+      </figure>
+      <figure class="still">
+        <img src="img/tuua-mockup-screen2.jpg" width="565" height="1227" loading="lazy" decoding="async"
+             alt="Proposed screen 2, Code validation: four boxes for the code sent by email, with Validate, Resend code and Change email." data-i18n-alt="act4_s2_alt">
+        <figcaption class="still__cap" data-i18n-html="act4_s2_cap"><b>2 · Validation.</b> A code sent to that email.</figcaption>
+      </figure>
+      <figure class="still">
+        <img src="img/tuua-mockup-screen3.jpg" width="565" height="1227" loading="lazy" decoding="async"
+             alt="Proposed screen 3, Payment method: card type, card number and CVV fields and a Pay button, filled with dummy data." data-i18n-alt="act4_s3_alt">
+        <figcaption class="still__cap" data-i18n-html="act4_s3_cap"><b>3 · Payment.</b> Card details. The amount on the mockup was a working figure; the live fee is in Act 06.</figcaption>
+      </figure>
+      <figure class="still">
+        <img src="img/tuua-mockup-screen4.jpg" width="565" height="1227" loading="lazy" decoding="async"
+             alt="Proposed screen 4, Ticket detail: a ticket number, a QR code to scan at the eGate and a Download receipt button." data-i18n-alt="act4_s4_alt">
+        <figcaption class="still__cap" data-i18n-html="act4_s4_cap"><b>4 · Ticket.</b> A QR code for the eGate, also sent by email.</figcaption>
+      </figure>
+    </div>
+
+    <div class="stills stills--1 io">
+      <figure class="still">
+        <img src="img/tuua-mockup-flowchart.jpg" width="1800" height="1221" loading="lazy" decoding="async"
+             alt="Flowchart of the passenger&#x27;s interactions with the TUUA Transfer payment platform, from scanning the platform QR code, through the four screens, to the TUUA turnstile and boarding." data-i18n-alt="act4_flow_alt">
+        <figcaption class="still__cap" data-i18n-html="act4_flow_cap"><b>The flowchart.</b> From the QR code that opens the platform, through the four screens, to the TUUA turnstile and boarding. Names, email and card numbers on the mockup are dummy data.</figcaption>
+      </figure>
+    </div>
+
+    <div class="scanstack io">
+      <div class="reveal" data-act="act4">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4" data-panel-title="Four channels, one digital" data-panel-title-key="act4_rv_btn" data-i18n="act4_rv_btn">Four channels, one digital</button>
+        <div class="reveal__body reveal__body--poster" id="rv-a4">
+          <p data-i18n-html="act4_rv_txt"><strong>The web platform is one of four ways to pay the fee, and the only digital one.</strong> On the web, the passenger receives a QR code by email and shows it at the eGate. At the three staffed channels, the passenger receives a bar-code sticker on the boarding pass instead.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
