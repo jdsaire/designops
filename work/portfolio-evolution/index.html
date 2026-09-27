@@ -738,8 +738,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="gantt io" id="gantt">
       <div class="gantt__chart" id="ganttChart">
-        <div class="gantt__grid" id="ganttGrid" role="tree"
-             aria-label="Both builds on a calendar axis: three phases with task rows, sized in days."
+        <div class="gantt__grid" id="ganttGrid" role="tree" data-i18n-aria="sch_g1_aria"
+             aria-label="The single-page build on a calendar axis: two epics with task rows, sized in days."
              ></div>
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Every window it draws is also stated in the note below.</p></noscript>
@@ -1421,13 +1421,12 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     return { draw: draw };
   }
 
-  /* The record stops at MEASURED_TO. Nothing is drawn past it. */
-  var MEASURED_TO = '2026-09-06';
-
   var instances = [
+    /* Chart 1 · the single-page build: epics 01 and 02, from the first commit to the
+       brief handoff. */
     renderSchedule({
       root:'gantt', grid:'ganttGrid',
-      axisStart:'2026-04-24', axisEnd:'2026-09-08',
+      axisStart:'2026-04-24', axisEnd:'2026-07-04',
       data: {
         epics: [
           { id:'e1a', key:'sch_ep1', name:'01 Single Page', commits:240, prs:48, start:'2026-04-24', end:'2026-06-18', tasks:[
@@ -1442,23 +1441,11 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
               { id:'sch_e7', name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
               { id:'sch_e8', name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
               { id:'sch_e9', name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
-            ]},
-          { id:'e2', name:'03 Multi Page', commits:103, prs:20, start:'2026-07-10', end:'2026-09-08', tasks:[
-              { id:'e2t0', name:"History reset and per-organism rebuild", start:'2026-07-10', end:'2026-07-11' },
-              { id:'e2t1', name:"Multi-page strategy runs", start:'2026-07-12', end:'2026-07-25' },
-              { id:'e2t6', name:"Defect inventory", start:'2026-08-28', end:'2026-08-29' },
-              { id:'e2t7', name:"AccreditaPass brief", start:'2026-08-30', end:'2026-08-30' },
-              { id:'e2t8', name:"Home reallocation", start:'2026-08-31', end:'2026-08-31' },
-              { id:'e2t9', name:"Trust-Verify relink", start:'2026-09-01', end:'2026-09-01' },
-              { id:'e2t10', name:"Airport brief and global mechanisms", start:'2026-09-05', end:'2026-09-05' },
-              { id:'e2t11', name:"Vector asset pass", start:'2026-09-06', end:'2026-09-06' }
             ]}
         ],
         /* Milestones sit on measured dates only. */
         milestones: [
-          { row:'e1b', at:'2026-07-04', key:'sch_ms_handoff', name:'Brief handoff' },
-          { row:'e2',  at:'2026-07-10', name:'History reset' },
-          { row:'e2',  at:MEASURED_TO, name:'Record ends' }
+          { row:'e1b', at:'2026-07-04', key:'sch_ms_handoff', name:'Brief handoff' }
         ]
       }
     })
