@@ -96,6 +96,7 @@
   "sch_aria_ctotals": "{name} totals: {window} 2026, {commits}, {prs}, {active}",
   "sch_aria_pr": "Pull request {n}, {name}, merged {date} 2026",
   "sch_aria_months": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
+  "sch_glossary": "<b>Commit</b>: one saved change to the site's code, with a note on what changed. <b>Pull request</b>: a set of commits proposed together, reviewed, then merged into the live site.",
   "gantt_noscript": "This component renders from its data object and requires JavaScript. Each chart's reading guide states the window it draws and its source.",
   "act3_verdict": "Six decisions, four of them multi-page.",
   "act3_lede": "What held from the start, and what the multi-page build added.",
