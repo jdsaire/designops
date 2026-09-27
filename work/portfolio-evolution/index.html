@@ -175,27 +175,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .rolestrip span{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-muted); font-weight:var(--fw-medium);}
 .rolestrip b{color:var(--color-brand-purple); font-weight:var(--fw-bold);}
 
-/* ---- Timeline carousel (Act 2 — the single lateral gesture, 3 stops) ---- */
+/* ---- Timeline (Act 2 — two steps: the single page, then the multi-page system) ---- */
 .timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
-/* Three versions are placed, not paged: the track is a plain grid at every width.
+/* Two steps are placed, not paged: the track is a plain grid at every width.
    Below 768px it stacks equally and the numbering carries the progression; above,
-   the cards rise. The nav drove a scroller that no longer exists. */
+   the cards rise and the multi-page step takes the wider column. */
 .timeline__track{display:grid; grid-auto-flow:row; grid-template-columns:1fr;
   gap:var(--slide-gap); padding-bottom:0;}
-/* The stagger. Version 1 sits lowest and version 3 highest, so the row reads as a
-   climb rather than as three peers. The step is --slide-gap, the spacing token the
-   track already uses — no new primitive, and deliberately no viewport-relative
-   height: the grid grows by two steps and --act-pad absorbs the difference. */
+/* The stagger. The first step sits lower and the multi-page step higher, so the row
+   reads as a climb rather than as two peers. The step is --slide-gap, the spacing
+   token the track already uses — no new primitive. */
 @media (min-width:768px){
-  .timeline__track{grid-template-columns:repeat(3,1fr); align-items:start;}
+  .timeline__track{grid-template-columns:2fr 3fr; align-items:start;}
   .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 2);}
-  .timeline__track > .card:nth-child(2){margin-top:var(--slide-gap);}
-  .timeline__track > .card:nth-child(3){margin-top:0;}
+  .timeline__track > .card:nth-child(2){margin-top:0;}
 }
 @media (min-width:1024px){
-  /* A wider canvas takes a longer step: one and a half gaps instead of one. */
+  /* A wider canvas takes a longer step: three gaps instead of two. */
   .timeline__track > .card:nth-child(1){margin-top:calc(var(--slide-gap) * 3);}
-  .timeline__track > .card:nth-child(2){margin-top:calc(var(--slide-gap) * 1.5);}
 }
 
 /* ---- Cards ---- */
@@ -697,7 +694,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 02 · THE EVOLUTION — 3 versions on a stepped layout ================= -->
+<!-- ================= ACT 02 · THE EVOLUTION — 2 steps on a stepped layout ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
     <div class="act__head io">
@@ -705,26 +702,21 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Evolution</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Three portfolio versions, all in code.</h2>
-      <p class="scan" data-i18n="act2_lede">Watch the shift from renting a template to writing every line.</p>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">From one scroll to a system of pages.</h2>
+      <p class="scan" data-i18n="act2_lede">Two versions: the single page that tested the idea, and the multi-page system it became.</p>
     </div>
 
     <div class="timeline io">
-      <div class="timeline__track" id="tlTrack" role="group" aria-label="The evolution, in three versions">
+      <div class="timeline__track" id="tlTrack" role="group" data-i18n-aria="act2_aria" aria-label="The evolution, in two steps">
         <article class="card">
-          <p class="catlabel" data-i18n="act2_s1_n">Version 1</p>
-          <h3 class="card__t" data-i18n="act2_s1_t">The Template era</h3>
-          <p class="card__x" data-i18n="act2_s1_x">My first portfolios ran on Canva and Framer. Both were faster than code, and neither could build what I had already designed in Figma.</p>
+          <p class="catlabel" data-i18n="act2_s1_n">Versions 1 and 2</p>
+          <h3 class="card__t" data-i18n="act2_s1_t">Template and single page</h3>
+          <p class="card__x" data-i18n="act2_s1_x">Canva and Framer could not build what I had designed in Figma, so I coded a single page with AI to test the concept: every section inside one scroll.</p>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="act2_s2_n">Version 2</p>
-          <h3 class="card__t" data-i18n="act2_s2_t">The Single-Page</h3>
-          <p class="card__x" data-i18n="act2_s2_x">A landing page to test the concept: beginner front-end, my first AI-orchestrated workflow, and every section inside one scroll.</p>
-        </article>
-        <article class="card">
-          <p class="catlabel" data-i18n="act2_s3_n">Version 3</p>
-          <h3 class="card__t" data-i18n="act2_s3_t">The Multi-Page</h3>
-          <p class="card__x" data-i18n="act2_s3_x">My most capable front-end to date: the Microsoft specialization finished, and case briefs carrying the recent work.</p>
+          <p class="catlabel" data-i18n="act2_s2_n">Version 3</p>
+          <h3 class="card__t" data-i18n="act2_s2_t">The Multi-Page</h3>
+          <p class="card__x" data-i18n="act2_s2_x">The version you are reading: a route and a dictionary per case brief on one shared chassis, English and Spanish on three dictionary levels, and WCAG AA held at every gate. My most capable front-end to date, with the Microsoft specialization finished.</p>
         </article>
       </div>
     </div>
