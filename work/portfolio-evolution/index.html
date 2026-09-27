@@ -316,8 +316,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__milestone-label--below{top:auto; bottom:.1rem;}
 .gantt__milestone-label--end{transform:translateX(calc(-100% + .45rem));}
 .gantt__milestone-label--start{transform:translateX(-.45rem);}
-.gantt__row-name{font-size:.9375rem; font-weight:var(--fw-semibold); color:var(--color-brand-white);}
-.gantt__row--cluster .gantt__row-field{min-height:4.25rem;}
+.gantt__pr{color:var(--color-brand-purple); font-weight:var(--fw-semibold); flex:none;}
+.gantt__task-label--pr{flex-wrap:nowrap; align-items:baseline;}
+.gantt__task-label--pr > span:last-child{align-self:center;}
+/* A closed epic shows its pull requests' diamonds; an open one hands them to its rows. */
+.gantt__milestone--overview{background:var(--color-brand-white);}
+.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__milestone--overview{display:none;}
 .sched__guide{margin-bottom:1rem;}
 .gantt + .sched__guide{margin-top:clamp(2.5rem,5vw,3.5rem);}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
@@ -767,7 +771,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="gantt io" id="gantt2">
       <div class="gantt__chart" id="gantt2Chart">
-        <div class="gantt__grid" id="gantt2Grid" role="group" data-i18n-aria="sch_g2_aria"
+        <div class="gantt__grid" id="gantt2Grid" role="tree" data-i18n-aria="sch_g2_aria"
              aria-label="The multi-page build on a calendar axis: five clusters, each pull request a diamond on its merge date."
              ></div>
       </div>
@@ -1256,16 +1260,22 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
    points recorded, so the axis is calendar time: every row
    carries a real start and end date, and rows may leave gaps.
 
+   Rows are epics that open onto task rows. A task may be a pull
+   request: it then carries its number, its commit days as the bar,
+   its merge date as a diamond and its commit count. A collapsed
+   epic shows its pull requests' diamonds on its own row; an open
+   one hands them to the task rows.
+
    Every string the organism draws, visible or assistive, comes from
    the brief's dictionary and is redrawn on each i18n:changed. The EN
    object below is only the first paint, and each value equals its
    key's EN value.
 
-   Sources: chart 1 from the public commit history of jdsaire/jdigital
-   and jdsaire/legacy-desops. Chart 2 from this repository's merged pull
-   requests #18–#32: each cluster's bar runs from its first to its last
-   commit, and each pull request is a diamond on its merge date, all in
-   Lima time.
+   Sources: the single-page epics from the public commit history of
+   jdsaire/jdigital and jdsaire/legacy-desops. The multi-page stages
+   from this repository's merged pull requests #18–#32: each bar runs
+   from its first commit to its last, and each pull request is a
+   diamond on its merge date, all in Lima time.
    ============================================================ */
 (function scheduleOrganism(){
   'use strict';
@@ -1282,22 +1292,22 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     sch_aria_totals:'{name} totals: {window} 2026, {commits}, {prs}',
     sch_aria_ctotals:'{name} totals: {window} 2026, {commits}, {prs}, {active}',
     sch_aria_ms:'Milestone: {name}, {date} 2026',
-    sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {cluster}, merged {date} 2026'
+    sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026'
   };
   function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
   function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
   function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
 
-  /* cfg: { root, grid, axisStart, axisEnd, ticks?, data:{ epics | clusters, milestones } }
-     Epics open onto task rows; clusters are single rows whose pull requests sit on
-     them as diamonds. Ticks are month starts unless the instance lists its own dates. */
+  /* cfg: { root, grid, axisStart, axisEnd, axisKey?, ticks?, data:{ epics, milestones? } }
+     Ticks are month starts unless the instance lists its own dates. */
   function renderSchedule(cfg){
     var root = document.getElementById(cfg.root);
     if(!root) return null;
     var DATA = cfg.data;
     var AXIS_START = cfg.axisStart;
     var grid = document.getElementById(cfg.grid);
+    var MILESTONES = (DATA.milestones || []).slice();
 
     /* ---------- Derived layout: calendar days ---------- */
     function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
@@ -1306,7 +1316,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
     function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
 
-    (DATA.epics || []).forEach(function(epic){
+    DATA.epics.forEach(function(epic){
       var starts = epic.tasks.map(function(t){ return offset(t.start); });
       var ends   = epic.tasks.map(function(t){ return offset(t.end); });
       /* A band's window is declared from the copy lock, not derived from its task
@@ -1316,6 +1326,13 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       epic.startOff = Math.min(Math.min.apply(null, starts), offset(epic.start));
       epic.endOff   = Math.max(Math.max.apply(null, ends),   offset(epic.end));
       epic.days = epic.endOff - epic.startOff + 1;
+      /* A pull request's merge is a diamond twice over: on its own row, and as an
+         overview on its epic's row while the epic is closed. */
+      epic.tasks.forEach(function(t){
+        if(!t.merge) return;
+        MILESTONES.push({ row:t.id, at:t.merge, pr:t.pr, task:t });
+        MILESTONES.push({ row:epic.id, at:t.merge, pr:t.pr, task:t, overview:true });
+      });
     });
 
     function draw(dict){
@@ -1325,7 +1342,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
       function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
       function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
-      function taskName(task){ return (isLocked(task) && dict && dict[task.id + '_t']) || task.name; }
+      function taskName(task){ return (isLocked(task) && dict && dict[task.id + '_t']) || nameOf(task); }
 
       /* Month ticks: the axis start carries its own month at 0, then every first of
          the month inside the window. */
@@ -1349,86 +1366,84 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         return h;
       }
 
-      function barHtml(item, cls, name, isEpic, noSpan){
+      function barHtml(item, cls, name, isEpic){
         var days = isEpic ? item.days : spanOf(item);
         var left = isEpic ? item.startOff : offset(item.start);
         var tpl = days === 1 ? t('sch_aria_bar1') : t('sch_aria_bar');
         return '<div class="gantt__bar ' + cls + '" data-bar="' + item.id + '"' +
                ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
                esc(fill(tpl, { name:name, window:win(item), days:days })) + '">' +
-               (noSpan ? '' : '<span class="gantt__span">' + esc(fill(t('sch_span_days'), { n:days })) + '</span>') + '</div>';
+               '<span class="gantt__span">' + esc(fill(t('sch_span_days'), { n:days })) + '</span></div>';
       }
 
       /* Milestones: any number per row, each at the centre of its day. Diamonds that
-         share a day stack vertically on that day and share one label; consecutive
-         labels on a row alternate above and below so neighbours never collide. A
-         pull request's label is its number alone. */
-      function milestonesHtml(rowId, rowName){
+         share a day stack vertically on that day. A named milestone carries a label;
+         consecutive labels alternate above and below, and a label near either end of
+         the axis anchors inward. A pull request's diamond carries no label: the row it
+         sits on, or the row it opens onto, names it. */
+      function milestonesHtml(rowId){
         var groups = {}, dates = [];
-        DATA.milestones.forEach(function(m){
+        MILESTONES.forEach(function(m){
           if(m.row !== rowId) return;
           if(!groups[m.at]){ groups[m.at] = []; dates.push(m.at); }
           groups[m.at].push(m);
         });
         dates.sort();
-        return dates.map(function(at, gi){
+        var labelled = 0;
+        return dates.map(function(at){
           var ms = groups[at], n = ms.length, x = (offset(at) + 0.5) / TOTAL_DAYS, l = pct(offset(at) + 0.5);
-          /* A label near either end of the axis anchors inward so it stays in the field. */
-          var edge = x > 0.9 ? ' gantt__milestone-label--end' : x < 0.1 ? ' gantt__milestone-label--start' : '';
           var diamonds = ms.map(function(m, i){
             var dy = (i - (n - 1) / 2) * 1.25;
-            var aria = m.pr ? fill(t('sch_aria_pr'), { n:m.pr, cluster:rowName, date:fmt(at) })
+            var aria = m.pr ? fill(t('sch_aria_pr'), { n:m.pr, name:nameOf(m.task), date:fmt(at) })
                             : fill(t('sch_aria_ms'), { name:nameOf(m), date:fmt(at) });
-            return '<span class="gantt__milestone" style="left:' + l + (dy ? '; top:calc(50% + ' + dy + 'rem)' : '') +
+            return '<span class="gantt__milestone' + (m.overview ? ' gantt__milestone--overview' : '') + '"' +
+                   (m.pr ? ' data-layer="ms"' : '') +
+                   ' style="left:' + l + (dy ? '; top:calc(50% + ' + dy + 'rem)' : '') +
                    '" role="img" aria-label="' + esc(aria) + '"></span>';
           }).join('');
-          var label = ms.map(function(m){ return m.pr ? fill(t('sch_ms_pr'), { n:m.pr }) : nameOf(m); }).join(' · ');
-          return diamonds + '<span class="gantt__milestone-label' + (gi % 2 ? ' gantt__milestone-label--below' : '') + edge +
+          var named = ms.filter(function(m){ return !m.pr; });
+          if(!named.length) return diamonds;
+          var edge = x > 0.9 ? ' gantt__milestone-label--end' : x < 0.1 ? ' gantt__milestone-label--start' : '';
+          var label = named.map(nameOf).join(' · ');
+          return diamonds + '<span class="gantt__milestone-label' + (labelled++ % 2 ? ' gantt__milestone-label--below' : '') + edge +
                  '" style="left:' + l + '" aria-hidden="true">' + esc(label) + '</span>';
         }).join('');
       }
 
-      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t(DATA.clusters ? 'sch_axis_cluster' : 'sch_axis_phase')) + '</div>' +
+      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t(cfg.axisKey || 'sch_axis_phase')) + '</div>' +
                  '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
                  '<div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
 
-      /* A cluster states its window, its commits, its pull requests and its active
-         days, one per line. Its bar carries no day count: the diamonds sit on it. */
-      (DATA.clusters || []).forEach(function(c){
-        var name = nameOf(c), commits = count('sch_commits', c.commits), prs = count('sch_prs', c.prs), active = count('sch_active', c.active);
-        html += '<div class="gantt__epic gantt__epic--cluster" data-epic="' + c.id + '">' +
-          '<div class="gantt__row gantt__row--cluster">' +
-            '<div class="gantt__row-label"><span class="gantt__row-name">' + esc(name) + '</span></div>' +
-            '<div class="gantt__row-field">' + barHtml(c, 'gantt__bar--task', name, false, true) +
-              milestonesHtml(c.id, name) + '</div>' +
-            '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(c), commits:commits, prs:prs, active:active })) + '">' +
-              '<b>' + win(c) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span>' +
-              '<span class="gantt__days">' + esc(active) + '</span></div>' +
-          '</div></div>';
-      });
-
-      (DATA.epics || []).forEach(function(epic){
+      DATA.epics.forEach(function(epic){
         var name = nameOf(epic), commits = count('sch_commits', epic.commits), prs = count('sch_prs', epic.prs);
-        /* One shape per level: an epic states its window, its commits and its pull
-           requests, one per line; a task states its window and nothing else. */
+        var active = epic.active != null ? count('sch_active', epic.active) : null;
+        var totals = active ? fill(t('sch_aria_ctotals'), { name:name, window:win(epic), commits:commits, prs:prs, active:active })
+                            : fill(t('sch_aria_totals'),  { name:name, window:win(epic), commits:commits, prs:prs });
+        /* One shape per level: an epic states its window, its commits, its pull
+           requests and, for a stage, its active days, one per line; a task states its
+           window, and a pull request its commits when that layer is on. */
         html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
           '<div class="gantt__row">' +
             '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
               '<span class="gantt__marker" aria-hidden="true">›</span>' + esc(name) + '</button></div>' +
             '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', name, true) +
-              milestonesHtml(epic.id, name) + '</div>' +
-            '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_totals'), { name:name, window:win(epic), commits:commits, prs:prs })) + '">' +
-              '<b>' + win(epic) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span></div>' +
+              milestonesHtml(epic.id) + '</div>' +
+            '<div class="gantt__row-summary" aria-label="' + esc(totals) + '">' +
+              '<b>' + win(epic) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span>' +
+              (active ? '<span class="gantt__days">' + esc(active) + '</span>' : '') + '</div>' +
           '</div>' +
           '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
         epic.tasks.forEach(function(task){
           var tn = taskName(task);
           html += '<li class="gantt__task-row" data-task="' + task.id + '">' +
-            '<span class="gantt__task-label">' +
+            '<span class="gantt__task-label' + (task.pr ? ' gantt__task-label--pr' : '') + '">' +
+              (task.pr ? '<span class="gantt__pr">' + esc(fill(t('sch_ms_pr'), { n:task.pr })) + '</span>' : '') +
               '<span' + (isLocked(task) ? ' data-i18n="' + task.id + '_t"' : '') + '>' + esc(tn) + '</span>' +
             '</span>' +
-            '<span class="gantt__task-field">' + barHtml(task, 'gantt__bar--task', tn, false) + '</span>' +
-            '<span class="gantt__task-summary"><b>' + win(task) + '</b></span></li>';
+            '<span class="gantt__task-field">' + barHtml(task, 'gantt__bar--task', tn, false) + milestonesHtml(task.id) + '</span>' +
+            '<span class="gantt__task-summary"><b>' + win(task) + '</b>' +
+              (task.commits != null ? '<span class="gantt__days" data-layer="commits">' + esc(count('sch_commits', task.commits)) + '</span>' : '') +
+            '</span></li>';
         });
         html += '</ul></div>';
       });
@@ -1443,11 +1458,22 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         var b = grid.querySelector('[aria-controls="' + id + '"]');
         if(b) setExpanded(b, true);
       });
+      applyLayers();
+    }
 
+    /* ---------- Layers: progressive disclosure (Brief 02 pattern) ----------
+       Elements marked data-layer="ms" or "commits" follow the instance's layer
+       state, which survives every redraw. */
+    var LAYERS = cfg.layers || { ms:true, commits:true };
+    function applyLayers(){
+      Object.keys(LAYERS).forEach(function(key){
+        Array.prototype.forEach.call(grid.querySelectorAll('[data-layer="' + key + '"]'), function(el){
+          el.hidden = !LAYERS[key];
+        });
+      });
     }
 
     /* ---------- Zoom: expand / collapse ----------
-       Individual disclosure is the only mechanism. Epics stay collapsed until opened.
        Delegated from the grid, so a redraw keeps its handlers. */
     function setExpanded(btn, expanded){
       btn.setAttribute('aria-expanded', String(expanded));
@@ -1502,31 +1528,41 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         ]
       }
     }),
-    /* Chart 2 · the multi-page build: from the first commit on 28 Aug to the merge
-       of #32 on 26 Sep. Spans, active days and commits are counted from each
-       cluster's pull requests; merge dates are converted to Lima time. */
+    /* The multi-page build: from the first commit on 28 Aug to the merge of #32 on
+       26 Sep. Each stage opens onto its pull requests; spans, active days and commits
+       are counted from them, and merge dates are converted to Lima time. */
     renderSchedule({
-      root:'gantt2', grid:'gantt2Grid',
+      root:'gantt2', grid:'gantt2Grid', axisKey:'sch_axis_cluster',
       axisStart:'2026-08-28', axisEnd:'2026-09-26',
       ticks:['2026-08-28','2026-09-01','2026-09-08','2026-09-15','2026-09-22'],
+      layers:{ ms:true, commits:false },
       data: {
-        clusters: [
-          { id:'c1', key:'sch_c1', name:'Defect inventory',             start:'2026-08-28', end:'2026-08-28', active:1, commits:1,   prs:1 },
-          { id:'c2', key:'sch_c2', name:'Case briefs',                  start:'2026-08-30', end:'2026-09-11', active:6, commits:30,  prs:4 },
-          { id:'c3', key:'sch_c3', name:'Home/About/Contact organisms', start:'2026-08-30', end:'2026-09-20', active:6, commits:83,  prs:5 },
-          { id:'c4', key:'sch_c4', name:'Global mechanisms and assets', start:'2026-09-05', end:'2026-09-06', active:2, commits:22,  prs:2 },
-          { id:'c5', key:'sch_c5', name:'Copy and i18n waves',          start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:3 }
-        ],
-        milestones: [
-          { row:'c1', at:'2026-08-29', pr:18 },
-          { row:'c2', at:'2026-08-30', pr:19 }, { row:'c2', at:'2026-09-01', pr:22 },
-          { row:'c2', at:'2026-09-05', pr:23 }, { row:'c2', at:'2026-09-11', pr:26 },
-          { row:'c3', at:'2026-08-31', pr:20 }, { row:'c3', at:'2026-08-31', pr:21 },
-          { row:'c3', at:'2026-09-13', pr:27 }, { row:'c3', at:'2026-09-16', pr:28 },
-          { row:'c3', at:'2026-09-20', pr:29 },
-          { row:'c4', at:'2026-09-05', pr:24 }, { row:'c4', at:'2026-09-06', pr:25 },
-          { row:'c5', at:'2026-09-22', pr:30 }, { row:'c5', at:'2026-09-24', pr:31 },
-          { row:'c5', at:'2026-09-26', pr:32 }
+        epics: [
+          { id:'c1', key:'sch_c1', name:'Defect inventory', start:'2026-08-28', end:'2026-08-28', active:1, commits:1, prs:1, tasks:[
+              { id:'p18', key:'sch_pr18', pr:18, name:'Defect inventory', start:'2026-08-28', end:'2026-08-28', merge:'2026-08-29', commits:1 }
+            ]},
+          { id:'c2', key:'sch_c2', name:'Case briefs', start:'2026-08-30', end:'2026-09-11', active:6, commits:30, prs:4, tasks:[
+              { id:'p19', key:'sch_pr19', pr:19, name:'AccreditaPass brief', start:'2026-08-30', end:'2026-08-30', merge:'2026-08-30', commits:3 },
+              { id:'p22', key:'sch_pr22', pr:22, name:'Trust-Verify relink', start:'2026-09-01', end:'2026-09-01', merge:'2026-09-01', commits:3 },
+              { id:'p23', key:'sch_pr23', pr:23, name:'Airport brief', start:'2026-09-05', end:'2026-09-05', merge:'2026-09-05', commits:4 },
+              { id:'p26', key:'sch_pr26', pr:26, name:'Portfolio Evolution review', start:'2026-09-08', end:'2026-09-11', merge:'2026-09-11', commits:20 }
+            ]},
+          { id:'c3', key:'sch_c3', name:'Home/About/Contact organisms', start:'2026-08-30', end:'2026-09-20', active:6, commits:83, prs:5, tasks:[
+              { id:'p20', key:'sch_pr20', pr:20, name:'Home reallocation', start:'2026-08-30', end:'2026-08-31', merge:'2026-08-31', commits:11 },
+              { id:'p21', key:'sch_pr21', pr:21, name:'Home directed changes', start:'2026-08-31', end:'2026-08-31', merge:'2026-08-31', commits:10 },
+              { id:'p27', key:'sch_pr27', pr:27, name:'Main organism hygiene', start:'2026-09-13', end:'2026-09-13', merge:'2026-09-13', commits:24 },
+              { id:'p28', key:'sch_pr28', pr:28, name:'About journey', start:'2026-09-15', end:'2026-09-16', merge:'2026-09-16', commits:22 },
+              { id:'p29', key:'sch_pr29', pr:29, name:'Contact organism', start:'2026-09-20', end:'2026-09-20', merge:'2026-09-20', commits:16 }
+            ]},
+          { id:'c4', key:'sch_c4', name:'Global mechanisms and assets', start:'2026-09-05', end:'2026-09-06', active:2, commits:22, prs:2, tasks:[
+              { id:'p24', key:'sch_pr24', pr:24, name:'Theme, contact and link integrity', start:'2026-09-05', end:'2026-09-05', merge:'2026-09-05', commits:8 },
+              { id:'p25', key:'sch_pr25', pr:25, name:'Vector artwork', start:'2026-09-05', end:'2026-09-06', merge:'2026-09-06', commits:14 }
+            ]},
+          { id:'c5', key:'sch_c5', name:'Copy and i18n waves', start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:3, tasks:[
+              { id:'p30', key:'sch_pr30', pr:30, name:'Main and About copy', start:'2026-09-20', end:'2026-09-22', merge:'2026-09-22', commits:41 },
+              { id:'p31', key:'sch_pr31', pr:31, name:'Dictionary split', start:'2026-09-22', end:'2026-09-24', merge:'2026-09-24', commits:54 },
+              { id:'p32', key:'sch_pr32', pr:32, name:'Brief Spanish and i18n', start:'2026-09-24', end:'2026-09-26', merge:'2026-09-26', commits:44 }
+            ]}
         ]
       }
     })
