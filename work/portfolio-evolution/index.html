@@ -271,6 +271,21 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         multi-page build as clusters of pull requests. ---- */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
+/* Toolbar and chips inherited from Brief 02's schedule (progressive disclosure). */
+.gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
+.gantt__action{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-medium);
+  background:var(--color-brand-black); color:var(--color-brand-white);
+  border:1px solid var(--color-brand-white); padding:.6rem 1.25rem; cursor:pointer; min-height:44px;
+  transition:background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
+.gantt__action:hover{background:var(--color-brand-white); color:var(--color-brand-black);}
+.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
+.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
+.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
+  background:var(--color-brand-black); color:var(--color-text-muted);
+  border:1px solid var(--g-border); padding:.45rem .9rem; cursor:pointer; min-height:44px;
+  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
+.gantt__chip[aria-pressed="true"]::before{content:"✓ "; color:var(--color-brand-purple);}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
 .gantt__grid{min-width:820px;}
 .gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
@@ -316,9 +331,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__milestone-label--below{top:auto; bottom:.1rem;}
 .gantt__milestone-label--end{transform:translateX(calc(-100% + .45rem));}
 .gantt__milestone-label--start{transform:translateX(-.45rem);}
-.gantt__pr{color:var(--color-brand-purple); font-weight:var(--fw-semibold); flex:none;}
-.gantt__task-label--pr{flex-wrap:nowrap; align-items:baseline;}
-.gantt__task-label--pr > span:last-child{align-self:center;}
+.gantt__pr{color:var(--color-brand-purple); font-weight:var(--fw-semibold); margin-right:.35em;}
 /* A closed epic shows its pull requests' diamonds; an open one hands them to its rows. */
 .gantt__milestone--overview{background:var(--color-brand-white);}
 .gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__milestone--overview{display:none;}
@@ -770,6 +783,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <div class="gantt io" id="gantt2">
+      <div class="gantt__tools">
+        <button class="gantt__action" type="button" aria-expanded="false" aria-controls="gantt2Grid">Expand all</button>
+        <div class="gantt__filters" role="group" data-i18n-aria="gantt_filters_aria" aria-label="Show or hide chart details">
+          <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
+          <button class="gantt__chip" type="button" data-filter="ms" aria-pressed="true" data-i18n="sch_f_ms">Merge dates</button>
+          <button class="gantt__chip" type="button" data-filter="commits" aria-pressed="false" data-i18n="sch_f_commits">Commits</button>
+        </div>
+      </div>
       <div class="gantt__chart" id="gantt2Chart">
         <div class="gantt__grid" id="gantt2Grid" role="tree" data-i18n-aria="sch_g2_aria"
              aria-label="The multi-page build on a calendar axis: five clusters, each pull request a diamond on its merge date."
@@ -1292,7 +1313,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     sch_aria_totals:'{name} totals: {window} 2026, {commits}, {prs}',
     sch_aria_ctotals:'{name} totals: {window} 2026, {commits}, {prs}, {active}',
     sch_aria_ms:'Milestone: {name}, {date} 2026',
-    sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026'
+    sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026',
+    gantt_expand:'Expand all', gantt_collapse:'Collapse all'
   };
   function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
   function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
@@ -1436,9 +1458,9 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         epic.tasks.forEach(function(task){
           var tn = taskName(task);
           html += '<li class="gantt__task-row" data-task="' + task.id + '">' +
-            '<span class="gantt__task-label' + (task.pr ? ' gantt__task-label--pr' : '') + '">' +
-              (task.pr ? '<span class="gantt__pr">' + esc(fill(t('sch_ms_pr'), { n:task.pr })) + '</span>' : '') +
-              '<span' + (isLocked(task) ? ' data-i18n="' + task.id + '_t"' : '') + '>' + esc(tn) + '</span>' +
+            '<span class="gantt__task-label">' +
+              (task.pr ? '<span><span class="gantt__pr">' + esc(fill(t('sch_ms_pr'), { n:task.pr })) + '</span>' + esc(tn) + '</span>'
+                       : '<span' + (isLocked(task) ? ' data-i18n="' + task.id + '_t"' : '') + '>' + esc(tn) + '</span>') +
             '</span>' +
             '<span class="gantt__task-field">' + barHtml(task, 'gantt__bar--task', tn, false) + milestonesHtml(task.id) + '</span>' +
             '<span class="gantt__task-summary"><b>' + win(task) + '</b>' +
@@ -1459,6 +1481,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         if(b) setExpanded(b, true);
       });
       applyLayers();
+      labels = { expand:t('gantt_expand'), collapse:t('gantt_collapse') };
+      syncToggleAll();
     }
 
     /* ---------- Layers: progressive disclosure (Brief 02 pattern) ----------
@@ -1473,6 +1497,32 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       });
     }
 
+    /* ---------- Toolbar: expand all, and one chip per layer ----------
+       The expand-all label is drawn here rather than swept, because it follows the
+       disclosure state as well as the language. */
+    var toggleAll = root.querySelector('.gantt__action'), labels = null;
+    function syncToggleAll(){
+      if(!toggleAll || !labels) return;
+      var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+      var allOpen = toggles.length && toggles.every(function(b){ return b.getAttribute('aria-expanded') === 'true'; });
+      toggleAll.setAttribute('aria-expanded', String(!!allOpen));
+      toggleAll.textContent = allOpen ? labels.collapse : labels.expand;
+    }
+    if(toggleAll) toggleAll.addEventListener('click', function(){
+      var open = toggleAll.getAttribute('aria-expanded') !== 'true';
+      Array.prototype.forEach.call(grid.querySelectorAll('.gantt__toggle'), function(b){ setExpanded(b, open); });
+      syncToggleAll();
+    });
+    Array.prototype.forEach.call(root.querySelectorAll('.gantt__chip'), function(chip){
+      var key = chip.getAttribute('data-filter');
+      chip.setAttribute('aria-pressed', String(!!LAYERS[key]));
+      chip.addEventListener('click', function(){
+        LAYERS[key] = !LAYERS[key];
+        chip.setAttribute('aria-pressed', String(LAYERS[key]));
+        applyLayers();
+      });
+    });
+
     /* ---------- Zoom: expand / collapse ----------
        Delegated from the grid, so a redraw keeps its handlers. */
     function setExpanded(btn, expanded){
@@ -1482,7 +1532,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     }
     grid.addEventListener('click', function(e){
       var btn = e.target.closest('.gantt__toggle');
-      if(btn) setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
+      if(btn){ setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true'); syncToggleAll(); }
     });
     grid.addEventListener('keydown', function(e){
       var btn = e.target.closest('.gantt__toggle');
