@@ -88,7 +88,6 @@
   "act3_c2_rv_btn": "Hecho para todos",
   "act3_c2_rv_txt1": "Cada imagen relevante lleva texto alternativo, cada control se alcanza por teclado con un estado de foco visible, y el contraste se verifica en ambos temas en lugar de suponerse.",
   "act3_c2_rv_txt2": "El layout se resuelve en tres breakpoints declarados: 767px o menos, de 768 a 1023 y de 1024 en adelante. Son los tres que las hojas de estilo realmente declaran, no una convención prestada de un framework.",
-  "act3_f2": "Una página",
   "act3_c3_t": "3) Grid y layout, una página",
   "act3_c3_x": "Diez secciones, una escala tipográfica, Flexbox y Grid en todo el sitio.",
   "act3_c3_rv_btn": "Arquitectura de información",
