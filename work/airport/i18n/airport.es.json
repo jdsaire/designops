@@ -83,5 +83,6 @@
   "act6_scan3": "La elegibilidad depende de un clic de autodeclaración (<em>\"Soy ese tipo de pasajero\"</em>) y no de la verificación automática de acuerdos que especificaba el alcance técnico. Hasta donde conozco el build, esa verificación nunca se implementó como estaba escrita. Este recorrido no pudo ver más allá de su propio límite para confirmarlo.",
   "act6_findings": "Seis hallazgos: uno mayor, cinco menores, ninguno crítico. El mayor es una pantalla titulada <em>\"Ingresa tus datos personales y de tu vuelo\"</em> cuyos únicos campos son datos del vuelo.",
   "act6_synth": "Puedo leer en público la brecha entre la propuesta y el build, que es una mejor posición que tener que describirla.",
+  "act6_sequel": "<strong>What I can claim:</strong> the design, prototype, evaluation and handoff of a platform live today. <strong>What I can't:</strong> its build, deployment or operation. <strong>What's next:</strong> six findings, one of them major, recorded for whoever runs it.",
   "act3_notice": "<strong>TUUA Transfer.</strong> Entiendo el mecanismo de la plataforma y contribuí a su diseño UX/UI, no a su desarrollo, despliegue u operación."
 }

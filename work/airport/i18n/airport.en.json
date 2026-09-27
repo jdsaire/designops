@@ -83,5 +83,6 @@
   "act6_scan3": "Eligibility is gated by a self-declaration click — <em>\"Soy ese tipo de pasajero\"</em> — rather than the automatic agreement check the technical scope specified. To my own knowledge of the build, that check was never implemented as written. This pass could not see past its own boundary to confirm it.",
   "act6_findings": "Six findings: one major, five minor, none critical. The major one is a screen headed <em>\"Ingresa tus datos personales y de tu vuelo\"</em> whose only fields are flight data.",
   "act6_synth": "I can read the gap between proposal and build in public, which is a better position than having to describe it.",
+  "act6_sequel": "<strong>What I can claim:</strong> the design, prototype, evaluation and handoff of a platform live today. <strong>What I can't:</strong> its build, deployment or operation. <strong>What's next:</strong> six findings, one of them major, recorded for whoever runs it.",
   "act3_notice": "<strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation."
 }
