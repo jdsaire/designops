@@ -326,17 +326,23 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
   transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;
   outline:2px solid var(--color-brand-black);}
-.gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
-  font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
-.gantt__milestone-label--below{top:auto; bottom:.1rem;}
-.gantt__milestone-label--end{transform:translateX(calc(-100% + .45rem));}
-.gantt__milestone-label--start{transform:translateX(-.45rem);}
 .gantt__pr{color:var(--color-brand-purple); font-weight:var(--fw-semibold); margin-right:.35em;}
 /* A closed epic shows its pull requests' diamonds; an open one hands them to its rows. */
 .gantt__milestone--overview{background:var(--color-brand-white);}
 .gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__milestone--overview{display:none;}
-.sched__guide{margin-bottom:1rem;}
-.gantt + .sched__guide{margin-top:clamp(2.5rem,5vw,3.5rem);}
+/* The two reading panels sit side by side where they open as a side panel (≥1024),
+   and stack where they open inline, so an open body keeps the full column. */
+.sched__ctas{display:flex; flex-direction:column; margin-bottom:1rem;}
+@media (min-width:1024px){ .sched__ctas{flex-direction:row; gap:2.5rem; align-items:flex-start;} }
+/* The first schedule, listed: each epic once, then its tasks with their dates. */
+.sched__first{margin-top:1.25rem;}
+.sched__epic + .sched__epic{margin-top:1.5rem;}
+.sched__epic-h{display:flex; flex-wrap:wrap; gap:.2rem .75rem; font-size:.875rem; color:var(--color-text-dim);}
+.sched__epic-h b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.sched__tasks{list-style:none; margin:.6rem 0 0; padding:0; border-top:1px solid var(--color-border-soft);}
+.sched__tasks li{display:flex; justify-content:space-between; gap:1rem; padding:.5rem 0;
+  border-bottom:1px solid var(--color-border-soft); font-size:.875rem; color:var(--color-text-muted);}
+.sched__win{white-space:nowrap; color:var(--color-text-dim);}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
@@ -760,25 +766,19 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="sch_lede">Two charts: the single-page epics first, then the multi-page work as pull requests.</p>
     </div>
 
-    <div class="reveal sched__guide io" data-act="sch1">
-      <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="How to read the single-page chart" data-panel-title-key="sch_g1_rv_btn" data-i18n="sch_g1_rv_btn">How to read the single-page chart</button>
-      <div class="reveal__body reveal__body--poster" id="rv-sch1">
-        <p data-i18n-html="sch_g1_rv_txt">Two epics, reconstructed from the public commit history of jdigital and legacy-desops, summed: 24 Apr – 04 Jul 2026. <strong>Each bar runs from an epic's first commit to its last</strong>; open an epic to see its tasks. 32 active build-days: three June dates carried document uploads, not site code, and are excluded.</p>
+    <div class="sched__ctas io">
+      <div class="reveal" data-act="sch">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the chart" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">How to read the chart</button>
+        <div class="reveal__body reveal__body--poster" id="rv-sch2">
+          <p data-i18n-html="sch_g2_rv_txt">Five stages of work from pull requests #18–#32, 28 Aug – 26 Sep 2026. <strong>Each bar runs from a stage's first commit to its last, and each diamond is a pull request on the day it merged</strong>, in Lima time. Open a stage to see its pull requests, or use the chips to show merge dates and commits.</p>
+        </div>
       </div>
-    </div>
-
-    <div class="gantt io" id="gantt">
-      <div class="gantt__chart" id="ganttChart">
-        <div class="gantt__grid" id="ganttGrid" role="tree" data-i18n-aria="sch_g1_aria"
-             aria-label="The single-page build on a calendar axis: two epics with task rows, sized in days."
-             ></div>
-      </div>
-    </div>
-
-    <div class="reveal sched__guide io" data-act="sch2">
-      <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the multi-page chart" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">How to read the multi-page chart</button>
-      <div class="reveal__body reveal__body--poster" id="rv-sch2">
-        <p data-i18n-html="sch_g2_rv_txt">Five clusters of work, from pull requests #18–#32 in jdsaire/designops, 28 Aug – 26 Sep 2026. <strong>Each bar runs from a cluster's first commit to its last, and each diamond is one pull request on the day it merged</strong>, in Lima time. Clusters overlap, so a day can count in more than one row.</p>
+      <div class="reveal" data-act="sch">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="The first portfolio schedule" data-panel-title-key="sch_first_btn" data-i18n="sch_first_btn">The first portfolio schedule</button>
+        <div class="reveal__body reveal__body--poster" id="rv-sch1">
+          <p data-i18n-html="sch_first_txt">The single page came first: two epics, 24 Apr – 04 Jul 2026, from the public commit history of jdigital and legacy-desops. <strong>Its work went organism by organism, inside one scroll.</strong> 32 active build-days; three June dates carried document uploads, not site code, and are excluded.</p>
+          <div class="sched__first" id="schedFirst"></div>
+        </div>
       </div>
     </div>
 
@@ -1292,8 +1292,9 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
    object below is only the first paint, and each value equals its
    key's EN value.
 
-   Sources: the single-page epics from the public commit history of
-   jdsaire/jdigital and jdsaire/legacy-desops. The multi-page stages
+   Sources: the first schedule (listed in its panel, not charted) from
+   the public commit history of jdsaire/jdigital and jdsaire/legacy-desops.
+   The multi-page stages
    from this repository's merged pull requests #18–#32: each bar runs
    from its first commit to its last, and each pull request is a
    diamond on its merge date, all in Lima time.
@@ -1303,16 +1304,14 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
   var DAY = 86400000;
   var EN = {
-    sch_axis_phase:'Phase', sch_axis_cluster:'Cluster', sch_axis_window:'Window',
+    sch_axis_cluster:'Cluster', sch_axis_window:'Window',
     sch_aria_months:'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec',
     sch_commits_1:'{n} commit', sch_commits_n:'{n} commits',
     sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
     sch_active_1:'{n} active day', sch_active_n:'{n} active days',
     sch_span_days:'{n}d',
     sch_aria_bar:'{name}, {window} 2026, {days} days', sch_aria_bar1:'{name}, {window} 2026, {days} day',
-    sch_aria_totals:'{name} totals: {window} 2026, {commits}, {prs}',
     sch_aria_ctotals:'{name} totals: {window} 2026, {commits}, {prs}, {active}',
-    sch_aria_ms:'Milestone: {name}, {date} 2026',
     sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026',
     gantt_expand:'Expand all', gantt_collapse:'Collapse all'
   };
@@ -1321,7 +1320,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
   function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
 
-  /* cfg: { root, grid, axisStart, axisEnd, axisKey?, ticks?, data:{ epics, milestones? } }
+  /* cfg: { root, grid, axisStart, axisEnd, axisKey, ticks?, layers?, data:{ epics } }
      Ticks are month starts unless the instance lists its own dates. */
   function renderSchedule(cfg){
     var root = document.getElementById(cfg.root);
@@ -1329,7 +1328,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     var DATA = cfg.data;
     var AXIS_START = cfg.axisStart;
     var grid = document.getElementById(cfg.grid);
-    var MILESTONES = (DATA.milestones || []).slice();
+    var MILESTONES = [];
 
     /* ---------- Derived layout: calendar days ---------- */
     function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
@@ -1341,10 +1340,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     DATA.epics.forEach(function(epic){
       var starts = epic.tasks.map(function(t){ return offset(t.start); });
       var ends   = epic.tasks.map(function(t){ return offset(t.end); });
-      /* A band's window is declared from the copy lock, not derived from its task
-         rows: jdigital's repository ran to 18 Jun while its last three dates carried
-         document uploads rather than site code and hold no task. The drawn bar still
-         has to contain every task it owns, so it spans whichever runs later. */
+      /* An epic's declared window and its tasks' extent can differ; the drawn bar
+         contains every task it owns, so it spans whichever runs wider. */
       epic.startOff = Math.min(Math.min.apply(null, starts), offset(epic.start));
       epic.endOff   = Math.max(Math.max.apply(null, ends),   offset(epic.end));
       epic.days = epic.endOff - epic.startOff + 1;
@@ -1399,10 +1396,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       }
 
       /* Milestones: any number per row, each at the centre of its day. Diamonds that
-         share a day stack vertically on that day. A named milestone carries a label;
-         consecutive labels alternate above and below, and a label near either end of
-         the axis anchors inward. A pull request's diamond carries no label: the row it
-         sits on, or the row it opens onto, names it. */
+         share a day stack vertically on that day. A pull request's diamond carries no
+         label: the row it sits on, or the row it opens onto, names it. */
       function milestonesHtml(rowId){
         var groups = {}, dates = [];
         MILESTONES.forEach(function(m){
@@ -1411,36 +1406,25 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
           groups[m.at].push(m);
         });
         dates.sort();
-        var labelled = 0;
         return dates.map(function(at){
-          var ms = groups[at], n = ms.length, x = (offset(at) + 0.5) / TOTAL_DAYS, l = pct(offset(at) + 0.5);
-          var diamonds = ms.map(function(m, i){
+          var ms = groups[at], n = ms.length, l = pct(offset(at) + 0.5);
+          return ms.map(function(m, i){
             var dy = (i - (n - 1) / 2) * 1.25;
-            var aria = m.pr ? fill(t('sch_aria_pr'), { n:m.pr, name:nameOf(m.task), date:fmt(at) })
-                            : fill(t('sch_aria_ms'), { name:nameOf(m), date:fmt(at) });
-            return '<span class="gantt__milestone' + (m.overview ? ' gantt__milestone--overview' : '') + '"' +
-                   (m.pr ? ' data-layer="ms"' : '') +
+            return '<span class="gantt__milestone' + (m.overview ? ' gantt__milestone--overview' : '') + '" data-layer="ms"' +
                    ' style="left:' + l + (dy ? '; top:calc(50% + ' + dy + 'rem)' : '') +
-                   '" role="img" aria-label="' + esc(aria) + '"></span>';
+                   '" role="img" aria-label="' + esc(fill(t('sch_aria_pr'), { n:m.pr, name:nameOf(m.task), date:fmt(at) })) + '"></span>';
           }).join('');
-          var named = ms.filter(function(m){ return !m.pr; });
-          if(!named.length) return diamonds;
-          var edge = x > 0.9 ? ' gantt__milestone-label--end' : x < 0.1 ? ' gantt__milestone-label--start' : '';
-          var label = named.map(nameOf).join(' · ');
-          return diamonds + '<span class="gantt__milestone-label' + (labelled++ % 2 ? ' gantt__milestone-label--below' : '') + edge +
-                 '" style="left:' + l + '" aria-hidden="true">' + esc(label) + '</span>';
         }).join('');
       }
 
-      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t(cfg.axisKey || 'sch_axis_phase')) + '</div>' +
+      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t(cfg.axisKey)) + '</div>' +
                  '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
                  '<div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
 
       DATA.epics.forEach(function(epic){
         var name = nameOf(epic), commits = count('sch_commits', epic.commits), prs = count('sch_prs', epic.prs);
-        var active = epic.active != null ? count('sch_active', epic.active) : null;
-        var totals = active ? fill(t('sch_aria_ctotals'), { name:name, window:win(epic), commits:commits, prs:prs, active:active })
-                            : fill(t('sch_aria_totals'),  { name:name, window:win(epic), commits:commits, prs:prs });
+        var active = count('sch_active', epic.active);
+        var totals = fill(t('sch_aria_ctotals'), { name:name, window:win(epic), commits:commits, prs:prs, active:active });
         /* One shape per level: an epic states its window, its commits, its pull
            requests and, for a stage, its active days, one per line; a task states its
            window, and a pull request its commits when that layer is on. */
@@ -1452,7 +1436,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
               milestonesHtml(epic.id) + '</div>' +
             '<div class="gantt__row-summary" aria-label="' + esc(totals) + '">' +
               '<b>' + win(epic) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span>' +
-              (active ? '<span class="gantt__days">' + esc(active) + '</span>' : '') + '</div>' +
+              '<span class="gantt__days">' + esc(active) + '</span></div>' +
           '</div>' +
           '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
         epic.tasks.forEach(function(task){
@@ -1550,33 +1534,48 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     return { draw: draw };
   }
 
+  /* The first schedule, as a list inside its reading panel: each epic once, with
+     its window, commits and pull requests, then its tasks and their dates. */
+  function listSchedule(cfg){
+    var el = document.getElementById(cfg.root);
+    if(!el) return null;
+    function draw(dict){
+      function t(k){ return dict && dict[k] !== undefined ? dict[k] : EN[k]; }
+      function count(base, n){ return fill(t(base + (n === 1 ? '_1' : '_n')), { n:n }); }
+      var mon = t('sch_aria_months').split(' ');
+      function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
+      function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
+      function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
+      el.innerHTML = cfg.epics.map(function(ep){
+        return '<div class="sched__epic"><div class="sched__epic-h"><b>' + esc(nameOf(ep)) + '</b><span>' +
+          win(ep) + ' · ' + esc(count('sch_commits', ep.commits)) + ' · ' + esc(count('sch_prs', ep.prs)) + '</span></div>' +
+          '<ul class="sched__tasks">' + ep.tasks.map(function(tk){
+            return '<li><span>' + esc((dict && dict[tk.id + '_t']) || tk.name) + '</span><span class="sched__win">' + win(tk) + '</span></li>';
+          }).join('') + '</ul></div>';
+      }).join('');
+    }
+    draw(null);
+    return { draw: draw };
+  }
+
   var instances = [
-    /* Chart 1 · the single-page build: epics 01 and 02, from the first commit to the
-       brief handoff. */
-    renderSchedule({
-      root:'gantt', grid:'ganttGrid',
-      axisStart:'2026-04-24', axisEnd:'2026-07-04',
-      data: {
-        epics: [
-          { id:'e1a', key:'sch_ep1', name:'01 Single Page', commits:240, prs:48, start:'2026-04-24', end:'2026-06-18', tasks:[
-              { id:'sch_e1', name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
-              { id:'sch_e2', name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
-              { id:'sch_e3', name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
-              { id:'sch_e4', name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
-              { id:'sch_e5', name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
-              { id:'sch_e6', name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
-            ]},
-          { id:'e1b', key:'sch_ep2', name:'02 Repo Hygiene', commits:46, prs:4, start:'2026-06-26', end:'2026-07-04', tasks:[
-              { id:'sch_e7', name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
-              { id:'sch_e8', name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
-              { id:'sch_e9', name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
-            ]}
-        ],
-        /* Milestones sit on measured dates only. */
-        milestones: [
-          { row:'e1b', at:'2026-07-04', key:'sch_ms_handoff', name:'Brief handoff' }
-        ]
-      }
+    listSchedule({
+      root:'schedFirst',
+      epics: [
+        { key:'sch_ep1', name:'01 Single Page', commits:240, prs:48, start:'2026-04-24', end:'2026-06-18', tasks:[
+            { id:'sch_e1', name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
+            { id:'sch_e2', name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
+            { id:'sch_e3', name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
+            { id:'sch_e4', name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
+            { id:'sch_e5', name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
+            { id:'sch_e6', name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
+          ]},
+        { key:'sch_ep2', name:'02 Repo Hygiene', commits:46, prs:4, start:'2026-06-26', end:'2026-07-04', tasks:[
+            { id:'sch_e7', name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
+            { id:'sch_e8', name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
+            { id:'sch_e9', name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
+          ]}
+      ]
     }),
     /* The multi-page build: from the first commit on 28 Aug to the merge of #32 on
        26 Sep. Each stage opens onto its pull requests; spans, active days and commits
