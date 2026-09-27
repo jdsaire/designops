@@ -1,13 +1,13 @@
 {
   "hero_read": "1 min read",
-  "hero_title": "The Airport Saga: three projects, one terminal.",
-  "hero_deck": "Follow one airport from three positions: a passenger app I prototyped, a lounge-booking redesign I proposed, and a payment platform live today.",
-  "hero_role1": "<b>Roles</b> — UX researcher · UX/UI designer · Usability tester",
-  "hero_role2": "<b>Duration</b> — 2024 – 2025",
-  "hero_role3": "<b>Scope</b> — UX research → UX design → prototyping → usability testing → handoff",
-  "hero_rv_txt": "Imagine one airport seen from three distances. First as an outsider: LimaFly, a passenger app for the whole airport day, which four people tested before I worked in the industry. Then as a candidate: a lounge-booking redesign that priced what the bad experience was costing in lost sales. Finally from inside the terminal: TUUA Transfer, a new fee on connecting international passengers, whose payment screens I designed, tested and handed to the team that built them.",
+  "hero_title": "Charging what was never charged",
+  "hero_deck": "Lima's airport had never charged international transfer passengers a fee. I designed the web channel to collect it, one of four ways to pay, and handed it over.",
+  "hero_role1": "<b>Roles</b> — Internal consultant · UX/UI designer · Planning coordinator",
+  "hero_role2": "<b>Duration</b> — May – Oct 2025 · Lima Airport Partners",
+  "hero_role3": "<b>Scope</b> — Planning → UX/UI design → prototyping → evaluation → handoff",
+  "cta_live": "Open the live TUUA platform",
+  "hero_rv_txt": "A passenger lands in Lima and connects to another international flight. At the new terminal they owe a fee the airport had never charged, and no channel existed to collect it. Five areas each held a piece of the problem. As the internal consultant from Processes and Innovation, I coordinated the planning between them, designed the web payment flow, evaluated it and handed it to the team that built it. TUUA Transfer runs today, charging 130,000+ international transfer passengers a month.",
   "act3_eyebrow": "Chapter 03 · TUUA Transfer",
-  "act3_meta": "May 2025 – Oct 2025 · Especialista en Procesos e Innovación, Lima Airport Partners",
   "act3_verdict": "A fee the airport had never charged, through a channel that did not exist. I designed the channel and handed it over.",
   "act3_scan1": "TUUA Transfer is a charge on international-transfer passengers at Jorge Chávez and a new line of airport revenue. It runs today against more than 130,000 of them a month.",
   "act3_scan2": "Five divisions each held a piece of it — Finanzas, Operaciones Aeroportuarias, TI, Comercial and Reputación — and engineering was waiting on a definition.",
@@ -27,6 +27,5 @@
   "act3_cp_scan4": "Eligibility is gated by a self-declaration click — <em>\"Soy ese tipo de pasajero\"</em> — rather than the automatic agreement check the technical scope specified. To my own knowledge of the build, that check was never implemented as written. This pass could not see past its own boundary to confirm it.",
   "act3_cp_findings": "Six findings: one major, five minor, none critical. The major one is a screen headed <em>\"Ingresa tus datos personales y de tu vuelo\"</em> whose only fields are flight data.",
   "act3_cp_synth": "I can read the gap between proposal and build in public, which is a better position than having to describe it.",
-  "act3_notice": "<strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.",
-  "cta_live": "Open the live TUUA platform"
+  "act3_notice": "<strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation."
 }
