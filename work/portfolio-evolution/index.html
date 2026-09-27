@@ -267,7 +267,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         brief (work/yape-trust-verify-brief/index.html): epic rows with disclosure,
         task sub-rows, chips, SVG overlay, milestones, totals column. The axis is
         calendar time here, not cumulative story points, so rows carry real dates and
-        are free to leave gaps — the two dormant stretches are the point. ---- */
+        are free to leave gaps. Two instances: the single-page build, then the
+        multi-page build as clusters of pull requests. ---- */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
@@ -291,7 +292,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   text-align:right; font-size:.78rem; color:var(--color-text-muted); gap:.15rem;}
 .gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .gantt__days{color:var(--color-text-dim);}
-.gantt__days > span{white-space:nowrap;}
 .gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
 .gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
   color:var(--color-brand-white); background:none; border:0; padding:0; cursor:pointer; text-align:left;
@@ -314,9 +314,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
   font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
 .gantt__milestone-label--below{top:auto; bottom:.1rem;}
+.gantt__milestone-label--end{transform:translateX(calc(-100% + .45rem));}
+.gantt__milestone-label--start{transform:translateX(-.45rem);}
 .gantt__row-name{font-size:.9375rem; font-weight:var(--fw-semibold); color:var(--color-brand-white);}
 .gantt__row--cluster .gantt__row-field{min-height:4.25rem;}
-.gantt + .gantt, .gantt + .reveal{margin-top:clamp(2rem,4vw,3rem);}
+.sched__guide{margin-bottom:1rem;}
+.gantt + .sched__guide{margin-top:clamp(2.5rem,5vw,3.5rem);}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
@@ -740,11 +743,25 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="sch_lede">Move through epics – from v1 to the current web.</p>
     </div>
 
+    <div class="reveal sched__guide io" data-act="sch1">
+      <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="How to read the single-page chart" data-panel-title-key="sch_g1_rv_btn" data-i18n="sch_g1_rv_btn">How to read the single-page chart</button>
+      <div class="reveal__body reveal__body--poster" id="rv-sch1">
+        <p data-i18n-html="sch_g1_rv_txt">Two epics, reconstructed from the public commit history of jdigital and legacy-desops, summed: 24 Apr – 04 Jul 2026. <strong>Each bar runs from an epic's first commit to its last</strong>; open an epic to see its tasks. 32 active build-days: three June dates carried document uploads, not site code, and are excluded.</p>
+      </div>
+    </div>
+
     <div class="gantt io" id="gantt">
       <div class="gantt__chart" id="ganttChart">
         <div class="gantt__grid" id="ganttGrid" role="tree" data-i18n-aria="sch_g1_aria"
              aria-label="The single-page build on a calendar axis: two epics with task rows, sized in days."
              ></div>
+      </div>
+    </div>
+
+    <div class="reveal sched__guide io" data-act="sch2">
+      <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the multi-page chart" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">How to read the multi-page chart</button>
+      <div class="reveal__body reveal__body--poster" id="rv-sch2">
+        <p data-i18n-html="sch_g2_rv_txt">Five clusters of work, from pull requests #18–#32 in jdsaire/designops, 28 Aug – 26 Sep 2026. <strong>Each bar runs from a cluster's first commit to its last, and each diamond is one pull request on the day it merged</strong>, in Lima time. Clusters overlap, so a day can count in more than one row.</p>
       </div>
     </div>
 
@@ -754,11 +771,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
              aria-label="The multi-page build on a calendar axis: five clusters, each pull request a diamond on its merge date."
              ></div>
       </div>
-      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Every window it draws is also stated in the note below.</p></noscript>
-
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Each chart's reading guide states the window it draws and its source.</p></noscript>
     </div>
-
-    <p class="dash__foot io" data-i18n="sch_note" style="border-top:0; padding-left:0;">Reconstructed from public commit history: github.com/jdsaire/jdigital and github.com/jdsaire/legacy-desops summed, 24 Apr – 04 Jul 2026; github.com/jdsaire/designops, 10 Jul – 08 Sep 2026. 32 active build-days on the first build — three further June dates carried document uploads, not site code, and are excluded. Nothing was committed between 25 July and 28 August.</p>
   </div>
 </section>
 
@@ -1359,7 +1373,9 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
         });
         dates.sort();
         return dates.map(function(at, gi){
-          var ms = groups[at], n = ms.length, l = pct(offset(at) + 0.5);
+          var ms = groups[at], n = ms.length, x = (offset(at) + 0.5) / TOTAL_DAYS, l = pct(offset(at) + 0.5);
+          /* A label near either end of the axis anchors inward so it stays in the field. */
+          var edge = x > 0.9 ? ' gantt__milestone-label--end' : x < 0.1 ? ' gantt__milestone-label--start' : '';
           var diamonds = ms.map(function(m, i){
             var dy = (i - (n - 1) / 2) * 1.25;
             var aria = m.pr ? fill(t('sch_aria_pr'), { n:m.pr, cluster:rowName, date:fmt(at) })
@@ -1368,7 +1384,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
                    '" role="img" aria-label="' + esc(aria) + '"></span>';
           }).join('');
           var label = ms.map(function(m){ return m.pr ? fill(t('sch_ms_pr'), { n:m.pr }) : nameOf(m); }).join(' · ');
-          return diamonds + '<span class="gantt__milestone-label' + (gi % 2 ? ' gantt__milestone-label--below' : '') +
+          return diamonds + '<span class="gantt__milestone-label' + (gi % 2 ? ' gantt__milestone-label--below' : '') + edge +
                  '" style="left:' + l + '" aria-hidden="true">' + esc(label) + '</span>';
         }).join('');
       }
@@ -1377,8 +1393,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
                  '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
                  '<div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
 
-      /* A cluster states its window, its commits and pull requests, and its active
-         days. Its bar carries no day count: the diamonds sit on it. */
+      /* A cluster states its window, its commits, its pull requests and its active
+         days, one per line. Its bar carries no day count: the diamonds sit on it. */
       (DATA.clusters || []).forEach(function(c){
         var name = nameOf(c), commits = count('sch_commits', c.commits), prs = count('sch_prs', c.prs), active = count('sch_active', c.active);
         html += '<div class="gantt__epic gantt__epic--cluster" data-epic="' + c.id + '">' +
@@ -1387,7 +1403,8 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
             '<div class="gantt__row-field">' + barHtml(c, 'gantt__bar--task', name, false, true) +
               milestonesHtml(c.id, name) + '</div>' +
             '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(c), commits:commits, prs:prs, active:active })) + '">' +
-              '<b>' + win(c) + '</b><span class="gantt__days"><span>' + esc(commits) + '</span> · <span>' + esc(prs) + '</span></span><span class="gantt__days">' + esc(active) + '</span></div>' +
+              '<b>' + win(c) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span>' +
+              '<span class="gantt__days">' + esc(active) + '</span></div>' +
           '</div></div>';
       });
 
