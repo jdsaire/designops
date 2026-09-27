@@ -1229,35 +1229,45 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
    points recorded, so the axis is calendar time: every row
    carries a real start and end date, and rows may leave gaps.
 
+   Every string the organism draws, visible or assistive, comes from
+   the brief's dictionary and is redrawn on each i18n:changed. The EN
+   object below is only the first paint, and each value equals its
+   key's EN value.
+
    Sources: E1a and E1b from the public commit history of
    jdsaire/jdigital and jdsaire/legacy-desops. E2 from this
-   repository's own merged pull-request spine. The one row not
-   sourced to a commit is badged on its face.
+   repository's own merged pull-request spine.
    ============================================================ */
 (function scheduleOrganism(){
   'use strict';
 
   var DAY = 86400000;
-  var MN  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var EN = {
+    sch_axis_phase:'Phase', sch_axis_window:'Window',
+    sch_aria_months:'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec',
+    sch_commits_1:'{n} commit', sch_commits_n:'{n} commits',
+    sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
+    sch_span_days:'{n}d',
+    sch_aria_bar:'{name}, {window} 2026, {days} days', sch_aria_bar1:'{name}, {window} 2026, {days} day',
+    sch_aria_totals:'{name} totals: {window} 2026, {commits}, {prs}',
+    sch_aria_ms:'Milestone: {name}, {date} 2026'
+  };
   function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
-  function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + MN[+p[1]-1]; }
-  function window_(item){
-    return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end);
-  }
   function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
   function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
 
-  /* cfg: { root, chart, grid, axisStart, axisEnd, data:{ epics, milestones } } */
+  /* cfg: { root, grid, axisStart, axisEnd, data:{ epics, milestones } } */
   function renderSchedule(cfg){
     var root = document.getElementById(cfg.root);
     if(!root) return null;
     var DATA = cfg.data;
     var AXIS_START = cfg.axisStart;
+    var grid = document.getElementById(cfg.grid);
 
     /* ---------- Derived layout: calendar days ---------- */
     function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
     var TOTAL_DAYS = offset(cfg.axisEnd) + 1;
-
     /* An end date is inclusive, so a one-day task is one day wide, not zero. */
     function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
     function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
@@ -1265,154 +1275,129 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     DATA.epics.forEach(function(epic){
       var starts = epic.tasks.map(function(t){ return offset(t.start); });
       var ends   = epic.tasks.map(function(t){ return offset(t.end); });
-      epic.startOff = Math.min.apply(null, starts);
-      epic.endOff   = Math.max.apply(null, ends);
       /* A band's window is declared from the copy lock, not derived from its task
          rows: jdigital's repository ran to 18 Jun while its last three dates carried
          document uploads rather than site code and hold no task. The drawn bar still
          has to contain every task it owns, so it spans whichever runs later. */
-      epic.startOff = Math.min(epic.startOff, offset(epic.start));
-      epic.endOff   = Math.max(epic.endOff,   offset(epic.end));
+      epic.startOff = Math.min(Math.min.apply(null, starts), offset(epic.start));
+      epic.endOff   = Math.max(Math.max.apply(null, ends),   offset(epic.end));
       epic.days = epic.endOff - epic.startOff + 1;
-      /* Derived sums, kept as the internal record and deliberately NOT displayed:
-         they are named apart from epic.commits, which is the declared cell string. */
-      epic.rowCommits = epic.tasks.reduce(function(a,t){ return a + (t.commits || 0); }, 0);
-      epic.taskDays   = epic.tasks.reduce(function(a,t){ return a + spanOf(t); }, 0);
     });
 
-    var grid = document.getElementById(cfg.grid);
+    function draw(dict){
+      function t(k){ return dict && dict[k] !== undefined ? dict[k] : EN[k]; }
+      function count(base, n){ return fill(t(base + (n === 1 ? '_1' : '_n')), { n:n }); }
+      var mon = t('sch_aria_months').split(' ');
+      function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
+      function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
+      function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
+      function taskName(task){ return (isLocked(task) && dict && dict[task.id + '_t']) || task.name; }
 
-    /* Month ticks: the axis start carries its own month at 0, then every first of
-       the month inside the window. */
-    function ticksHtml(){
-      var h = '<span class="gantt__tick" style="left:0">' + MN[+AXIS_START.slice(5,7)-1] + '</span>' +
-              '<span class="gantt__gridline" style="left:0"></span>';
-      var y = +AXIS_START.slice(0,4), m = +AXIS_START.slice(5,7);
-      for(;;){
-        m++; if(m > 12){ m = 1; y++; }
-        var iso = y + '-' + (m < 10 ? '0' : '') + m + '-01';
-        if(d(iso) > d(cfg.axisEnd)) break;
-        var l = pct(offset(iso));
-        h += '<span class="gantt__tick" style="left:' + l + '">' + MN[m-1] + '</span>';
-        h += '<span class="gantt__gridline" style="left:' + l + '"></span>';
+      /* Month ticks: the axis start carries its own month at 0, then every first of
+         the month inside the window. */
+      function ticksHtml(){
+        var h = '<span class="gantt__tick" style="left:0">' + mon[+AXIS_START.slice(5,7)-1] + '</span>' +
+                '<span class="gantt__gridline" style="left:0"></span>';
+        var y = +AXIS_START.slice(0,4), m = +AXIS_START.slice(5,7);
+        for(;;){
+          m++; if(m > 12){ m = 1; y++; }
+          var iso = y + '-' + (m < 10 ? '0' : '') + m + '-01';
+          if(d(iso) > d(cfg.axisEnd)) break;
+          var l = pct(offset(iso));
+          h += '<span class="gantt__tick" style="left:' + l + '">' + mon[m-1] + '</span>';
+          h += '<span class="gantt__gridline" style="left:' + l + '"></span>';
+        }
+        return h;
       }
-      return h;
-    }
 
-    function barHtml(item, cls, id, isEpic){
-      var days = isEpic ? item.days : spanOf(item);
-      var left = isEpic ? item.startOff : offset(item.start);
-      var mod  = '';
-      if(item.flag === 'principal') mod = ' gantt__bar--principal';
-      var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
-      var label = '<span class="gantt__span">' + days + 'd</span>';
-      return '<div class="gantt__bar ' + cls + mod + '" data-bar="' + id + '"' +
-             (item.flag ? ' data-flag="' + item.flag + '"' : '') +
-             ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
-             item.name + ', ' + window_(item) + ' 2026, ' + days + ' days' + provenance + '">' + label + '</div>';
-    }
-    /* One shape per level, so no two cells in the column carry different fields.
-       An epic states its window, its commits and its pull requests, one per line.
-       A task states its window and nothing else. */
-    function summaryHtml(item, isEpic){
-      if(isEpic) return '<b>' + window_(item) + '</b>' +
-                        '<span class="gantt__days">' + item.commits + '</span>' +
-                        '<span class="gantt__days">' + item.prs + '</span>';
-      return '<b>' + window_(item) + '</b>';
-    }
-
-    var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div>' +
-               '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
-               '<div class="gantt__axis-summary">Window</div></div>';
-
-    DATA.epics.forEach(function(epic){
-      html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
-        '<div class="gantt__row">' +
-          '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
-            '<span class="gantt__marker" aria-hidden="true">›</span>' + epic.name + '</button></div>' +
-          '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id, true) +
-            '<span data-ms-slot="' + epic.id + '"></span></div>' +
-          '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + window_(epic) + ' 2026, ' + epic.commits + ', ' + epic.prs + '">' + summaryHtml(epic, true) + '</div>' +
-        '</div>' +
-        '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
-      epic.tasks.forEach(function(t){
-        html += '<li class="gantt__task-row" data-task="' + t.id + '">' +
-          '<span class="gantt__task-label">' +
-            '<span' + (isLocked(t) ? ' data-i18n="' + t.id + '_t"' : '') + '>' + t.name + '</span>' +
-          '</span>' +
-          '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id, false) + '</span>' +
-          '<span class="gantt__task-summary">' + summaryHtml(t, false) + '</span></li>';
-      });
-      html += '</ul></div>';
-    });
-    grid.innerHTML = html;
-
-    var drawnMs = [];
-    DATA.milestones.forEach(function(m){
-      var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
-      if(!slot) return;
-      drawnMs.push(m);
-      var l = pct(offset(m.at));
-      slot.outerHTML = '<span>' +
-        '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="Milestone: ' +
-        m.name + ', ' + window_({start:m.at, end:m.at}) + ' 2026"></span>' +
-        '<span class="gantt__milestone-label" style="left:' + l + '">' + m.name + '</span></span>';
-    });
-
-    /* ---------- Assistive labels in the active language ----------
-       The labels above are drawn in English at load. On every i18n:changed the
-       loader hands over the merged dictionary, and the labels are rebuilt from its
-       sch_aria_* templates, so a screen reader hears the language on screen. */
-    function relabel(dict){
-      if(!dict.sch_aria_bar || !dict.sch_aria_months) return;
-      var mon = dict.sch_aria_months.split(' ');
-      function fmtL(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
-      function winL(item){ return item.start === item.end ? fmtL(item.start) : fmtL(item.start) + ' – ' + fmtL(item.end); }
-      function bar(item, isEpic){
-        var el = grid.querySelector('[data-bar="' + item.id + '"]');
-        if(!el) return;
+      function barHtml(item, cls, name, isEpic){
         var days = isEpic ? item.days : spanOf(item);
-        var name = (!isEpic && isLocked(item) && dict[item.id + '_t']) || item.name;
-        var tpl = days === 1 && dict.sch_aria_bar1 ? dict.sch_aria_bar1 : dict.sch_aria_bar;
-        var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
-        el.setAttribute('aria-label', fill(tpl, { name:name, window:winL(item), days:days }) + provenance);
+        var left = isEpic ? item.startOff : offset(item.start);
+        var tpl = days === 1 ? t('sch_aria_bar1') : t('sch_aria_bar');
+        return '<div class="gantt__bar ' + cls + '" data-bar="' + item.id + '"' +
+               ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
+               esc(fill(tpl, { name:name, window:win(item), days:days })) + '">' +
+               '<span class="gantt__span">' + esc(fill(t('sch_span_days'), { n:days })) + '</span></div>';
       }
+
+      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t('sch_axis_phase')) + '</div>' +
+                 '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
+                 '<div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
+
       DATA.epics.forEach(function(epic){
-        bar(epic, true);
-        var sum = grid.querySelector('[data-epic="' + epic.id + '"] .gantt__row-summary');
-        if(sum && dict.sch_aria_totals) sum.setAttribute('aria-label',
-          fill(dict.sch_aria_totals, { name:epic.name, window:winL(epic), commits:epic.commits, prs:epic.prs }));
-        epic.tasks.forEach(function(t){ bar(t, false); });
+        var name = nameOf(epic), commits = count('sch_commits', epic.commits), prs = count('sch_prs', epic.prs);
+        /* One shape per level: an epic states its window, its commits and its pull
+           requests, one per line; a task states its window and nothing else. */
+        html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
+          '<div class="gantt__row">' +
+            '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
+              '<span class="gantt__marker" aria-hidden="true">›</span>' + esc(name) + '</button></div>' +
+            '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', name, true) +
+              '<span data-ms-slot="' + epic.id + '"></span></div>' +
+            '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_totals'), { name:name, window:win(epic), commits:commits, prs:prs })) + '">' +
+              '<b>' + win(epic) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span></div>' +
+          '</div>' +
+          '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
+        epic.tasks.forEach(function(task){
+          var tn = taskName(task);
+          html += '<li class="gantt__task-row" data-task="' + task.id + '">' +
+            '<span class="gantt__task-label">' +
+              '<span' + (isLocked(task) ? ' data-i18n="' + task.id + '_t"' : '') + '>' + esc(tn) + '</span>' +
+            '</span>' +
+            '<span class="gantt__task-field">' + barHtml(task, 'gantt__bar--task', tn, false) + '</span>' +
+            '<span class="gantt__task-summary"><b>' + win(task) + '</b></span></li>';
+        });
+        html += '</ul></div>';
       });
-      if(dict.sch_aria_ms) Array.prototype.forEach.call(grid.querySelectorAll('.gantt__milestone'), function(el, i){
-        var m = drawnMs[i];
-        if(m) el.setAttribute('aria-label', fill(dict.sch_aria_ms, { name:m.name, date:fmtL(m.at) }));
+
+      /* Keep each epic's disclosure state across a redraw. */
+      var open = {};
+      Array.prototype.forEach.call(grid.querySelectorAll('.gantt__toggle[aria-expanded="true"]'), function(b){
+        open[b.getAttribute('aria-controls')] = true;
+      });
+      grid.innerHTML = html;
+      Object.keys(open).forEach(function(id){
+        var b = grid.querySelector('[aria-controls="' + id + '"]');
+        if(b) setExpanded(b, true);
+      });
+
+      DATA.milestones.forEach(function(m){
+        var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
+        if(!slot) return;
+        var l = pct(offset(m.at)), mn = nameOf(m);
+        slot.outerHTML = '<span>' +
+          '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="' +
+          esc(fill(t('sch_aria_ms'), { name:mn, date:fmt(m.at) })) + '"></span>' +
+          '<span class="gantt__milestone-label" style="left:' + l + '">' + esc(mn) + '</span></span>';
       });
     }
 
     /* ---------- Zoom: expand / collapse ----------
-       Individual disclosure is the only mechanism. Epics stay collapsed until opened. */
-    var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+       Individual disclosure is the only mechanism. Epics stay collapsed until opened.
+       Delegated from the grid, so a redraw keeps its handlers. */
     function setExpanded(btn, expanded){
       btn.setAttribute('aria-expanded', String(expanded));
       var list = document.getElementById(btn.getAttribute('aria-controls'));
       if(list) list.hidden = !expanded;
     }
-    toggles.forEach(function(btn, i){
-      btn.addEventListener('click', function(){
-        setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
-      });
-      btn.addEventListener('keydown', function(e){
-        var nx = null;
-        if(e.key === 'ArrowDown') nx = toggles[i+1];
-        if(e.key === 'ArrowUp')   nx = toggles[i-1];
-        if(e.key === 'Home')      nx = toggles[0];
-        if(e.key === 'End')       nx = toggles[toggles.length-1];
-        if(nx){ e.preventDefault(); nx.focus(); }
-      });
+    grid.addEventListener('click', function(e){
+      var btn = e.target.closest('.gantt__toggle');
+      if(btn) setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
+    });
+    grid.addEventListener('keydown', function(e){
+      var btn = e.target.closest('.gantt__toggle');
+      if(!btn) return;
+      var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
+      var i = toggles.indexOf(btn), nx = null;
+      if(e.key === 'ArrowDown') nx = toggles[i+1];
+      if(e.key === 'ArrowUp')   nx = toggles[i-1];
+      if(e.key === 'Home')      nx = toggles[0];
+      if(e.key === 'End')       nx = toggles[toggles.length-1];
+      if(nx){ e.preventDefault(); nx.focus(); }
     });
 
-    return { relabel: relabel };
+    draw(null);
+    return { draw: draw };
   }
 
   /* The record stops at MEASURED_TO. Nothing is drawn past it. */
@@ -1420,37 +1405,37 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
   var instances = [
     renderSchedule({
-      root:'gantt', chart:'ganttChart', grid:'ganttGrid',
+      root:'gantt', grid:'ganttGrid',
       axisStart:'2026-04-24', axisEnd:'2026-09-08',
       data: {
         epics: [
-          { id:'e1a', name:'01 Single Page', commits:'240 commits', prs:'48 PRs', start:'2026-04-24', end:'2026-06-18', tasks:[
-              { id:'sch_e1', window:"24–28 Apr · 5 days", name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
-              { id:'sch_e2', window:"30 Apr – 06 May · 5 days", name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
-              { id:'sch_e3', window:"07–12 May · 5 days", name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
-              { id:'sch_e4', window:"19–28 May · 4 days", name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
-              { id:'sch_e5', window:"30–31 May · 2 days", name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
-              { id:'sch_e6', window:"03–07 Jun · 5 days", name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
+          { id:'e1a', key:'sch_ep1', name:'01 Single Page', commits:240, prs:48, start:'2026-04-24', end:'2026-06-18', tasks:[
+              { id:'sch_e1', name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
+              { id:'sch_e2', name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
+              { id:'sch_e3', name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
+              { id:'sch_e4', name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
+              { id:'sch_e5', name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
+              { id:'sch_e6', name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
             ]},
-          { id:'e1b', name:'02 Repo Hygiene', commits:'46 commits', prs:'4 PRs', start:'2026-06-26', end:'2026-07-04', tasks:[
-              { id:'sch_e7', window:"26–27 Jun · 2 days", name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
-              { id:'sch_e8', window:"29–30 Jun · 2 days", name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
-              { id:'sch_e9', window:"04 Jul · 1 day", name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
+          { id:'e1b', key:'sch_ep2', name:'02 Repo Hygiene', commits:46, prs:4, start:'2026-06-26', end:'2026-07-04', tasks:[
+              { id:'sch_e7', name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
+              { id:'sch_e8', name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
+              { id:'sch_e9', name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
             ]},
-          { id:'e2', name:'03 Multi Page', commits:'103 commits', prs:'20 PRs', start:'2026-07-10', end:'2026-09-08', tasks:[
-              { id:'e2t0', name:"History reset and per-organism rebuild", start:'2026-07-10', end:'2026-07-11', commits:2 },
-              { id:'e2t1', name:"Multi-page strategy runs", start:'2026-07-12', end:'2026-07-25', commits:38 },
-              { id:'e2t6', name:"Defect inventory", start:'2026-08-28', end:'2026-08-29', commits:2 },
-              { id:'e2t7', name:"AccreditaPass brief", start:'2026-08-30', end:'2026-08-30', commits:14 },
-              { id:'e2t8', name:"Home reallocation", start:'2026-08-31', end:'2026-08-31', commits:13 },
-              { id:'e2t9', name:"Trust-Verify relink", start:'2026-09-01', end:'2026-09-01', commits:4 },
-              { id:'e2t10', name:"Airport brief and global mechanisms", start:'2026-09-05', end:'2026-09-05', commits:20 },
-              { id:'e2t11', name:"Vector asset pass", start:'2026-09-06', end:'2026-09-06', commits:10 }
+          { id:'e2', name:'03 Multi Page', commits:103, prs:20, start:'2026-07-10', end:'2026-09-08', tasks:[
+              { id:'e2t0', name:"History reset and per-organism rebuild", start:'2026-07-10', end:'2026-07-11' },
+              { id:'e2t1', name:"Multi-page strategy runs", start:'2026-07-12', end:'2026-07-25' },
+              { id:'e2t6', name:"Defect inventory", start:'2026-08-28', end:'2026-08-29' },
+              { id:'e2t7', name:"AccreditaPass brief", start:'2026-08-30', end:'2026-08-30' },
+              { id:'e2t8', name:"Home reallocation", start:'2026-08-31', end:'2026-08-31' },
+              { id:'e2t9', name:"Trust-Verify relink", start:'2026-09-01', end:'2026-09-01' },
+              { id:'e2t10', name:"Airport brief and global mechanisms", start:'2026-09-05', end:'2026-09-05' },
+              { id:'e2t11', name:"Vector asset pass", start:'2026-09-06', end:'2026-09-06' }
             ]}
         ],
         /* Milestones sit on measured dates only. */
         milestones: [
-          { epic:'e1b', at:'2026-07-04', name:'Brief handoff' },
+          { epic:'e1b', at:'2026-07-04', key:'sch_ms_handoff', name:'Brief handoff' },
           { epic:'e2',  at:'2026-07-10', name:'History reset' },
           { epic:'e2',  at:MEASURED_TO, name:'Record ends' }
         ]
@@ -1460,7 +1445,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
   document.addEventListener('i18n:changed', function(e){
     var dict = e.detail && e.detail.dict;
-    if(dict) instances.forEach(function(inst){ if(inst) inst.relabel(dict); });
+    if(dict) instances.forEach(function(inst){ if(inst) inst.draw(dict); });
   });
 })();
 
