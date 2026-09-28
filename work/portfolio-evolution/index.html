@@ -293,13 +293,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__stage{font-size:.9375rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); line-height:1.35;}
 .gantt__stage-n{color:var(--color-brand-purple); margin-right:.35em;}
 .gantt__stage-note{font-size:.8125rem; font-weight:var(--fw-regular); color:var(--color-text-dim); white-space:nowrap;}
-/* The duration bar sits in the lower lane and carries the stage's active days; a bar
-   too narrow to hold them sets them just past its end. */
-.gantt__bar{position:absolute; transform:translateY(-50%); height:1.625rem; background:var(--color-brand-purple);
-  border:1px solid var(--color-brand-purple); display:flex; align-items:center; padding:0 .4rem; min-width:.35rem;}
-.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-on-brand); white-space:nowrap;}
-.gantt__bar--narrow .gantt__span{position:absolute; left:calc(100% + .5rem); color:var(--color-text-muted);}
-/* Pull requests: numbered diamonds in the upper lane, on their merge dates. Diamonds a
+/* The duration bar runs through the stage's diamonds; its length in days sits beside it. */
+.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); height:1.625rem; background:var(--color-brand-purple);
+  border:1px solid var(--color-brand-purple); min-width:.35rem;}
+.gantt__len{position:absolute; top:50%; transform:translateY(-50%); font-size:.75rem; font-weight:var(--fw-semibold);
+  color:var(--color-text-muted); white-space:nowrap;}
+/* Pull requests: numbered diamonds on the bar, on their merge dates. Diamonds a
    day or less apart stack. Hover, focus or a tap makes one active: purple outline and
    its caption. */
 .gantt__dot{position:absolute; width:1.5rem; height:1.5rem; padding:0; transform:translate(-50%,-50%) rotate(45deg);
@@ -1260,9 +1259,9 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
    Each row is a stage: its number, its name and its commit count
    as a label; a duration bar from its first commit to its last,
-   carrying its active days; and its pull requests as numbered
-   diamonds on their merge dates. A diamond names what it delivered
-   in a caption on hover, focus or tap.
+   with its length in days beside it; and its pull requests as
+   numbered diamonds on the bar, on their merge dates. A diamond
+   names what it delivered in a caption on hover, focus or tap.
 
    Every string the organism draws, visible or assistive, comes from
    the brief's dictionary and is redrawn on each i18n:changed. The EN
@@ -1283,8 +1282,9 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     sch_commits_1:'{n} commit', sch_commits_n:'{n} commits',
     sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
     sch_active_1:'{n} active day', sch_active_n:'{n} active days',
+    sch_days_1:'{n} day', sch_days_n:'{n} days',
     sch_aria_cbar:'{name}, {window} 2026, {days} days, {active}',
-    sch_aria_ctotals:'{name}: {window} 2026, {prs}',
+    sch_aria_ctotals:'{name}: {window} 2026, {prs}, {active}',
     sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026',
     sch_cap_merged:'Merged {date}'
   };
@@ -1341,25 +1341,33 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
       cfg.stages.forEach(function(st, si){
         var name = nameOf(st), prs = count('sch_prs', st.prs.length), active = count('sch_active', st.active), days = spanOf(st);
-        var lane = st.tall ? 4.9 : 2.6;                   /* rem: upper lane for the diamonds */
+        var field = st.tall ? 5 : 3.25;                  /* rem: a stack of two needs the taller row */
         var dots = st.stacks.map(function(stack){
           return stack.map(function(pr, i){
             var dy = (i - (stack.length - 1) / 2) * STEP;
             var label = fill(t('sch_aria_pr'), { n:pr.n, name:nameOf(pr), date:fmt(pr.merge) });
             return '<button class="gantt__dot" type="button" data-pr="' + pr.n + '" data-stage="' + si + '"' +
-                   ' style="left:' + pct(offset(pr.merge) + 0.5) + '; top:calc(' + (lane / 2) + 'rem + ' + dy.toFixed(3) + 'rem)"' +
+                   ' style="left:' + pct(offset(pr.merge) + 0.5) + '; top:calc(50% + ' + dy.toFixed(3) + 'rem)"' +
                    ' aria-label="' + esc(label) + '"><span aria-hidden="true">' + pr.n + '</span></button>';
           }).join('');
         }).join('');
+        /* The length sits past the bar and past any diamond beyond its end; where that
+           would run off the axis, it sits before the bar instead. */
+        var merges = st.prs.map(function(p){ return offset(p.merge); });
+        var after = Math.max(offset(st.end), Math.max.apply(null, merges)) + 1;
+        var before = Math.min(offset(st.start), Math.min.apply(null, merges));
+        var len = esc(count('sch_days', days));
+        var lenHtml = after <= TOTAL_DAYS - 4
+          ? '<span class="gantt__len" style="left:calc(' + pct(after) + ' + ' + (after > offset(st.end) + 1 ? '.9rem' : '.5rem') + ')" aria-hidden="true">' + len + '</span>'
+          : '<span class="gantt__len gantt__len--before" style="right:calc(' + pct(TOTAL_DAYS - before) + ' + .5rem)" aria-hidden="true">' + len + '</span>';
         html += '<div class="gantt__epic" data-epic="' + st.id + '"><div class="gantt__row">' +
           '<div class="gantt__row-label"><span class="gantt__stage"><span class="gantt__stage-n">' + two(si + 1) + '</span>' + esc(name) +
             ' <span class="gantt__stage-note">– ' + esc(count('sch_commits', st.commits)) + '</span></span></div>' +
-          '<div class="gantt__row-field" style="min-height:' + (lane + 2.4) + 'rem">' +
-            '<div class="gantt__bar' + (days < 4 ? ' gantt__bar--narrow' : '') + '" style="left:' + pct(offset(st.start)) + '; width:' + pct(days) +
-              '; top:' + (lane + 1.1) + 'rem" role="img" aria-label="' + esc(fill(t('sch_aria_cbar'), { name:name, window:win(st), days:days, active:active })) + '">' +
-              '<span class="gantt__span" aria-hidden="true">' + esc(active) + '</span></div>' + dots + '</div>' +
-          '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(st), prs:prs })) + '">' +
-            '<b>' + win(st) + '</b><span class="gantt__days">' + esc(prs) + '</span></div>' +
+          '<div class="gantt__row-field" style="min-height:' + field + 'rem">' +
+            '<div class="gantt__bar" style="left:' + pct(offset(st.start)) + '; width:' + pct(days) + '" role="img" aria-label="' +
+              esc(fill(t('sch_aria_cbar'), { name:name, window:win(st), days:days, active:active })) + '"></div>' + lenHtml + dots + '</div>' +
+          '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(st), prs:prs, active:active })) + '">' +
+            '<b>' + win(st) + '</b><span class="gantt__days">' + esc(prs) + '</span><span class="gantt__days">' + esc(active) + '</span></div>' +
         '</div></div>';
       });
       grid.innerHTML = html;
@@ -1391,8 +1399,12 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       place(dot);
     }
     function place(dot){
+      /* Measure at the origin, where the caption wraps at its own width. */
+      cap.style.width = ''; cap.style.left = '0px'; cap.style.top = '0px';
       var c = chart.getBoundingClientRect(), r = dot.getBoundingClientRect();
       var w = cap.offsetWidth, h = cap.offsetHeight, pad = 8;
+      /* An absolute box shrinks as it nears the chart's visible edge; hold its width. */
+      cap.style.width = w + 'px';
       var x = r.left - c.left + chart.scrollLeft + r.width / 2;
       var left = Math.max(chart.scrollLeft + pad, Math.min(x - w / 2, chart.scrollLeft + chart.clientWidth - w - pad));
       var axis = grid.querySelector('.gantt__axis').offsetHeight;
