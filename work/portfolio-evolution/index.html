@@ -271,65 +271,49 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         multi-page build as clusters of pull requests. ---- */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
-/* Toolbar and chips inherited from Brief 02's schedule (progressive disclosure). */
-.gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
-.gantt__action{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-medium);
-  background:var(--color-brand-black); color:var(--color-brand-white);
-  border:1px solid var(--color-brand-white); padding:.6rem 1.25rem; cursor:pointer; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
-.gantt__action:hover{background:var(--color-brand-white); color:var(--color-brand-black);}
-.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
-.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
-.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
-  background:var(--color-brand-black); color:var(--color-text-muted);
-  border:1px solid var(--g-border); padding:.45rem .9rem; cursor:pointer; min-height:44px;
-  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
-.gantt__chip[aria-pressed="true"]::before{content:"✓ "; color:var(--color-brand-purple);}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
-.gantt__grid{min-width:820px;}
+/* Wide enough that diamonds two days apart never touch; closer ones stack. */
+.gantt__grid{min-width:1100px;}
 .gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
   border-bottom:1px solid var(--g-border); font-size:.75rem; color:var(--color-text-muted);}
 .gantt__axis > div{padding:.75rem 1rem;}
 .gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
 .gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem; white-space:nowrap;}
 .gantt__axis-summary{text-align:right;}
-.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+.gantt__row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
   border-top:1px solid var(--g-border); align-items:stretch;}
-.gantt__task-row{background:rgba(var(--ink),0.02);}
 .gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
-.gantt__task-label{padding:.5rem 1rem .5rem 2.4rem; color:var(--color-text-muted); font-size:.875rem;
-  display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; position:relative;}
-.gantt__row-field,.gantt__task-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
-.gantt__row-field{min-height:3.25rem;}
-.gantt__task-field{min-height:2.5rem;}
-.gantt__row-summary,.gantt__task-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
+.gantt__row-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__row-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
   text-align:right; font-size:.78rem; color:var(--color-text-muted); gap:.15rem;}
 .gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .gantt__days{color:var(--color-text-dim);}
 .gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
-.gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
-  color:var(--color-brand-white); background:none; border:0; padding:0; cursor:pointer; text-align:left;
-  display:flex; align-items:center; gap:.5rem; min-height:44px;}
-.gantt__toggle .gantt__marker{display:inline-block; width:.8em; color:var(--color-text-muted); font-weight:var(--fw-regular);
-  transition:transform 160ms var(--ease-standard);}
-.gantt__toggle[aria-expanded="true"] .gantt__marker{transform:rotate(90deg);}
-.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__row-label{border-left:3px solid var(--color-brand-purple);}
-.gantt__epic:hover .gantt__bar--epic,.gantt__epic:has(.gantt__toggle:focus-visible) .gantt__bar--epic{border-color:var(--color-brand-purple);}
-.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); background:var(--g-border);
+/* A stage: its number, its locked name, and its commit count as a quiet annotation. */
+.gantt__stage{font-size:.9375rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); line-height:1.35;}
+.gantt__stage-n{color:var(--color-brand-purple); margin-right:.35em;}
+.gantt__stage-note{font-size:.8125rem; font-weight:var(--fw-regular); color:var(--color-text-dim); white-space:nowrap;}
+/* The duration bar sits in the lower lane and carries the stage's active days; a bar
+   too narrow to hold them sets them just past its end. */
+.gantt__bar{position:absolute; transform:translateY(-50%); height:1.625rem; background:var(--color-brand-purple);
   border:1px solid var(--color-brand-purple); display:flex; align-items:center; padding:0 .4rem; min-width:.35rem;}
-.gantt__bar--epic{height:1.625rem; background:var(--color-brand-purple);}
-.gantt__bar--task{height:1rem;}
-.gantt__bar--principal{background:transparent; border-style:dotted;}
-.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); white-space:nowrap;}
-.gantt__bar--epic .gantt__span{color:var(--color-on-brand);}
-.gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
-  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;
-  outline:2px solid var(--color-brand-black);}
-.gantt__pr{color:var(--color-brand-purple); font-weight:var(--fw-semibold); margin-right:.35em;}
-/* A closed epic shows its pull requests' diamonds; an open one hands them to its rows. */
-.gantt__milestone--overview{background:var(--color-brand-white);}
-.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__milestone--overview{display:none;}
+.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-on-brand); white-space:nowrap;}
+.gantt__bar--narrow .gantt__span{position:absolute; left:calc(100% + .5rem); color:var(--color-text-muted);}
+/* Pull requests: numbered diamonds in the upper lane, on their merge dates. Diamonds a
+   day or less apart stack. Hover, focus or a tap makes one active: purple outline and
+   its caption. */
+.gantt__dot{position:absolute; width:1.5rem; height:1.5rem; padding:0; transform:translate(-50%,-50%) rotate(45deg);
+  background:var(--color-brand-black); border:2px solid var(--color-brand-white); cursor:pointer;
+  display:grid; place-items:center; z-index:3; transition:border-color var(--duration-ui) var(--ease-standard);}
+.gantt__dot > span{transform:rotate(-45deg); font-size:.625rem; font-weight:var(--fw-bold); line-height:1;
+  color:var(--color-brand-white); font-variant-numeric:tabular-nums;}
+.gantt__dot:hover,.gantt__dot:focus-visible,.gantt__dot.is-active{border-color:var(--color-brand-purple); z-index:5;}
+.gantt__dot:focus-visible{outline-offset:4px;}
+.gantt__cap{position:absolute; z-index:6; max-width:17rem; padding:.55rem .75rem; pointer-events:none;
+  background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
+  font-size:.8125rem; line-height:1.45; color:var(--color-text-muted);}
+.gantt__cap b{color:var(--color-brand-purple); font-weight:var(--fw-bold); margin-right:.35em;}
+.gantt__cap-d{display:block; margin-top:.2rem; font-size:.75rem; color:var(--color-text-dim);}
 /* The two reading panels sit side by side where they open as a side panel (≥1024),
    and stack where they open inline, so an open body keeps the full column. */
 .sched__ctas{display:flex; flex-direction:column; margin-bottom:1rem;}
@@ -789,17 +773,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <div class="gantt io" id="gantt2">
-      <div class="gantt__tools">
-        <button class="gantt__action" type="button" aria-expanded="false" aria-controls="gantt2Grid">Expand all</button>
-        <div class="gantt__filters" role="group" data-i18n-aria="gantt_filters_aria" aria-label="Show or hide chart details">
-          <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
-          <button class="gantt__chip" type="button" data-filter="ms" aria-pressed="true" data-i18n="sch_f_ms">Merge dates</button>
-          <button class="gantt__chip" type="button" data-filter="commits" aria-pressed="false" data-i18n="sch_f_commits">Commits</button>
-        </div>
-      </div>
       <div class="gantt__chart" id="gantt2Chart">
-        <div class="gantt__grid" id="gantt2Grid" role="tree" data-i18n-aria="sch_g2_aria"
-             aria-label="The multi-page build on a calendar axis: five stages, each opening onto its pull requests, with a diamond on each merge date."
+        <div class="gantt__grid" id="gantt2Grid" role="group" data-i18n-aria="sch_g2_aria"
+             aria-label="The multi-page build on a calendar axis: five stages, each with a duration bar and its pull requests as numbered diamonds on their merge dates."
              ></div>
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart renders from its data object and requires JavaScript. The reading guide above states the window it draws and its source.</p></noscript>
@@ -1282,7 +1258,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
    ACT 03 · SCHEDULE ORGANISM — data-driven, calendar-scaled.
    Instantiation contract: one render function, one data object per
    chart. Markup, CSS and logic are the organism's own; an instance
-   supplies its root ids, its axis window and its rows.
+   supplies its root ids, its axis window and its stages.
 
    Converted from the Verify App brief's roadmap organism, whose
    axis was cumulative story points and whose layout made every
@@ -1290,23 +1266,20 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
    points recorded, so the axis is calendar time: every row
    carries a real start and end date, and rows may leave gaps.
 
-   Rows are epics that open onto task rows. A task may be a pull
-   request: it then carries its number, its commit days as the bar,
-   its merge date as a diamond and its commit count. A collapsed
-   epic shows its pull requests' diamonds on its own row; an open
-   one hands them to the task rows.
+   Each row is a stage: its number, its name and its commit count
+   as a label; a duration bar from its first commit to its last,
+   carrying its active days; and its pull requests as numbered
+   diamonds on their merge dates. A diamond names what it delivered
+   in a caption on hover, focus or tap.
 
    Every string the organism draws, visible or assistive, comes from
    the brief's dictionary and is redrawn on each i18n:changed. The EN
    object below is only the first paint, and each value equals its
    key's EN value.
 
-   Sources: the first schedule (listed in its panel, not charted) from
-   the public commit history of jdsaire/jdigital and jdsaire/legacy-desops.
-   The multi-page stages
-   from this repository's merged pull requests #18–#32: each bar runs
-   from its first commit to its last, and each pull request is a
-   diamond on its merge date, all in Lima time.
+   Sources: this repository's merged pull requests #18–#32. Bars run
+   from a stage's first commit to its last; active days are distinct
+   commit dates; diamonds sit on merge dates; all in Lima time.
    ============================================================ */
 (function scheduleOrganism(){
   'use strict';
@@ -1318,226 +1291,157 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     sch_commits_1:'{n} commit', sch_commits_n:'{n} commits',
     sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
     sch_active_1:'{n} active day', sch_active_n:'{n} active days',
-    sch_span_days:'{n}d',
-    sch_aria_bar:'{name}, {window} 2026, {days} days', sch_aria_bar1:'{name}, {window} 2026, {days} day',
-    sch_aria_ctotals:'{name} totals: {window} 2026, {commits}, {prs}, {active}',
+    sch_aria_cbar:'{name}, {window} 2026, {days} days, {active}',
+    sch_aria_ctotals:'{name}: {window} 2026, {prs}',
     sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026',
-    gantt_expand:'Expand all', gantt_collapse:'Collapse all'
+    sch_cap_merged:'Merged {date}'
   };
   function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
   function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
-  function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
 
-  /* cfg: { root, grid, axisStart, axisEnd, axisKey, ticks?, layers?, data:{ epics } }
-     Ticks are month starts unless the instance lists its own dates. */
+  /* cfg: { root, chart, grid, axisStart, axisEnd, ticks, stages } */
   function renderSchedule(cfg){
     var root = document.getElementById(cfg.root);
     if(!root) return null;
-    var DATA = cfg.data;
+    var grid  = document.getElementById(cfg.grid);
+    var chart = document.getElementById(cfg.chart);
     var AXIS_START = cfg.axisStart;
-    var grid = document.getElementById(cfg.grid);
-    var MILESTONES = [];
 
     /* ---------- Derived layout: calendar days ---------- */
     function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
     var TOTAL_DAYS = offset(cfg.axisEnd) + 1;
-    /* An end date is inclusive, so a one-day task is one day wide, not zero. */
+    /* An end date is inclusive, so a one-day stage is one day wide, not zero. */
     function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
     function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
 
-    DATA.epics.forEach(function(epic){
-      var starts = epic.tasks.map(function(t){ return offset(t.start); });
-      var ends   = epic.tasks.map(function(t){ return offset(t.end); });
-      /* An epic's declared window and its tasks' extent can differ; the drawn bar
-         contains every task it owns, so it spans whichever runs wider. */
-      epic.startOff = Math.min(Math.min.apply(null, starts), offset(epic.start));
-      epic.endOff   = Math.max(Math.max.apply(null, ends),   offset(epic.end));
-      epic.days = epic.endOff - epic.startOff + 1;
-      /* A pull request's merge is a diamond twice over: on its own row, and as an
-         overview on its epic's row while the epic is closed. */
-      epic.tasks.forEach(function(t){
-        if(!t.merge) return;
-        MILESTONES.push({ row:t.id, at:t.merge, pr:t.pr, task:t });
-        MILESTONES.push({ row:epic.id, at:t.merge, pr:t.pr, task:t, overview:true });
+    /* Diamonds a day or less apart would overlap: they form a stack, each still on its
+       own date. A row with a stack gets a taller upper lane. */
+    cfg.stages.forEach(function(st){
+      var prs = st.prs.slice().sort(function(a, b){ return d(a.merge) - d(b.merge) || a.n - b.n; });
+      st.stacks = [];
+      prs.forEach(function(pr){
+        var last = st.stacks[st.stacks.length - 1];
+        if(last && offset(pr.merge) - offset(last[last.length - 1].merge) <= 1) last.push(pr);
+        else st.stacks.push([pr]);
       });
+      st.tall = st.stacks.some(function(s){ return s.length > 1; });
     });
+    var STEP = 1.5 * Math.SQRT2 + 0.15;                /* rem: a diamond's diagonal plus a hairline, centre to centre */
 
-    function draw(dict){
-      function t(k){ return dict && dict[k] !== undefined ? dict[k] : EN[k]; }
-      function count(base, n){ return fill(t(base + (n === 1 ? '_1' : '_n')), { n:n }); }
-      var mon = t('sch_aria_months').split(' ');
-      function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
-      function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
-      function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
-      function taskName(task){ return (isLocked(task) && dict && dict[task.id + '_t']) || nameOf(task); }
+    var dict = null;
+    function t(k){ return dict && dict[k] !== undefined ? dict[k] : EN[k]; }
+    function count(base, n){ return fill(t(base + (n === 1 ? '_1' : '_n')), { n:n }); }
+    function mon(){ return t('sch_aria_months').split(' '); }
+    function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon()[+p[1]-1]; }
+    function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
+    function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
+    function two(n){ return (n < 10 ? '0' : '') + n; }
 
-      /* Month ticks: the axis start carries its own month at 0, then every first of
-         the month inside the window. */
-      function ticksHtml(){
-        if(cfg.ticks) return cfg.ticks.map(function(iso){
+    function draw(next){
+      if(next) dict = next;
+      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t('sch_axis_cluster')) + '</div><div class="gantt__axis-units">' +
+        cfg.ticks.map(function(iso){
           var l = pct(offset(iso));
-          return '<span class="gantt__tick" style="left:' + l + '">' + fmt(iso) + '</span>' +
-                 '<span class="gantt__gridline" style="left:' + l + '"></span>';
-        }).join('');
-        var h = '<span class="gantt__tick" style="left:0">' + mon[+AXIS_START.slice(5,7)-1] + '</span>' +
-                '<span class="gantt__gridline" style="left:0"></span>';
-        var y = +AXIS_START.slice(0,4), m = +AXIS_START.slice(5,7);
-        for(;;){
-          m++; if(m > 12){ m = 1; y++; }
-          var iso = y + '-' + (m < 10 ? '0' : '') + m + '-01';
-          if(d(iso) > d(cfg.axisEnd)) break;
-          var l = pct(offset(iso));
-          h += '<span class="gantt__tick" style="left:' + l + '">' + mon[m-1] + '</span>';
-          h += '<span class="gantt__gridline" style="left:' + l + '"></span>';
-        }
-        return h;
-      }
+          return '<span class="gantt__tick" style="left:' + l + '">' + fmt(iso) + '</span><span class="gantt__gridline" style="left:' + l + '"></span>';
+        }).join('') +
+        '</div><div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
 
-      function barHtml(item, cls, name, isEpic){
-        var days = isEpic ? item.days : spanOf(item);
-        var left = isEpic ? item.startOff : offset(item.start);
-        var tpl = days === 1 ? t('sch_aria_bar1') : t('sch_aria_bar');
-        return '<div class="gantt__bar ' + cls + '" data-bar="' + item.id + '"' +
-               ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
-               esc(fill(tpl, { name:name, window:win(item), days:days })) + '">' +
-               '<span class="gantt__span">' + esc(fill(t('sch_span_days'), { n:days })) + '</span></div>';
-      }
-
-      /* Milestones: any number per row, each at the centre of its day. Diamonds that
-         share a day stack vertically on that day. A pull request's diamond carries no
-         label: the row it sits on, or the row it opens onto, names it. */
-      function milestonesHtml(rowId){
-        var groups = {}, dates = [];
-        MILESTONES.forEach(function(m){
-          if(m.row !== rowId) return;
-          if(!groups[m.at]){ groups[m.at] = []; dates.push(m.at); }
-          groups[m.at].push(m);
-        });
-        dates.sort();
-        return dates.map(function(at){
-          var ms = groups[at], n = ms.length, l = pct(offset(at) + 0.5);
-          return ms.map(function(m, i){
-            var dy = (i - (n - 1) / 2) * 1.25;
-            return '<span class="gantt__milestone' + (m.overview ? ' gantt__milestone--overview' : '') + '" data-layer="ms"' +
-                   ' style="left:' + l + (dy ? '; top:calc(50% + ' + dy + 'rem)' : '') +
-                   '" role="img" aria-label="' + esc(fill(t('sch_aria_pr'), { n:m.pr, name:nameOf(m.task), date:fmt(at) })) + '"></span>';
+      cfg.stages.forEach(function(st, si){
+        var name = nameOf(st), prs = count('sch_prs', st.prs.length), active = count('sch_active', st.active), days = spanOf(st);
+        var lane = st.tall ? 4.9 : 2.6;                   /* rem: upper lane for the diamonds */
+        var dots = st.stacks.map(function(stack){
+          return stack.map(function(pr, i){
+            var dy = (i - (stack.length - 1) / 2) * STEP;
+            var label = fill(t('sch_aria_pr'), { n:pr.n, name:nameOf(pr), date:fmt(pr.merge) });
+            return '<button class="gantt__dot" type="button" data-pr="' + pr.n + '" data-stage="' + si + '"' +
+                   ' style="left:' + pct(offset(pr.merge) + 0.5) + '; top:calc(' + (lane / 2) + 'rem + ' + dy.toFixed(3) + 'rem)"' +
+                   ' aria-label="' + esc(label) + '"><span aria-hidden="true">' + pr.n + '</span></button>';
           }).join('');
         }).join('');
-      }
-
-      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t(cfg.axisKey)) + '</div>' +
-                 '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
-                 '<div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
-
-      DATA.epics.forEach(function(epic){
-        var name = nameOf(epic), commits = count('sch_commits', epic.commits), prs = count('sch_prs', epic.prs);
-        var active = count('sch_active', epic.active);
-        var totals = fill(t('sch_aria_ctotals'), { name:name, window:win(epic), commits:commits, prs:prs, active:active });
-        /* One shape per level: an epic states its window, its commits, its pull
-           requests and, for a stage, its active days, one per line; a task states its
-           window, and a pull request its commits when that layer is on. */
-        html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
-          '<div class="gantt__row">' +
-            '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
-              '<span class="gantt__marker" aria-hidden="true">›</span>' + esc(name) + '</button></div>' +
-            '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', name, true) +
-              milestonesHtml(epic.id) + '</div>' +
-            '<div class="gantt__row-summary" aria-label="' + esc(totals) + '">' +
-              '<b>' + win(epic) + '</b><span class="gantt__days">' + esc(commits) + '</span><span class="gantt__days">' + esc(prs) + '</span>' +
-              '<span class="gantt__days">' + esc(active) + '</span></div>' +
-          '</div>' +
-          '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
-        epic.tasks.forEach(function(task){
-          var tn = taskName(task);
-          html += '<li class="gantt__task-row" data-task="' + task.id + '">' +
-            '<span class="gantt__task-label">' +
-              (task.pr ? '<span><span class="gantt__pr">' + esc(fill(t('sch_ms_pr'), { n:task.pr })) + '</span>' + esc(tn) + '</span>'
-                       : '<span' + (isLocked(task) ? ' data-i18n="' + task.id + '_t"' : '') + '>' + esc(tn) + '</span>') +
-            '</span>' +
-            '<span class="gantt__task-field">' + barHtml(task, 'gantt__bar--task', tn, false) + milestonesHtml(task.id) + '</span>' +
-            '<span class="gantt__task-summary"><b>' + win(task) + '</b>' +
-              (task.commits != null ? '<span class="gantt__days" data-layer="commits">' + esc(count('sch_commits', task.commits)) + '</span>' : '') +
-            '</span></li>';
-        });
-        html += '</ul></div>';
-      });
-
-      /* Keep each epic's disclosure state across a redraw. */
-      var open = {};
-      Array.prototype.forEach.call(grid.querySelectorAll('.gantt__toggle[aria-expanded="true"]'), function(b){
-        open[b.getAttribute('aria-controls')] = true;
+        html += '<div class="gantt__epic" data-epic="' + st.id + '"><div class="gantt__row">' +
+          '<div class="gantt__row-label"><span class="gantt__stage"><span class="gantt__stage-n">' + two(si + 1) + '</span>' + esc(name) +
+            ' <span class="gantt__stage-note">– ' + esc(count('sch_commits', st.commits)) + '</span></span></div>' +
+          '<div class="gantt__row-field" style="min-height:' + (lane + 2.4) + 'rem">' +
+            '<div class="gantt__bar' + (days < 4 ? ' gantt__bar--narrow' : '') + '" style="left:' + pct(offset(st.start)) + '; width:' + pct(days) +
+              '; top:' + (lane + 1.1) + 'rem" role="img" aria-label="' + esc(fill(t('sch_aria_cbar'), { name:name, window:win(st), days:days, active:active })) + '">' +
+              '<span class="gantt__span" aria-hidden="true">' + esc(active) + '</span></div>' + dots + '</div>' +
+          '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(st), prs:prs })) + '">' +
+            '<b>' + win(st) + '</b><span class="gantt__days">' + esc(prs) + '</span></div>' +
+        '</div></div>';
       });
       grid.innerHTML = html;
-      Object.keys(open).forEach(function(id){
-        var b = grid.querySelector('[aria-controls="' + id + '"]');
-        if(b) setExpanded(b, true);
-      });
-      applyLayers();
-      labels = { expand:t('gantt_expand'), collapse:t('gantt_collapse') };
-      syncToggleAll();
+      hide();
     }
 
-    /* ---------- Layers: progressive disclosure (Brief 02 pattern) ----------
-       Elements marked data-layer="ms" or "commits" follow the instance's layer
-       state, which survives every redraw. */
-    var LAYERS = cfg.layers || { ms:true, commits:true };
-    function applyLayers(){
-      Object.keys(LAYERS).forEach(function(key){
-        Array.prototype.forEach.call(grid.querySelectorAll('[data-layer="' + key + '"]'), function(el){
-          el.hidden = !LAYERS[key];
-        });
-      });
-    }
+    /* ---------- Caption: one per chart, placed where it reads best ----------
+       Above the diamond, or below it when that would cross the axis header; always
+       clamped inside the part of the chart the reader can see, so it stays whole at
+       390 while the chart scrolls sideways. */
+    var cap = document.createElement('div');
+    cap.className = 'gantt__cap';
+    cap.setAttribute('aria-hidden', 'true');
+    cap.hidden = true;
+    chart.appendChild(cap);
+    var current = null, pinned = false;
 
-    /* ---------- Toolbar: expand all, and one chip per layer ----------
-       The expand-all label is drawn here rather than swept, because it follows the
-       disclosure state as well as the language. */
-    var toggleAll = root.querySelector('.gantt__action'), labels = null;
-    function syncToggleAll(){
-      if(!toggleAll || !labels) return;
-      var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
-      var allOpen = toggles.length && toggles.every(function(b){ return b.getAttribute('aria-expanded') === 'true'; });
-      toggleAll.setAttribute('aria-expanded', String(!!allOpen));
-      toggleAll.textContent = allOpen ? labels.collapse : labels.expand;
+    function prOf(dot){
+      var st = cfg.stages[+dot.getAttribute('data-stage')], n = +dot.getAttribute('data-pr');
+      return st.prs.filter(function(p){ return p.n === n; })[0];
     }
-    if(toggleAll) toggleAll.addEventListener('click', function(){
-      var open = toggleAll.getAttribute('aria-expanded') !== 'true';
-      Array.prototype.forEach.call(grid.querySelectorAll('.gantt__toggle'), function(b){ setExpanded(b, open); });
-      syncToggleAll();
+    function show(dot){
+      var pr = prOf(dot);
+      if(current && current !== dot) current.classList.remove('is-active');
+      current = dot; dot.classList.add('is-active');
+      cap.innerHTML = '<b>' + esc(fill(t('sch_ms_pr'), { n:pr.n })) + '</b>' + esc(nameOf(pr)) +
+                      '<span class="gantt__cap-d">' + esc(fill(t('sch_cap_merged'), { date:fmt(pr.merge) })) + '</span>';
+      cap.hidden = false;
+      place(dot);
+    }
+    function place(dot){
+      var c = chart.getBoundingClientRect(), r = dot.getBoundingClientRect();
+      var w = cap.offsetWidth, h = cap.offsetHeight, pad = 8;
+      var x = r.left - c.left + chart.scrollLeft + r.width / 2;
+      var left = Math.max(chart.scrollLeft + pad, Math.min(x - w / 2, chart.scrollLeft + chart.clientWidth - w - pad));
+      var axis = grid.querySelector('.gantt__axis').offsetHeight;
+      var top = r.top - c.top + chart.scrollTop - h - pad;
+      if(top < axis + 4) top = r.bottom - c.top + chart.scrollTop + pad;
+      cap.style.left = left + 'px';
+      cap.style.top = top + 'px';
+    }
+    function hide(){
+      if(current) current.classList.remove('is-active');
+      current = null; pinned = false; cap.hidden = true;
+    }
+    grid.addEventListener('pointerover', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(dot && e.pointerType === 'mouse' && !pinned) show(dot);
     });
-    Array.prototype.forEach.call(root.querySelectorAll('.gantt__chip'), function(chip){
-      var key = chip.getAttribute('data-filter');
-      chip.setAttribute('aria-pressed', String(!!LAYERS[key]));
-      chip.addEventListener('click', function(){
-        LAYERS[key] = !LAYERS[key];
-        chip.setAttribute('aria-pressed', String(LAYERS[key]));
-        applyLayers();
-      });
+    grid.addEventListener('pointerout', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(dot && e.pointerType === 'mouse' && !pinned && !dot.contains(e.relatedTarget)) hide();
     });
-
-    /* ---------- Zoom: expand / collapse ----------
-       Delegated from the grid, so a redraw keeps its handlers. */
-    function setExpanded(btn, expanded){
-      btn.setAttribute('aria-expanded', String(expanded));
-      var list = document.getElementById(btn.getAttribute('aria-controls'));
-      if(list) list.hidden = !expanded;
-    }
     grid.addEventListener('click', function(e){
-      var btn = e.target.closest('.gantt__toggle');
-      if(btn){ setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true'); syncToggleAll(); }
+      var dot = e.target.closest('.gantt__dot');
+      if(!dot) return;
+      if(pinned && current === dot){ hide(); return; }
+      show(dot); pinned = true;
     });
-    grid.addEventListener('keydown', function(e){
-      var btn = e.target.closest('.gantt__toggle');
-      if(!btn) return;
-      var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
-      var i = toggles.indexOf(btn), nx = null;
-      if(e.key === 'ArrowDown') nx = toggles[i+1];
-      if(e.key === 'ArrowUp')   nx = toggles[i-1];
-      if(e.key === 'Home')      nx = toggles[0];
-      if(e.key === 'End')       nx = toggles[toggles.length-1];
-      if(nx){ e.preventDefault(); nx.focus(); }
+    grid.addEventListener('focusin', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(dot && !pinned) show(dot);
     });
+    grid.addEventListener('focusout', function(e){
+      if(!pinned && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.gantt__dot'))) hide();
+    });
+    document.addEventListener('click', function(e){
+      if(current && !e.target.closest('.gantt__dot')) hide();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && current) hide();
+    });
+    chart.addEventListener('scroll', function(){ if(current) place(current); }, { passive:true });
+    window.addEventListener('resize', function(){ if(current) place(current); });
 
     draw(null);
     return { draw: draw };
@@ -1587,42 +1491,34 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       ]
     }),
     /* The multi-page build: from the first commit on 28 Aug to the merge of #32 on
-       26 Sep. Each stage opens onto its pull requests; spans, active days and commits
-       are counted from them, and merge dates are converted to Lima time. */
+       26 Sep, in five stages. Spans, active days and commits are counted from each
+       stage's pull requests; merge dates are converted to Lima time. */
     renderSchedule({
-      root:'gantt2', grid:'gantt2Grid', axisKey:'sch_axis_cluster',
+      root:'gantt2', chart:'gantt2Chart', grid:'gantt2Grid',
       axisStart:'2026-08-28', axisEnd:'2026-09-26',
       ticks:['2026-08-28','2026-09-01','2026-09-08','2026-09-15','2026-09-22'],
-      layers:{ ms:true, commits:false },
-      data: {
-        epics: [
-          { id:'c1', key:'sch_c1', name:'Defect inventory', start:'2026-08-28', end:'2026-08-28', active:1, commits:1, prs:1, tasks:[
-              { id:'p18', key:'sch_pr18', pr:18, name:'Defect inventory', start:'2026-08-28', end:'2026-08-28', merge:'2026-08-29', commits:1 }
-            ]},
-          { id:'c2', key:'sch_c2', name:'Case briefs', start:'2026-08-30', end:'2026-09-11', active:6, commits:30, prs:4, tasks:[
-              { id:'p19', key:'sch_pr19', pr:19, name:'AccreditaPass brief', start:'2026-08-30', end:'2026-08-30', merge:'2026-08-30', commits:3 },
-              { id:'p22', key:'sch_pr22', pr:22, name:'Trust-Verify relink', start:'2026-09-01', end:'2026-09-01', merge:'2026-09-01', commits:3 },
-              { id:'p23', key:'sch_pr23', pr:23, name:'Airport brief', start:'2026-09-05', end:'2026-09-05', merge:'2026-09-05', commits:4 },
-              { id:'p26', key:'sch_pr26', pr:26, name:'Portfolio Evolution review', start:'2026-09-08', end:'2026-09-11', merge:'2026-09-11', commits:20 }
-            ]},
-          { id:'c3', key:'sch_c3', name:'Home/About/Contact organisms', start:'2026-08-30', end:'2026-09-20', active:6, commits:83, prs:5, tasks:[
-              { id:'p20', key:'sch_pr20', pr:20, name:'Home reallocation', start:'2026-08-30', end:'2026-08-31', merge:'2026-08-31', commits:11 },
-              { id:'p21', key:'sch_pr21', pr:21, name:'Home directed changes', start:'2026-08-31', end:'2026-08-31', merge:'2026-08-31', commits:10 },
-              { id:'p27', key:'sch_pr27', pr:27, name:'Main organism hygiene', start:'2026-09-13', end:'2026-09-13', merge:'2026-09-13', commits:24 },
-              { id:'p28', key:'sch_pr28', pr:28, name:'About journey', start:'2026-09-15', end:'2026-09-16', merge:'2026-09-16', commits:22 },
-              { id:'p29', key:'sch_pr29', pr:29, name:'Contact organism', start:'2026-09-20', end:'2026-09-20', merge:'2026-09-20', commits:16 }
-            ]},
-          { id:'c4', key:'sch_c4', name:'Global mechanisms and assets', start:'2026-09-05', end:'2026-09-06', active:2, commits:22, prs:2, tasks:[
-              { id:'p24', key:'sch_pr24', pr:24, name:'Theme, contact and link integrity', start:'2026-09-05', end:'2026-09-05', merge:'2026-09-05', commits:8 },
-              { id:'p25', key:'sch_pr25', pr:25, name:'Vector artwork', start:'2026-09-05', end:'2026-09-06', merge:'2026-09-06', commits:14 }
-            ]},
-          { id:'c5', key:'sch_c5', name:'Copy and i18n waves', start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:3, tasks:[
-              { id:'p30', key:'sch_pr30', pr:30, name:'Main and About copy', start:'2026-09-20', end:'2026-09-22', merge:'2026-09-22', commits:41 },
-              { id:'p31', key:'sch_pr31', pr:31, name:'Dictionary split', start:'2026-09-22', end:'2026-09-24', merge:'2026-09-24', commits:54 },
-              { id:'p32', key:'sch_pr32', pr:32, name:'Brief Spanish and i18n', start:'2026-09-24', end:'2026-09-26', merge:'2026-09-26', commits:44 }
-            ]}
-        ]
-      }
+      stages: [
+        { id:'c1', key:'sch_c1', name:'Defect inventory', start:'2026-08-28', end:'2026-08-28', active:1, commits:1, prs:[
+            { n:18, key:'sch_pr18', name:'Listed what was broken before rebuilding', merge:'2026-08-29' } ]},
+        { id:'c2', key:'sch_c2', name:'Case briefs', start:'2026-08-30', end:'2026-09-11', active:6, commits:30, prs:[
+            { n:19, key:'sch_pr19', name:'Published the AccreditaPass case brief', merge:'2026-08-30' },
+            { n:22, key:'sch_pr22', name:'Moved the Trust-Verify app to its own repository', merge:'2026-09-01' },
+            { n:23, key:'sch_pr23', name:'Published the Airport brief and retired two draft pages', merge:'2026-09-05' },
+            { n:26, key:'sch_pr26', name:'Reviewed and revised this Portfolio Evolution brief', merge:'2026-09-11' } ]},
+        { id:'c3', key:'sch_c3', name:'Home/About/Contact organisms', start:'2026-08-30', end:'2026-09-20', active:6, commits:83, prs:[
+            { n:20, key:'sch_pr20', name:'Reorganised the home page around four work cards', merge:'2026-08-31' },
+            { n:21, key:'sch_pr21', name:'Refined home navigation, cards and track record', merge:'2026-08-31' },
+            { n:27, key:'sch_pr27', name:"Tidied the home page's building blocks", merge:'2026-09-13' },
+            { n:28, key:'sch_pr28', name:"Built the About page's journey", merge:'2026-09-16' },
+            { n:29, key:'sch_pr29', name:'Finished the Contact page in English and Spanish', merge:'2026-09-20' } ]},
+        { id:'c4', key:'sch_c4', name:'Global mechanisms and assets', start:'2026-09-05', end:'2026-09-06', active:2, commits:22, prs:[
+            { n:24, key:'sch_pr24', name:'Added light and dark themes and connected the contact form', merge:'2026-09-05' },
+            { n:25, key:'sch_pr25', name:'Drew vector artwork for the work and capability cards', merge:'2026-09-06' } ]},
+        { id:'c5', key:'sch_c5', name:'Copy and i18n waves', start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:[
+            { n:30, key:'sch_pr30', name:'Approved copy for Home and About in both languages', merge:'2026-09-22' },
+            { n:31, key:'sch_pr31', name:'Split the dictionaries and standardised the briefs', merge:'2026-09-24' },
+            { n:32, key:'sch_pr32', name:'Spanish for every brief, on three dictionary levels', merge:'2026-09-26' } ]}
+      ]
     })
   ];
 
