@@ -363,6 +363,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .stills--4{grid-template-columns:repeat(4,1fr);}
 @media (max-width:767px){ .stills--4{grid-template-columns:repeat(2,1fr);} }
 .stills--1{grid-template-columns:1fr;}
+/* Act 04 · redrawn proposal screens (WD-Q23…Q25). Square frames, hairline
+   borders and purple primary actions: the site's own language, both themes. */
+.mock{display:flex; flex-direction:column; gap:.55rem; aspect-ratio:9/17; padding:clamp(.9rem,1.4vw,1.25rem);
+  background:var(--surface-card); border:1px solid var(--border-hairline); color:var(--color-brand-white);}
+.mock__steps{display:flex; gap:.3rem; margin-bottom:.6rem;}
+.mock__step{width:1.2rem; height:1.2rem; display:grid; place-items:center; font-size:.58rem; font-weight:var(--fw-semibold);
+  border:1px solid var(--color-border-soft); color:var(--color-text-dim);}
+.mock__step.is-on{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
+.mock__t{font-size:clamp(1rem,1.35vw,1.2rem); font-weight:var(--fw-bold); line-height:1.15; letter-spacing:-.01em;}
+.mock__x{font-size:.78rem; line-height:1.45; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.mock__no{font-size:.72rem; font-weight:var(--fw-semibold); color:var(--color-text-muted); letter-spacing:.04em;}
+.mock__l{font-size:.58rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-dim); margin-top:.2rem;}
+.mock__in{display:block; padding:.5rem .6rem; font-size:.72rem; background:var(--surface-input);
+  border:1px solid var(--color-border-soft); color:var(--color-text-dim); overflow-wrap:anywhere;}
+.mock__select{display:flex; justify-content:space-between; color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.mock__select::after{content:"▾"; color:var(--color-text-dim);}
+.mock__code{display:grid; grid-template-columns:repeat(4,1fr); gap:.35rem;}
+.mock__code span{aspect-ratio:1; background:var(--surface-input); border:1px solid var(--color-border-soft);}
+.mock__btn{display:block; margin-top:auto; padding:.6rem .5rem; text-align:center; font-size:.66rem; font-weight:var(--fw-semibold);
+  letter-spacing:.12em; text-transform:uppercase; background:var(--color-brand-purple); color:var(--color-on-brand);}
+.mock__code + .mock__btn{margin-top:.4rem;}
+.mock__row{display:flex; flex-wrap:wrap; gap:.35rem;}
+.mock__ghost{flex:1 1 6rem; padding:.45rem .4rem; text-align:center; font-size:.6rem; font-weight:var(--fw-semibold);
+  border:1px solid var(--color-border-soft); color:var(--color-brand-white);}
+.mock__ghost--full{flex:0 0 auto; margin-top:auto; font-size:.66rem; letter-spacing:.06em;}
+.mock__qr{width:58%; align-self:center; color:var(--color-brand-white); margin:.2rem 0;}
+.still__cap b{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
+.mock__fine{font-size:.62rem; line-height:1.4; color:var(--color-text-dim); text-align:center;}
 
 </style>
 </head>
@@ -655,27 +683,57 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act4_lede">The payment flow I designed, as I proposed it.</p>
     </div>
 
-    <!-- Real captures of the proposed screens, framed (PM-7, WD-Q17, WD-Q22). -->
+    <!-- The proposed screens, redrawn in this site's style (WD-Q23…Q25). -->
     <div class="stills stills--4 io">
       <figure class="still">
-        <img src="img/tuua-mockup-screen1.jpg" width="565" height="1227" loading="lazy" decoding="async"
-             alt="Proposed screen 1, Personal data: name and email fields and a Register button, filled with dummy data." data-i18n-alt="act4_s1_alt">
-        <figcaption class="still__cap" data-i18n-html="act4_s1_cap"><b>1 · Personal data.</b> Name and email to begin.</figcaption>
+        <div class="mock" role="img" aria-label="Redrawn screen 1, Personal details: name and email fields and a Register button." data-i18n-aria="act4_s1_alt">
+          <span class="mock__steps"><span class="mock__step is-on">1</span><span class="mock__step">2</span><span class="mock__step">3</span><span class="mock__step">4</span></span>
+          <p class="mock__t" data-i18n="act4_m1_t">Personal details</p>
+          <p class="mock__x" data-i18n="act4_m1_x">Enter your details to continue.</p>
+          <span class="mock__l" data-i18n="act4_m1_name">Name</span>
+          <span class="mock__in" data-i18n="act4_m1_name_ph">Full name</span>
+          <span class="mock__l" data-i18n="act4_m1_mail">Email</span>
+          <span class="mock__in" data-i18n="act4_m1_mail_ph">name@example.com</span>
+          <span class="mock__btn" data-i18n="act4_m1_btn">Register</span>
+        </div>
+        <figcaption class="still__cap" data-i18n-html="act4_s1_cap"><b>1 · Home.</b> Personal details to begin.</figcaption>
       </figure>
       <figure class="still">
-        <img src="img/tuua-mockup-screen2.jpg" width="565" height="1227" loading="lazy" decoding="async"
-             alt="Proposed screen 2, Code validation: four boxes for the code sent by email, with Validate, Resend code and Change email." data-i18n-alt="act4_s2_alt">
+        <div class="mock" role="img" aria-label="Redrawn screen 2, Code validation: four boxes for the code sent by email, with Validate, Resend code and Change email." data-i18n-aria="act4_s2_alt">
+          <span class="mock__steps"><span class="mock__step">1</span><span class="mock__step is-on">2</span><span class="mock__step">3</span><span class="mock__step">4</span></span>
+          <p class="mock__t" data-i18n="act4_m2_t">Code validation</p>
+          <p class="mock__x" data-i18n="act4_m2_x">Enter the code sent to the email you registered.</p>
+          <span class="mock__code"><span></span><span></span><span></span><span></span></span>
+          <span class="mock__btn" data-i18n="act4_m2_btn">Validate</span>
+          <span class="mock__row"><span class="mock__ghost" data-i18n="act4_m2_resend">Resend code</span><span class="mock__ghost" data-i18n="act4_m2_change">Change email</span></span>
+        </div>
         <figcaption class="still__cap" data-i18n-html="act4_s2_cap"><b>2 · Validation.</b> A code sent to that email.</figcaption>
       </figure>
       <figure class="still">
-        <img src="img/tuua-mockup-screen3.jpg" width="565" height="1227" loading="lazy" decoding="async"
-             alt="Proposed screen 3, Payment method: card type, card number and CVV fields and a Pay button, filled with dummy data." data-i18n-alt="act4_s3_alt">
-        <figcaption class="still__cap" data-i18n-html="act4_s3_cap"><b>3 · Payment.</b> Card details. The amount on the mockup was a working figure; the live fee is in Act 06.</figcaption>
+        <div class="mock" role="img" aria-label="Redrawn screen 3, Payment method: card type, card number and CVV fields and a Pay button." data-i18n-aria="act4_s3_alt">
+          <span class="mock__steps"><span class="mock__step">1</span><span class="mock__step">2</span><span class="mock__step is-on">3</span><span class="mock__step">4</span></span>
+          <p class="mock__t" data-i18n="act4_m3_t">Payment method</p>
+          <p class="mock__x" data-i18n="act4_m3_x">Select how to pay.</p>
+          <span class="mock__in mock__select">VISA</span>
+          <span class="mock__l" data-i18n="act4_m3_card">Card number</span>
+          <span class="mock__in">•••• •••• •••• ••••</span>
+          <span class="mock__l" data-i18n="act4_m3_cvv">CVV</span>
+          <span class="mock__in">•••</span>
+          <span class="mock__btn" data-i18n="act4_m3_btn">Pay</span>
+        </div>
+        <figcaption class="still__cap" data-i18n-html="act4_s3_cap"><b>3 · Payment gateway.</b> Card details.</figcaption>
       </figure>
       <figure class="still">
-        <img src="img/tuua-mockup-screen4.jpg" width="565" height="1227" loading="lazy" decoding="async"
-             alt="Proposed screen 4, Ticket detail: a ticket number, a QR code to scan at the eGate and a Download receipt button." data-i18n-alt="act4_s4_alt">
-        <figcaption class="still__cap" data-i18n-html="act4_s4_cap"><b>4 · Ticket.</b> A QR code for the eGate, also sent by email.</figcaption>
+        <div class="mock" role="img" aria-label="Redrawn screen 4, Ticket details: a ticket number, a QR code to scan at the eGate and a Download receipt button." data-i18n-aria="act4_s4_alt">
+          <span class="mock__steps"><span class="mock__step">1</span><span class="mock__step">2</span><span class="mock__step">3</span><span class="mock__step is-on">4</span></span>
+          <p class="mock__t" data-i18n="act4_m4_t">Ticket details</p>
+          <p class="mock__no" data-i18n="act4_m4_no">No. TT-0000000</p>
+          <p class="mock__x" data-i18n="act4_m4_scan">Scan the QR code at the eGate.</p>
+          <svg class="mock__qr" viewBox="0 0 21 21" aria-hidden="true" focusable="false"><path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2zM8 0h2v2H8zM11 1h2v3h-2zM8 3h2v3H8zM9 7h3v2H9zM13 8h2v2h-2zM0 8h2v2H0zM3 9h3v2H3zM16 8h2v2h-2zM19 9h2v3h-2zM8 10h2v3H8zM11 11h3v2h-3zM15 12h3v2h-3zM8 14h3v2H8zM12 15h2v3h-2zM15 15h2v2h-2zM18 16h3v2h-3zM8 18h3v3H8zM14 19h3v2h-3zM19 19h2v2h-2z" fill="currentColor"/></svg>
+          <span class="mock__ghost mock__ghost--full" data-i18n="act4_m4_dl">Download receipt</span>
+          <p class="mock__fine" data-i18n="act4_m4_sent">Receipt and QR code sent to your email.</p>
+        </div>
+        <figcaption class="still__cap" data-i18n-html="act4_s4_cap"><b>4 · Payment confirmation.</b> A QR code for the eGate, also sent by email.</figcaption>
       </figure>
     </div>
 
