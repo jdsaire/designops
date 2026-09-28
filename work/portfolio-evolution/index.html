@@ -318,15 +318,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
    and stack where they open inline, so an open body keeps the full column. */
 .sched__ctas{display:flex; flex-direction:column; margin-bottom:1rem;}
 @media (min-width:1024px){ .sched__ctas{flex-direction:row; gap:2.5rem; align-items:flex-start;} }
-/* The first schedule, listed: each epic once, then its tasks with their dates. */
-.sched__first{margin-top:1.25rem;}
-.sched__epic + .sched__epic{margin-top:1.5rem;}
-.sched__epic-h{display:flex; flex-wrap:wrap; gap:.2rem .75rem; font-size:.875rem; color:var(--color-text-dim);}
-.sched__epic-h b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.sched__tasks{list-style:none; margin:.6rem 0 0; padding:0; border-top:1px solid var(--color-border-soft);}
-.sched__tasks li{display:flex; justify-content:space-between; gap:1rem; padding:.5rem 0;
-  border-bottom:1px solid var(--color-border-soft); font-size:.875rem; color:var(--color-text-muted);}
-.sched__win{white-space:nowrap; color:var(--color-text-dim);}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
@@ -761,14 +752,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <div class="reveal" data-act="sch">
         <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the chart" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">How to read the chart</button>
         <div class="reveal__body reveal__body--poster" id="rv-sch2">
-          <p data-i18n-html="sch_g2_rv_txt">Five stages of work from pull requests #18–#32, 28 Aug – 26 Sep 2026. <strong>Each bar runs from a stage's first commit to its last, and each diamond is a pull request on the day it merged</strong>, in Lima time. Open a stage to see its pull requests, or use the chips to show merge dates and commits.</p>
+          <p data-i18n-html="sch_g2_rv_txt">Five stages of work from pull requests #18–#32, 28 Aug – 26 Sep 2026. <strong>Each bar spans a stage from its first commit to its last; each diamond is one pull request, numbered, on the day it merged.</strong> Hover or tap a diamond to read what it delivered. The notes under the chart give the method.</p>
         </div>
       </div>
       <div class="reveal" data-act="sch">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="The first portfolio schedule" data-panel-title-key="sch_first_btn" data-i18n="sch_first_btn">The first portfolio schedule</button>
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="The first schedule" data-panel-title-key="sch_first_btn" data-i18n="sch_first_btn">The first schedule</button>
         <div class="reveal__body reveal__body--poster" id="rv-sch1">
-          <p data-i18n-html="sch_first_txt">The single page came first: two epics, 24 Apr – 04 Jul 2026, from the public commit history of jdigital and legacy-desops. <strong>Its work went organism by organism, inside one scroll.</strong> 32 active build-days; three June dates carried document uploads, not site code, and are excluded.</p>
-          <div class="sched__first" id="schedFirst"></div>
+          <p data-i18n-html="sch_first_txt">Before this site, a single page. Two epics, 24 Apr – 04 Jul 2026: <strong>01 Single Page built it organism by organism</strong> — foundation, capabilities, contact, bridges and a pages pipeline — and 02 Repo Hygiene prepared the handoff. 240 and 46 commits in the public history of jdigital and legacy-desops; 32 active build-days.</p>
         </div>
       </div>
     </div>
@@ -1449,49 +1439,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     return { draw: draw };
   }
 
-  /* The first schedule, as a list inside its reading panel: each epic once, with
-     its window, commits and pull requests, then its tasks and their dates. */
-  function listSchedule(cfg){
-    var el = document.getElementById(cfg.root);
-    if(!el) return null;
-    function draw(dict){
-      function t(k){ return dict && dict[k] !== undefined ? dict[k] : EN[k]; }
-      function count(base, n){ return fill(t(base + (n === 1 ? '_1' : '_n')), { n:n }); }
-      var mon = t('sch_aria_months').split(' ');
-      function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
-      function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
-      function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
-      el.innerHTML = cfg.epics.map(function(ep){
-        return '<div class="sched__epic"><div class="sched__epic-h"><b>' + esc(nameOf(ep)) + '</b><span>' +
-          win(ep) + ' · ' + esc(count('sch_commits', ep.commits)) + ' · ' + esc(count('sch_prs', ep.prs)) + '</span></div>' +
-          '<ul class="sched__tasks">' + ep.tasks.map(function(tk){
-            return '<li><span>' + esc((dict && dict[tk.id + '_t']) || tk.name) + '</span><span class="sched__win">' + win(tk) + '</span></li>';
-          }).join('') + '</ul></div>';
-      }).join('');
-    }
-    draw(null);
-    return { draw: draw };
-  }
-
   var instances = [
-    listSchedule({
-      root:'schedFirst',
-      epics: [
-        { key:'sch_ep1', name:'01 Single Page', commits:240, prs:48, start:'2026-04-24', end:'2026-06-18', tasks:[
-            { id:'sch_e1', name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
-            { id:'sch_e2', name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
-            { id:'sch_e3', name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
-            { id:'sch_e4', name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
-            { id:'sch_e5', name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
-            { id:'sch_e6', name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
-          ]},
-        { key:'sch_ep2', name:'02 Repo Hygiene', commits:46, prs:4, start:'2026-06-26', end:'2026-07-04', tasks:[
-            { id:'sch_e7', name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
-            { id:'sch_e8', name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
-            { id:'sch_e9', name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
-          ]}
-      ]
-    }),
     /* The multi-page build: from the first commit on 28 Aug to the merge of #32 on
        26 Sep, in five stages. Spans, active days and commits are counted from each
        stage's pull requests; merge dates are converted to Lima time. */
