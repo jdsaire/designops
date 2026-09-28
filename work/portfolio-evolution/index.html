@@ -1301,7 +1301,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
     sch_active_1:'{n} active day', sch_active_n:'{n} active days',
     sch_days_1:'{n} day', sch_days_n:'{n} days',
-    sch_aria_cbar:'{name}, {window} 2026, {days} days, {active}',
+    sch_aria_cbar:'{name}, {window} 2026, {days}, {active}',
     sch_aria_ctotals:'{name}: {window} 2026, {prs}, {active}',
     sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026',
     sch_cap_merged:'Merged {date}'
@@ -1383,7 +1383,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
             ' <span class="gantt__stage-note">– ' + esc(count('sch_commits', st.commits)) + '</span></span></div>' +
           '<div class="gantt__row-field" style="min-height:' + field + 'rem">' +
             '<div class="gantt__bar" style="left:' + pct(offset(st.start)) + '; width:' + pct(days) + '" role="img" aria-label="' +
-              esc(fill(t('sch_aria_cbar'), { name:name, window:win(st), days:days, active:active })) + '"></div>' + lenHtml + dots + '</div>' +
+              esc(fill(t('sch_aria_cbar'), { name:name, window:win(st), days:count('sch_days', days), active:active })) + '"></div>' + lenHtml + dots + '</div>' +
           '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(st), prs:prs, active:active })) + '">' +
             '<b>' + win(st) + '</b><span class="gantt__days">' + esc(prs) + '</span><span class="gantt__days">' + esc(active) + '</span></div>' +
         '</div></div>';

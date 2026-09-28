@@ -75,7 +75,7 @@
   "sch_days_1": "{n} día",
   "sch_days_n": "{n} días",
   "sch_ms_pr": "#{n}",
-  "sch_aria_cbar": "{name}, {window} de 2026, {days} días, {active}",
+  "sch_aria_cbar": "{name}, {window} de 2026, {days}, {active}",
   "sch_aria_ctotals": "{name}: {window} de 2026, {prs}, {active}",
   "sch_aria_pr": "Pull request {n}, {name}, integrado el {date} de 2026",
   "sch_cap_merged": "Integrado el {date}",
