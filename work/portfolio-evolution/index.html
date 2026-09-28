@@ -381,6 +381,17 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem);}
 /* A metric that exists for one build only prints a dash rather than a zero. */
 .drow__v--none{color:var(--color-text-dim); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-light);}
+/* Each measure opens onto one plain line saying what it counts — the disclosure the
+   schedule's epics used: a turning marker, and a purple rule while open. */
+.drow__toggle{font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; text-align:left;
+  background:none; border:0; padding:0; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem; min-height:44px;}
+.drow__toggle:hover{color:var(--color-brand-white);}
+.drow__marker{display:inline-block; width:.8em; letter-spacing:0; transition:transform 160ms var(--ease-standard);}
+.drow__toggle[aria-expanded="true"] .drow__marker{transform:rotate(90deg);}
+.drow:has(.drow__toggle[aria-expanded="true"]) :is(.drow__l,.drow__desc){box-shadow:inset 3px 0 0 var(--color-brand-purple); padding-left:.9rem;}
+.drow__desc{grid-column:1 / -1; margin:0; font-size:.8125rem; line-height:1.5; font-weight:var(--fw-light);
+  color:var(--color-text-muted); letter-spacing:0; text-transform:none;}
+.drow__desc[hidden]{display:none;}
 @media (max-width:767px){
   .drow{grid-template-columns:1fr 1fr; gap:.35rem .75rem;}
   .drow__l{grid-column:1 / -1;}
@@ -904,44 +915,46 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <div class="drow__l"></div><div class="drow__v" data-i18n="dash_col_multi">Multi page</div><div class="drow__v" data-i18n="dash_col_single">Single page</div>
           </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m6">Commits</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m6"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m6">Commits</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="286">286</span></div>
+        <p class="drow__desc" id="dmd-m6" data-i18n="dash_m6_d" hidden>Each saved change to the site's code, counted from its public history.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m7">Pull requests</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m7"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m7">Pull requests</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="52">52</span></div>
+        <p class="drow__desc" id="dmd-m7" data-i18n="dash_m7_d" hidden>Batches of changes, each reviewed before it reached the live site.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m8">Days of public history</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m8"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m8">Days of public history</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="71">71</span></div>
+        <p class="drow__desc" id="dmd-m8" data-i18n="dash_m8_d" hidden>Calendar days from the first saved change to the last.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m9">Active build-days</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m9"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m9">Active build-days</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="32">32</span></div>
+        <p class="drow__desc" id="dmd-m9" data-i18n="dash_m9_d" hidden>Days with at least one saved change.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m1a">Pages</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m1a"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m1a">Pages</span></button></div>
         <div class="drow__v"><span class="dcell__n" data-count="7">7</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="1">1</span></div>
+        <p class="drow__desc" id="dmd-m1a" data-i18n="dash_m1a_d" hidden>Separate web pages a visitor can open.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m1b">Organisms</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m1b"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m1b">Organisms</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="10">10</span></div>
+        <p class="drow__desc" id="dmd-m1b" data-i18n="dash_m1b_d" hidden>Reusable page sections, such as a hero, a card grid or a contact form.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m3">Languages engineered</div>
-        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
-      </div>
-      <div class="drow">
-        <div class="drow__l" data-i18n="dash_m2">Dictionary keys</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-expanded="false" aria-controls="dmd-m2"><span class="drow__marker" aria-hidden="true">›</span><span data-i18n="dash_m2">Dictionary keys</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <p class="drow__desc" id="dmd-m2" data-i18n="dash_m2_d" hidden>Labelled pieces of text, each kept in English and in Spanish.</p>
       </div>
         </div>
       </div>
@@ -1494,6 +1507,16 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     if(dict) instances.forEach(function(inst){ if(inst) inst.draw(dict); });
   });
 })();
+
+/* ============ Dashboard measures: one plain line each, on demand ============ */
+document.querySelectorAll(".drow__toggle").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const open = btn.getAttribute("aria-expanded") !== "true";
+    btn.setAttribute("aria-expanded", String(open));
+    const d = document.getElementById(btn.getAttribute("aria-controls"));
+    if(d) d.hidden = !open;
+  });
+});
 
 /* ============ Count-up (once per element, reduced-motion aware) ============ */
 const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
