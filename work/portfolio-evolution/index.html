@@ -426,6 +426,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;
   font-size:.72rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
 .synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.synthesis + .synthesis{margin-top:.75rem;}
 .dash .synthesis{margin:0 clamp(1.4rem,2.5vw,2.25rem) clamp(1.4rem,2.5vw,2.25rem);}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
@@ -781,9 +782,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart renders from its data object and requires JavaScript. The reading guide above states the window it draws and its source.</p></noscript>
     </div>
 
-    <!-- Glossary for readers outside software (WC-Q18). -->
-    <p class="synthesis io" data-i18n-html="sch_glossary"><b>Commit</b>: one saved change to the site's code, with a note on what changed. <b>Pull request</b>: a set of commits proposed together, reviewed, then merged into the live site.</p>
-  </div>
+    <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
+    <p class="synthesis io" data-i18n-html="sch_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed. The count beside each stage leaves out merge commits. A bar runs from the stage's first commit to its last, and its active days are the dates with at least one commit.</p>
+    <p class="synthesis io" data-i18n-html="sch_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site. Pull requests #18–#32 are grouped into five stages by what they changed. Each diamond sits on its merge date in Lima time (UTC−5), so #24 and #29 fall a day before GitHub's UTC dates.</p>
+    <p class="synthesis io" data-i18n-html="sch_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026. The first schedule comes from the public histories of jdigital and legacy-desops, 24 Apr – 04 Jul 2026.</p>  </div>
 </section>
 
 <!-- ================= ACT 04 · THE ARCHITECTURE — 6 numbered cards: 2 foundational, 4 multi-page ================= -->
