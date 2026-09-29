@@ -204,6 +204,14 @@
   "act6_sev_minor": "Minor",
   "act6_fr_btn": "The major finding",
   "act6_fr_txt": "<strong>A heading that asks for more than the form does.</strong> A screen headed <em>\"Ingresa tus datos personales y de tu vuelo\"</em> whose only fields are flight data.",
-  "act6_sequel": "<strong>What I can claim:</strong> the design, prototype, evaluation and handoff of a platform live today. <strong>What I can't:</strong> its build, deployment or operation. <strong>What's next:</strong> six findings, one of them major, recorded for whoever runs it.",
+  "act6_k1_tag": "What I can claim",
+  "act6_k1_t": "Design to handoff",
+  "act6_k1_x": "The design, prototype, evaluation and handoff of a platform live today.",
+  "act6_k2_tag": "What I can't",
+  "act6_k2_t": "Not the build",
+  "act6_k2_x": "Its build, deployment and operation belong to others.",
+  "act6_k3_tag": "What's next",
+  "act6_k3_t": "Six findings on record",
+  "act6_k3_x": "One major and five minor, recorded for whoever runs the platform.",
   "act3_notice": "<strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation."
 }

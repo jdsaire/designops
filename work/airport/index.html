@@ -253,7 +253,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* ---- ACT 05 · THE REFLECTION ---- */
 .house .card__t{display:flex; flex-direction:column; gap:.3rem;}
-.house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-brand-purple);}
+.house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-purple-light);}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
@@ -446,7 +446,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .journey__t{font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:var(--fw-semibold); color:var(--color-brand-white); line-height:1.3;}
 .journey__ch{list-style:none; display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:.4rem; margin-top:.3rem;}
 .journey__c{display:flex; flex-direction:column; gap:.15rem; padding:.5rem .6rem; font-size:.72rem; font-weight:var(--fw-medium);
-  border:1px solid rgba(var(--ink),.4); color:var(--color-text-muted);
+  border:1px solid rgba(var(--ink),.5); color:var(--color-text-muted);
   transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
 .journey__c small{font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-dim);}
 .journey__c--web{border-color:var(--color-brand-purple);}
@@ -466,7 +466,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .chain__x{font-size:.85rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
 .chain__n--missing{border:1.5px dashed var(--color-brand-purple); background:transparent;}
 .chain__n--wait .chain__x{color:var(--color-text-dim);}
-.chain__q{position:absolute; top:.8rem; right:1rem; font-size:1.4rem; font-weight:var(--fw-black); color:var(--color-brand-purple); line-height:1;}
+.chain__q{position:absolute; top:.8rem; right:1rem; font-size:1.4rem; font-weight:var(--fw-black); color:var(--color-purple-light); line-height:1;}
 /* the links: broken on both sides of the missing channel */
 .chain__n:not(:last-child)::after{content:""; position:absolute; left:50%; bottom:calc(-2.2rem - 1px); height:2.2rem;
   border-left:1.5px dashed rgba(var(--ink),.45);}
@@ -489,16 +489,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .wbs__stamp{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.16em; text-transform:uppercase; padding:.35rem .6rem;
   border:1px solid var(--color-brand-purple); color:var(--color-purple-light);}
 .wbs__branches{list-style:none; display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1.6rem; position:relative;}
-.wbs__b{position:relative; border:1px solid rgba(var(--ink),.4); padding:1rem 1.1rem 1.1rem;}
+.wbs__b{position:relative; border:1px solid rgba(var(--ink),.5); padding:1rem 1.1rem 1.1rem;}
 .wbs__b::before{content:""; position:absolute; left:1.2rem; top:calc(-1.6rem - 1px); height:1.6rem; border-left:1px solid rgba(var(--ink),.45);}
 .wbs__b + .wbs__b::before{top:calc(-1rem - 1px); height:1rem;}
 .wbs__bt{display:block; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:.6rem;}
 .wbs__leaves{list-style:none; display:flex; flex-direction:column; gap:.4rem; border-left:1px solid rgba(var(--ink),.3); padding-left:.9rem;}
 .wbs__btn{position:relative; width:100%; min-height:44px; text-align:left; padding:.6rem 2rem .6rem .8rem; font-size:.9rem; font-weight:var(--fw-semibold);
-  color:var(--color-brand-white); background:var(--surface-card); border:1px solid var(--color-border-soft); cursor:pointer;
+  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;
   transition:border-color var(--duration-ui) var(--ease-standard);}
 .wbs__btn::after{content:"+"; position:absolute; right:.8rem; top:50%; transform:translateY(-50%); color:var(--color-brand-purple); font-weight:var(--fw-bold);}
-.wbs__btn:hover{border-color:rgba(var(--ink),.45);}
+.wbs__btn:hover{border-color:rgba(var(--ink),.75);}
 .wbs__btn[aria-expanded="true"]{border-color:var(--color-brand-purple);}
 .wbs__btn[aria-expanded="true"]::after{content:"\2212";}
 .wbs__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
@@ -515,7 +515,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 
 /* CHASSIS PASS · Act 05 handoff boundary */
-.handoff{display:grid; grid-template-columns:1fr; margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.4);}
+.handoff{display:grid; grid-template-columns:1fr; margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.5);}
 .handoff__lane{padding:1.1rem 1.2rem; display:flex; flex-direction:column; gap:.7rem;}
 .handoff__lane--after{background:var(--surface-card);}
 .handoff__h{font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);}
@@ -544,7 +544,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* CHASSIS PASS · Act 06 comparison, figures, severity */
 .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
-.cmp{margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.4);}
+.cmp{margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.5);}
 .cmp__hint{display:none; padding:.8rem 1.2rem; font-size:.78rem; color:var(--color-text-dim); border-bottom:1px solid var(--color-border-faint);}
 .js .cmp__hint{display:block;}
 .cmp__lanes{display:grid; grid-template-columns:1fr 1fr;}
@@ -555,13 +555,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .cmp__steps{list-style:none; display:flex; flex-direction:column; gap:.45rem; counter-reset:c;}
 .cmp__steps li{counter-increment:c;}
 .cmp__step{position:relative; width:100%; min-height:44px; text-align:left; padding:.55rem .6rem .55rem 2.1rem; font-size:.82rem; font-weight:var(--fw-medium);
-  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.4); cursor:pointer;
+  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;
   transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
 .cmp__lane--live .cmp__step{background:var(--color-brand-black);}
 .cmp__step::before{content:counter(c); position:absolute; left:.6rem; top:50%; transform:translateY(-50%); width:1.1rem; height:1.1rem;
   display:grid; place-items:center; font-size:.58rem; font-weight:var(--fw-bold); border:1px solid rgba(var(--ink),.45); color:var(--color-text-muted);}
 .cmp__step--out{border-style:dashed; color:var(--color-text-muted);}
-.cmp__step:hover{border-color:rgba(var(--ink),.6);}
+.cmp__step:hover{border-color:rgba(var(--ink),.75);}
 .cmp__step.is-pair, .cmp__step[aria-pressed="true"]{border-color:var(--color-brand-purple);}
 .cmp__step[aria-pressed="true"]::before, .cmp__step.is-pair::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
 .cmp__step:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
@@ -582,6 +582,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .sev__n{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white);}
 .sev .reveal{margin-top:1rem;}
 @media (max-width:600px){ .cmp__lane{padding:.8rem .6rem;} .cmp__step{font-size:.76rem; padding-left:1.9rem;} .cmp__step::before{left:.45rem;} }
+.close-cells{margin-top:clamp(1.6rem,3vw,2.4rem);}
 </style>
 </head>
 <body id="top">
@@ -1070,7 +1071,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <p class="sequel io" data-i18n-html="act6_sequel"><strong>What I can claim:</strong> the design, prototype, evaluation and handoff of a platform live today. <strong>What I can't:</strong> its build, deployment or operation. <strong>What's next:</strong> six findings, one of them major, recorded for whoever runs it.</p>
+    <div class="cardgrid cardgrid--3 close-cells io">
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_k1_tag">What I can claim</span><span data-i18n="act6_k1_t">Design to handoff</span></h3>
+        <p class="card__x" data-i18n="act6_k1_x">The design, prototype, evaluation and handoff of a platform live today.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_k2_tag">What I can't</span><span data-i18n="act6_k2_t">Not the build</span></h3>
+        <p class="card__x" data-i18n="act6_k2_x">Its build, deployment and operation belong to others.</p>
+      </article>
+      <article class="card house">
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_k3_tag">What's next</span><span data-i18n="act6_k3_t">Six findings on record</span></h3>
+        <p class="card__x" data-i18n="act6_k3_x">One major and five minor, recorded for whoever runs the platform.</p>
+      </article>
+    </div>
 
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
     <div class="notes io" id="disclosure">
