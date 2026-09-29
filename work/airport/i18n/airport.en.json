@@ -146,8 +146,6 @@
   "act4_fc_lg_screen": "Platform screen",
   "act4_fc_lg_physical": "Physical interaction",
   "act4_flow_cap": "<b>The flowchart.</b> From the QR code that opens the platform, through the four screens, to the TUUA turnstile and boarding. Purple marks the platform screens I designed.",
-  "act4_rv_btn": "Four channels, one digital",
-  "act4_rv_txt": "<strong>The web platform is one of four ways to pay the fee, and the only digital one.</strong> On the web, the passenger receives a QR code by email and shows it at the eGate. At the three staffed channels, the passenger receives a bar-code sticker on the boarding pass instead.",
   "act5_eyebrow": "Act 05 · The Handoff",
   "act5_verdict": "My part ended where the build began.",
   "act5_lede": "How the proposal was evaluated, and where it stopped.",
