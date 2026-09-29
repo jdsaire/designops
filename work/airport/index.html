@@ -457,6 +457,29 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__steps{grid-template-columns:repeat(4,1fr); gap:1.6rem; align-items:start;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
+
+/* CHASSIS PASS · Act 01 broken chain */
+.chain{list-style:none; display:grid; grid-template-columns:1fr; gap:2.2rem; margin-top:clamp(1.6rem,3vw,2.4rem);}
+.chain__n{position:relative; display:flex; flex-direction:column; gap:.35rem; padding:1.1rem 1.2rem;
+  border:1px solid rgba(var(--ink),.45); background:var(--surface-card);}
+.chain__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.chain__x{font-size:.85rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.chain__n--missing{border:1.5px dashed var(--color-brand-purple); background:transparent;}
+.chain__n--wait .chain__x{color:var(--color-text-dim);}
+.chain__q{position:absolute; top:.8rem; right:1rem; font-size:1.4rem; font-weight:var(--fw-black); color:var(--color-brand-purple); line-height:1;}
+/* the links: broken on both sides of the missing channel */
+.chain__n:not(:last-child)::after{content:""; position:absolute; left:50%; bottom:calc(-2.2rem - 1px); height:2.2rem;
+  border-left:1.5px dashed rgba(var(--ink),.45);}
+.chain__n:not(:last-child)::before{content:"\00d7"; position:absolute; left:calc(50% + .6rem); bottom:-1.85rem;
+  font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-purple);}
+.chain__foot{margin-top:clamp(1.2rem,2vw,1.6rem); font-size:clamp(.95rem,1.1vw,1.05rem); color:var(--color-text-muted); font-weight:var(--fw-light); max-width:60rem;}
+.chain__foot strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+@media (min-width:768px){
+  .chain{grid-template-columns:repeat(3,1fr); gap:3rem;}
+  .chain__n:not(:last-child)::after{left:auto; right:calc(-3rem - 1px); bottom:auto; top:50%; height:0; width:3rem;
+    border-left:0; border-top:1.5px dashed rgba(var(--ink),.45);}
+  .chain__n:not(:last-child)::before{left:auto; right:-1.85rem; bottom:auto; top:calc(50% - 1.6rem);}
+}
 </style>
 </head>
 <body id="top">
@@ -678,14 +701,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
       </div>
       <h2 class="verdict" id="v1" data-i18n="act1_verdict">A fee with no way to collect it.</h2>
-      <p class="scan" data-i18n="act1_lede">Why engineering was waiting on a definition.</p>
+      <p class="scan" data-i18n="act1_lede">Three links, and the middle one missing.</p>
     </div>
 
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act1_scan1">The airport had to start charging international transfer passengers a fee it had never charged, and no channel existed to collect it.</p>
-      <p class="scan" data-i18n="act1_scan2">Five areas each held a piece of it: Finance, Airport Operations, IT, Commercial and Reputation.</p>
-      <p class="scan" data-i18n="act1_scan3">Engineering was waiting on a definition.</p>
-    </div>
+    <ol class="chain io">
+        <li class="chain__n"><span class="chain__t" data-i18n="act1_n1_t">The fee</span><span class="chain__x" data-i18n="act1_n1_x">Never charged before</span></li>
+        <li class="chain__n chain__n--missing"><span class="chain__q" aria-hidden="true">?</span><span class="chain__t" data-i18n="act1_n2_t">The channel</span><span class="chain__x" data-i18n="act1_n2_x">None existed to collect it</span></li>
+        <li class="chain__n chain__n--wait"><span class="chain__t" data-i18n="act1_n3_t">Engineering</span><span class="chain__x" data-i18n="act1_n3_x">Waiting on a definition</span></li>
+    </ol>
+    <p class="chain__foot io" data-i18n-html="act1_foot"><strong>Five central areas</strong> each held a piece of it: Finance, Airport Operations, IT, Commercial and Reputation.</p>
   </div>
 </section>
 
