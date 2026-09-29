@@ -480,6 +480,39 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     border-left:0; border-top:1.5px dashed rgba(var(--ink),.45);}
   .chain__n:not(:last-child)::before{left:auto; right:-1.85rem; bottom:auto; top:calc(50% - 1.6rem);}
 }
+
+/* CHASSIS PASS · Act 03 WBS tree */
+.wbs{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.wbs__root{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem;
+  padding:1rem 1.2rem; border:2px solid var(--color-brand-purple); background:var(--surface-card);}
+.wbs__rt{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.wbs__stamp{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.16em; text-transform:uppercase; padding:.35rem .6rem;
+  border:1px solid var(--color-brand-purple); color:var(--color-purple-light);}
+.wbs__branches{list-style:none; display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1.6rem; position:relative;}
+.wbs__b{position:relative; border:1px solid rgba(var(--ink),.4); padding:1rem 1.1rem 1.1rem;}
+.wbs__b::before{content:""; position:absolute; left:1.2rem; top:calc(-1.6rem - 1px); height:1.6rem; border-left:1px solid rgba(var(--ink),.45);}
+.wbs__b + .wbs__b::before{top:calc(-1rem - 1px); height:1rem;}
+.wbs__bt{display:block; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:.6rem;}
+.wbs__leaves{list-style:none; display:flex; flex-direction:column; gap:.4rem; border-left:1px solid rgba(var(--ink),.3); padding-left:.9rem;}
+.wbs__btn{position:relative; width:100%; min-height:44px; text-align:left; padding:.6rem 2rem .6rem .8rem; font-size:.9rem; font-weight:var(--fw-semibold);
+  color:var(--color-brand-white); background:var(--surface-card); border:1px solid var(--color-border-soft); cursor:pointer;
+  transition:border-color var(--duration-ui) var(--ease-standard);}
+.wbs__btn::after{content:"+"; position:absolute; right:.8rem; top:50%; transform:translateY(-50%); color:var(--color-brand-purple); font-weight:var(--fw-bold);}
+.wbs__btn:hover{border-color:rgba(var(--ink),.45);}
+.wbs__btn[aria-expanded="true"]{border-color:var(--color-brand-purple);}
+.wbs__btn[aria-expanded="true"]::after{content:"\2212";}
+.wbs__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
+.wbs__x{padding:.55rem .8rem .2rem; font-size:.85rem; line-height:1.5; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.js .wbs__x[hidden]{display:none;}
+.wbs__note{margin-top:1rem; font-size:.78rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+@media (min-width:900px){
+  .wbs__branches{grid-template-columns:repeat(3,1fr); gap:1.2rem;}
+  .wbs__branches::before{content:""; position:absolute; top:calc(-.8rem - 1px); left:calc((100% - 2.4rem) / 6); right:calc((100% - 2.4rem) / 6); border-top:1px solid rgba(var(--ink),.45);}
+  .wbs__b::before, .wbs__b + .wbs__b::before{left:50%; top:calc(-.8rem - 1px); height:.8rem;}
+  .wbs__branches{margin-top:1.6rem;}
+  .wbs__root{position:relative;}
+  .wbs__root::after{content:""; position:absolute; left:50%; bottom:calc(-.8rem - 2px); height:.8rem; border-left:1px solid rgba(var(--ink),.45);}
+}
 </style>
 </head>
 <body id="top">
@@ -753,25 +786,32 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · Scope &amp; Deliverables</span>
       </div>
       <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five deliverables, closed on 4 August 2025.</h2>
-      <p class="scan" data-i18n="act3_lede">The scope my area delivered, in the closure mail's own list.</p>
+      <p class="scan" data-i18n="act3_lede">Open any deliverable in the work breakdown.</p>
     </div>
 
-    <div class="cardgrid cardgrid--3 io">
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c1_t">Two technical scopes</h3>
-        <p class="card__x" data-i18n="act3_c1_x">One for the platform and one for the payment gateway: the structural requirements handed to engineering.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c2_t">Mockup and web prototype</h3>
-        <p class="card__x" data-i18n="act3_c2_x">The proposed payment screens, and a web prototype of the flow.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act3_c3_t">Casuistry and process map</h3>
-        <p class="card__x" data-i18n="act3_c3_x">An operational casuistry estimating web-payment usage, and a process map: a blueprint for the physical payment points and a flowchart for the web one.</p>
-      </article>
+    <div class="wbs io">
+      <div class="wbs__root"><span class="wbs__rt" data-i18n="act3_root">TUUA Transfer design package</span><span class="wbs__stamp" data-i18n="act3_stamp">Closed · 4 Aug 2025</span></div>
+      <ul class="wbs__branches">
+      <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b1">Technical scopes</span>
+        <ul class="wbs__leaves">
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l1" data-i18n="act3_l1_t">Platform scope</button><p class="wbs__x" id="wbs-l1" data-i18n="act3_l1_x">The structural requirements for the payment platform, handed to engineering.</p></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l2" data-i18n="act3_l2_t">Payment gateway scope</button><p class="wbs__x" id="wbs-l2" data-i18n="act3_l2_x">The structural requirements for the payment gateway.</p></li>
+        </ul>
+      </li>
+      <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b2">Experience</span>
+        <ul class="wbs__leaves">
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l3" data-i18n="act3_l3_t">Screen mockup and web prototype</button><p class="wbs__x" id="wbs-l3" data-i18n="act3_l3_x">The proposed payment screens shown in Act 04, and a web prototype of the flow.</p></li>
+        </ul>
+      </li>
+      <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b3">Operations</span>
+        <ul class="wbs__leaves">
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l4" data-i18n="act3_l4_t">Operational casuistry</button><p class="wbs__x" id="wbs-l4" data-i18n="act3_l4_x">An estimate of web-payment usage across the operational cases.</p></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l5" data-i18n="act3_l5_t">Process map</button><p class="wbs__x" id="wbs-l5" data-i18n="act3_l5_x">A blueprint for the physical payment points and a flowchart for the web one.</p></li>
+        </ul>
+      </li>
+      </ul>
+      <p class="wbs__note" data-i18n="act3_note">The five deliverables as the closure mail lists them; the three branches are my grouping.</p>
     </div>
-
-    <p class="synthesis io" data-i18n="act3_synth">The closure mail listed all five on 4 August 2025: scope defined, deliverables handed over, work package closed.</p>
   </div>
 </section>
 
@@ -1187,6 +1227,17 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 document.querySelectorAll('.tabs[data-journey]').forEach(box=>{
   const j = box.closest('.act').querySelector('.journey');
   box.addEventListener('tabs:select', e=>{ if(j && e.detail.tab.dataset.channel) j.dataset.channel = e.detail.tab.dataset.channel; });
+});
+
+/* ============ Act 03 WBS leaves — disclosure; open without script ============ */
+document.querySelectorAll('.wbs__btn').forEach(btn=>{
+  const x = document.getElementById(btn.getAttribute('aria-controls'));
+  if(x) x.hidden = true;
+  btn.addEventListener('click', ()=>{
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    if(x) x.hidden = !open;
+  });
 });
 
 /* ============ Entrance (once) ============ */
