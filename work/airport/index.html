@@ -410,6 +410,53 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .fc__lg-h{fill:var(--color-text-dim); font-size:12px; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase;}
 .fc__lg{fill:var(--color-text-muted); font-size:13px;}
 
+
+/* CHASSIS PASS · tabs + stat cells (WD-Q27) */
+/* ---- Tabs — carried forward from Brief 01's Act 05 tablist (itself Brief 04's). Without
+        script every panel shows, stacked; the tablist appears only when script drives it. ---- */
+.tabs{border:1px solid var(--color-border-soft);}
+.tabs__list{display:none; border-bottom:1px solid var(--color-border-soft);}
+.js .tabs__list{display:flex;}
+.tabs__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.6rem; font-weight:var(--fw-semibold);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim);
+  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+@media (min-width:768px){ .tabs__tab{font-size:.7rem; letter-spacing:.16em;} }
+.tabs__tab:hover{color:var(--color-brand-white);}
+.tabs__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
+.tabs__tab:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-2px;}
+.tabs__panel{padding:clamp(1.1rem,2vw,1.6rem); font-size:clamp(.95rem,1.1vw,1.05rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.tabs__panel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.tabs__panel[hidden]{display:none;}
+.tabs__panel + .tabs__panel{border-top:1px solid var(--color-border-faint);}
+/* ---- Stat cells — Brief 04's .dcell ---- */
+.dcells{display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;}
+@media (max-width:600px){ .dcells{grid-template-columns:1fr;} }
+.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
+.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em; color:var(--color-brand-white);}
+.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
+.dcell__p{font-size:.78rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.45;}
+
+/* CHASSIS PASS · Act 00 journey */
+.act .journey, .act .tabs, .act .dcells{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.journey__steps{list-style:none; display:grid; grid-template-columns:1fr; gap:1.4rem; position:relative;}
+.journey__step{position:relative; display:flex; flex-direction:column; gap:.6rem; padding:1rem 1.1rem;
+  border:1px solid var(--color-border-soft); background:var(--surface-card);}
+.journey__step:not(:last-child)::after{content:""; position:absolute; left:1.55rem; bottom:-1.4rem; width:1px; height:1.4rem; background:rgba(var(--ink),.45);}
+.journey__i{width:1.6rem; height:1.6rem; fill:none; stroke:var(--color-brand-purple); stroke-width:1.6;}
+.journey__t{font-size:clamp(.95rem,1.15vw,1.05rem); font-weight:var(--fw-semibold); color:var(--color-brand-white); line-height:1.3;}
+.journey__ch{list-style:none; display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:.4rem; margin-top:.3rem;}
+.journey__c{display:flex; flex-direction:column; gap:.15rem; padding:.5rem .6rem; font-size:.72rem; font-weight:var(--fw-medium);
+  border:1px solid rgba(var(--ink),.4); color:var(--color-text-muted);
+  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+.journey__c small{font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-dim);}
+.journey__c--web{border-color:var(--color-brand-purple);}
+.journey[data-channel="web"] .journey__c--web,
+.journey[data-channel="staff"] .journey__c--staff{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
+.journey[data-channel="web"] .journey__c--web small{color:var(--color-on-brand);}
+@media (min-width:900px){
+  .journey__steps{grid-template-columns:repeat(4,1fr); gap:1.6rem; align-items:start;}
+  .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
+}
 </style>
 </head>
 <body id="top">
@@ -576,7 +623,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
       </div>
       <h2 class="verdict" id="v0" data-i18n="act0_verdict">A new fee, with no precedent to copy.</h2>
-      <p class="scan" data-i18n="act0_lede">Three terms and three facts before the story starts.</p>
+      <p class="scan" data-i18n="act0_lede">Switch channels to follow an international transfer passenger through the fee.</p>
     </div>
 
     <div class="scanstack io">
@@ -590,19 +637,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="cardgrid cardgrid--3 io">
-      <article class="card">
-        <h3 class="card__t" data-i18n="act0_c1_t">No precedent</h3>
-        <p class="card__x" data-i18n="act0_c1_x">Nobody had charged it before. There was no internal or external precedent to follow.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act0_c2_t">130,000+ a month</h3>
-        <p class="card__x" data-i18n="act0_c2_x">Today the fee is charged to 130,000+ international transfer passengers a month, on a platform a third party operates.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act0_c3_t">Four ways to pay</h3>
-        <p class="card__x" data-i18n="act0_c3_x">Three staffed payment points and one web platform. The web is the only digital channel, and the one whose flow I designed.</p>
-      </article>
+    <div class="journey io" data-channel="web">
+      <ol class="journey__steps">
+        <li class="journey__step"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 20h18M6 5l9 8M15 13h-5M15 13V8"/></svg><span class="journey__t" data-i18n="act0_j1">Arrive on an international flight</span></li>
+        <li class="journey__step journey__step--pay"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12"/><path d="M3 10h18M7 15h4"/></svg><span class="journey__t" data-i18n="act0_j2">Pay TUUA Transfer</span>
+          <ul class="journey__ch">
+            <li class="journey__c journey__c--web"><span data-i18n="act0_ch_web">Web platform</span><small data-i18n="act0_ch_digital">The only digital channel</small></li>
+            <li class="journey__c journey__c--staff"><span data-i18n="act0_ch_staff">Staffed point</span></li>
+            <li class="journey__c journey__c--staff"><span data-i18n="act0_ch_staff">Staffed point</span></li>
+            <li class="journey__c journey__c--staff"><span data-i18n="act0_ch_staff">Staffed point</span></li>
+          </ul>
+        </li>
+        <li class="journey__step"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4v16M19 4v16M5 12h14M9 9v6"/></svg><span class="journey__t" data-i18n="act0_j3">Pass the eGate and the TUUA turnstile</span></li>
+        <li class="journey__step"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 20h18M6 15l9-9M15 6h-5M15 6v5"/></svg><span class="journey__t" data-i18n="act0_j4">Board the next international flight</span></li>
+      </ol>
+    </div>
+
+    <div class="tabs io" data-journey="act0">
+      <div class="tabs__list" role="tablist" aria-label="Payment channels" data-i18n-aria="act0_tabs_aria">
+        <button class="tabs__tab" role="tab" id="a0-tab-web" aria-selected="true" aria-controls="a0-tp-web" data-channel="web" data-i18n="act0_tab_web">Web</button>
+        <button class="tabs__tab" role="tab" id="a0-tab-staff" aria-selected="false" aria-controls="a0-tp-staff" data-channel="staff" data-i18n="act0_tab_staff">Staffed points</button>
+      </div>
+      <div class="tabs__panel" id="a0-tp-web" role="tabpanel" aria-labelledby="a0-tab-web"><p data-i18n-html="act0_tp_web"><strong>A QR code by email.</strong> The passenger pays on the web platform and shows the QR code at the eGate.</p></div>
+      <div class="tabs__panel" id="a0-tp-staff" role="tabpanel" aria-labelledby="a0-tab-staff"><p data-i18n-html="act0_tp_staff"><strong>A bar-code sticker.</strong> At any of the three staffed points, the passenger receives a sticker on the boarding pass, which the eGate reads.</p></div>
+    </div>
+
+    <div class="dcells io">
+      <div class="dcell"><span class="dcell__n" data-i18n="act0_s1_n">130,000+</span><span class="dcell__l" data-i18n="act0_s1_l">International transfer passengers a month</span><span class="dcell__p" data-i18n="act0_s1_p">Charged today, on a platform a third party operates.</span></div>
+      <div class="dcell"><span class="dcell__n" data-i18n="act0_s2_n">None</span><span class="dcell__l" data-i18n="act0_s2_l">Precedent to copy</span><span class="dcell__p" data-i18n="act0_s2_p">Nobody had charged this fee before, inside the airport or outside it.</span></div>
     </div>
   </div>
 </section>
@@ -1073,6 +1135,35 @@ function runCounts(scope){
     requestAnimationFrame(step);
   });
 }
+
+/* ============ Tabs — carried forward from Brief 01; announces tabs:select ============ */
+document.querySelectorAll('[role="tablist"]').forEach(list=>{
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  function select(tab){
+    tabs.forEach(t=>{
+      const sel = t === tab;
+      t.setAttribute("aria-selected", String(sel));
+      t.tabIndex = sel ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute("aria-controls"));
+      if(panel) panel.hidden = !sel;
+    });
+    list.dispatchEvent(new CustomEvent("tabs:select", { bubbles:true, detail:{ tab } }));
+  }
+  tabs.forEach((tab,i)=>{
+    tab.addEventListener("click", ()=> select(tab));
+    tab.addEventListener("keydown", e=>{
+      const nx = e.key === "ArrowRight" ? tabs[(i+1) % tabs.length] : e.key === "ArrowLeft" ? tabs[(i-1+tabs.length) % tabs.length] : null;
+      if(nx){ e.preventDefault(); select(nx); nx.focus(); }
+    });
+  });
+  select(tabs.find(t=>t.getAttribute("aria-selected")==="true") || tabs[0]);
+});
+
+/* ============ Act 00 journey follows the channel tabs ============ */
+document.querySelectorAll('.tabs[data-journey]').forEach(box=>{
+  const j = box.closest('.act').querySelector('.journey');
+  box.addEventListener('tabs:select', e=>{ if(j && e.detail.tab.dataset.channel) j.dataset.channel = e.detail.tab.dataset.channel; });
+});
 
 /* ============ Entrance (once) ============ */
 const io = new IntersectionObserver(entries=>{
