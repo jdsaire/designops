@@ -513,6 +513,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .wbs__root{position:relative;}
   .wbs__root::after{content:""; position:absolute; left:50%; bottom:calc(-.8rem - 2px); height:.8rem; border-left:1px solid rgba(var(--ink),.45);}
 }
+
+/* CHASSIS PASS · Act 05 handoff boundary */
+.handoff{display:grid; grid-template-columns:1fr; margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.4);}
+.handoff__lane{padding:1.1rem 1.2rem; display:flex; flex-direction:column; gap:.7rem;}
+.handoff__lane--after{background:var(--surface-card);}
+.handoff__h{font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);}
+.handoff__lane--mine .handoff__h{color:var(--color-purple-light);}
+.handoff__list{list-style:none; display:flex; flex-direction:column; gap:.45rem; counter-reset:h;}
+.handoff__list li{position:relative; padding-left:1.6rem; font-size:.95rem; line-height:1.45; color:var(--color-brand-white); counter-increment:h;}
+.handoff__list li::before{content:counter(h); position:absolute; left:0; top:.1rem; width:1.1rem; height:1.1rem; display:grid; place-items:center;
+  font-size:.58rem; font-weight:var(--fw-bold); border:1px solid rgba(var(--ink),.45); color:var(--color-text-muted);}
+.handoff__lane--mine .handoff__list li::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
+.handoff__list li strong{font-weight:var(--fw-semibold);}
+.handoff__lane--after .handoff__list li{color:var(--color-text-muted);}
+.handoff__lane--after .handoff__list li strong{color:var(--color-brand-white);}
+.handoff__edge{position:relative; height:2.4rem; display:grid; place-items:center;}
+.handoff__edge::before{content:""; position:absolute; left:0; right:0; top:50%; border-top:2px solid var(--color-brand-purple);}
+.handoff__edge-t{position:relative; padding:.25rem .6rem; font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.16em; text-transform:uppercase;
+  background:var(--color-brand-purple); color:var(--color-on-brand);}
+.handoff__never{grid-column:1 / -1; padding:.8rem 1.2rem; border-top:1px solid rgba(var(--ink),.4); font-size:.85rem; color:var(--color-text-muted);}
+.handoff__never strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.tabs__note{padding:.8rem clamp(1.1rem,2vw,1.6rem); border-top:1px solid var(--color-border-faint); font-size:.78rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+@media (min-width:768px){
+  .handoff{grid-template-columns:1fr 3.2rem 1fr;}
+  .handoff__edge{height:auto;}
+  .handoff__edge::before{left:50%; right:auto; top:0; bottom:0; border-top:0; border-left:2px solid var(--color-brand-purple);}
+  .handoff__edge-t{writing-mode:vertical-rl; transform:rotate(180deg); padding:.6rem .25rem;}
+}
 </style>
 </head>
 <body id="top">
@@ -902,22 +930,30 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Handoff</span>
       </div>
       <h2 class="verdict" id="v5" data-i18n="act5_verdict">My part ended where the build began.</h2>
-      <p class="scan" data-i18n="act5_lede">How the proposal was evaluated, and where it stopped.</p>
+      <p class="scan" data-i18n="act5_lede">Where my part stopped, and the two evaluations behind it.</p>
     </div>
 
-    <div class="cardgrid cardgrid--3 io">
-      <article class="card">
-        <h3 class="card__t" data-i18n="act5_c1_t">Two evaluations, two scopes</h3>
-        <p class="card__x" data-i18n="act5_c1_x">Stakeholder review sessions for the digital platform, and field observation at the physical payment booths, evidenced by two pre-trial surveys and a set of qualitative notes. They are different methods answering different questions, and neither stands in for the other.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act5_c2_t">Where the design stopped</h3>
-        <p class="card__x" data-i18n="act5_c2_x">The same closure mail states that development would add one to two screens beyond the ones I proposed, with minor adjustments, gated on Billing's approval of the final version. The line between my deliverable and the vendor's is written into the programme's own documents, not only into my account of it.</p>
-      </article>
-      <article class="card">
-        <h3 class="card__t" data-i18n="act5_c3_t">What was never mine</h3>
-        <p class="card__x" data-i18n="act5_c3_x">Setting the fee was never my decision, and neither were the platform's build, deployment or operation. A third party operates it today.</p>
-      </article>
+    <div class="handoff io">
+      <div class="handoff__lane handoff__lane--mine">
+        <span class="handoff__h" data-i18n="act5_mine_h">My part</span>
+        <ol class="handoff__list"><li data-i18n="act5_mine1">Design</li><li data-i18n="act5_mine2">Prototype</li><li data-i18n="act5_mine3">Evaluation</li><li data-i18n="act5_mine4">Handoff</li></ol>
+      </div>
+      <div class="handoff__edge"><span class="handoff__edge-t" data-i18n="act5_edge">Handoff</span></div>
+      <div class="handoff__lane handoff__lane--after">
+        <span class="handoff__h" data-i18n="act5_after_h">After handoff</span>
+        <ol class="handoff__list"><li data-i18n-html="act5_after1"><strong>One to two more screens</strong> and minor adjustments, per the closure mail, gated on Billing's approval</li><li data-i18n="act5_after2">Build</li><li data-i18n="act5_after3">Deployment</li><li data-i18n="act5_after4">Operation, by a third party</li></ol>
+      </div>
+      <p class="handoff__never" data-i18n-html="act5_never"><strong>Never mine at any stage:</strong> setting the fee.</p>
+    </div>
+
+    <div class="tabs io">
+      <div class="tabs__list" role="tablist" aria-label="Evaluations" data-i18n-aria="act5_tabs_aria">
+        <button class="tabs__tab" role="tab" id="a5-tab-1" aria-selected="true" aria-controls="a5-tp-1" data-i18n="act5_tab1">Stakeholder review</button>
+        <button class="tabs__tab" role="tab" id="a5-tab-2" aria-selected="false" aria-controls="a5-tp-2" data-i18n="act5_tab2">Field observation</button>
+      </div>
+      <div class="tabs__panel" id="a5-tp-1" role="tabpanel" aria-labelledby="a5-tab-1"><p data-i18n-html="act5_tp1"><strong>For the digital platform.</strong> Review sessions with the programme's stakeholders, run on the web payment flow.</p></div>
+      <div class="tabs__panel" id="a5-tp-2" role="tabpanel" aria-labelledby="a5-tab-2"><p data-i18n-html="act5_tp2"><strong>For the physical payment booths.</strong> Observation in the field, evidenced by two pre-trial surveys and a set of qualitative notes.</p></div>
+      <p class="tabs__note" data-i18n="act5_tabs_note">Different methods answering different questions; neither stands in for the other.</p>
     </div>
   </div>
 </section>
