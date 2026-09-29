@@ -541,6 +541,47 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .handoff__edge::before{left:50%; right:auto; top:0; bottom:0; border-top:0; border-left:2px solid var(--color-brand-purple);}
   .handoff__edge-t{writing-mode:vertical-rl; transform:rotate(180deg); padding:.6rem .25rem;}
 }
+
+/* CHASSIS PASS · Act 06 comparison, figures, severity */
+.visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
+.cmp{margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.4);}
+.cmp__hint{display:none; padding:.8rem 1.2rem; font-size:.78rem; color:var(--color-text-dim); border-bottom:1px solid var(--color-border-faint);}
+.js .cmp__hint{display:block;}
+.cmp__lanes{display:grid; grid-template-columns:1fr 1fr;}
+.cmp__lane{padding:1rem; display:flex; flex-direction:column; gap:.7rem;}
+.cmp__lane--live{background:var(--surface-card); border-left:1px solid rgba(var(--ink),.4);}
+.cmp__h{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);}
+.cmp__lane:first-child .cmp__h{color:var(--color-purple-light);}
+.cmp__steps{list-style:none; display:flex; flex-direction:column; gap:.45rem; counter-reset:c;}
+.cmp__steps li{counter-increment:c;}
+.cmp__step{position:relative; width:100%; min-height:44px; text-align:left; padding:.55rem .6rem .55rem 2.1rem; font-size:.82rem; font-weight:var(--fw-medium);
+  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.4); cursor:pointer;
+  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+.cmp__lane--live .cmp__step{background:var(--color-brand-black);}
+.cmp__step::before{content:counter(c); position:absolute; left:.6rem; top:50%; transform:translateY(-50%); width:1.1rem; height:1.1rem;
+  display:grid; place-items:center; font-size:.58rem; font-weight:var(--fw-bold); border:1px solid rgba(var(--ink),.45); color:var(--color-text-muted);}
+.cmp__step--out{border-style:dashed; color:var(--color-text-muted);}
+.cmp__step:hover{border-color:rgba(var(--ink),.6);}
+.cmp__step.is-pair, .cmp__step[aria-pressed="true"]{border-color:var(--color-brand-purple);}
+.cmp__step[aria-pressed="true"]::before, .cmp__step.is-pair::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
+.cmp__step:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
+.cmp__notes{border-top:1px solid rgba(var(--ink),.4); padding:1rem 1.2rem; min-height:4.5rem;}
+.cmp__note{font-size:clamp(.9rem,1.05vw,1rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.cmp__note + .cmp__note{margin-top:.6rem;}
+.js .cmp__note{display:none;}
+.js .cmp__note.is-on{display:block; margin-top:0;}
+.cmp__note strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.act .dcells{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.sev{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.sev__t{width:100%; border-collapse:collapse;}
+.sev__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.sev__t th{width:6.5rem; text-align:left; font-size:.82rem; font-weight:var(--fw-medium); color:var(--color-text-muted); padding:.45rem 0;}
+.sev__t td{display:flex; align-items:center; gap:.7rem; padding:.45rem 0;}
+.sev__bar{display:block; height:.9rem; width:calc(var(--v) * 70%); min-width:2px; background:rgba(var(--ink),.55);}
+.sev__bar--major{background:var(--color-brand-purple);}
+.sev__n{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.sev .reveal{margin-top:1rem;}
+@media (max-width:600px){ .cmp__lane{padding:.8rem .6rem;} .cmp__step{font-size:.76rem; padding-left:1.9rem;} .cmp__step::before{left:.45rem;} }
 </style>
 </head>
 <body id="top">
@@ -966,35 +1007,68 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">The platform is live, it is not mine, and the difference between what I proposed and what shipped is public.</h2>
-      <p class="scan" data-i18n="act6_lede">A year later, I reviewed the live platform against my own proposal.</p>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">The platform is live, it isn't mine, and the gap is public.</h2>
+      <p class="scan" data-i18n="act6_lede">A year later, I reviewed the live platform against my proposal. Select any step to compare the two.</p>
     </div>
 
     <p class="synthesis io" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
 
-    <div class="contrast io">
-      <div class="contrast__face">
-        <span class="contrast__tag" data-i18n="act6_f1_tag">My proposal</span>
-        <p class="contrast__txt" data-i18n="act6_f1_txt">Personal data first: name and email, a validation code, then payment and the ticket.</p>
+    <div class="cmp io">
+      <p class="cmp__hint" data-i18n="act6_hint">Select a step in either flow to compare it with the other.</p>
+      <div class="cmp__lanes">
+        <div class="cmp__lane">
+          <span class="cmp__h" data-i18n="act6_lane1">My proposal</span>
+          <ol class="cmp__steps">
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="data" data-pair="data" data-i18n="act6_p1">Personal data</button></li>
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="val" data-i18n="act6_p2">Validation code</button></li>
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="fee" data-pair="fee" data-i18n="act6_p3">Payment</button></li>
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="ticket" data-i18n="act6_p4">Ticket</button></li>
+          </ol>
+        </div>
+        <div class="cmp__lane cmp__lane--live">
+          <span class="cmp__h" data-i18n="act6_lane2">Live today</span>
+          <ol class="cmp__steps">
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="home" data-i18n="act6_v1">Homepage</button></li>
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="elig" data-i18n="act6_v2">Eligibility self-declaration</button></li>
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="fee" data-pair="fee" data-i18n="act6_v3">Flight details and fee</button></li>
+          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="data" data-pair="data" data-i18n="act6_v4">Customer details</button></li>
+          <li><button class="cmp__step cmp__step--out" type="button" aria-pressed="false" data-note="ctrl" data-i18n="act6_v5">Payment control, not reached</button></li>
+          </ol>
+        </div>
       </div>
-      <div class="contrast__face contrast__face--build">
-        <span class="contrast__tag" data-i18n="act6_f2_tag">Live today</span>
-        <p class="contrast__txt" data-i18n="act6_f2_txt">The flight first: an eligibility self-declaration, flight details with the fee, then customer details before the payment control.</p>
+      <div class="cmp__notes" role="status" aria-live="polite">
+        <p class="cmp__note" data-note="data" data-i18n-html="act6_n_data"><strong>Reordered, not removed.</strong> Personal-data capture moved from my first screen to the live flow's fourth, after the flight lookup. I read the reordering as intuitive and do not contest it.</p>
+        <p class="cmp__note" data-note="val" data-i18n-html="act6_n_val"><strong>No counterpart before payment.</strong> None of the four public screens asks for an email code.</p>
+        <p class="cmp__note" data-note="fee" data-i18n-html="act6_n_fee"><strong>$11.86, a screen earlier.</strong> The live fee appears on the flight-details screen, a full screen earlier than I proposed, and matches in both places it appears. Fee-setting was never my decision.</p>
+        <p class="cmp__note" data-note="ticket" data-i18n-html="act6_n_ticket"><strong>Beyond the boundary.</strong> The review stopped before payment, so the live ticket was not observed.</p>
+        <p class="cmp__note" data-note="home" data-i18n-html="act6_n_home"><strong>An entry page first.</strong> The live flow opens on a homepage that explains the fee before the first step.</p>
+        <p class="cmp__note" data-note="elig" data-i18n-html="act6_n_elig"><strong>A click instead of a check.</strong> Eligibility is a self-declaration, <em>"Soy ese tipo de pasajero"</em>, where the technical scope specified an automatic agreement check. To my own knowledge of the build, that check was never implemented as written; the review could not see past its boundary to confirm it.</p>
+        <p class="cmp__note" data-note="ctrl" data-i18n-html="act6_n_ctrl"><strong>Where the review stops.</strong> Public, unauthenticated pages only: one control short of paying, with no transaction submitted.</p>
       </div>
-      <p class="contrast__bridge" data-i18n-html="act6_bridge"><strong>Reordered, not removed.</strong> Personal-data capture now follows the flight lookup, and I measured it doing exactly that on the customer-details screen. I read the reordering as intuitive and do not contest it.</p>
     </div>
 
-    <div class="scanstack io">
-      <p class="scan" data-i18n="act6_scan1">Four screens are reachable before the payment control itself: the homepage, an eligibility self-declaration, a flight-details screen carrying the fee, and a customer-details screen. The pass stops there, deliberately, one control short of paying.</p>
-      <p class="scan" data-i18n="act6_scan2">The fee is set at $11.86, shown a full screen earlier than I proposed and consistent between its two appearances: $23.72 for two passengers. Fee-setting was never my decision.</p>
+    <div class="dcells io">
+      <div class="dcell"><span class="dcell__n" data-i18n="act6_s1_n">$11.86</span><span class="dcell__l" data-i18n="act6_s1_l">Fee per passenger, live</span><span class="dcell__p" data-i18n="act6_s1_p">The same in both of its appearances.</span></div>
+      <div class="dcell"><span class="dcell__n" data-i18n="act6_s2_n">$23.72</span><span class="dcell__l" data-i18n="act6_s2_l">For two passengers</span><span class="dcell__p" data-i18n="act6_s2_p">Setting the fee was never my decision.</span></div>
     </div>
 
-    <div class="scanstack io">
-      <p class="scan" data-i18n-html="act6_scan3">Eligibility is gated by a self-declaration click — <em>"Soy ese tipo de pasajero"</em> — rather than the automatic agreement check the technical scope specified. To my own knowledge of the build, that check was never implemented as written. This pass could not see past its own boundary to confirm it.</p>
-      <p class="scan" data-i18n-html="act6_findings">Six findings: one major, five minor, none critical. The major one is a screen headed <em>"Ingresa tus datos personales y de tu vuelo"</em> whose only fields are flight data.</p>
+    <div class="sev io">
+      <table class="sev__t">
+        <caption class="sev__cap" data-i18n="act6_sev_cap">Six findings from the review, by severity</caption>
+        <thead class="visually-hidden"><tr><th scope="col" data-i18n="act6_sev_h1">Severity</th><th scope="col" data-i18n="act6_sev_h2">Findings</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" data-i18n="act6_sev_crit">Critical</th><td><span class="sev__bar" style="--v:0" aria-hidden="true"></span><span class="sev__n">0</span></td></tr>
+          <tr><th scope="row" data-i18n="act6_sev_major">Major</th><td><span class="sev__bar sev__bar--major" style="--v:.2" aria-hidden="true"></span><span class="sev__n">1</span></td></tr>
+          <tr><th scope="row" data-i18n="act6_sev_minor">Minor</th><td><span class="sev__bar" style="--v:1" aria-hidden="true"></span><span class="sev__n">5</span></td></tr>
+        </tbody>
+      </table>
+      <div class="reveal" data-act="act6">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a6" data-panel-title="The major finding" data-panel-title-key="act6_fr_btn" data-i18n="act6_fr_btn">The major finding</button>
+        <div class="reveal__body reveal__body--poster" id="rv-a6">
+          <p data-i18n-html="act6_fr_txt"><strong>A heading that asks for more than the form does.</strong> A screen headed <em>"Ingresa tus datos personales y de tu vuelo"</em> whose only fields are flight data.</p>
+        </div>
+      </div>
     </div>
-
-    <p class="synthesis io" data-i18n="act6_synth">I can read the gap between proposal and build in public, which is a better position than having to describe it.</p>
 
     <p class="sequel io" data-i18n-html="act6_sequel"><strong>What I can claim:</strong> the design, prototype, evaluation and handoff of a platform live today. <strong>What I can't:</strong> its build, deployment or operation. <strong>What's next:</strong> six findings, one of them major, recorded for whoever runs it.</p>
 
@@ -1265,6 +1339,17 @@ document.querySelectorAll('.wbs__btn').forEach(btn=>{
     btn.setAttribute('aria-expanded', String(open));
     if(x) x.hidden = !open;
   });
+});
+
+/* ============ Act 06 comparison — one step pressed, its pair and note shown ============ */
+document.querySelectorAll('.cmp').forEach(cmp=>{
+  const steps = [...cmp.querySelectorAll('.cmp__step')], notes = [...cmp.querySelectorAll('.cmp__note')];
+  function pick(btn){
+    steps.forEach(s=>{ s.setAttribute('aria-pressed', String(s === btn)); s.classList.toggle('is-pair', !!btn.dataset.pair && s !== btn && s.dataset.pair === btn.dataset.pair); });
+    notes.forEach(n=> n.classList.toggle('is-on', n.dataset.note === btn.dataset.note));
+  }
+  steps.forEach(s=> s.addEventListener('click', ()=> pick(s)));
+  pick(steps[0]);
 });
 
 /* ============ Entrance (once) ============ */
