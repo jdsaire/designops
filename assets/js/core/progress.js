@@ -16,14 +16,29 @@
    only by a reload — the header is left painted at the animation's opening
    frame, which is opacity 0. The guard marks a header as revealed the moment
    it is fully on screen; the CSS then drops the animation and pins the
-   resting state, so a stalled timeline can no longer hide anything. */
+   resting state, so a stalled timeline can no longer hide anything.
+
+   The case briefs carry the same scroll-driven entrance on every .io block
+   (io-rise, filling both ends of a view() range), and the same stall left
+   their text and buttons invisible after a scroll or an idle tab, until a
+   reload. The guard covers those blocks too. A brief's block is pinned from
+   here rather than from each brief's CSS: the guard drops the animation
+   inline and keeps the block's own .is-in resting state, so no brief file
+   has to change for the fix to reach it. */
 function revealGuard() {
   var headers = document.querySelectorAll(
-    '.work__header, .capabilities__header, .evolution__header, .track-record__header'
+    '.work__header, .capabilities__header, .evolution__header, .track-record__header, .io'
   );
   if (!headers.length) return;
+  function pin(el) {
+    el.classList.add('is-revealed');
+    if (el.classList.contains('io')) {
+      el.classList.add('is-in');
+      el.style.animation = 'none';
+    }
+  }
   if (typeof IntersectionObserver !== 'function') {
-    Array.prototype.forEach.call(headers, function (el) { el.classList.add('is-revealed'); });
+    Array.prototype.forEach.call(headers, pin);
     return;
   }
   var io = new IntersectionObserver(function (entries) {
@@ -34,7 +49,7 @@ function revealGuard() {
       var root = e.rootBounds;
       var tall = root && e.isIntersecting && e.intersectionRect.height >= root.height * 0.6;
       if (e.intersectionRatio < 0.99 && !tall) return;
-      e.target.classList.add('is-revealed');
+      pin(e.target);
       io.unobserve(e.target);
     });
   }, { threshold: [0, 0.25, 0.5, 0.75, 0.99] });
