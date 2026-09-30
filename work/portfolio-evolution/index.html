@@ -157,8 +157,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         from the editorial's short version. The only local rule is the heading colour
         and the ordinal, which is a counter rather than copy because Act 01 has six
         characters of headroom against its ceiling. ---- */
-.pcards{counter-reset:pcard;}
-.pcard .pcard__t::before{counter-increment:pcard; content:counter(pcard) ") ";}
 /* No colour rule: .card__t inherits the body's brand-white, which is the point —
    the heading is Act 04's heading, unmodified except for its ordinal. */
 
@@ -694,59 +692,32 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Qualified on paper, unfamiliar in the room.</h2>
-      <p class="scan" data-i18n="act1_lede">Start with the problem: good work nobody can place.</p>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Credentials open the door. They don't prove what I can build.</h2>
+      <p class="scan" data-i18n="act1_lede">Three reasons a strong résumé is no longer enough.</p>
     </div>
 
-    <!-- Four cards on the Act 04 chassis. The context is the card body; the implication
-         sits behind the reveal, so the two are told apart by structure rather than by
-         a reader noticing which column they are in. data-act groups them, so opening
-         one closes the others. The ordinals are a CSS counter, not copy: Act 01 has six
-         characters of headroom and a numbered string would spend more than that. -->
-    <div class="cardgrid cardgrid--2 pcards io">
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_s1_cat">The reading</h3>
-        <p class="card__x" data-i18n="act1_s1_l">I apply for roles whose posts list what a candidate must have. No post lists what a candidate is expected to sound like.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c1" data-panel-title="The reading" data-i18n="act4_c1_rv_btn" data-panel-title-key="act1_s1_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c1">
-            <p data-i18n="act1_s1_r">Meeting every requirement is what gets an application considered; being understood is what gets it believed, and only the first is ever written down.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_s2_cat">The credential</h3>
-        <p class="card__x" data-i18n="act1_s2_l">My own credentials are an MBA, a MicroMasters and a Microsoft specialization. Not one of them showed what I can actually build.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c2" data-panel-title="The credential" data-i18n="act4_c1_rv_btn" data-panel-title-key="act1_s2_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c2">
-            <p data-i18n="act1_s2_r">Research estimates work sample predicts job performance at about 3× more than education. A running page shows what I did with the diplomas</p>
-          </div>
-        </div>
-      </article>
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_s3_cat">The claim</h3>
-        <p class="card__x" data-i18n="act1_s3_l">Three in four hiring teams say they receive AI-written applications – turning openings into odysseys for qualified candidates.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c3" data-panel-title="The claim" data-i18n="act4_c1_rv_btn" data-panel-title-key="act1_s3_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c3">
-            <p data-i18n="act1_s3_r">65% of hiring managers say skills are harder to verify as anybody can generate a fluent claim in seconds. Every figure here is backed up in public commit history.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_s4_cat">The market</h3>
-        <p class="card__x" data-i18n="act1_s4_l">Employment in Lima, Peru has grown 22% since 2019, while the share of it held by workers under 25 has fallen by about a third.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c4" data-panel-title="The market" data-i18n="act4_c1_rv_btn" data-panel-title-key="act1_s4_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c4">
-            <p data-i18n="act1_s4_r">Instead of contracting, local market is moving toward work that cannot be automated. That is the direction this website is built toward.</p>
-          </div>
-        </div>
-      </article>
+    <!-- Three cards on the Act 02 ladder; what the reveals held now lives in each body. -->
+    <div class="timeline io">
+      <div class="timeline__track" role="group" data-i18n-aria="act1_aria" aria-label="The problem, in three reasons">
+        <article class="card">
+          <p class="catlabel" data-i18n="act1_s1_n">The reading</p>
+          <h3 class="card__t" data-i18n="act1_s1_t">Posts list requirements, not voices</h3>
+          <p class="card__x" data-i18n-html="act1_s1_x">Job posts spell out what a candidate must have, never how they are expected to think or sound. <strong>Meeting every requirement gets an application read; being understood gets it believed.</strong></p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act1_s2_n">The credential</p>
+          <h3 class="card__t" data-i18n="act1_s2_t">Diplomas don't show the build</h3>
+          <p class="card__x" data-i18n-html="act1_s2_x">Despite their value, not a single one of my flagship academic credentials (an MBA, a MicroMasters and a Microsoft specialization) evidences what I can actually build. Since a work sample predicts performance about 3× better than education, <strong>this live page translates those honors into an irrefutable legacy</strong>.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act1_s3_n">The claim</p>
+          <h3 class="card__t" data-i18n="act1_s3_t">Fluent is free now</h3>
+          <p class="card__x" data-i18n-html="act1_s3_x">Three in four hiring teams say they receive AI-written applications, and 65% of hiring managers find skills harder to verify. <strong>When anyone can write a fluent claim in seconds, only a verifiable build stands out.</strong></p>
+        </article>
+      </div>
     </div>
 
-    <p class="synthesis io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026; INEI Encuesta Permanente de Empleo Nacional, May–July 2026.</p>
+    <p class="synthesis io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026.</p>
   </div>
 </section>
 
