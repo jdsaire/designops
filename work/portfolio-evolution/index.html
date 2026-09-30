@@ -207,6 +207,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .card:hover{border-color:var(--color-brand-purple);}
 .card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+/* Strategic bold in card bodies reads like the synthesis and scan emphasis. */
+.card__x strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 @media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
 @media (max-width:767px){
   .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
@@ -645,6 +647,42 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p data-i18n="hero_short">AI now drafts the résumés and the cover letters, so sounding capable has never been cheaper. A senior professional has to show the work instead, and I chose to lead that shift rather than wait for it. This site is my most advanced front-end build to date and the most important piece of my personal brand, designed and built by me with AI in five months. Scroll on for why it had to exist, how it grew from a single page, how it was built, and the figures that prove it.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= ACT 00 · THE CONTEXT — three shifts on the Act 02 ladder ================= -->
+<section class="act" id="act0" aria-labelledby="v0">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+      </div>
+      <h2 class="verdict" id="v0" data-i18n="act0_verdict">AI is rewriting work faster than careers can adapt.</h2>
+      <p class="scan" data-i18n="act0_lede">Three shifts that make a proven personal brand urgent in 2026.</p>
+    </div>
+
+    <div class="timeline io">
+      <div class="timeline__track" role="group" data-i18n-aria="act0_aria" aria-label="The context, in three shifts">
+        <article class="card">
+          <p class="catlabel" data-i18n="act0_s1_n">The shift</p>
+          <h3 class="card__t" data-i18n="act0_s1_t">A fifth of jobs in motion</h3>
+          <p class="card__x" data-i18n-html="act0_s1_x">By 2030, <strong>22% of today's jobs will be disrupted</strong>, with 170 million created and 92 million displaced, and 39% of the skills workers rely on are expected to change.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act0_s2_n">The bottom rung</p>
+          <h3 class="card__t" data-i18n="act0_s2_t">Fewer first chances</h3>
+          <p class="card__x" data-i18n-html="act0_s2_x">Young workers in the most AI-exposed jobs lost 13% of their employment since 2022, though the cause may not be AI alone. Across Latin America, <strong>26–38% of jobs are exposed to generative AI</strong>; in Lima, the under-25 share of work has fallen by about a third since 2019.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act0_s3_n">The edge</p>
+          <h3 class="card__t" data-i18n="act0_s3_t">Proof beats experience</h3>
+          <p class="card__x" data-i18n-html="act0_s3_x">66% of leaders would not hire someone without AI skills, and <strong>71% would choose a less experienced candidate who has them</strong>. Differentiation for 2027 has to be shown, not claimed, in 2026.</p>
+        </article>
+      </div>
+    </div>
+
+    <p class="synthesis io" data-i18n="act0_foot">Sources: World Economic Forum, Future of Jobs Report 2025; Federal Reserve Bank of Dallas, Atkinson and Yamco, 6 January 2026; ILO and World Bank, Working Paper 121, 2024; Microsoft and LinkedIn, Work Trend Index 2024; INEI, Encuesta Permanente de Empleo Nacional, May–July 2026.</p>
   </div>
 </section>
 
