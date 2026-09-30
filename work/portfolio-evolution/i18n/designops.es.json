@@ -159,7 +159,8 @@
   "act6_p1_x": "Cada ejecución se detiene en cada etapa hasta que la libero con una frase fija. La revisión ocurre sobre la página en funcionamiento, en ambos idiomas, antes de cualquier integración.",
   "act6_p2_cat": "Resoluciones y registros",
   "act6_p2_t": "Decidir una vez",
-  "act6_p2_x": "Cada decisión se vuelve una resolución numerada en un solo registro, y cada edición que hago en disco queda anotada. La siguiente sesión parte del registro, no de la memoria.",
-  "act6_p3_cat": "Verificación",
-  "act6_p3_t": "Medido, no supuesto"
+  "act6_p2_x": "Every decision becomes a numbered ruling in one log, and every edit I make on disk is recorded. The project manager's role is absorbed.",
+  "act6_p3_cat": "Clarity",
+  "act6_p3_t": "Say it plainly",
+  "act6_p3_x": "The build only proved itself once every claim could be traced to its source and every sentence read by someone outside tech. <strong>Plain words turned the work into proof.</strong>"
 }

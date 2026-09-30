@@ -159,7 +159,8 @@
   "act6_p1_x": "A run stops at every gate until I release it. Review happens on the running page before changes are effective in live build.",
   "act6_p2_cat": "Rulings and records",
   "act6_p2_t": "Decide once",
-  "act6_p2_x": "Every decision becomes a numbered ruling in one log, and every edit I make on disk is recorded. Scrum Master is absorved.",
-  "act6_p3_cat": "Verification",
-  "act6_p3_t": "Measured, not assumed"
+  "act6_p2_x": "Every decision becomes a numbered ruling in one log, and every edit I make on disk is recorded. The project manager's role is absorbed.",
+  "act6_p3_cat": "Clarity",
+  "act6_p3_t": "Say it plainly",
+  "act6_p3_x": "The build only proved itself once every claim could be traced to its source and every sentence read by someone outside tech. <strong>Plain words turned the work into proof.</strong>"
 }
