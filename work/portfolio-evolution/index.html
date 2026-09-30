@@ -389,6 +389,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   text-decoration:underline dotted; text-underline-offset:.35em; text-decoration-color:var(--color-text-dim);}
 .drow__toggle:hover,.drow__toggle:focus-visible,.drow__toggle.is-active{color:var(--color-brand-white); text-decoration-color:var(--color-brand-purple);}
 .drow__desc{display:none;}
+@media (max-width:1023px), (hover:none){
+  .drow__toggle{cursor:default; text-decoration:none; pointer-events:none;}
+}
 .dash__cap{position:absolute; z-index:6; max-width:13rem; padding:.55rem .75rem; pointer-events:none;
   background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
   font-size:.8125rem; line-height:1.45; color:var(--color-text-muted); letter-spacing:0; text-transform:none;}
@@ -1506,6 +1509,15 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   cap.className = "dash__cap"; cap.setAttribute("aria-hidden","true"); cap.hidden = true;
   dash.appendChild(cap);
   let current = null, pinned = false;
+  /* Desktop only (WC-Q42): a wide screen with a mouse or trackpad. On phones and
+     tablets the labels stay plain, out of the tab order, and screen readers still
+     read each description through aria-describedby. */
+  const desk = window.matchMedia("(min-width:1024px) and (hover:hover)");
+  const toggles = dash.querySelectorAll(".drow__toggle");
+  function mode(){
+    if(!desk.matches) hide();
+    toggles.forEach(b=>{ if(desk.matches) b.removeAttribute("tabindex"); else b.setAttribute("tabindex","-1"); });
+  }
   /* To the right of the label, centred on it, so no figure is covered; where the
      row leaves too little room beside a long label (phone widths), below it. */
   function place(btn){
@@ -1531,14 +1543,16 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     cap.textContent = d.textContent; cap.hidden = false; place(btn);
   }
   function hide(){ if(current) current.classList.remove("is-active"); current = null; pinned = false; cap.hidden = true; }
-  dash.addEventListener("pointerover", e=>{ const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned) show(b); });
+  dash.addEventListener("pointerover", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned) show(b); });
   dash.addEventListener("pointerout", e=>{ const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned && !b.contains(e.relatedTarget)) hide(); });
-  dash.addEventListener("click", e=>{ const b = e.target.closest(".drow__toggle"); if(!b) return; if(pinned && current === b){ hide(); return; } show(b); pinned = true; });
-  dash.addEventListener("focusin", e=>{ const b = e.target.closest(".drow__toggle"); if(b && !pinned) show(b); });
+  dash.addEventListener("click", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(!b) return; if(pinned && current === b){ hide(); return; } show(b); pinned = true; });
+  dash.addEventListener("focusin", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(b && !pinned) show(b); });
   dash.addEventListener("focusout", e=>{ if(!pinned && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(".drow__toggle"))) hide(); });
   document.addEventListener("click", e=>{ if(current && !e.target.closest(".drow__toggle")) hide(); });
   document.addEventListener("keydown", e=>{ if(e.key === "Escape" && current) hide(); });
   window.addEventListener("resize", ()=>{ if(current) place(current); });
+  desk.addEventListener("change", mode);
+  mode();
 })();
 
 /* ============ Count-up (once per element, reduced-motion aware) ============ */
