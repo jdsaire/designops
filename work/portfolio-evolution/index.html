@@ -799,7 +799,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <p class="synthesis io" data-i18n-html="sch_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
 </section>
 
-<!-- ================= ACT 04 · THE ARCHITECTURE — 6 numbered cards: 2 foundational, 4 multi-page ================= -->
+<!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, each with its own label and a technical panel ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head io">
@@ -807,76 +807,52 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act4_verdict">Six decisions, four of them multi-page.</h2>
-      <p class="scan" data-i18n="act4_lede">What held from the start, and what the multi-page build added.</p>
+      <h2 class="verdict" id="v3" data-i18n="act4_verdict">Four choices keep this site fast, open and easy to grow.</h2>
+      <p class="scan" data-i18n="act4_lede">The decisions under every page, in plain words.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2 io" id="act3Cards">
+    <div class="cardgrid cardgrid--2 io" id="act4Cards">
       <article class="card">
-        <p class="catlabel" data-i18n="act4_f1">Foundational</p>
-        <h3 class="card__t" data-i18n="act4_c1_t">1) Vanilla HTML/CSS/JavaScript</h3>
-        <p class="card__x" data-i18n="act4_c1_x">No framework, no build step, no dependency I cannot read end to end.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Vanilla HTML/CSS/JavaScript" data-i18n="act4_c1_rv_btn" data-panel-title-key="act4_c1_t">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c1">
-            <p data-i18n="act4_c1_rv_txt">Nothing to migrate when a major version lands. No security-patch treadmill. A payload small enough to stay fast on a mid-range phone over Peruvian mobile data — which is what most recruiters will use to open it.</p>
+        <p class="catlabel" data-i18n="act4_c1_cat">Speed</p>
+        <h3 class="card__t" data-i18n="act4_c1_t">1) No framework to weigh it down</h3>
+        <p class="card__x" data-i18n-html="act4_c1_x">The site runs on the web's own three languages, with no framework or add-on in between, so <strong>pages load fast and nothing breaks when a tool changes</strong>.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c1" data-panel-title="No framework to weigh it down" data-i18n="act4_c1_rv_btn" data-panel-title-key="act4_c1_t">The stack</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c1">
+            <p data-i18n="act4_c1_rv_txt">Plain HTML, CSS and JavaScript, served as static files: no build step, no framework and no dependency that cannot be read end to end. Nothing to migrate when a major version lands, no security-patch treadmill, and a light payload that stays fast on an average phone connection.</p>
           </div>
         </div>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act4_f1">Foundational</p>
-        <h3 class="card__t" data-i18n="act4_c2_t">2) WCAG as a gate</h3>
-        <p class="card__x" data-i18n="act4_c2_x">WCAG AA held as a build gate, usable with screen readers and keyboards.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="WCAG as a gate" data-i18n="act4_c2_rv_btn" data-panel-title-key="act4_c2_t">MADE FOR EVERYONE</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c2">
-            <p data-i18n="act4_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
-            <p data-i18n="act4_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up.</p>
+        <p class="catlabel" data-i18n="act4_c2_cat">Access</p>
+        <h3 class="card__t" data-i18n="act4_c2_t">2) Made for everyone</h3>
+        <p class="card__x" data-i18n-html="act4_c2_x">Anyone can move through every page with a keyboard or a screen reader, and <strong>text stays readable in light and dark themes</strong>, on a phone or a wide screen.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c2" data-panel-title="Made for everyone" data-i18n="act4_c2_rv_btn" data-panel-title-key="act4_c2_t">The checks</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c2">
+            <p data-i18n="act4_c2_rv_txt">Built to WCAG AA: every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed. Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up.</p>
           </div>
         </div>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act4_f3">Multi-page</p>
-        <h3 class="card__t" data-i18n="act4_c3_t">3) Three-level dictionaries</h3>
-        <p class="card__x" data-i18n="act4_c3_x">Site chrome, the strings every brief shares, and each brief's own copy, merged in that order.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Three-level dictionaries" data-i18n="act4_c3_rv_btn" data-panel-title-key="act4_c3_t">HOW THE LEVELS WORK</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c3">
-            <p data-i18n="act4_c3_rv_txt1">A key lives at one level only, so a label every brief shares changes once, for all of them.</p>
-            <p data-i18n="act4_c3_rv_txt3">Every English file has a Spanish twin with the same keys, checked by script before each commit.</p>
+        <p class="catlabel" data-i18n="act4_c3_cat">Two languages</p>
+        <h3 class="card__t" data-i18n="act4_c3_t">3) English and Spanish, built in</h3>
+        <p class="card__x" data-i18n-html="act4_c3_x">Every word lives in one of three places: <strong>text every page shares, text every case brief shares, and text for one page only</strong>. Change a shared label once and it updates everywhere, in both languages.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c3" data-panel-title="English and Spanish, built in" data-i18n="act4_c3_rv_btn" data-panel-title-key="act4_c3_t">The levels</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c3">
+            <p data-i18n="act4_c3_rv_txt">Three dictionary levels merge in order: global site chrome, a regional layer for what the briefs share (interface labels, tags, related reading), then each brief's own local keys. A key lives at exactly one level, and every English file has a Spanish twin with the same keys, checked by script before each commit.</p>
           </div>
         </div>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act4_f3">Multi-page</p>
-        <h3 class="card__t" data-i18n="act4_c4_t">4) One chassis for every brief</h3>
-        <p class="card__x" data-i18n="act4_c4_x">Acts, poster panels, charts and dashboards, shared by every case brief.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="One chassis for every brief" data-i18n="act4_c4_rv_btn" data-panel-title-key="act4_c4_t">WHAT THE CHASSIS BUYS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c4">
-            <p data-i18n="act4_c4_rv_txt1">Each case gets its own route and its own dictionary, so a recruiter can be sent to one page rather than to a scroll position. The cost: one defect in the chassis is a defect in every brief.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <p class="catlabel" data-i18n="act4_f3">Multi-page</p>
-        <h3 class="card__t" data-i18n="act4_c5_t">5) A gated dispatch pipeline</h3>
-        <p class="card__x" data-i18n="act4_c5_x">Every stage is written down as a dispatch before any code changes.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c5" data-panel-title="A gated dispatch pipeline" data-i18n="act4_c5_rv_btn" data-panel-title-key="act4_c5_t">HOW A STAGE RUNS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c5">
-            <p data-i18n="act4_c5_rv_txt">A written brief, then a prompt with preflight checks, then a plan I approve. The build stops at each gate on a local server until I release it with a set phrase, and it ends in a completion report. AI executes; the standard, the review and every merge stay with me.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <p class="catlabel" data-i18n="act4_f3">Multi-page</p>
-        <h3 class="card__t" data-i18n="act4_c6_t">6) Orchestration under a scope freeze</h3>
-        <p class="card__x" data-i18n="act4_c6_x">This build runs under a locked scope against overthinking.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act4_c6_rv_btn" data-panel-title-key="act4_c6_t">HOW GOVERNANCE IS APPLIED</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c6">
-            <p data-i18n="act4_c6_rv_txt">Improvements that fall outside the written scope are logged in one line and not built. Decisions are made once, recorded as numbered rulings and not reopened. The discipline is the deliverable as much as the site is.</p>
+        <p class="catlabel" data-i18n="act4_c4_cat">Consistency</p>
+        <h3 class="card__t" data-i18n="act4_c4_t">4) The same templates on every brief</h3>
+        <p class="card__x" data-i18n-html="act4_c4_x">Every case brief uses the same interface components as templates: acts, cards, panels, charts and dashboards. <strong>A reader who learns one brief can read them all.</strong></p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c4" data-panel-title="The same templates on every brief" data-i18n="act4_c4_rv_btn" data-panel-title-key="act4_c4_t">The templates</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c4">
+            <p data-i18n="act4_c4_rv_txt">Each brief is its own page with its own route and dictionary, built from one shared set of components and design tokens. The trade-off is discipline: a defect in a shared component shows up in every brief, so each change is checked across all of them at three widths, two themes and two languages.</p>
           </div>
         </div>
       </article>
