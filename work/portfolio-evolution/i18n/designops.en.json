@@ -153,14 +153,14 @@
   "dash_r3": "What a team gains is not this code. It is the way of working that made the second build cheaper.",
   "dash_foot": "Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).",
   "act6_verdict": "What this web pipeline taught.",
-  "act6_lede": "Three lessons from gates, rulings and records.",
+  "act6_lede": "Three lessons: governance, tracking and audience.",
   "act6_p1_cat": "Governance",
   "act6_p1_t": "Stops that hold",
-  "act6_p1_x": "A run stops at every gate until I release it. Review happens on the running page before changes are effective in live build.",
+  "act6_p1_x": "<strong>A run stops at every gate until I release it.</strong> Review happens on the running page before changes are effective in live build.",
   "act6_p2_cat": "Tracking",
   "act6_p2_t": "Decide once",
-  "act6_p2_x": "Every decision becomes a numbered ruling in one log, and every edit I make is recorded without a project manager.",
+  "act6_p2_x": "Every decision becomes <strong>a numbered ruling in one log</strong>, and every edit I make is recorded without a project manager.",
   "act6_p3_cat": "Audience",
   "act6_p3_t": "Say it clearly",
-  "act6_p3_x": "Every claim was traced to its source, and optimized to be understood by users with little to zero code experience."
+  "act6_p3_x": "Every claim was <strong>traced to its source</strong>, and optimized to be understood by users with little to zero code experience."
 }
