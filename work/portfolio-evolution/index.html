@@ -389,7 +389,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   text-decoration:underline dotted; text-underline-offset:.35em; text-decoration-color:var(--color-text-dim);}
 .drow__toggle:hover,.drow__toggle:focus-visible,.drow__toggle.is-active{color:var(--color-brand-white); text-decoration-color:var(--color-brand-purple);}
 .drow__desc{display:none;}
-.dash__cap{position:absolute; z-index:6; max-width:17rem; padding:.55rem .75rem; pointer-events:none;
+.dash__cap{position:absolute; z-index:6; max-width:13rem; padding:.55rem .75rem; pointer-events:none;
   background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
   font-size:.8125rem; line-height:1.45; color:var(--color-text-muted); letter-spacing:0; text-transform:none;}
 @media (max-width:767px){
@@ -882,7 +882,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
       </div>
       <h2 class="verdict" id="v4" data-i18n="act5_verdict">Both versions, side by side.</h2>
-      <p class="scan" data-i18n="act5_lede">Read every measure of multi page against single scroll.</p>
+      <p class="scan" data-i18n="act5_lede">Read every measure of multi page against single page.</p>
     </div>
 
 
@@ -1506,15 +1506,22 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   cap.className = "dash__cap"; cap.setAttribute("aria-hidden","true"); cap.hidden = true;
   dash.appendChild(cap);
   let current = null, pinned = false;
+  /* To the right of the label, centred on it, so no figure is covered; where the
+     row leaves too little room beside a long label (phone widths), below it. */
   function place(btn){
-    cap.style.width = ""; cap.style.left = "0px"; cap.style.top = "0px";
+    cap.style.maxWidth = ""; cap.style.left = "0px"; cap.style.top = "0px";
     const c = dash.getBoundingClientRect(), r = btn.getBoundingClientRect();
-    const w = cap.offsetWidth, h = cap.offsetHeight, pad = 8;
-    cap.style.width = w + "px";
-    const left = Math.max(pad, Math.min(r.left - c.left, dash.clientWidth - w - pad));
-    let top = r.top - c.top - h - 6;
-    if(top < pad) top = r.bottom - c.top + 6;
-    cap.style.left = left + "px"; cap.style.top = top + "px";
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize), pad = 8, gap = 12;
+    const x = r.right - c.left + gap, room = dash.clientWidth - x - pad;
+    if(room >= 9 * rem){
+      cap.style.maxWidth = Math.min(13 * rem, room) + "px";
+      cap.style.left = x + "px";
+      cap.style.top = Math.max(pad, r.top - c.top + (r.height - cap.offsetHeight) / 2) + "px";
+    } else {
+      const w = cap.offsetWidth;
+      cap.style.left = Math.max(pad, Math.min(r.left - c.left, dash.clientWidth - w - pad)) + "px";
+      cap.style.top = (r.bottom - c.top + 6) + "px";
+    }
   }
   function show(btn){
     const d = document.getElementById(btn.getAttribute("aria-describedby"));

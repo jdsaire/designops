@@ -119,7 +119,7 @@
   "act4_c4_rv_txt": "Atomic design, run as DesignOps. Global tokens for colour, type and spacing feed atoms such as buttons and tags, molecules such as cards and reveal panels, and organisms such as this schedule and dashboard. Each brief builds the same organisms from its own data and dictionary, so one fix lands everywhere, and every change is checked at three widths, two themes and two languages.",
   "act4_foot": "For more, access the repository.",
   "act5_verdict": "Both versions, side by side.",
-  "act5_lede": "Read every measure of multi page against single scroll.",
+  "act5_lede": "Read every measure of multi page against single page.",
   "dash_tab2": "Derived",
   "dash_tab3": "Insights",
   "dash_col_multi": "Multi page",
