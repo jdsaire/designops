@@ -752,7 +752,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Multipage Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
       </div>
       <h2 class="verdict" id="vsch" data-i18n="sch_verdict">How this site came together.</h2>
       <p class="scan" data-i18n="sch_lede">Open any stage to see what went into it.</p>
@@ -760,7 +760,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="sched__ctas io">
       <div class="reveal" data-act="sch">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the chart" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">How to read the chart</button>
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="Chart overview" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">Chart overview</button>
         <div class="reveal__body reveal__body--poster" id="rv-sch2">
           <p data-i18n-html="sch_g2_rv_txt">Five stages of work from pull requests #18–#32, 28 Aug – 26 Sep 2026. <strong>Each bar spans a stage from its first commit to its last; each diamond is one pull request, numbered, on the day it merged.</strong> Hover or tap a diamond to read what it delivered. The notes under the chart give the method.</p>
         </div>
@@ -783,9 +783,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
-    <p class="synthesis io" data-i18n-html="sch_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed. The count beside each stage leaves out merge commits. A bar runs from the stage's first commit to its last, and its active days are the dates with at least one commit.</p>
-    <p class="synthesis io" data-i18n-html="sch_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site. Pull requests #18–#32 are grouped into five stages by what they changed. Each diamond sits on its merge date in Lima time (UTC−5), so #24 and #29 fall a day before GitHub's UTC dates.</p>
-    <p class="synthesis io" data-i18n-html="sch_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026. The first schedule comes from the public histories of jdigital and legacy-desops, 24 Apr – 04 Jul 2026.</p>  </div>
+    <p class="synthesis io" data-i18n-html="sch_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
+    <p class="synthesis io" data-i18n-html="sch_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
+    <p class="synthesis io" data-i18n-html="sch_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
 </section>
 
 <!-- ================= ACT 04 · THE ARCHITECTURE — 6 numbered cards: 2 foundational, 4 multi-page ================= -->
@@ -820,7 +820,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="WCAG as a gate" data-i18n="act3_c2_rv_btn" data-panel-title-key="act3_c2_t">MADE FOR EVERYONE</button>
           <div class="reveal__body reveal__body--poster" id="rv-a3c2">
             <p data-i18n="act3_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
-            <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up. Those are the three the stylesheets actually declare, not a convention borrowed from a framework.</p>
+            <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up.</p>
           </div>
         </div>
       </article>
@@ -1002,7 +1002,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         </div>
       </div>
 
-      <p class="synthesis" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days). Multi-page figures are measured at closure. Rates are simple averages over calendar days.</p>
+      <p class="synthesis" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).</p>
     </div>
   </div>
 </section>
@@ -1025,17 +1025,16 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <article class="card">
         <p class="catlabel" data-i18n="act5_p1_cat">Gates</p>
         <h3 class="card__t" data-i18n="act5_p1_t">Stops that hold</h3>
-        <p class="card__x" data-i18n="act5_p1_x">A run stops at every gate until I release it with a set phrase. Review happens on the running page, in both languages, before anything merges.</p>
+        <p class="card__x" data-i18n="act5_p1_x">A run stops at every gate until I release it. Review happens on the running page before changes are effective in live build.</p>
       </article>
       <article class="card">
         <p class="catlabel" data-i18n="act5_p2_cat">Rulings and records</p>
         <h3 class="card__t" data-i18n="act5_p2_t">Decide once</h3>
-        <p class="card__x" data-i18n="act5_p2_x">Every decision becomes a numbered ruling in one log, and every edit I make on disk is recorded. The next session starts from the record, not from memory.</p>
+        <p class="card__x" data-i18n="act5_p2_x">Every decision becomes a numbered ruling in one log, and every edit I make on disk is recorded. Scrum Master is absorved.</p>
       </article>
       <article class="card">
         <p class="catlabel" data-i18n="act5_p3_cat">Verification</p>
         <h3 class="card__t" data-i18n="act5_p3_t">Measured, not assumed</h3>
-        <p class="card__x" data-i18n="act5_p3_x">Every figure on this page comes from a measurement or a named source. A headless check covers each page at three widths, two themes and two languages after every commit.</p>
       </article>
     </div>
 

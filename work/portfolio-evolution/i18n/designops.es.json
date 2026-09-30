@@ -157,6 +157,5 @@
   "act5_p2_t": "Decidir una vez",
   "act5_p2_x": "Cada decisión se vuelve una resolución numerada en un solo registro, y cada edición que hago en disco queda anotada. La siguiente sesión parte del registro, no de la memoria.",
   "act5_p3_cat": "Verificación",
-  "act5_p3_t": "Medido, no supuesto",
-  "act5_p3_x": "Cada cifra de esta página viene de una medición o de una fuente nombrada. Una verificación automática recorre cada página en tres anchos, dos temas y dos idiomas después de cada commit."
+  "act5_p3_t": "Medido, no supuesto"
 }
