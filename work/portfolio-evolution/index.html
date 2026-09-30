@@ -312,7 +312,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
   font-size:.8125rem; line-height:1.45; color:var(--color-text-muted);}
 .gantt__cap b{color:var(--color-brand-purple); font-weight:var(--fw-bold); margin-right:.35em;}
-.gantt__cap-d{display:block; margin-top:.2rem; font-size:.75rem; color:var(--color-text-dim);}
+.gantt__cap-d{color:var(--color-text-dim); white-space:nowrap;}
 /* The two reading panels sit side by side where they open as a side panel (≥1024),
    and stack where they open inline, so an open body keeps the full column. */
 .sched__ctas{display:flex; flex-direction:column; margin-bottom:1rem;}
@@ -763,7 +763,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head io">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="sch_eyebrow">Act 03 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
       <h2 class="verdict" id="vsch" data-i18n="sch_verdict">How this site came together.</h2>
       <p class="scan" data-i18n="sch_lede">Open any stage to see what went into it.</p>
@@ -773,7 +773,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <div class="reveal" data-act="sch">
         <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="Chart overview" data-panel-title-key="sch_g2_rv_btn" data-i18n="sch_g2_rv_btn">Chart overview</button>
         <div class="reveal__body reveal__body--poster" id="rv-sch2">
-          <p data-i18n-html="sch_g2_rv_txt">Five stages of work from pull requests #18–#32, 28 Aug – 26 Sep 2026. <strong>Each bar spans a stage from its first commit to its last; each diamond is one pull request, numbered, on the day it merged.</strong> Hover or tap a diamond to read what it delivered. The notes under the chart give the method.</p>
+          <p data-i18n-html="sch_g2_rv_txt">A Gantt chart turns a project into a picture of time. Each row is one part of the work, read from left to right along a calendar, so you can see <strong>what happened when, how long each part took and where parts overlapped</strong>. Teams usually draw one to plan work ahead; this one shows work already done.</p>
         </div>
       </div>
       <div class="reveal" data-act="sch">
@@ -1422,7 +1422,7 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
       if(current && current !== dot) current.classList.remove('is-active');
       current = dot; dot.classList.add('is-active');
       cap.innerHTML = '<b>' + esc(fill(t('sch_ms_pr'), { n:pr.n })) + '</b>' + esc(nameOf(pr)) +
-                      '<span class="gantt__cap-d">' + esc(fill(t('sch_cap_merged'), { date:fmt(pr.merge) })) + '</span>';
+                      ' <span class="gantt__cap-d">· ' + esc(fill(t('sch_cap_merged'), { date:fmt(pr.merge) })) + '</span>';
       cap.hidden = false;
       place(dot);
     }
