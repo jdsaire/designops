@@ -632,7 +632,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 .net__close{position:absolute; top:.45rem; right:.45rem; width:44px; height:44px; font-size:1.1rem; color:var(--color-text-muted); cursor:pointer;}
 .net__close:hover{color:var(--color-brand-white);}
 .net__close:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-4px;}
-.net__legend{list-style:none; display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-top:.9rem; font-size:.74rem; color:var(--color-text-muted);}
+.net__legend{list-style:none; display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-bottom:.9rem; font-size:.74rem; color:var(--color-text-muted);}
 .net__legend li{display:flex; align-items:center; gap:.5rem;}
 .net__lg{display:inline-block; width:28px; height:0; border-top:3px solid rgba(var(--ink),.8);}
 .net__lg--medium{border-top-width:2px;}
@@ -656,6 +656,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
   padding:1.6rem 1.2rem 1.6rem; max-height:70vh; overflow:auto;}
 .net__sheet-handle{position:absolute; top:.55rem; left:50%; width:36px; height:4px; margin-left:-18px; background:rgba(var(--ink),.3);}
 @media (max-width:767px){
+  .net__legend{display:none;}
   .net__stage{border:0; background:transparent;}
   .net__canvas{height:240px; pointer-events:none;}
 }
@@ -926,6 +927,12 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <div class="net io" data-net>
+      <ul class="net__legend" aria-hidden="true">
+        <li><i class="net__lg net__lg--strong"></i><span data-i18n="act2_net_tie_strong">Strong tie</span></li>
+        <li><i class="net__lg net__lg--medium"></i><span data-i18n="act2_net_tie_medium">Medium tie</span></li>
+        <li><i class="net__lg net__lg--weak"></i><span data-i18n="act2_net_tie_weak">Weak tie</span></li>
+        <li><i class="net__lg net__lg--ext"></i><span data-i18n="act2_net_tie_ext">External, by role</span></li>
+      </ul>
       <div class="net__stage">
         <canvas class="net__canvas" role="img" aria-label="Stakeholder network of the TUUA Transfer project: ten internal areas in four central offices and seven external roles, in rings by how closely each worked on the web channel and the points of sale." data-i18n-aria="act2_net_aria"></canvas>
         <div class="net__card" hidden>
@@ -934,12 +941,6 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         </div>
       </div>
       <div class="net__labels" hidden><span class="net__l-centre" data-i18n="act2_net_centre">TUUA Transfer</span><span class="net__l-ring" data-i18n="act2_net_tie_strong">Strong tie</span><span class="net__l-ring" data-i18n="act2_net_tie_medium">Medium tie</span><span class="net__l-ring" data-i18n="act2_net_tie_weak">Weak tie</span><span class="net__l-ring" data-i18n="act2_net_tie_ext">External, by role</span><span class="net__l-off net__l-off--af" data-i18n="act2_net_off_af">Adm &amp; Finance</span><span class="net__l-off net__l-off--ops" data-i18n="act2_net_off_ops">Operations</span><span class="net__l-off net__l-off--com" data-i18n="act2_net_off_com">Commercial</span><span class="net__l-off net__l-off--ds" data-i18n="act2_net_off_ds">Development &amp; Sustainability</span></div>
-      <ul class="net__legend" aria-hidden="true">
-        <li><i class="net__lg net__lg--strong"></i><span data-i18n="act2_net_tie_strong">Strong tie</span></li>
-        <li><i class="net__lg net__lg--medium"></i><span data-i18n="act2_net_tie_medium">Medium tie</span></li>
-        <li><i class="net__lg net__lg--weak"></i><span data-i18n="act2_net_tie_weak">Weak tie</span></li>
-        <li><i class="net__lg net__lg--ext"></i><span data-i18n="act2_net_tie_ext">External, by role</span></li>
-      </ul>
       <div class="net__list">
       <div class="net__group" data-ring="strong">
         <p class="net__ring-h" data-i18n="act2_net_tie_strong">Strong tie</p>
