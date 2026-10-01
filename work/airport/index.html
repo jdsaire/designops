@@ -638,6 +638,15 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 .net__lg--medium{border-top-width:2px;}
 .net__lg--weak{border-top:1.5px dashed rgba(var(--ink),.8);}
 .net__lg--ext{width:14px; height:14px; border:1.5px dashed rgba(var(--ink),.8); border-radius:50%;}
+/* the desktop prompt: a watermark in the column the card uses; gone while a card is open (WD-Q56) */
+.net__tap{display:none; position:absolute; right:20px; top:50%; width:300px; transform:translateY(-50%); margin:0; pointer-events:none;
+  align-items:center; gap:1.1rem; color:var(--color-text-dim); font-size:clamp(1.3rem,1.7vw,1.8rem); font-weight:var(--fw-light);
+  line-height:1.25; letter-spacing:.14em; text-transform:uppercase;
+  transition:opacity var(--duration-ui) var(--ease-standard), visibility var(--duration-ui) var(--ease-standard);}
+.net__tap-arrow{flex:0 0 auto; width:56px; height:24px;}
+@media (min-width:1024px){ .net[data-side] .net__tap{display:flex;} }
+.net[data-active] .net__tap{opacity:0; visibility:hidden;}
+@media (prefers-reduced-motion:reduce){ .net__tap{transition:none;} }
 /* the ring list: the accessible and mobile layer. Visually hidden from 768, still focusable */
 .net__list{display:grid; gap:1rem; margin-top:1rem;}
 @media (min-width:768px){ .net__list{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;} }
@@ -935,6 +944,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       </ul>
       <div class="net__stage">
         <canvas class="net__canvas" role="img" aria-label="Stakeholder network of the TUUA Transfer project: ten internal areas in four central offices and seven external roles, in rings by how closely each worked on the web channel and the points of sale." data-i18n-aria="act2_net_aria"></canvas>
+        <p class="net__tap" aria-hidden="true"><svg class="net__tap-arrow" viewBox="0 0 56 24" aria-hidden="true" focusable="false"><path d="M55 12H3M13 2 3 12l10 10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-i18n="act2_net_tap">Tap each node for details</span></p>
         <div class="net__card" hidden>
           <button class="net__close" type="button" aria-label="Close" data-i18n-aria="act2_net_close">×</button>
           <p class="net__card-path"></p><p class="net__card-t"></p><p class="net__card-role"></p><p class="net__card-x"></p>
@@ -1537,7 +1547,7 @@ document.querySelectorAll('.tl').forEach(tl=>{
   function layout(){
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = window.devicePixelRatio||1;
     cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
-    compact = W < 560; const side = W >= 1000; cx = side ? (W - 340)/2 : W/2; cy = H/2; R = Math.min(cx, H*.5) * (compact ? .96 : .92);
+    compact = W < 560; const side = W >= 1000; root.toggleAttribute('data-side', side); cx = side ? (W - 340)/2 : W/2; cy = H/2; R = Math.min(cx, H*.5) * (compact ? .96 : .92);
     for(const off of Object.keys(SECT)){
       const [a0,a1] = SECT[off];
       for(const ring of Object.keys(RING)){
