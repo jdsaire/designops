@@ -615,6 +615,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* CHASSIS PASS · Act 02 stakeholder network */
 /* ---- Act 02 · stakeholder network (Prototype B, influence rings; jdigital constellation lineage) ---- */
+/* phones: where to see the map (WD-Q54); never shown from 768 */
+.net-how{display:none;}
+@media (max-width:767px){
+  .net-how{display:block; background:var(--color-brand-purple); color:var(--color-on-brand); padding:1.1rem 1.2rem 1.2rem; margin-top:-.5rem;}
+  .net-how__t{font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.16em; text-transform:uppercase;}
+  .net-how__x{font-size:.92rem; line-height:1.5; font-weight:var(--fw-regular, 400); margin-top:.45rem;}
+}
 .net{margin-top:clamp(1.6rem,3vw,2.4rem); position:relative;
   --net-af:#A100FF; --net-ops:#C2A3FF; --net-com:#8F5BFF; --net-ds:#E3D1FF; --net-af-text:#C766FF;}
 /* office label text keeps 4.5:1: a lighter tint of A&F on black; a deeper Commercial on white */
@@ -934,6 +941,11 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <h2 class="verdict" id="v2" data-i18n="act2_verdict">Ten areas in four central offices.</h2>
       <p class="scan" data-i18n="act2_lede">See the degree of contribution by key actors.</p>
     </div>
+
+    <aside class="net-how" aria-labelledby="netHowT">
+      <p class="net-how__t" id="netHowT" data-i18n="act2_mob_t">How to see network map</p>
+      <p class="net-how__x" data-i18n="act2_mob_x">Open this page on a desktop to explore the full network map. Here, every area is listed below by its degree of intervention: tap one for its role.</p>
+    </aside>
 
     <div class="net io" data-net>
       <ul class="net__legend" aria-hidden="true">
