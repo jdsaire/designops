@@ -468,15 +468,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .pos__t td{border-top:0; font-size:.84rem;}
 }
 
-/* CHASSIS PASS · Act 01 broken chain */
-.chain{list-style:none; display:grid; grid-template-columns:1fr; gap:2.2rem; margin-top:clamp(1.6rem,3vw,2.4rem);}
-.chain__n{position:relative; display:flex; flex-direction:column; gap:.35rem; padding:1.1rem 1.2rem;
-  border:1px solid rgba(var(--ink),.45); background:var(--surface-card);}
-.chain__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white);}
-.chain__x{font-size:.85rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.chain__n--missing{border:1.5px dashed var(--color-brand-purple); background:transparent;}
-.chain__n--wait .chain__x{color:var(--color-text-dim);}
-.chain__q{position:absolute; top:.8rem; right:1rem; font-size:1.4rem; font-weight:var(--fw-black); color:var(--color-purple-light); line-height:1;}
+/* CHASSIS PASS · Act 01 why-now timeline + cost of delay (round 1) */
+/* the rail: six steps on one line, dots joined by a hairline */
+.tl__rail{position:relative; display:none; border-bottom:0;}
+.js .tl__rail{display:grid; grid-template-columns:repeat(6,1fr);}
+.tl__rail::before{content:""; position:absolute; left:calc(100% / 12); right:calc(100% / 12); top:1.55rem; border-top:1px solid rgba(var(--ink),.45);}
+.tl__tab{position:relative; display:flex; flex-direction:column; align-items:center; gap:.35rem; min-height:44px; padding:.9rem .2rem .8rem; cursor:pointer;
+  color:var(--color-text-muted); text-align:center;}
+.tl__n{width:1.4rem; height:1.4rem; display:grid; place-items:center; font-size:.6rem; font-weight:var(--fw-bold);
+  background:var(--color-brand-black); border:1px solid rgba(var(--ink),.55); color:var(--color-text-muted); position:relative; z-index:1;
+  transition:background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
+.tl__d{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.06em; line-height:1.25;}
+.tl__tab:hover .tl__n{border-color:var(--color-brand-purple);}
+.tl__tab[aria-selected="true"]{color:var(--color-brand-white);}
+.tl__tab[aria-selected="true"] .tl__n{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
+.tl__tab:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-2px;}
+.tl__panel{border-top:1px solid var(--color-border-soft);}
+.tl__h{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white); margin-bottom:.4rem;}
+.tl__nav{display:none; justify-content:space-between; gap:.5rem; padding:0 clamp(1.1rem,2vw,1.6rem) clamp(1rem,1.8vw,1.4rem);}
+.js .tl__nav{display:flex;}
+.tl__btn{min-height:44px; padding:.5rem 1rem; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;}
+.tl__btn:hover{border-color:var(--color-brand-purple);}
+.tl__btn:disabled{opacity:.35; cursor:default;}
+.tl__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
+.dcells--3{grid-template-columns:1fr;}
+@media (min-width:900px){ .dcells--3{grid-template-columns:repeat(3,1fr);} }
+#act1 .reveal{margin-top:1rem;}
+
 /* the links: broken on both sides of the missing channel */
 .chain__n:not(:last-child)::after{content:""; position:absolute; left:50%; bottom:calc(-2.2rem - 1px); height:2.2rem;
   border-left:1.5px dashed rgba(var(--ink),.45);}
@@ -812,15 +831,38 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
       </div>
       <h2 class="verdict" id="v1" data-i18n="act1_verdict">A fee with no way to collect it.</h2>
-      <p class="scan" data-i18n="act1_lede">Three links, and the middle one missing.</p>
+      <p class="scan" data-i18n="act1_lede">Step through how a promise in a contract became an urgent fee.</p>
     </div>
 
-    <ol class="chain io">
-        <li class="chain__n"><span class="chain__t" data-i18n="act1_n1_t">The fee</span><span class="chain__x" data-i18n="act1_n1_x">Never charged before</span></li>
-        <li class="chain__n chain__n--missing"><span class="chain__q" aria-hidden="true">?</span><span class="chain__t" data-i18n="act1_n2_t">The channel</span><span class="chain__x" data-i18n="act1_n2_x">None existed to collect it</span></li>
-        <li class="chain__n chain__n--wait"><span class="chain__t" data-i18n="act1_n3_t">Engineering</span><span class="chain__x" data-i18n="act1_n3_x">Waiting on a definition</span></li>
-    </ol>
-    <p class="chain__foot io" data-i18n-html="act1_foot"><strong>Five central areas</strong> each held a piece of it: Finance, Airport Operations, IT, Commercial and Reputation.</p>
+    <div class="tl tabs io">
+      <div class="tabs__list tl__rail" role="tablist" aria-label="Why the fee became urgent" data-i18n-aria="act1_tl_aria">
+        <button class="tl__tab" role="tab" id="a1-tl-1" aria-selected="true" aria-controls="a1-tp-1"><span class="tl__n">01</span><span class="tl__d" data-i18n="act1_t1_d">2001</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-2" aria-selected="false" aria-controls="a1-tp-2"><span class="tl__n">02</span><span class="tl__d" data-i18n="act1_t2_d">Early 2010s</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-3" aria-selected="false" aria-controls="a1-tp-3"><span class="tl__n">03</span><span class="tl__d" data-i18n="act1_t3_d">2010s–2025</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-4" aria-selected="false" aria-controls="a1-tp-4"><span class="tl__n">04</span><span class="tl__d" data-i18n="act1_t4_d">June 2025</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-5" aria-selected="false" aria-controls="a1-tp-5"><span class="tl__n">05</span><span class="tl__d" data-i18n="act1_t5_d">2025</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-6" aria-selected="false" aria-controls="a1-tp-6"><span class="tl__n">06</span><span class="tl__d" data-i18n="act1_t6_d">2025</span></button>
+      </div>
+      <div class="tabs__panel tl__panel" id="a1-tp-1" role="tabpanel" aria-labelledby="a1-tl-1"><p class="tl__h" data-i18n="act1_t1_h">The concession</p><p data-i18n="act1_t1_x">Lima Airport Partners begins operating Jorge Chávez under a concession contract with the Peruvian State.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-2" role="tabpanel" aria-labelledby="a1-tl-2"><p class="tl__h" data-i18n="act1_t2_h">A fee on paper</p><p data-i18n="act1_t2_x">A contract amendment provides for a transfer fee, chargeable only once a new passenger terminal is in operation.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-3" role="tabpanel" aria-labelledby="a1-tl-3"><p class="tl__h" data-i18n="act1_t3_h">The terminal waits</p><p data-i18n="act1_t3_x">The new terminal is delayed for years while the State releases the land it needs.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-4" role="tabpanel" aria-labelledby="a1-tl-4"><p class="tl__h" data-i18n="act1_t4_h">The terminal opens</p><p data-i18n="act1_t4_x">The fee becomes chargeable, but no mechanism exists to collect it.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-5" role="tabpanel" aria-labelledby="a1-tl-5"><p class="tl__h" data-i18n="act1_t5_h">No ticket channel in time</p><p data-i18n="act1_t5_x">Airlines usually collect airport fees inside the ticket. Adding this one needed an agreement that did not arrive in time, while the national press questioned Lima's competitiveness as a hub.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-6" role="tabpanel" aria-labelledby="a1-tl-6"><p class="tl__h" data-i18n="act1_t6_h">The contingency</p><p data-i18n="act1_t6_x">Finance's answer: collect the fee inside the airport itself, at staffed points and on the web. It became a critical project after the terminal's opening.</p></div>
+      <div class="tl__nav"><button class="tl__btn" type="button" data-step="-1" data-i18n="act1_prev">Previous</button><button class="tl__btn" type="button" data-step="1" data-i18n="act1_next">Next</button></div>
+    </div>
+
+    <div class="dcells dcells--3 io">
+      <div class="dcell"><span class="dcell__n" data-i18n="act1_s1_n">130,000+</span><span class="dcell__l" data-i18n="act1_s1_l">International transfer passengers a month</span><span class="dcell__p" data-i18n="act1_s1_p">Charged today, on a platform a third party operates.</span></div>
+      <div class="dcell"><span class="dcell__n" data-i18n="act1_s2_n">≈ $43,600</span><span class="dcell__l" data-i18n="act1_s2_l">Fee a day, before tax</span><span class="dcell__p" data-i18n="act1_s2_p">Left uncollected for each day without a channel, at today's volume.</span></div>
+      <div class="dcell"><span class="dcell__n" data-i18n="act1_s3_n">≈ $23,300</span><span class="dcell__l" data-i18n="act1_s3_l">For Lima Airport, a day</span><span class="dcell__p" data-i18n="act1_s3_p">The State takes 46.511% as royalty: ≈ $20,300 a day.</span></div>
+    </div>
+    <div class="reveal io" data-act="act1">
+      <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1-est" data-panel-title="How this is estimated" data-panel-title-key="act1_est_btn" data-i18n="act1_est_btn">How this is estimated</button>
+      <div class="reveal__body reveal__body--poster" id="rv-a1-est">
+        <p data-i18n-html="act1_est_txt"><strong>130,000 × USD 10.05 ÷ 30 days.</strong> USD 10.05 is the fee before 18% IGV, which makes it $11.86. Lima Airport keeps 53.489%; the State takes 46.511% as royalty under the concession. An estimate at today's volume, not a measured loss.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1366,6 +1408,18 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   }
   steps.forEach(s=> s.addEventListener('click', ()=> pick(s)));
   pick(steps[0]);
+});
+
+/* ============ Act 01 timeline — Previous / Next drive the tablist ============ */
+document.querySelectorAll('.tl').forEach(tl=>{
+  const tabs = [...tl.querySelectorAll('[role="tab"]')], btns = [...tl.querySelectorAll('.tl__btn')];
+  function sync(){ const i = tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');
+    btns.forEach(b=>{ b.disabled = (+b.dataset.step < 0 && i === 0) || (+b.dataset.step > 0 && i === tabs.length - 1); }); }
+  btns.forEach(b=> b.addEventListener('click', ()=>{
+    const i = tabs.findIndex(t=>t.getAttribute('aria-selected')==='true') + (+b.dataset.step);
+    if(tabs[i]) tabs[i].click();
+  }));
+  tl.addEventListener('tabs:select', sync); sync();
 });
 
 /* ============ Entrance (once) ============ */
