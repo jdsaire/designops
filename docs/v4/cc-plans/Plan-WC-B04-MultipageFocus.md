@@ -109,7 +109,7 @@ Also checked: EN/ES key parity by script, and the Gantt 1 EN assistive labels ag
 
 ---
 
-## 2. Rulings added during the run (WC-Q4 to WC-Q47)
+## 2. Rulings added during the run (WC-Q4 to WC-Q48)
 
 Each line is copied from `PRE-MAX-CHANGELOG.md`, where the full text is kept.
 
@@ -157,6 +157,7 @@ Each line is copied from `PRE-MAX-CHANGELOG.md`, where the full text is kept.
 - **30/09** · WC-Q45 Brief 04 Act 05 method note (dash_foot, shown under Measure/Derived/Insights) hidden until it also cites the multi-page source; keys kept in EN/ES · principal + /ask chip · —
 - **30/09** · WC-Q46 mobile menu (shared nav.css, all 7 pages): THEME and LANGUAGE side by side in one row with a 1px divider, each switch a full-column two-segment control 48px tall with a clearer outline; tighter vertical rhythm so the menu fits a 600px-tall viewport on every page (briefs scroll slightly at 568) · principal + /ask chip · W1 overlay
 - **30/09** · WC-Q47 open mobile menu survived widening past 767px (desktop bar z-index 100 covered the overlay's close button; body stayed overflow:hidden): navchrome.js closes the overlay on leaving the mobile range, and nav.css never paints it at ≥768px · principal · —
+- **30/09** · WC-Q48 Brief 04 Act 05 Spanish tab labels after Gate 3 (principal, at Gate 4): regional ui_tab_measure "Medición" → "Métrica simple" (also Brief 02's first tab, the only other user) and local dash_tab3 "La lectura" → "Hallazgos"; act1_s1_n "La lectura" untouched; added to PR #33 · principal message · WC-Q45
 
 ---
 

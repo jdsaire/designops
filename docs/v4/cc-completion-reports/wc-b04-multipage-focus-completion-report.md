@@ -9,7 +9,7 @@
 
 ## 1. Commits
 
-All 67 commits below, plus this archive commit, were written under the GitHub account jdsaire (`88201583+jdsaire@users.noreply.github.com`) as author and committer. 46 carry the display name "Juan Diego S." (the clone's configured name), and 21, made after the run resumed on 30 Sep, carry "jdsaire". They are the same account. History was pushed, so it was not rewritten.
+All 68 commits below, plus the archive commits, were written under the GitHub account jdsaire (`88201583+jdsaire@users.noreply.github.com`) as author and committer. 46 carry the display name "Juan Diego S." (the clone's configured name), and 21, made after the run resumed on 30 Sep, carry "jdsaire". They are the same account. History was pushed, so it was not rewritten.
 
 - `62f167f` refactor(brief04): render the schedule from one function that takes its root, axis and rows
 - `6578011` feat(brief04): draw every schedule label from the dictionary and redraw it on each language change
@@ -78,6 +78,7 @@ All 67 commits below, plus this archive commit, were written under the GitHub ac
 - `7b7324a` fix(brief04): hide the dashboard's method note until it also cites the multi-page source
 - `af8b756` feat(nav): set the mobile menu's theme and language switches side by side, larger and divided
 - `f61eb9f` fix(nav): close the mobile menu when the window grows past the mobile layout
+- `beb2fb3` fix(brief04): name the dashboard's Spanish tabs Métrica simple and Hallazgos (WC-Q48, added at Gate 4; `d6e3487`, the first archive commit, precedes it)
 
 **Flagged batch:** `52ee345` carried the last Gate 1 correction set (WC-Q27, plus the mid-message refinements of WC-Q25) in one commit, because the principal released Gate 1 in the same message as those corrections.
 
@@ -119,7 +120,7 @@ Brief 04 now tells the multi-page build first.
 | 10 | Brief 04 matrix clean; every panel titled in the active language | PASS | 48-cell matrix (4 briefs × 390/768/1440 × dark/light × EN/ES): 0 script or network errors, 0 overflow, 0 clipped lines; 120 panels titled correctly |
 | 11 | Briefs 01–03 render identically to base | PASS, as amended | 0 pixel differences. Text differs only by the 21 lines of the mobile menu, which no longer renders at 768px and wider (WC-Q47). Panel bold on Briefs 01 and 02 (WC-Q44) shows only in open panels |
 | 12 | Principal's edits exactly as left, each recorded | PASS | 147 edits in COPY-WC-GATE-EDITS: Gate 2 EN 34, Gate 3 EN 46, Gate 3 ES 67. Only syntax or typos were repaired, and only with a ruling (WC-Q28, WC-Q37) |
-| 13 | One PR, unmerged, auto-merge off; sole author; zero AI reference; local main untouched | PASS | PR #33 open with 67 commits and auto-merge null. Author and committer are always the jdsaire account (two display names, §1). 0 AI-attribution trailers. Local main is at f28b4ce |
+| 13 | One PR, unmerged, auto-merge off; sole author; zero AI reference; local main untouched | PASS | PR #33 open, auto-merge null. Author and committer are always the jdsaire account (two display names, §1). 0 AI-attribution trailers. Local main is at f28b4ce |
 | 14 | Plan and report archived, READMEs updated, internal link count before = after, dispatch B line corrected | PASS | This commit. Internal markdown links under `docs/`: 0 before and 0 after (paths are cited in backticks). The `wb-brief-spanish` report §6 line is corrected |
 
 ### PR → cluster mapping as shipped (WC-Q4; names as of the Gate 3 lock)
@@ -151,6 +152,7 @@ Brief 04 now tells the multi-page build first.
   - the desktop-only overlays (WC-Q42)
   - the hidden Act 05 note (WC-Q45)
 - **Changes outside Brief 04, approved during the run:**
+  - regional `ui_tab_measure` ES "Métrica simple", which Brief 02's first tab also reads (WC-Q48)
   - `assets/js/core/progress.js`: reveal guard (WC-Q39)
   - `assets/css/shared/nav.css` and `assets/js/core/navchrome.js`: mobile menu (WC-Q46, WC-Q47)
   - panel bold in Briefs 01 and 02 (WC-Q44)
