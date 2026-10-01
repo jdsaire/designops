@@ -225,6 +225,11 @@ function init(opts) {
     });
   }
   if (overlayClose) overlayClose.addEventListener('click', closeOverlay);
+  /* WC-Q47: the overlay belongs to the mobile layout. A menu left open while the
+     window grows past it would sit under the desktop bar with its close button
+     covered, and keep the page from scrolling; leaving the mobile range closes it. */
+  const mqMobile = window.matchMedia('(max-width:767px)');
+  mqMobile.addEventListener('change', (e) => { if (!e.matches) closeOverlay(); });
   if (overlay) {
     /* Nested Work disclosure inside the overlay. */
     const overlayWorkTrigger = document.getElementById('overlayWorkTrigger');
