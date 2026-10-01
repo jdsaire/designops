@@ -121,7 +121,7 @@
   "act5_verdict": "Comparando las versiones.",
   "act5_lede": "Revise las métricas que dejaron las rondas de despliegue.",
   "dash_tab2": "Métrica Agregada",
-  "dash_tab3": "La lectura",
+  "dash_tab3": "Hallazgos",
   "dash_col_multi": "Multipágina (v2)",
   "dash_col_single": "Landing Page (v1)",
   "dash_m6": "Commits",
