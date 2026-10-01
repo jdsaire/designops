@@ -292,6 +292,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .reveal__body{border-left:2px solid var(--color-brand-purple); padding:.9rem 0 .2rem 1rem; margin-top:.6rem;}
 .reveal__body[hidden]{display:none;}
 .reveal__body p{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted); margin-bottom:.7rem;}
+/* Panel text is Light (300), so a plain <strong> only reaches Regular (400) and never reads as bold. */
+.reveal__body strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
 .reveal__body p:last-child{margin-bottom:0;}
 
 /* Side panel (desktop) */
