@@ -1581,7 +1581,9 @@ document.querySelectorAll('.tl').forEach(tl=>{
     if(compact) return;
     const t = (n.chip.querySelector('.net__lt')||{}).textContent||''; const sp=t.indexOf(' ');
     const lines = (sp===-1 || t.length<11) ? [t] : [t.slice(0,sp), t.slice(sp+1)];
-    const fs = n.ring==='ext' ? 10.5 : 11; ctx.font = `600 ${fs}px Graphik, Arial, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    let fs = n.ring==='ext' ? 10.5 : 11; ctx.font = `600 ${fs}px Graphik, Arial, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    const wmax = Math.max(...lines.map(l=>ctx.measureText(l).width)), room = 2*r - 6;          // longer names (ES) shrink to fit their circle
+    if(wmax > room){ fs = Math.max(8, fs*room/wmax); ctx.font = `600 ${fs}px Graphik, Arial, sans-serif`; }
     ctx.fillStyle = col('--color-brand-white'); const lh=fs*1.25, y0=y-(lines.length-1)*lh/2;
     lines.forEach((ln,i)=>ctx.fillText(ln,x,y0+i*lh));
   }
