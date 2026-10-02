@@ -1089,7 +1089,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · Scope &amp; Deliverables</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five deliverables, closed on 4 August 2025.</h2>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five deliverables, one handoff-ready package.</h2>
       <p class="scan" data-i18n="act3_lede">Open any deliverable in the work breakdown.</p>
     </div>
 
@@ -1098,19 +1098,19 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <ul class="wbs__branches">
       <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b1">Technical scopes</span>
         <ul class="wbs__leaves">
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l1" data-i18n="act3_l1_t">Platform scope</button><p class="wbs__x" id="wbs-l1" data-i18n="act3_l1_x">The structural requirements for the payment platform, handed to engineering.</p></li>
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l2" data-i18n="act3_l2_t">Payment gateway scope</button><p class="wbs__x" id="wbs-l2" data-i18n="act3_l2_x">The structural requirements for the payment gateway.</p></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l1" data-i18n="act3_l1_t">01 · Platform scope</button><p class="wbs__x" id="wbs-l1" data-i18n="act3_l1_x">The structural requirements for the payment platform, handed to engineering.</p></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l2" data-i18n="act3_l2_t">02 · Payment gateway scope</button><p class="wbs__x" id="wbs-l2" data-i18n="act3_l2_x">The structural requirements for the payment gateway.</p></li>
         </ul>
       </li>
       <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b2">Experience</span>
         <ul class="wbs__leaves">
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l3" data-i18n="act3_l3_t">Screen mockup and web prototype</button><div class="wbs__x" id="wbs-l3"><p data-i18n="act3_l3_x">The proposed payment screens shown in Act 04, and a web prototype of the flow.</p><a class="wbs__go" href="#a4-screens" data-i18n="act3_l3_go">See the screens</a></div></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l3" data-i18n="act3_l3_t">03 · Screen mockup and web prototype</button><div class="wbs__x" id="wbs-l3"><p data-i18n="act3_l3_x">The proposed payment screens shown in Act 04, and a web prototype of the flow.</p><a class="wbs__go" href="#a4-screens" data-i18n="act3_l3_go">See the screens</a></div></li>
         </ul>
       </li>
       <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b3">Operations</span>
         <ul class="wbs__leaves">
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l4" data-i18n="act3_l4_t">Operational casuistry</button><p class="wbs__x" id="wbs-l4" data-i18n="act3_l4_x">An estimate of web-payment usage across the operational cases.</p></li>
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l5" data-i18n="act3_l5_t">Process map</button><div class="wbs__x" id="wbs-l5"><p data-i18n="act3_l5_x">A blueprint for the physical payment points and a flowchart for the web one.</p><a class="wbs__go" href="#a4-flow" data-i18n="act3_l5_go">See the flowchart</a></div></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l4" data-i18n="act3_l4_t">04 · Operational casuistry</button><p class="wbs__x" id="wbs-l4" data-i18n="act3_l4_x">An estimate of web-payment usage across the operational cases.</p></li>
+          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l5" data-i18n="act3_l5_t">05 · Process map</button><div class="wbs__x" id="wbs-l5"><p data-i18n="act3_l5_x">A blueprint for the physical payment points and a flowchart for the web one.</p><a class="wbs__go" href="#a4-flow" data-i18n="act3_l5_go">See the flowchart</a></div></li>
         </ul>
       </li>
       </ul>
@@ -1574,6 +1574,8 @@ document.querySelectorAll('.wbs__btn').forEach(btn=>{
   if(x) x.hidden = true;
   btn.addEventListener('click', ()=>{
     const open = btn.getAttribute('aria-expanded') !== 'true';
+    if(open) document.querySelectorAll('.wbs__btn[aria-expanded="true"]').forEach(o=>{ if(o === btn) return;   // one deliverable open at a time
+      o.setAttribute('aria-expanded','false'); const ox = document.getElementById(o.getAttribute('aria-controls')); if(ox) ox.hidden = true; });
     btn.setAttribute('aria-expanded', String(open));
     if(x) x.hidden = !open;
   });
