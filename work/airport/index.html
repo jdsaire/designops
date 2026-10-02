@@ -669,6 +669,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .cmp__note strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .act .dcells{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .sev{margin-top:clamp(1.6rem,3vw,2.4rem);}
+/* Act 06 trims (WD-Q68): the method as one quiet line under the lede; the live fee beside the severity chart */
+.method-line{margin-top:-.75rem; max-width:46rem; font-size:.82rem; line-height:1.5; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.a6-pair{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.a6-pair .dcells{margin-top:0;} .a6-pair .dcells{grid-template-columns:1fr;}
+@media (min-width:1024px){ .a6-pair{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:clamp(1.5rem,3vw,2.5rem); align-items:start;} .a6-pair .sev{margin-top:0;} }
 .sev__t{width:100%; border-collapse:collapse;}
 .sev__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 .sev__t th{width:6.5rem; text-align:left; font-size:.82rem; font-weight:var(--fw-medium); color:var(--color-text-muted); padding:.45rem 0;}
@@ -1237,10 +1242,9 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act6_lede">A year later, I reviewed the live platform against my proposal. Select any step to compare the two.</p>
     </div>
 
-    <p class="synthesis io" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
+    <p class="method-line io" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
 
     <div class="cmp io">
-      <p class="cmp__hint" data-i18n="act6_hint">Select a step in either flow to compare it with the other.</p>
       <div class="cmp__lanes">
         <div class="cmp__lane">
           <span class="cmp__h" data-i18n="act6_lane1">My proposal</span>
@@ -1273,9 +1277,9 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       </div>
     </div>
 
+    <div class="a6-pair">
     <div class="dcells io">
       <div class="dcell"><span class="dcell__n" data-i18n="act6_s1_n">$11.86</span><span class="dcell__l" data-i18n="act6_s1_l">Fee per passenger, live</span><span class="dcell__p" data-i18n="act6_s1_p">The same in both of its appearances.</span></div>
-      <div class="dcell"><span class="dcell__n" data-i18n="act6_s2_n">$23.72</span><span class="dcell__l" data-i18n="act6_s2_l">For two passengers</span><span class="dcell__p" data-i18n="act6_s2_p">Setting the fee was never my decision.</span></div>
     </div>
 
     <div class="sev io">
@@ -1295,6 +1299,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         </div>
       </div>
     </div>
+    </div>
 
     <div class="cardgrid cardgrid--3 close-cells io">
       <article class="card house">
@@ -1306,8 +1311,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <p class="card__x" data-i18n="act6_k2_x">Its build, deployment and operation belong to others.</p>
       </article>
       <article class="card house">
-        <h3 class="card__t"><span class="house__tag" data-i18n="act6_k3_tag">What's next</span><span data-i18n="act6_k3_t">Six findings on record</span></h3>
-        <p class="card__x" data-i18n="act6_k3_x">One major and five minor, recorded for whoever runs the platform.</p>
+        <h3 class="card__t"><span class="house__tag" data-i18n="act6_k3_tag">What's next</span><span data-i18n="act6_k3_t">A lower fee, inside the ticket</span></h3>
+        <p class="card__x" data-i18n="act6_k3_x">In July 2026, Lima Airport proposed cutting the fee from $10.05 to $6.40 + IGV and moving it into the ticket. Airlines haven't agreed; collection in the terminal continues.</p>
       </article>
     </div>
 
