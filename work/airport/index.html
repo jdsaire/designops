@@ -149,7 +149,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .contrast__bridge{grid-column:1 / -1; border-top:1px solid var(--color-border-soft); padding:1rem clamp(1.4rem,2.5vw,2.25rem);
   font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
 /* Role strip — three stacked lines */
 .rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
   border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-faint);
@@ -453,14 +452,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
 .pos__t{width:100%; border-collapse:collapse; border:1px solid rgba(var(--ink),.5);}
-.pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.cap{margin:0 0 .8rem;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 .pos__t th, .pos__t td{padding:.8rem 1rem; text-align:left; vertical-align:top; border-top:1px solid var(--color-border-soft); font-size:.9rem; line-height:1.45;}
 .pos__t thead th{border-top:0; font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-muted);}
 .pos__t thead .pos__web{color:var(--color-purple-light);}
 .pos__t tbody th{width:22%; font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim);}
 .pos__t td{color:var(--color-brand-white); font-weight:var(--fw-light);}
 .pos__t td:nth-child(2){background:var(--surface-card); border-left:2px solid var(--color-brand-purple);}
-.pos .reveal{margin-top:1rem;}
+.pos .reveal{margin-bottom:1rem;}
 @media (max-width:600px){
   .pos__t thead tr, .pos__t tbody tr{display:grid; grid-template-columns:1fr 1fr;}
   .pos__t .pos__corner{display:none;}
@@ -845,18 +844,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act0_lede">Follow the int-int transfer journey, then compare the ways to pay.</p>
     </div>
 
-    <div class="scanstack io">
-      <div class="reveal" data-act="act0">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0" data-panel-title="Airport terms in plain words" data-panel-title-key="act0_rv_btn" data-i18n="act0_rv_btn">Airport terms in plain words</button>
-        <div class="reveal__body reveal__body--poster" id="rv-a0">
-          <p data-i18n-html="act0_rv1"><strong>Jorge Chávez.</strong> Lima's international airport, run by the private operator Lima Airport Partners, where I worked.</p>
-          <p data-i18n-html="act0_rv2"><strong>International transfer passenger.</strong> A passenger who arrives in Lima on an international flight and connects to another international flight.</p>
-          <p data-i18n-html="act0_rv3"><strong>TUUA.</strong> Tarifa Unificada de Uso de Aeropuerto, the airport-use fee. TUUA Transfer is the one charged for the services these passengers use while they board.</p>
-        </div>
-      </div>
-    </div>
-
     <div class="journey io">
+      <p class="cap" data-i18n="act0_flow_cap">The connection, step by step</p>
       <ol class="journey__steps">
         <li class="journey__step"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 20h18M6 5l9 8M15 13h-5M15 13V8"/></svg><span class="journey__t" data-i18n="act0_j1">Arrive on international flight</span></li>
         <li class="journey__step journey__step--key"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12"/><path d="M3 10h18M7 15h4"/></svg><span class="journey__t" data-i18n="act0_j2">Pay Transfer fee</span><span class="journey__tag" data-i18n="act0_j2_tag">The missing channel</span></li>
@@ -866,8 +855,13 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <div class="pos io">
-      <table class="pos__t">
-        <caption class="pos__cap" data-i18n="act0_pos_cap">Two ways to pay the fee</caption>
+      <div class="reveal" data-act="act0">
+        <button class="reveal__btn" id="a0PosBtn" type="button" aria-expanded="false" aria-controls="rv-a0-pos" data-panel-title="One fee, two ways to pay" data-panel-title-key="act0_pos_btn" data-i18n="act0_pos_btn">One fee, two ways to pay</button>
+        <div class="reveal__body reveal__body--poster" id="rv-a0-pos">
+          <p data-i18n-html="act0_pos_txt"><strong>A physical-digital model.</strong> The fee is collected inside the airport, during the international connection. Three staffed points carry most payments; a web channel, built only for this fee, lets passengers skip the queues at peak hours. Both end at the same eGate.</p>
+        </div>
+      </div>
+      <table class="pos__t" aria-labelledby="a0PosBtn">
         <thead><tr><th scope="col" class="pos__corner"><span class="visually-hidden" data-i18n="act0_pos_h0">Channel</span></th><th scope="col" class="pos__web" data-i18n="act0_pos_web">Web</th><th scope="col" data-i18n="act0_pos_staff">Physical sales</th></tr></thead>
         <tbody>
           <tr><th scope="row" data-i18n="act0_pos_r1">Where</th><td data-i18n="act0_pos_r1_web">A site exclusive to collect this fee</td><td data-i18n="act0_pos_r1_staff">Three staffed points of sale in the terminal</td></tr>
@@ -876,12 +870,6 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           <tr><th scope="row" data-i18n="act0_pos_r4">Expected capacity</th><td data-i18n="act0_pos_r4_web">Planned as the less-used channel</td><td data-i18n="act0_pos_r4_staff">Expected to carry most payments</td></tr>
         </tbody>
       </table>
-      <div class="reveal" data-act="act0">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0-pos" data-panel-title="One fee, two ways to pay" data-panel-title-key="act0_pos_btn" data-i18n="act0_pos_btn">One fee, two ways to pay</button>
-        <div class="reveal__body reveal__body--poster" id="rv-a0-pos">
-          <p data-i18n-html="act0_pos_txt"><strong>A physical-digital model.</strong> The fee is collected inside the airport, during the international connection. Three staffed points carry most payments; a web channel, built only for this fee, lets passengers skip the queues at peak hours. Both end at the same eGate.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
