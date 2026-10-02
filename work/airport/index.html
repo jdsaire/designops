@@ -679,6 +679,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
   color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;}
 .net__group[data-ring="weak"] .net__chip, .net__group[data-ring="ext"] .net__chip{border-style:dashed;}
 .net__chip:hover, .net__chip[aria-pressed="true"]{border-color:var(--color-brand-purple);}
+.net__chip[data-net-id="inn"]{background:rgba(161,0,255,.16); border-color:var(--color-brand-purple);}
+.net__chip[data-net-id="bil"], .net__chip[data-net-id="arc"], .net__chip[data-net-id="its"]{border-color:var(--color-brand-purple);}
 .net__chip:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
 .net__dot{width:.6rem; height:.6rem; border-radius:50%; background:var(--net-c, var(--color-brand-purple));}
 .net__chip[data-office="af"]{--net-c:var(--net-af);} .net__chip[data-office="ops"]{--net-c:var(--net-ops);}
@@ -1558,6 +1560,7 @@ document.querySelectorAll('.tl').forEach(tl=>{
   const SECT = { af:[95,178], ops:[-62,92], com:[188,245], ds:[255,305] };       // degrees, maths orientation
   const RING = { strong:.42, medium:.61, weak:.77, ext:.92 };
   const LW = { strong:3, medium:2, weak:1.2, ext:1.1 };
+  const TIER2 = new Set(['bil','arc','its']);   // the areas a reader should open after mine
   const LINKS = [["inn", "bil"], ["inn", "fc"], ["inn", "arc"], ["inn", "its"], ["its", "arc"], ["inn", "ter"], ["bil", "fc"], ["bil", "arc"], ["bil", "prc"], ["aop", "ter"], ["cx", "ter"], ["prc", "ext_col"], ["prc", "ext_gw"], ["arc", "ext_gw"], ["ter", "ext_flow"], ["ter", "ext_secp"], ["com", "ext_air"], ["bil", "ext_reg"], ["ter", "ext_pax"]];
   const nodes = chips.map(c => ({ id:c.dataset.netId, office:c.dataset.office, ring:c.dataset.ring, chip:c,
     phase:Math.random()*6.28, amp:2+Math.random()*2, speed:.6+Math.random()*.5 }));
@@ -1605,14 +1608,16 @@ document.querySelectorAll('.tl').forEach(tl=>{
     // rings and their labels
     Object.entries(RING).forEach(([ring,f])=>{
       ctx.beginPath(); ctx.arc(cx,cy,R*f,0,Math.PI*2); ctx.setLineDash(ring==='ext'?[2,6]:[]); ctx.strokeStyle=ink(.16); ctx.lineWidth=1; ctx.stroke(); ctx.setLineDash([]);
-      if(!compact){ ctx.font='600 10px Graphik, Arial, sans-serif'; ctx.textAlign='left'; ctx.fillStyle=ink(.55);
-        const lab = root.querySelectorAll('.net__l-ring')[Object.keys(RING).indexOf(ring)]; ctx.fillText((lab?lab.textContent:'').toUpperCase(), cx+6, cy-R*f-7); }
+      if(!compact){ ctx.font='600 9.5px Graphik, Arial, sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle=ink(.55);
+        const lab = root.querySelectorAll('.net__l-ring')[Object.keys(RING).indexOf(ring)]; ctx.fillText((lab?lab.textContent:'').toUpperCase(), cx, cy-R*f-7); }
     });
     // office labels on the outer edge
     if(!compact) Object.entries(SECT).forEach(([o,[a0,a1]])=>{
-      const a=((a0+a1)/2)*Math.PI/180, rr=R*1.0, x=cx+Math.cos(a)*rr, y=cy-Math.sin(a)*rr*.98;
+      const a=((a0+a1)/2)*Math.PI/180, rr=R*1.0; let x=cx+Math.cos(a)*rr, y=cy-Math.sin(a)*rr*.98;
       ctx.font='700 11px Graphik, Arial, sans-serif'; const lbl = txt('.net__l-off--'+o).toUpperCase(), lw = ctx.measureText(lbl).width;
-      let lx = Math.cos(a)>.2 ? x : (Math.cos(a)<-.2 ? x - lw : x - lw/2); lx = Math.max(8, Math.min(lx, W - 8 - lw));   // keep inside the canvas
+      let lx = Math.cos(a)>.2 ? x : (Math.cos(a)<-.2 ? x - lw : x - lw/2);
+      if(o==='ds' && byId.inn){ lx = byId.inn.x + rad(byId.inn) + 14; y = byId.inn.y + 4; }   // beside my node, not on the bottom edge
+      lx = Math.max(8, Math.min(lx, W - 8 - lw));   // keep inside the canvas
       ctx.textAlign='left'; ctx.fillStyle=col('--net-'+o+'-text') || offCol(o); ctx.fillText(lbl, lx, y);
     });
     const P = n => [n.x, n.y + Math.sin(t*n.speed+n.phase)*(compact?0:n.amp)];
@@ -1628,12 +1633,13 @@ document.querySelectorAll('.tl').forEach(tl=>{
     // nodes
     nodes.forEach(n=>{ const [x,y]=P(n); const r=rad(n); const c = n.ring==='ext' ? col('--color-brand-white') : offCol(n.office);
       const on = focus && focus.id===n.id, dim = focus && !hot.has(n.id);
-      if(!compact){ const g=ctx.createRadialGradient(x,y,r*.2,x,y,r*2.1); g.addColorStop(0, rgba(c.startsWith('#')?c:'#A100FF', on?.5:(n.id==='inn'?.35:.14))); g.addColorStop(1,'rgba(0,0,0,0)');
+      if(!compact){ const g=ctx.createRadialGradient(x,y,r*.2,x,y,r*2.1); g.addColorStop(0, rgba(c.startsWith('#')?c:'#A100FF', on?.5:(n.id==='inn'?.35:(TIER2.has(n.id)?.27:.14)))); g.addColorStop(1,'rgba(0,0,0,0)');
         ctx.beginPath(); ctx.arc(x,y,r*2.1,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
       ctx.globalAlpha = dim ? .35 : 1;
       ctx.beginPath(); ctx.arc(x,y,r*(on?1.12:1),0,Math.PI*2); ctx.fillStyle = n.id==='inn' ? rgba('#A100FF',.22) : col('--color-brand-black'); ctx.fill();
       ctx.setLineDash(n.ring==='ext'||n.ring==='weak'?[4,4]:[]); ctx.strokeStyle = n.ring==='ext' ? ink(.7) : c; ctx.lineWidth = on?2.4:(n.ring==='strong'?1.8:1.3); ctx.stroke(); ctx.setLineDash([]);
       if(n.id==='inn' && !compact){ ctx.beginPath(); ctx.arc(x,y,r+6,0,Math.PI*2); ctx.setLineDash([3,5]); ctx.strokeStyle=rgba('#A100FF',.7); ctx.lineWidth=1; ctx.stroke(); ctx.setLineDash([]); }
+      if(TIER2.has(n.id) && !compact){ ctx.beginPath(); ctx.arc(x,y,r+5,0,Math.PI*2); ctx.strokeStyle=rgba('#A100FF',.75); ctx.lineWidth=1.4; ctx.stroke(); }
       label(n,x,y,r); ctx.globalAlpha = 1; n.rx=x; n.ry=y; n.r=r; });
     // centre
     const pr = (compact?20:56) * (1 + (reduce.matches?0:Math.sin(t*.8)*.015));
