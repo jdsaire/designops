@@ -469,29 +469,45 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 
 /* CHASSIS PASS · Act 01 why-now timeline + cost of delay (round 1) */
-/* the rail: six steps on one line, dots joined by a hairline */
+/* the rail: five moments, circles in the network map's language (glow, pulse); purple fills up to the active one */
+.tl{--tl-n:48px; --tl-p:0;}
 .tl__rail{position:relative; display:none; border-bottom:0;}
 .js .tl__rail{display:grid; grid-template-columns:repeat(5,1fr);}
-.tl__rail::before{content:""; position:absolute; left:calc(100% / 10); right:calc(100% / 10); top:1.55rem; border-top:1px solid rgba(var(--ink),.45);}
-.tl__tab{position:relative; display:flex; flex-direction:column; align-items:center; gap:.35rem; min-height:44px; padding:.9rem .2rem .8rem; cursor:pointer;
+.tl__rail::before, .tl__rail::after{content:""; position:absolute; left:10%; top:calc(1.1rem + var(--tl-n) / 2); border-top:2px solid rgba(var(--ink),.3);}
+.tl__rail::before{right:10%;}
+.tl__rail::after{width:calc(80% * var(--tl-p)); border-top-color:var(--color-brand-purple); transition:width 420ms var(--ease-standard);}
+.tl__tab{position:relative; display:flex; flex-direction:column; align-items:center; gap:.5rem; min-height:44px; padding:1.1rem .2rem .9rem; cursor:pointer;
   color:var(--color-text-muted); text-align:center;}
-.tl__n{width:1.4rem; height:1.4rem; display:grid; place-items:center; font-size:.6rem; font-weight:var(--fw-bold);
-  background:var(--color-brand-black); border:1px solid rgba(var(--ink),.55); color:var(--color-text-muted); position:relative; z-index:1;
-  transition:background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.tl__d{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.06em; line-height:1.25;}
-.tl__tab:hover .tl__n{border-color:var(--color-brand-purple);}
+.tl__n{position:relative; z-index:1; width:var(--tl-n); height:var(--tl-n); border-radius:50%; display:grid; place-items:center;
+  font-size:.82rem; font-weight:var(--fw-bold); font-variant-numeric:tabular-nums; color:var(--color-text-muted);
+  background:var(--color-brand-black); border:1.5px solid rgba(var(--ink),.55);
+  transition:background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard),
+    box-shadow var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);}
+.tl__n::after{content:""; position:absolute; inset:-2px; border-radius:50%; border:2px solid var(--color-brand-purple); opacity:0; pointer-events:none;}
+.tl__d{font-size:.68rem; font-weight:var(--fw-semibold); letter-spacing:.06em; line-height:1.25;}
+.tl__tab:hover .tl__n, .tl__tab:focus-visible .tl__n{border-color:var(--color-brand-purple); transform:scale(1.06);
+  box-shadow:0 0 0 6px rgba(161,0,255,.12), 0 0 22px rgba(161,0,255,.4);}
+.tl__tab.is-done .tl__n{border-color:var(--color-brand-purple); color:var(--color-purple-light);}
 .tl__tab[aria-selected="true"]{color:var(--color-brand-white);}
-.tl__tab[aria-selected="true"] .tl__n{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
-.tl__tab:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-2px;}
+.tl__tab[aria-selected="true"] .tl__n{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);
+  box-shadow:0 0 26px rgba(161,0,255,.55);}
+.tl__tab[aria-selected="true"] .tl__n::after{animation:tl-pulse 2.4s var(--ease-standard) infinite;}
+@keyframes tl-pulse{ from{transform:scale(1); opacity:.7;} to{transform:scale(1.55); opacity:0;} }
+@media (prefers-reduced-motion:reduce){ .tl__tab[aria-selected="true"] .tl__n::after{animation:none;} .tl__rail::after{transition:none;} }
+.tl__tab:focus-visible{outline:none;}
 .tl__panel{border-top:1px solid var(--color-border-soft);}
 .tl__h{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white); margin-bottom:.4rem;}
-.tl__nav{display:none; justify-content:space-between; gap:.5rem; padding:0 clamp(1.1rem,2vw,1.6rem) clamp(1rem,1.8vw,1.4rem);}
-.js .tl__nav{display:flex;}
-.tl__btn{min-height:44px; padding:.5rem 1rem; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.12em; text-transform:uppercase;
-  color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;}
-.tl__btn:hover{border-color:var(--color-brand-purple);}
+/* controls: the Services carousel's chevrons and counter, kept on the left with the text */
+.tl__ctrl{display:none; align-items:center; gap:.75rem; padding:0 clamp(1.1rem,2vw,1.6rem) clamp(1rem,1.8vw,1.4rem);}
+.js .tl__ctrl{display:flex;}
+.tl__btn{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white);
+  border:1px solid rgba(var(--ink),.5); cursor:pointer; transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+.tl__btn svg{width:1rem; height:1rem; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+.tl__btn:hover:not(:disabled){border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
 .tl__btn:disabled{opacity:.35; cursor:default;}
 .tl__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
+.tl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
+@media (max-width:767px){ .tl{--tl-n:40px;} .tl__n{font-size:.74rem;} .tl__d{font-size:.6rem;} }
 .dcells--3{grid-template-columns:1fr;}
 @media (min-width:900px){ .dcells--3{grid-template-columns:repeat(3,1fr);} }
 #act1 .reveal{margin-top:1rem;}
@@ -901,7 +917,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <div class="tabs__panel tl__panel" id="a1-tp-3" role="tabpanel" aria-labelledby="a1-tl-3"><p class="tl__h" data-i18n="act1_t3_h">The terminal opens</p><p data-i18n="act1_t3_x">The fee becomes chargeable, but no mechanism exists to collect it.</p></div>
       <div class="tabs__panel tl__panel" id="a1-tp-4" role="tabpanel" aria-labelledby="a1-tl-4"><p class="tl__h" data-i18n="act1_t4_h">Commercial terms</p><p data-i18n="act1_t4_x">LAP and Airlines negotiated fee collection inside the ticket.</p></div>
       <div class="tabs__panel tl__panel" id="a1-tp-5" role="tabpanel" aria-labelledby="a1-tl-5"><p class="tl__h" data-i18n="act1_t5_h">Collection begins</p><p data-i18n="act1_t5_x">Implementation of fee mechanism at the airport.</p></div>
-      <div class="tl__nav"><button class="tl__btn" type="button" data-step="-1" data-i18n="act1_prev">Previous</button><button class="tl__btn" type="button" data-step="1" data-i18n="act1_next">Next</button></div>
+      <div class="tl__ctrl"><button class="tl__btn" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="act1_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tl__count" aria-live="polite" aria-atomic="true">01 / 05</span><button class="tl__btn" type="button" data-step="1" aria-label="Next" data-i18n-aria="act1_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
     </div>
 
     <div class="dcells dcells--3 io">
@@ -1513,15 +1529,22 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   pick(steps[0]);
 });
 
-/* ============ Act 01 timeline — Previous / Next drive the tablist ============ */
+/* ============ Act 01 timeline — chevrons, counter, rail fill and swipe drive the tablist ============ */
 document.querySelectorAll('.tl').forEach(tl=>{
-  const tabs = [...tl.querySelectorAll('[role="tab"]')], btns = [...tl.querySelectorAll('.tl__btn')];
-  function sync(){ const i = tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');
-    btns.forEach(b=>{ b.disabled = (+b.dataset.step < 0 && i === 0) || (+b.dataset.step > 0 && i === tabs.length - 1); }); }
-  btns.forEach(b=> b.addEventListener('click', ()=>{
-    const i = tabs.findIndex(t=>t.getAttribute('aria-selected')==='true') + (+b.dataset.step);
-    if(tabs[i]) tabs[i].click();
-  }));
+  const tabs = [...tl.querySelectorAll('[role="tab"]')], btns = [...tl.querySelectorAll('.tl__btn')], count = tl.querySelector('.tl__count');
+  const at = ()=> tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');
+  const pad = n => String(n).padStart(2,'0');
+  function sync(){ const i = at(), n = tabs.length;
+    btns.forEach(b=>{ b.disabled = (+b.dataset.step < 0 && i === 0) || (+b.dataset.step > 0 && i === n - 1); });
+    if(count) count.textContent = pad(i+1) + ' / ' + pad(n);
+    tabs.forEach((t,k)=> t.classList.toggle('is-done', k < i));
+    tl.style.setProperty('--tl-p', n > 1 ? i/(n-1) : 0); }
+  const go = d => { const t = tabs[at() + d]; if(t) t.click(); };
+  btns.forEach(b=> b.addEventListener('click', ()=> go(+b.dataset.step)));
+  let x0 = 0, y0 = 0;
+  tl.addEventListener('touchstart', e=>{ x0 = e.changedTouches[0].screenX; y0 = e.changedTouches[0].screenY; }, { passive:true });
+  tl.addEventListener('touchend', e=>{ const dx = e.changedTouches[0].screenX - x0, dy = e.changedTouches[0].screenY - y0;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && !e.target.closest('.tl__ctrl')) go(dx < 0 ? 1 : -1); }, { passive:true });
   tl.addEventListener('tabs:select', sync); sync();
 });
 
