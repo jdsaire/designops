@@ -480,7 +480,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
 .pos__t{width:auto; max-width:100%; border-collapse:collapse; border:1px solid rgba(var(--ink),.5);}
-.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl, .act .cap--lead + .stills{margin-top:0;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl, .act .cap--lead + .stills, .act .cap--lead + .cmp, .act .cap--lead + .cardgrid{margin-top:0;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 .pos__t th, .pos__t td{padding:.8rem 1rem; text-align:left; vertical-align:top; border-top:1px solid var(--color-border-soft); font-size:.9rem; line-height:1.45;}
 .pos__t thead th{border-top:0; font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-muted);}
 .pos__t thead .pos__web{color:var(--color-purple-light);}
@@ -636,29 +636,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .relay__baton span{writing-mode:horizontal-tb; transform:none; padding:.25rem .6rem;}
 }
 
-/* CHASSIS PASS · Act 06 comparison, figures, severity */
+/* CHASSIS PASS · Act 06 comparison */
 .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
 .cmp{margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.5);}
 .cmp__hint{display:none; padding:.8rem 1.2rem; font-size:.78rem; color:var(--color-text-dim); border-bottom:1px solid var(--color-border-faint);}
 .js .cmp__hint{display:block;}
-.cmp__lanes{display:grid; grid-template-columns:1fr 1fr;}
-.cmp__lane{padding:1rem; display:flex; flex-direction:column; gap:.7rem;}
-.cmp__lane--live{background:var(--surface-card); border-left:1px solid rgba(var(--ink),.4);}
+/* the comparator as two horizontal flows (WD-Q72), in the flowchart's language: proposal row above the live row */
+.cmp__scroll{overflow-x:auto; scrollbar-width:thin;}
+.cmp__lanes{display:flex; flex-direction:column; min-width:880px;}
+.cmp__lane{padding:1rem 1.2rem 1.3rem; display:flex; flex-direction:column; gap:.8rem;}
+.cmp__lane--live{background:var(--surface-card); border-top:1px solid rgba(var(--ink),.4);}
 .cmp__h{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);}
 .cmp__lane:first-child .cmp__h{color:var(--color-purple-light);}
-.cmp__steps{list-style:none; display:flex; flex-direction:column; gap:.45rem; counter-reset:c;}
-.cmp__steps li{counter-increment:c;}
-.cmp__step{position:relative; width:100%; min-height:44px; text-align:left; padding:.55rem .6rem .55rem 2.1rem; font-size:.82rem; font-weight:var(--fw-medium);
-  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;
-  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
-.cmp__lane--live .cmp__step{background:var(--color-brand-black);}
-.cmp__step::before{content:counter(c); position:absolute; left:.6rem; top:50%; transform:translateY(-50%); width:1.1rem; height:1.1rem;
-  display:grid; place-items:center; font-size:.58rem; font-weight:var(--fw-bold); border:1px solid rgba(var(--ink),.45); color:var(--color-text-muted);}
-.cmp__step--out{border-style:dashed; color:var(--color-text-muted);}
-.cmp__step:hover{border-color:rgba(var(--ink),.75);}
-.cmp__step.is-pair, .cmp__step[aria-pressed="true"]{border-color:var(--color-brand-purple);}
+.cmp__steps{list-style:none; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); column-gap:30px; counter-reset:c;}
+.cmp__steps li{counter-increment:c; position:relative; display:flex;}
+.cmp__steps li:not(:last-child)::after{content:""; position:absolute; top:50%; right:-27px; width:22px; border-top:1.5px solid rgba(var(--ink),.5);}
+.cmp__steps li:not(:last-child)::before{content:""; position:absolute; top:50%; right:-28px; margin-top:-4px; border:4px solid transparent; border-left:6px solid rgba(var(--ink),.6); border-right:0;}
+.cmp__step{position:relative; width:100%; min-height:62px; display:grid; place-items:center; text-align:center; padding:.6rem .7rem; font-size:.84rem; font-weight:var(--fw-semibold); line-height:1.3;
+  color:var(--color-brand-white); background:var(--color-brand-black); border:1.5px solid rgba(var(--ink),.55); cursor:pointer;
+  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard), box-shadow var(--duration-ui) var(--ease-standard);}
+.cmp__lane:first-child .cmp__step{border:2px solid var(--color-brand-purple); background:rgba(161,0,255,.12);}
+.cmp__step::before{content:counter(c); position:absolute; left:-9px; bottom:-9px; width:18px; height:18px; display:grid; place-items:center;
+  font-size:.62rem; font-weight:var(--fw-bold); background:var(--color-brand-black); border:1px solid rgba(var(--ink),.55); color:var(--color-text-muted);}
+.cmp__lane:first-child .cmp__step::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
+.cmp__step--out{border-style:dashed !important; color:var(--color-text-muted);}
+.cmp__step:hover{border-color:var(--color-purple-light);}
+.cmp__step.is-pair, .cmp__step[aria-pressed="true"]{border-color:var(--color-purple-light); box-shadow:0 0 0 3px rgba(161,0,255,.22), 0 0 22px rgba(161,0,255,.35);}
 .cmp__step[aria-pressed="true"]::before, .cmp__step.is-pair::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
-.cmp__step:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
+.cmp__step:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:3px;}
 .cmp__notes{border-top:1px solid rgba(var(--ink),.4); padding:1rem 1.2rem; min-height:4.5rem;}
 .cmp__note{font-size:clamp(.9rem,1.05vw,1rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
 .cmp__note + .cmp__note{margin-top:.6rem;}
@@ -666,20 +671,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .js .cmp__note.is-on{display:block; margin-top:0;}
 .cmp__note strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .act .dcells{margin-top:clamp(1.6rem,3vw,2.4rem);}
-.sev{margin-top:clamp(1.6rem,3vw,2.4rem);}
-/* Act 06 trims (WD-Q68): the method as one quiet line under the lede; the live fee beside the severity chart */
-.method-line{margin-top:-.75rem; max-width:46rem; font-size:.82rem; line-height:1.5; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.a6-pair{margin-top:clamp(1.6rem,3vw,2.4rem);}
-.a6-pair .dcells{margin-top:0;} .a6-pair .dcells{grid-template-columns:1fr;}
-@media (min-width:1024px){ .a6-pair{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:clamp(1.5rem,3vw,2.5rem); align-items:start;} .a6-pair .sev{margin-top:0;} }
-.sev__t{width:100%; border-collapse:collapse;}
-.sev__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
-.sev__t th{width:6.5rem; text-align:left; font-size:.82rem; font-weight:var(--fw-medium); color:var(--color-text-muted); padding:.45rem 0;}
-.sev__t td{display:flex; align-items:center; gap:.7rem; padding:.45rem 0;}
-.sev__bar{display:block; height:.9rem; width:calc(var(--v) * 70%); min-width:2px; background:rgba(var(--ink),.55);}
-.sev__bar--major{background:var(--color-brand-purple);}
-.sev__n{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white);}
-.sev .reveal{margin-top:1rem;}
+.method-line{margin-top:.8rem; max-width:46rem; font-size:.82rem; line-height:1.5; color:var(--color-text-dim); font-weight:var(--fw-light);}
 @media (max-width:600px){ .cmp__lane{padding:.8rem .6rem;} .cmp__step{font-size:.76rem; padding-left:1.9rem;} .cmp__step::before{left:.45rem;} }
 .close-cells{margin-top:clamp(1.6rem,3vw,2.4rem);}
 
@@ -1236,14 +1228,13 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">The platform is live, it isn't mine, and the gap is public.</h2>
-      <p class="scan" data-i18n="act6_lede">A year later, I reviewed the live platform against my proposal. Select any step to compare the two.</p>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">A year later, the live flow took a different path.</h2>
+      <p class="scan" data-i18n="act6_lede">Select a step to see what moved, what went and what stayed.</p>
     </div>
 
-    <p class="method-line io" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
-
+    <p class="cap cap--lead io" data-i18n="act6_cmp_cap">My proposal above, the live flow below</p>
     <div class="cmp io">
-      <div class="cmp__lanes">
+      <div class="cmp__scroll"><div class="cmp__lanes">
         <div class="cmp__lane">
           <span class="cmp__h" data-i18n="act6_lane1">My proposal</span>
           <ol class="cmp__steps">
@@ -1264,6 +1255,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           </ol>
         </div>
       </div>
+      </div>
       <div class="cmp__notes" role="status" aria-live="polite">
         <p class="cmp__note" data-note="data" data-i18n-html="act6_n_data"><strong>Reordered, not removed.</strong> Personal-data capture moved from my first screen to the live flow's fourth, after the flight lookup. I read the reordering as intuitive and do not contest it.</p>
         <p class="cmp__note" data-note="val" data-i18n-html="act6_n_val"><strong>No counterpart before payment.</strong> None of the four public screens asks for an email code.</p>
@@ -1275,30 +1267,9 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       </div>
     </div>
 
-    <div class="a6-pair">
-    <div class="dcells io">
-      <div class="dcell"><span class="dcell__n" data-i18n="act6_s1_n">$11.86</span><span class="dcell__l" data-i18n="act6_s1_l">Fee per passenger, live</span><span class="dcell__p" data-i18n="act6_s1_p">The same in both of its appearances.</span></div>
-    </div>
+    <p class="method-line" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured, and no data was collected beyond what any visitor sees.</p>
 
-    <div class="sev io">
-      <table class="sev__t">
-        <caption class="sev__cap" data-i18n="act6_sev_cap">Six findings from the review, by severity</caption>
-        <thead class="visually-hidden"><tr><th scope="col" data-i18n="act6_sev_h1">Severity</th><th scope="col" data-i18n="act6_sev_h2">Findings</th></tr></thead>
-        <tbody>
-          <tr><th scope="row" data-i18n="act6_sev_crit">Critical</th><td><span class="sev__bar" style="--v:0" aria-hidden="true"></span><span class="sev__n">0</span></td></tr>
-          <tr><th scope="row" data-i18n="act6_sev_major">Major</th><td><span class="sev__bar sev__bar--major" style="--v:.2" aria-hidden="true"></span><span class="sev__n">1</span></td></tr>
-          <tr><th scope="row" data-i18n="act6_sev_minor">Minor</th><td><span class="sev__bar" style="--v:1" aria-hidden="true"></span><span class="sev__n">5</span></td></tr>
-        </tbody>
-      </table>
-      <div class="reveal" data-act="act6">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a6" data-panel-title="The major finding" data-panel-title-key="act6_fr_btn" data-i18n="act6_fr_btn">The major finding</button>
-        <div class="reveal__body reveal__body--poster" id="rv-a6">
-          <p data-i18n-html="act6_fr_txt"><strong>A heading that asks for more than the form does.</strong> A screen headed <em>"Ingresa tus datos personales y de tu vuelo"</em> whose only fields are flight data.</p>
-        </div>
-      </div>
-    </div>
-    </div>
-
+    <p class="cap cap--lead io" data-i18n="act6_wrap_cap">Where this leaves my claim</p>
     <div class="cardgrid cardgrid--3 close-cells io">
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_k1_tag">What I can claim</span><span data-i18n="act6_k1_t">Design to handoff</span></h3>
@@ -1318,7 +1289,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="notes io" id="disclosure">
       <p class="notes__label" data-i18n="ui_disclosure_label">Disclosure notes</p>
       <div class="notes__grid">
-        <p class="note" data-i18n-html="act3_notice"><strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation.</p>
+        <p class="note" data-i18n-html="act6_note1"><strong>TUUA Transfer.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation. Testimony of my involvement and contribution is available upon formal request.</p>
+        <p class="note" data-i18n-html="act6_note2"><strong>My stance on the fee.</strong> Designing its collection channel doesn't make me a party to the fee itself. Whether it continues is for Peru's Judiciary to decide: in June 2026, a Lima court allowed a constitutional challenge to proceed, while collection continues.</p>
       </div>
     </div>
 
