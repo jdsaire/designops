@@ -388,6 +388,30 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   border:1px solid rgba(var(--ink),.4); color:var(--color-brand-white);}
 .mock__ghost--full{flex:0 0 auto; margin-top:auto; font-size:.66rem; letter-spacing:.06em;}
 .mock__qr{width:58%; align-self:center; color:var(--color-brand-white); margin:.2rem 0;}
+/* Act 04 · the screens as phones (WD-Q65): square device frame, status bar, home indicator; height follows content */
+.mock{aspect-ratio:auto; border:6px solid rgba(var(--ink),.1); box-shadow:0 0 0 1px rgba(var(--ink),.35); padding-top:.6rem; padding-bottom:.7rem;}
+.mock__status{display:flex; justify-content:space-between; align-items:center; margin:0 0 .5rem; font-size:.62rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); letter-spacing:.02em;}
+.mock__status svg{width:2.4rem; height:.66rem; fill:currentColor;}
+.mock__status .b{fill:none; stroke:currentColor; stroke-width:1;}
+.mock__home{display:block; width:34%; height:4px; margin:auto auto 0; padding-top:0; position:relative; top:0; background:rgba(var(--ink),.55); flex:0 0 auto;}
+.stills--4 > .still{display:flex; flex-direction:column;}
+.stills--4 .mock{flex:1 1 auto;}
+.stills--4 .still__cap{min-height:3em;}   /* two caption lines kept for all four, so the frames line up */
+.mock__btn, .mock__ghost--full{margin-top:auto;}
+.mock__qr{width:46%; margin-bottom:.9rem;}
+@media (min-width:768px) and (max-width:1023px){ .stills--4{grid-template-columns:repeat(2,1fr);} }
+/* phones: a swipe track after Main's Work cards, with dots */
+.a4-dots{display:none; justify-content:center; gap:.5rem; margin-top:1rem;}
+.a4-dot{width:.45rem; height:.45rem; min-width:0; padding:0; background:rgba(var(--ink),.22); border:0; cursor:pointer;
+  transition:background var(--duration-ui) var(--ease-standard), width var(--duration-ui) var(--ease-standard);}
+.a4-dot.is-on{background:var(--color-brand-purple); width:1.25rem;}
+@media (max-width:767px){
+  .stills--4{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:.75rem;
+    padding:0 var(--gutter) 1rem; margin-left:calc(-1 * var(--gutter)); margin-right:calc(-1 * var(--gutter)); scrollbar-width:none;}
+  .stills--4::-webkit-scrollbar{display:none;}
+  .stills--4 > .still{flex:0 0 78vw; max-width:320px; scroll-snap-align:center;}
+  .a4-dots{display:flex;}
+}
 .act4__note{margin:clamp(1.2rem,2vw,1.6rem) 0 clamp(1.6rem,3vw,2.4rem); max-width:60rem;}
 .still__cap b{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
 .mock__fine{font-size:.62rem; line-height:1.4; color:var(--color-text-dim); text-align:center;}
@@ -1080,6 +1104,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div id="a4-screens" class="stills stills--4 io">
       <figure class="still">
         <div class="mock" role="img" aria-label="Redrawn screen 1, Personal details: name and email fields and a Register button." data-i18n-aria="act4_s1_alt">
+          <span class="mock__status" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 44 12" focusable="false"><rect x="0" y="8" width="3" height="4"/><rect x="5" y="5.5" width="3" height="6.5"/><rect x="10" y="3" width="3" height="9"/><rect x="15" y="0.5" width="3" height="11.5"/><rect class="b" x="23.5" y="1.5" width="17" height="9"/><rect x="25.5" y="3.5" width="11" height="5"/><rect x="41" y="4.5" width="2" height="3"/></svg></span>
           <span class="mock__steps"><span class="mock__step is-on">1</span><span class="mock__step">2</span><span class="mock__step">3</span><span class="mock__step">4</span></span>
           <p class="mock__t" data-i18n="act4_m1_t">Personal details</p>
           <p class="mock__x" data-i18n="act4_m1_x">Enter your details to continue.</p>
@@ -1088,22 +1113,26 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           <span class="mock__l" data-i18n="act4_m1_mail">Email</span>
           <span class="mock__in" data-i18n="act4_m1_mail_ph">name@example.com</span>
           <span class="mock__btn" data-i18n="act4_m1_btn">Register</span>
+          <span class="mock__home" aria-hidden="true"></span>
         </div>
         <figcaption class="still__cap" data-i18n-html="act4_s1_cap"><b>1 · Home.</b> Personal details to begin.</figcaption>
       </figure>
       <figure class="still">
         <div class="mock" role="img" aria-label="Redrawn screen 2, Code validation: four boxes for the code sent by email, with Validate, Resend code and Change email." data-i18n-aria="act4_s2_alt">
+          <span class="mock__status" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 44 12" focusable="false"><rect x="0" y="8" width="3" height="4"/><rect x="5" y="5.5" width="3" height="6.5"/><rect x="10" y="3" width="3" height="9"/><rect x="15" y="0.5" width="3" height="11.5"/><rect class="b" x="23.5" y="1.5" width="17" height="9"/><rect x="25.5" y="3.5" width="11" height="5"/><rect x="41" y="4.5" width="2" height="3"/></svg></span>
           <span class="mock__steps"><span class="mock__step">1</span><span class="mock__step is-on">2</span><span class="mock__step">3</span><span class="mock__step">4</span></span>
           <p class="mock__t" data-i18n="act4_m2_t">Code validation</p>
           <p class="mock__x" data-i18n="act4_m2_x">Enter the code sent to the email you registered.</p>
           <span class="mock__code"><span></span><span></span><span></span><span></span></span>
           <span class="mock__btn" data-i18n="act4_m2_btn">Validate</span>
           <span class="mock__row"><span class="mock__ghost" data-i18n="act4_m2_resend">Resend code</span><span class="mock__ghost" data-i18n="act4_m2_change">Change email</span></span>
+          <span class="mock__home" aria-hidden="true"></span>
         </div>
         <figcaption class="still__cap" data-i18n-html="act4_s2_cap"><b>2 · Validation.</b> A code sent to that email.</figcaption>
       </figure>
       <figure class="still">
         <div class="mock" role="img" aria-label="Redrawn screen 3, Payment method: card type, card number and CVV fields and a Pay button." data-i18n-aria="act4_s3_alt">
+          <span class="mock__status" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 44 12" focusable="false"><rect x="0" y="8" width="3" height="4"/><rect x="5" y="5.5" width="3" height="6.5"/><rect x="10" y="3" width="3" height="9"/><rect x="15" y="0.5" width="3" height="11.5"/><rect class="b" x="23.5" y="1.5" width="17" height="9"/><rect x="25.5" y="3.5" width="11" height="5"/><rect x="41" y="4.5" width="2" height="3"/></svg></span>
           <span class="mock__steps"><span class="mock__step">1</span><span class="mock__step">2</span><span class="mock__step is-on">3</span><span class="mock__step">4</span></span>
           <p class="mock__t" data-i18n="act4_m3_t">Payment method</p>
           <p class="mock__x" data-i18n="act4_m3_x">Select how to pay.</p>
@@ -1113,11 +1142,13 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           <span class="mock__l" data-i18n="act4_m3_cvv">CVV</span>
           <span class="mock__in">•••</span>
           <span class="mock__btn" data-i18n="act4_m3_btn">Pay</span>
+          <span class="mock__home" aria-hidden="true"></span>
         </div>
         <figcaption class="still__cap" data-i18n-html="act4_s3_cap"><b>3 · Payment gateway.</b> Card details.</figcaption>
       </figure>
       <figure class="still">
         <div class="mock" role="img" aria-label="Redrawn screen 4, Ticket details: a ticket number, a QR code to scan at the eGate and a Download receipt button." data-i18n-aria="act4_s4_alt">
+          <span class="mock__status" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 44 12" focusable="false"><rect x="0" y="8" width="3" height="4"/><rect x="5" y="5.5" width="3" height="6.5"/><rect x="10" y="3" width="3" height="9"/><rect x="15" y="0.5" width="3" height="11.5"/><rect class="b" x="23.5" y="1.5" width="17" height="9"/><rect x="25.5" y="3.5" width="11" height="5"/><rect x="41" y="4.5" width="2" height="3"/></svg></span>
           <span class="mock__steps"><span class="mock__step">1</span><span class="mock__step">2</span><span class="mock__step">3</span><span class="mock__step is-on">4</span></span>
           <p class="mock__t" data-i18n="act4_m4_t">Ticket details</p>
           <p class="mock__no" data-i18n="act4_m4_no">No. TT-0000000</p>
@@ -1125,11 +1156,13 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           <svg class="mock__qr" viewBox="0 0 21 21" aria-hidden="true" focusable="false"><path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2zM8 0h2v2H8zM11 1h2v3h-2zM8 3h2v3H8zM9 7h3v2H9zM13 8h2v2h-2zM0 8h2v2H0zM3 9h3v2H3zM16 8h2v2h-2zM19 9h2v3h-2zM8 10h2v3H8zM11 11h3v2h-3zM15 12h3v2h-3zM8 14h3v2H8zM12 15h2v3h-2zM15 15h2v2h-2zM18 16h3v2h-3zM8 18h3v3H8zM14 19h3v2h-3zM19 19h2v2h-2z" fill="currentColor"/></svg>
           <span class="mock__ghost mock__ghost--full" data-i18n="act4_m4_dl">Download receipt</span>
           <p class="mock__fine" data-i18n="act4_m4_sent">Receipt and QR code sent to your email.</p>
+          <span class="mock__home" aria-hidden="true"></span>
         </div>
         <figcaption class="still__cap" data-i18n-html="act4_s4_cap"><b>4 · Payment confirmation.</b> A QR code for the eGate, also sent by email.</figcaption>
       </figure>
     </div>
 
+    <div class="a4-dots" aria-hidden="false"></div>
     <p class="still__cap act4__note io" data-i18n="act4_redraw">Both figures are redrawn from my 2025 proposal, delivered in Spanish, in this site's style. Fields show neutral placeholders and the payment screen shows no amount.</p>
 
     <div class="stills stills--1 io" id="a4-flow">
@@ -1704,6 +1737,21 @@ document.querySelectorAll('.tl').forEach(tl=>{
   reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
   document.body.append(backdrop, sheet);   // at the document root, as in jdigital: no animated ancestor can trap the fixed layers
   layout(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+})();
+
+/* ============ Act 04 screens — phone swipe track with dots (Main Work pattern) ============ */
+(function(){
+  const track = document.getElementById('a4-screens'), dots = document.querySelector('.a4-dots'); if(!track || !dots) return;
+  const shots = [...track.children];
+  shots.forEach((f,i)=>{ const b = document.createElement('button'); b.type = 'button'; b.className = 'a4-dot' + (i ? '' : ' is-on'); b.dataset.i = i; dots.append(b); });
+  const btns = [...dots.children];
+  function label(){ btns.forEach((b,i)=> b.setAttribute('aria-label', (i+1) + ' / ' + shots.length + ' · ' + (shots[i].querySelector('.mock__t')||{}).textContent)); }
+  const step = ()=> shots[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 12);
+  let ticking = false;
+  track.addEventListener('scroll', ()=>{ if(ticking) return; ticking = true; requestAnimationFrame(()=>{ const k = Math.round(track.scrollLeft / step());
+    btns.forEach((b,i)=> b.classList.toggle('is-on', i === k)); ticking = false; }); }, { passive:true });
+  btns.forEach(b=> b.addEventListener('click', ()=> track.scrollTo({ left: +b.dataset.i * step(), behavior:'smooth' })));
+  label(); document.addEventListener('i18n:changed', label);
 })();
 
 /* ============ Entrance (once) ============ */
