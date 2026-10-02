@@ -452,7 +452,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
 .pos__t{width:auto; max-width:100%; border-collapse:collapse; border:1px solid rgba(var(--ink),.5);}
-.cap{margin:0 0 .8rem;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl{margin-top:0;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 .pos__t th, .pos__t td{padding:.8rem 1rem; text-align:left; vertical-align:top; border-top:1px solid var(--color-border-soft); font-size:.9rem; line-height:1.45;}
 .pos__t thead th{border-top:0; font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-muted);}
 .pos__t thead .pos__web{color:var(--color-purple-light);}
@@ -471,8 +471,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* CHASSIS PASS · Act 01 why-now timeline + cost of delay (round 1) */
 /* the rail: six steps on one line, dots joined by a hairline */
 .tl__rail{position:relative; display:none; border-bottom:0;}
-.js .tl__rail{display:grid; grid-template-columns:repeat(6,1fr);}
-.tl__rail::before{content:""; position:absolute; left:calc(100% / 12); right:calc(100% / 12); top:1.55rem; border-top:1px solid rgba(var(--ink),.45);}
+.js .tl__rail{display:grid; grid-template-columns:repeat(5,1fr);}
+.tl__rail::before{content:""; position:absolute; left:calc(100% / 10); right:calc(100% / 10); top:1.55rem; border-top:1px solid rgba(var(--ink),.45);}
 .tl__tab{position:relative; display:flex; flex-direction:column; align-items:center; gap:.35rem; min-height:44px; padding:.9rem .2rem .8rem; cursor:pointer;
   color:var(--color-text-muted); text-align:center;}
 .tl__n{width:1.4rem; height:1.4rem; display:grid; place-items:center; font-size:.6rem; font-weight:var(--fw-bold);
@@ -887,21 +887,20 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act1_lede">Step through how a contract promise became a critical income stream.</p>
     </div>
 
+    <p class="cap cap--lead io" data-i18n="act1_tl_cap">From concession to collection, 2001–2025</p>
     <div class="tl tabs io">
       <div class="tabs__list tl__rail" role="tablist" aria-label="Why the fee became urgent" data-i18n-aria="act1_tl_aria">
         <button class="tl__tab" role="tab" id="a1-tl-1" aria-selected="true" aria-controls="a1-tp-1"><span class="tl__n">01</span><span class="tl__d" data-i18n="act1_t1_d">Feb 2001</span></button>
         <button class="tl__tab" role="tab" id="a1-tl-2" aria-selected="false" aria-controls="a1-tp-2"><span class="tl__n">02</span><span class="tl__d" data-i18n="act1_t2_d">Mar 2013</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-3" aria-selected="false" aria-controls="a1-tp-3"><span class="tl__n">03</span><span class="tl__d" data-i18n="act1_t3_d">2010s–2025</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-4" aria-selected="false" aria-controls="a1-tp-4"><span class="tl__n">04</span><span class="tl__d" data-i18n="act1_t4_d">Jun 2025</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-5" aria-selected="false" aria-controls="a1-tp-5"><span class="tl__n">05</span><span class="tl__d" data-i18n="act1_t5_d">Aug 2025</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-6" aria-selected="false" aria-controls="a1-tp-6"><span class="tl__n">06</span><span class="tl__d" data-i18n="act1_t6_d">Oct 2025</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-3" aria-selected="false" aria-controls="a1-tp-3"><span class="tl__n">03</span><span class="tl__d" data-i18n="act1_t3_d">Jun 2025</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-4" aria-selected="false" aria-controls="a1-tp-4"><span class="tl__n">04</span><span class="tl__d" data-i18n="act1_t4_d">Aug 2025</span></button>
+        <button class="tl__tab" role="tab" id="a1-tl-5" aria-selected="false" aria-controls="a1-tp-5"><span class="tl__n">05</span><span class="tl__d" data-i18n="act1_t5_d">Oct 2025</span></button>
       </div>
       <div class="tabs__panel tl__panel" id="a1-tp-1" role="tabpanel" aria-labelledby="a1-tl-1"><p class="tl__h" data-i18n="act1_t1_h">The concession</p><p data-i18n="act1_t1_x">LAP begins operating Jorge Chávez under concession with Peruvian State.</p></div>
       <div class="tabs__panel tl__panel" id="a1-tp-2" role="tabpanel" aria-labelledby="a1-tl-2"><p class="tl__h" data-i18n="act1_t2_h">An income promise</p><p data-i18n="act1_t2_x">Contract Amendment N°6 allows transfer fees upon delivery of new terminal.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-3" role="tabpanel" aria-labelledby="a1-tl-3"><p class="tl__h" data-i18n="act1_t3_h">The terminal waits</p><p data-i18n="act1_t3_x">Construction delayed for years while the State releases the land it needs.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-4" role="tabpanel" aria-labelledby="a1-tl-4"><p class="tl__h" data-i18n="act1_t4_h">The terminal opens</p><p data-i18n="act1_t4_x">The fee becomes chargeable, but no mechanism exists to collect it.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-5" role="tabpanel" aria-labelledby="a1-tl-5"><p class="tl__h" data-i18n="act1_t5_h">Commercial terms</p><p data-i18n="act1_t5_x">LAP and Airlines negotiated fee collection inside the ticket.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-6" role="tabpanel" aria-labelledby="a1-tl-6"><p class="tl__h" data-i18n="act1_t6_h">Collection begins</p><p data-i18n="act1_t6_x">Implementation of fee mechanism at the airport.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-3" role="tabpanel" aria-labelledby="a1-tl-3"><p class="tl__h" data-i18n="act1_t3_h">The terminal opens</p><p data-i18n="act1_t3_x">The fee becomes chargeable, but no mechanism exists to collect it.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-4" role="tabpanel" aria-labelledby="a1-tl-4"><p class="tl__h" data-i18n="act1_t4_h">Commercial terms</p><p data-i18n="act1_t4_x">LAP and Airlines negotiated fee collection inside the ticket.</p></div>
+      <div class="tabs__panel tl__panel" id="a1-tp-5" role="tabpanel" aria-labelledby="a1-tl-5"><p class="tl__h" data-i18n="act1_t5_h">Collection begins</p><p data-i18n="act1_t5_x">Implementation of fee mechanism at the airport.</p></div>
       <div class="tl__nav"><button class="tl__btn" type="button" data-step="-1" data-i18n="act1_prev">Previous</button><button class="tl__btn" type="button" data-step="1" data-i18n="act1_next">Next</button></div>
     </div>
 
@@ -913,7 +912,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="reveal io" data-act="act1">
       <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1-est" data-panel-title="How this is estimated" data-panel-title-key="act1_est_btn" data-i18n="act1_est_btn">How this is estimated</button>
       <div class="reveal__body reveal__body--poster" id="rv-a1-est">
-        <p data-i18n-html="act1_est_txt"><strong>130,000 × USD 10.05 ÷ 30 days.</strong> USD 10.05 is the fee before 18% IGV, which makes it $11.86. Lima Airport keeps 53.489%; the State takes 46.511% as royalty under the concession. An estimate at today's volume, not a measured loss.</p>
+        <p data-i18n-html="act1_est_txt"><strong>130,000 × $10.05 ÷ 30 days.</strong> $10.05 is the fee before 18% IGV, which makes it $11.86. Lima Airport keeps 53.489%; the State takes 46.511% as royalty under the concession. An estimate at today's volume, not a measured loss.</p>
       </div>
     </div>
   </div>
