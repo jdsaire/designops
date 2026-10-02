@@ -480,7 +480,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
 .pos__t{width:auto; max-width:100%; border-collapse:collapse; border:1px solid rgba(var(--ink),.5);}
-.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl{margin-top:0;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl, .act .cap--lead + .stills{margin-top:0;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 .pos__t th, .pos__t td{padding:.8rem 1rem; text-align:left; vertical-align:top; border-top:1px solid var(--color-border-soft); font-size:.9rem; line-height:1.45;}
 .pos__t thead th{border-top:0; font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-muted);}
 .pos__t thead .pos__web{color:var(--color-purple-light);}
@@ -1126,11 +1126,12 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Design</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Four screens, from sign-up to ticket.</h2>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">From sign-up to the eGate in four screens.</h2>
       <p class="scan" data-i18n="act4_lede">The payment flow I designed, as I proposed it.</p>
     </div>
 
     <!-- The proposed screens, redrawn in this site's style (WD-Q23…Q25). -->
+    <p class="cap cap--lead io" data-i18n="act4_scr_cap">The four proposal screens</p>
     <div id="a4-screens" class="stills stills--4 io">
       <figure class="still">
         <div class="mock" role="img" aria-label="Redrawn screen 1, Personal details: name and email fields and a Register button." data-i18n-aria="act4_s1_alt">
@@ -1788,7 +1789,7 @@ document.querySelectorAll('.tl').forEach(tl=>{
   const txt = key => (root.querySelector('.flow__labels [data-k="'+key+'"]')||{}).textContent || '';
   const col = v => getComputedStyle(root).getPropertyValue(v).trim();
   const ink = a => `rgba(${col('--ink')},${a})`;
-  let W=0, H=0, dpr=1, rows=2, k=1, nodes=[], brs=[], path=[], segs=[], total=0, hover=null, visible=true, start=performance.now();
+  let W=0, H=0, dpr=1, rows=2, k=1, nodes=[], brs=[], path=[], segs=[], total=0, hover=null, visible=true, seen=false, tokT0=null, tokDone=false, wrapAt=-1;
   const half = n => HALF[n.shape].map(v=>v*k);
   function layout(){
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = window.devicePixelRatio || 1;
@@ -1802,8 +1803,10 @@ document.querySelectorAll('.tl').forEach(tl=>{
       return { key, shape, scr, i, row, x: mx + pitch*(c + .5), y: yRow[row] }; });
     brs = BR.map(([d,key,shape])=>{ const n = nodes.find(m=>m.key===d), up = rows === 1 || n.row === 0;
       return { key, shape, from:n, up, x:n.x, y: up ? n.y - 104*k : n.y + 96*k }; });
-    path = []; nodes.forEach((n,i)=>{ if(rows === 2 && i === 9){ const a = nodes[8], mid = (a.y + n.y)/2; path.push([a.x, mid], [n.x, mid]); } path.push([n.x, n.y]); });
-    segs = []; total = 0; for(let i=1;i<path.length;i++){ const L = Math.hypot(path[i][0]-path[i-1][0], path[i][1]-path[i-1][1]); segs.push([total, L]); total += L; }
+    path = []; wrapAt = -1; nodes.forEach((n,i)=>{ if(rows === 2 && i === 9){ const a = nodes[8], mid = (a.y + n.y)/2; wrapAt = path.length - 1; path.push([a.x, mid], [n.x, mid]); } path.push([n.x, n.y]); });
+    // segment timing: the wrap from Validation OK? down to Payment gateway runs at 4×, so the eye lands on row 2 at once
+    segs = []; total = 0; for(let i=1;i<path.length;i++){ const L = Math.hypot(path[i][0]-path[i-1][0], path[i][1]-path[i-1][1]), f = (wrapAt >= 0 && i > wrapAt && i <= wrapAt + 3) ? 4 : 1, dt = L / (200*k*f); segs.push([total, dt, L, f]); total += dt; }
+    const wr = segs.filter(x=>x[3] > 1); cv.dataset.timing = JSON.stringify({ total:+total.toFixed(2), wrapDt:+wr.reduce((a,x)=>a+x[1],0).toFixed(2), wrapLen:Math.round(wr.reduce((a,x)=>a+x[2],0)), base:+(200*k).toFixed(1) });
     snaps.innerHTML = ''; nodes.filter(n=>n.scr).forEach(n=>{ const s = document.createElement('span'); s.className = 'flow__snap'; s.style.left = n.x + 'px'; snaps.append(s); });
     cv.dataset.rows = rows; cv.dataset.pos = JSON.stringify(Object.fromEntries(nodes.map(n=>[n.key, [Math.round(n.x), Math.round(n.y)]])));
   }
@@ -1824,13 +1827,16 @@ document.querySelectorAll('.tl').forEach(tl=>{
     ctx.setLineDash(dash ? [4,4] : []); ctx.strokeStyle = c; ctx.lineWidth = on ? 2.2 : 1.4; ctx.stroke(); ctx.setLineDash([]);
     const a = pts[pts.length-2], b = pts[pts.length-1]; head(b[0], b[1], Math.atan2(b[1]-a[1], b[0]-a[0]), c); }
   function tag(t, x, y, align){ ctx.font = `600 ${Math.max(10, 11*k)}px Graphik, Arial, sans-serif`; ctx.fillStyle = col('--color-text-muted'); ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle'; ctx.fillText(t, x, y); }
-  function tokenAt(d){ for(const [s0,L] of segs){ if(d <= s0 + L){ const i = segs.findIndex(s=>s[0]===s0), f = L ? (d - s0)/L : 0; const a = path[i], b = path[i+1]; return [a[0] + (b[0]-a[0])*f, a[1] + (b[1]-a[1])*f]; } } return path[path.length-1]; }
+  function tokenAt(t){ for(let i=0;i<segs.length;i++){ const [t0,dt] = segs[i]; if(t <= t0 + dt){ const f = dt ? (t - t0)/dt : 0, a = path[i], b = path[i+1]; return [a[0] + (b[0]-a[0])*f, a[1] + (b[1]-a[1])*f]; } } return path[path.length-1]; }
   function draw(ts){
     if(!W) return; ctx.clearRect(0,0,W,H);
     const yes = txt('yes'), no = txt('no'), lit = new Set();
     let tok = null;
-    if(!reduce.matches){ const speed = 150*k, cycle = total/speed + 1.4, tt = ((ts - start)/1000) % cycle, d = Math.min(total, tt*speed); tok = tokenAt(d);
-      nodes.forEach(n=>{ if(Math.hypot(tok[0]-n.x, tok[1]-n.y) < 34*k) lit.add(n.key); }); }
+    let tokA = 1;
+    // the passenger walks the flow once, when the chart first comes into view on desktop; never on the phone strip
+    if(!reduce.matches && rows === 2 && !tokDone){ if(tokT0 === null && seen) tokT0 = ts;
+      if(tokT0 !== null){ const tt = (ts - tokT0)/1000; if(tt > total + .6){ tokDone = true; root.dataset.token = 'done'; } else { tok = tokenAt(Math.min(tt, total)); tokA = tt > total ? 1 - (tt - total)/.6 : 1; root.dataset.token = 'running';
+        nodes.forEach(n=>{ if(Math.hypot(tok[0]-n.x, tok[1]-n.y) < 34*k) lit.add(n.key); }); } } }
     const hot = hover ? new Set([hover.key]) : null;
     // main edges
     nodes.forEach((n,i)=>{ if(!i) return; const a = nodes[i-1], [ah] = half(a), [bh] = half(n), on = !!(hover && (hover===a || hover===n));
@@ -1853,9 +1859,9 @@ document.querySelectorAll('.tl').forEach(tl=>{
         if(lit.has(n.key)){ ctx.beginPath(); ctx.rect(n.x - hw - 5, n.y - hh - 5, hw*2 + 10, hh*2 + 10); ctx.strokeStyle = 'rgba(161,0,255,.55)'; ctx.lineWidth = 1.2; ctx.stroke(); } }
       label(n); });
     // the passenger
-    if(tok){ const g = ctx.createRadialGradient(tok[0], tok[1], 0, tok[0], tok[1], 16); g.addColorStop(0, 'rgba(199,102,255,.9)'); g.addColorStop(1, 'rgba(161,0,255,0)');
+    if(tok){ ctx.globalAlpha = Math.max(0, tokA); const g = ctx.createRadialGradient(tok[0], tok[1], 0, tok[0], tok[1], 16); g.addColorStop(0, 'rgba(199,102,255,.9)'); g.addColorStop(1, 'rgba(161,0,255,0)');
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(tok[0], tok[1], 16, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(tok[0], tok[1], 4.5, 0, Math.PI*2); ctx.fillStyle = '#FFFFFF'; ctx.fill(); }
+      ctx.beginPath(); ctx.arc(tok[0], tok[1], 4.5, 0, Math.PI*2); ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.globalAlpha = 1; }
   }
   function loop(ts){ if(visible) draw(ts); if(!reduce.matches) requestAnimationFrame(loop); }
   // hover lights a node and its edges (no panels here)
@@ -1871,7 +1877,7 @@ document.querySelectorAll('.tl').forEach(tl=>{
   document.addEventListener('i18n:changed', ()=>{ dotLabels(); draw(performance.now()); });
   new MutationObserver(()=>draw(performance.now())).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
   new ResizeObserver(()=>{ layout(); draw(performance.now()); }).observe(strip);
-  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; }), { threshold:0 }).observe(cv);
+  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(en.intersectionRatio >= .4) seen = true; }), { threshold:[0, .4] }).observe(strip);
   reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
   layout(); dotLabels(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
 })();
