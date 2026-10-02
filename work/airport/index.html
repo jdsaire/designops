@@ -592,7 +592,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* CHASSIS PASS · Act 05 handoff boundary */
 /* Act 05 · one relay track (WD-Q67): my four stages in purple, the handoff baton, four stages after it;
    the two evaluation methods hang from the Evaluation stage */
-.relay{display:grid; grid-template-columns:1fr auto 1fr; grid-template-areas:"mine baton after" "ev baton after" "never never never";
+.relay{display:grid; grid-template-columns:1fr auto 1fr; grid-template-areas:"mine baton after" "ev baton after";
   margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.5);}
 .relay__seg{padding:1.2rem 1.2rem 1.4rem;}
 .relay__seg--mine{grid-area:mine;} .relay__seg--after{grid-area:after; background:var(--surface-card);}
@@ -619,8 +619,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   color:var(--color-text-muted); font-weight:var(--fw-light);}
 .relay__card strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .relay__ct{font-size:.64rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-purple-light); margin-bottom:.35rem;}
-.relay__never{grid-area:never; padding:.8rem 1.2rem; border-top:1px solid rgba(var(--ink),.4); font-size:.85rem; color:var(--color-text-muted);}
-.relay__never strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 /* below desktop the tracks run top to bottom */
 @media (max-width:1023px){
   .relay__track{grid-template-columns:1fr; gap:.9rem;}
@@ -632,7 +630,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .relay__ev::before{display:none;}
 }
 @media (max-width:767px){
-  .relay{grid-template-columns:1fr; grid-template-areas:"mine" "ev" "baton" "after" "never";}
+  .relay{grid-template-columns:1fr; grid-template-areas:"mine" "ev" "baton" "after";}
   .relay__baton{width:auto; height:2.6rem;}
   .relay__baton::before{top:50%; bottom:auto; left:0; right:0; border-left:0; border-top:2px solid var(--color-brand-purple);}
   .relay__baton span{writing-mode:horizontal-tb; transform:none; padding:.25rem .6rem;}
@@ -1226,7 +1224,6 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <div class="relay__card"><p class="relay__ct" data-i18n="act5_ev1_t">Stakeholder review</p><p data-i18n-html="act5_ev1_x"><strong>For the digital platform.</strong> Review sessions with the programme's stakeholders, run on the web payment flow.</p></div>
         <div class="relay__card"><p class="relay__ct" id="a5-ev2" data-i18n="act5_ev2_t">Field observation</p><p data-i18n-html="act5_ev2_x"><strong>For the physical payment booths.</strong> Observation in the field, evidenced by two pre-trial surveys and a set of qualitative notes.</p></div>
       </div>
-      <p class="relay__never" data-i18n-html="act5_never"><strong>Never mine at any stage:</strong> setting the fee.</p>
     </div>
   </div>
 </section>
