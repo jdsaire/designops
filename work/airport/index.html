@@ -975,6 +975,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           <li><button class="net__chip" type="button" data-net-id="fc" data-office="af" data-ring="strong"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_fc_t">Controlling</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_af">Adm &amp; Finance</span></span><span class="net__m-role" data-i18n="act2_net_fc_role">Internal client</span><span class="net__m-x" data-i18n="act2_net_fc_x">Origin of the contingency, and the division Billing belongs to.</span></span></li>
           <li><button class="net__chip" type="button" data-net-id="bil" data-office="af" data-ring="strong"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_bil_t">Billing</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_af">Adm &amp; Finance</span> › <span data-i18n="act2_net_fc_t">Controlling</span></span><span class="net__m-role" data-i18n="act2_net_bil_role">Project owner</span><span class="net__m-x" data-i18n="act2_net_bil_x">Review and approval of every artifact by stakeholders.</span></span></li>
           <li><button class="net__chip" type="button" data-net-id="arc" data-office="ops" data-ring="strong"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_arc_t">Architecture</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_ops">Operations</span> › <span data-i18n="act2_net_div_it">IT</span></span><span class="net__m-role" data-i18n="act2_net_arc_role">Front and Back-End</span><span class="net__m-x" data-i18n="act2_net_arc_x">Developed the web channel from my scopes, and runs it today.</span></span></li>
+          <li><button class="net__chip" type="button" data-net-id="its" data-office="ops" data-ring="strong"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_its_t">IT Solutions</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_ops">Operations</span> › <span data-i18n="act2_net_div_it">IT</span></span><span class="net__m-role" data-i18n="act2_net_its_role">Project management</span><span class="net__m-x" data-i18n="act2_net_its_x">Managed technical requirements for the in-house web build.</span></span></li>
           <li><button class="net__chip" type="button" data-net-id="ter" data-office="ops" data-ring="strong"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_ter_t">Terminals</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_ops">Operations</span> › <span data-i18n="act2_net_div_aops">Airport Operations</span></span><span class="net__m-role" data-i18n="act2_net_ter_role">Physical operation</span><span class="net__m-x" data-i18n="act2_net_ter_x">Field control of flows and queues.</span></span></li>
           <li><button class="net__chip" type="button" data-net-id="aop" data-office="ops" data-ring="strong"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_aop_t">PlanOps</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_ops">Operations</span> › <span data-i18n="act2_net_div_aops">Airport Operations</span></span><span class="net__m-role" data-i18n="act2_net_aop_role">Planning the space</span><span class="net__m-x" data-i18n="act2_net_aop_x">Simulated the queues and adapted the layout for the points of sale.</span></span></li>
         </ul>
@@ -990,7 +991,6 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <p class="net__ring-h" data-i18n="act2_net_tie_weak">Weak tie</p>
         <ul class="net__chips">
           <li><button class="net__chip" type="button" data-net-id="prc" data-office="af" data-ring="weak"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_prc_t">Procurement</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_af">Adm &amp; Finance</span></span><span class="net__m-role" data-i18n="act2_net_prc_role">Contractor agreements</span><span class="net__m-x" data-i18n="act2_net_prc_x">Contracted the physical-collection provider and the payment gateway.</span></span></li>
-          <li><button class="net__chip" type="button" data-net-id="sec" data-office="ops" data-ring="weak"><span class="net__dot" aria-hidden="true"></span><span class="net__lt" data-i18n="act2_net_sec_t">Asset Security</span></button><span class="net__meta" hidden><span class="net__m-path"><span data-i18n="act2_net_off_ops">Operations</span></span><span class="net__m-role" data-i18n="act2_net_sec_role">Risk mapping</span><span class="net__m-x" data-i18n="act2_net_sec_x">Mapped the risks; no direct intervention.</span></span></li>
         </ul>
       </div>
       <div class="net__group" data-ring="ext">
@@ -1555,10 +1555,10 @@ document.querySelectorAll('.tl').forEach(tl=>{
   const card = root.querySelector('.net__card'), sheet = root.querySelector('.net__sheet'), backdrop = root.querySelector('.net__backdrop');
   const chips = [...root.querySelectorAll('.net__chip')];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const SECT = { af:[95,178], ops:[-38,82], com:[188,245], ds:[255,305] };       // degrees, maths orientation
+  const SECT = { af:[95,178], ops:[-62,92], com:[188,245], ds:[255,305] };       // degrees, maths orientation
   const RING = { strong:.42, medium:.61, weak:.77, ext:.92 };
   const LW = { strong:3, medium:2, weak:1.2, ext:1.1 };
-  const LINKS = [["inn", "bil"], ["inn", "fc"], ["inn", "arc"], ["inn", "ter"], ["bil", "fc"], ["bil", "arc"], ["bil", "prc"], ["aop", "ter"], ["cx", "ter"], ["prc", "ext_col"], ["prc", "ext_gw"], ["arc", "ext_gw"], ["ter", "ext_flow"], ["ter", "ext_secp"], ["sec", "ext_secp"], ["com", "ext_air"], ["bil", "ext_reg"], ["ter", "ext_pax"]];
+  const LINKS = [["inn", "bil"], ["inn", "fc"], ["inn", "arc"], ["inn", "its"], ["its", "arc"], ["inn", "ter"], ["bil", "fc"], ["bil", "arc"], ["bil", "prc"], ["aop", "ter"], ["cx", "ter"], ["prc", "ext_col"], ["prc", "ext_gw"], ["arc", "ext_gw"], ["ter", "ext_flow"], ["ter", "ext_secp"], ["com", "ext_air"], ["bil", "ext_reg"], ["ter", "ext_pax"]];
   const nodes = chips.map(c => ({ id:c.dataset.netId, office:c.dataset.office, ring:c.dataset.ring, chip:c,
     phase:Math.random()*6.28, amp:2+Math.random()*2, speed:.6+Math.random()*.5 }));
   const byId = Object.fromEntries(nodes.map(n=>[n.id,n]));
@@ -1580,8 +1580,9 @@ document.querySelectorAll('.tl').forEach(tl=>{
       }
     }
     const pos = {}; nodes.forEach(n=>pos[n.id]=[Math.round(n.x),Math.round(n.y)]); cv.dataset.pos = JSON.stringify(pos);
+    const rr = {}; nodes.forEach(n=>rr[n.id]=rad(n)); cv.dataset.r = JSON.stringify(rr);
   }
-  function rad(n){ const base = compact ? {strong:7,medium:6,weak:5,ext:4.5} : {strong:31,medium:29,weak:27,ext:24}; return base[n.ring]; }
+  function rad(n){ const base = compact ? {strong:7,medium:6,weak:5,ext:4.5} : (W < 860 ? {strong:26,medium:25,weak:23,ext:21} : {strong:31,medium:29,weak:27,ext:24}); return base[n.ring]; }
   function offCol(o){ return col('--net-'+o) || '#A100FF'; }
   function curve(x1,y1,x2,y2,stroke,lw,dash,bend){
     const mx=(x1+x2)/2, my=(y1+y2)/2, dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1;
