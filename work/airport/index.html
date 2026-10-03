@@ -622,7 +622,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     }
 @media (max-width:767px){
   .relay{grid-template-columns:1fr; grid-template-areas:"mine" "baton" "after";}
-  .relay__baton{width:auto; height:2.6rem;}
+  .relay__baton{width:auto; height:2.6rem; place-items:center start; padding-left:1.2rem;}   /* left, in line with the stage column above and below */
   .relay__baton::before{top:50%; bottom:auto; left:0; right:0; border-left:0; border-top:2px solid var(--color-brand-purple);}
   .relay__baton span{writing-mode:horizontal-tb; transform:none; padding:.25rem .6rem;}
 }
