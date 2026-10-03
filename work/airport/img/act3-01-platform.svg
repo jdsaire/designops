@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Platform scope</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs><rect width="768" height="512" fill="#0A0A0A"/>
+  <circle cx="300" cy="256" r="220" fill="url(#glow)"/>
+  <!-- the phone: what the passenger sees -->
+  <rect x="218" y="78" width="168" height="356" rx="4" fill="none" stroke="#C2A3FF" stroke-width="2" opacity="0.9"/>
+  <rect x="270" y="92" width="64" height="5" fill="#C2A3FF" opacity="0.5"/>
+  <g fill="none" stroke="#C2A3FF" stroke-width="1.5">
+    <rect x="238" y="122" width="128" height="40" opacity="0.55"/>
+    <rect x="238" y="174" width="128" height="40" opacity="0.55"/>
+    <rect x="238" y="278" width="128" height="40" opacity="0.55"/>
+  </g>
+  <path d="M250 142 l8 8 l14 -16" fill="none" stroke="#C2A3FF" stroke-width="2"/>
+  <rect x="238" y="226" width="128" height="40" fill="url(#g)"/>
+  <g fill="#C2A3FF" opacity="0.8">
+    <rect x="276" y="338" width="14" height="14"/><rect x="296" y="338" width="8" height="8"/><rect x="314" y="338" width="14" height="14"/>
+    <rect x="276" y="358" width="8" height="8"/><rect x="292" y="356" width="14" height="14"/><rect x="314" y="360" width="8" height="8"/>
+    <rect x="276" y="376" width="14" height="14"/><rect x="298" y="378" width="8" height="8"/><rect x="314" y="376" width="14" height="14"/>
+  </g>
+  <!-- the back office: reports and real-time sync -->
+  <g stroke="#C2A3FF" stroke-width="1.5" stroke-dasharray="5 5" fill="none" opacity="0.6">
+    <path d="M366 246 H470 V176 H520"/><path d="M366 298 H470 V336 H520"/><path d="M366 246 H520"/>
+  </g>
+  <rect x="520" y="206" width="80" height="80" fill="url(#g)"/>
+  <rect x="534" y="220" width="52" height="8" fill="#0A0A0A" opacity="0.6"/><rect x="534" y="236" width="40" height="8" fill="#0A0A0A" opacity="0.6"/><rect x="534" y="252" width="46" height="8" fill="#0A0A0A" opacity="0.6"/>
+  <rect x="520" y="150" width="56" height="52" fill="none" stroke="#C2A3FF" stroke-width="1.5" opacity="0.5"/>
+  <rect x="520" y="310" width="56" height="52" fill="none" stroke="#C2A3FF" stroke-width="1.5" opacity="0.5"/>
+  <g fill="#C2A3FF" opacity="0.45"><rect x="530" y="180" width="8" height="14"/><rect x="542" y="170" width="8" height="24"/><rect x="554" y="164" width="8" height="30"/></g>
+  <g fill="#C2A3FF" opacity="0.45"><rect x="530" y="322" width="36" height="5"/><rect x="530" y="333" width="28" height="5"/><rect x="530" y="344" width="32" height="5"/></g>
+</svg>

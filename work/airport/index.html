@@ -553,40 +553,41 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .chain__n:not(:last-child)::before{left:auto; right:-1.85rem; bottom:auto; top:calc(50% - 1.6rem);}
 }
 
-/* CHASSIS PASS · Act 03 WBS tree */
-.wbs{margin-top:clamp(1.6rem,3vw,2.4rem);}
-.wbs__root{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem;
-  padding:1rem 1.2rem; border:2px solid var(--color-brand-purple); background:var(--surface-card);}
-.wbs__rt{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white);}
-.wbs__branches{list-style:none; display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1.6rem; position:relative;}
-.wbs__b{position:relative; border:1px solid rgba(var(--ink),.5); padding:1rem 1.1rem 1.1rem;}
-.wbs__b::before{content:""; position:absolute; left:1.2rem; top:calc(-1.6rem - 1px); height:1.6rem; border-left:1px solid rgba(var(--ink),.45);}
-.wbs__b + .wbs__b::before{top:calc(-1rem - 1px); height:1rem;}
-.wbs__bt{display:block; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:.6rem;}
-.wbs__leaves{list-style:none; display:flex; flex-direction:column; gap:.4rem; border-left:1px solid rgba(var(--ink),.3); padding-left:.9rem;}
-.wbs__btn{position:relative; width:100%; min-height:44px; text-align:left; padding:.6rem 2rem .6rem .8rem; font-size:.9rem; font-weight:var(--fw-semibold);
-  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;
-  transition:border-color var(--duration-ui) var(--ease-standard);}
-.wbs__btn::after{content:"+"; position:absolute; right:.8rem; top:50%; transform:translateY(-50%); color:var(--color-brand-purple); font-weight:var(--fw-bold);}
-.wbs__btn:hover{border-color:rgba(var(--ink),.75);}
-.wbs__btn[aria-expanded="true"]{border-color:var(--color-brand-purple);}
-.wbs__btn[aria-expanded="true"]::after{content:"\2212";}
-.wbs__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
-.wbs__x{padding:.55rem .8rem .2rem; font-size:.85rem; line-height:1.5; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.js .wbs__x[hidden]{display:none;}
-.wbs__go{display:inline-flex; align-items:center; gap:.35rem; min-height:44px; font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.12em; text-transform:uppercase; color:var(--color-purple-light);}
-.wbs__go::after{content:"→"; transition:transform var(--duration-ui) var(--ease-standard);}
-.wbs__go:hover::after{transform:translateX(3px);}
+/* Act 03 · deliverables carousel (WD-Q78): jdigital Services / Main's capabilities carousel, ported in-page */
 #a4-screens, #a4-flow{scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
-.wbs__go:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
-@media (min-width:900px){
-  .wbs__branches{grid-template-columns:repeat(3,1fr); gap:1.2rem;}
-  .wbs__branches::before{content:""; position:absolute; top:calc(-.8rem - 1px); left:calc((100% - 2.4rem) / 6); right:calc((100% - 2.4rem) / 6); border-top:1px solid rgba(var(--ink),.45);}
-  .wbs__b::before, .wbs__b + .wbs__b::before{left:50%; top:calc(-.8rem - 1px); height:.8rem;}
-  .wbs__branches{margin-top:1.6rem;}
-  .wbs__root{position:relative;}
-  .wbs__root::after{content:""; position:absolute; left:50%; bottom:calc(-.8rem - 2px); height:.8rem; border-left:1px solid rgba(var(--ink),.45);}
+.dl{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.dl__viewport{overflow:hidden; margin-right:calc(-1 * var(--gutter)); outline:none;}
+.dl__viewport:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
+.dl__track{list-style:none; display:flex; gap:clamp(3rem,4vw,4rem); transition:transform 420ms var(--ease-standard);}
+.dl__slide{flex:0 0 calc(100% - var(--peek-width)); min-width:0; display:grid; grid-template-columns:51fr 49fr; gap:clamp(2rem,4vw,4rem); align-items:center;
+  transition:opacity 420ms var(--ease-standard);}
+.dl__slide:not(.is-on){opacity:.35;}
+.dl__media{aspect-ratio:3 / 2; overflow:hidden; background:#0A0A0A; border:1px solid var(--color-border-soft);}
+.dl__img{display:block; width:100%; height:100%; object-fit:cover;}
+.dl__label{font-size:.8rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-brand-purple); margin-bottom:.75rem;}
+.dl__title{font-size:clamp(1.25rem,1.75vw,1.625rem); font-weight:var(--fw-bold); line-height:1.25; letter-spacing:-.015em; color:var(--color-brand-white);}
+.dl__body{font-size:clamp(.98rem,1.1vw,1.06rem); line-height:1.65; color:var(--color-text-muted); font-weight:var(--fw-light); margin-top:1rem;}
+.dl__cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; margin-top:1.25rem;}
+.dl__cta-l{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.dl__cta-i{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:var(--color-brand-purple); transition:background var(--duration-ui) var(--ease-standard);}
+.dl__cta:hover .dl__cta-i, .dl__cta:focus-visible .dl__cta-i{background:var(--color-purple-hover);}
+.dl__cta-i svg, .dl__nav svg{width:.95rem; height:.95rem; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+.dl__cta-i svg{stroke:var(--color-on-brand);}
+.dl__ctrl{display:flex; align-items:center; justify-content:flex-end; gap:.75rem; margin-top:clamp(1.25rem,2vw,1.75rem); padding-right:var(--peek-width);}
+.dl__nav{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
+  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+.dl__nav:hover, .dl__nav:focus-visible{border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
+.dl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
+@media (min-width:768px) and (max-width:1023px){ .dl__slide{grid-template-columns:45fr 55fr; gap:clamp(1.5rem,3vw,2.5rem);} }
+@media (max-width:767px){
+  .dl__viewport{margin-right:0; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  .dl__viewport::-webkit-scrollbar{display:none;}
+  .dl__track{gap:1rem; transform:none !important; transition:none;}
+  .dl__slide{flex:0 0 100%; grid-template-columns:1fr; gap:1.25rem; align-items:start; scroll-snap-align:start;}
+  .dl__slide:not(.is-on){opacity:1;}
+  .dl__ctrl{justify-content:flex-start; padding-right:0;}
 }
+@media (prefers-reduced-motion:reduce){ .dl__track, .dl__slide{transition:none;} }
 
 /* CHASSIS PASS · Act 05 handoff boundary */
 /* Act 05 · one relay track (WD-Q67): my four stages in purple, the handoff baton, four stages after it;
@@ -1082,27 +1083,32 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act3_lede">Step through the five deliverables I handed over.</p>
     </div>
 
-    <div class="wbs io">
-      <div class="wbs__root"><span class="wbs__rt" data-i18n="act3_root">TUUA Transfer design package</span></div>
-      <ul class="wbs__branches">
-      <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b1">Technical scopes</span>
-        <ul class="wbs__leaves">
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l1" data-i18n="act3_l1_t">01 · Platform scope</button><p class="wbs__x" id="wbs-l1" data-i18n="act3_l1_x">The structural requirements for the payment platform, handed to engineering.</p></li>
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l2" data-i18n="act3_l2_t">02 · Payment gateway scope</button><p class="wbs__x" id="wbs-l2" data-i18n="act3_l2_x">The structural requirements for the payment gateway.</p></li>
-        </ul>
-      </li>
-      <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b2">Experience</span>
-        <ul class="wbs__leaves">
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l3" data-i18n="act3_l3_t">03 · Screen mockup and web prototype</button><div class="wbs__x" id="wbs-l3"><p data-i18n="act3_l3_x">The proposed payment screens shown in Act 04, and a web prototype of the flow.</p><a class="wbs__go" href="#a4-screens" data-i18n="act3_l3_go">See the screens</a></div></li>
-        </ul>
-      </li>
-      <li class="wbs__b"><span class="wbs__bt" data-i18n="act3_b3">Operations</span>
-        <ul class="wbs__leaves">
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l4" data-i18n="act3_l4_t">04 · Operational casuistry</button><p class="wbs__x" id="wbs-l4" data-i18n="act3_l4_x">An estimate of web-payment usage across the operational cases.</p></li>
-          <li class="wbs__leaf"><button class="wbs__btn" type="button" aria-expanded="false" aria-controls="wbs-l5" data-i18n="act3_l5_t">05 · Process map</button><div class="wbs__x" id="wbs-l5"><p data-i18n="act3_l5_x">A blueprint for the physical payment points and a flowchart for the web one.</p><a class="wbs__go" href="#a4-flow" data-i18n="act3_l5_go">See the flowchart</a></div></li>
-        </ul>
-      </li>
-      </ul>
+    <div class="dl io" data-dl>
+      <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
+        <ol class="dl__track">
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 05">
+            <div class="dl__media"><img class="dl__img" src="img/act3-01-platform.svg" alt="A phone flow linked to back-office reports and sync" data-i18n-alt="act3_img1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="act3_b1">Technical scopes</p><h3 class="dl__title" data-i18n="act3_l1_t">01 · Platform scope</h3><p class="dl__body" data-i18n="act3_l1_x">Passenger side: an automatic check of airline agreements for exemptions, data capture, card payment, and an e-receipt with an eGate QR by email. Back office: sales reports reconciled with the gateway and real-time sync with the airport's fee system, sized for 4 million+ passengers a year.</p></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 05">
+            <div class="dl__media"><img class="dl__img" src="img/act3-02-gateway.svg" alt="A payment card beside a security shield, synced both ways" data-i18n-alt="act3_img2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="act3_b1">Technical scopes</p><h3 class="dl__title" data-i18n="act3_l2_t">02 · Payment gateway scope</h3><p class="dl__body" data-i18n="act3_l2_x">Card and digital payments confirmed in real time, returning the data for the e-receipt and the access QR. PCI DSS certified, 99.9% availability and peaks of 1,500 transactions an hour, with daily reconciliation and chargeback reports for Billing.</p></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 05">
+            <div class="dl__media"><img class="dl__img" src="img/act3-03-mockup.svg" alt="Four phone screens fanned out, the second highlighted" data-i18n-alt="act3_img3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="act3_b2">Experience</p><h3 class="dl__title" data-i18n="act3_l3_t">03 · Screen mockup and web prototype</h3><p class="dl__body" data-i18n="act3_l3_x">Four mobile steps: personal data, email code, card payment and the QR ticket for the eGate. A clickable version of the same flow carried the stakeholder review.</p><a class="dl__cta" href="#a4-screens"><span class="dl__cta-l" data-i18n="act3_l3_go">See the screens</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="04 / 05">
+            <div class="dl__media"><img class="dl__img" src="img/act3-04-casuistry.svg" alt="Three benchmarks feeding one estimate, sized into four channels" data-i18n-alt="act3_img4_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="act3_b3">Operations</p><h3 class="dl__title" data-i18n="act3_l4_t">04 · Operational casuistry</h3><p class="dl__body" data-i18n="act3_l4_x">Three benchmarks of electronic payment in transport put initial web adoption at 5–7% of int-int passengers. At 5%, demand was split across cash desks, eGate POS, web and mobile POS, so Operations Planning could size counters and queues.</p></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="05 / 05">
+            <div class="dl__media"><img class="dl__img" src="img/act3-05-process.svg" alt="A four-lane blueprint crossed by the online payment flow" data-i18n-alt="act3_img5_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="act3_b3">Operations</p><h3 class="dl__title" data-i18n="act3_l5_t">05 · Process map</h3><p class="dl__body" data-i18n="act3_l5_x">A service blueprint of the three staffed channels across passenger, front-office, back-office and automation lanes. A flowchart traces the online payment, from the signage QR to boarding.</p><a class="dl__cta" href="#a4-flow"><span class="dl__cta-l" data-i18n="act3_l5_go">See the flowchart</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+        </ol>
+      </div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="act1_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 05</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="act1_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
     </div>
   </div>
 </section>
@@ -1537,17 +1543,31 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   select(tabs.find(t=>t.getAttribute("aria-selected")==="true") || tabs[0]);
 });
 
-/* ============ Act 03 WBS leaves — disclosure; open without script ============ */
-document.querySelectorAll('.wbs__btn').forEach(btn=>{
-  const x = document.getElementById(btn.getAttribute('aria-controls'));
-  if(x) x.hidden = true;
-  btn.addEventListener('click', ()=>{
-    const open = btn.getAttribute('aria-expanded') !== 'true';
-    if(open) document.querySelectorAll('.wbs__btn[aria-expanded="true"]').forEach(o=>{ if(o === btn) return;   // one deliverable open at a time
-      o.setAttribute('aria-expanded','false'); const ox = document.getElementById(o.getAttribute('aria-controls')); if(ox) ox.hidden = true; });
-    btn.setAttribute('aria-expanded', String(open));
-    if(x) x.hidden = !open;
-  });
+/* ============ Act 03 deliverables carousel — translate on desktop, swipe on phones (Main's capabilities carousel) ============ */
+document.querySelectorAll('[data-dl]').forEach(root=>{
+  const vp = root.querySelector('.dl__viewport'), track = root.querySelector('.dl__track'), slides = [...track.children];
+  const count = root.querySelector('.dl__count'), n = slides.length, phone = window.matchMedia('(max-width:767px)');
+  const pad = v => String(v).padStart(2,'0'); let i = 0;
+  const step = ()=> slides[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+  function paint(){ slides.forEach((s,k)=>{ const on = k === i; s.classList.toggle('is-on', on);
+      if(phone.matches){ s.removeAttribute('aria-hidden'); s.inert = false; } else { s.setAttribute('aria-hidden', String(!on)); s.inert = !on; } });
+    count.textContent = pad(i+1) + ' / ' + pad(n); root.dataset.index = i; }
+  function go(k, smooth){ i = (k + n) % n;
+    if(phone.matches){ track.style.transform = ''; vp.scrollTo({ left: slides[i].offsetLeft, behavior: smooth === false ? 'auto' : 'smooth' }); }
+    else track.style.transform = 'translateX(-' + (i * step()) + 'px)';
+    paint(); }
+  root.querySelectorAll('.dl__nav').forEach(b=> b.addEventListener('click', ()=> go(i + (+b.dataset.step))));
+  vp.addEventListener('keydown', e=>{ if(e.key === 'ArrowLeft'){ e.preventDefault(); go(i-1); } if(e.key === 'ArrowRight'){ e.preventDefault(); go(i+1); } });
+  let x0 = 0, y0 = 0;
+  vp.addEventListener('touchstart', e=>{ x0 = e.changedTouches[0].screenX; y0 = e.changedTouches[0].screenY; }, { passive:true });
+  vp.addEventListener('touchend', e=>{ if(phone.matches) return; const dx = e.changedTouches[0].screenX - x0, dy = e.changedTouches[0].screenY - y0;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? i+1 : i-1); }, { passive:true });
+  let tick = false;
+  vp.addEventListener('scroll', ()=>{ if(!phone.matches || tick) return; tick = true; requestAnimationFrame(()=>{ const k = Math.round(vp.scrollLeft / (slides[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0)));
+    if(k !== i && k >= 0 && k < n){ i = k; paint(); } tick = false; }); }, { passive:true });
+  let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=> go(i, false), 120); });
+  phone.addEventListener('change', ()=> go(i, false));
+  go(0, false);
 });
 
 /* ============ Act 06 comparison — one step pressed, its pair and note shown ============ */
