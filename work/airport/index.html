@@ -1613,6 +1613,7 @@ document.querySelectorAll('.tl').forEach(tl=>{
       }
     }
     const pos = {}; nodes.forEach(n=>pos[n.id]=[Math.round(n.x),Math.round(n.y)]); cv.dataset.pos = JSON.stringify(pos);
+    cv.dataset.geo = JSON.stringify({ cx:Math.round(cx), cy:Math.round(cy), R:Math.round(R) });
     const rr = {}; nodes.forEach(n=>rr[n.id]=rad(n)); cv.dataset.r = JSON.stringify(rr);
   }
   function rad(n){ const base = compact ? {strong:7,medium:6,weak:5,ext:4.5} : (W < 860 ? {strong:26,medium:25,weak:23,ext:21} : {strong:31,medium:29,weak:27,ext:24}); return base[n.ring]; }
@@ -1646,7 +1647,8 @@ document.querySelectorAll('.tl').forEach(tl=>{
       const a=((a0+a1)/2)*Math.PI/180, rr=R*1.0; let x=cx+Math.cos(a)*rr, y=cy-Math.sin(a)*rr*.98;
       ctx.font='700 11px Graphik, Arial, sans-serif'; const lbl = txt('.net__l-off--'+o).toUpperCase(), lw = ctx.measureText(lbl).width;
       let lx = Math.cos(a)>.2 ? x : (Math.cos(a)<-.2 ? x - lw : x - lw/2);
-      if(o==='ds' && byId.inn){ lx = byId.inn.x + rad(byId.inn) + 14; y = byId.inn.y + 4; }   // beside my node, not on the bottom edge
+      if(o==='ds' && byId.inn){ const ai = byId.inn.a, rl = R*.69;   // on my node's ray, inside the medium–weak band
+        const px = cx + Math.cos(ai)*rl, py = cy - Math.sin(ai)*rl; lx = px - lw/2; y = py + 4; cv.dataset.dsLabel = JSON.stringify([Math.round(px), Math.round(py)]); }
       lx = Math.max(8, Math.min(lx, W - 8 - lw));   // keep inside the canvas
       ctx.textAlign='left'; ctx.fillStyle=col('--net-'+o+'-text') || offCol(o); ctx.fillText(lbl, lx, y);
     });
