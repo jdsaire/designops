@@ -1293,6 +1293,11 @@ applyI18n(curLang);
 
 /* Scroll progress bar — moved to shared assets/js/core/progress.js (P-5), loaded via the module bootstrap at the end of the page (P-5). */
 
+/* ============ UI state across reloads (iteration 7): per tab, best effort; the page works the same without it ============ */
+const uiState = (()=>{ const K = 'b03:ui'; let s = {}; try{ s = JSON.parse(sessionStorage.getItem(K)) || {}; }catch(e){ s = {}; }
+  return { get: k => s[k], set: (k, v)=>{ if(v === null || v === undefined || (Array.isArray(v) && !v.length)) delete s[k]; else s[k] = v;
+    try{ sessionStorage.setItem(K, JSON.stringify(s)); }catch(e){} } }; })();
+
 /* ============ Reveal system: accordion ≤1023 / side-panel ≥1024 (approved) ============ */
 const mqDesktop = window.matchMedia("(min-width:1024px)");
 const panel = document.getElementById("panel");
@@ -1359,6 +1364,12 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
 
+/* open panels survive a reload: saved by trigger, reopened through the trigger itself */
+{ const btns = [...document.querySelectorAll(".reveal__btn")];
+  const save = ()=> uiState.set("rv", btns.filter(b=>b.getAttribute("aria-expanded")==="true").map(b=>b.getAttribute("aria-controls")));
+  (uiState.get("rv") || []).forEach(id=>{ const b = btns.find(x=>x.getAttribute("aria-controls")===id); if(b && b.getAttribute("aria-expanded")!=="true") b.click(); });
+  const mo = new MutationObserver(save); btns.forEach(b=> mo.observe(b, { attributes:true, attributeFilter:["aria-expanded"] })); }
+
 /* ============ Count-up (once per element, reduced-motion aware) ============ */
 const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 function runCounts(scope){
@@ -1381,7 +1392,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   const step = ()=> slides[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
   function paint(){ slides.forEach((s,k)=>{ const on = k === i; s.classList.toggle('is-on', on);
       if(phone.matches){ s.removeAttribute('aria-hidden'); s.inert = false; } else { s.setAttribute('aria-hidden', String(!on)); s.inert = !on; } });
-    count.textContent = pad(i+1) + ' / ' + pad(n); root.dataset.index = i; }
+    count.textContent = pad(i+1) + ' / ' + pad(n); root.dataset.index = i; uiState.set('dl', i || null); }
   function go(k, smooth){ i = (k + n) % n;
     if(phone.matches){ track.style.transform = ''; vp.scrollTo({ left: slides[i].offsetLeft, behavior: smooth === false ? 'auto' : 'smooth' }); }
     else track.style.transform = 'translateX(-' + (i * step()) + 'px)';
@@ -1397,7 +1408,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     if(k !== i && k >= 0 && k < n){ i = k; paint(); } tick = false; }); }, { passive:true });
   let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=> go(i, false), 120); });
   phone.addEventListener('change', ()=> go(i, false));
-  go(0, false);
+  go(Math.min(n - 1, Math.max(0, +uiState.get('dl') || 0)), false);   // a reload keeps the slide
 });
 
 /* ============ Act 02 stakeholder network — canvas rings, card, sheet, ring list ============ */
@@ -1523,12 +1534,12 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     if(mobile()){ card.hidden = true; fill(sheet,n); showSheet(true); }
     else { showSheet(false); requestAnimationFrame(()=>{ layout(); fill(card,n); card.hidden = false; placeCard(n); draw(performance.now()); }); } });
   function open(n, from){
-    active = n; root.dataset.active = n.id; chips.forEach(c=>c.setAttribute('aria-pressed', String(c===n.chip)));
+    active = n; root.dataset.active = n.id; uiState.set('net', n.id); chips.forEach(c=>c.setAttribute('aria-pressed', String(c===n.chip)));
     if(mobile()){ fill(sheet,n); showSheet(true); sheet.querySelector('.net__close').focus(); }
     else { fill(card,n); card.hidden=false; placeCard(n); }
     if(reduce.matches) draw(0);
   }
-  function close(){ const n = active; active=null; delete root.dataset.active; chips.forEach(c=>c.setAttribute('aria-pressed','false'));
+  function close(){ const n = active; active=null; delete root.dataset.active; uiState.set('net', null); chips.forEach(c=>c.setAttribute('aria-pressed','false'));
     card.hidden=true; const wasSheet = sheet.classList.contains('is-open'); showSheet(false); if(wasSheet && n) n.chip.focus(); if(reduce.matches) draw(0); }
   function hit(x,y){ return nodes.find(n=>Math.hypot(x-(n.rx??n.x), y-(n.ry??n.y)) < (n.r||30)+6) || null; }
   function xy(e){ const r=cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
@@ -1548,6 +1559,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
   document.body.append(backdrop, sheet);   // at the document root, as in jdigital: no animated ancestor can trap the fixed layers
   layout(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+  { const sv = uiState.get('net'); if(sv && byId[sv]) open(byId[sv]); }   // a reload keeps the open card or sheet
 })();
 
 /* ============ Act 04 screens — phone swipe track with dots (Main Work pattern) ============ */
@@ -1560,9 +1572,10 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   const step = ()=> shots[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 12);
   let ticking = false;
   track.addEventListener('scroll', ()=>{ if(ticking) return; ticking = true; requestAnimationFrame(()=>{ const k = Math.round(track.scrollLeft / step());
-    btns.forEach((b,i)=> b.classList.toggle('is-on', i === k)); ticking = false; }); }, { passive:true });
+    btns.forEach((b,i)=> b.classList.toggle('is-on', i === k)); uiState.set('a4s', k || null); ticking = false; }); }, { passive:true });
   btns.forEach(b=> b.addEventListener('click', ()=> track.scrollTo({ left: +b.dataset.i * step(), behavior:'smooth' })));
   label(); document.addEventListener('i18n:changed', label);
+  { const k0 = +uiState.get('a4s') || 0; if(k0) requestAnimationFrame(()=>{ track.scrollLeft = k0 * step(); }); }   // a reload keeps the screen
 })();
 
 /* ============ Act 04 flowchart — canvas, left to right, passenger token (WD-Q66) ============ */
@@ -1663,13 +1676,14 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   function dotLabels(){ dots.forEach(b=>{ const n = MAIN.find(m=>m[2] === +b.dataset.s); b.setAttribute('aria-label', b.dataset.s + ' · ' + txt(n[0])); }); }
   dots.forEach(b=> b.addEventListener('click', ()=>{ const n = nodes.find(m=>m.scr === +b.dataset.s); if(n) strip.scrollTo({ left: n.x - strip.clientWidth/2, behavior:'smooth' }); }));
   strip.addEventListener('scroll', ()=>{ const c = strip.scrollLeft + strip.clientWidth/2; let best = 1, bd = 1e9;
-    nodes.filter(n=>n.scr).forEach(n=>{ const d = Math.abs(n.x - c); if(d < bd){ bd = d; best = n.scr; } }); dots.forEach(b=> b.classList.toggle('is-on', +b.dataset.s === best)); }, { passive:true });
+    nodes.filter(n=>n.scr).forEach(n=>{ const d = Math.abs(n.x - c); if(d < bd){ bd = d; best = n.scr; } }); dots.forEach(b=> b.classList.toggle('is-on', +b.dataset.s === best)); if(!wide.matches) uiState.set('flow', Math.round(strip.scrollLeft) || null); }, { passive:true });
   document.addEventListener('i18n:changed', ()=>{ dotLabels(); draw(performance.now()); });
   new MutationObserver(()=>draw(performance.now())).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
   new ResizeObserver(()=>{ layout(); draw(performance.now()); }).observe(strip);
   new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(en.intersectionRatio >= .4) seen = true; }), { threshold:[0, .4] }).observe(strip);
   reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
   layout(); dotLabels(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+  { const x0 = +uiState.get('flow') || 0; if(x0 && !wide.matches) requestAnimationFrame(()=>{ strip.scrollLeft = x0; }); }   // a reload keeps the strip's place
 })();
 
 /* ============ Entrance (once) ============ */
