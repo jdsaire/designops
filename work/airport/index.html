@@ -479,22 +479,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__steps{grid-template-columns:repeat(4,1fr); gap:1.6rem; align-items:stretch;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
-.pos__t{width:auto; max-width:100%; border-collapse:collapse; border:1px solid rgba(var(--ink),.5);}
-.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl, .act .cap--lead + .stills, .act .cap--lead + .cmp, .act .cap--lead + .cardgrid{margin-top:0;} .cap, .pos__cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
-.pos__t th, .pos__t td{padding:.8rem 1rem; text-align:left; vertical-align:top; border-top:1px solid var(--color-border-soft); font-size:.9rem; line-height:1.45;}
-.pos__t thead th{border-top:0; font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-muted);}
-.pos__t thead .pos__web{color:var(--color-purple-light);}
-.pos__t tbody th{width:14rem; white-space:nowrap; font-size:.72rem; font-weight:var(--fw-semibold); letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim);}
-.pos__t td{color:var(--color-brand-white); font-weight:var(--fw-light); max-width:24rem; padding-right:2rem;}
-.pos__t td:nth-child(2){background:var(--surface-card); border-left:2px solid var(--color-brand-purple);}
-.pos .reveal{margin-bottom:1rem;}
-@media (max-width:1023px){ .pos__t tbody th{width:auto; white-space:normal;} .pos__t td{padding-right:1rem;} }
-@media (max-width:600px){
-  .pos__t thead tr, .pos__t tbody tr{display:grid; grid-template-columns:1fr 1fr;}
-  .pos__t .pos__corner{display:none;}
-  .pos__t tbody th{grid-column:1 / -1; width:auto; padding-bottom:.2rem; border-top:1px solid var(--color-border-soft);}
-  .pos__t td{border-top:0; font-size:.84rem;}
-}
+.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl, .act .cap--lead + .stills, .act .cap--lead + .cmp, .act .cap--lead + .cardgrid{margin-top:0;} .cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 
 /* CHASSIS PASS · Act 01 why-now timeline + cost of delay (round 1) */
 /* the rail: five moments, circles in the network map's language (glow, pulse); purple fills up to the active one */
@@ -921,18 +906,9 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <div class="reveal" data-act="act0">
         <button class="reveal__btn" id="a0PosBtn" type="button" aria-expanded="false" aria-controls="rv-a0-pos" data-panel-title="One fee, two ways to pay" data-panel-title-key="act0_pos_btn" data-i18n="act0_pos_btn">One fee, two ways to pay</button>
         <div class="reveal__body reveal__body--poster" id="rv-a0-pos">
-          <p data-i18n-html="act0_pos_txt"><strong>A physical-digital model.</strong> The fee is collected inside the airport, during the international connection. Three staffed points carry most payments; a web channel, built only for this fee, lets passengers skip the queues at peak hours. Both end at the same eGate.</p>
+          <p data-i18n-html="act0_pos_txt"><strong>A physical-digital model.</strong> The fee is paid inside the airport, mid-connection. Three staffed points carry most payments, issuing a bar-code sticker for the boarding pass. A web channel, exclusive to this fee, lets passengers skip peak-hour queues with a QR. Both end at the eGate.</p>
         </div>
       </div>
-      <table class="pos__t" aria-labelledby="a0PosBtn">
-        <thead><tr><th scope="col" class="pos__corner"><span class="visually-hidden" data-i18n="act0_pos_h0">Channel</span></th><th scope="col" class="pos__web" data-i18n="act0_pos_web">Web</th><th scope="col" data-i18n="act0_pos_staff">Physical sales</th></tr></thead>
-        <tbody>
-          <tr><th scope="row" data-i18n="act0_pos_r1">Where</th><td data-i18n="act0_pos_r1_web">A site exclusive to collect this fee</td><td data-i18n="act0_pos_r1_staff">Three staffed points of sale in the terminal</td></tr>
-          <tr><th scope="row" data-i18n="act0_pos_r2">What the passenger gets</th><td data-i18n="act0_pos_r2_web">A QR code, scanned at the eGate</td><td data-i18n="act0_pos_r2_staff">A bar-code sticker on the boarding pass</td></tr>
-          <tr><th scope="row" data-i18n="act0_pos_r3">Best for</th><td data-i18n="act0_pos_r3_web">Skipping the queues at rush hours</td><td data-i18n="act0_pos_r3_staff">Paying in person, with staff on hand</td></tr>
-          <tr><th scope="row" data-i18n="act0_pos_r4">Expected capacity</th><td data-i18n="act0_pos_r4_web">Planned as the less-used channel</td><td data-i18n="act0_pos_r4_staff">Expected to carry most payments</td></tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </section>
