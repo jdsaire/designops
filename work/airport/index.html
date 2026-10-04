@@ -417,6 +417,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .mock__fine{font-size:.62rem; line-height:1.4; color:var(--color-text-dim); text-align:center;}
 /* Act 04 · flowchart on canvas (WD-Q66): left to right; two reading rows from 1024, one pannable row below */
 .flow{margin-top:clamp(1.6rem,3vw,2.4rem); --fl-scr:#A100FF;}
+@media (max-width:767px){ .flow{display:none;} }   /* phones: the desktop note stands in (iteration 5), like Act 02's map */
 .fcl{list-style:none; display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-bottom:.9rem; font-size:.74rem; color:var(--color-text-muted);}
 .fcl li{display:flex; align-items:center; gap:.5rem;}
 .fcl__i{display:inline-block; width:16px; height:16px; border:1.5px solid rgba(var(--ink),.7);}
@@ -1109,12 +1110,19 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="a4-dots" aria-hidden="false"></div>
     <p class="still__cap act4__note io" data-i18n="act4_redraw">Both figures are redrawn from my 2025 proposal, delivered in Spanish, in this site's style.</p>
 
-    <div class="flow io" id="a4-flow" data-flow>
+    <div class="a4-flowwrap" id="a4-flow">
+    <aside class="desk-how" aria-labelledby="flowHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="flowHowT" data-i18n="act4_mob_t">See flowchart</p>
+      <p class="desk-how__x" data-i18n="act4_mob_x">Full visual available on desktop.</p>
+    </aside>
+    <div class="flow io" data-flow>
       <p class="cap" data-i18n="act4_flow_cap">From the platform QR to boarding</p>
       <ul class="fcl" aria-hidden="true"><li><i class="fcl__i fcl__i--act"></i><span data-i18n="act4_fc_lg_action">Action</span></li><li><i class="fcl__i fcl__i--dec"></i><span data-i18n="act4_fc_lg_decision">Decision</span></li><li><i class="fcl__i fcl__i--scr"></i><span data-i18n="act4_fc_lg_screen">Platform screen I designed</span></li><li><i class="fcl__i fcl__i--phy"></i><span data-i18n="act4_fc_lg_physical">Physical interaction</span></li></ul>
       <div class="flow__strip"><canvas class="flow__canvas" role="img" aria-label="Redrawn flowchart of the passenger&#x27;s interactions with the TUUA Transfer payment platform: from scanning the platform QR code, through the four screens, to the TUUA turnstile and boarding, with an error or assistance branch at each check." data-i18n-aria="act4_flow_alt"></canvas><span class="flow__snaps" aria-hidden="true"></span></div>
       <div class="flow__labels" hidden><span data-k="start" data-i18n="act4_fc_start">Start</span><span data-k="panel" data-i18n="act4_fc_panel">Access panel</span><span data-k="scanp" data-i18n="act4_fc_scanp">Scan platform QR</span><span data-k="conn" data-i18n="act4_fc_conn">Connection OK?</span><span data-k="home" data-i18n="act4_fc_home">Home</span><span data-k="data" data-i18n="act4_fc_data">Enter personal data</span><span data-k="val" data-i18n="act4_fc_val">Validation</span><span data-k="code" data-i18n="act4_fc_code">Enter validation code</span><span data-k="valok" data-i18n="act4_fc_valok">Validation OK?</span><span data-k="gate" data-i18n="act4_fc_gate">Payment gateway</span><span data-k="pay" data-i18n="act4_fc_pay">Enter payment details</span><span data-k="payok" data-i18n="act4_fc_payok">Payment OK?</span><span data-k="conf" data-i18n="act4_fc_conf">Payment confirmation</span><span data-k="turn" data-i18n="act4_fc_turn">TUUA turnstile</span><span data-k="scan" data-i18n="act4_fc_scan">Scan QR</span><span data-k="codeok" data-i18n="act4_fc_codeok">Code recognised?</span><span data-k="board" data-i18n="act4_fc_board">Access boarding</span><span data-k="end" data-i18n="act4_fc_end">End</span><span data-k="error" data-i18n="act4_fc_error">Error</span><span data-k="assist" data-i18n="act4_fc_assist">Assistance</span><span data-k="yes" data-i18n="act4_fc_yes">Yes</span><span data-k="no" data-i18n="act4_fc_no">No</span></div>
       <div class="flow__dots"></div>
+    </div>
     </div>
   </div>
 </section>
