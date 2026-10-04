@@ -438,23 +438,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 
 
-/* CHASSIS PASS · tabs + stat cells (WD-Q27) */
-/* ---- Tabs — carried forward from Brief 01's Act 05 tablist (itself Brief 04's). Without
-        script every panel shows, stacked; the tablist appears only when script drives it. ---- */
-.tabs{border:1px solid var(--color-border-soft);}
-.tabs__list{display:none; border-bottom:1px solid var(--color-border-soft);}
-.js .tabs__list{display:flex;}
-.tabs__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.6rem; font-weight:var(--fw-semibold);
-  letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim);
-  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-@media (min-width:768px){ .tabs__tab{font-size:.7rem; letter-spacing:.16em;} }
-.tabs__tab:hover{color:var(--color-brand-white);}
-.tabs__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
-.tabs__tab:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-2px;}
-.tabs__panel{padding:clamp(1.1rem,2vw,1.6rem); font-size:clamp(.95rem,1.1vw,1.05rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.tabs__panel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.tabs__panel[hidden]{display:none;}
-.tabs__panel + .tabs__panel{border-top:1px solid var(--color-border-faint);}
+/* CHASSIS PASS · stat cells (WD-Q27) */
 /* ---- Stat cells — Brief 04's .dcell ---- */
 .dcells{display:grid; grid-template-columns:repeat(2,1fr); gap:1rem;}
 @media (max-width:600px){ .dcells{grid-template-columns:1fr;} }
@@ -464,7 +448,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dcell__p{font-size:.78rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.45;}
 
 /* CHASSIS PASS · Act 00 journey + points of sale (round 1) */
-.act .journey, .act .pos, .act .tabs{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.act .journey, .act .pos{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .journey__steps{list-style:none; display:grid; grid-template-columns:1fr; gap:1.4rem; position:relative;}
 .journey__step{position:relative; display:flex; flex-direction:column; gap:.6rem; padding:1rem 1.1rem;
   border:1px solid rgba(var(--ink),.5); background:var(--surface-card);
@@ -479,48 +463,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__steps{grid-template-columns:repeat(4,1fr); gap:1.6rem; align-items:stretch;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
-.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .tl, .act .cap--lead + .stills, .act .cap--lead + .cmp, .act .cap--lead + .cardgrid{margin-top:0;} .cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .relay, .act .cap--lead + .stills, .act .cap--lead + .cmp, .act .cap--lead + .cardgrid{margin-top:0;} .cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 
-/* CHASSIS PASS · Act 01 why-now timeline + cost of delay (round 1) */
-/* the rail: five moments, circles in the network map's language (glow, pulse); purple fills up to the active one */
-.tl{--tl-n:48px; --tl-p:0;}
-.tl__rail{position:relative; display:none; border-bottom:0;}
-.js .tl__rail{display:grid; grid-template-columns:repeat(5,1fr);}
-.tl__rail::before, .tl__rail::after{content:""; position:absolute; left:10%; top:calc(1.1rem + var(--tl-n) / 2); border-top:2px solid rgba(var(--ink),.3);}
-.tl__rail::before{right:10%;}
-.tl__rail::after{width:calc(80% * var(--tl-p)); border-top-color:var(--color-brand-purple); transition:width 420ms var(--ease-standard);}
-.tl__tab{position:relative; display:flex; flex-direction:column; align-items:center; gap:.5rem; min-height:44px; padding:1.1rem .2rem .9rem; cursor:pointer;
-  color:var(--color-text-muted); text-align:center;}
-.tl__n{position:relative; z-index:1; width:var(--tl-n); height:var(--tl-n); border-radius:50%; display:grid; place-items:center;
-  font-size:.82rem; font-weight:var(--fw-bold); font-variant-numeric:tabular-nums; color:var(--color-text-muted);
-  background:var(--color-brand-black); border:1.5px solid rgba(var(--ink),.55);
-  transition:background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard),
-    box-shadow var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);}
-.tl__n::after{content:""; position:absolute; inset:-2px; border-radius:50%; border:2px solid var(--color-brand-purple); opacity:0; pointer-events:none;}
-.tl__d{font-size:.68rem; font-weight:var(--fw-semibold); letter-spacing:.06em; line-height:1.25;}
-.tl__tab:hover .tl__n, .tl__tab:focus-visible .tl__n{border-color:var(--color-brand-purple); transform:scale(1.06);
-  box-shadow:0 0 0 6px rgba(161,0,255,.12), 0 0 22px rgba(161,0,255,.4);}
-.tl__tab.is-done .tl__n{border-color:var(--color-brand-purple); color:var(--color-purple-light);}
-.tl__tab[aria-selected="true"]{color:var(--color-brand-white);}
-.tl__tab[aria-selected="true"] .tl__n{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);
-  box-shadow:0 0 26px rgba(161,0,255,.55);}
-.tl__tab[aria-selected="true"] .tl__n::after{animation:tl-pulse 2.4s var(--ease-standard) infinite;}
-@keyframes tl-pulse{ from{transform:scale(1); opacity:.7;} to{transform:scale(1.55); opacity:0;} }
-@media (prefers-reduced-motion:reduce){ .tl__tab[aria-selected="true"] .tl__n::after{animation:none;} .tl__rail::after{transition:none;} }
-.tl__tab:focus-visible{outline:none;}
-.tl__panel{border-top:1px solid var(--color-border-soft);}
-.tl__h{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); color:var(--color-brand-white); margin-bottom:.4rem;}
-/* controls: the Services carousel's chevrons and counter, kept on the left with the text */
-.tl__ctrl{display:none; align-items:center; gap:.75rem; padding:0 clamp(1.1rem,2vw,1.6rem) clamp(1rem,1.8vw,1.4rem);}
-.js .tl__ctrl{display:flex;}
-.tl__btn{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white);
-  border:1px solid rgba(var(--ink),.5); cursor:pointer; transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
-.tl__btn svg{width:1rem; height:1rem; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
-.tl__btn:hover:not(:disabled){border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
-.tl__btn:disabled{opacity:.35; cursor:default;}
-.tl__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
-.tl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
-@media (max-width:767px){ .tl{--tl-n:40px;} .tl__n{font-size:.74rem;} .tl__d{font-size:.6rem;} }
+/* CHASSIS PASS · Act 01 cost of delay (round 1); the timeline runs on the Act 05 relay (iteration 5) */
 .dcells--3{grid-template-columns:1fr;}
 @media (min-width:900px){ .dcells--3{grid-template-columns:repeat(3,1fr);} }
 #act1 .reveal{margin-top:1rem;}
@@ -599,17 +544,32 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   letter-spacing:.16em; text-transform:uppercase; background:var(--color-brand-purple); color:var(--color-on-brand);}
 /* below desktop the tracks run top to bottom */
 @media (max-width:1023px){
-  .relay__track{grid-template-columns:1fr; gap:.9rem;}
-  .relay__track::before{left:17px; right:auto; top:17px; bottom:17px; border-top:0; border-left:2px solid var(--color-brand-purple);}
-  .relay__seg--after .relay__track::before{border-top:0; border-left:2px dashed rgba(var(--ink),.4);}
-  .relay__st{flex-direction:row; align-items:flex-start; text-align:left; gap:.8rem; padding:0;}
-  .relay__tx{padding-top:.4rem;}
-    }
+  .relay:not(.relay--solo) .relay__track{grid-template-columns:1fr; gap:.9rem;}
+  .relay:not(.relay--solo) .relay__track::before{left:17px; right:auto; top:17px; bottom:17px; border-top:0; border-left:2px solid var(--color-brand-purple);}
+  .relay:not(.relay--solo) .relay__seg--after .relay__track::before{border-top:0; border-left:2px dashed rgba(var(--ink),.4);}
+  .relay:not(.relay--solo) .relay__st{flex-direction:row; align-items:flex-start; text-align:left; gap:.8rem; padding:0;}
+  .relay:not(.relay--solo) .relay__tx{padding-top:.4rem;}
+}
 @media (max-width:767px){
-  .relay{grid-template-columns:1fr; grid-template-areas:"mine" "baton" "after";}
+  .relay:not(.relay--solo){grid-template-columns:1fr; grid-template-areas:"mine" "baton" "after";}
   .relay__baton{width:auto; height:2.6rem; place-items:center start; padding-left:1.2rem;}   /* left, in line with the stage column above and below */
   .relay__baton::before{top:50%; bottom:auto; left:0; right:0; border-left:0; border-top:2px solid var(--color-brand-purple);}
   .relay__baton span{writing-mode:horizontal-tb; transform:none; padding:.25rem .6rem;}
+}
+
+/* one-segment relays (Acts 01 and 06, iteration 5): Act 05's track and border, n stages in a row from 768, a column below */
+.relay--solo{grid-template-columns:1fr; grid-template-areas:none; --relay-n:4;}
+.relay--5{--relay-n:5;}
+.relay--solo .relay__seg{grid-area:auto;}
+.relay--solo .relay__track{grid-template-columns:repeat(var(--relay-n),1fr); margin-top:0;}
+.relay--solo .relay__track::before{left:calc(50% / var(--relay-n)); right:calc(50% / var(--relay-n));}
+.relay__d{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.12em; text-transform:uppercase; color:var(--color-purple-light); line-height:1.3;}
+@media (max-width:767px){
+  .relay--solo .relay__track{grid-template-columns:1fr; gap:.9rem;}
+  .relay--solo .relay__track::before{left:17px; right:auto; top:17px; bottom:17px; border-top:0; border-left:2px solid var(--color-brand-purple);}
+  .relay--solo .relay__seg--after .relay__track::before{border-top:0; border-left:2px dashed rgba(var(--ink),.4);}
+  .relay--solo .relay__st{flex-direction:row; align-items:flex-start; text-align:left; gap:.8rem; padding:0;}
+  .relay--solo .relay__tx{padding-top:.4rem;}
 }
 
 /* CHASSIS PASS · Act 06 comparison */
@@ -926,20 +886,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <p class="cap cap--lead io" data-i18n="act1_tl_cap">From concession to collection, 2001–2025</p>
-    <div class="tl tabs io">
-      <div class="tabs__list tl__rail" role="tablist" aria-label="Why the fee became urgent" data-i18n-aria="act1_tl_aria">
-        <button class="tl__tab" role="tab" id="a1-tl-1" aria-selected="true" aria-controls="a1-tp-1"><span class="tl__n">01</span><span class="tl__d" data-i18n="act1_t1_d">Feb 2001</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-2" aria-selected="false" aria-controls="a1-tp-2"><span class="tl__n">02</span><span class="tl__d" data-i18n="act1_t2_d">Mar 2013</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-3" aria-selected="false" aria-controls="a1-tp-3"><span class="tl__n">03</span><span class="tl__d" data-i18n="act1_t3_d">Jun 2025</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-4" aria-selected="false" aria-controls="a1-tp-4"><span class="tl__n">04</span><span class="tl__d" data-i18n="act1_t4_d">Aug 2025</span></button>
-        <button class="tl__tab" role="tab" id="a1-tl-5" aria-selected="false" aria-controls="a1-tp-5"><span class="tl__n">05</span><span class="tl__d" data-i18n="act1_t5_d">Oct 2025</span></button>
-      </div>
-      <div class="tabs__panel tl__panel" id="a1-tp-1" role="tabpanel" aria-labelledby="a1-tl-1"><p class="tl__h" data-i18n="act1_t1_h">The concession</p><p data-i18n="act1_t1_x">LAP begins operating Jorge Chávez under concession with Peruvian State.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-2" role="tabpanel" aria-labelledby="a1-tl-2"><p class="tl__h" data-i18n="act1_t2_h">An income promise</p><p data-i18n="act1_t2_x">Contract Amendment N°6 allows transfer fees upon delivery of new terminal.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-3" role="tabpanel" aria-labelledby="a1-tl-3"><p class="tl__h" data-i18n="act1_t3_h">The terminal opens</p><p data-i18n="act1_t3_x">The fee becomes chargeable, but no mechanism exists to collect it.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-4" role="tabpanel" aria-labelledby="a1-tl-4"><p class="tl__h" data-i18n="act1_t4_h">Commercial terms</p><p data-i18n="act1_t4_x">LAP and Airlines negotiated fee collection inside the ticket.</p></div>
-      <div class="tabs__panel tl__panel" id="a1-tp-5" role="tabpanel" aria-labelledby="a1-tl-5"><p class="tl__h" data-i18n="act1_t5_h">Mechanism ready</p><p data-i18n="act1_t5_x">Implementation of fee mechanism at the airport.</p></div>
-      <div class="tl__ctrl"><button class="tl__btn" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="act1_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tl__count" aria-live="polite" aria-atomic="true">01 / 05</span><button class="tl__btn" type="button" data-step="1" aria-label="Next" data-i18n-aria="act1_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+    <div class="relay relay--solo relay--5 io">
+      <div class="relay__seg"><ol class="relay__track"><li class="relay__st"><span class="relay__node">1</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t1_d">Feb 2001</span><span class="relay__t" data-i18n="act1_t1_h">The concession</span><span class="relay__x" data-i18n="act1_t1_x">LAP begins operating Jorge Chávez under concession with Peruvian State.</span></span></li><li class="relay__st"><span class="relay__node">2</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t2_d">Mar 2013</span><span class="relay__t" data-i18n="act1_t2_h">An income promise</span><span class="relay__x" data-i18n="act1_t2_x">Contract Amendment N°6 allows transfer fees upon delivery of new terminal.</span></span></li><li class="relay__st"><span class="relay__node">3</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t3_d">Jun 2025</span><span class="relay__t" data-i18n="act1_t3_h">The terminal opens</span><span class="relay__x" data-i18n="act1_t3_x">The fee becomes chargeable, but no mechanism exists to collect it.</span></span></li><li class="relay__st"><span class="relay__node">4</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t4_d">Aug 2025</span><span class="relay__t" data-i18n="act1_t4_h">Commercial terms</span><span class="relay__x" data-i18n="act1_t4_x">LAP and Airlines negotiated fee collection inside the ticket.</span></span></li><li class="relay__st"><span class="relay__node">5</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t5_d">Oct 2025</span><span class="relay__t" data-i18n="act1_t5_h">Mechanism ready</span><span class="relay__x" data-i18n="act1_t5_x">Implementation of fee mechanism at the airport.</span></span></li></ol></div>
     </div>
 
     <div class="dcells dcells--3 io">
@@ -1075,7 +1023,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
           </li>
         </ol>
       </div>
-      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="act1_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 05</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="act1_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="act3_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 05</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="act3_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
     </div>
   </div>
 </section>
@@ -1485,29 +1433,6 @@ function runCounts(scope){
   });
 }
 
-/* ============ Tabs — carried forward from Brief 01; announces tabs:select ============ */
-document.querySelectorAll('[role="tablist"]').forEach(list=>{
-  const tabs = [...list.querySelectorAll('[role="tab"]')];
-  function select(tab){
-    tabs.forEach(t=>{
-      const sel = t === tab;
-      t.setAttribute("aria-selected", String(sel));
-      t.tabIndex = sel ? 0 : -1;
-      const panel = document.getElementById(t.getAttribute("aria-controls"));
-      if(panel) panel.hidden = !sel;
-    });
-    list.dispatchEvent(new CustomEvent("tabs:select", { bubbles:true, detail:{ tab } }));
-  }
-  tabs.forEach((tab,i)=>{
-    tab.addEventListener("click", ()=> select(tab));
-    tab.addEventListener("keydown", e=>{
-      const nx = e.key === "ArrowRight" ? tabs[(i+1) % tabs.length] : e.key === "ArrowLeft" ? tabs[(i-1+tabs.length) % tabs.length] : null;
-      if(nx){ e.preventDefault(); select(nx); nx.focus(); }
-    });
-  });
-  select(tabs.find(t=>t.getAttribute("aria-selected")==="true") || tabs[0]);
-});
-
 /* ============ Act 03 deliverables carousel — translate on desktop, swipe on phones (Main's capabilities carousel) ============ */
 document.querySelectorAll('[data-dl]').forEach(root=>{
   const vp = root.querySelector('.dl__viewport'), track = root.querySelector('.dl__track'), slides = [...track.children];
@@ -1544,25 +1469,6 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   }
   steps.forEach(s=> s.addEventListener('click', ()=> pick(s)));
   pick(steps[0]);
-});
-
-/* ============ Act 01 timeline — chevrons, counter, rail fill and swipe drive the tablist ============ */
-document.querySelectorAll('.tl').forEach(tl=>{
-  const tabs = [...tl.querySelectorAll('[role="tab"]')], btns = [...tl.querySelectorAll('.tl__btn')], count = tl.querySelector('.tl__count');
-  const at = ()=> tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');
-  const pad = n => String(n).padStart(2,'0');
-  function sync(){ const i = at(), n = tabs.length;
-    btns.forEach(b=>{ b.disabled = (+b.dataset.step < 0 && i === 0) || (+b.dataset.step > 0 && i === n - 1); });
-    if(count) count.textContent = pad(i+1) + ' / ' + pad(n);
-    tabs.forEach((t,k)=> t.classList.toggle('is-done', k < i));
-    tl.style.setProperty('--tl-p', n > 1 ? i/(n-1) : 0); }
-  const go = d => { const t = tabs[at() + d]; if(t) t.click(); };
-  btns.forEach(b=> b.addEventListener('click', ()=> go(+b.dataset.step)));
-  let x0 = 0, y0 = 0;
-  tl.addEventListener('touchstart', e=>{ x0 = e.changedTouches[0].screenX; y0 = e.changedTouches[0].screenY; }, { passive:true });
-  tl.addEventListener('touchend', e=>{ const dx = e.changedTouches[0].screenX - x0, dy = e.changedTouches[0].screenY - y0;
-    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && !e.target.closest('.tl__ctrl')) go(dx < 0 ? 1 : -1); }, { passive:true });
-  tl.addEventListener('tabs:select', sync); sync();
 });
 
 /* ============ Act 02 stakeholder network — canvas rings, card, sheet, ring list ============ */
