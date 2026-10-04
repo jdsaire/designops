@@ -464,7 +464,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .journey__steps{grid-template-columns:repeat(4,1fr); gap:1.6rem; align-items:stretch;}
   .journey__step:not(:last-child)::after{left:auto; right:-1.6rem; top:1.8rem; bottom:auto; width:1.6rem; height:1px;}
 }
-.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .relay, .act .cap--lead + .stills, .act .cap--lead + .cmp, .act .cap--lead + .cardgrid{margin-top:0;} .cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
+.cap{margin:0 0 .8rem;} .act .cap--lead{margin-top:clamp(1.6rem,3vw,2.4rem);} .act .cap--lead + .relay, .act .cap--lead + .stills, .act .cap--lead + .cardgrid{margin-top:0;} .cap{caption-side:top; text-align:left; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); padding-bottom:.8rem;}
 
 /* CHASSIS PASS · Act 01 cost of delay (round 1); the timeline runs on the Act 05 relay (iteration 5) */
 .dcells--3{grid-template-columns:1fr;}
@@ -575,41 +575,28 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* CHASSIS PASS · Act 06 comparison */
 .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
-.cmp{margin-top:clamp(1.6rem,3vw,2.4rem); border:1px solid rgba(var(--ink),.5);}
-.cmp__hint{display:none; padding:.8rem 1.2rem; font-size:.78rem; color:var(--color-text-dim); border-bottom:1px solid var(--color-border-faint);}
-.js .cmp__hint{display:block;}
-/* the comparator as two horizontal flows (WD-Q72), in the flowchart's language: proposal row above the live row */
-.cmp__scroll{overflow-x:auto; scrollbar-width:thin;}
-.cmp__lanes{display:flex; flex-direction:column; min-width:880px;}
-.cmp__lane{padding:1rem 1.2rem 1.3rem; display:flex; flex-direction:column; gap:.8rem;}
-.cmp__lane--live{background:var(--surface-card); border-top:1px solid rgba(var(--ink),.4);}
-.cmp__h{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);}
-.cmp__lane:first-child .cmp__h{color:var(--color-purple-light);}
-.cmp__steps{list-style:none; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); column-gap:30px; counter-reset:c;}
-.cmp__steps li{counter-increment:c; position:relative; display:flex;}
-.cmp__steps li:not(:last-child)::after{content:""; position:absolute; top:50%; right:-27px; width:22px; border-top:1.5px solid rgba(var(--ink),.5);}
-.cmp__steps li:not(:last-child)::before{content:""; position:absolute; top:50%; right:-28px; margin-top:-4px; border:4px solid transparent; border-left:6px solid rgba(var(--ink),.6); border-right:0;}
-.cmp__step{position:relative; width:100%; min-height:62px; display:grid; place-items:center; text-align:center; padding:.6rem .7rem; font-size:.84rem; font-weight:var(--fw-semibold); line-height:1.3;
-  color:var(--color-brand-white); background:var(--color-brand-black); border:1.5px solid rgba(var(--ink),.55); cursor:pointer;
-  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard), box-shadow var(--duration-ui) var(--ease-standard);}
-.cmp__lane:first-child .cmp__step{border:2px solid var(--color-brand-purple); background:rgba(161,0,255,.12);}
-.cmp__step::before{content:counter(c); position:absolute; left:-9px; bottom:-9px; width:18px; height:18px; display:grid; place-items:center;
-  font-size:.62rem; font-weight:var(--fw-bold); background:var(--color-brand-black); border:1px solid rgba(var(--ink),.55); color:var(--color-text-muted);}
-.cmp__lane:first-child .cmp__step::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
-.cmp__step--out{border-style:dashed !important; color:var(--color-text-muted);}
-.cmp__step:hover{border-color:var(--color-purple-light);}
-.cmp__step.is-pair, .cmp__step[aria-pressed="true"]{border-color:var(--color-purple-light); box-shadow:0 0 0 3px rgba(161,0,255,.22), 0 0 22px rgba(161,0,255,.35);}
-.cmp__step[aria-pressed="true"]::before, .cmp__step.is-pair::before{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand);}
-.cmp__step:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:3px;}
-.cmp__notes{border-top:1px solid rgba(var(--ink),.4); padding:1rem 1.2rem; min-height:4.5rem;}
-.cmp__note{font-size:clamp(.9rem,1.05vw,1rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.cmp__note + .cmp__note{margin-top:.6rem;}
-.js .cmp__note{display:none;}
-.js .cmp__note.is-on{display:block; margin-top:0;}
-.cmp__note strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+/* the live flow on the one-segment relay (WD-Q82): press a node, its note shows below */
+.relay__btn{all:unset; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; gap:.55rem; width:100%; cursor:pointer; text-align:center; -webkit-tap-highlight-color:transparent;}
+.relay__btn .relay__t{color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
+.relay__btn .relay__node{transition:background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard), box-shadow var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);}
+.relay__btn .relay__node::after{content:""; position:absolute; inset:-2px; border-radius:50%; border:2px solid var(--color-brand-purple); opacity:0; pointer-events:none;}
+.relay__btn--out .relay__node{border-style:dashed;}
+.relay__btn:hover .relay__node, .relay__btn:focus-visible .relay__node{border-color:var(--color-brand-purple); transform:scale(1.06); box-shadow:0 0 0 6px rgba(161,0,255,.12), 0 0 22px rgba(161,0,255,.4);}
+.relay__btn:hover .relay__t, .relay__btn[aria-pressed="true"] .relay__t{color:var(--color-brand-white);}
+.relay__btn[aria-pressed="true"] .relay__node{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand); box-shadow:0 0 26px rgba(161,0,255,.55);}
+.relay__btn[aria-pressed="true"] .relay__node::after{animation:relay-pulse 2.4s var(--ease-standard) infinite;}
+@keyframes relay-pulse{ from{transform:scale(1); opacity:.7;} to{transform:scale(1.55); opacity:0;} }
+@media (prefers-reduced-motion:reduce){ .relay__btn[aria-pressed="true"] .relay__node::after{animation:none;} }
+.relay__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
+.relay__notes{border-top:1px solid rgba(var(--ink),.4); padding:1rem 1.2rem; min-height:4.5rem;}
+.relay__note{font-size:clamp(.9rem,1.05vw,1rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
+.relay__note + .relay__note{margin-top:.6rem;}
+.js .relay__note{display:none;}
+.js .relay__note.is-on{display:block; margin-top:0;}
+.relay__note strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+@media (max-width:767px){ .relay--solo .relay__btn{flex-direction:row; align-items:center; text-align:left; gap:.8rem;} }
 .act .dcells{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .method-line{margin-top:.8rem; max-width:46rem; font-size:.82rem; line-height:1.5; color:var(--color-text-dim); font-weight:var(--fw-light);}
-@media (max-width:600px){ .cmp__lane{padding:.8rem .6rem;} .cmp__step{font-size:.76rem; padding-left:1.9rem;} .cmp__step::before{left:.45rem;} }
 .close-cells{margin-top:clamp(1.6rem,3vw,2.4rem);}
 
 /* CHASSIS PASS · Act 02 stakeholder network */
@@ -1161,42 +1148,19 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">A year later, the live flow took a different path.</h2>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">A year on, the flow changed.</h2>
       <p class="scan" data-i18n="act6_lede">Select a step to see what moved, what went and what stayed.</p>
     </div>
 
-    <p class="cap cap--lead io" data-i18n="act6_cmp_cap">My proposal above, the live flow below</p>
-    <div class="cmp io">
-      <div class="cmp__scroll"><div class="cmp__lanes">
-        <div class="cmp__lane">
-          <span class="cmp__h" data-i18n="act6_lane1">My proposal</span>
-          <ol class="cmp__steps">
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="data" data-pair="data" data-i18n="act6_p1">Personal data</button></li>
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="val" data-i18n="act6_p2">Validation code</button></li>
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="fee" data-pair="fee" data-i18n="act6_p3">Payment</button></li>
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="ticket" data-i18n="act6_p4">Ticket</button></li>
-          </ol>
-        </div>
-        <div class="cmp__lane cmp__lane--live">
-          <span class="cmp__h" data-i18n="act6_lane2">Live today</span>
-          <ol class="cmp__steps">
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="home" data-i18n="act6_v1">Homepage</button></li>
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="elig" data-i18n="act6_v2">Eligibility self-declaration</button></li>
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="fee" data-pair="fee" data-i18n="act6_v3">Flight details and fee</button></li>
-          <li><button class="cmp__step" type="button" aria-pressed="false" data-note="data" data-pair="data" data-i18n="act6_v4">Customer details</button></li>
-          <li><button class="cmp__step cmp__step--out" type="button" aria-pressed="false" data-note="ctrl" data-i18n="act6_v5">Payment control, not reached</button></li>
-          </ol>
-        </div>
-      </div>
-      </div>
-      <div class="cmp__notes" role="status" aria-live="polite">
-        <p class="cmp__note" data-note="data" data-i18n-html="act6_n_data"><strong>Reordered, not removed.</strong> Personal-data capture moved from my first screen to the live flow's fourth, after the flight lookup. I read the reordering as intuitive and do not contest it.</p>
-        <p class="cmp__note" data-note="val" data-i18n-html="act6_n_val"><strong>No counterpart before payment.</strong> None of the four public screens asks for an email code.</p>
-        <p class="cmp__note" data-note="fee" data-i18n-html="act6_n_fee"><strong>$11.86, a screen earlier.</strong> The live fee appears on the flight-details screen, a full screen earlier than I proposed, and matches in both places it appears. Fee-setting was never my decision.</p>
-        <p class="cmp__note" data-note="ticket" data-i18n-html="act6_n_ticket"><strong>Beyond the boundary.</strong> The review stopped before payment, so the live ticket was not observed.</p>
-        <p class="cmp__note" data-note="home" data-i18n-html="act6_n_home"><strong>An entry page first.</strong> The live flow opens on a homepage that explains the fee before the first step.</p>
-        <p class="cmp__note" data-note="elig" data-i18n-html="act6_n_elig"><strong>A click instead of a check.</strong> Eligibility is a self-declaration, <em>"Soy ese tipo de pasajero"</em>, where the technical scope specified an automatic agreement check. To my own knowledge of the build, that check was never implemented as written; the review could not see past its boundary to confirm it.</p>
-        <p class="cmp__note" data-note="ctrl" data-i18n-html="act6_n_ctrl"><strong>Where the review stops.</strong> Public, unauthenticated pages only: one control short of paying, with no transaction submitted.</p>
+    <p class="cap cap--lead io" data-i18n="act6_cmp_cap">Live today, step by step</p>
+    <div class="relay relay--solo relay--5 relay--live io">
+      <div class="relay__seg relay__seg--after"><ol class="relay__track"><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="home"><span class="relay__node">1</span><span class="relay__t" data-i18n="act6_v1">Homepage</span></button></li><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="elig"><span class="relay__node">2</span><span class="relay__t" data-i18n="act6_v2">Eligibility self-declaration</span></button></li><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="fee"><span class="relay__node">3</span><span class="relay__t" data-i18n="act6_v3">Flight details and fee</span></button></li><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="data"><span class="relay__node">4</span><span class="relay__t" data-i18n="act6_v4">Customer details</span></button></li><li class="relay__st"><button class="relay__btn relay__btn--out" type="button" aria-pressed="false" data-note="ctrl"><span class="relay__node">5</span><span class="relay__t" data-i18n="act6_v5">Payment control, not reached</span></button></li></ol></div>
+      <div class="relay__notes" role="status" aria-live="polite">
+        <p class="relay__note" data-note="home" data-i18n-html="act6_n_home"><strong>An entry page first.</strong> The live flow opens on a homepage that explains the fee before the first step.</p>
+        <p class="relay__note" data-note="elig" data-i18n-html="act6_n_elig"><strong>A click instead of a check.</strong> Eligibility is a self-declaration, <em>"Soy ese tipo de pasajero"</em>, where the technical scope specified an automatic agreement check. To my own knowledge of the build, that check was never implemented as written; the review could not see past its boundary to confirm it.</p>
+        <p class="relay__note" data-note="fee" data-i18n-html="act6_n_fee"><strong>$11.86, a screen earlier.</strong> The live fee appears on the flight-details screen, a full screen earlier than I proposed, and matches in both places it appears. Fee-setting was never my decision.</p>
+        <p class="relay__note" data-note="data" data-i18n-html="act6_n_data"><strong>Reordered, not removed.</strong> Personal-data capture moved from my first screen to the live flow's fourth, after the flight lookup. I read the reordering as intuitive and do not contest it.</p>
+        <p class="relay__note" data-note="ctrl" data-i18n-html="act6_n_ctrl"><strong>Where the review stops.</strong> Public, unauthenticated pages only: one control short of paying, with no transaction submitted.</p>
       </div>
     </div>
 
@@ -1471,15 +1435,15 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   go(0, false);
 });
 
-/* ============ Act 06 comparison — one step pressed, its pair and note shown ============ */
-document.querySelectorAll('.cmp').forEach(cmp=>{
-  const steps = [...cmp.querySelectorAll('.cmp__step')], notes = [...cmp.querySelectorAll('.cmp__note')];
+/* ============ Act 06 live flow — one node pressed, its note shown (WD-Q82) ============ */
+document.querySelectorAll('.relay--live').forEach(r=>{
+  const btns = [...r.querySelectorAll('.relay__btn')], notes = [...r.querySelectorAll('.relay__note')];
   function pick(btn){
-    steps.forEach(s=>{ s.setAttribute('aria-pressed', String(s === btn)); s.classList.toggle('is-pair', !!btn.dataset.pair && s !== btn && s.dataset.pair === btn.dataset.pair); });
+    btns.forEach(b=> b.setAttribute('aria-pressed', String(b === btn)));
     notes.forEach(n=> n.classList.toggle('is-on', n.dataset.note === btn.dataset.note));
   }
-  steps.forEach(s=> s.addEventListener('click', ()=> pick(s)));
-  pick(steps[0]);
+  btns.forEach(b=> b.addEventListener('click', ()=> pick(b)));
+  pick(btns[0]);
 });
 
 /* ============ Act 02 stakeholder network — canvas rings, card, sheet, ring list ============ */
