@@ -582,26 +582,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* CHASSIS PASS · Act 06 comparison */
 .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
-/* the live flow on the one-segment relay (WD-Q82): press a node, its note shows below */
-.relay__btn{all:unset; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; gap:.55rem; width:100%; cursor:pointer; text-align:center; -webkit-tap-highlight-color:transparent;}
-.relay__btn .relay__t{color:var(--color-text-muted); transition:color var(--duration-ui) var(--ease-standard);}
-.relay__btn .relay__node{transition:background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard), box-shadow var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-standard);}
-.relay__btn .relay__node::after{content:""; position:absolute; inset:-2px; border-radius:50%; border:2px solid var(--color-brand-purple); opacity:0; pointer-events:none;}
-.relay__btn--out .relay__node{border-style:dashed;}
-.relay__btn:hover .relay__node, .relay__btn:focus-visible .relay__node{border-color:var(--color-brand-purple); transform:scale(1.06); box-shadow:0 0 0 6px rgba(161,0,255,.12), 0 0 22px rgba(161,0,255,.4);}
-.relay__btn:hover .relay__t, .relay__btn[aria-pressed="true"] .relay__t{color:var(--color-brand-white);}
-.relay__btn[aria-pressed="true"] .relay__node{background:var(--color-brand-purple); border-color:var(--color-brand-purple); color:var(--color-on-brand); box-shadow:0 0 26px rgba(161,0,255,.55);}
-.relay__btn[aria-pressed="true"] .relay__node::after{animation:relay-pulse 2.4s var(--ease-standard) infinite;}
-@keyframes relay-pulse{ from{transform:scale(1); opacity:.7;} to{transform:scale(1.55); opacity:0;} }
-@media (prefers-reduced-motion:reduce){ .relay__btn[aria-pressed="true"] .relay__node::after{animation:none;} }
-.relay__btn:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
-.relay__notes{border-top:1px solid rgba(var(--ink),.4); padding:1rem 1.2rem; min-height:4.5rem;}
-.relay__note{font-size:clamp(.9rem,1.05vw,1rem); line-height:1.55; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.relay__note + .relay__note{margin-top:.6rem;}
-.js .relay__note{display:none;}
-.js .relay__note.is-on{display:block; margin-top:0;}
-.relay__note strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-@media (max-width:767px){ .relay--solo .relay__btn{flex-direction:row; align-items:center; text-align:left; gap:.8rem;} }
+/* Act 06 live flow: static lines under each node, as in Act 05 (iteration 6); the step the review never reached keeps a dashed node */
+.relay__node--out{border-style:dashed !important;}
 .act .dcells{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .method-line{margin-top:.8rem; max-width:46rem; font-size:.82rem; line-height:1.5; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .close-cells{margin-top:clamp(1.6rem,3vw,2.4rem);}
@@ -1157,19 +1139,12 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
       </div>
       <h2 class="verdict" id="v6" data-i18n="act6_verdict">A year on, the flow changed.</h2>
-      <p class="scan" data-i18n="act6_lede">Select a step to see what moved, what went and what stayed.</p>
+      <p class="scan" data-i18n="act6_lede">Five live steps, each set against my proposal.</p>
     </div>
 
     <p class="cap cap--lead io" data-i18n="act6_cmp_cap">Live today, step by step</p>
-    <div class="relay relay--solo relay--5 relay--live io">
-      <div class="relay__seg relay__seg--after"><ol class="relay__track"><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="home"><span class="relay__node">1</span><span class="relay__t" data-i18n="act6_v1">Homepage</span></button></li><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="elig"><span class="relay__node">2</span><span class="relay__t" data-i18n="act6_v2">Eligibility self-declaration</span></button></li><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="fee"><span class="relay__node">3</span><span class="relay__t" data-i18n="act6_v3">Flight details and fee</span></button></li><li class="relay__st"><button class="relay__btn" type="button" aria-pressed="false" data-note="data"><span class="relay__node">4</span><span class="relay__t" data-i18n="act6_v4">Customer details</span></button></li><li class="relay__st"><button class="relay__btn relay__btn--out" type="button" aria-pressed="false" data-note="ctrl"><span class="relay__node">5</span><span class="relay__t" data-i18n="act6_v5">Payment control, not reached</span></button></li></ol></div>
-      <div class="relay__notes" role="status" aria-live="polite">
-        <p class="relay__note" data-note="home" data-i18n-html="act6_n_home"><strong>An entry page first.</strong> The live flow opens on a homepage that explains the fee before the first step.</p>
-        <p class="relay__note" data-note="elig" data-i18n-html="act6_n_elig"><strong>A click instead of a check.</strong> Eligibility is a self-declaration, <em>"Soy ese tipo de pasajero"</em>, where the technical scope specified an automatic agreement check. To my own knowledge of the build, that check was never implemented as written; the review could not see past its boundary to confirm it.</p>
-        <p class="relay__note" data-note="fee" data-i18n-html="act6_n_fee"><strong>$11.86, a screen earlier.</strong> The live fee appears on the flight-details screen, a full screen earlier than I proposed, and matches in both places it appears. Fee-setting was never my decision.</p>
-        <p class="relay__note" data-note="data" data-i18n-html="act6_n_data"><strong>Reordered, not removed.</strong> Personal-data capture moved from my first screen to the live flow's fourth, after the flight lookup. I read the reordering as intuitive and do not contest it.</p>
-        <p class="relay__note" data-note="ctrl" data-i18n-html="act6_n_ctrl"><strong>Where the review stops.</strong> Public, unauthenticated pages only: one control short of paying, with no transaction submitted.</p>
-      </div>
+    <div class="relay relay--solo relay--5 io">
+      <div class="relay__seg relay__seg--after"><ol class="relay__track"><li class="relay__st"><span class="relay__node">1</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v1">Homepage</span><span class="relay__x" data-i18n="act6_v1_x">An entry page explains the fee first</span></span></li><li class="relay__st"><span class="relay__node">2</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v2">Eligibility self-declaration</span><span class="relay__x" data-i18n="act6_v2_x">A click, where the scope set an automatic check</span></span></li><li class="relay__st"><span class="relay__node">3</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v3">Flight details and fee</span><span class="relay__x" data-i18n="act6_v3_x">$11.86, shown a screen earlier than mine</span></span></li><li class="relay__st"><span class="relay__node">4</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v4">Customer details</span><span class="relay__x" data-i18n="act6_v4_x">Moved from my first screen to the fourth</span></span></li><li class="relay__st"><span class="relay__node relay__node--out">5</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v5">Payment control, not reached</span><span class="relay__x" data-i18n="act6_v5_x">Where the review stops; nothing submitted</span></span></li></ol></div>
     </div>
 
     <p class="method-line" data-i18n="act6_method">Public, unauthenticated pages only. No transaction was submitted, no session was captured.</p>
@@ -1441,17 +1416,6 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=> go(i, false), 120); });
   phone.addEventListener('change', ()=> go(i, false));
   go(0, false);
-});
-
-/* ============ Act 06 live flow — one node pressed, its note shown (WD-Q82) ============ */
-document.querySelectorAll('.relay--live').forEach(r=>{
-  const btns = [...r.querySelectorAll('.relay__btn')], notes = [...r.querySelectorAll('.relay__note')];
-  function pick(btn){
-    btns.forEach(b=> b.setAttribute('aria-pressed', String(b === btn)));
-    notes.forEach(n=> n.classList.toggle('is-on', n.dataset.note === btn.dataset.note));
-  }
-  btns.forEach(b=> b.addEventListener('click', ()=> pick(b)));
-  pick(btns[0]);
 });
 
 /* ============ Act 02 stakeholder network — canvas rings, card, sheet, ring list ============ */
