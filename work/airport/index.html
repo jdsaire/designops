@@ -521,7 +521,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .dl__viewport{margin-right:0; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
   .dl__viewport::-webkit-scrollbar{display:none;}
   .dl__track{gap:1rem; transform:none !important; transition:none;}
-  .dl__slide{flex:0 0 100%; grid-template-columns:1fr; gap:1.25rem; align-items:start; scroll-snap-align:start;}
+  .dl__slide{flex:0 0 100%; grid-template-columns:1fr; gap:1.25rem; align-items:start; align-content:start; scroll-snap-align:start;}   /* rows keep their size; the track's equal height no longer widens one slide's gap */
+  .dl__cta{display:none;}   /* phones: the slides stand alone (iteration 6) */
   .dl__slide:not(.is-on){opacity:1;}
   .dl__ctrl{justify-content:flex-start; padding-right:0;}
 }
