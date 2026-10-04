@@ -606,7 +606,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (max-width:767px){
   .desk-how{display:grid; grid-template-columns:auto 1fr; column-gap:1rem; align-items:center; background:var(--color-brand-purple); color:var(--color-on-brand);
     padding:1rem 1.2rem; margin-top:clamp(1.6rem,3vw,2.4rem);}
-  .desk-how__i{grid-row:1 / 3; align-self:stretch; height:100%; width:auto; aspect-ratio:6 / 5; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linejoin:miter;}
+  .desk-how__i{grid-row:1 / 3; align-self:center; flex:none; width:3rem; height:2.5rem; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linejoin:miter;}   /* fixed: the card's height comes from its text, never from the icon */
   .desk-how__t{font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.16em; text-transform:uppercase;}
   .desk-how__x{font-size:.92rem; line-height:1.45; font-weight:var(--fw-regular, 400); margin-top:.3rem;}
 }
@@ -970,7 +970,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <aside class="desk-how" aria-labelledby="netHowT">
-      <svg class="desk-how__i" viewBox="0 0 48 40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
       <p class="desk-how__t" id="netHowT" data-i18n="act2_mob_t">See network map</p>
       <p class="desk-how__x" data-i18n="act2_mob_x">Full visual available on desktop.</p>
     </aside>
@@ -1099,7 +1099,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 
     <div class="a4-flowwrap" id="a4-flow">
     <aside class="desk-how" aria-labelledby="flowHowT">
-      <svg class="desk-how__i" viewBox="0 0 48 40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
       <p class="desk-how__t" id="flowHowT" data-i18n="act4_mob_t">See flowchart</p>
       <p class="desk-how__x" data-i18n="act4_mob_x">Full visual available on desktop.</p>
     </aside>
