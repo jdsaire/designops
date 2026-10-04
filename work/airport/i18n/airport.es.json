@@ -244,16 +244,7 @@
   "act6_v5": "Control de pago, no alcanzado",
   "act6_v5_x": "Where the review stops; nothing submitted",
   "act6_method": "Solo páginas públicas, sin autenticación. No se envió ninguna transacción, no se capturó ninguna sesión y no se recogieron datos más allá de lo que cualquier visitante ve.",
-  "act6_wrap_cap": "Balance de mi aporte",
-  "act6_k1_tag": "Lo que puedo afirmar",
-  "act6_k1_t": "Del diseño a la entrega",
-  "act6_k1_x": "Diseño, prototipo, evaluación y entrega de una plataforma hoy en funcionamiento.",
-  "act6_k2_tag": "Lo que no",
-  "act6_k2_t": "No el desarrollo",
-  "act6_k2_x": "Su desarrollo, despliegue y operación corresponden a otros.",
-  "act6_k3_tag": "Lo que sigue",
-  "act6_k3_t": "Una tarifa menor, dentro del boleto",
-  "act6_k3_x": "En julio de 2026, Lima Airport propuso bajar la tarifa de $10.05 a $6.40 + IGV e incluirla en el boleto. Las aerolíneas no han aceptado; el cobro en el terminal continúa.",
   "act6_note1": "<strong>TUUA Transfer.</strong> Conozco el mecanismo de la plataforma y contribuí a su diseño UX/UI, no a su desarrollo, despliegue ni operación. Puedo dar testimonio de mi participación y aporte ante solicitud formal.",
-  "act6_note2": "<strong>Mi postura sobre la tarifa.</strong> Diseñar su canal de cobro no me hace parte de la tarifa en sí. Si continúa, lo decidirá el Poder Judicial del Perú: en junio de 2026, un tribunal de Lima permitió que siga adelante un proceso de amparo en su contra, mientras el cobro continúa."
+  "act6_note2": "<strong>Lo que sigue: una tarifa menor, dentro del boleto.</strong> En julio de 2026, Lima Airport propuso bajar la tarifa de $10.05 a $6.40 + IGV e incluirla en el boleto. Las aerolíneas no han aceptado; el cobro en el terminal continúa.",
+  "act6_note3": "<strong>Mi postura sobre la tarifa.</strong> Diseñar su canal de cobro no me hace parte de la tarifa en sí. Si continúa, lo decidirá el Poder Judicial del Perú: en junio de 2026, un tribunal de Lima permitió que siga adelante un proceso de amparo en su contra, mientras el cobro continúa."
 }
