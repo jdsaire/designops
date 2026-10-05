@@ -174,7 +174,7 @@ Plan, Gates 0, 1 and 2 carried no on-disk edits.
 - **Brief 04:** the EN mirror to its re-voiced ES, and the multi-page refocus with a split schedule (site-wC).
 - **Brief 03:** the EN mirror, and a rebuild scoped to the TUUA transfer project (site-wD).
 - **Brief 01:** the script-built schedule stays English (WB-P2, backlog).
-- **The copy skill:** designops-copy-es v4.0 lives as a file copy in site-wB; the installed plugin copy is still v3.0. A copy-edition skill is to be created from `SPEC-COPY-EDITION-v1_0.md`.
+- **The copy skill:** designops-copy-es v4.0 lives as a file copy in site-wB; the installed plugin is v4.0 (corrected at the site-wC archive: measured 27 Sep 2026, site-wC preflight V12; this line first read "still v3.0"). A copy-edition skill is to be created from `SPEC-COPY-EDITION-v1_0.md`.
 
 **Other open items**
 - After the merge, GitHub Pages caches for 10 minutes, so a returning visitor may briefly see English fallback text.

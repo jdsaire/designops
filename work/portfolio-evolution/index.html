@@ -157,8 +157,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         from the editorial's short version. The only local rule is the heading colour
         and the ordinal, which is a counter rather than copy because Act 01 has six
         characters of headroom against its ceiling. ---- */
-.pcards{counter-reset:pcard;}
-.pcard .pcard__t::before{counter-increment:pcard; content:counter(pcard) ") ";}
 /* No colour rule: .card__t inherits the body's brand-white, which is the point —
    the heading is Act 04's heading, unmodified except for its ordinal. */
 
@@ -207,6 +205,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .card:hover{border-color:var(--color-brand-purple);}
 .card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+/* Strategic bold in card bodies reads like the synthesis and scan emphasis. */
+.card__x strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 @media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
 @media (max-width:767px){
   .cardgrid--3,.cardgrid--2{grid-template-columns:1fr;}
@@ -243,6 +243,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .reveal__body{border-left:2px solid var(--color-brand-purple); padding:.9rem 0 .2rem 1rem; margin-top:.6rem;}
 .reveal__body[hidden]{display:none;}
 .reveal__body p{font-size:.92rem; font-weight:var(--fw-light); color:var(--color-text-muted); margin-bottom:.7rem;}
+/* Panel text is Light (300), so a plain <strong> only reaches Regular (400) and never reads as bold. */
+.reveal__body strong{font-weight:var(--fw-semibold); color:var(--color-brand-white);}
 .reveal__body p:last-child{margin-bottom:0;}
 
 /* Side panel (desktop) */
@@ -267,50 +269,56 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         brief (work/yape-trust-verify-brief/index.html): epic rows with disclosure,
         task sub-rows, chips, SVG overlay, milestones, totals column. The axis is
         calendar time here, not cumulative story points, so rows carry real dates and
-        are free to leave gaps — the two dormant stretches are the point. ---- */
+        are free to leave gaps. Two instances: the single-page build, then the
+        multi-page build as clusters of pull requests. ---- */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
-.gantt__grid{min-width:820px;}
+/* Wide enough that diamonds two days apart never touch; closer ones stack. */
+.gantt__grid{min-width:1100px;}
 .gantt__axis{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
   border-bottom:1px solid var(--g-border); font-size:.75rem; color:var(--color-text-muted);}
 .gantt__axis > div{padding:.75rem 1rem;}
 .gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
 .gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem; white-space:nowrap;}
 .gantt__axis-summary{text-align:right;}
-.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
+.gantt__row{display:grid; grid-template-columns:minmax(200px,260px) 1fr minmax(104px,140px);
   border-top:1px solid var(--g-border); align-items:stretch;}
-.gantt__task-row{background:rgba(var(--ink),0.02);}
 .gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
-.gantt__task-label{padding:.5rem 1rem .5rem 2.4rem; color:var(--color-text-muted); font-size:.875rem;
-  display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; position:relative;}
-.gantt__row-field,.gantt__task-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
-.gantt__row-field{min-height:3.25rem;}
-.gantt__task-field{min-height:2.5rem;}
-.gantt__row-summary,.gantt__task-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
+.gantt__row-field{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+.gantt__row-summary{padding:.5rem 1rem; display:flex; flex-direction:column; justify-content:center;
   text-align:right; font-size:.78rem; color:var(--color-text-muted); gap:.15rem;}
 .gantt__row-summary b{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .gantt__days{color:var(--color-text-dim);}
 .gantt__gridline{position:absolute; top:0; bottom:0; width:1px; background:var(--g-border);}
-.gantt__toggle{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-semibold);
-  color:var(--color-brand-white); background:none; border:0; padding:0; cursor:pointer; text-align:left;
-  display:flex; align-items:center; gap:.5rem; min-height:44px;}
-.gantt__toggle .gantt__marker{display:inline-block; width:.8em; color:var(--color-text-muted); font-weight:var(--fw-regular);
-  transition:transform 160ms var(--ease-standard);}
-.gantt__toggle[aria-expanded="true"] .gantt__marker{transform:rotate(90deg);}
-.gantt__epic:has(.gantt__toggle[aria-expanded="true"]) .gantt__row-label{border-left:3px solid var(--color-brand-purple);}
-.gantt__epic:hover .gantt__bar--epic,.gantt__epic:has(.gantt__toggle:focus-visible) .gantt__bar--epic{border-color:var(--color-brand-purple);}
-.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); background:var(--g-border);
-  border:1px solid var(--color-brand-purple); display:flex; align-items:center; padding:0 .4rem; min-width:.35rem;}
-.gantt__bar--epic{height:1.625rem; background:var(--color-brand-purple);}
-.gantt__bar--task{height:1rem;}
-.gantt__bar--principal{background:transparent; border-style:dotted;}
-.gantt__span{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); white-space:nowrap;}
-.gantt__bar--epic .gantt__span{color:var(--color-on-brand);}
-.gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
-  transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-purple); z-index:3;}
-.gantt__milestone-label{position:absolute; top:.1rem; transform:translateX(-50%);
-  font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
+/* A stage: its number, its locked name, and its commit count as a quiet annotation. */
+.gantt__stage{font-size:.9375rem; font-weight:var(--fw-semibold); color:var(--color-brand-white); line-height:1.35;}
+.gantt__stage-n{color:var(--color-brand-purple); margin-right:.35em;}
+.gantt__stage-note{font-size:.8125rem; font-weight:var(--fw-regular); color:var(--color-text-dim); white-space:nowrap;}
+/* The duration bar runs through the stage's diamonds; its length in days sits beside it. */
+.gantt__bar{position:absolute; top:50%; transform:translateY(-50%); height:1.625rem; background:var(--color-brand-purple);
+  border:1px solid var(--color-brand-purple); min-width:.35rem;}
+.gantt__len{position:absolute; top:50%; transform:translateY(-50%); font-size:.75rem; font-weight:var(--fw-semibold);
+  color:var(--color-text-muted); white-space:nowrap;}
+/* Pull requests: numbered diamonds on the bar, on their merge dates. Diamonds a
+   day or less apart stack. Hover, focus or a tap makes one active: purple outline and
+   its caption. */
+.gantt__dot{position:absolute; width:1.5rem; height:1.5rem; padding:0; transform:translate(-50%,-50%) rotate(45deg);
+  background:var(--color-brand-black); border:2px solid var(--color-brand-white); cursor:pointer;
+  display:grid; place-items:center; z-index:3; transition:border-color var(--duration-ui) var(--ease-standard);}
+.gantt__dot > span{transform:rotate(-45deg); font-size:.625rem; font-weight:var(--fw-bold); line-height:1;
+  color:var(--color-brand-white); font-variant-numeric:tabular-nums;}
+.gantt__dot:hover,.gantt__dot:focus-visible,.gantt__dot.is-active{border-color:var(--color-brand-purple); z-index:5;}
+.gantt__dot:focus-visible{outline-offset:4px;}
+.gantt__cap{position:absolute; z-index:6; max-width:17rem; padding:.55rem .75rem; pointer-events:none;
+  background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
+  font-size:.8125rem; line-height:1.45; color:var(--color-text-muted);}
+.gantt__cap b{color:var(--color-brand-purple); font-weight:var(--fw-bold); margin-right:.35em;}
+.gantt__cap-d{color:var(--color-text-dim); white-space:nowrap;}
+/* The two reading panels sit side by side where they open as a side panel (≥1024),
+   and stack where they open inline, so an open body keeps the full column. */
+.sched__ctas{display:flex; flex-direction:column; margin-bottom:1rem;}
+@media (min-width:1024px){ .sched__ctas{flex-direction:row; gap:2.5rem; align-items:flex-start;} }
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
@@ -345,7 +353,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .evidence__link:hover{color:var(--color-brand-purple);}
 
 /* ---- ACT 04 · THE DASHBOARD — master dashboard ---- */
-.dash{border:1px solid var(--color-border-soft);}
+.dash{border:1px solid var(--color-border-soft); position:relative;}
 .dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
 .dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
   letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
@@ -375,6 +383,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem);}
 /* A metric that exists for one build only prints a dash rather than a zero. */
 .drow__v--none{color:var(--color-text-dim); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-light);}
+/* Each measure names what it counts in an overlay on hover, focus or tap — the same
+   caption the schedule's diamonds use. The description stays in the row, hidden, as
+   the button's accessible description and the overlay's text. */
+.drow__toggle{font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; text-align:left;
+  background:none; border:0; padding:0; cursor:pointer; min-height:44px;
+  text-decoration:underline dotted; text-underline-offset:.35em; text-decoration-color:var(--color-text-dim);}
+.drow__toggle:hover,.drow__toggle:focus-visible,.drow__toggle.is-active{color:var(--color-brand-white); text-decoration-color:var(--color-brand-purple);}
+.drow__desc{display:none;}
+@media (max-width:1023px), (hover:none){
+  .drow__toggle{cursor:default; text-decoration:none; pointer-events:none;}
+}
+.dash__cap{position:absolute; z-index:6; max-width:13rem; padding:.55rem .75rem; pointer-events:none;
+  background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
+  font-size:.8125rem; line-height:1.45; color:var(--color-text-muted); letter-spacing:0; text-transform:none;}
 @media (max-width:767px){
   .drow{grid-template-columns:1fr 1fr; gap:.35rem .75rem;}
   .drow__l{grid-column:1 / -1;}
@@ -405,6 +427,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 }
 
 /* ---- ACT 05 · THE REFLECTION ---- */
+/* Footnotes: the synthesis style from Brief 02's Act 04, on every note of this page. */
+.synthesis{border-left:3px solid var(--color-brand-purple); padding:.2rem 0 .2rem 1.15rem;
+  margin-top:clamp(1.5rem,2.5vw,2rem); max-width:52rem;
+  font-size:.72rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+.synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
+.synthesis + .synthesis{margin-top:.75rem;}
+.dash .synthesis{margin:0 clamp(1.4rem,2.5vw,2.25rem) clamp(1.4rem,2.5vw,2.25rem);}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
@@ -593,13 +622,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <span class="section__eyebrow-bar"></span>
       <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="brief_read">6 min read</span></span>
     </div>
-    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">From template to system.</h1>
-    <p class="hero__deck" data-i18n="hero_lede">Follow one portfolio from a template I rented to a bilingual system I wrote, in five months.</p>
+    <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">This web. My web.</h1>
+    <p class="hero__deck" data-i18n="hero_lede">Discover the story of my career's masterpiece in the AI age.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
       <span class="kw" role="listitem" data-i18n="tag_web_development">Web Development</span>
       <span class="kw" role="listitem" data-i18n="tag_front_end">Front-end</span>
       <span class="kw" role="listitem" data-i18n="tag_design_systems">Design Systems</span>
-      <span class="kw" role="listitem" data-i18n="tag_internationalization">Internationalization</span>
+      <span class="kw" role="listitem" data-i18n="tag_branding">Branding</span>
       <span class="kw" role="listitem" data-i18n="tag_designops">DesignOps</span>
     </div>
     <div class="rolestrip" aria-label="Role and scope">
@@ -618,9 +647,45 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <button class="reveal__btn" aria-expanded="false" aria-controls="rv-hero" data-panel-title="The 10 sec version" data-i18n="ui_ten_sec_version" data-panel-title-key="ui_ten_sec_version">The 10 sec version</button>
       <!-- canonical: this copy supersedes work_card1_body upstream (pending designops Fable-5 pass) -->
       <div class="reveal__body reveal__body--poster" id="rv-hero">
-        <p data-i18n="hero_short">Picture a portfolio that outgrew two homes. Templates on Canva and Framer could not build what I had designed, so I moved to a single page I coded with AI, then rebuilt it as this bilingual multi-page site with its own design system and case briefs on my recent work. Every step sits in public commit history, and the page you are reading is the result.</p>
+        <p data-i18n="hero_short">AI now drafts the résumés and the cover letters, so sounding capable has never been cheaper. A senior professional has to show the work instead, and I chose to lead that shift rather than wait for it. This site is my most advanced front-end build to date and the most important piece of my personal brand, designed and built by me with AI in five months. Scroll on for why it had to exist, how it grew from a single page, how it was built, and the figures that prove it.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= ACT 00 · THE CONTEXT — three shifts on the Act 02 ladder ================= -->
+<section class="act" id="act0" aria-labelledby="v0">
+  <div class="container">
+    <div class="act__head io">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+      </div>
+      <h2 class="verdict" id="v0" data-i18n="act0_verdict">AI disrupts work. Careers can't adapt.</h2>
+      <p class="scan" data-i18n="act0_lede">Three shifts that make a proven personal brand urgent in 2026.</p>
+    </div>
+
+    <div class="timeline io">
+      <div class="timeline__track" role="group" data-i18n-aria="act0_aria" aria-label="The context, in three shifts">
+        <article class="card">
+          <p class="catlabel" data-i18n="act0_s1_n">The shift</p>
+          <h3 class="card__t" data-i18n="act0_s1_t">A fifth of jobs in motion</h3>
+          <p class="card__x" data-i18n-html="act0_s1_x">By 2030, <strong>22% of today's jobs will be disrupted</strong>: 170 million created, 92 million displaced, and 39% of core skills changing.</p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act0_s2_n">The builder gap</p>
+          <h3 class="card__t" data-i18n="act0_s2_t">Designing is no longer enough</h3>
+          <p class="card__x" data-i18n-html="act0_s2_x">In Peru, 84% of tech employers demand AI modelling and app development. <strong>Pure designers now trail profiles who also build.</strong></p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act0_s3_n">The edge</p>
+          <h3 class="card__t" data-i18n="act0_s3_t">AI beats outdated experience</h3>
+          <p class="card__x" data-i18n-html="act0_s3_x">66% of leaders would not hire someone without AI skills, and <strong>71% would choose a less experienced candidate who has them</strong>.</p>
+        </article>
+      </div>
+    </div>
+
+    <p class="synthesis io" data-i18n="act0_foot">Sources: World Economic Forum, Future of Jobs Report 2025; Experis, Expectativas de Talento Tecnológico (Peru), 2026; Microsoft and LinkedIn, Work Trend Index 2024.</p>
   </div>
 </section>
 
@@ -632,63 +697,36 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Qualified on paper, unfamiliar in the room.</h2>
-      <p class="scan" data-i18n="act1_lede">Start with the problem: good work nobody can place.</p>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Credentials open doors. They don't prove design engineering skills.</h2>
+      <p class="scan" data-i18n="act1_lede">Three reasons a strong résumé is no longer enough for differentiation.</p>
     </div>
 
-    <!-- Four cards on the Act 04 chassis. The context is the card body; the implication
-         sits behind the reveal, so the two are told apart by structure rather than by
-         a reader noticing which column they are in. data-act groups them, so opening
-         one closes the others. The ordinals are a CSS counter, not copy: Act 01 has six
-         characters of headroom and a numbered string would spend more than that. -->
-    <div class="cardgrid cardgrid--2 pcards io">
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_g1_cat">The reading</h3>
-        <p class="card__x" data-i18n="act1_g1_l">I apply for roles whose posts list what a candidate must have. No post lists what a candidate is expected to sound like.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c1" data-panel-title="The reading" data-i18n="act3_c1_rv_btn" data-panel-title-key="act1_g1_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c1">
-            <p data-i18n="act1_g1_r">Meeting every requirement is what gets an application considered; being understood is what gets it believed, and only the first is ever written down.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_g2_cat">The credential</h3>
-        <p class="card__x" data-i18n="act1_g2_l">My own credentials are an MBA, a MicroMasters and a Microsoft specialization. Not one of them showed what I can actually build.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c2" data-panel-title="The credential" data-i18n="act3_c1_rv_btn" data-panel-title-key="act1_g2_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c2">
-            <p data-i18n="act1_g2_r">Research estimates work sample predicts job performance at about 3× more than education. A running page shows what I did with the diplomas</p>
-          </div>
-        </div>
-      </article>
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_g3_cat">The claim</h3>
-        <p class="card__x" data-i18n="act1_g3_l">Three in four hiring teams say they receive AI-written applications – turning openings into odysseys for qualified candidates.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c3" data-panel-title="The claim" data-i18n="act3_c1_rv_btn" data-panel-title-key="act1_g3_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c3">
-            <p data-i18n="act1_g3_r">65% of hiring managers say skills are harder to verify as anybody can generate a fluent claim in seconds. Every figure here is backed up in public commit history.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card pcard">
-        <h3 class="card__t pcard__t" data-i18n="act1_g4_cat">The market</h3>
-        <p class="card__x" data-i18n="act1_g4_l">Employment in Lima, Peru has grown 22% since 2019, while the share of it held by workers under 25 has fallen by about a third.</p>
-        <div class="reveal" data-act="act1">
-          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1c4" data-panel-title="The market" data-i18n="act3_c1_rv_btn" data-panel-title-key="act1_g4_cat">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a1c4">
-            <p data-i18n="act1_g4_r">Instead of contracting, local market is moving toward work that cannot be automated. That is the direction this website is built toward.</p>
-          </div>
-        </div>
-      </article>
+    <!-- Three cards on the Act 02 ladder; what the reveals held now lives in each body. -->
+    <div class="timeline io">
+      <div class="timeline__track" role="group" data-i18n-aria="act1_aria" aria-label="The problem, in three reasons">
+        <article class="card">
+          <p class="catlabel" data-i18n="act1_s1_n">The reading</p>
+          <h3 class="card__t" data-i18n="act1_s1_t">Posts list requirements, not voices</h3>
+          <p class="card__x" data-i18n-html="act1_s1_x">Job posts spell out what a candidate must have, never how they think. <strong>Meeting every requirement gets an application read; being understood gets it believed.</strong></p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act1_s2_n">The credential</p>
+          <h3 class="card__t" data-i18n="act1_s2_t">Diplomas don't show the build</h3>
+          <p class="card__x" data-i18n-html="act1_s2_x">A work sample predicts performance 3× better than education. <strong>This live page translates my credentials into proof of critical thinking and method.</strong></p>
+        </article>
+        <article class="card">
+          <p class="catlabel" data-i18n="act1_s3_n">The claim</p>
+          <h3 class="card__t" data-i18n="act1_s3_t">Everyone claim expertise now</h3>
+          <p class="card__x" data-i18n-html="act1_s3_x">Three in four hiring teams report AI-written applications, and 65% of hiring managers find skills harder to verify. <strong>Only a strong portfolio stands out with serious employers.</strong></p>
+        </article>
+      </div>
     </div>
 
-    <p class="sequel io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026; INEI Encuesta Permanente de Empleo Nacional, May–July 2026.</p>
+    <p class="synthesis io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026.</p>
   </div>
 </section>
 
-<!-- ================= ACT 02 · THE EVOLUTION — 3 versions on a stepped layout ================= -->
+<!-- ================= ACT 02 · THE EVOLUTION — 3 levels on a stepped layout ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
     <div class="act__head io">
@@ -696,33 +734,35 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Evolution</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Three portfolio versions, all in code.</h2>
-      <p class="scan" data-i18n="act2_lede">Watch the shift from renting a template to writing every line.</p>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">Three levels of fidelity, one direction.</h2>
+      <p class="scan" data-i18n="act2_lede">From renting a template to directing every code line.</p>
     </div>
 
     <div class="timeline io">
-      <div class="timeline__track" id="tlTrack" role="group" aria-label="The evolution, in three versions">
+      <div class="timeline__track" id="tlTrack" role="group" data-i18n-aria="act2_aria" aria-label="The evolution, in three levels">
         <article class="card">
-          <p class="catlabel" data-i18n="act2_s1_n">Version 1</p>
-          <h3 class="card__t" data-i18n="act2_s1_t">The Template era</h3>
-          <p class="card__x" data-i18n="act2_s1_x">My first portfolios ran on Canva and Framer. Both were faster than code, and neither could build what I had already designed in Figma.</p>
+          <p class="catlabel" data-i18n="act2_s1_n">Level 1</p>
+          <h3 class="card__t" data-i18n="act2_s1_t">The Template era (2023–25)</h3>
+          <p class="card__x" data-i18n-html="act2_s1_x">My first portfolios ran on Canva, Figma and Framer. None matched <strong>the fidelity my UX authority demanded</strong>. Learning to code meant restarting as a junior programmer.</p>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="act2_s2_n">Version 2</p>
-          <h3 class="card__t" data-i18n="act2_s2_t">The Single-Page</h3>
-          <p class="card__x" data-i18n="act2_s2_x">A landing page to test the concept: beginner front-end, my first AI-orchestrated workflow, and every section inside one scroll.</p>
+          <p class="catlabel" data-i18n="act2_s2_n">Level 2</p>
+          <h3 class="card__t" data-i18n="act2_s2_t">The Single-Page (Q2 2026)</h3>
+          <p class="card__x" data-i18n-html="act2_s2_x">Not a prompt to brag about: weeks on one scroll gave me <strong>the flight hours no university could</strong>, locking the AI workflows behind this site.</p>
         </article>
         <article class="card">
-          <p class="catlabel" data-i18n="act2_s3_n">Version 3</p>
-          <h3 class="card__t" data-i18n="act2_s3_t">The Multi-Page</h3>
-          <p class="card__x" data-i18n="act2_s3_x">My most capable front-end to date: the Microsoft specialization finished, and case briefs carrying the recent work.</p>
+          <p class="catlabel" data-i18n="act2_s3_n">Level 3</p>
+          <h3 class="card__t" data-i18n="act2_s3_t">The Multi-Page (Now)</h3>
+          <p class="card__x" data-i18n-html="act2_s3_x">The version accomplished after completing my Microsoft Front-End specialization. Home, About, and Contact pages, plus 4 copy-tested case briefs: <strong>my greatest build to date</strong>.</p>
         </article>
       </div>
     </div>
+
+    <p class="synthesis io" data-i18n="act2_foot">Building a site with AI in 2027 takes more than a prompt: it takes a whole orchestration, from research to review. That is what sets this build apart from audacious vibe-coders and from developers who still write every line by hand.</p>
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SCHEDULE — days-axis Gantt over both builds ================= -->
+<!-- ================= ACT 03 · THE MULTIPAGE SCHEDULE — one days-axis Gantt; the first schedule in a panel ================= -->
 <section class="act" id="sched" aria-labelledby="vsch">
   <div class="container">
     <div class="act__head io">
@@ -730,25 +770,41 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">49 build days across five months.</h2>
-      <p class="scan" data-i18n="sch_lede">Move through epics – from v1 to the current web.</p>
+      <h2 class="verdict" id="vsch" data-i18n="act3_verdict">How this site came together.</h2>
+      <p class="scan" data-i18n="act3_lede">Every stage, and what each pull request delivered.</p>
     </div>
 
-    <div class="gantt io" id="gantt">
-      <div class="gantt__chart" id="ganttChart">
-        <div class="gantt__grid" id="ganttGrid" role="tree"
-             aria-label="Both builds on a calendar axis: three phases with task rows, sized in days."
+    <div class="sched__ctas io">
+      <div class="reveal" data-act="sch">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="Chart overview" data-panel-title-key="act3_rv1_btn" data-i18n="act3_rv1_btn">Chart overview</button>
+        <div class="reveal__body reveal__body--poster" id="rv-sch2">
+          <p data-i18n-html="act3_rv1_txt">This Gantt chart turns cold project work into a visual summary for tracking purposes. Each row is one stage of the work, read from left to right along the calendar, so you can see <strong>what happened when, how long each deploy took and where overlaps happen</strong>. This visual records completed work, not planned.</p>
+        </div>
+      </div>
+      <div class="reveal" data-act="sch">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="The first schedule" data-panel-title-key="act3_rv2_btn" data-i18n="act3_rv2_btn">The first schedule</button>
+        <div class="reveal__body reveal__body--poster" id="rv-sch1">
+          <p data-i18n-html="act3_rv2_txt">Before this site, a one-page version of this portfolio was built and tested internally. Work was carried out from 24 Apr to 04 Jul 2026. <strong>Epic 01: Single Page</strong> built section by section: hero, work, capabilities, and contact. <strong>Epic 02: Repo Hygiene</strong> prepared the handoff. In total, two GitHub repositories ('jdigital' and 'legacy-desops') carried 240 and 46 commits respectively in public history across 32 active build-days.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gantt io" id="gantt2">
+      <div class="gantt__chart" id="gantt2Chart">
+        <div class="gantt__grid" id="gantt2Grid" role="group" data-i18n-aria="sch_aria_chart"
+             aria-label="The multi-page build on a calendar axis: five stages, each with a duration bar and its pull requests as numbered diamonds on their merge dates."
              ></div>
       </div>
-      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript. Every window it draws is also stated in the note below.</p></noscript>
-
+      <noscript><p class="gantt__caption" data-i18n="sch_noscript">This chart renders from its data object and requires JavaScript. The reading guide above states the window it draws and its source.</p></noscript>
     </div>
 
-    <p class="dash__foot io" data-i18n="sch_note" style="border-top:0; padding-left:0;">Reconstructed from public commit history: github.com/jdsaire/jdigital and github.com/jdsaire/legacy-desops summed, 24 Apr – 04 Jul 2026; github.com/jdsaire/designops, 10 Jul – 08 Sep 2026. 32 active build-days on the first build — three further June dates carried document uploads, not site code, and are excluded. Nothing was committed between 25 July and 28 August.</p>
-  </div>
+    <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
+    <p class="synthesis io" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
+    <p class="synthesis io" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
+    <p class="synthesis io" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
 </section>
 
-<!-- ================= ACT 04 · THE ARCHITECTURE — 6 numbered cards, each labelled by category ================= -->
+<!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, each with its own label and a technical panel ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head io">
@@ -756,83 +812,59 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Two architectures, six decisions.</h2>
-      <p class="scan" data-i18n="act3_lede">Compare what carried across both builds vs what's unique to each one.</p>
+      <h2 class="verdict" id="v3" data-i18n="act4_verdict">Four choices keep this site scalable.</h2>
+      <p class="scan" data-i18n="act4_lede">The technical stack across the page, in plain words.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2 io" id="act3Cards">
+    <div class="cardgrid cardgrid--2 io" id="act4Cards">
       <article class="card">
-        <p class="catlabel" data-i18n="act3_f1">Foundational</p>
-        <h3 class="card__t" data-i18n="act3_c1_t">1) Vanilla HTML/CSS/JavaScript</h3>
-        <p class="card__x" data-i18n="act3_c1_x">No framework, no build step, no dependency I cannot read end to end.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c1" data-panel-title="Vanilla HTML/CSS/JavaScript" data-i18n="act3_c1_rv_btn" data-panel-title-key="act3_c1_t">KNOW THE IMPLICATIONS</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c1">
-            <p data-i18n="act3_c1_rv_txt">Nothing to migrate when a major version lands. No security-patch treadmill. A payload small enough to stay fast on a mid-range phone over Peruvian mobile data — which is what most recruiters will use to open it.</p>
+        <p class="catlabel" data-i18n="act4_c1_cat">Speed</p>
+        <h3 class="card__t" data-i18n="act4_c1_t">1) Light, fast and built to last</h3>
+        <p class="card__x" data-i18n-html="act4_c1_x">The site runs on the web's three core languages, with no framework so <strong>pages load fast and nothing breaks after a hard change</strong>.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c1" data-panel-title="Light, fast and built to last" data-i18n="act4_c1_rv_btn" data-panel-title-key="act4_c1_t">The stack</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c1">
+            <p data-i18n="act4_c1_rv_txt">Vanilla HTML, CSS and JavaScript: the web's native standards, with no framework, and no library, deployed as static files on GitHub Pages. No major-version migrations, no dependency to patch, full control of every byte, and a light payload that loads fast on an average phone.</p>
           </div>
         </div>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act3_f1">Foundational</p>
-        <h3 class="card__t" data-i18n="act3_c2_t">2) Accessibility &amp; responsiveness</h3>
-        <p class="card__x" data-i18n="act3_c2_x">WCAG AA held as a build gate, usable with screen readers and keyboards.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c2" data-panel-title="Accessibility and responsiveness" data-i18n="act3_c2_rv_btn" data-panel-title-key="act3_c2_t">MADE FOR EVERYONE</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c2">
-            <p data-i18n="act3_c2_rv_txt1">Every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes rather than assumed.</p>
-            <p data-i18n="act3_c2_rv_txt2">Layout resolves at three declared breakpoints — 767px and below, 768 to 1023, and 1024 up. Those are the three the stylesheets actually declare, not a convention borrowed from a framework.</p>
+        <p class="catlabel" data-i18n="act4_c2_cat">Accessibility</p>
+        <h3 class="card__t" data-i18n="act4_c2_t">2) Made for everyone</h3>
+        <p class="card__x" data-i18n-html="act4_c2_x">Anyone can navigate with <strong>a keyboard or a screen reader</strong>, with text readable in light and dark themes, on a phone or a wide screen.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c2" data-panel-title="Made for everyone" data-i18n="act4_c2_rv_btn" data-panel-title-key="act4_c2_t">The checks</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c2">
+            <p data-i18n="act4_c2_rv_txt">Built to WCAG AA: every meaningful image carries alt text, every control is reachable by keyboard with a visible focus state, and contrast is verified in both themes. Responsive layout resolves at three declared breakpoints: <767px, 768–1023px, and ≥1024px.</p>
           </div>
         </div>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act3_f2">Single-page</p>
-        <h3 class="card__t" data-i18n="act3_c3_t">3) Grid and layout, one page</h3>
-        <p class="card__x" data-i18n="act3_c3_x">Ten sections, one type scale, Flexbox and Grid throughout.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c3" data-panel-title="Grid and layout, one page" data-i18n="act3_c3_rv_btn" data-panel-title-key="act3_c3_t">MORE ON INFORMATION ARCHITECTURE</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c3">
-            <p data-i18n="act3_c3_rv_txt1">The ontology: ten reusable organisms, each owning one job — navigation, hero, work cards, capability carousel, contact.</p>
-            <p data-i18n="act3_c3_rv_txt3">The choreography: one scroll, one order, every visitor served the same sequence whether or not it was the one they came for.</p>
+        <p class="catlabel" data-i18n="act4_c3_cat">Copy</p>
+        <h3 class="card__t" data-i18n="act4_c3_t">3) Every word in its place</h3>
+        <p class="card__x" data-i18n-html="act4_c3_x">Every word lives in one of three dictionary types: <strong>text every page shares, text every case brief shares, and text for one page only</strong>.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c3" data-panel-title="Every word in its place" data-i18n="act4_c3_rv_btn" data-panel-title-key="act4_c3_t">The levels</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c3">
+            <p data-i18n="act4_c3_rv_txt">Internationalization (i18n) runs on three layers of JSON dictionaries, merged in order: global for site chrome, regional for the strings every brief shares, local for each brief's own copy. Every string sits under one key at one level, and each English locale file has a Spanish twin with the same keys, checked by script. Spanish is transcreated, not translated.</p>
           </div>
         </div>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act3_f2">Single-page</p>
-        <h3 class="card__t" data-i18n="act3_c4_t">4) Orchestration in Claude</h3>
-        <p class="card__x" data-i18n="act3_c4_x">Speed came from AI; the standard stayed with me.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c4" data-panel-title="Orchestration in Claude" data-i18n="act3_c4_rv_btn" data-panel-title-key="act3_c4_t">HOW CLAUDE WAS USED</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c4">
-            <p data-i18n="act3_c4_rv_txt1">Structured XML dispatches govern every build session — scope, constraints, and approval gates written before execution. Claude Code executes with Plan Mode previews reviewed before code lands; deployment follows hard rules with named commit intent — register, direct push, or a pull request with its link for manual approval — and authorship is logged to a single human author.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <p class="catlabel" data-i18n="act3_f3">Multi-page</p>
-        <h3 class="card__t" data-i18n="act3_c5_t">5) Grid and layout, eight pages</h3>
-        <p class="card__x" data-i18n="act3_c5_x">The same token layer, now carried across a shared chassis.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c5" data-panel-title="Grid and layout, eight pages" data-i18n="act3_c5_rv_btn" data-panel-title-key="act3_c5_t">WHAT THE SPLIT BOUGHT</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c5">
-            <p data-i18n="act3_c5_rv_txt">Each case gets its own route, its own dictionary and its own entry point, so a recruiter can be sent to one page rather than to a scroll position. The cost is a chassis that must stay identical across eight pages — and one defect in it is eight defects.</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <p class="catlabel" data-i18n="act3_f3">Multi-page</p>
-        <h3 class="card__t" data-i18n="act3_c6_t">6) Orchestration under a scope freeze</h3>
-        <p class="card__x" data-i18n="act3_c6_x">This build runs under a locked scope against overthinking.</p>
-        <div class="reveal" data-act="act3">
-          <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a3c6" data-panel-title="Orchestration under a scope freeze" data-i18n="act3_c6_rv_btn" data-panel-title-key="act3_c6_t">HOW GOVERNANCE IS APPLIED</button>
-          <div class="reveal__body reveal__body--poster" id="rv-a3c6">
-            <p data-i18n="act3_c6_rv_txt">Every stage is dispatched as a written prompt with preflight checks, approval gates and a completion report. Improvements that fall outside the list are logged in one line and not built. The discipline is the deliverable as much as the site is.</p>
+        <p class="catlabel" data-i18n="act4_c4_cat">Design System</p>
+        <h3 class="card__t" data-i18n="act4_c4_t">4) The same scaffold on every brief</h3>
+        <p class="card__x" data-i18n-html="act4_c4_x">Every case brief uses <strong>the same interface components as templates</strong>: editorials, cards, panels, charts and dashboards.</p>
+        <div class="reveal" data-act="act4">
+          <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a4c4" data-panel-title="The same templates on every brief" data-i18n="act4_c4_rv_btn" data-panel-title-key="act4_c4_t">The stylesheet</button>
+          <div class="reveal__body reveal__body--poster" id="rv-a4c4">
+            <p data-i18n="act4_c4_rv_txt">The web applies principles from Atomic Design and DesignOps. Global tokens for colour, type and spacing feed atoms such as buttons and tags, molecules such as cards and reveal panels, and organisms such as this schedule and dashboard. Each brief builds the same organisms from its own data and dictionary, so one fix lands everywhere, and every change is checked at three page widths, two themes and two languages.</p>
           </div>
         </div>
       </article>
     </div>
 
     <!-- The build links again, where a technical reader wants them (Brief 01 pattern, W2A-G3-Q2). -->
-    <p class="scan act__foot io" data-i18n="arch_foot">For more on the architecture, read the repository's README or browse my GitHub profile. You are reading the live site right now.</p>
+    <p class="scan act__foot io" data-i18n="act4_foot">For more, access the repository.</p>
     <div class="ctaset io">
       <a class="cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">
         <span class="cta__label" data-i18n="ui_cta_repo">Read the repository</span>
@@ -854,8 +886,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Both builds, side by side.</h2>
-      <p class="scan" data-i18n="act4_lede">Read every measure of both builds in one place, single page against multi.</p>
+      <h2 class="verdict" id="v4" data-i18n="act5_verdict">Both versions, side by side.</h2>
+      <p class="scan" data-i18n="act5_lede">Read every measure of multi page against single page.</p>
     </div>
 
 
@@ -872,42 +904,49 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
         <div class="drows">
           <div class="drow drow--head" aria-hidden="true">
-            <div class="drow__l"></div><div class="drow__v">Single page</div><div class="drow__v">Multi page</div>
+            <div class="drow__l"></div><div class="drow__v" data-i18n="dash_col_multi">Multi page</div><div class="drow__v" data-i18n="dash_col_single">Single page</div>
           </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m6">Commits</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m6"><span data-i18n="dash_m6">Commits</span></button></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="286">286</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="103">103</span></div>
+        <p class="drow__desc" id="dmd-m6" data-i18n="dash_m6_d" hidden>Each saved change to the site's code.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m7">Pull requests</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m7"><span data-i18n="dash_m7">Pull requests</span></button></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="52">52</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="20">20</span></div>
+        <p class="drow__desc" id="dmd-m7" data-i18n="dash_m7_d" hidden>Batches of changes, reviewed before reaching live site.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m8">Days of public history</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m8"><span data-i18n="dash_m8">Days of public history</span></button></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="71">71</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="60">60</span></div>
+        <p class="drow__desc" id="dmd-m8" data-i18n="dash_m8_d" hidden>Calendar days from the first saved change to the last.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m9">Active build-days</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m9"><span data-i18n="dash_m9">Active build-days</span></button></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="32">32</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="17">17</span></div>
+        <p class="drow__desc" id="dmd-m9" data-i18n="dash_m9_d" hidden>Days with at least one saved change.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m1">Building blocks</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m1a"><span data-i18n="dash_m1a">Pages</span></button></div>
+        <div class="drow__v"><span class="dcell__n" data-count="7">7</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="1">1</span></div>
+        <p class="drow__desc" id="dmd-m1a" data-i18n="dash_m1a_d" hidden>Separate screens a visitor can open.</p>
+      </div>
+      <div class="drow">
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m1b"><span data-i18n="dash_m1b">Organisms</span></button></div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="10">10</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="8">8</span></div>
+        <p class="drow__desc" id="dmd-m1b" data-i18n="dash_m1b_d" hidden>Reusable page sections, such as a hero, a card grid or a contact form.</p>
       </div>
       <div class="drow">
-        <div class="drow__l" data-i18n="dash_m3">Languages engineered</div>
-        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="2">2</span></div>
-      </div>
-      <div class="drow">
-        <div class="drow__l" data-i18n="dash_m2">Dictionary keys</div>
+        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m2"><span data-i18n="dash_m2">Dictionary keys</span></button></div>
         <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n" data-count="175">175</span></div>
+        <p class="drow__desc" id="dmd-m2" data-i18n="dash_m2_d" hidden>Labelled pieces of text, each kept in EN/ES.</p>
       </div>
         </div>
       </div>
@@ -915,22 +954,22 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <div class="dash__panel" id="dp-d" role="tabpanel" aria-labelledby="tab-d" hidden>
         <div class="drows">
           <div class="drow drow--head" aria-hidden="true">
-            <div class="drow__l"></div><div class="drow__v">Single page</div><div class="drow__v">Multi page</div>
+            <div class="drow__l"></div><div class="drow__v" data-i18n="dash_col_multi">Multi page</div><div class="drow__v" data-i18n="dash_col_single">Single page</div>
           </div>
       <div class="drow">
         <div class="drow__l" data-i18n="dash_d1">Commits per day, sustained</div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="4.0">4.0</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 71 days</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="6.1">6.1</span><span class="dcell__p" data-i18n="dash2_d1_p">103 ÷ 17</span></div>
       </div>
       <div class="drow">
         <div class="drow__l" data-i18n="dash_d2">Pull requests per week</div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="5.1">5.1</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.1 weeks</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="2.3">2.3</span><span class="dcell__p" data-i18n="dash2_d2_p">20 PRs ÷ 8.6 weeks</span></div>
       </div>
       <div class="drow">
         <div class="drow__l" data-i18n="dash_d3">Commits per review gate</div>
+        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
         <div class="drow__v"><span class="dcell__n" data-count="5.5">5.5</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span></div>
-        <div class="drow__v"><span class="dcell__n" data-count="5.2">5.2</span><span class="dcell__p" data-i18n="dash2_d3_p">103 ÷ 20</span></div>
       </div>
         </div>
       </div>
@@ -945,8 +984,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <p class="card__x" data-i18n="dash_r1">286 commits went through 52 review gates. Nothing shipped without passing a check I set for myself first.</p>
           </article>
           <article class="card">
-            <h3 class="card__t" data-i18n="dash2_r1_t">Half the time</h3>
-            <p class="card__x" data-i18n="dash2_r1">The second build kept that habit in half the days, starting from a written list of known defects rather than nothing.</p>
+            <h3 class="card__t" data-i18n="dash2_r1_t">The habit carried</h3>
+            <p class="card__x" data-i18n="dash2_r1">The multi-page build kept that habit, starting from a written list of known defects rather than nothing.</p>
           </article>
           <article class="card">
             <h3 class="card__t" data-i18n="dash_r3_t">What transfers</h3>
@@ -955,12 +994,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         </div>
       </div>
 
-      <p class="dash__foot" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days); designops, 10 Jul – 08 Sep 2026 (60 days). Rates are simple averages; anything after 06 Sep is forecast.</p>
+      <!-- Hidden until it carries the multi-page source as well (WC-Q45); its keys stay. -->
+      <p class="synthesis" data-i18n="dash_foot" hidden>Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).</p>
     </div>
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE REFLECTION — three phase cards, descending ================= -->
+<!-- ================= ACT 06 · THE REFLECTION — three lesson cards, descending ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head io">
@@ -968,28 +1008,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">What each phase left behind.</h2>
-      <p class="scan" data-i18n="act5_lede">Look at what three phases taught.</p>
+      <h2 class="verdict" id="v5" data-i18n="act6_verdict">What this web deploy taught.</h2>
+      <p class="scan" data-i18n="act6_lede">Learnings no academic title can provide.</p>
     </div>
 
-    <!-- Three cards on the Act 04 chassis, one per phase, descending. The schedule
-         runs the same three phases across the page; this section runs them down it,
-         so the ladder falls where Act 02's climbs. -->
+    <!-- Three cards on the Act 04 chassis, one lesson of the multi-page pipeline each,
+         descending, so the ladder falls where Act 02's climbs. -->
     <div class="cardgrid cardgrid--3 ladder-down io">
       <article class="card">
-        <p class="catlabel" data-i18n="act5_p1_cat">Single-page</p>
-        <h3 class="card__t" data-i18n="act5_p1_t">Speed without memory</h3>
-        <p class="card__x" data-i18n="act5_p1_x">Prompts were plain text and every session began from nothing. I moved fast and rebuilt the same decisions repeatedly.</p>
+        <p class="catlabel" data-i18n="act6_p1_cat">Governance</p>
+        <h3 class="card__t" data-i18n="act6_p1_t">Checkpoints that hold</h3>
+        <p class="card__x" data-i18n-html="act6_p1_x"><strong>A run stops at every gate until I release it.</strong> Review happens on the client server before changes are effective in live browser.</p>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act5_p2_cat">Repo hygiene</p>
-        <h3 class="card__t" data-i18n="act5_p2_t">History worth keeping</h3>
-        <p class="card__x" data-i18n="act5_p2_x">Nine days spent cleaning a repository taught me that a history you can read is worth more than the code it holds.</p>
+        <p class="catlabel" data-i18n="act6_p2_cat">Tracking</p>
+        <h3 class="card__t" data-i18n="act6_p2_t">One-time decisions</h3>
+        <p class="card__x" data-i18n-html="act6_p2_x">Every decision becomes <strong>a numbered ruling in one log</strong>, and every edit I make is recorded without a project controller.</p>
       </article>
       <article class="card">
-        <p class="catlabel" data-i18n="act5_p3_cat">Multi-page</p>
-        <h3 class="card__t" data-i18n="act5_p3_t">Scope before speed</h3>
-        <p class="card__x" data-i18n="act5_p3_x">A written scope with exit conditions ended the overthinking. The discipline turned out to matter as much as anything it produced.</p>
+        <p class="catlabel" data-i18n="act6_p3_cat">Audience</p>
+        <h3 class="card__t" data-i18n="act6_p3_t">Effective communication</h3>
+        <p class="card__x" data-i18n-html="act6_p3_x">Every claim traced to its source, and was <strong> optimized to professionals outside the Systems Engineering world.</strong></p>
       </article>
     </div>
 
@@ -1219,246 +1258,304 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
 
 /* ============================================================
    ACT 03 · SCHEDULE ORGANISM — data-driven, calendar-scaled.
-   Instantiation contract: only the DATA object is edited per
-   brief; markup, CSS and logic are the organism's own.
+   Instantiation contract: one render function, one data object per
+   chart. Markup, CSS and logic are the organism's own; an instance
+   supplies its root ids, its axis window and its stages.
 
    Converted from the Verify App brief's roadmap organism, whose
    axis was cumulative story points and whose layout made every
    task contiguous (cursor += t.sp). Neither build here has story
    points recorded, so the axis is calendar time: every row
-   carries a real start and end date, rows may leave gaps, and
-   the gaps are load-bearing — 19–25 Jun and the 34-day dormant
-   stretch from 25 Jul to 28 Aug are facts the chart must show.
+   carries a real start and end date, and rows may leave gaps.
 
-   Sources: E1a and E1b from the public commit history of
-   jdsaire/jdigital and jdsaire/legacy-desops. E2 from this
-   repository's own merged pull-request spine, #6–#25. The one
-   row not sourced to a commit is badged on its face.
+   Each row is a stage: its number, its name and its commit count
+   as a label; a duration bar from its first commit to its last,
+   with its length in days beside it; and its pull requests as
+   numbered diamonds on the bar, on their merge dates. A diamond
+   names what it delivered in a caption on hover, focus or tap.
+
+   Every string the organism draws, visible or assistive, comes from
+   the brief's dictionary and is redrawn on each i18n:changed. The EN
+   object below is only the first paint, and each value equals its
+   key's EN value.
+
+   Sources: this repository's merged pull requests #18–#32. Bars run
+   from a stage's first commit to its last; active days are distinct
+   commit dates; diamonds sit on merge dates; all in Lima time.
    ============================================================ */
 (function scheduleOrganism(){
   'use strict';
 
-  var AXIS_START = '2026-04-24';
-  var AXIS_END   = '2026-09-08';
-  /* The record stops here. Nothing is drawn past it: the four dispatched stages
-     that follow carry no date, and drawing them would invent one. The caption
-     names them and the milestone marks the boundary. */
-  var MEASURED_TO = '2026-09-06';
-
-  var DATA = {
-    epics: [
-      { id:'e1a', name:'01 Single Page', commits:'240 commits', prs:'48 PRs', start:'2026-04-24', end:'2026-06-18', tasks:[
-          { id:'sch_e1', window:"24–28 Apr · 5 days", name:"Workflow adoption & foundation", start:'2026-04-24', end:'2026-04-28' },
-          { id:'sch_e2', window:"30 Apr – 06 May · 5 days", name:"Capabilities & about system", start:'2026-04-30', end:'2026-05-06' },
-          { id:'sch_e3', window:"07–12 May · 5 days", name:"CTAs & contact form", start:'2026-05-07', end:'2026-05-12' },
-          { id:'sch_e4', window:"19–28 May · 4 days", name:"Contact integration & i18n stabilization", start:'2026-05-19', end:'2026-05-28' },
-          { id:'sch_e5', window:"30–31 May · 2 days", name:"Bridges & positioning refactor", start:'2026-05-30', end:'2026-05-31' },
-          { id:'sch_e6', window:"03–07 Jun · 5 days", name:"Pages pipeline & i18n v2", start:'2026-06-03', end:'2026-06-07' }
-        ]},
-      { id:'e1b', name:'02 Repo Hygiene', commits:'46 commits', prs:'4 PRs', start:'2026-06-26', end:'2026-07-04', tasks:[
-          { id:'sch_e7', window:"26–27 Jun · 2 days", name:"DesignOps variant baseline", start:'2026-06-26', end:'2026-06-27' },
-          { id:'sch_e8', window:"29–30 Jun · 2 days", name:"ES localization & mobile UX", start:'2026-06-29', end:'2026-06-30' },
-          { id:'sch_e9', window:"04 Jul · 1 day", name:"Repo cleanse, backup & Brief handoff", start:'2026-07-04', end:'2026-07-04' }
-        ]},
-      { id:'e2', name:'03 Multi Page', commits:'103 commits', prs:'20 PRs', start:'2026-07-10', end:'2026-09-08', tasks:[
-          { id:'e2t0', name:"History reset and per-organism rebuild", start:'2026-07-10', end:'2026-07-11', commits:2 },
-          { id:'e2t1', name:"Multi-page strategy runs", start:'2026-07-12', end:'2026-07-25', commits:38 },
-          { id:'e2t6', name:"Defect inventory", start:'2026-08-28', end:'2026-08-29', commits:2 },
-          { id:'e2t7', name:"AccreditaPass brief", start:'2026-08-30', end:'2026-08-30', commits:14 },
-          { id:'e2t8', name:"Home reallocation", start:'2026-08-31', end:'2026-08-31', commits:13 },
-          { id:'e2t9', name:"Trust-Verify relink", start:'2026-09-01', end:'2026-09-01', commits:4 },
-          { id:'e2t10', name:"Airport brief and global mechanisms", start:'2026-09-05', end:'2026-09-05', commits:20 },
-          { id:'e2t11', name:"Vector asset pass", start:'2026-09-06', end:'2026-09-06', commits:10 }
-        ]}
-    ],
-    /* Milestones sit on measured dates only. */
-    milestones: [
-      { epic:'e1b', at:'2026-07-04', name:'Brief handoff' },
-      { epic:'e2',  at:'2026-07-10', name:'History reset' },
-      { epic:'e2',  at:MEASURED_TO, name:'Record ends' }
-    ]
-  };
-
-
-  var root = document.getElementById('gantt');
-  if(!root) return;
-
-  /* ---------- Derived layout: calendar days ---------- */
   var DAY = 86400000;
+  var EN = {
+    sch_axis_cluster:'Stage', sch_axis_window:'Window',
+    sch_aria_months:'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec',
+    sch_commits_1:'{n} commit', sch_commits_n:'{n} commits',
+    sch_prs_1:'{n} PR', sch_prs_n:'{n} PRs',
+    sch_active_1:'{n} active day', sch_active_n:'{n} active days',
+    sch_days_1:'{n} day', sch_days_n:'{n} days',
+    sch_aria_cbar:'{name}, {window} 2026, {days}, {active}',
+    sch_aria_ctotals:'{name}: {window} 2026, {prs}, {active}',
+    sch_ms_pr:'#{n}', sch_aria_pr:'Pull request {n}, {name}, merged {date} 2026',
+    sch_cap_merged:'Merged {date}'
+  };
   function d(iso){ var p = iso.split('-'); return Date.UTC(+p[0], +p[1]-1, +p[2]); }
-  function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
-  var TOTAL_DAYS = offset(AXIS_END) + 1;
+  function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 
-  /* An end date is inclusive, so a one-day task is one day wide, not zero. */
-  function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
-  function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
+  /* cfg: { root, chart, grid, axisStart, axisEnd, ticks, stages } */
+  function renderSchedule(cfg){
+    var root = document.getElementById(cfg.root);
+    if(!root) return null;
+    var grid  = document.getElementById(cfg.grid);
+    var chart = document.getElementById(cfg.chart);
+    var AXIS_START = cfg.axisStart;
 
-  DATA.epics.forEach(function(epic){
-    var starts = epic.tasks.map(function(t){ return offset(t.start); });
-    var ends   = epic.tasks.map(function(t){ return offset(t.end); });
-    epic.startOff = Math.min.apply(null, starts);
-    epic.endOff   = Math.max.apply(null, ends);
-    /* A band's window is declared from the copy lock, not derived from its task
-       rows: jdigital's repository ran to 18 Jun while its last three dates carried
-       document uploads rather than site code and hold no task. The drawn bar still
-       has to contain every task it owns, so it spans whichever runs later — which is
-       how legacy-desops' bar reaches 06 Jul to hold the one row I supply myself. */
-    epic.startOff = Math.min(epic.startOff, offset(epic.start));
-    epic.endOff   = Math.max(epic.endOff,   offset(epic.end));
-    epic.days = epic.endOff - epic.startOff + 1;
-    /* Derived sums, kept as the internal record and deliberately NOT displayed:
-       they are named apart from epic.commits, which is the declared cell string.
-       Band 03's rowCommits is the invariant — it must total 103. */
-    epic.rowCommits = epic.tasks.reduce(function(a,t){ return a + (t.commits || 0); }, 0);
-    epic.taskDays   = epic.tasks.reduce(function(a,t){ return a + spanOf(t); }, 0);
-  });
+    /* ---------- Derived layout: calendar days ---------- */
+    function offset(iso){ return Math.round((d(iso) - d(AXIS_START)) / DAY); }
+    var TOTAL_DAYS = offset(cfg.axisEnd) + 1;
+    /* An end date is inclusive, so a one-day stage is one day wide, not zero. */
+    function spanOf(item){ return offset(item.end) - offset(item.start) + 1; }
+    function pct(days){ return (days / TOTAL_DAYS * 100).toFixed(3) + '%'; }
 
-  var grid    = document.getElementById('ganttGrid');
-  var chart   = document.getElementById('ganttChart');
-
-  var MONTHS = ['2026-05-01','2026-06-01','2026-07-01','2026-08-01','2026-09-01'];
-  var MNAME  = { '05':'May', '06':'Jun', '07':'Jul', '08':'Aug', '09':'Sep' };
-
-  function ticksHtml(){
-    var h = '<span class="gantt__tick" style="left:0">Apr</span>' +
-            '<span class="gantt__gridline" style="left:0"></span>';
-    MONTHS.forEach(function(iso){
-      var l = pct(offset(iso));
-      h += '<span class="gantt__tick" style="left:' + l + '">' + MNAME[iso.slice(5,7)] + '</span>';
-      h += '<span class="gantt__gridline" style="left:' + l + '"></span>';
+    /* Diamonds a day or less apart would overlap: they form a stack, each still on its
+       own date. A row with a stack gets a taller upper lane. */
+    cfg.stages.forEach(function(st){
+      var prs = st.prs.slice().sort(function(a, b){ return d(a.merge) - d(b.merge) || a.n - b.n; });
+      st.stacks = [];
+      prs.forEach(function(pr){
+        var last = st.stacks[st.stacks.length - 1];
+        if(last && offset(pr.merge) - offset(last[last.length - 1].merge) <= 1) last.push(pr);
+        else st.stacks.push([pr]);
+      });
+      st.tall = st.stacks.some(function(s){ return s.length > 1; });
     });
-    return h;
-  }
+    var STEP = 1.5 * Math.SQRT2 + 0.15;                /* rem: a diamond's diagonal plus a hairline, centre to centre */
 
-  function fmt(iso){
-    var p = iso.split('-'), mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return p[2].replace(/^0/,'') + ' ' + mn[+p[1]-1];
-  }
-  function window_(item){
-    return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end);
-  }
+    var dict = null;
+    function t(k){ return dict && dict[k] !== undefined ? dict[k] : EN[k]; }
+    function count(base, n){ return fill(t(base + (n === 1 ? '_1' : '_n')), { n:n }); }
+    function mon(){ return t('sch_aria_months').split(' '); }
+    function fmt(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon()[+p[1]-1]; }
+    function win(item){ return item.start === item.end ? fmt(item.start) : fmt(item.start) + ' – ' + fmt(item.end); }
+    function nameOf(item){ return (item.key && dict && dict[item.key]) || item.name; }
+    function two(n){ return (n < 10 ? '0' : '') + n; }
 
-  function barHtml(item, cls, id, isEpic){
-    var days = isEpic ? item.days : spanOf(item);
-    var left = isEpic ? item.startOff : offset(item.start);
-    var mod  = '';
-    if(item.flag === 'principal') mod = ' gantt__bar--principal';
-    var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
-    var label = '<span class="gantt__span">' + days + 'd</span>';
-    return '<div class="gantt__bar ' + cls + mod + '" data-bar="' + id + '"' +
-           (item.flag ? ' data-flag="' + item.flag + '"' : '') +
-           ' style="left:' + pct(left) + '; width:' + pct(days) + ';" role="img" aria-label="' +
-           item.name + ', ' + window_(item) + ' 2026, ' + days + ' days' + provenance + '">' + label + '</div>';
-  }
-  function isLocked(t){ return /^sch_e\d+$/.test(t.id); }
-  /* One shape per level, so no two cells in the column carry different fields.
-     An epic states its window, its commits and its pull requests, one per line.
-     A task states its window and nothing else: the day counts and per-row commit
-     totals it used to print were derived differently per band and disagreed with
-     the bar beside them. Both still live in the DATA object as the record. */
-  function summaryHtml(item, isEpic){
-    if(isEpic) return '<b>' + window_(item) + '</b>' +
-                      '<span class="gantt__days">' + item.commits + '</span>' +
-                      '<span class="gantt__days">' + item.prs + '</span>';
-    return '<b>' + window_(item) + '</b>';
-  }
+    function draw(next){
+      if(next) dict = next;
+      var html = '<div class="gantt__axis" aria-hidden="true"><div>' + esc(t('sch_axis_cluster')) + '</div><div class="gantt__axis-units">' +
+        cfg.ticks.map(function(iso){
+          var l = pct(offset(iso));
+          return '<span class="gantt__tick" style="left:' + l + '">' + fmt(iso) + '</span><span class="gantt__gridline" style="left:' + l + '"></span>';
+        }).join('') +
+        '</div><div class="gantt__axis-summary">' + esc(t('sch_axis_window')) + '</div></div>';
 
-  var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div>' +
-             '<div class="gantt__axis-units">' + ticksHtml() + '</div>' +
-             '<div class="gantt__axis-summary">Window</div></div>';
-
-  DATA.epics.forEach(function(epic){
-    html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
-      '<div class="gantt__row">' +
-        '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
-          '<span class="gantt__marker" aria-hidden="true">›</span>' + epic.name + '</button></div>' +
-        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id, true) +
-          '<span data-ms-slot="' + epic.id + '"></span></div>' +
-        '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + window_(epic) + ' 2026, ' + epic.commits + ', ' + epic.prs + '">' + summaryHtml(epic, true) + '</div>' +
-      '</div>' +
-      '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
-    epic.tasks.forEach(function(t){
-      html += '<li class="gantt__task-row" data-task="' + t.id + '">' +
-        '<span class="gantt__task-label">' +
-          '<span' + (isLocked(t) ? ' data-i18n="' + t.id + '_t"' : '') + '>' + t.name + '</span>' +
-        '</span>' +
-        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id, false) + '</span>' +
-        '<span class="gantt__task-summary">' + summaryHtml(t, false) + '</span></li>';
-    });
-    html += '</ul></div>';
-  });
-  grid.innerHTML = html;
-
-  var drawnMs = [];
-  DATA.milestones.forEach(function(m){
-    var slot = grid.querySelector('[data-ms-slot="' + m.epic + '"]');
-    if(!slot) return;
-    drawnMs.push(m);
-    var l = pct(offset(m.at));
-    slot.outerHTML = '<span>' +
-      '<span class="gantt__milestone" style="left:' + l + '" role="img" aria-label="Milestone: ' +
-      m.name + ', ' + window_({start:m.at, end:m.at}) + ' 2026"></span>' +
-      '<span class="gantt__milestone-label" style="left:' + l + '">' + m.name + '</span></span>';
-  });
-
-  /* ---------- Assistive labels in the active language ----------
-     The labels above are drawn in English at load. On every i18n:changed the
-     loader hands over the merged dictionary, and the labels are rebuilt from its
-     sch_aria_* templates, so a screen reader hears the language on screen.
-     Visible text is not touched. */
-  function relabel(d){
-    if(!d.sch_aria_bar || !d.sch_aria_months) return;
-    var mon = d.sch_aria_months.split(' ');
-    function fmtL(iso){ var p = iso.split('-'); return p[2].replace(/^0/,'') + ' ' + mon[+p[1]-1]; }
-    function winL(item){ return item.start === item.end ? fmtL(item.start) : fmtL(item.start) + ' – ' + fmtL(item.end); }
-    function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
-    function bar(item, isEpic){
-      var el = grid.querySelector('[data-bar="' + item.id + '"]');
-      if(!el) return;
-      var days = isEpic ? item.days : spanOf(item);
-      var name = (!isEpic && isLocked(item) && d[item.id + '_t']) || item.name;
-      var tpl = days === 1 && d.sch_aria_bar1 ? d.sch_aria_bar1 : d.sch_aria_bar;
-      var provenance = item.flag === 'principal' ? ', supplied by the author rather than the commit record' : '';
-      el.setAttribute('aria-label', fill(tpl, { name:name, window:winL(item), days:days }) + provenance);
+      cfg.stages.forEach(function(st, si){
+        var name = nameOf(st), prs = count('sch_prs', st.prs.length), active = count('sch_active', st.active), days = spanOf(st);
+        var field = st.tall ? 5 : 3.25;                  /* rem: a stack of two needs the taller row */
+        var dots = st.stacks.map(function(stack){
+          return stack.map(function(pr, i){
+            var dy = (i - (stack.length - 1) / 2) * STEP;
+            var label = fill(t('sch_aria_pr'), { n:pr.n, name:nameOf(pr), date:fmt(pr.merge) });
+            return '<button class="gantt__dot" type="button" data-pr="' + pr.n + '" data-stage="' + si + '"' +
+                   ' style="left:' + pct(offset(pr.merge) + 0.5) + '; top:calc(50% + ' + dy.toFixed(3) + 'rem)"' +
+                   ' aria-label="' + esc(label) + '"><span aria-hidden="true">' + pr.n + '</span></button>';
+          }).join('');
+        }).join('');
+        /* The length sits past the bar and past any diamond beyond its end; where that
+           would run off the axis, it sits before the bar instead. */
+        var merges = st.prs.map(function(p){ return offset(p.merge); });
+        var after = Math.max(offset(st.end), Math.max.apply(null, merges)) + 1;
+        var before = Math.min(offset(st.start), Math.min.apply(null, merges));
+        var len = esc(count('sch_days', days));
+        var lenHtml = after <= TOTAL_DAYS - 4
+          ? '<span class="gantt__len" style="left:calc(' + pct(after) + ' + ' + (after > offset(st.end) + 1 ? '.9rem' : '.5rem') + ')" aria-hidden="true">' + len + '</span>'
+          : '<span class="gantt__len gantt__len--before" style="right:calc(' + pct(TOTAL_DAYS - before) + ' + .5rem)" aria-hidden="true">' + len + '</span>';
+        html += '<div class="gantt__epic" data-epic="' + st.id + '"><div class="gantt__row">' +
+          '<div class="gantt__row-label"><span class="gantt__stage"><span class="gantt__stage-n">' + two(si + 1) + '</span>' + esc(name) +
+            ' <span class="gantt__stage-note">– ' + esc(count('sch_commits', st.commits)) + '</span></span></div>' +
+          '<div class="gantt__row-field" style="min-height:' + field + 'rem">' +
+            '<div class="gantt__bar" style="left:' + pct(offset(st.start)) + '; width:' + pct(days) + '" role="img" aria-label="' +
+              esc(fill(t('sch_aria_cbar'), { name:name, window:win(st), days:count('sch_days', days), active:active })) + '"></div>' + lenHtml + dots + '</div>' +
+          '<div class="gantt__row-summary" aria-label="' + esc(fill(t('sch_aria_ctotals'), { name:name, window:win(st), prs:prs, active:active })) + '">' +
+            '<b>' + win(st) + '</b><span class="gantt__days">' + esc(prs) + '</span><span class="gantt__days">' + esc(active) + '</span></div>' +
+        '</div></div>';
+      });
+      grid.innerHTML = html;
+      hide();
     }
-    DATA.epics.forEach(function(epic){
-      bar(epic, true);
-      var sum = grid.querySelector('[data-epic="' + epic.id + '"] .gantt__row-summary');
-      if(sum && d.sch_aria_totals) sum.setAttribute('aria-label',
-        fill(d.sch_aria_totals, { name:epic.name, window:winL(epic), commits:epic.commits, prs:epic.prs }));
-      epic.tasks.forEach(function(t){ bar(t, false); });
-    });
-    if(d.sch_aria_ms) Array.prototype.forEach.call(grid.querySelectorAll('.gantt__milestone'), function(el, i){
-      var m = drawnMs[i];
-      if(m) el.setAttribute('aria-label', fill(d.sch_aria_ms, { name:m.name, date:fmtL(m.at) }));
-    });
-  }
-  document.addEventListener('i18n:changed', function(e){
-    var d = e.detail && e.detail.dict; if(d) relabel(d);
-  });
 
-  /* ---------- Zoom: expand / collapse ---------- */
-  var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
-  /* No expand-all control: its two strings retire with the rail, and N6 makes
-     individual disclosure the only mechanism. Epics stay collapsed until opened. */
-  function setExpanded(btn, expanded){
-    btn.setAttribute('aria-expanded', String(expanded));
-    var list = document.getElementById(btn.getAttribute('aria-controls'));
-    if(list) list.hidden = !expanded;
+    /* ---------- Caption: one per chart, placed where it reads best ----------
+       Above the diamond, or below it when that would cross the axis header; always
+       clamped inside the part of the chart the reader can see, so it stays whole at
+       390 while the chart scrolls sideways. */
+    var cap = document.createElement('div');
+    cap.className = 'gantt__cap';
+    cap.setAttribute('aria-hidden', 'true');
+    cap.hidden = true;
+    chart.appendChild(cap);
+    var current = null, pinned = false;
+
+    function prOf(dot){
+      var st = cfg.stages[+dot.getAttribute('data-stage')], n = +dot.getAttribute('data-pr');
+      return st.prs.filter(function(p){ return p.n === n; })[0];
+    }
+    function show(dot){
+      var pr = prOf(dot);
+      if(current && current !== dot) current.classList.remove('is-active');
+      current = dot; dot.classList.add('is-active');
+      cap.innerHTML = '<b>' + esc(fill(t('sch_ms_pr'), { n:pr.n })) + '</b>' + esc(nameOf(pr)) +
+                      ' <span class="gantt__cap-d">· ' + esc(fill(t('sch_cap_merged'), { date:fmt(pr.merge) })) + '</span>';
+      cap.hidden = false;
+      place(dot);
+    }
+    function place(dot){
+      /* Measure at the origin, where the caption wraps at its own width. */
+      cap.style.width = ''; cap.style.left = '0px'; cap.style.top = '0px';
+      var c = chart.getBoundingClientRect(), r = dot.getBoundingClientRect();
+      var w = cap.offsetWidth, h = cap.offsetHeight, pad = 8;
+      /* An absolute box shrinks as it nears the chart's visible edge; hold its width. */
+      cap.style.width = w + 'px';
+      var x = r.left - c.left + chart.scrollLeft + r.width / 2;
+      var left = Math.max(chart.scrollLeft + pad, Math.min(x - w / 2, chart.scrollLeft + chart.clientWidth - w - pad));
+      var axis = grid.querySelector('.gantt__axis').offsetHeight;
+      var top = r.top - c.top + chart.scrollTop - h - pad;
+      if(top < axis + 4) top = r.bottom - c.top + chart.scrollTop + pad;
+      cap.style.left = left + 'px';
+      cap.style.top = top + 'px';
+    }
+    function hide(){
+      if(current) current.classList.remove('is-active');
+      current = null; pinned = false; cap.hidden = true;
+    }
+    grid.addEventListener('pointerover', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(dot && e.pointerType === 'mouse' && !pinned) show(dot);
+    });
+    grid.addEventListener('pointerout', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(dot && e.pointerType === 'mouse' && !pinned && !dot.contains(e.relatedTarget)) hide();
+    });
+    grid.addEventListener('click', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(!dot) return;
+      if(pinned && current === dot){ hide(); return; }
+      show(dot); pinned = true;
+    });
+    grid.addEventListener('focusin', function(e){
+      var dot = e.target.closest('.gantt__dot');
+      if(dot && !pinned) show(dot);
+    });
+    grid.addEventListener('focusout', function(e){
+      if(!pinned && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.gantt__dot'))) hide();
+    });
+    document.addEventListener('click', function(e){
+      if(current && !e.target.closest('.gantt__dot')) hide();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && current) hide();
+    });
+    chart.addEventListener('scroll', function(){ if(current) place(current); }, { passive:true });
+    window.addEventListener('resize', function(){ if(current) place(current); });
+
+    draw(null);
+    return { draw: draw };
   }
-  toggles.forEach(function(btn, i){
-    btn.addEventListener('click', function(){
-      setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
-    });
-    btn.addEventListener('keydown', function(e){
-      var nx = null;
-      if(e.key === 'ArrowDown') nx = toggles[i+1];
-      if(e.key === 'ArrowUp')   nx = toggles[i-1];
-      if(e.key === 'Home')      nx = toggles[0];
-      if(e.key === 'End')       nx = toggles[toggles.length-1];
-      if(nx){ e.preventDefault(); nx.focus(); }
-    });
+
+  var instances = [
+    /* The multi-page build: from the first commit on 28 Aug to the merge of #32 on
+       26 Sep, in five stages. Spans, active days and commits are counted from each
+       stage's pull requests; merge dates are converted to Lima time. */
+    renderSchedule({
+      root:'gantt2', chart:'gantt2Chart', grid:'gantt2Grid',
+      axisStart:'2026-08-28', axisEnd:'2026-09-26',
+      ticks:['2026-08-28','2026-09-01','2026-09-08','2026-09-15','2026-09-22'],
+      stages: [
+        { id:'c1', key:'sch_c1', name:'Defect inventory', start:'2026-08-28', end:'2026-08-28', active:1, commits:1, prs:[
+            { n:18, key:'sch_pr18', name:'Listed what was broken before rebuilding', merge:'2026-08-29' } ]},
+        { id:'c2', key:'sch_c2', name:'Case briefs', start:'2026-08-30', end:'2026-09-11', active:6, commits:30, prs:[
+            { n:19, key:'sch_pr19', name:'Published the AccreditaPass case brief', merge:'2026-08-30' },
+            { n:22, key:'sch_pr22', name:'Moved the Trust-Verify app to its own repository', merge:'2026-09-01' },
+            { n:23, key:'sch_pr23', name:'Published the Airport brief and retired two draft pages', merge:'2026-09-05' },
+            { n:26, key:'sch_pr26', name:'Reviewed and revised this Portfolio Evolution brief', merge:'2026-09-11' } ]},
+        { id:'c3', key:'sch_c3', name:'Home/About/Contact', start:'2026-08-30', end:'2026-09-20', active:6, commits:83, prs:[
+            { n:20, key:'sch_pr20', name:'Reorganised the home page around four work cards', merge:'2026-08-31' },
+            { n:21, key:'sch_pr21', name:'Refined home navigation, cards and track record', merge:'2026-08-31' },
+            { n:27, key:'sch_pr27', name:"Tidied the home page's building blocks", merge:'2026-09-13' },
+            { n:28, key:'sch_pr28', name:"Built the About page's journey", merge:'2026-09-16' },
+            { n:29, key:'sch_pr29', name:'Finished the Contact page in English and Spanish', merge:'2026-09-20' } ]},
+        { id:'c4', key:'sch_c4', name:'Global mechanisms', start:'2026-09-05', end:'2026-09-06', active:2, commits:22, prs:[
+            { n:24, key:'sch_pr24', name:'Added light and dark themes and connected the contact form', merge:'2026-09-05' },
+            { n:25, key:'sch_pr25', name:'Drew vector artwork for the work and capability cards', merge:'2026-09-06' } ]},
+        { id:'c5', key:'sch_c5', name:'Copy and i18n waves', start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:[
+            { n:30, key:'sch_pr30', name:'Approved copy for Home and About in both languages', merge:'2026-09-22' },
+            { n:31, key:'sch_pr31', name:'Split the dictionaries and standardised the briefs', merge:'2026-09-24' },
+            { n:32, key:'sch_pr32', name:'Spanish for every brief, on three dictionary levels', merge:'2026-09-26' } ]}
+      ]
+    })
+  ];
+
+  document.addEventListener('i18n:changed', function(e){
+    var dict = e.detail && e.detail.dict;
+    if(dict) instances.forEach(function(inst){ if(inst) inst.draw(dict); });
   });
+})();
+
+/* ============ Dashboard measures: a plain description in an overlay ============
+   Hover, focus or tap a measure to read what it counts; a second tap, Escape or a
+   tap elsewhere closes it. Placed above the label, or below it near the top, and
+   kept inside the dashboard. */
+(function measureCaptions(){
+  const dash = document.querySelector(".dash");
+  if(!dash) return;
+  const cap = document.createElement("div");
+  cap.className = "dash__cap"; cap.setAttribute("aria-hidden","true"); cap.hidden = true;
+  dash.appendChild(cap);
+  let current = null, pinned = false;
+  /* Desktop only (WC-Q42): a wide screen with a mouse or trackpad. On phones and
+     tablets the labels stay plain, out of the tab order, and screen readers still
+     read each description through aria-describedby. */
+  const desk = window.matchMedia("(min-width:1024px) and (hover:hover)");
+  const toggles = dash.querySelectorAll(".drow__toggle");
+  function mode(){
+    if(!desk.matches) hide();
+    toggles.forEach(b=>{ if(desk.matches) b.removeAttribute("tabindex"); else b.setAttribute("tabindex","-1"); });
+  }
+  /* To the right of the label, centred on it, so no figure is covered; where the
+     row leaves too little room beside a long label (phone widths), below it. */
+  function place(btn){
+    cap.style.maxWidth = ""; cap.style.left = "0px"; cap.style.top = "0px";
+    const c = dash.getBoundingClientRect(), r = btn.getBoundingClientRect();
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize), pad = 8, gap = 12;
+    const x = r.right - c.left + gap, room = dash.clientWidth - x - pad;
+    if(room >= 9 * rem){
+      cap.style.maxWidth = Math.min(13 * rem, room) + "px";
+      cap.style.left = x + "px";
+      cap.style.top = Math.max(pad, r.top - c.top + (r.height - cap.offsetHeight) / 2) + "px";
+    } else {
+      const w = cap.offsetWidth;
+      cap.style.left = Math.max(pad, Math.min(r.left - c.left, dash.clientWidth - w - pad)) + "px";
+      cap.style.top = (r.bottom - c.top + 6) + "px";
+    }
+  }
+  function show(btn){
+    const d = document.getElementById(btn.getAttribute("aria-describedby"));
+    if(!d) return;
+    if(current && current !== btn) current.classList.remove("is-active");
+    current = btn; btn.classList.add("is-active");
+    cap.textContent = d.textContent; cap.hidden = false; place(btn);
+  }
+  function hide(){ if(current) current.classList.remove("is-active"); current = null; pinned = false; cap.hidden = true; }
+  dash.addEventListener("pointerover", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned) show(b); });
+  dash.addEventListener("pointerout", e=>{ const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned && !b.contains(e.relatedTarget)) hide(); });
+  dash.addEventListener("click", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(!b) return; if(pinned && current === b){ hide(); return; } show(b); pinned = true; });
+  dash.addEventListener("focusin", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(b && !pinned) show(b); });
+  dash.addEventListener("focusout", e=>{ if(!pinned && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(".drow__toggle"))) hide(); });
+  document.addEventListener("click", e=>{ if(current && !e.target.closest(".drow__toggle")) hide(); });
+  document.addEventListener("keydown", e=>{ if(e.key === "Escape" && current) hide(); });
+  window.addEventListener("resize", ()=>{ if(current) place(current); });
+  desk.addEventListener("change", mode);
+  mode();
 })();
 
 /* ============ Count-up (once per element, reduced-motion aware) ============ */

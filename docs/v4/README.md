@@ -11,7 +11,9 @@ this is the next version folder per the pattern `v1`/`v2`/`v3` establish.
 - `cc-plans/` — the approved plan(s) for these deployments.
 - `cc-completion-reports/` — the completion report for each executed run.
 
-The most recent run archived here is **Dispatch B · brief Spanish, three-level i18n** (deploy
-v19, PR #32): all four briefs render in Spanish; brief dictionaries split into global, regional and
-local levels; Brief 01's English re-locked and Brief 02's mirrored to their approved Spanish; side
-panels and inline-bold lines follow the active language; and Brief 03's load error fixed.
+The most recent run archived here is **site-wC · Brief 04 multi-page refocus** (deploy v20,
+PR #33). Brief 04 now tells the multi-page build first: a new Act 00, a calendar-scaled schedule of
+PRs #18–#32, and a dashboard comparing both builds, with English and Spanish locked by the principal.
+It also carries site-wide fixes: the reveal guard now covers every brief, panel bold renders, and the
+mobile menu sets theme and language side by side and closes when the window widens. The run before
+it was **Dispatch B · brief Spanish, three-level i18n** (deploy v19, PR #32).
