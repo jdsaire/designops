@@ -15,3 +15,4 @@ Approved deployment plans for v4 and later.
 | W2A · i18n split, brief standardisation, About | `Plan-W2A-I18nSplitMobileChassis.md` |
 | Dispatch B · brief Spanish, three-level i18n | `Plan-WB-BriefSpanish.md` |
 | site-wC · Brief 04 multi-page refocus | `Plan-WC-B04-MultipageFocus.md` |
+| site-wD · Brief 03 rebuilt as TUUA Transfer | `Plan-WD-B03-TUUA.md` |

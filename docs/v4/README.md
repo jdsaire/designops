@@ -11,9 +11,8 @@ this is the next version folder per the pattern `v1`/`v2`/`v3` establish.
 - `cc-plans/` — the approved plan(s) for these deployments.
 - `cc-completion-reports/` — the completion report for each executed run.
 
-The most recent run archived here is **site-wC · Brief 04 multi-page refocus** (deploy v20,
-PR #33). Brief 04 now tells the multi-page build first: a new Act 00, a calendar-scaled schedule of
-PRs #18–#32, and a dashboard comparing both builds, with English and Spanish locked by the principal.
-It also carries site-wide fixes: the reveal guard now covers every brief, panel bold renders, and the
-mobile menu sets theme and language side by side and closes when the window widens. The run before
-it was **Dispatch B · brief Spanish, three-level i18n** (deploy v19, PR #32).
+The most recent run archived here is **site-wD · Brief 03 rebuilt as TUUA Transfer** (deploy v21,
+PR #34). Brief 03 now tells one project, the web payment channel for Lima Airport's transfer fee, in
+seven acts from context to contrast, in English and Spanish, and keeps the reader's place across a
+reload. It merged `main` after PR #33 to carry that run's site-wide fixes and added the panel-bold rule
+to its own page. The run before it was **site-wC · Brief 04 multi-page refocus** (deploy v20, PR #33).
