@@ -15,3 +15,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | W2A · i18n split, brief standardisation, About | `w2a-i18n-split-mobile-chassis-completion-report.md` |
 | Dispatch B · brief Spanish, three-level i18n | `wb-brief-spanish-completion-report.md` |
 | site-wC · Brief 04 multi-page refocus | `wc-b04-multipage-focus-completion-report.md` |
+| site-wD · Brief 03 rebuilt as TUUA Transfer | `wd-b03-tuua-completion-report.md` |
