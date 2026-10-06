@@ -347,6 +347,41 @@
   </section>
 
   <!-- ============================================================
+       BRIDGE — Positioning · portrait + Canva-highlight heading (PR #35)
+       Between Work and Capabilities; shared/bridge.css, as About's onboarding bridge.
+       The hover caption (≥1024 px) names the portrait; the image's alt describes it.
+       Anchor: #bridge-positioning
+       ============================================================ -->
+  <section class="bridge bridge--positioning" id="bridge-positioning" aria-labelledby="bridge-positioning-heading">
+    <div class="bridge__media">
+      <span class="img-alt-host" alt="Juan Diego Saire — AI Product &amp; Experience Engineer, Lima, Peru." data-i18n-alt="bridge_image_caption">
+        <picture>
+          <source type="image/avif" srcset="assets/img/bridge-positioning/portrait-600.avif 600w, assets/img/bridge-positioning/portrait-900.avif 900w, assets/img/bridge-positioning/portrait-1200.avif 1200w" sizes="(min-width: 768px) 50vw, 100vw">
+          <source type="image/webp" srcset="assets/img/bridge-positioning/portrait-600.webp 600w, assets/img/bridge-positioning/portrait-900.webp 900w, assets/img/bridge-positioning/portrait-1200.webp 1200w" sizes="(min-width: 768px) 50vw, 100vw">
+          <img
+            class="bridge__image"
+            src="assets/img/bridge-positioning/portrait-900.webp"
+            alt="Confident black-and-white portrait of Juan Diego Saire standing with purpose, hands on hips in a white shirt."
+            data-i18n-alt="bridge_image_alt"
+            loading="lazy"
+            decoding="async"
+            width="900"
+            height="1349"
+          >
+        </picture>
+      </span>
+      <div class="bridge__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="bridge__content">
+      <span class="bridge__rule" aria-hidden="true"></span>
+      <div class="bridge__heading-wrapper">
+        <h2 class="bridge__heading" id="bridge-positioning-heading"><span data-i18n="bridge_heading">Ask. Reject. Verify. Anticipate. That's the work when AI writes the code.</span></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        CAPABILITIES — full organism (per-vertical detail deepens at /capabilities/)
        Anchor: #capabilities
        ============================================================ -->
