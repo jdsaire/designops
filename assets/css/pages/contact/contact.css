@@ -326,15 +326,29 @@ body.modal-open {
   display: none;
 }
 
-/* Destinations: one per line, left-aligned to the same gutter as the
-   heading. The shared .cta is inline-flex, which is what set the LinkedIn
-   label against the GitHub icon with 4-5px between them. */
-.contact-channels .cta {
+/* Destinations (PR35-Q33): the footer's pair, LinkedIn and this site's code on GitHub, under the
+   heading; Contact's own footer carries the closing statement and © only. Stacked on phones,
+   side by side from 768. Purple icons, white labels, each link at least 44 px tall, named by
+   its visible label in both languages. */
+.contact-channels {
   display: flex;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem 2.25rem;
 }
-.contact-channels .cta:last-child {
-  margin-bottom: 0;
+.contact-channels .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  margin: 0;
+  color: var(--color-brand-purple);
+}
+.contact-channels .cta:hover .cta__label,
+.contact-channels .cta:focus-visible .cta__label { color: var(--color-brand-purple); }
+.contact-channels .cta:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+@media (min-width: 768px) {
+  .contact-channels { flex-direction: row; flex-wrap: wrap; align-items: center; }
 }
 
 /* The one separation between the opening stack and the form, the same
