@@ -14,8 +14,9 @@
   <meta property="og:image" content="assets/img/bridge1_onboarding.svg">
   <meta property="og:locale" content="en_US">
 
-  <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
   <link rel="preload" href="assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo/archivo-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/base/fonts.css">
   <link rel="stylesheet" href="assets/css/base/tokens.css">
   <link rel="stylesheet" href="assets/css/base/reset.css">
@@ -159,8 +160,8 @@
   <main id="main">
 
   <!-- ============================================================
-       HERO — v9 · EN/ES bilingual
-       H1 locked: EN option A / ES option A (per principal)
+       HERO — v10 · EN/ES bilingual
+       PR #35: attribution, then the two-line heading (PR35-Q22, V7 Block, upper case)
        ============================================================ -->
   <section class="hero" id="top" aria-label="Introduction">
 
@@ -171,23 +172,20 @@
 
     <div class="hero__inner">
 
-      <div class="hero__left">
+      <div class="hero__stage">
 
-        <!-- Headline: one h1 for both languages, values from the i18n engine -->
-        <h1 class="hero__h1">
-          <span class="hero__h1-line" data-i18n="hero_h1_line1">STRATEGIC BUILDS.</span>
-          <span class="hero__h1-line"><span class="purple" data-i18n="hero_h1_line2">AI-POWERED.</span></span>
-        </h1>
-
-        <!-- Meta stack below the headline: the name, the title line, then the badge -->
-        <div class="hero__meta">
+        <!-- Attribution, then the heading: one h1 for both languages, values from the i18n engine.
+             Each line is pre / italic hook / post; phones break before the post segment. -->
+        <div class="hero__attr">
           <p class="hero__attribution hero__attribution--name" data-i18n="hero_attribution_name">Juan Diego Saire</p>
+          <span class="hero__sep" aria-hidden="true">·</span>
           <p class="hero__attribution hero__attribution--title" data-i18n="hero_attribution_title">AI Product &amp; Experience Engineer</p>
-          <span class="hero__badge">
-            <span class="hero__badge-dot" aria-hidden="true"></span>
-            <span data-i18n="hero_badge">Building in Lima, Peru.</span>
-          </span>
         </div>
+
+        <h1 class="hero__h1">
+          <span class="hero__h1-line hero__l1"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l1_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l1_em">DESIGN</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l1_post">ATE CODE.</span></span>
+          <span class="hero__h1-line hero__l2"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l2_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l2_w3">IMPACT</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l2_post">PREVAILS.</span></span>
+        </h1>
 
       </div>
     </div>
