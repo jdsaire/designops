@@ -44,6 +44,10 @@
 .hero--fit .hero__h1-line { white-space:nowrap; }
 .hero__hook { font-style:italic; color:var(--color-brand-purple); padding-right:0.04em; }
 
+/* Value proposition: About's highlight (shared/bridge.css .bridge__heading), size reduced only. */
+.hero__sub { margin:clamp(1.75rem,3vw,2.75rem) 0 0; max-width:42rem; }
+.hero__sub .hero__sub-hl.bridge__heading { font-size:1.375rem; }
+
 /* While hero.js fits the heading, the hero's content box waits unseen, so nothing on it moves
    after the first paint (a visible box that resizes counts as a layout shift even when its
    content is hidden). If the script never runs, it shows after 3 s regardless. */
@@ -91,6 +95,7 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
   .hero__attr { flex-direction:column; align-items:flex-start; row-gap:0.15rem; }
   .hero__attribution { font-size:0.9375rem; }
   .hero__sep { display:none; }
+  .hero__sub .hero__sub-hl.bridge__heading { font-size:1.0625rem; }
   .hero__tags { display:none; }
   .hero__right { padding-top:1.5rem; border-top:1px solid var(--color-border-faint); gap:1.25rem; }
   .hero__stats { gap:1rem; }
