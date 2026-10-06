@@ -17,6 +17,8 @@
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="../../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/base/fonts.css">
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <style>
@@ -32,7 +34,7 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
   --color-text-dim:rgba(255,255,255,0.50);
   --color-border-faint:rgba(255,255,255,0.06);
   --color-border-soft:rgba(255,255,255,0.10);
-  --font-primary:'Graphik',Arial,sans-serif;
+  --font-primary:'Archivo','Archivo Fallback',Arial,sans-serif;
   --fw-light:300; --fw-regular:400; --fw-medium:500;
   --fw-semibold:600; --fw-bold:700; --fw-black:900;
   --max-content-width:1440px;

@@ -12,7 +12,7 @@
        response headers we control, so this meta tag is the only vehicle,
        and frame-ancestors cannot be carried in one. Scoped to this page
        (S10D D7); the other seven are a CC-3 line. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-z/L/xVjXibIZ7gMDFCNXZVuBILZDkxu+3TrsJz5BwxY='; style-src 'self'; img-src 'self'; font-src 'none'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-z/L/xVjXibIZ7gMDFCNXZVuBILZDkxu+3TrsJz5BwxY='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
   <title>Contact · Juan Diego Saire — DesignOps</title>
   <meta name="description" content="Tell me about the team and the challenge. One form, a reply within 48 hours.">
   <link rel="icon" type="image/svg+xml" href="../logos/jdigital-logo-default.svg">
@@ -25,6 +25,8 @@
   <meta property="og:locale" content="en_US">
 
   <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+  <link rel="preload" href="../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/base/fonts.css">
   <link rel="stylesheet" href="../assets/css/base/tokens.css">
   <link rel="stylesheet" href="../assets/css/base/reset.css">
   <link rel="stylesheet" href="../assets/css/shared/progress.css">

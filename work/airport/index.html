@@ -23,6 +23,8 @@
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="../../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/base/fonts.css">
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <style>
@@ -38,7 +40,7 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
   --color-text-dim:rgba(255,255,255,0.50);
   --color-border-faint:rgba(255,255,255,0.06);
   --color-border-soft:rgba(255,255,255,0.10);
-  --font-primary:'Graphik',Arial,sans-serif;
+  --font-primary:'Archivo','Archivo Fallback',Arial,sans-serif;
   --fw-light:300; --fw-regular:400; --fw-medium:500;
   --fw-semibold:600; --fw-bold:700; --fw-black:900;
   --max-content-width:1440px;
@@ -1460,9 +1462,9 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     if(compact) return;
     const t = (n.chip.querySelector('.net__lt')||{}).textContent||''; const sp=t.indexOf(' ');
     const lines = (sp===-1 || t.length<11) ? [t] : [t.slice(0,sp), t.slice(sp+1)];
-    let fs = n.ring==='ext' ? 10.5 : 11; ctx.font = `600 ${fs}px Graphik, Arial, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+    let fs = n.ring==='ext' ? 10.5 : 11; ctx.font = `600 ${fs}px Archivo, Arial, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
     const wmax = Math.max(...lines.map(l=>ctx.measureText(l).width)), room = 2*r - 6;          // longer names (ES) shrink to fit their circle
-    if(wmax > room){ fs = Math.max(8, fs*room/wmax); ctx.font = `600 ${fs}px Graphik, Arial, sans-serif`; }
+    if(wmax > room){ fs = Math.max(8, fs*room/wmax); ctx.font = `600 ${fs}px Archivo, Arial, sans-serif`; }
     ctx.fillStyle = col('--color-brand-white'); const lh=fs*1.25, y0=y-(lines.length-1)*lh/2;
     lines.forEach((ln,i)=>ctx.fillText(ln,x,y0+i*lh));
   }
@@ -1472,13 +1474,13 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     // rings and their labels
     Object.entries(RING).forEach(([ring,f])=>{
       ctx.beginPath(); ctx.arc(cx,cy,R*f,0,Math.PI*2); ctx.setLineDash(ring==='ext'?[2,6]:[]); ctx.strokeStyle=ink(.16); ctx.lineWidth=1; ctx.stroke(); ctx.setLineDash([]);
-      if(!compact){ ctx.font='600 9.5px Graphik, Arial, sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle=ink(.55);
+      if(!compact){ ctx.font='600 9.5px Archivo, Arial, sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle=ink(.55);
         const lab = root.querySelectorAll('.net__l-ring')[Object.keys(RING).indexOf(ring)]; ctx.fillText((lab?lab.textContent:'').toUpperCase(), cx, cy-R*f-7); }
     });
     // office labels on the outer edge
     if(!compact) Object.entries(SECT).forEach(([o,[a0,a1]])=>{
       const a=((a0+a1)/2)*Math.PI/180, rr=R*1.0; let x=cx+Math.cos(a)*rr, y=cy-Math.sin(a)*rr*.98;
-      ctx.font='700 11px Graphik, Arial, sans-serif'; const lbl = txt('.net__l-off--'+o).toUpperCase(), lw = ctx.measureText(lbl).width;
+      ctx.font='700 11px Archivo, Arial, sans-serif'; const lbl = txt('.net__l-off--'+o).toUpperCase(), lw = ctx.measureText(lbl).width;
       let lx = Math.cos(a)>.2 ? x : (Math.cos(a)<-.2 ? x - lw : x - lw/2);
       if(o==='ds' && byId.inn){ const ai = byId.inn.a, rl = R*.69;   // on my node's ray, inside the medium–weak band
         const px = cx + Math.cos(ai)*rl, py = cy - Math.sin(ai)*rl; lx = px - lw/2; y = py + 4; cv.dataset.dsLabel = JSON.stringify([Math.round(px), Math.round(py)]); }
@@ -1511,7 +1513,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     const g=ctx.createRadialGradient(cx,cy,0,cx,cy,pr*1.6); g.addColorStop(0,'rgba(161,0,255,.22)'); g.addColorStop(1,'rgba(0,0,0,0)');
     ctx.beginPath(); ctx.arc(cx,cy,pr*1.6,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
     ctx.beginPath(); ctx.arc(cx,cy,pr,0,Math.PI*2); ctx.fillStyle=col('--surface-card'); ctx.fill(); ctx.strokeStyle='#A100FF'; ctx.lineWidth=2.4; ctx.stroke();
-    if(!compact){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 13px Graphik, Arial, sans-serif'; ctx.fillStyle=col('--color-purple-light');
+    if(!compact){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 13px Archivo, Arial, sans-serif'; ctx.fillStyle=col('--color-purple-light');
       ctx.fillText(txt('.net__l-centre'), cx, cy); }
   }
   function loop(ts){ if(visible) draw(ts||0); if(!reduce.matches) requestAnimationFrame(loop); }
@@ -1561,6 +1563,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
   document.body.append(backdrop, sheet);   // at the document root, as in jdigital: no animated ancestor can trap the fixed layers
   layout(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+  if(document.fonts) document.fonts.load('600 11px Archivo').then(()=>{ layout(); draw(performance.now()); }, ()=>{});   // labels are measured: redo once the face is in
   { const sv = uiState.get('net'); if(sv && byId[sv]) open(byId[sv]); }   // a reload keeps the open card or sheet
 })();
 
@@ -1623,7 +1626,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     if(ctx.measureText(tr).width > max && cur){ out.push(cur); cur = w; } else cur = tr; }); if(cur) out.push(cur); return out; }
   function label(n){ const [hw] = half(n); let fs = Math.max(10, 12.5*k);
     const max = n.shape === 'dec' ? hw*1.2 : (n.shape === 'act' || n.shape === 'term' ? hw*1.6 : hw*1.8);
-    let ls; do { ctx.font = `${n.shape==='scr'?700:500} ${fs}px Graphik, Arial, sans-serif`; ls = lines(txt(n.key), max); fs -= .5; } while((ls.length > 3 || ls.some(l=>ctx.measureText(l).width > max*1.15)) && fs > 8.5);
+    let ls; do { ctx.font = `${n.shape==='scr'?700:500} ${fs}px Archivo, Arial, sans-serif`; ls = lines(txt(n.key), max); fs -= .5; } while((ls.length > 3 || ls.some(l=>ctx.measureText(l).width > max*1.15)) && fs > 8.5);
     ctx.fillStyle = col('--color-brand-white'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     const lh = (fs+.5)*1.2, y0 = n.y - (ls.length-1)*lh/2; ls.forEach((l,i)=>ctx.fillText(l, n.x, y0 + i*lh)); }
   function head(x,y,a,c){ const s = 7; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x - s*Math.cos(a-.42), y - s*Math.sin(a-.42)); ctx.lineTo(x - s*Math.cos(a+.42), y - s*Math.sin(a+.42)); ctx.closePath(); ctx.fillStyle = c; ctx.fill(); }
@@ -1631,7 +1634,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); pts.slice(1).forEach(p=>ctx.lineTo(p[0], p[1]));
     ctx.setLineDash(dash ? [4,4] : []); ctx.strokeStyle = c; ctx.lineWidth = on ? 2.2 : 1.4; ctx.stroke(); ctx.setLineDash([]);
     const a = pts[pts.length-2], b = pts[pts.length-1]; head(b[0], b[1], Math.atan2(b[1]-a[1], b[0]-a[0]), c); }
-  function tag(t, x, y, align){ ctx.font = `600 ${Math.max(10, 11*k)}px Graphik, Arial, sans-serif`; ctx.fillStyle = col('--color-text-muted'); ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle'; ctx.fillText(t, x, y); }
+  function tag(t, x, y, align){ ctx.font = `600 ${Math.max(10, 11*k)}px Archivo, Arial, sans-serif`; ctx.fillStyle = col('--color-text-muted'); ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle'; ctx.fillText(t, x, y); }
   function tokenAt(t){ for(let i=0;i<segs.length;i++){ const [t0,dt] = segs[i]; if(t <= t0 + dt){ const f = dt ? (t - t0)/dt : 0, a = path[i], b = path[i+1]; return [a[0] + (b[0]-a[0])*f, a[1] + (b[1]-a[1])*f]; } } return path[path.length-1]; }
   function draw(ts){
     if(!W) return; ctx.clearRect(0,0,W,H);
@@ -1660,7 +1663,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
       ctx.setLineDash(n.shape === 'phy' || n.shape === 'err' ? [5,4] : []);
       ctx.strokeStyle = n.scr ? '#A100FF' : (on ? col('--color-purple-light') : ink(.6)); ctx.lineWidth = n.scr ? 2.4 : (on ? 2 : 1.4); ctx.stroke(); ctx.setLineDash([]);
       if(n.scr){ const [hw,hh] = half(n), bs = 18*k; ctx.fillStyle = '#A100FF'; ctx.fillRect(n.x - hw - bs/2, n.y + hh - bs/2, bs, bs);
-        ctx.fillStyle = '#FFFFFF'; ctx.font = `700 ${Math.max(9, 11*k)}px Graphik, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(n.scr), n.x - hw, n.y + hh);
+        ctx.fillStyle = '#FFFFFF'; ctx.font = `700 ${Math.max(9, 11*k)}px Archivo, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(n.scr), n.x - hw, n.y + hh);
         if(lit.has(n.key)){ ctx.beginPath(); ctx.rect(n.x - hw - 5, n.y - hh - 5, hw*2 + 10, hh*2 + 10); ctx.strokeStyle = 'rgba(161,0,255,.55)'; ctx.lineWidth = 1.2; ctx.stroke(); } }
       label(n); });
     // the passenger
@@ -1685,6 +1688,7 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(en.intersectionRatio >= .4) seen = true; }), { threshold:[0, .4] }).observe(strip);
   reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
   layout(); dotLabels(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+  if(document.fonts) document.fonts.load('600 11px Archivo').then(()=>{ layout(); draw(performance.now()); }, ()=>{});   // labels are measured: redo once the face is in
   { const x0 = +uiState.get('flow') || 0; if(x0 && !wide.matches) requestAnimationFrame(()=>{ strip.scrollLeft = x0; }); }   // a reload keeps the strip's place
 })();
 
