@@ -48,6 +48,9 @@
 .hero__sub { margin:clamp(1.75rem,3vw,2.75rem) 0 0; max-width:42rem; }
 .hero__sub .hero__sub-hl.bridge__heading { font-size:1.375rem; }
 
+/* The call to see the work: the shared .cta, spaced on the stage's scale. */
+.hero__stage > .hero__cta { margin:clamp(1.5rem,2.4vw,2.25rem) 0 0; }
+
 /* While hero.js fits the heading, the hero's content box waits unseen, so nothing on it moves
    after the first paint (a visible box that resizes counts as a layout shift even when its
    content is hidden). If the script never runs, it shows after 3 s regardless. */

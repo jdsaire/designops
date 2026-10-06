@@ -100,7 +100,7 @@ function init() {
   function entrance() {
     if (entered || reduceMQ.matches) return;
     entered = true;
-    const seq = [stage.querySelector('.hero__attr'), h1].filter(Boolean);
+    const seq = [stage.querySelector('.hero__attr'), h1, stage.querySelector('.hero__sub'), stage.querySelector('.hero__cta')].filter(Boolean);
     if (!seq.length || typeof seq[0].animate !== 'function') return;
     seq.forEach((el, i) => {
       el.animate(
