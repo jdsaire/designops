@@ -521,8 +521,9 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
    both links then end inside the first screen, side by side. shared/bridge.css stays as it is,
    so Main's positioning bridge is untouched. */
 #bridge1-onboarding .bridge__downloads { margin-top: -0.375rem; }
-/* Phones (JD, PR35-Q57): one row, MD right after PDF, as from 768. The labels are the file
-   names, "CV (PDF)" / "CV (MD)" (PR35-Q58), so the pair fits from 320. */
+/* Phones (JD, PR35-Q57, Q59): one row, MD right after PDF, as from 768. The full labels need
+   more than the 260–330 px column, so each wraps inside its own link ("Download CV" over
+   "(PDF)"), beside its icon. */
 @media (max-width: 767px) {
   #bridge1-onboarding .bridge__downloads { flex-direction: row; align-items: center; }
 }
