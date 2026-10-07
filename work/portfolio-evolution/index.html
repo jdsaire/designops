@@ -450,29 +450,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
 
 /* ================= MOTION ================= */
-/* Content is visible by default; only a page whose script runs hides it until it scrolls in. */
-.js .io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
-.js .io.is-in{opacity:1; transform:none;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .js .io{opacity:1; transform:none;}
   .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
     .dcell__bar i{transform:scaleX(var(--v,0));}
 }
 
 /* ================= MOTION · D7 NATIVE LAYER (progressive enhancement, compositor-only) =================
    All effects gate behind prefers-reduced-motion:no-preference + @supports; the reduced-motion block
-   above (animation:none!important; .io reset) is the authoritative static end-state for every effect.
+   above (animation:none!important) is the authoritative static end-state for every effect.
    Radius 0 / shadow none / purple-accent-only held; no property here carries or recolors body text. */
 
-/* S1 — scroll choreography: layer a view()-linked entrance over the JS .is-in fade (fallback intact) */
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
-  }
-}
-@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
 
 
 
@@ -638,7 +627,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 00 · THE CONTEXT — three shifts on the Act 02 ladder ================= -->
 <section class="act" id="act0" aria-labelledby="v0">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
@@ -647,7 +636,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act0_lede">Three shifts that make a proven personal brand urgent in 2026.</p>
     </div>
 
-    <div class="timeline io">
+    <div class="timeline">
       <div class="timeline__track" role="group" data-i18n-aria="act0_aria" aria-label="The context, in three shifts">
         <article class="card">
           <p class="catlabel" data-i18n="act0_s1_n">The shift</p>
@@ -667,14 +656,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <p class="synthesis io" data-i18n="act0_foot">Sources: World Economic Forum, Future of Jobs Report 2025; Experis, Expectativas de Talento Tecnológico (Peru), 2026; Microsoft and LinkedIn, Work Trend Index 2024.</p>
+    <p class="synthesis" data-i18n="act0_foot">Sources: World Economic Forum, Future of Jobs Report 2025; Experis, Expectativas de Talento Tecnológico (Peru), 2026; Microsoft and LinkedIn, Work Trend Index 2024.</p>
   </div>
 </section>
 
 <!-- ================= ACT 01 · THE PROBLEM ================= -->
 <section class="act" id="act1" aria-labelledby="v1">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
@@ -684,7 +673,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <!-- Three cards on the Act 02 ladder; what the reveals held now lives in each body. -->
-    <div class="timeline io">
+    <div class="timeline">
       <div class="timeline__track" role="group" data-i18n-aria="act1_aria" aria-label="The problem, in three reasons">
         <article class="card">
           <p class="catlabel" data-i18n="act1_s1_n">The reading</p>
@@ -704,14 +693,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <p class="synthesis io" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026.</p>
+    <p class="synthesis" data-i18n="act1_foot">Sources: Sackett et al. (2022) on selection validity; Robert Half, November 2025, n = 2,000+; Deel Global Hiring Report 2026.</p>
   </div>
 </section>
 
 <!-- ================= ACT 02 · THE EVOLUTION — 3 levels on a stepped layout ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Evolution</span>
@@ -720,7 +709,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act2_lede">From renting a template to directing every code line.</p>
     </div>
 
-    <div class="timeline io">
+    <div class="timeline">
       <div class="timeline__track" id="tlTrack" role="group" data-i18n-aria="act2_aria" aria-label="The evolution, in three levels">
         <article class="card">
           <p class="catlabel" data-i18n="act2_s1_n">Level 1</p>
@@ -740,14 +729,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <p class="synthesis io" data-i18n="act2_foot">Building a site with AI in 2027 takes more than a prompt: it takes a whole orchestration, from research to review. That is what sets this build apart from audacious vibe-coders and from developers who still write every line by hand.</p>
+    <p class="synthesis" data-i18n="act2_foot">Building a site with AI in 2027 takes more than a prompt: it takes a whole orchestration, from research to review. That is what sets this build apart from audacious vibe-coders and from developers who still write every line by hand.</p>
   </div>
 </section>
 
 <!-- ================= ACT 03 · THE MULTIPAGE SCHEDULE — one days-axis Gantt; the first schedule in a panel ================= -->
 <section class="act" id="sched" aria-labelledby="vsch">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
@@ -756,7 +745,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act3_lede">Every stage, and what each pull request delivered.</p>
     </div>
 
-    <div class="sched__ctas io">
+    <div class="sched__ctas">
       <div class="reveal" data-act="sch">
         <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="Chart overview" data-panel-title-key="act3_rv1_btn" data-i18n="act3_rv1_btn">Chart overview</button>
         <div class="reveal__body reveal__body--poster" id="rv-sch2">
@@ -771,7 +760,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="gantt io" id="gantt2">
+    <div class="gantt" id="gantt2">
       <div class="gantt__chart" id="gantt2Chart">
         <div class="gantt__grid" id="gantt2Grid" role="group" data-i18n-aria="sch_aria_chart"
              aria-label="The multi-page build on a calendar axis: five stages, each with a duration bar and its pull requests as numbered diamonds on their merge dates."
@@ -781,15 +770,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
-    <p class="synthesis io" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
-    <p class="synthesis io" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
-    <p class="synthesis io" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
+    <p class="synthesis" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
+    <p class="synthesis" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
+    <p class="synthesis" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
 </section>
 
 <!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, each with its own label and a technical panel ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
@@ -798,7 +787,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act4_lede">The technical stack across the page, in plain words.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2 io" id="act4Cards">
+    <div class="cardgrid cardgrid--2" id="act4Cards">
       <article class="card">
         <p class="catlabel" data-i18n="act4_c1_cat">Speed</p>
         <h3 class="card__t" data-i18n="act4_c1_t">1) Light, fast and built to last</h3>
@@ -846,8 +835,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <!-- The build links again, where a technical reader wants them (Brief 01 pattern, W2A-G3-Q2). -->
-    <p class="scan act__foot io" data-i18n="act4_foot">For more, access the repository.</p>
-    <div class="ctaset io">
+    <p class="scan act__foot" data-i18n="act4_foot">For more, access the repository.</p>
+    <div class="ctaset">
       <a class="cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">
         <span class="cta__label" data-i18n="ui_cta_repo">Read the repository</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
@@ -863,7 +852,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 05 · THE DASHBOARD — paired values per metric ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
@@ -876,7 +865,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <!-- Paired values per metric. Both builds sit on one surface with no control to
          operate: a tablist made each column a click away from the other, which is the
          opposite of a comparison. A dash means the metric exists for one build only. -->
-    <div class="dash io" id="dash">
+    <div class="dash" id="dash">
       <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
         <button class="dash__tab" role="tab" id="tab-m" aria-selected="true"  aria-controls="dp-m" data-i18n="ui_tab_measure">Measure</button>
         <button class="dash__tab" role="tab" id="tab-d" aria-selected="false" aria-controls="dp-d" data-i18n="dash_tab2">Derived</button>
@@ -985,7 +974,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 06 · THE REFLECTION — three lesson cards, descending ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
@@ -996,7 +985,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <!-- Three cards on the Act 04 chassis, one lesson of the multi-page pipeline each,
          descending, so the ladder falls where Act 02's climbs. -->
-    <div class="cardgrid cardgrid--3 ladder-down io">
+    <div class="cardgrid cardgrid--3 ladder-down">
       <article class="card">
         <p class="catlabel" data-i18n="act6_p1_cat">Governance</p>
         <h3 class="card__t" data-i18n="act6_p1_t">Checkpoints that hold</h3>
@@ -1015,7 +1004,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
-    <div class="close io">
+    <div class="close">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
@@ -1545,15 +1534,6 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   mode();
 })();
 
-/* ============ Entrance (once) ============ */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting) return;
-    en.target.classList.add("is-in");
-    io.unobserve(en.target);
-  });
-},{threshold:0.18});
-document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
 <script type="module">
   import { init as initProgress } from "../../assets/js/core/progress.js";

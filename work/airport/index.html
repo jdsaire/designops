@@ -18,8 +18,6 @@
      the principal edits them on disk and no pass rewrites them.
      Act 04 redraws the proposal's screens and flowchart in the page
      (WD-Q23…Q25): keyed text in both languages, tokens, both themes.
-     Every .io block is kept small on purpose: the entrance observer fires
-     at threshold 0.18, so a block taller than the viewport never reveals.
      ============================================================ -->
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
 <script>document.documentElement.classList.add('js');</script>
@@ -269,13 +267,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
 
 /* ================= MOTION ================= */
-/* Content is visible by default; only a page whose script runs hides it until it scrolls in. */
-.js .io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
-.js .io.is-in{opacity:1; transform:none;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .js .io{opacity:1; transform:none;}
   .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
   .timeline__nav{display:none;}
   
@@ -283,16 +277,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 /* ================= MOTION · D7 NATIVE LAYER (progressive enhancement, compositor-only) =================
    All effects gate behind prefers-reduced-motion:no-preference + @supports; the reduced-motion block
-   above (animation:none!important; .io reset) is the authoritative static end-state for every effect.
+   above (animation:none!important) is the authoritative static end-state for every effect.
    Radius 0 / shadow none / purple-accent-only held; no property here carries or recolors body text. */
 
-/* S1 — scroll choreography: layer a view()-linked entrance over the JS .is-in fade (fallback intact) */
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
-  }
-}
-@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
 
 
 /* S6 — depth: subtle preserve-3d lift on the Architecture (#act3) evidence cards, hover/focus only */
@@ -805,7 +792,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 00 · THE CONTEXT ================= -->
 <section class="act" id="act0" aria-labelledby="v0">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
@@ -814,7 +801,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act0_lede">How a payment affects the experience during a connecting flight.</p>
     </div>
 
-    <div class="journey io">
+    <div class="journey">
       <p class="cap" data-i18n="act0_flow_cap">The passenger journey</p>
       <ol class="journey__steps">
         <li class="journey__step"><svg class="journey__i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 20h18M6 5l9 8M15 13h-5M15 13V8"/></svg><span class="journey__t" data-i18n="act0_j1">Arrive on international flight</span></li>
@@ -824,7 +811,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       </ol>
     </div>
 
-    <div class="pos io">
+    <div class="pos">
       <div class="reveal" data-act="act0">
         <button class="reveal__btn" id="a0PosBtn" type="button" aria-expanded="false" aria-controls="rv-a0-pos" data-panel-title="One fee, two ways to pay" data-panel-title-key="act0_pos_btn" data-i18n="act0_pos_btn">Two ways to pay the fee</button>
         <div class="reveal__body reveal__body--poster" id="rv-a0-pos">
@@ -838,7 +825,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 01 · THE PROBLEM ================= -->
 <section class="act" id="act1" aria-labelledby="v1">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
@@ -847,17 +834,17 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act1_lede">Five moments from concession to collection, and the income at stake.</p>
     </div>
 
-    <div class="relay relay--solo relay--5 io">
+    <div class="relay relay--solo relay--5">
       <div class="relay__seg"><span class="relay__h" data-i18n="act1_tl_cap">From concession to collection, 2001–2025</span><ol class="relay__track"><li class="relay__st"><span class="relay__node">1</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t1_d">Feb 2001</span><span class="relay__t" data-i18n="act1_t1_h">The concession</span><span class="relay__x" data-i18n="act1_t1_x">LAP begins operating Jorge Chávez under concession with Peruvian State.</span></span></li><li class="relay__st"><span class="relay__node">2</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t2_d">Mar 2013</span><span class="relay__t" data-i18n="act1_t2_h">An income promise</span><span class="relay__x" data-i18n="act1_t2_x">Amendment N°6 allows transfer fees upon delivery of new terminal.</span></span></li><li class="relay__st"><span class="relay__node">3</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t3_d">Jun 2025</span><span class="relay__t" data-i18n="act1_t3_h">The terminal opens</span><span class="relay__x" data-i18n="act1_t3_x">The fee becomes chargeable, but no mechanism exists to collect it.</span></span></li><li class="relay__st"><span class="relay__node">4</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t4_d">Aug 2025</span><span class="relay__t" data-i18n="act1_t4_h">Commercial terms</span><span class="relay__x" data-i18n="act1_t4_x">LAP and Airlines negotiated fee collection inside the ticket.</span></span></li><li class="relay__st"><span class="relay__node">5</span><span class="relay__tx"><span class="relay__d" data-i18n="act1_t5_d">Oct 2025</span><span class="relay__t" data-i18n="act1_t5_h">Mechanism ready</span><span class="relay__x" data-i18n="act1_t5_x">Implementation of fee mechanism at the airport, led by LAP Finance.</span></span></li></ol></div>
     </div>
 
-    <p class="cap cap--lead io" data-i18n="act1_fig_cap">The fee at today's volume</p>
-    <div class="dcells dcells--3 io">
+    <p class="cap cap--lead" data-i18n="act1_fig_cap">The fee at today's volume</p>
+    <div class="dcells dcells--3">
       <div class="dcell"><span class="dcell__n" data-i18n="act1_s1_n">130,000+</span><span class="dcell__l" data-i18n="act1_s1_l">Intl. transfer passengers / month</span><span class="dcell__p" data-i18n="act1_s1_p">Would be charged today.</span></div>
       <div class="dcell"><span class="dcell__n" data-i18n="act1_s2_n">≈ $43,600</span><span class="dcell__l" data-i18n="act1_s2_l">Fee a day, before tax</span><span class="dcell__p" data-i18n="act1_s2_p">Previously left uncollected.</span></div>
       <div class="dcell"><span class="dcell__n" data-i18n="act1_s3_n">≈ $23,300</span><span class="dcell__l" data-i18n="act1_s3_l">For Lima Airport, a day</span><span class="dcell__p" data-i18n="act1_s3_p">The Peruvian State takes 46.5% as royalty.</span></div>
     </div>
-    <div class="reveal io" data-act="act1">
+    <div class="reveal" data-act="act1">
       <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a1-est" data-panel-title="How this is estimated" data-panel-title-key="act1_est_btn" data-i18n="act1_est_btn">How this is estimated</button>
       <div class="reveal__body reveal__body--poster" id="rv-a1-est">
         <p data-i18n-html="act1_est_txt"><strong>130,000 × $10.05 ÷ 30 days.</strong> $10.05 is the fee before 18% IGV, which makes it $11.86. Lima Airport keeps 53.489%; the State takes 46.511% as royalty under the concession. An estimate at today's volume, not a measured loss.</p>
@@ -869,7 +856,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 02 · THE STAKEHOLDERS ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Stakeholders</span>
@@ -878,7 +865,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act2_lede">Explore how each key actor contributed in the project.</p>
     </div>
 
-    <div class="net io" data-net>
+    <div class="net" data-net>
       <ul class="net__legend" aria-hidden="true">
         <li><i class="net__lg net__lg--strong"></i><span data-i18n="act2_net_tie_strong">Strong tie</span></li>
         <li><i class="net__lg net__lg--medium"></i><span data-i18n="act2_net_tie_medium">Medium tie</span></li>
@@ -952,7 +939,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 03 · SCOPE & DELIVERABLES ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · Scope &amp; Deliverables</span>
@@ -961,7 +948,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act3_lede">Step through the deliverables I produced.</p>
     </div>
 
-    <div class="dl io" data-dl>
+    <div class="dl" data-dl>
       <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
         <ol class="dl__track">
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 05">
@@ -994,7 +981,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 04 · THE DESIGN ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Design</span>
@@ -1004,8 +991,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <!-- The proposed screens, redrawn in this site's style (WD-Q23…Q25). -->
-    <p class="cap cap--lead io" data-i18n="act4_scr_cap">The four screens</p>
-    <div id="a4-screens" class="stills stills--4 io">
+    <p class="cap cap--lead" data-i18n="act4_scr_cap">The four screens</p>
+    <div id="a4-screens" class="stills stills--4">
       <figure class="still">
         <div class="mock" role="img" aria-label="Redrawn screen 1, Personal details: name and email fields and a Register button." data-i18n-aria="act4_s1_alt">
           <span class="mock__status" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 44 12" focusable="false"><rect x="0" y="8" width="3" height="4"/><rect x="5" y="5.5" width="3" height="6.5"/><rect x="10" y="3" width="3" height="9"/><rect x="15" y="0.5" width="3" height="11.5"/><rect class="b" x="23.5" y="1.5" width="17" height="9"/><rect x="25.5" y="3.5" width="11" height="5"/><rect x="41" y="4.5" width="2" height="3"/></svg></span>
@@ -1067,7 +1054,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <div class="a4-dots" aria-hidden="false"></div>
-    <p class="still__cap act4__note io" data-i18n="act4_redraw">Screens are redrawn from my 2025 proposal.</p>
+    <p class="still__cap act4__note" data-i18n="act4_redraw">Screens are redrawn from my 2025 proposal.</p>
 
     <div class="a4-flowwrap" id="a4-flow">
     <aside class="desk-how" aria-labelledby="flowHowT">
@@ -1075,7 +1062,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="desk-how__t" id="flowHowT" data-i18n="act4_mob_t">See flowchart</p>
       <p class="desk-how__x" data-i18n="act4_mob_x">Full visual available on desktop.</p>
     </aside>
-    <div class="flow io" data-flow>
+    <div class="flow" data-flow>
       <p class="cap" data-i18n="act4_flow_cap">User flow – online payment</p>
       <ul class="fcl" aria-hidden="true"><li><i class="fcl__i fcl__i--act"></i><span data-i18n="act4_fc_lg_action">Action</span></li><li><i class="fcl__i fcl__i--dec"></i><span data-i18n="act4_fc_lg_decision">Decision</span></li><li><i class="fcl__i fcl__i--scr"></i><span data-i18n="act4_fc_lg_screen">Platform screen I designed</span></li><li><i class="fcl__i fcl__i--phy"></i><span data-i18n="act4_fc_lg_physical">Physical interaction</span></li></ul>
       <div class="flow__strip"><canvas class="flow__canvas" role="img" aria-label="Redrawn flowchart of the passenger&#x27;s interactions with the TUUA Transfer payment platform: from scanning the platform QR code, through the four screens, to the TUUA turnstile and boarding, with an error or assistance branch at each check." data-i18n-aria="act4_flow_alt"></canvas><span class="flow__snaps" aria-hidden="true"></span></div>
@@ -1089,7 +1076,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 05 · THE HANDOFF ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Handoff</span>
@@ -1098,12 +1085,12 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act5_lede">Where my part ended, and what came next.</p>
     </div>
 
-    <div class="relay io">
+    <div class="relay">
       <div class="relay__seg relay__seg--mine"><span class="relay__h" data-i18n="act5_mine_h">My part</span><ol class="relay__track"><li class="relay__st"><span class="relay__node">1</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_mine1">Design</span><span class="relay__x" data-i18n="act5_mine1_x">From data capture to QR ticket</span></span></li><li class="relay__st"><span class="relay__node">2</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_mine2">Prototype</span><span class="relay__x" data-i18n="act5_mine2_x">Clickable flow for stakeholder review</span></span></li><li class="relay__st"><span class="relay__node">3</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_mine3">Evaluation</span><span class="relay__x" data-i18n="act5_mine3_x">Online test and field observation</span></span></li><li class="relay__st"><span class="relay__node">4</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_mine4">Handoff</span><span class="relay__x" data-i18n="act5_mine4_x">Scopes, mockup, casuistry and map</span></span></li></ol></div>
       <div class="relay__baton"><span data-i18n="act5_edge">Handoff</span></div>
       <div class="relay__seg relay__seg--after"><span class="relay__h" data-i18n="act5_after_h">After handoff</span><ol class="relay__track" start="5"><li class="relay__st"><span class="relay__node">5</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_after1_t">More screens</span><span class="relay__x" data-i18n="act5_after1_x">Minor adjustments to my proposal</span></span></li><li class="relay__st"><span class="relay__node">6</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_after2_t">Build</span><span class="relay__x" data-i18n="act5_after2_x">By Lima Airport (IT Architecture)</span></span></li><li class="relay__st"><span class="relay__node">7</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_after3">Deployment</span><span class="relay__x" data-i18n="act5_after3_x">Collection live since Dec 2025</span></span></li><li class="relay__st"><span class="relay__node">8</span><span class="relay__tx"><span class="relay__t" data-i18n="act5_after4_t">Operation</span><span class="relay__x" data-i18n="act5_after4_x">Enabled before queues in the terminal</span></span></li></ol></div>
     </div>
-    <div class="ctaset act5__cta io">
+    <div class="ctaset act5__cta">
       <a class="cta" href="https://pagotuua.lima-airport.com/" target="_blank" rel="noopener noreferrer">
         <span class="cta__label" data-i18n="cta_live">Open the live TUUA platform</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
@@ -1115,7 +1102,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
 <!-- ================= ACT 06 · THE CONTRAST ================= -->
 <section class="act" id="act6" aria-labelledby="v6">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
@@ -1124,14 +1111,14 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <p class="scan" data-i18n="act6_lede">Five live steps, each set against my proposal.</p>
     </div>
 
-    <div class="relay relay--solo relay--5 io">
+    <div class="relay relay--solo relay--5">
       <div class="relay__seg relay__seg--after"><span class="relay__h" data-i18n="act6_cmp_cap">Live screen flow</span><ol class="relay__track"><li class="relay__st"><span class="relay__node">1</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v1">Homepage</span><span class="relay__x" data-i18n="act6_v1_x">An entry page explains the fee first</span></span></li><li class="relay__st"><span class="relay__node">2</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v2">Eligibility</span><span class="relay__x" data-i18n="act6_v2_x">A click instead of an automatic check</span></span></li><li class="relay__st"><span class="relay__node">3</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v3">Flight details and fee</span><span class="relay__x" data-i18n="act6_v3_x">Total amount shown earlier</span></span></li><li class="relay__st"><span class="relay__node">4</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v4">Customer details</span><span class="relay__x" data-i18n="act6_v4_x">Moved from my first screen to the fourth</span></span></li><li class="relay__st"><span class="relay__node relay__node--out">5</span><span class="relay__tx"><span class="relay__t" data-i18n="act6_v5">Payment control</span><span class="relay__x" data-i18n="act6_v5_x">Where the review stops</span></span></li></ol></div>
     </div>
 
     <p class="method-line" data-i18n="act6_method">Public, unauthenticated pages only. No transaction submitted, no data sent.</p>
 
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
-    <div class="notes io" id="disclosure">
+    <div class="notes" id="disclosure">
       <p class="notes__label" data-i18n="ui_disclosure_label">Disclosure notes</p>
       <div class="notes__grid">
         <p class="note" data-i18n-html="act6_note1"><strong>My participation.</strong> I understand the platform's mechanism and contributed to its UX/UI design — not its development, deployment or operation. Work testimony available upon formal request.</p>
@@ -1141,7 +1128,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     </div>
 
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
-    <div class="close io">
+    <div class="close">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
@@ -1664,15 +1651,6 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   { const x0 = +uiState.get('flow') || 0; if(x0 && !wide.matches) requestAnimationFrame(()=>{ strip.scrollLeft = x0; }); }   // a reload keeps the strip's place
 })();
 
-/* ============ Entrance (once) ============ */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting) return;
-    en.target.classList.add("is-in");
-    io.unobserve(en.target);
-  });
-},{threshold:0.18});
-document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
 <script type="module">
   import { init as initProgress } from "../../assets/js/core/progress.js";

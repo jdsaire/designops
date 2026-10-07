@@ -329,23 +329,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
 
 /* ================= MOTION ================= */
-/* Content is visible by default; only a page whose script runs hides it until it scrolls in. */
-.js .io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
-.js .io.is-in{opacity:1; transform:none;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .js .io{opacity:1; transform:none;}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
 
 /* ================= MOTION · D7 NATIVE LAYER — Brief 04's, verbatim (progressive enhancement, compositor-only) ================= */
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
-  }
-}
-@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
 
 </style>
 </head>
@@ -512,7 +502,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 01 · THE PROBLEM — four numbered cards, detail behind the reveal ================= -->
 <section class="act" id="act1" aria-labelledby="v1">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
@@ -520,7 +510,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v1" data-i18n="act1_verdict">Access changes. Reporters don't know.</h2>
       <p class="scan" data-i18n="act1_lede">Four failures that turn a valid pass into a wasted trip.</p>
     </div>
-    <div class="cardgrid cardgrid--2 pcards io">
+    <div class="cardgrid cardgrid--2 pcards">
       <article class="card pcard">
         <h3 class="card__t pcard__t" data-i18n="p1_t">Refusals with no reason</h3>
         <p class="card__x" data-i18n="p1_x">Access withdrawn without a reason breaks the journalist's logistics and leaves no way to respond.</p>
@@ -568,7 +558,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 02 · UX SIMULATION — three runs on an ascending ladder, then the question they answered ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · UX Simulation</span>
@@ -576,7 +566,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v2" data-i18n="act2_verdict">Smart hypotheses, not imposed designs.</h2>
       <p class="scan" data-i18n="act2_lede">The design research runs that turned doubts into decisions before any code.</p>
     </div>
-    <div class="timeline io">
+    <div class="timeline">
       <div class="timeline__track" role="group" aria-label="The UX simulation, in three runs">
         <article class="card">
           <p class="catlabel" data-i18n="l1_n">Round 1 · Research</p>
@@ -614,7 +604,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
     <!-- The how-might-we the runs produced, and its answer — on the Similar-work chassis. -->
-    <div class="convert io" id="hmw">
+    <div class="convert" id="hmw">
       <p class="convert__nextlabel" data-i18n="hmw_label">The design challenge</p>
       <div class="cardgrid cardgrid--2">
         <article class="card">
@@ -633,7 +623,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 03 · THE SCHEDULE — five weeks on a calendar axis, epics collapsed ================= -->
 <section class="act" id="sched" aria-labelledby="vsch">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
@@ -641,20 +631,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Five weeks, right after the final.</h2>
       <p class="scan" data-i18n="sch_lede">Seven phases from sketch to finished build.</p>
     </div>
-    <div class="gantt io" id="gantt">
+    <div class="gantt" id="gantt">
       <div class="gantt__chart" id="ganttChart">
         <div class="gantt__grid" id="ganttGrid" role="list" aria-label="The build on a calendar axis: seven phases, sized in days."></div>
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
     </div>
-    <p class="dash__foot io" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+    <p class="dash__foot" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
   </div>
 </section>
 
 <!-- ================= ACT 04 · THE ARCHITECTURE — four decisions, plain on the card, technical in the panel ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
@@ -662,7 +652,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v4" data-i18n="act4_verdict">One journey, three languages.</h2>
       <p class="scan" data-i18n="act4_lede">The four pillars that hold the build's architecture together.</p>
     </div>
-    <div class="cardgrid cardgrid--2 pcards io">
+    <div class="cardgrid cardgrid--2 pcards">
       <article class="card pcard">
         <p class="catlabel" data-i18n="b1_n">Front-end decisions</p>
         <h3 class="card__t pcard__t" data-i18n="b1_t">Runs entirely in the browser</h3>
@@ -709,8 +699,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
     <!-- The build links again, where a technical reader wants them. -->
-    <p class="scan act__foot io" data-i18n="ui_arch_foot">For more, access the repository.</p>
-    <div class="ctaset io">
+    <p class="scan act__foot" data-i18n="ui_arch_foot">For more, access the repository.</p>
+    <div class="ctaset">
       <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
         <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
@@ -730,7 +720,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 05 · THE TEST — first version against final, in three tabs (Brief 04's dashboard) ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evaluation</span>
@@ -738,7 +728,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v5" data-i18n="act5_verdict">Two audits to improve usability.</h2>
       <p class="scan" data-i18n="act5_lede">Compare the results across three kinds of test.</p>
     </div>
-    <div class="dash io">
+    <div class="dash">
       <div class="dash__tabs" role="tablist" aria-label="Test figures">
         <button class="dash__tab" role="tab" id="tab-1" aria-selected="true" aria-controls="dp-1" data-i18n="dash_tab1">Severity</button>
         <button class="dash__tab" role="tab" id="tab-2" aria-selected="false" aria-controls="dp-2" data-i18n="dash_tab2">Heuristics</button>
@@ -835,7 +825,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 06 · THE CLOSE — claim, limit, next, on a descending ladder ================= -->
 <section class="act" id="act6" aria-labelledby="v6">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Close</span>
@@ -843,7 +833,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v6" data-i18n="act6_verdict">What this app lets me say.</h2>
       <p class="scan" data-i18n="act6_lede">What it solved, where its technical limits sit, and what comes next.</p>
     </div>
-    <div class="cardgrid cardgrid--3 ladder-down io">
+    <div class="cardgrid cardgrid--3 ladder-down">
       <article class="card">
         <p class="catlabel" data-i18n="r1_n">The milestone</p>
         <h3 class="card__t" data-i18n="r1_t">From concept to working interface</h3>
@@ -861,7 +851,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
-    <div class="notes io" id="disclosure">
+    <div class="notes" id="disclosure">
       <p class="notes__label" data-i18n="ui_disclosure_label">Disclosure notes</p>
       <div class="notes__grid notes__grid--2">
         <p class="note"><strong data-i18n="disclosure1_lead">An independent portfolio project.</strong> <span data-i18n="disclosure1_body">No affiliation, endorsement or institutional link with FIFA. Accreditation data runs as a local simulation in the browser session and is never stored. The match schedule is the only real asset.</span></p>
@@ -869,7 +859,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
-    <div class="close io">
+    <div class="close">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
@@ -1145,15 +1135,6 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
   select(tabs.find(t=>t.getAttribute("aria-selected")==="true") || tabs[0]);
 });
 
-/* ============ Entrance (once) ============ */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting) return;
-    en.target.classList.add("is-in");
-    io.unobserve(en.target);
-  });
-},{threshold:0.18});
-document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
 <script type="module">
   import { init as initProgress } from "../../assets/js/core/progress.js";
