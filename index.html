@@ -176,8 +176,8 @@
       <div class="hero__stage">
 
         <!-- Attribution, then the heading: one h1 for both languages, values from the i18n engine.
-             Each line is pre / italic hook / post; phones break before the post segment. Line 2 types its
-             three words (hero.js); the heading's text for screen readers is the static sentence. -->
+             Each line is pre / italic hook / post; phones break before the post segment (PR35-Q48: line 2
+             rests on one word, no typing). -->
         <div class="hero__attr">
           <p class="hero__attribution hero__attribution--name" data-i18n="hero_attribution_name">Juan Diego Saire</p>
           <span class="hero__sep" aria-hidden="true">·</span>
@@ -186,13 +186,8 @@
 
         <h1 class="hero__h1">
           <span class="hero__h1-line hero__l1"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l1_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l1_em">DESIGN</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l1_post">ATE CODE.</span></span>
-          <span class="hero__h1-line hero__l2"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l2_pre"></span> <span class="hero__cycle" aria-hidden="true"><em class="hero__hook hero__w" data-w="1" data-i18n="hero_h1_l2_w1">METHOD</em><em class="hero__hook hero__w" data-w="2" data-i18n="hero_h1_l2_w2">MINDSET</em><em class="hero__hook hero__w" data-w="3" data-i18n="hero_h1_l2_w3">IMPACT</em><span class="hero__caret"></span><em class="hero__hook hero__typed">IMPACT</em></span><span class="visually-hidden" data-i18n="hero_h1_l2_w3">IMPACT</span> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l2_post">PREVAILS.</span></span>
+          <span class="hero__h1-line hero__l2"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l2_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l2_w3">IMPACT</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l2_post">PREVAILS.</span></span>
         </h1>
-        <!-- Pauses and resumes line 2's typing loop and the gradient (WCAG 2.2.2); hero.js places it after line 2's last word -->
-        <button class="hero__motion" type="button" aria-label="Pause animation" data-i18n-aria="hero_motion_pause">
-          <svg class="hero__motion-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="6" width="3.4" height="12" rx="0.7"/><rect x="13.6" y="6" width="3.4" height="12" rx="0.7"/></svg>
-          <svg class="hero__motion-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.6 6.3v11.4L18 12z"/></svg>
-        </button>
 
         <!-- Value proposition: About's purple highlight (.bridge__heading), size reduced only -->
         <p class="hero__sub"><span class="bridge__heading hero__sub-hl" data-i18n="hero_sub">I build seamless websites and apps, translating business challenges into tested products using advanced AI.</span></p>

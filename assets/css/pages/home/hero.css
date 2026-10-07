@@ -44,46 +44,6 @@
 .hero--fit .hero__h1-line { white-space:nowrap; }
 .hero__hook { font-style:italic; color:var(--color-brand-purple); padding-right:0.04em; }
 
-/* Line 2's typing slot (PR35-Q19): hero.js types the three words into .hero__typed. The slot
-   keeps its widest word's width in layout, so nothing reflows while the loop runs; on desktop the
-   trailing word and the pause button slide by --slot-shift to close up on the current word, and
-   the caret steps along the text by --caret-x, both with translate. The words themselves stay
-   in the page, unseen, for the language swap; screen readers read the static sentence (the
-   visually hidden word 3). The caret keeps its room in every mode, so the static sentence sits
-   where the typed one does. */
-.hero__cycle { display:inline-block; white-space:nowrap; text-align:left; vertical-align:baseline; }
-.hero__w { display:none; }
-.hero__sizer { position:absolute; left:0; top:0; visibility:hidden; white-space:nowrap; pointer-events:none; }
-.hero__caret { display:inline-block; width:0.055em; height:0.8em; margin-right:-0.055em; vertical-align:-0.07em; background:var(--color-brand-purple); translate:var(--caret-x,0px) 0; }
-.hero[data-caret="blink"] .hero__caret { animation:hero-blink 1.06s step-end infinite; }
-@keyframes hero-blink { 50% { opacity:0; } }
-.hero:not([data-tw]) .hero__caret, .hero[data-tw="paused"] .hero__caret, .hero[data-tw="static"] .hero__caret { visibility:hidden; }
-@media (min-width:768px) {
-  .hero__l2 .hero__seg--post { display:inline-block; }   /* translate moves boxes, not inline runs */
-  .hero__l2 .hero__seg--post, .hero__motion { translate:var(--slot-shift,0px) 0; transition:translate 280ms cubic-bezier(0.2,0,0,1); }
-}
-.visually-hidden { position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
-
-/* Desktop: line 2 keeps room for the pause button after its last word, in every mode. */
-@media (min-width:768px) { .hero__l2 { padding-inline-end:48px; } }
-
-/* Pause button (WCAG 2.2.2): after line 2's last word, outside the heading; it pauses the
-   typing and the gradient. Round by design, like the caret it controls; never under 24 px. */
-.hero__motion {
-  position:absolute; left:0; top:0; z-index:2; width:var(--btn,32px); height:var(--btn,32px); padding:0;
-  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
-  border-radius:50%; border:1px solid rgba(var(--ink),0.38); background:rgba(var(--ground),0.35);
-  color:var(--color-brand-white);
-  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard), translate 280ms cubic-bezier(0.2,0,0,1);
-}
-.hero__motion:hover { border-color:var(--color-brand-purple); background:rgba(161,0,255,0.18); }
-.hero__motion:focus-visible { outline:2px solid var(--color-brand-purple); outline-offset:2px; }
-.hero__motion svg { width:calc(var(--btn,32px) * 0.44); height:calc(var(--btn,32px) * 0.44); fill:currentColor; display:block; }
-.hero__motion .hero__motion-play { display:none; }
-.hero[data-tw="paused"] .hero__motion .hero__motion-pause { display:none; }
-.hero[data-tw="paused"] .hero__motion .hero__motion-play { display:block; }
-.hero:not([data-tw]) .hero__motion, .hero[data-tw="static"] .hero__motion { display:none; }
-.hero[data-tw="paused"] .hero__gradient { animation-play-state:paused; }
 
 /* Value proposition: About's highlight (shared/bridge.css .bridge__heading), size reduced only. */
 .hero__sub { margin:clamp(1.75rem,3vw,2.75rem) 0 0; max-width:42rem; }
@@ -148,7 +108,6 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:0.01ms!important; animation-iteration-count:1!important; transition-duration:0.01ms!important; }
-  .hero__l2 .hero__seg--post, .hero__motion { transition:none; }
   html { scroll-behavior:auto; }
   .hero__h1,.hero__tags,.hero__right { opacity:1; }
 }
