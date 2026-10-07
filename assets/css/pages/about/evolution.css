@@ -340,21 +340,18 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
 #evolution .timeline__toggle { align-items: flex-start; min-height: 44px; }
 #evolution .jr-head { flex: 1; }
 /* The chevron follows the title's last word (PR #35, G2(d)). jr-head's flex: 1 stretches the heading block, so the
-   chevron element sat at the row's far edge, 253–646 px from the text. The title's ::after draws it instead:
-   non-breaking spaces glued to the last word, the chevron painted as a purple mask at their end. It lands about
-   7 px after the text on whichever line the title ends, in both languages; the i18n swap replaces the text, never
-   the pseudo-element. Open flips it; the old element is hidden. */
+   chevron element sat at the row's far edge, 253–646 px from the text. The title's ::after draws it instead: a
+   non-breaking space glues it to the last word, so it lands about 13 px after the text on whichever line the title
+   ends, in both languages (the i18n swap replaces the text, never the pseudo-element). The chevron is a purple SVG
+   painted as the pseudo-element's background: a mask is not applied to an inline box in Safari, which showed a solid
+   purple square there. Open flips it; the old element is hidden. */
 #evolution .timeline__chevron { display: none; }
 #evolution .timeline__title::after {
-  content: "\00a0\00a0\00a0\00a0\00a0";
-  background-color: var(--color-brand-purple);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.2l4 4 4-4' fill='none' stroke='%23000' stroke-width='2.3'/%3E%3C/svg%3E") no-repeat right 58% / 0.74em 0.74em;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.2l4 4 4-4' fill='none' stroke='%23000' stroke-width='2.3'/%3E%3C/svg%3E") no-repeat right 58% / 0.74em 0.74em;
+  content: "\00a0";
+  padding-right: 1.15em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.2l4 4 4-4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E") no-repeat right 58% / 0.74em 0.74em;
 }
-#evolution .timeline__item.is-open .timeline__title::after {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 7.8l4-4 4 4' fill='none' stroke='%23000' stroke-width='2.3'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 7.8l4-4 4 4' fill='none' stroke='%23000' stroke-width='2.3'/%3E%3C/svg%3E");
-}
+#evolution .timeline__item.is-open .timeline__title::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 7.8l4-4 4 4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E"); }
 #evolution .jr-sub {
   margin-top: 0.15rem;
   font-size: 0.75rem;
