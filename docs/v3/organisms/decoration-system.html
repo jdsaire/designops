@@ -71,26 +71,12 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
 .dcell__bar i { position: absolute; inset: 0; transform-origin: left; background: var(--color-brand-purple); transform: scaleX(var(--v, 0)); }
 .stat__number { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1; letter-spacing: -.02em; }
 .stat__label { color: var(--color-text-muted); margin-top: .5rem; font-size: .9rem; }
-.field { height: 220px; position: relative; overflow: hidden; background: var(--color-brand-black); }
-.field__g { position: absolute; width: 160%; height: 160%; top: -30%; left: -30%;
-  background: radial-gradient(ellipse 600px 450px at 18% 50%, rgba(161,0,255,0.16) 0%, transparent 60%), radial-gradient(ellipse 500px 500px at 72% 30%, rgba(70,0,115,0.22) 0%, transparent 55%);
-  animation: drift var(--duration-ambient) var(--ease-standard) infinite alternate; }
-@keyframes drift { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-2.5%,-1.5%) scale(1.02); } }
-.field[data-paused] .field__g { animation-play-state: paused; }
-.field p { position: relative; padding: 2rem; font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 900; text-transform: uppercase; line-height: 1.05; }
-.field p em { color: var(--color-brand-purple); }
 .lane { overflow: hidden; padding: .6rem 0; border-top: 1px solid var(--color-border-faint); }
 .lane__t { display: flex; width: max-content; gap: 3rem; animation: lane-l var(--lane-dur, 20s) linear infinite; }
 .lane--r .lane__t { animation-name: lane-r; }
 .lane:hover .lane__t { animation-play-state: paused; }
 .lane__t span { font-weight: 800; font-size: 1.1rem; letter-spacing: .06em; color: rgba(var(--ink), .55); white-space: nowrap; }
 @keyframes lane-l { to { transform: translateX(-50%); } } @keyframes lane-r { from { transform: translateX(-50%); } to { transform: none; } }
-.hero-mini > * { display: block; }
-.hero-mini .a { font-size: .95rem; } .hero-mini .a b { font-weight: 700; }
-.hero-mini .l1, .hero-mini .l2 { font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; line-height: 1.02; text-transform: uppercase; }
-.hero-mini em { font-style: italic; color: var(--color-brand-purple); }
-.hero-mini .s { margin-top: 1rem; max-width: 40rem; color: var(--color-text-muted); }
-.hero-mini .c { margin-top: 1rem; font-weight: 700; }
 .net svg, .flow svg { width: 100%; height: auto; display: block; }
 .net circle.n { fill: var(--surface-card); stroke: var(--color-brand-purple); stroke-width: 1.6; }
 .net line { stroke: rgba(var(--ink), .3); stroke-width: 1.2; }
@@ -101,8 +87,7 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
 .flow path { fill: none; stroke: rgba(var(--ink), .45); stroke-width: 1.4; }
 .flow text { fill: var(--color-brand-white); font: 600 12px var(--font-primary); }
 @media (max-width: 767px) { .cards, .journey__steps, .meters { grid-template-columns: 1fr; } .journey__step:not(:last-child)::after { top: auto; bottom: -1.4rem; left: 1.5rem; right: auto; width: 1px; height: 1.4rem; } .spec__head { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .field__g, .lane__t, .net g.b { animation: none; } }
-</style>
+@media (prefers-reduced-motion: reduce) { </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -112,7 +97,7 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
   <ul class="floor" aria-label="The floor (PR35-Q29)">
     <li><b>Final frame</b>Reduced motion, no JavaScript and print all show the end state, in the same layout.</li>
     <li><b>Nothing flashes</b>The largest change in one place is a 1 px edge or a 4 px meter.</li>
-    <li><b>Text is never hidden or delayed</b>Two named exceptions: About's count-ups (X-3) and the hero entrance (X-4).</li>
+    <li><b>Text is never hidden or delayed</b>No exceptions (PR35-Q49): About's figures are static and the hero shows at once.</li>
     <li><b>Contrast and focus intact</b>No pattern uses <code>outline</code>, changes a text colour or lowers an opacity of text.</li>
   </ul>
   <div class="bar"><button class="btn" type="button" id="all">Replay every one-shot</button><button class="btn" type="button" id="theme" aria-pressed="false">Light theme</button><span id="rmnote"></span></div>
@@ -156,32 +141,17 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
   <button class="btn" type="button" data-replay="meter">Replay</button></div>
   <div class="stage"><div class="meters" id="meters"><div><b>45</b><span class="dcell__bar"><i style="--v:1"></i></span></div><div><b>6</b><span class="dcell__bar"><i style="--v:1"></i></span></div><div><b>3</b><span class="dcell__bar"><i style="--v:.6"></i></span></div><div><b>&lt;7</b><span class="dcell__bar"><i style="--v:.5"></i></span></div></div></div></section>
 
-<section class="spec" id="count"><div class="spec__head"><div><p class="spec__n">07 · COUNT · exception X-3</p><h2 class="spec__title">A figure counts to itself</h2>
-  <p class="spec__meta">About's track-record figures only. The real figure stays in the text and in the accessibility tree; an aria-hidden runner counts over it for <code>--duration-count</code> 1.2 s and is removed on the last step, ending on the markup's own text. <span class="rm">Reduced motion and no JavaScript → the figure.</span></p></div>
-  <button class="btn" type="button" data-replay="count">Replay</button></div>
-  <div class="stage"><div class="stat__number" id="fig">130,000+</div><p class="stat__label">Monthly impacted passengers from intervention</p></div></section>
-
-<section class="spec" id="entrance"><div class="spec__head"><div><p class="spec__n">08 · ENTRANCE · exception X-4</p><h2 class="spec__title">The opening arrives in five beats</h2>
-  <p class="spec__meta">Main's hero only, once per page load: attribution, line 1, line 2 with its button, the value proposition, the CTA; <code>opacity</code> and <code>translateY(1.125rem)</code>, 500 ms, 80 ms apart. All text is in place by 820 ms. <span class="rm">Reduced motion → in place.</span></p></div>
-  <button class="btn" type="button" data-replay="entrance">Replay</button></div>
-  <div class="stage hero-mini" id="hero"><span class="a"><b>Juan Diego Saire</b> · AI Product &amp; Experience Engineer</span><span class="l1"><em>Design</em> ate code.</span><span class="l2"><em>Impact</em> prevails.</span><span class="s">I build scalable digital products, translating business challenges into tested interfaces with my top AI skills.</span><span class="c">See the work ↓</span></div></section>
-
-<section class="spec" id="field"><div class="spec__head"><div><p class="spec__n">09 · FIELD · aesthetic · ambient</p><h2 class="spec__title">The opening breathes</h2>
-  <p class="spec__meta">Main's hero gradient drifts <code>translate(−2.5 %, −1.5 %) scale(1.02)</code> over <code>--duration-ambient</code> 7 s, alternate. The hero's pause button stops it with the typing. <span class="rm">Reduced motion → still.</span></p></div>
-  <button class="btn" type="button" id="fieldBtn" aria-pressed="false">Pause</button></div>
-  <div class="stage field" id="fieldStage"><div class="field__g"></div><p><em>Design</em> ate code.</p></div></section>
-
-<section class="spec" id="marquee"><div class="spec__head"><div><p class="spec__n">10 · MARQUEE · aesthetic + message · exception X-1</p><h2 class="spec__title">A deliberate pause before the work</h2>
+<section class="spec" id="marquee"><div class="spec__head"><div><p class="spec__n">07 · MARQUEE · aesthetic + message · exception X-1</p><h2 class="spec__title">A deliberate pause before the work</h2>
   <p class="spec__meta">Main's two credential lanes at 60 px/s in opposite directions; a lane holds still while hovered. Each lane is one labelled image for screen readers. <span class="rm">Reduced motion → static lanes.</span></p></div></div>
   <div class="stage"><div class="lane" role="img" aria-label="Demo lane"><div class="lane__t" id="lane1"></div></div><div class="lane lane--r" role="img" aria-label="Demo lane"><div class="lane__t" id="lane2"></div></div></div></section>
 
-<section class="spec" id="live"><div class="spec__head"><div><p class="spec__n">11 · LIVE MAP · interaction · exception X-2</p><h2 class="spec__title">The map is live and explorable</h2>
+<section class="spec" id="live"><div class="spec__head"><div><p class="spec__n">08 · LIVE MAP · interaction · exception X-2</p><h2 class="spec__title">The map is live and explorable</h2>
   <p class="spec__meta">Brief 03's network nodes bob 2–4 px while the map is on screen, on desktop only; frames are requested only while it is on screen. The centre's pulse is retired. <span class="rm">Reduced motion → still.</span></p></div></div>
   <div class="stage net"><svg viewBox="0 0 600 180" aria-hidden="true"><line x1="300" y1="90" x2="120" y2="50"/><line x1="300" y1="90" x2="140" y2="140"/><line x1="300" y1="90" x2="470" y2="45"/><line x1="300" y1="90" x2="490" y2="130"/><line x1="120" y1="50" x2="140" y2="140"/>
     <g class="b" style="--bob-d:-.4s;--amp:3px"><circle class="n" cx="120" cy="50" r="16"/></g><g class="b" style="--bob-d:-1.3s;--amp:2px;--bob-t:3.6s"><circle class="n" cx="140" cy="140" r="14"/></g><g class="b" style="--bob-d:-2.1s;--amp:4px;--bob-t:2.9s"><circle class="n" cx="470" cy="45" r="15"/></g><g class="b" style="--bob-d:-.9s;--amp:3px;--bob-t:3.3s"><circle class="n" cx="490" cy="130" r="13"/></g>
     <circle class="n" cx="300" cy="90" r="26" style="stroke-width:2.4"/></svg></div></section>
 
-<section class="spec" id="token"><div class="spec__head"><div><p class="spec__n">12 · TOKEN · message</p><h2 class="spec__title">The passenger walks the flow once</h2>
+<section class="spec" id="token"><div class="spec__head"><div><p class="spec__n">09 · TOKEN · message</p><h2 class="spec__title">The passenger walks the flow once</h2>
   <p class="spec__meta">Brief 03's flowchart on desktop: a token walks the path when the chart is first seen, lighting each step it passes, then fades; the loop stops after the walk. <span class="rm">Reduced motion → the final frame.</span></p></div>
   <button class="btn" type="button" data-replay="token">Replay</button></div>
   <div class="stage flow"><svg viewBox="0 0 600 120" id="flowSvg" aria-hidden="true"><path d="M70 60 H530"/><rect x="20" y="40" width="100" height="40"/><rect x="190" y="40" width="100" height="40"/><rect x="360" y="40" width="100" height="40"/><rect x="480" y="40" width="100" height="40"/>
@@ -190,13 +160,12 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
 <section class="spec"><p class="spec__n">Tokens</p><h2 class="spec__title">One clock for every pattern</h2>
   <table class="tok"><thead><tr><th>Token</th><th>Value</th><th>Used by</th></tr></thead><tbody>
   <tr><td><code>--duration-ui</code></td><td>250 ms</td><td>state motion; the RUN edge's fade</td></tr>
-  <tr><td><code>--duration-deco</code></td><td>500 ms</td><td>SIGNATURE, CLOSING BAR, GROW, RELATE, EMPHASISE, ENTRANCE</td></tr>
-  <tr><td><code>--stagger-deco</code></td><td>80 ms (700 ms of stagger at most per sequence)</td><td>GROW, RELATE, meters, ENTRANCE</td></tr>
+  <tr><td><code>--duration-deco</code></td><td>500 ms</td><td>SIGNATURE, CLOSING BAR, GROW, RELATE, EMPHASISE</td></tr>
+  <tr><td><code>--stagger-deco</code></td><td>80 ms (700 ms of stagger at most per sequence)</td><td>GROW, RELATE, meters</td></tr>
   <tr><td><code>--stagger-run</code> / <code>--hold-run</code></td><td>140 ms / 360 ms (a pass lets go by 1.2 s)</td><td>RUN</td></tr>
-  <tr><td><code>--duration-count</code></td><td>1200 ms</td><td>COUNT (X-3)</td></tr>
-  <tr><td><code>--duration-ambient</code></td><td>7000 ms</td><td>FIELD</td></tr>
+  <tr><td><code>--duration-ambient</code></td><td>7000 ms</td><td>(no pattern since FIELD was retired)</td></tr>
   <tr><td>Marquee speed</td><td>60 px/s</td><td>MARQUEE</td></tr>
-  <tr><td><code>--ease-decelerate</code> / <code>--ease-standard</code></td><td>(0, 0, .2, 1) / (.4, 0, .2, 1)</td><td>arrivals / FIELD, EMPHASISE, state motion</td></tr>
+  <tr><td><code>--ease-decelerate</code> / <code>--ease-standard</code></td><td>(0, 0, .2, 1) / (.4, 0, .2, 1)</td><td>arrivals / EMPHASISE, state motion</td></tr>
   <tr><td>Trigger</td><td>top edge at 60 % of the viewport, or fully in view</td><td>every one-shot</td></tr>
   </tbody></table></section>
 </main>
@@ -225,8 +194,6 @@ import * as D from '../../../assets/js/core/decoration.js';
     emph: function () { var j = document.getElementById('journey'); D.run([].slice.call(j.children), j.querySelector('.journey__step--key'), true)(); },
     grow: function () { lines(); D.grow(g)(); },
     meter: function () { D.meter([].slice.call(document.querySelectorAll('#meters i')))(); },
-    count: function () { D.count(document.getElementById('fig'))(); },
-    entrance: function () { if (rm) return; [].slice.call(document.getElementById('hero').children).forEach(function (el, i) { el.animate([{ opacity: 0, transform: 'translateY(1.125rem)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: i * 80, easing: 'cubic-bezier(0,0,0.2,1)', fill: 'backwards' }); }); },
     token: function () {
       if (rm) return; var t = document.getElementById('tok'), rs = [].slice.call(document.querySelectorAll('#flowSvg rect')), t0 = null, D1 = 2200;
       (function f(ts) { if (ts === undefined) return requestAnimationFrame(f); if (t0 === null) t0 = ts; var p = Math.min(1, (ts - t0) / D1), x = 70 + 460 * p;
@@ -237,8 +204,6 @@ import * as D from '../../../assets/js/core/decoration.js';
   [].forEach.call(document.querySelectorAll('[data-replay]'), function (b) { b.addEventListener('click', function () { A[b.dataset.replay](); }); });
   document.getElementById('all').addEventListener('click', function () { Object.keys(A).forEach(function (k, i) { setTimeout(A[k], i * 120); }); });
   document.getElementById('theme').addEventListener('click', function () { var on = document.documentElement.getAttribute('data-theme') !== 'light'; if (on) document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme'); this.setAttribute('aria-pressed', String(on)); });
-  var fb = document.getElementById('fieldBtn'), fs = document.getElementById('fieldStage');
-  fb.addEventListener('click', function () { var p = !fs.hasAttribute('data-paused'); fs.toggleAttribute('data-paused', p); fb.textContent = p ? 'Play' : 'Pause'; fb.setAttribute('aria-pressed', String(p)); });
   /* lanes at 60 px/s, like the ticker */
   ['lane1', 'lane2'].forEach(function (id, k) { var el = document.getElementById(id), words = ['LOGO 01', 'LOGO 02', 'LOGO 03', 'LOGO 04', 'LOGO 05', 'LOGO 06'];
     el.innerHTML = words.concat(words).map(function (w) { return '<span>' + w + '</span>'; }).join(''); el.style.setProperty('--lane-dur', (el.scrollWidth / 2 / 60).toFixed(2) + 's'); });

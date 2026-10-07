@@ -4,9 +4,8 @@ Companion to `decoration-system.html`, the live specimen. It loads the site's ow
 so it shows the shipped code, not a copy.
 
 **Code:** `assets/css/shared/decoration.css` and `assets/js/core/decoration.js` (an ES module, loaded on all seven
-pages), with the timing tokens in `assets/css/base/tokens.css` and each brief's own `:root`. FIELD, ENTRANCE,
-MARQUEE, LIVE MAP and TOKEN live with their components: `pages/home/hero.{css,js}`, `shared/ticker.css`, and Brief
-03's inline canvases.
+pages), with the timing tokens in `assets/css/base/tokens.css` and each brief's own `:root`. MARQUEE, LIVE MAP
+and TOKEN live with their components: `shared/ticker.css` and Brief 03's inline canvases.
 
 **Provenance (PR #35):**
 - v1.0 was the decoration diagnosis at G2 round 2. Its floor (PR35-Q29), roles and verdicts were approved at G2(a);
@@ -16,13 +15,15 @@ MARQUEE, LIVE MAP and TOKEN live with their components: `pages/home/hero.{css,js
   X-3 made concrete, X-4 registered, on-screen loops, reduced motion keeping the layout, the state-motion register,
   the retirements and the pre-state rules. It was approved at G4a.
 - It shipped at G4b.
+- v1.2 (G5 iteration, PR35-Q48…Q51): the hero's typing loop, caret and pause button are retired, so FIELD holds
+  still and the hero shows at once (ENTRANCE and X-4 retired); COUNT and X-3 are retired, so About's figures are
+  static. Floor rule 3 now has no exceptions; X-1 and X-2 are the only registered exceptions, both under WCAG 2.2.2.
 
 ## 1. Scope: what counts as a decoration
 
 | Kind | Definition | Governed by |
 |---|---|---|
 | **Decoration** | Motion or ornament not needed to read or use the page: bars, fields, edges, fills, lines, the marquee, the entrance, the counts. | This spec. Every one needs a role (§3), fits the budget (§4) and meets the floor (§2). |
-| **Content motion** | Motion that is itself the content: the hero's typing loop and caret (PR35-Q19). | The hero spec. It has a pause button, so WCAG 2.2.2 is met, and its accessible name is stable. It shares the pause button with FIELD. |
 | **State motion** | Feedback for an action: hover, focus, open/close, slide, page fade, anchor scroll, nav hide. | §8. Not counted in the budget. |
 | **Guards** | `.hero__inner` hidden until the fit, with a 3 s CSS fallback. | Not motion. |
 
@@ -32,10 +33,10 @@ MARQUEE, LIVE MAP and TOKEN live with their components: `pages/home/hero.{css,js
 |---|---|
 | 1. Under reduced motion, a decoration rests on a static final frame, in the same layout as the animated end state. That frame also shows without JavaScript and in print. | After every pattern has played, each decorated component matches its reduced-motion frame pixel for pixel. |
 | 2. Nothing flashes. | The largest change in one place is a 1 px edge, a 3 px bar or a 4 px meter. No pattern lights the same place more than once. |
-| 3. Nothing hides or delays text. Patterns animate a bar, a border, a fill or a line, never the words. Exceptions: X-3, X-4. | Text sampled at 40, 160 and 320 ms after each scroll step: count the text elements in view whose effective opacity is below 0.99. |
+| 3. Nothing hides or delays text. Patterns animate a bar, a border, a fill or a line, never the words. No exceptions (PR35-Q49). | Text sampled at 40, 160 and 320 ms after each scroll step: count the text elements in view whose effective opacity is below 0.99. |
 | 4. Contrast and focus are never lowered. | No pattern uses `outline`, changes a text colour, or lowers the opacity of text. Count elements carrying an outline other than `:focus-visible`. |
 
-Only WCAG 2.2.2 may be relaxed, each case named in §7. Floor rule 3 has two named exceptions, both approved by JD: X-3 (PR35-Q36) and X-4 (G2(e)).
+Only WCAG 2.2.2 may be relaxed, each case named in §7. Floor rule 3 has no exceptions: X-3 and X-4 were revoked by PR35-Q49.
 
 ## 3. Roles
 
@@ -51,10 +52,8 @@ No role means the decoration is retired.
 
 - **One ambient decoration in view at a time.**
   - A component counts once: the ticker's two lanes are one MARQUEE.
-  - The hero's typing is content that shares FIELD's pause button.
-  - Measured at 320, 390, 768, 1024 and 1440: Main shows FIELD or MARQUEE, never both; Brief 03 shows the map; reduced motion shows none.
+  - Measured at 320, 390, 768, 1024 and 1440: Main shows MARQUEE only; Brief 03 shows the map; reduced motion shows none.
 - **Ambient loops are slow and small:**
-  - FIELD runs a 7 s period;
   - MARQUEE runs at 60 px/s;
   - LIVE MAP bobs 2–4 px.
 - **A loop asks for frames only while on screen.** A one-shot that uses a loop stops it when it is done.
@@ -63,7 +62,6 @@ No role means the decoration is retired.
 - **Compositor first.**
   - Patterns animate `transform` and `opacity`.
   - RELATE's `stroke-dashoffset` (motion spec S4) is the one exception, named.
-  - X-3 changes text by design.
 - **A component already on screen when the script runs** keeps its final frame, with no restart and no flash. Only the eyebrow bars, armed before first paint, draw as the page opens.
 
 ## 5. Tokens and timing
@@ -71,14 +69,13 @@ No role means the decoration is retired.
 | Token | Value | Used by |
 |---|---|---|
 | `--duration-ui` | 250 ms | state motion; the RUN edge's fade |
-| `--duration-deco` | 500 ms | SIGNATURE, CLOSING BAR, GROW, RELATE, EMPHASISE, ENTRANCE |
-| `--stagger-deco` | 80 ms; a sequence's staggers add up to 700 ms at most | GROW, meters, RELATE, ENTRANCE |
+| `--duration-deco` | 500 ms | SIGNATURE, CLOSING BAR, GROW, RELATE, EMPHASISE |
+| `--stagger-deco` | 80 ms; a sequence's staggers add up to 700 ms at most | GROW, meters, RELATE |
 | `--stagger-run` | 140 ms, shortened so a pass lets go of its last item by 1.2 s | RUN |
 | `--hold-run` | 360 ms (the key item holds 500 ms) | RUN |
-| `--duration-count` | 1200 ms | COUNT (X-3) |
-| `--duration-ambient` | 7000 ms | FIELD |
+| `--duration-ambient` | 7000 ms | (FIELD retired; token kept for future ambient patterns) |
 | marquee speed | 60 px/s (`ticker.js`) | MARQUEE |
-| `--ease-decelerate` / `--ease-standard` (exist) | (0, 0, .2, 1) / (.4, 0, .2, 1) | every arrival / FIELD, EMPHASISE, state motion |
+| `--ease-decelerate` / `--ease-standard` (exist) | (0, 0, .2, 1) / (.4, 0, .2, 1) | every arrival / EMPHASISE, state motion |
 | trigger | top edge at 60 % of the viewport height; fully in view counts only where the page cannot scroll that far | every one-shot |
 
 ## 6. Patterns
@@ -92,12 +89,12 @@ No role means the decoration is retired.
 | **GROW** | Message: when and for how long | each Gantt fill grows from its start behind its label (`scaleX` on a fill layer), 500 ms, 80 ms apart, in schedule order; labels, lengths, dots and milestones stay | bars full | B01 (7 bars), B02 (5), B04 (5) |
 | **GROW · meter** | Message: how much of the target | each meter fills to its value, 500 ms, 80 ms apart; the figures are static | meters at value | B02's 8 meters |
 | **RELATE** | Message: what had to finish first | each dependency line starts as the bar it leaves finishes and reveals along its direction through a mask, 500 ms; it keeps its 5/4 dash, and its arrowhead appears as it arrives | dashed lines with heads | B02 (5 lines) |
-| **FIELD** | Aesthetic: the opening | the hero gradient drifts `translate(−2.5 %, −1.5 %) scale(1.02)`, 7 s, alternate; paused by the hero's pause button | still | Main hero |
-| **ENTRANCE** (X-4) | Aesthetic: the opening | 5 beats (attribution, line 1, line 2 with its button, value proposition, CTA): `opacity` and `translateY(1.125rem)`, 500 ms, 80 ms apart, once per load, after the fit | in place | Main hero |
+| **FIELD** (retired, PR35-Q50) | Aesthetic: the opening | the hero gradient holds still; an endless drift without the retired pause button would need a 2.2.2 exception | still | Main hero |
+| **ENTRANCE** (retired, PR35-Q49) | — | the hero shows at once when it is fitted | in place | Main hero |
 | **MARQUEE** (X-1) | Aesthetic + Message: a deliberate pause before the work (PR35-Q28) | two lanes at 60 px/s in opposite directions; a lane holds while hovered; a logo lifts from .55 to 1 opacity on hover | static lanes | Main ticker |
 | **LIVE MAP** (X-2) | Interaction: the map is live and explorable | nodes bob 2–4 px on desktop while the map is on screen; hover or tap focuses ties; the centre pulse is retired | still | B03 network (phones show the list and sheet) |
 | **TOKEN** | Message: the passenger's path | on desktop, a token walks the flowchart once when the chart is first seen (about 12–15 s), lighting each step it passes, then fades; the loop then stops; hover redraws on demand | final frame | B03 flowchart |
-| **COUNT** (X-3) | Message: the figure as payoff | the real figure stays in the text at opacity 0 while an aria-hidden runner counts over it for 1.2 s, aligned and set like the figure; the runner ends on the figure's own text and is removed; no layout moves | the figure | About's 4 shown figures |
+| **COUNT** (retired, PR35-Q49) | — | About's track-record figures are static, like the briefs' | the figure | About |
 
 **Implementation rules:**
 - Pre-states come from script only, and only when motion is allowed.
@@ -113,10 +110,10 @@ No role means the decoration is retired.
 |---|---|---|---|
 | X-1 | Main credential ticker | WCAG 2.2.2: a loop over 5 s with no pause control | Each lane is one image labelled for screen readers ("Academic and institutional credentials", "Industry and applied execution credentials"), so no reading depends on the motion. A lane holds while hovered. Reduced motion shows static lanes. |
 | X-2 | B03 network bob | WCAG 2.2.2 | It moves 2–4 px, on desktop only, and only while on screen. Reduced motion is still. Every role is in the 17-item list beside the map: visible on phones, read by screen readers on desktop. Ties are reachable by hover, tap and the list. |
-| X-3 | About track record, 4 figures | floor rule 3: the true figure shows up to 1.2 s late | The figure is in the markup (no JS) and stays in the accessibility tree throughout (the runner is aria-hidden). Reduced motion shows it at once. The briefs' 18 figures are static. |
-| X-4 | Main hero entrance | floor rule 3: the hero text arrives up to 820 ms after the fit | Text is in the DOM and the accessibility tree from the start (opacity only). It plays once per load. Reduced motion and no JS show it at once. |
+| ~~X-3~~ | About track record | revoked by PR35-Q49: the figures are static | — |
+| ~~X-4~~ | Main hero entrance | revoked by PR35-Q49: the hero shows at once | — |
 
-FIELD needs no exception, because the hero's pause button stops it (PR35-Q19).
+With the typing loop retired (PR35-Q48), FIELD holds still (PR35-Q50) and needs no exception.
 
 ## 8. State motion
 
@@ -138,7 +135,7 @@ These are interaction feedback, outside the decoration budget.
 | Disclosures: About's 25 panels (`max-height`, 320 ms), brief reveals, brief side panel (320 ms), B03 map sheet (320 ms) | — | off | keep (`max-height` is the named layout exception for disclosures) |
 | Hover and focus: work-card reveal + 3° tilt, About card reveal (400 ms), CTA icons, ticker logos, journey step border, card borders, chips, tabs, dots | — | off or flat | keep |
 | Scroll-linked: progress bar (`scaleX`), About journey rail and markers | — | rail instant | keep |
-| Hero pause-button slot shift (280 ms, translate) | Main | off | keep |
+| Hero pause-button slot shift (280 ms, translate) | Main | off | retired with the typing loop (PR35-Q48) |
 | Contact form fields and success modal (300 ms) | Contact | off | keep |
 | B02 timeline arrows (≤ 1023): smooth `scrollBy` | B02 | the layout restacks instead | jump (`behavior: instant`); the layout stays (Δ13) |
 
@@ -148,13 +145,13 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new.
 
 | # | Component | Verdict (v1.1) | Role | Note |
 |---|---|---|---|---|
-| D01 | Main · hero gradient | **Keep** FIELD | Aesthetic | paused by the hero's pause button |
+| D01 | Main · hero gradient | **Still** (PR35-Q50) | Aesthetic | no drift |
 | D02 | Main · credential ticker | **Keep** MARQUEE + hover hold | Aesthetic, Message | X-1; **60 px/s** |
 | D03 | B03 · network bob | **Keep** LIVE MAP | Interaction | X-2; **frames only while on screen** |
 | D04 | B03 · network centre pulse | Retire | — | a second loop in one component |
 | D05 | B03 · network ring entrance (round-1 idea) | Retire | — | would delay canvas labels |
 | D06 | Main · hero badge pulse | Retired at G3 | — | with the badge |
-| D07 | Main · hero caret | Content | — | part of the typing (D28) |
+| D07 | Main · hero caret | Retired | — | PR35-Q48 |
 | D08 | All · eyebrow bars | **Extend** SIGNATURE to **44** | Aesthetic | replaces S5 (D30) |
 | D09 | All · footer | **Generate** CLOSING BAR (7) | Aesthetic | Contact included |
 | D10 | Briefs · `.io` fade/rise (90 blocks) | Retire | — | floor 3 |
@@ -167,15 +164,15 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new.
 | D17 | Gantts (B01, B02, B04) | GROW | Message | fills behind labels |
 | D18 | B02 · dependency overlay | RELATE **through a mask** | Message | Δ7 |
 | D19 | B03 · flowchart token | Keep TOKEN | Message | **the loop stops after the walk** |
-| D20 | Count-ups | About: Keep (X-3), **4 shown**; briefs: static figures | Message | Δ10; B02's markup "0" fixed |
+| D20 | Count-ups | **Static figures everywhere** (PR35-Q49) | Message | Δ10; B02's markup "0" fixed |
 | D21 | Main · work-card reveal + lift | Keep (state) | Interaction | reachable by pointer, focus and tap |
 | D22 | About card reveal; ticker logo hover; CTA icons; journey step hover | Keep (state) | Interaction | §8 |
 | D23 | B03 · S6 rule on `#act3 .card` | Retire | — | matches nothing |
 | D24 | Nav, progress, carousels, rail, disclosures, tabs | Keep (state) | Interaction | **§8 register** |
 | D25 | Main value proposition, bridge headings · purple highlight | Keep, still | Message | 12.69:1 |
 | D26 | Main/About · bridge portraits | Keep, still | — | — |
-| D27 | Main · hero entrance (G2(e) B) | **Keep, register X-4** | Aesthetic | Δ11 |
-| D28 | Main · hero typing loop + caret | **Content** (outside the budget) | — | PR35-Q19; shares the pause button with FIELD |
+| D27 | Main · hero entrance (G2(e) B) | **Retired** (PR35-Q49) | — | the hero shows at once |
+| D28 | Main · hero typing loop + caret | **Retired** (PR35-Q48) | — | line 2 rests on IMPACT / IMPACTO |
 | D29 | B02 · dashboard meters (8) | **Extend** GROW · meter | Message | Δ8 |
 | D30 | Briefs · S5 hero bar (blend difference) | **Retire** into SIGNATURE | — | green on the light theme (Δ9) |
 | D31 | B02/B04 · timeline restack under reduced motion | **Retire** the restack; B02's arrows jump | — | Δ13 |
@@ -217,7 +214,7 @@ Branch `deploy/v22-main-closing`, Chrome channel unless stated; WebKit where nam
   head script. That script adds `deco-armed` when motion is allowed. Contact's CSP lists that script's hash.
 - **Every pattern is an arm/play pair.** `arm(target)` sets the pre-state, only when motion is allowed, without a
   transition, and returns `play()`. The page plays it from `when(component)`; the specimen plays it from a button.
-  Exports: `sig`, `run`, `grow`, `meter`, `count`, `motion`.
+  Exports: `sig`, `run`, `grow`, `meter`, `motion`.
 - **A new pattern** names its role (§3), fits the budget (§4), takes its timing from the tokens (§5), and draws a bar,
   an edge, a fill or a line, never the words. Its final frame is the markup's own state. It needs a row in §6 and in
   §9, and an exception in §7 if it relaxes anything.
