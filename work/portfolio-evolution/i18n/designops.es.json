@@ -1,7 +1,7 @@
 {
   "brief_read": "6 min de lectura",
   "hero_title": "Cómo desarrollé mi propia web.",
-  "hero_lede": "Conozca los detalles de mi mayor activo  personal en la era IA.",
+  "hero_lede": "Conozca los detalles de mi mayor activo personal en la era IA.",
   "hero_role1": "<b>Roles</b> — Product owner · UX designer · Front-end developer",
   "hero_role2": "<b>Duración</b> — Cinco meses · abr – sep 2026",
   "hero_role3": "<b>Alcance</b> — Estrategia UX → design system → desarrollo → operación",
@@ -53,7 +53,7 @@
   "act3_rv1_btn": "Sobre el gráfico",
   "act3_rv1_txt": "Este diagrama de Gantt convierte el trabajo hecho en el proyecto en un resumen visual para seguimiento. Cada fila es un bloque de trabajo relacionado que se lee de izquierda a derecha en el calendario. Así se ve <strong>qué pasó y cuándo, cuánto duró cada despliegue y dónde hubo conflictos</strong>. Sólo se registra trabajo finalizado, no planeado.",
   "act3_rv2_btn": "El primer cronograma",
-  "act3_rv2_txt": "Previo a esta versión, una web de una sola página se diseñó y probó internamente, del 24 abr al 04 jul 2026. <strong>Épica 01: Single Page</strong> se construyó sección por sección: Hero, Portafolio, Capacidades y Contacto. <strong>Épica 02: Repo Hygiene</strong> preparó el terreno para el desarrollo multi-página. En total, dos repositorios de GitHub ('jdigital' y 'legacy-desops') sumaron 240 y 46 commits en su historial público, a lo largo de 32 días de despliegues activos.",
+  "act3_rv2_txt": "Previo a esta versión, una web de una sola página se diseñó y probó internamente, del 24 abr al 04 jul 2026. <strong>Épica 01: Single Page</strong> se construyó sección por sección: Hero, Portafolio, Capacidades y Contacto. <strong>Épica 02: Repo Hygiene</strong> preparó el terreno para el desarrollo multipágina. En total, dos repositorios de GitHub ('jdigital' y 'legacy-desops') sumaron 240 y 46 commits en su historial público, a lo largo de 32 días de despliegues activos.",
   "sch_aria_chart": "El build multipágina en un eje de calendario: cinco etapas, cada una con su barra de duración y sus pull requests como rombos numerados en sus fechas de integración.",
   "sch_axis_cluster": "Etapa",
   "sch_axis_window": "Periodo",

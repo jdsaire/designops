@@ -36,7 +36,7 @@
   "l3_n": "Ronda 3 · Prototipado",
   "l3_t": "Arquitectura decidida antes del código",
   "l3_x": "Flujos, datos y pantallas se definieron primero, asegurando que el desarrollo ejecutara una estructura sólida y no una suposición.",
-  "l3_r": "Nueve etapas transformaron el concepto en una especificación lista para construir: arquitectura de información a partir de un card sorting simulado, design tokens accesibles bajo estándar WCAG 2.2 AA (modo claro/oscuro), flujos de tareas y un modelo de datos. El sistema también incluyó autenticación y soporte multi-idioma.",
+  "l3_r": "Nueve etapas transformaron el concepto en una especificación lista para construir: arquitectura de información a partir de un card sorting simulado, design tokens accesibles bajo estándar WCAG 2.2 AA (modo claro/oscuro), flujos de tareas y un modelo de datos. El sistema también incluyó autenticación y soporte multiidioma.",
   "hmw_label": "El desafío de diseño",
   "hmw_q_t": "How Might We",
   "act2_question": "¿Cómo mitigar el impacto negativo de un cambio de acceso para periodistas?",
