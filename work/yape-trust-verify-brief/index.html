@@ -15,13 +15,14 @@
      Route depth: work/yape-trust-verify-brief/ — nav paths ../../
      Close: Next steps · contact CTA (../../contact/) · Keep exploring (W2A-G3-Q2)
      ============================================================ -->
-<script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
 <script>document.documentElement.classList.add('js');</script>
 <link rel="preload" href="../../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/css/base/fonts.css">
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
+<link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -427,13 +428,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   }
 }
 @keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
-@media (prefers-reduced-motion:no-preference){
-  @supports (mix-blend-mode:difference){
-    .hero .section__eyebrow-bar{ transform-origin:left center; mix-blend-mode:difference;
-      animation:sig-draw 900ms var(--ease-decelerate) both; }
-  }
-}
-@keyframes sig-draw{ from{transform:scaleX(0); opacity:.35;} to{transform:scaleX(1); opacity:1;} }
 
 </style>
 </head>
@@ -1488,10 +1482,12 @@ document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
 <script type="module">
   import { init as initProgress } from "../../assets/js/core/progress.js";
+  import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
   initTheme();
   initProgress();
+  initDecoration();
   initNavChrome({ swapLang: window.swapLang });
 </script>
 </body>

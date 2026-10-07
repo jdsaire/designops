@@ -8,6 +8,7 @@ import { init as initProgress }  from '../../core/progress.js';
 import { init as initNavChrome } from '../../core/navchrome.js';
 import { init as initEvolution } from './evolution.js';
 import { init as initStats }     from './stats.js';
+import { init as initDecoration } from '../../core/decoration.js';
 
 setPage('about/i18n/about');
 
@@ -18,4 +19,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavChrome({ swapLang });
   initEvolution();
   initStats();
+  initDecoration();
 });

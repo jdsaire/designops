@@ -1,0 +1,22 @@
+/* shared/decoration.css — the decoration system (docs/v3/organisms/decoration-system.spec.md, PR #35).
+   Floor (PR35-Q29): reduced motion rests on the final frame · nothing flashes · nothing hides or delays text (named
+   exceptions X-3, X-4) · contrast and focus never lowered · only WCAG 2.2.2 relaxed (X-1, X-2).
+   Patterns draw a bar, an edge, a fill or a line, never the words. core/decoration.js sets every pre-state, and only
+   when motion is allowed, so without JavaScript, under reduced motion and in print the final frame is the only frame.
+   Timing comes from the decoration tokens in tokens.css (and each brief's :root). */
+
+/* Pre-states are applied without a transition, so nothing visibly empties when it is armed. */
+.deco-instant, .deco-instant::before { transition: none !important; }
+
+/* SIGNATURE + CLOSING BAR · every eyebrow bar, and the footer's closing bar, draws once from the left. */
+.deco-sig { transform-origin: left center; transition: transform var(--duration-deco) var(--ease-decelerate); }
+.deco-sig.deco-pre { transform: scaleX(0); }
+/* Armed before first paint by each page's head script, so a bar already on screen draws as the page opens instead of
+   flashing full, then empty. decoration.js takes over at once; if it never runs, a 3 s release shows the bars. */
+@keyframes deco-release { to { transform: none; } }
+html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); transform-origin: left center; animation: deco-release 0s 3s forwards; }
+
+/* Print shows the final frame. */
+@media print {
+  .deco-sig.deco-pre, html.deco-armed .section__eyebrow-bar { transform: none !important; }
+}

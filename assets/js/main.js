@@ -15,6 +15,7 @@ import { init as initHero }      from './pages/home/hero.js';
 import { init as initWork }      from './pages/home/work.js';
 import { init as initTicker }    from './pages/home/ticker.js';
 import { init as initCarousel }  from './pages/capabilities/carousel.js';
+import { init as initDecoration } from './core/decoration.js';
 
 setPage('i18n/main');
 
@@ -27,4 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initWork();
   initTicker();
   initCarousel();
+  initDecoration();
 });

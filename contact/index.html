@@ -12,7 +12,7 @@
        response headers we control, so this meta tag is the only vehicle,
        and frame-ancestors cannot be carried in one. Scoped to this page
        (S10D D7); the other seven are a CC-3 line. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-z/L/xVjXibIZ7gMDFCNXZVuBILZDkxu+3TrsJz5BwxY=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
   <title>Contact · Juan Diego Saire — DesignOps</title>
   <meta name="description" content="Tell me about the team and the challenge. One form, a reply within 48 hours.">
   <link rel="icon" type="image/svg+xml" href="../logos/jdigital-logo-default.svg">
@@ -24,7 +24,7 @@
   <meta property="og:image" content="../assets/img/bridge1_onboarding.svg">
   <meta property="og:locale" content="en_US">
 
-  <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+  <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
   <link rel="preload" href="../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/css/base/fonts.css">
   <link rel="stylesheet" href="../assets/css/base/tokens.css">
@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="../assets/css/shared/section-extras.css">
   <link rel="stylesheet" href="../assets/css/pages/contact/contact.css">
   <link rel="stylesheet" href="../assets/css/shared/footer.css">
+  <link rel="stylesheet" href="../assets/css/shared/decoration.css">
   <link rel="stylesheet" href="../assets/css/shared/designops-variant.css">
 </head>
 <body>
