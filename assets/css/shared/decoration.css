@@ -37,6 +37,24 @@ html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); t
 .deco-run-item.deco-emph:not(.deco-run--before)::after,
 .deco-run-item.deco-run--before.deco-emph::before { animation: deco-emph var(--duration-deco) var(--ease-standard) 1 both; }
 
+/* GROW · each Gantt bar's fill grows from its start, behind its label; label, length, dots and milestones stay. The
+   bar's own background moves into ::before for the duration only. */
+.deco-grow-bar { isolation: isolate; background-color: transparent !important; }
+.deco-grow-bar::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--deco-fill); transform-origin: left center;
+  transition: transform var(--duration-deco) var(--ease-decelerate) var(--deco-delay, 0ms);
+}
+.deco-grow-bar.deco-pre::before { transform: scaleX(0); }
+/* GROW · meter: dashboard meters fill to their value; the figures above them are static. */
+.dcell__bar i.deco-meter { transition: transform var(--duration-deco) var(--ease-decelerate) var(--deco-delay, 0ms); }
+.dcell__bar i.deco-meter.deco-pre { transform: scaleX(0); }
+
+/* RELATE · dependency lines reveal along their direction through a mask, so they keep their dash; each arrowhead
+   appears as its line arrives. stroke-dashoffset is the one sanctioned non-compositor property (motion spec S4). */
+.deco-relate-mask { transition: stroke-dashoffset var(--duration-deco) var(--ease-decelerate); }
+.deco-relate-head { transition: opacity 120ms linear var(--deco-delay, 0ms); }
+.deco-relate-head.deco-pre { opacity: 0; }
+
 /* COUNT (X-3) · About's track-record figures: the real figure stays in the text at opacity 0 (and in the accessibility
    tree) while an aria-hidden runner counts over it, aligned and set like the figure. No layout moves. */
 .deco-count { position: relative; }
@@ -46,6 +64,10 @@ html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); t
 /* Print shows the final frame. */
 @media print {
   .deco-sig.deco-pre, html.deco-armed .section__eyebrow-bar { transform: none !important; }
+  .deco-grow-bar.deco-pre::before { transform: none !important; }
+  .dcell__bar i.deco-meter.deco-pre { transform: scaleX(var(--v, 0)) !important; }
+  .deco-relate-mask { stroke-dashoffset: 0 !important; }
+  .deco-relate-head.deco-pre { opacity: 1 !important; }
   .deco-count > .deco-count-final { opacity: 1 !important; }
   .deco-count > .deco-count-run { display: none !important; }
 }
