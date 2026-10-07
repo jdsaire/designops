@@ -1,7 +1,7 @@
 /* shared/footer.css — FOOTER, the one source for all 7 pages (the briefs link it like nav.css; PR #35 G4).
    G2(c) · PR35-Q31…Q33: the closing statement over the page's last hairline, then ©.
-   - Statement: two lines, always separate; line 2 in brand purple; UPPER by text-transform (the keys stay sentence
-     case, so screen readers read words) with the last word of each line in Archivo Italic. Main's section-headline
+   - Statement: two lines, always separate; line 2 in brand purple; Sentence case, as the keys are written (PR35-Q40,
+     replacing PR35-Q32's upper case), with the last word of each line in Archivo Italic. Main's section-headline
      type: 700, clamp(2rem, 4vw, 3.5rem), 1.08, -0.02em.
    - The closing bar above it is the eyebrow bar's mark (decoration spec v1.1, CLOSING BAR).
    - F2 from 1024: statement left, the two links stacked right and bottom-aligned; one column below.
@@ -38,7 +38,6 @@
   font-weight: var(--fw-bold);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
   color: var(--color-brand-white);
 }
 .footer__line { display: block; text-wrap: balance; }
