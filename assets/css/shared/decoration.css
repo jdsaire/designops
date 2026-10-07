@@ -1,6 +1,6 @@
 /* shared/decoration.css — the decoration system (docs/v3/organisms/decoration-system.spec.md, PR #35).
-   Floor (PR35-Q29): reduced motion rests on the final frame · nothing flashes · nothing hides or delays text (named
-   exceptions X-3, X-4) · contrast and focus never lowered · only WCAG 2.2.2 relaxed (X-1, X-2).
+   Floor (PR35-Q29): reduced motion rests on the final frame · nothing flashes · nothing hides or delays text (no
+   exceptions, PR35-Q49) · contrast and focus never lowered · only WCAG 2.2.2 relaxed (X-1, X-2).
    Patterns draw a bar, an edge, a fill or a line, never the words. core/decoration.js sets every pre-state, and only
    when motion is allowed, so without JavaScript, under reduced motion and in print the final frame is the only frame.
    Timing comes from the decoration tokens in tokens.css (and each brief's :root). */
@@ -55,12 +55,6 @@ html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); t
 .deco-relate-head { transition: opacity 120ms linear var(--deco-delay, 0ms); }
 .deco-relate-head.deco-pre { opacity: 0; }
 
-/* COUNT (X-3) · About's track-record figures: the real figure stays in the text at opacity 0 (and in the accessibility
-   tree) while an aria-hidden runner counts over it, aligned and set like the figure. No layout moves. */
-.deco-count { position: relative; }
-.deco-count > .deco-count-final { opacity: 0; }
-.deco-count > .deco-count-run { position: absolute; inset: 0; text-align: inherit; white-space: nowrap; }
-
 /* Print shows the final frame. */
 @media print {
   .deco-sig.deco-pre, html.deco-armed .section__eyebrow-bar { transform: none !important; }
@@ -68,6 +62,4 @@ html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); t
   .dcell__bar i.deco-meter.deco-pre { transform: scaleX(var(--v, 0)) !important; }
   .deco-relate-mask { stroke-dashoffset: 0 !important; }
   .deco-relate-head.deco-pre { opacity: 1 !important; }
-  .deco-count > .deco-count-final { opacity: 1 !important; }
-  .deco-count > .deco-count-run { display: none !important; }
 }

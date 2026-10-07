@@ -37,7 +37,6 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
   --stagger-deco:    80ms;
   --stagger-run:     140ms;
   --hold-run:        360ms;
-  --duration-count:  1200ms;
   /* ── Theme channels. --ink is the foreground, --ground its opposite.
      Both are bare "r,g,b" triplets so alpha literals that had no token
      (rgba(255,255,255,.12), rgba(0,0,0,.68) …) become rgba(var(--ink),.12)
