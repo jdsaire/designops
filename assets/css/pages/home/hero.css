@@ -12,9 +12,9 @@
     radial-gradient(ellipse 600px 450px at 18% 50%, rgba(161,0,255,0.06) 0%, transparent 60%),
     radial-gradient(ellipse 500px 500px at 72% 30%, rgba(70,0,115,0.09) 0%, transparent 55%),
     radial-gradient(ellipse 320px 320px at 50% 82%, rgba(117,0,192,0.05) 0%, transparent 50%);
-  animation:drift var(--duration-ambient) var(--ease-standard) infinite alternate;
 }
-@keyframes drift { 0% { transform:translate(0,0) scale(1); } 100% { transform:translate(-2.5%,-1.5%) scale(1.02); } }
+/* The gradient holds still (PR35-Q50): with the typing loop's pause button retired, an endless
+   drift would need a WCAG 2.2.2 exception. */
 .hero__scrim { position:absolute; inset:0; background:linear-gradient(110deg,rgba(var(--ground),0.72) 0%,rgba(var(--ground),0.38) 50%,rgba(var(--ground),0.58) 100%); }
 
 .hero__inner {
