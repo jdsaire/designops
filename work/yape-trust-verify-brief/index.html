@@ -411,8 +411,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
-  .timeline__nav{display:none;}
+  /* Timelines keep their layout under reduced motion (decoration spec floor rule 1); only their motion stops. */
   .dcell__bar i{transform:scaleX(var(--v,0));}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
@@ -1166,8 +1165,10 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
 const track = document.getElementById("tlTrack");
 const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
 function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
-prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:"smooth"}));
-next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:"smooth"}));
+/* Reduced motion keeps the swipe track and its arrows; the arrows jump instead of gliding. */
+const tlBehavior = ()=> window.matchMedia("(prefers-reduced-motion:reduce)").matches ? "instant" : "smooth";
+prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:tlBehavior()}));
+next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:tlBehavior()}));
 function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
 track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
 

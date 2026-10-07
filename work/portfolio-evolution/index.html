@@ -453,7 +453,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
+  /* Timelines keep their layout under reduced motion (decoration spec floor rule 1); only their motion stops. */
     .dcell__bar i{transform:scaleX(var(--v,0));}
 }
 
