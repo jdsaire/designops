@@ -39,6 +39,28 @@ function sig(bar) {
   return () => frame(() => bar.classList.remove('deco-pre'));
 }
 
+/* RUN (+ EMPHASISE): one pass in reading order, --stagger-run apart, each item held --hold-run; a long pass
+   shortens its step so it lets go of its last item by 1.2 s. As the pass lands on the key item, that item's edge
+   swells. */
+function run(items, key, before) {
+  items = items.filter(shown);
+  if (!motion || items.length < 2) return noop;
+  const css = getComputedStyle(document.documentElement);
+  const tok = (n, fb) => parseFloat(css.getPropertyValue(n)) || fb;
+  const DUR = tok('--duration-deco', 500), RSTEP = tok('--stagger-run', 140), RHOLD = tok('--hold-run', 360);
+  items.forEach(it => {
+    it.classList.add('deco-run-item'); if (before) it.classList.add('deco-run--before');
+    if (getComputedStyle(it).position === 'static') it.classList.add('deco-run-host');
+  });
+  const step = Math.min(RSTEP, (1200 - RHOLD) / (items.length - 1));
+  return () => items.forEach((it, i) => {
+    const isKey = it === key, hold = isKey ? DUR : RHOLD;
+    setTimeout(() => { it.classList.add('deco-lit'); if (isKey) it.classList.add('deco-emph'); }, i * step);
+    setTimeout(() => it.classList.remove('deco-lit'), i * step + hold);
+    if (isKey) setTimeout(() => it.classList.remove('deco-emph'), i * step + DUR + 50);
+  });
+}
+
 /* COUNT (exception X-3): About's track-record figures. The real figure stays in the text, and in the accessibility
    tree, at opacity 0 while an aria-hidden runner counts over it for --duration-count; the runner is aligned and set
    like the figure, ends on the figure's own text and is removed. Nothing in the layout moves. */
@@ -74,8 +96,15 @@ function init() {
   /* 44 eyebrow bars and 7 closing bars across the site */
   document.querySelectorAll('.section__eyebrow-bar').forEach(bar => { if (shown(bar)) when(bar.parentElement, sig(bar)); });
   h.classList.add('deco-ready');
+  const kids = c => [...c.children];
+  /* RUN: timelines (a swipe track keeps its items off screen, so it is skipped: Brief 02 below 1024), ladders,
+     Brief 03's journey (the missing channel is its key) and relays (one pass across the hand-off baton) */
+  document.querySelectorAll('.timeline__track').forEach(c => { if (c.scrollWidth <= c.clientWidth + 4 && !onScreen(c)) when(c, run(kids(c))); });
+  document.querySelectorAll('.ladder-down').forEach(c => { if (!onScreen(c)) when(c, run(kids(c))); });
+  document.querySelectorAll('.journey__steps').forEach(c => { if (!onScreen(c)) when(c, run(kids(c), c.querySelector('.journey__step--key'), true)); });
+  document.querySelectorAll('.relay').forEach(r => { if (!onScreen(r)) when(r, run([...r.querySelectorAll('.relay__node, .relay__baton span')], r.querySelector('.relay__baton span'))); });
   /* About's track record: the figures shown (evolution.css hides the fifth) */
   document.querySelectorAll('.track-record__stats .stat__number').forEach(el => { if (shown(el) && !onScreen(el)) when(el, count(el)); });
 }
 
-export { init, motion, sig, count };
+export { init, motion, sig, run, count };

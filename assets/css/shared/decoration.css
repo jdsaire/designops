@@ -16,6 +16,27 @@
 @keyframes deco-release { to { transform: none; } }
 html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); transform-origin: left center; animation: deco-release 0s 3s forwards; }
 
+/* RUN · a 1 px brand-purple edge passes through an ordered component once, in reading order. The edge is a
+   pseudo-element layer animated by opacity, never `outline`, so the focus ring stays the page's only outline. Items
+   whose ::after is taken (Brief 03's journey connectors) use ::before. Relay nodes and the hand-off baton are filled
+   purple, so their edge rings 4 px outside them. */
+.deco-run-host { position: relative; }
+.deco-run-item:not(.deco-run--before)::after,
+.deco-run-item.deco-run--before::before {
+  content: ""; position: absolute; inset: var(--deco-edge-inset, 0); z-index: 2; pointer-events: none;
+  border: 1px solid var(--color-brand-purple); border-radius: inherit; opacity: 0;
+  transition: opacity var(--duration-ui) linear;
+}
+.relay__node.deco-run-item, .relay__baton span.deco-run-item { --deco-edge-inset: -4px; }
+.deco-run-item.deco-lit:not(.deco-run--before)::after,
+.deco-run-item.deco-run--before.deco-lit::before { opacity: 1; }
+
+/* EMPHASISE · when the pass lands on the key item, its edge swells 6 % and settles; the words stay still. The item
+   then rests in its own state (the journey's key step keeps its 2 px purple border). */
+@keyframes deco-emph { 0% { transform: none; } 45% { transform: scale(1.06); } 100% { transform: none; } }
+.deco-run-item.deco-emph:not(.deco-run--before)::after,
+.deco-run-item.deco-run--before.deco-emph::before { animation: deco-emph var(--duration-deco) var(--ease-standard) 1 both; }
+
 /* COUNT (X-3) · About's track-record figures: the real figure stays in the text at opacity 0 (and in the accessibility
    tree) while an aria-hidden runner counts over it, aligned and set like the figure. No layout moves. */
 .deco-count { position: relative; }
