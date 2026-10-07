@@ -281,16 +281,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
 
 
-/* S6 — depth: subtle preserve-3d lift on the Architecture (#act3) evidence cards, hover/focus only */
-@media (prefers-reduced-motion:no-preference){
-  @supports (transform-style:preserve-3d){
-    #act3 .cardgrid--2{ perspective:1100px; }
-    #act3 .card{ transform-style:preserve-3d; transition:transform 260ms var(--ease-standard), border-color var(--duration-ui) var(--ease-standard); }
-    #act3 .card__t{ transition:transform 260ms var(--ease-standard); }
-    #act3 .card:hover, #act3 .card:focus-within{ transform:rotateX(2deg) translateZ(8px); }
-    #act3 .card:hover .card__t, #act3 .card:focus-within .card__t{ transform:translateZ(14px); }
-  }
-}
 
 /* ===== CARRIED FORWARD from work/accreditapass/ — rules this chassis lacks
    and the locked copy depends on: both standing notices, the pull quotes,
@@ -1467,14 +1457,17 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
       if(TIER2.has(n.id) && !compact){ ctx.beginPath(); ctx.arc(x,y,r+5,0,Math.PI*2); ctx.strokeStyle=rgba('#A100FF',.75); ctx.lineWidth=1.4; ctx.stroke(); }
       label(n,x,y,r); ctx.globalAlpha = 1; n.rx=x; n.ry=y; n.r=r; });
     // centre
-    const pr = (compact?20:56) * (1 + (reduce.matches?0:Math.sin(t*.8)*.015));
+    const pr = compact?20:56;   /* the centre's pulse retired (decoration spec D04): one ambient motion per component */
     const g=ctx.createRadialGradient(cx,cy,0,cx,cy,pr*1.6); g.addColorStop(0,'rgba(161,0,255,.22)'); g.addColorStop(1,'rgba(0,0,0,0)');
     ctx.beginPath(); ctx.arc(cx,cy,pr*1.6,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
     ctx.beginPath(); ctx.arc(cx,cy,pr,0,Math.PI*2); ctx.fillStyle=col('--surface-card'); ctx.fill(); ctx.strokeStyle='#A100FF'; ctx.lineWidth=2.4; ctx.stroke();
     if(!compact){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 13px Archivo, Arial, sans-serif'; ctx.fillStyle=col('--color-purple-light');
       ctx.fillText(txt('.net__l-centre'), cx, cy); }
   }
-  function loop(ts){ if(visible) draw(ts||0); if(!reduce.matches) requestAnimationFrame(loop); }
+  /* Frames only while the map is on screen; phones never bob, so they draw once and then on demand. */
+  let running = false;
+  function loop(ts){ running = false; if(!visible || reduce.matches) return; draw(ts||0); if(compact) return; running = true; requestAnimationFrame(loop); }
+  function start(){ if(!running && !reduce.matches){ running = true; requestAnimationFrame(loop); } }
   function fill(box, n){
     const m = n.chip.parentElement.querySelector('.net__meta');
     box.querySelector('.net__card-path').textContent = m.querySelector('.net__m-path').textContent;
@@ -1499,17 +1492,17 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
     active = n; root.dataset.active = n.id; uiState.set('net', n.id); chips.forEach(c=>c.setAttribute('aria-pressed', String(c===n.chip)));
     if(mobile()){ fill(sheet,n); showSheet(true); sheet.querySelector('.net__close').focus(); }
     else { fill(card,n); card.hidden=false; placeCard(n); }
-    if(reduce.matches) draw(0);
+    if(reduce.matches || !running) draw(performance.now());
   }
   function close(){ const n = active; active=null; delete root.dataset.active; uiState.set('net', null); chips.forEach(c=>c.setAttribute('aria-pressed','false'));
-    card.hidden=true; const wasSheet = sheet.classList.contains('is-open'); showSheet(false); if(wasSheet && n) n.chip.focus(); if(reduce.matches) draw(0); }
+    card.hidden=true; const wasSheet = sheet.classList.contains('is-open'); showSheet(false); if(wasSheet && n) n.chip.focus(); if(reduce.matches || !running) draw(performance.now()); }
   function hit(x,y){ return nodes.find(n=>Math.hypot(x-(n.rx??n.x), y-(n.ry??n.y)) < (n.r||30)+6) || null; }
   function xy(e){ const r=cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
-  cv.addEventListener('mousemove', e=>{ if(compact) return; const h=hit(...xy(e)); if(h!==hover){ hover=h; cv.style.cursor=h?'pointer':'default'; if(reduce.matches) draw(0);} });
-  cv.addEventListener('mouseleave', ()=>{ hover=null; if(reduce.matches) draw(0); });
+  cv.addEventListener('mousemove', e=>{ if(compact) return; const h=hit(...xy(e)); if(h!==hover){ hover=h; cv.style.cursor=h?'pointer':'default'; if(reduce.matches || !running) draw(performance.now());} });
+  cv.addEventListener('mouseleave', ()=>{ hover=null; if(reduce.matches || !running) draw(performance.now()); });
   cv.addEventListener('click', e=>{ if(compact) return; const h=hit(...xy(e)); if(!h || h===active) close(); else open(h); });
   chips.forEach(c=>{ c.setAttribute('aria-pressed','false'); c.addEventListener('click', ()=>{ const n=byId[c.dataset.netId]; if(active===n && !mobile()) close(); else open(n); });
-    c.addEventListener('focus', ()=>{ if(!mobile()){ hover=byId[c.dataset.netId]; if(reduce.matches) draw(0);} });
+    c.addEventListener('focus', ()=>{ if(!mobile()){ hover=byId[c.dataset.netId]; if(reduce.matches || !running) draw(performance.now());} });
     c.addEventListener('blur', ()=>{ hover=null; }); });
   root.querySelectorAll('.net__close').forEach(b=>b.addEventListener('click', close));
   backdrop.addEventListener('click', close);
@@ -1517,10 +1510,10 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   document.addEventListener('i18n:changed', ()=>{ if(active){ fill(mobile()?sheet:card, active);} draw(performance.now()); });
   new MutationObserver(()=>draw(performance.now())).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
   new ResizeObserver(()=>{ layout(); if(active && !mobile()) placeCard(active); draw(performance.now()); }).observe(stage);
-  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; }), {threshold:0}).observe(cv);
-  reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
+  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(visible) start(); }), {threshold:0}).observe(cv);
+  reduce.addEventListener('change', ()=>{ if(!reduce.matches) start(); else draw(0); });
   document.body.append(backdrop, sheet);   // at the document root, as in jdigital: no animated ancestor can trap the fixed layers
-  layout(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+  layout(); draw(0); start();
   if(document.fonts) document.fonts.load('600 11px Archivo').then(()=>{ layout(); draw(performance.now()); }, ()=>{});   // labels are measured: redo once the face is in
   { const sv = uiState.get('net'); if(sv && byId[sv]) open(byId[sv]); }   // a reload keeps the open card or sheet
 })();
@@ -1629,11 +1622,14 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(tok[0], tok[1], 16, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.arc(tok[0], tok[1], 4.5, 0, Math.PI*2); ctx.fillStyle = '#FFFFFF'; ctx.fill(); ctx.globalAlpha = 1; }
   }
-  function loop(ts){ if(visible) draw(ts); if(!reduce.matches) requestAnimationFrame(loop); }
+  /* Frames only while the chart is on screen and its passenger is still to walk; afterwards it draws on demand. */
+  let running = false;
+  function loop(ts){ running = false; if(!visible || reduce.matches) return; draw(ts); if(rows !== 2 || tokDone) return; running = true; requestAnimationFrame(loop); }
+  function start(){ if(!running && !reduce.matches){ running = true; requestAnimationFrame(loop); } }
   // hover lights a node and its edges (no panels here)
   function hit(x,y){ return nodes.find(n=>{ const [hw,hh] = half(n); return Math.abs(x-n.x) <= hw && Math.abs(y-n.y) <= hh; }) || null; }
-  cv.addEventListener('mousemove', e=>{ const r = cv.getBoundingClientRect(), h = hit(e.clientX - r.left, e.clientY - r.top); if(h !== hover){ hover = h; if(reduce.matches) draw(0); } });
-  cv.addEventListener('mouseleave', ()=>{ hover = null; if(reduce.matches) draw(0); });
+  cv.addEventListener('mousemove', e=>{ const r = cv.getBoundingClientRect(), h = hit(e.clientX - r.left, e.clientY - r.top); if(h !== hover){ hover = h; if(reduce.matches || !running) draw(performance.now()); } });
+  cv.addEventListener('mouseleave', ()=>{ hover = null; if(reduce.matches || !running) draw(performance.now()); });
   // below 1024: four dots jump the strip to each platform screen
   const dots = [1,2,3,4].map(i=>{ const b = document.createElement('button'); b.type = 'button'; b.className = 'a4-dot' + (i === 1 ? ' is-on' : ''); b.dataset.s = i; dotsEl.append(b); return b; });
   function dotLabels(){ dots.forEach(b=>{ const n = MAIN.find(m=>m[2] === +b.dataset.s); b.setAttribute('aria-label', b.dataset.s + ' · ' + txt(n[0])); }); }
@@ -1643,9 +1639,9 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   document.addEventListener('i18n:changed', ()=>{ dotLabels(); draw(performance.now()); });
   new MutationObserver(()=>draw(performance.now())).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
   new ResizeObserver(()=>{ layout(); draw(performance.now()); }).observe(strip);
-  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(en.intersectionRatio >= .4) seen = true; }), { threshold:[0, .4] }).observe(strip);
-  reduce.addEventListener('change', ()=>{ if(!reduce.matches) requestAnimationFrame(loop); else draw(0); });
-  layout(); dotLabels(); draw(0); if(!reduce.matches) requestAnimationFrame(loop);
+  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(en.intersectionRatio >= .4) seen = true; if(visible && !tokDone) start(); }), { threshold:[0, .4] }).observe(strip);
+  reduce.addEventListener('change', ()=>{ if(!reduce.matches) start(); else draw(0); });
+  layout(); dotLabels(); draw(0); start();
   if(document.fonts) document.fonts.load('600 11px Archivo').then(()=>{ layout(); draw(performance.now()); }, ()=>{});   // labels are measured: redo once the face is in
   { const x0 = +uiState.get('flow') || 0; if(x0 && !wide.matches) requestAnimationFrame(()=>{ strip.scrollLeft = x0; }); }   // a reload keeps the strip's place
 })();

@@ -414,9 +414,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
 .dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
 .dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
-.dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
-  transition:transform 900ms var(--ease-decelerate);}
 /* Three across at tablet as well as desktop: the default cardgrid--3 drops to two
    columns below 1024, which would leave this row of three as two-and-one. */
 @media (min-width:768px) and (max-width:1023px){
@@ -454,7 +451,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
   /* Timelines keep their layout under reduced motion (decoration spec floor rule 1); only their motion stops. */
-    .dcell__bar i{transform:scaleX(var(--v,0));}
 }
 
 /* ================= MOTION · D7 NATIVE LAYER (progressive enhancement, compositor-only) =================
