@@ -1360,20 +1360,6 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   (uiState.get("rv") || []).forEach(id=>{ const b = btns.find(x=>x.getAttribute("aria-controls")===id); if(b && b.getAttribute("aria-expanded")!=="true") b.click(); });
   const mo = new MutationObserver(save); btns.forEach(b=> mo.observe(b, { attributes:true, attributeFilter:["aria-expanded"] })); }
 
-/* ============ Count-up (once per element, reduced-motion aware) ============ */
-const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-function runCounts(scope){
-  (scope||document).querySelectorAll("[data-count]").forEach(el=>{
-    if(el.dataset.done || el.closest("[hidden]")) return; el.dataset.done="1";
-    const raw = el.dataset.count, target = parseFloat(raw), dec = raw.includes(".") ? 1 : 0;
-    if(reduce || target===0){ el.textContent = target.toFixed(dec); return; }
-    let t0=null; const dur=700;
-    const step=(ts)=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1);
-      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec); if(p<1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
-  });
-}
-
 /* ============ Act 03 deliverables carousel — translate on desktop, swipe on phones (Main's capabilities carousel) ============ */
 document.querySelectorAll('[data-dl]').forEach(root=>{
   const vp = root.querySelector('.dl__viewport'), track = root.querySelector('.dl__track'), slides = [...track.children];
@@ -1683,7 +1669,6 @@ const io = new IntersectionObserver(entries=>{
   entries.forEach(en=>{
     if(!en.isIntersecting) return;
     en.target.classList.add("is-in");
-    runCounts(en.target);
     io.unobserve(en.target);
   });
 },{threshold:0.18});

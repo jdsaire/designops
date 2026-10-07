@@ -39,6 +39,33 @@ function sig(bar) {
   return () => frame(() => bar.classList.remove('deco-pre'));
 }
 
+/* COUNT (exception X-3): About's track-record figures. The real figure stays in the text, and in the accessibility
+   tree, at opacity 0 while an aria-hidden runner counts over it for --duration-count; the runner is aligned and set
+   like the figure, ends on the figure's own text and is removed. Nothing in the layout moves. */
+function count(el) {
+  const fin0 = el.querySelector('.deco-count-final'); if (fin0) el.textContent = fin0.textContent;   /* a replay starts clean */
+  const final = el.textContent.trim(), m = final.match(/^([\d.,\s]+)(.*)$/);
+  if (!motion || !m) return noop;
+  const digits = m[1].trim(), suffix = m[2], sep = (digits.match(/[.,\s](?=\d{3}\b)/) || [''])[0];
+  const target = parseInt(digits.replace(/[^\d]/g, ''), 10); if (!target) return noop;
+  const fmt = n => { const t = String(n); return sep ? t.replace(/\B(?=(\d{3})+(?!\d))/g, sep) : t; };
+  const dur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--duration-count')) || 1200;
+  el.textContent = ''; el.classList.add('deco-count');
+  const fin = document.createElement('span'); fin.className = 'deco-count-final'; fin.textContent = final;
+  const runner = document.createElement('span'); runner.className = 'deco-count-run'; runner.setAttribute('aria-hidden', 'true'); runner.textContent = '0' + suffix;
+  el.append(fin, runner);
+  return () => {
+    let t0 = null;
+    const step = ts => {
+      if (t0 === null) t0 = ts;
+      const p = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      if (p < 1) { runner.textContent = fmt(Math.round(target * e)) + suffix; requestAnimationFrame(step); }
+      else { runner.remove(); el.classList.remove('deco-count'); }
+    };
+    requestAnimationFrame(step);
+  };
+}
+
 let started = false;
 function init() {
   if (started) return; started = true;
@@ -47,6 +74,8 @@ function init() {
   /* 44 eyebrow bars and 7 closing bars across the site */
   document.querySelectorAll('.section__eyebrow-bar').forEach(bar => { if (shown(bar)) when(bar.parentElement, sig(bar)); });
   h.classList.add('deco-ready');
+  /* About's track record: the figures shown (evolution.css hides the fifth) */
+  document.querySelectorAll('.track-record__stats .stat__number').forEach(el => { if (shown(el) && !onScreen(el)) when(el, count(el)); });
 }
 
-export { init, motion, sig };
+export { init, motion, sig, count };

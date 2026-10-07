@@ -1,5 +1,5 @@
 /* home/hero.js — HERO (PR #35).
-   The track-record stat count-up left with its organism for about/stats.js (S10C).
+   The track-record stat count-up left with its organism (S10C); it now lives in core/decoration.js (PR #35).
 
    Fit: the heading's two lines are sized from their own text, per language and viewport.
    Line 1 fills the stage's width; line 2 fills it too, less the room its pause button keeps

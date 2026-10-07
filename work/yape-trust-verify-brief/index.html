@@ -870,37 +870,37 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           </div>
           <div class="dash__grid">
             <div class="dcell">
-              <span class="dcell__n"><span data-count="45">0</span></span>
+              <span class="dcell__n"><span>45</span></span>
               <span class="dcell__l" data-i18n="m1_l">Assertions passing</span>
               <span class="dcell__p" data-i18n-html="m1_p"><strong>45 of 45.</strong> None waived.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="6">0</span></span>
+              <span class="dcell__n"><span>6</span></span>
               <span class="dcell__l" data-i18n="m2_l">Protocol scenarios</span>
               <span class="dcell__p" data-i18n-html="m2_p"><strong>All six pass.</strong></span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="0">0</span></span>
+              <span class="dcell__n"><span>0</span></span>
               <span class="dcell__l" data-i18n="m3_l">Backend services</span>
               <span class="dcell__p" data-i18n-html="m3_p"><strong>Front-end only</strong>, by constraint.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="5">0</span></span>
+              <span class="dcell__n"><span>5</span></span>
               <span class="dcell__l" data-i18n="m4_l">CI gates per push</span>
               <span class="dcell__p" data-i18n-html="m4_p"><strong>Typecheck, tests, build, drift, paths.</strong></span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="5">0</span></span>
+              <span class="dcell__n"><span>5</span></span>
               <span class="dcell__l" data-i18n="m5_l">Security controls running in the client</span>
               <span class="dcell__p" data-i18n-html="m5_p"><strong>Secure keypad</strong>, shuffled digits, execution lock, blocking overlay, privacy masking.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="3">0</span></span>
+              <span class="dcell__n"><span>3</span></span>
               <span class="dcell__l" data-i18n="m6_l">API endpoints consumed</span>
               <span class="dcell__p" data-i18n-html="m6_p">Real request handling <strong>against mock fixtures</strong>.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0.6"></i></span>
@@ -912,7 +912,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0.5"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="0">0</span></span>
+              <span class="dcell__n"><span>0</span></span>
               <span class="dcell__l" data-i18n="m8_l">Lines of code typed by hand</span>
               <span class="dcell__p" data-i18n-html="m8_p">Every line directed, reviewed and understood. <strong>None typed.</strong></span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
@@ -1191,23 +1191,8 @@ tabs.forEach(tab=>{
       t.setAttribute("aria-selected", String(sel));
       document.getElementById(panels[t.id]).hidden = !sel;
     });
-    runCounts(document.getElementById(panels[tab.id]));
   });
 });
-
-/* ============ Count-up (once per element, reduced-motion aware) ============ */
-const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-function runCounts(scope){
-  (scope||document).querySelectorAll("[data-count]").forEach(el=>{
-    if(el.dataset.done || el.closest("[hidden]")) return; el.dataset.done="1";
-    const raw = el.dataset.count, target = parseFloat(raw), dec = raw.includes(".") ? 1 : 0;
-    if(reduce || target===0){ el.textContent = target.toFixed(dec); return; }
-    let t0=null; const dur=700;
-    const step=(ts)=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1);
-      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec); if(p<1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
-  });
-}
 
 /* ============================================================
    ACT 03 · ROADMAP ORGANISM — data-driven, effort-scaled.
@@ -1474,7 +1459,6 @@ const io = new IntersectionObserver(entries=>{
   entries.forEach(en=>{
     if(!en.isIntersecting) return;
     en.target.classList.add("is-in");
-    runCounts(en.target);
     io.unobserve(en.target);
   });
 },{threshold:0.18});

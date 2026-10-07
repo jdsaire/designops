@@ -16,7 +16,15 @@
 @keyframes deco-release { to { transform: none; } }
 html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); transform-origin: left center; animation: deco-release 0s 3s forwards; }
 
+/* COUNT (X-3) · About's track-record figures: the real figure stays in the text at opacity 0 (and in the accessibility
+   tree) while an aria-hidden runner counts over it, aligned and set like the figure. No layout moves. */
+.deco-count { position: relative; }
+.deco-count > .deco-count-final { opacity: 0; }
+.deco-count > .deco-count-run { position: absolute; inset: 0; text-align: inherit; white-space: nowrap; }
+
 /* Print shows the final frame. */
 @media print {
   .deco-sig.deco-pre, html.deco-armed .section__eyebrow-bar { transform: none !important; }
+  .deco-count > .deco-count-final { opacity: 1 !important; }
+  .deco-count > .deco-count-run { display: none !important; }
 }
