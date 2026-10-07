@@ -138,5 +138,6 @@
   "about_jr_ccod_title": "Claude Code 101",
   "about_jr_ccod_meta": "Claude Academy",
   "about_cv_head": "La versión de una página.",
-  "about_cv_cta": "Descargar CV (PDF)"
+  "about_cv_cta": "Descargar CV (PDF)",
+  "about_cv_cta_md": "Descargar CV (MD)"
 }
