@@ -65,7 +65,8 @@
 .footer .footer__link:hover .cta__label,
 .footer .footer__link:focus-visible .cta__label { color: var(--color-brand-purple); }
 .footer .footer__link:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
-.footer__linkedin-icon {
+.footer__linkedin-icon,
+.footer__icon {
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
