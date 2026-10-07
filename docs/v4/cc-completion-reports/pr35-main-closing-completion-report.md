@@ -84,7 +84,7 @@ Main opens on the new positioning, every page renders in Archivo, the footer is 
 | 9 | Matrix 84/84, parity, fallbacks = EN, no new contrast failure | 84/84: 0 errors, 0 overflow, 0 clipped, 0 unresolved, 0 unapplied, 0 missing keys; parity 0; fallbacks equal EN (0 new, 32 resolved); contrast 8,272 checked, 0 new failures |
 | 10 | No "MVP", "agents", "full-stack", "Tech Lead", "led" for JD, *tú* | 0 · 0 · 0 · 0 · "led" 2 (LAP Finance, Yape) · *tú* 0. AI product names: none added by this run (see §4) |
 | 11 | Zero AI attribution; sole author jdsaire | 44 commits plus this archive: one author and committer identity; 0 attribution lines; branch, PR title and body checked |
-| 12 | Pushed only after `APPROVED PR35 G5`; PR unmerged, auto-merge off | see §8 |
+| 12 | Pushed only after `APPROVED PR35 G5`; PR unmerged, auto-merge off | pushed after the phrase; https://github.com/jdsaire/designops/pull/35, unmerged, auto-merge off |
 | 13 | Plan and report archived under docs/v4 with index lines; link count | indexed in three READMEs; internal markdown links under docs/v4: 0 before, 0 after (the indexes use code spans, as before) |
 | 14 | Every deviation listed; ends with the relay | §4 and §9 |
 
@@ -129,13 +129,13 @@ Full text in `out/active/PRE-MAX/closing/PR35-run/EVIDENCE-AMENDMENT-PROPOSALS-P
 
 This report and the plan are indexed in `docs/v4/cc-completion-reports/README.md`, `docs/v4/cc-plans/README.md` and `docs/v4/README.md`. Every working record of this run sits together outside the repository in `out/active/PRE-MAX/closing/PR35-run/`: the gate-edits record, the EVIDENCE proposals, the decoration spec drafts, RESUME, the PR body, both plan files, the harness, the prototypes and the snapshots per gate. The dispatch's inputs stay in `closing/`. None of those records joins the repository: this plan and report carry what a reader of the repo needs, while the prototypes hold full site copies and font binaries, the snapshots show third-party credential logos, and the gate notes and EVIDENCE analysis are internal.
 
-**Pull request URL:** recorded here after `APPROVED PR35 G5`.
+**Pull request URL:** https://github.com/jdsaire/designops/pull/35 — opened 7 Oct 2026 after `APPROVED PR35 G5`, against `main`, unmerged, auto-merge off.
 
 ## 9. Relay
 
 ```
 PIPELINE RELAY — PR #35 Main closing closed
-Landed:      PR#35 open for manual merge (URL in §8) · 46 commits · 6 gates (Plan, G1–G5; G4 in two parts, G5 iterated twice)
+Landed:      PR#35 open for manual merge (https://github.com/jdsaire/designops/pull/35) · 46 commits · 6 gates (Plan, G1–G5; G4 in two parts, G5 iterated twice)
 Open:        POSITIONING v1_5 + KEYS-Main-EN-ES v1_1 + SPEC-Copy-Main v1_1 owed (PR35-Q45) · EVIDENCE: B26, B27, Y02/B22 notes (B25, P06 withdrawn) · LinkedIn "industrial engineer" line · CV files per format and language · favicon 404 · Assessment Gate 0 unlogged
 Next:        PR #36 — Brief 04 "Measured at closure" figures + the locked CVs in About's hero (PR35-Q60: scopes of #36 and #37 inverted); then PR #37 — repo hygiene
 Go to:       COWORK  (new MD spec: sync after PR #35, then BRIEF-CC-PR36; trigger in closing/PR35-run/TRIGGER-CW-Sync-PR35-v1_0.md)
