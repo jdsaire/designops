@@ -57,3 +57,20 @@ html[data-theme="light"] .section--alt { background: var(--color-brand-black); b
   margin-top: 1rem;
   max-width: 36rem;
 }
+
+/* ---- CONTACT organism (Main and About; PR35-Q55) · centred at desktop and tablet ----
+   Mirrors the header contract in shared/designops-variant.css. Scoped to the organism's class,
+   so the Contact page's own #contact form section never matches. The eyebrow is a flex column
+   pinned to flex-start, so it needs an explicit override; the headline and the inline-flex CTA
+   follow text-align. Mobile keeps the left alignment. The CTA sits in the former lede's place
+   (S10C): the gap matches Main's About headline to CTA. */
+@media (min-width: 768px) {
+  .section--contact-cta .section__inner  { text-align: center; }
+  .section--contact-cta .section__eyebrow { align-items: center; }
+}
+.section--contact-cta .cta { margin-top: clamp(2rem, 3.5vw, 3.5rem); }
+/* Main's .cta (pages/home/hero.css) sets its icon at 1.75rem on phones; the organism carries that
+   size so About's copy matches Main's at every width. */
+@media (max-width: 767px) {
+  .section--contact-cta .cta__icon { width: 1.75rem; height: 1.75rem; }
+}
