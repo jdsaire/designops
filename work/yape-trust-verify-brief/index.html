@@ -15,10 +15,14 @@
      Route depth: work/yape-trust-verify-brief/ — nav paths ../../
      Close: Next steps · contact CTA (../../contact/) · Keep exploring (W2A-G3-Q2)
      ============================================================ -->
-<script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+<script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
 <script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="../../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/base/fonts.css">
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
+<link rel="stylesheet" href="../../assets/css/shared/footer.css">
+<link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -32,7 +36,7 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
   --color-text-dim:rgba(255,255,255,0.50);
   --color-border-faint:rgba(255,255,255,0.06);
   --color-border-soft:rgba(255,255,255,0.10);
-  --font-primary:'Graphik',Arial,sans-serif;
+  --font-primary:'Archivo','Archivo Fallback',Arial,sans-serif;
   --fw-light:300; --fw-regular:400; --fw-medium:500;
   --fw-semibold:600; --fw-bold:700; --fw-black:900;
   --max-content-width:1440px;
@@ -43,6 +47,7 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
   --ease-standard:cubic-bezier(0.4,0,0.2,1);
   --ease-decelerate:cubic-bezier(0,0,0.2,1);
   --duration-ui:250ms;
+  --duration-deco:500ms; --stagger-deco:80ms; --stagger-run:140ms; --hold-run:360ms;   /* decoration clock, as tokens.css */
   --act-pad:clamp(4rem,8vw,8rem);
   --panel-w:min(430px,36vw);
 }
@@ -399,53 +404,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 
-/* ================= FOOTER (unified structure — P-7) ================= */
-.footer{border-top:1px solid var(--color-border-faint); padding:clamp(4rem,6vw,6rem) 0 clamp(2rem,3vw,2.5rem); margin-top:var(--act-pad);}
-.footer__inner{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
-.footer__grid{display:grid; grid-template-columns:1fr; gap:clamp(2rem,4vw,3rem);}
-.footer__content{display:flex; flex-direction:column; gap:1.5rem;}
-.footer__tagline{font-size:clamp(1.875rem,3.6vw,3rem); font-weight:var(--fw-bold); line-height:1.1; letter-spacing:-0.02em; color:var(--color-brand-white); white-space:nowrap;}
-.footer__tagline .purple{color:var(--color-brand-purple); display:block;}
-.footer .cta{display:inline-flex; align-items:center; gap:0.6rem; color:var(--color-brand-purple);}
-.footer .cta:hover,.footer .cta:focus-visible{color:var(--color-purple-hover);}
+/* ================= FOOTER: assets/css/shared/footer.css (PR #35, one source for all pages) ================= */
 .cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
-.footer__linkedin-icon{display:inline-block; width:1.25rem; height:1.25rem; flex-shrink:0; vertical-align:middle;}
-.footer__strip{padding-top:0.75rem; border-top:1px solid var(--color-border-faint); margin-top:clamp(2rem,4vw,3rem);}
-.footer__meta{display:flex; flex-wrap:wrap; gap:1.25rem; font-size:0.8rem; color:var(--color-text-dim);}
-@media (min-width:768px) and (max-width:1023px){ .footer__grid{grid-template-columns:1fr;} }
-@media (max-width:767px){ .footer__grid{grid-template-columns:1fr;} .footer__tagline{white-space:normal;} }
 
 /* ================= MOTION ================= */
-/* Content is visible by default; only a page whose script runs hides it until it scrolls in. */
-.js .io{opacity:0; transform:translateY(18px); transition:opacity 480ms var(--ease-decelerate), transform 480ms var(--ease-decelerate);}
-.js .io.is-in{opacity:1; transform:none;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  .js .io{opacity:1; transform:none;}
-  .timeline__track{grid-auto-flow:row; grid-template-columns:1fr; overflow:visible;}
-  .timeline__nav{display:none;}
+  /* Timelines keep their layout under reduced motion (decoration spec floor rule 1); only their motion stops. */
   .dcell__bar i{transform:scaleX(var(--v,0));}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
 
 /* ================= MOTION · D7 NATIVE LAYER — Brief 04's, verbatim (progressive enhancement, compositor-only) ================= */
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .io{ animation:io-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 42%; }
-  }
-}
-@keyframes io-rise{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:none;} }
-@media (prefers-reduced-motion:no-preference){
-  @supports (mix-blend-mode:difference){
-    .hero .section__eyebrow-bar{ transform-origin:left center; mix-blend-mode:difference;
-      animation:sig-draw 900ms var(--ease-decelerate) both; }
-  }
-}
-@keyframes sig-draw{ from{transform:scaleX(0); opacity:.35;} to{transform:scaleX(1); opacity:1;} }
 
-/* FOOTER HIDDEN — pending redesign; rules above retained for restoration. */
-.footer{display:none;}
 </style>
 </head>
 <body id="top">
@@ -610,7 +582,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 00 · THE CONTEXT ================= -->
 <section class="act" id="act0" aria-labelledby="v0">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
@@ -618,7 +590,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v0" data-i18n="act0_verdict">The app Peru pays with.</h2>
     </div>
 
-    <div class="scanstack io">
+    <div class="scanstack">
       <div class="reveal" data-act="act0">
         <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0" data-panel-title="Yape in three facts" data-panel-title-key="act0_rv_btn" data-i18n="act0_rv_btn">Yape in three facts</button>
         <div class="reveal__body reveal__body--poster" id="rv-a0">
@@ -629,7 +601,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="cardgrid cardgrid--3 io">
+    <div class="cardgrid cardgrid--3">
       <article class="card">
         <h3 class="card__t" data-i18n="act0_c1_t">Everyone's wallet</h3>
         <p class="card__x" data-i18n-html="act0_c1_x">Cash still matters in Peru, but its share fell sharply as <strong>fast payments took over daily commerce</strong>, led by Yape and its interbank rival Plin.</p>
@@ -649,7 +621,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 01 · THE PROBLEM — two-column, receipt right ================= -->
 <section class="act" id="act1" aria-labelledby="v1">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
@@ -659,7 +631,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="split">
       <div>
-        <div class="contrast io" role="group" aria-label="The fraud, split in two">
+        <div class="contrast" role="group" aria-label="The fraud, split in two">
           <div class="contrast__face">
             <span class="contrast__tag" data-i18n="act1_c1_tag">What you see</span>
             <p class="contrast__txt" data-i18n-html="act1_c1_txt"><strong>A payment confirmation</strong>, on a phone, held up at your counter —</p>
@@ -671,7 +643,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           <p class="contrast__bridge" data-i18n-html="act1_bridge">The fake reproduces exactly what you are looking at. <strong>That is why staring harder fails.</strong></p>
         </div>
 
-        <div class="scanstack io">
+        <div class="scanstack">
           <p class="scan" data-i18n-html="act1_scan1"
              data-full="Peru's wallet boom outran its trust infrastructure. In the &quot;Yape falso&quot; fraud, a counterfeit app generates a convincing confirmation screen — and the merchant hands over the goods for a payment that never settles. The national digital-security centre documented the method in an official 2024 alert.">Peru's wallet boom outran its trust infrastructure, and <strong>the fake receipt is the hole it left</strong>.</p>
           <p class="scan" data-i18n-html="act1_scan2"
@@ -679,15 +651,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         </div>
 
 
-        <div class="reveal io" data-act="act1">
+        <div class="reveal" data-act="act1">
           <button class="reveal__btn" aria-expanded="false" aria-controls="rv-a1" data-panel-title="Why I chose this problem" data-i18n="act1_rv_btn" data-panel-title-key="act1_rv_btn">Why I chose this problem</button>
           <div class="reveal__body reveal__body--poster" id="rv-a1">
-            <p data-i18n-html="act1_rv_txt">I benchmarked three innovation-centre banks in markets like Peru: Nubank, Nequi and Attijariwafa. All three treat verifiable payment trust as core product, so <strong>the gap is real</strong>. Merchant finance tools were a crowded space and onboarding drifts into regulated identity; <strong>payment trust won</strong> because it is urgent and solvable in front-end alone.</p>
+            <p data-i18n-html="act1_rv_txt">I benchmarked three innovation-center banks in markets like Peru: Nubank, Nequi and Attijariwafa. All three treat verifiable payment trust as core product, so <strong>the gap is real</strong>. Merchant finance tools were a crowded space and onboarding drifts into regulated identity; <strong>payment trust won</strong> because it is urgent and solvable in front-end alone.</p>
           </div>
         </div>
       </div>
 
-      <figure class="receipt io">
+      <figure class="receipt">
         <img src="img/yape-receipt.jpg" width="1260" height="1915" loading="lazy" decoding="async"
              alt="A Yape payment confirmation screen showing an amount in soles, a recipient name, a date and time, a three-digit security code, and an operation number."
              data-i18n-alt="act1_receipt_alt">
@@ -700,7 +672,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 02 · THE ADAPTATION — 3 stops, the single lateral gesture ================= -->
 <section class="act" id="act2" aria-labelledby="v2">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Scope</span>
@@ -714,7 +686,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="timeline io">
+    <div class="timeline">
       <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The adaptation, in three stops">
         <article class="stop">
           <span class="stop__n" data-i18n="act2_s1_n">Pillar 1</span>
@@ -743,10 +715,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 03 · THE BUILD SHAPE — roadmap organism, effort-scaled ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Build Shape</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
       <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five phases, sized by effort.</h2>
       <div class="reveal" data-act="act3">
@@ -757,7 +729,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="gantt io" id="gantt">
+    <div class="gantt" id="gantt">
       <div class="gantt__tools">
         <button class="gantt__action" id="ganttToggleAll" type="button" aria-expanded="false" data-i18n="gantt_expand">Expand all</button>
         <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
@@ -785,7 +757,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, zero figures on the surface ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
@@ -794,7 +766,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act4_lede">The four technology decisions behind the build.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2 io">
+    <div class="cardgrid cardgrid--2">
       <article class="card">
         <h3 class="card__t" data-i18n="act4_c1_t">React — one source of truth for every screen</h3>
         <p class="card__x" data-i18n-html="act4_c1_x">React draws every screen from the app's data, never the reverse, so <strong>what the merchant sees always matches what the app knows</strong>. In a trust tool, that guarantee is the product.</p>
@@ -840,11 +812,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="synthesis io" data-i18n-html="act4_synthesis">Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. <strong>Treating it as proof is the trap the tool exists to close.</strong></p>
+    <p class="synthesis" data-i18n-html="act4_synthesis">Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. <strong>Treating it as proof is the trap the tool exists to close.</strong></p>
 
     <!-- The build links again, where a technical reader wants them (Brief 01 pattern, W2A-G3-Q2). -->
-    <p class="scan act__foot io" data-i18n="ui_arch_foot">For more, access the repository.</p>
-    <div class="ctaset io">
+    <p class="scan act__foot" data-i18n="ui_arch_foot">For more, access the repository.</p>
+    <div class="ctaset">
       <a class="cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer">
         <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
         <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
@@ -864,7 +836,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 05 · THE DASHBOARD — measured only; staged lives in Act 04 Card 3 ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
@@ -873,7 +845,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act5_lede">Compare what was measured with what it means.</p>
     </div>
 
-    <div class="dash io">
+    <div class="dash">
       <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
         <button class="dash__tab" id="tab-m" role="tab" aria-selected="true" aria-controls="dp-m" data-i18n="ui_tab_measure">Measure</button>
         <button class="dash__tab" id="tab-r" role="tab" aria-selected="false" aria-controls="dp-r" data-i18n="act5_tab_r">The insight</button>
@@ -887,37 +859,37 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           </div>
           <div class="dash__grid">
             <div class="dcell">
-              <span class="dcell__n"><span data-count="45">0</span></span>
+              <span class="dcell__n"><span>45</span></span>
               <span class="dcell__l" data-i18n="m1_l">Assertions passing</span>
               <span class="dcell__p" data-i18n-html="m1_p"><strong>45 of 45.</strong> None waived.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="6">0</span></span>
+              <span class="dcell__n"><span>6</span></span>
               <span class="dcell__l" data-i18n="m2_l">Protocol scenarios</span>
               <span class="dcell__p" data-i18n-html="m2_p"><strong>All six pass.</strong></span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="0">0</span></span>
+              <span class="dcell__n"><span>0</span></span>
               <span class="dcell__l" data-i18n="m3_l">Backend services</span>
               <span class="dcell__p" data-i18n-html="m3_p"><strong>Front-end only</strong>, by constraint.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="5">0</span></span>
+              <span class="dcell__n"><span>5</span></span>
               <span class="dcell__l" data-i18n="m4_l">CI gates per push</span>
               <span class="dcell__p" data-i18n-html="m4_p"><strong>Typecheck, tests, build, drift, paths.</strong></span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="5">0</span></span>
+              <span class="dcell__n"><span>5</span></span>
               <span class="dcell__l" data-i18n="m5_l">Security controls running in the client</span>
               <span class="dcell__p" data-i18n-html="m5_p"><strong>Secure keypad</strong>, shuffled digits, execution lock, blocking overlay, privacy masking.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="3">0</span></span>
+              <span class="dcell__n"><span>3</span></span>
               <span class="dcell__l" data-i18n="m6_l">API endpoints consumed</span>
               <span class="dcell__p" data-i18n-html="m6_p">Real request handling <strong>against mock fixtures</strong>.</span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0.6"></i></span>
@@ -929,7 +901,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0.5"></i></span>
             </div>
             <div class="dcell">
-              <span class="dcell__n"><span data-count="0">0</span></span>
+              <span class="dcell__n"><span>0</span></span>
               <span class="dcell__l" data-i18n="m8_l">Lines of code typed by hand</span>
               <span class="dcell__p" data-i18n-html="m8_p">Every line directed, reviewed and understood. <strong>None typed.</strong></span>
               <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
@@ -942,7 +914,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <div class="dash__read">
           <p class="dash__readline" data-i18n-html="r1"><strong>The fastest artifact in this portfolio is also its most technical.</strong> That inversion is the finding.</p>
           <ul class="dash__recos">
-            <li class="dash__reco" data-i18n-html="r2_1">Entering app development, with a new stack, security discipline and testing rigour, <strong>looked reserved for career developers</strong>.</li>
+            <li class="dash__reco" data-i18n-html="r2_1">Entering app development, with a new stack, security discipline and testing rigor, <strong>looked reserved for career developers</strong>.</li>
             <li class="dash__reco" data-i18n-html="r2_2">Directed properly, it took <strong>under a week</strong> and produced the only work here a stranger can verify by running a test suite.</li>
             <li class="dash__reco" data-i18n-html="r2_3">Entering a new stack is now cheap; <strong>what stays scarce is knowing what to build</strong> and how to prove it holds.</li>
           </ul>
@@ -958,7 +930,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <!-- ================= ACT 06 · THE REFLECTION — 4 house cards ================= -->
 <section class="act" id="act6" aria-labelledby="v6">
   <div class="container">
-    <div class="act__head io">
+    <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
@@ -967,7 +939,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act6_lede">Four lessons this build left behind.</p>
     </div>
 
-    <div class="cardgrid cardgrid--4 io">
+    <div class="cardgrid cardgrid--4">
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_h1_tag">The ceiling</span><span data-i18n="act6_h1_t">Territory I thought was closed</span></h3>
         <p class="card__x" data-i18n-html="act6_h1_x">I thought app development belonged to career developers. This build broke that ceiling: I now <strong>work the technical side while owning every strategic call</strong>, starting with the stack.</p>
@@ -986,10 +958,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="sequel io" data-i18n-html="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong>.</p>
+    <p class="sequel" data-i18n-html="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong>.</p>
 
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
-    <div class="notes io" id="disclosure">
+    <div class="notes" id="disclosure">
       <p class="notes__label" data-i18n="ui_disclosure_label">Disclosure notes</p>
       <div class="notes__grid">
         <p class="note" data-i18n-html="independence"><strong>An independent case study.</strong> Not affiliated with, endorsed by, or connected to Yape or BCP. Built against fabricated fixtures. No real payment, account, or ledger is involved.</p>
@@ -997,7 +969,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
-    <div class="close io">
+    <div class="close">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
@@ -1032,16 +1004,20 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="footer__inner">
     <div class="footer__grid">
       <div class="footer__content">
-        <p class="footer__tagline">
-          <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
-        </p>
-        <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
-           class="cta" aria-label="Connect with Juan Diego on LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false">
-            <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
-          </svg>
-          <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
-        </a>
+        <div class="footer__close">
+          <span class="section__eyebrow-bar footer__bar" aria-hidden="true"></span>
+          <p class="footer__tagline"><span class="footer__line"><span data-i18n="footer_l1_pre">Tested </span><span class="footer__em" data-i18n="footer_l1_em">concepts</span><span data-i18n="footer_l1_post">.</span></span><span class="footer__line purple"><span data-i18n="footer_l2_pre">Protected </span><span class="footer__em" data-i18n="footer_l2_em">budgets</span><span data-i18n="footer_l2_post">.</span></span></p>
+        </div>
+        <div class="footer__links">
+          <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer" class="cta footer__link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/></svg>
+            <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+          </a>
+          <a href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer" class="cta footer__link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__icon" aria-hidden="true" focusable="false"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.575.106.785-.25.785-.556 0-.274-.01-1-.015-1.965-3.195.695-3.87-1.54-3.87-1.54-.523-1.33-1.276-1.684-1.276-1.684-1.043-.713.08-.699.08-.699 1.153.081 1.76 1.184 1.76 1.184 1.025 1.757 2.69 1.25 3.345.955.104-.742.4-1.25.728-1.538-2.55-.29-5.234-1.275-5.234-5.673 0-1.253.448-2.278 1.183-3.081-.119-.29-.513-1.458.112-3.04 0 0 .965-.309 3.16 1.177a10.98 10.98 0 0 1 2.877-.387c.976.004 1.96.132 2.877.387 2.194-1.486 3.157-1.177 3.157-1.177.627 1.582.233 2.75.114 3.04.737.803 1.182 1.828 1.182 3.081 0 4.409-2.688 5.38-5.246 5.665.412.355.78 1.056.78 2.128 0 1.537-.014 2.776-.014 3.154 0 .309.207.668.79.555C20.713 21.386 24 17.077 24 12 24 5.73 18.77.5 12 .5Z" fill="currentColor"/></svg>
+            <span class="cta__label" data-i18n="footer_github">See the code on GitHub</span>
+          </a>
+        </div>
       </div>
     </div>
     <div class="footer__strip">
@@ -1061,6 +1037,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="panel__slot" id="panelSlot"></div>
 </aside>
 
+<script>/* i18n early (PR #35): a repeat visit renders the reader's language from the first layout, so a reload or back/forward restores the scroll position into the layout the reader left. The engines cache each page's merged dictionary; this applies it before any layout and the async load then confirms it. English is the markup itself. */(function(){try{var L=localStorage.getItem('jds-lang')||'ES';if(L==='EN')return;var d=JSON.parse(localStorage.getItem('jds-i18n:'+location.pathname+':'+L)||'null');if(!d)return;var h=document.documentElement,q=function(a,f){var n=document.querySelectorAll('['+a+']');for(var i=0;i<n.length;i++){var k=n[i].getAttribute(a);if(d[k]!==undefined)f(n[i],d[k]);}};h.setAttribute('lang',L==='ES'?'es':'en');h.setAttribute('data-lang',L);q('data-i18n',function(e,v){if(!e.children.length)e.textContent=v;});q('data-i18n-html',function(e,v){e.innerHTML=v;});q('data-i18n-aria',function(e,v){e.setAttribute('aria-label',v);});q('data-i18n-placeholder',function(e,v){e.placeholder=v;});q('data-i18n-alt',function(e,v){e.setAttribute('alt',v);});}catch(e){}})();</script>
 <script>
 /* ============================================================
    i18n — CHROME/BODY split, mirrors Brief 01 convention.
@@ -1107,6 +1084,7 @@ function applyI18n(lang){
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ const k=el.getAttribute("data-i18n-placeholder"); if(d[k]!==undefined) el.placeholder=d[k]; });
     document.querySelectorAll("[data-i18n-alt]").forEach(el=>{ const k=el.getAttribute("data-i18n-alt"); if(d[k]!==undefined) el.alt=d[k]; });
     document.querySelectorAll("[data-i18n-html]").forEach(el=>{ const k=el.getAttribute("data-i18n-html"); if(d[k]!==undefined) el.innerHTML=d[k]; });
+    if(lang !== "EN"){ try{ localStorage.setItem("jds-i18n:" + location.pathname + ":" + lang, JSON.stringify(d)); }catch(e){} }   /* read by the i18n early script on the next visit */
     document.dispatchEvent(new CustomEvent("i18n:changed",{ detail:{ lang, dict:d } }));
   });
 }
@@ -1187,8 +1165,10 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
 const track = document.getElementById("tlTrack");
 const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
 function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
-prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:"smooth"}));
-next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:"smooth"}));
+/* Reduced motion keeps the swipe track and its arrows; the arrows jump instead of gliding. */
+const tlBehavior = ()=> window.matchMedia("(prefers-reduced-motion:reduce)").matches ? "instant" : "smooth";
+prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:tlBehavior()}));
+next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:tlBehavior()}));
 function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
 track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
 
@@ -1202,23 +1182,8 @@ tabs.forEach(tab=>{
       t.setAttribute("aria-selected", String(sel));
       document.getElementById(panels[t.id]).hidden = !sel;
     });
-    runCounts(document.getElementById(panels[tab.id]));
   });
 });
-
-/* ============ Count-up (once per element, reduced-motion aware) ============ */
-const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-function runCounts(scope){
-  (scope||document).querySelectorAll("[data-count]").forEach(el=>{
-    if(el.dataset.done || el.closest("[hidden]")) return; el.dataset.done="1";
-    const raw = el.dataset.count, target = parseFloat(raw), dec = raw.includes(".") ? 1 : 0;
-    if(reduce || target===0){ el.textContent = target.toFixed(dec); return; }
-    let t0=null; const dur=700;
-    const step=(ts)=>{ if(!t0)t0=ts; const p=Math.min((ts-t0)/dur,1);
-      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec); if(p<1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
-  });
-}
 
 /* ============================================================
    ACT 03 · ROADMAP ORGANISM — data-driven, effort-scaled.
@@ -1480,23 +1445,15 @@ function runCounts(scope){
   applyFilters();
 })();
 
-/* ============ Entrance (once) ============ */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(!en.isIntersecting) return;
-    en.target.classList.add("is-in");
-    runCounts(en.target);
-    io.unobserve(en.target);
-  });
-},{threshold:0.18});
-document.querySelectorAll(".io").forEach(el=>io.observe(el));
 </script>
 <script type="module">
   import { init as initProgress } from "../../assets/js/core/progress.js";
+  import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
   initTheme();
   initProgress();
+  initDecoration();
   initNavChrome({ swapLang: window.swapLang });
 </script>
 </body>

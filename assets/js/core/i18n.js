@@ -63,6 +63,11 @@ function swapLang(lang) {
       if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
     });
 
+    /* Cache the merged dictionary for this page: on the next visit the inline i18n early script applies it before
+       the first layout, so the browser restores a reload's scroll position into the reader's language (Safari
+       restored it into the English markup, then the swap moved the page under the reader: 25–264 px). */
+    if (lang !== 'EN') { try { localStorage.setItem('jds-i18n:' + location.pathname + ':' + lang, JSON.stringify(dict)); } catch (e) {} }
+
     document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang, dict } }));
   });
 }

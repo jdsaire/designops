@@ -4,17 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Juan Diego Saire — AI Product &amp; Experience Engineer</title>
-  <meta name="description" content="I turn business problems into working prototypes, built with AI — apps and web you can open, and one design standard governed at scale.">
+  <meta name="description" content="AI Product &amp; Experience Engineer in Lima. I turn business cases into tested interfaces, directing AI through specs, review gates and tests.">
   <link rel="icon" type="image/svg+xml" href="logos/jdigital-logo-default.svg">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Juan Diego Saire — AI Product &amp; Experience Engineer">
-  <meta property="og:description" content="Working prototypes, built with AI, that show an efficiency or a better experience before anyone funds them.">
+  <meta property="og:description" content="Design ate code. Impact prevails. I build seamless websites and apps, translating business challenges into tested products using advanced AI.">
   <meta property="og:image" content="assets/img/bridge1_onboarding.svg">
   <meta property="og:locale" content="en_US">
 
-  <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
+  <link rel="preload" href="assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo/archivo-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/base/fonts.css">
   <link rel="stylesheet" href="assets/css/base/tokens.css">
   <link rel="stylesheet" href="assets/css/base/reset.css">
   <link rel="stylesheet" href="assets/css/shared/progress.css">
@@ -25,6 +28,7 @@
   <link rel="stylesheet" href="assets/css/pages/home/teaser.css">
   <link rel="stylesheet" href="assets/css/pages/capabilities/capabilities.css">
   <link rel="stylesheet" href="assets/css/shared/footer.css">
+  <link rel="stylesheet" href="assets/css/shared/decoration.css">
   <link rel="stylesheet" href="assets/css/shared/bridge.css">
   <link rel="stylesheet" href="assets/css/shared/ticker.css">
   <link rel="stylesheet" href="assets/css/pages/home/work-status.css">
@@ -157,8 +161,8 @@
   <main id="main">
 
   <!-- ============================================================
-       HERO — v9 · EN/ES bilingual
-       H1 locked: EN option A / ES option A (per principal)
+       HERO — v10 · EN/ES bilingual
+       PR #35: attribution, then the two-line heading (PR35-Q22, V7 Block, upper case)
        ============================================================ -->
   <section class="hero" id="top" aria-label="Introduction">
 
@@ -169,23 +173,29 @@
 
     <div class="hero__inner">
 
-      <div class="hero__left">
+      <div class="hero__stage">
 
-        <!-- Headline: one h1 for both languages, values from the i18n engine -->
+        <!-- Attribution, then the heading: one h1 for both languages, values from the i18n engine.
+             Each line is pre / italic hook / post; phones break before the post segment (PR35-Q48: line 2
+             rests on one word, no typing). -->
+        <div class="hero__attr">
+          <p class="hero__attribution hero__attribution--name" data-i18n="hero_attribution_name">Juan Diego Saire</p>
+          <span class="hero__sep" aria-hidden="true">·</span>
+          <p class="hero__attribution hero__attribution--title" data-i18n="hero_attribution_title">AI Product &amp; Experience Engineer</p>
+        </div>
+
         <h1 class="hero__h1">
-          <span class="hero__h1-line" data-i18n="hero_h1_line1">STRATEGIC BUILDS.</span>
-          <span class="hero__h1-line"><span class="purple" data-i18n="hero_h1_line2">AI-POWERED.</span></span>
+          <span class="hero__h1-line hero__l1"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l1_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l1_em">DESIGN</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l1_post">ATE CODE.</span></span>
+          <span class="hero__h1-line hero__l2"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l2_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l2_w3">IMPACT</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l2_post">PREVAILS.</span></span>
         </h1>
 
-        <!-- Meta stack below the headline: the name, the title line, then the badge -->
-        <div class="hero__meta">
-          <p class="hero__attribution hero__attribution--name" data-i18n="hero_attribution_name">Juan Diego Saire</p>
-          <p class="hero__attribution hero__attribution--title" data-i18n="hero_attribution_title">AI Product &amp; Experience Engineer</p>
-          <span class="hero__badge">
-            <span class="hero__badge-dot" aria-hidden="true"></span>
-            <span data-i18n="hero_badge">Building in Lima, Peru.</span>
-          </span>
-        </div>
+        <!-- Value proposition: About's purple highlight (.bridge__heading), size reduced only -->
+        <p class="hero__sub"><span class="bridge__heading hero__sub-hl" data-i18n="hero_sub">I build seamless websites and apps, translating business challenges into tested products using advanced AI.</span></p>
+
+        <a class="cta hero__cta" href="#work">
+          <span class="cta__label" data-i18n="hero_cta">See the work</span>
+          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </a>
 
       </div>
     </div>
@@ -300,12 +310,12 @@
 
           <div class="work-card__default">
             <p class="work-card__category" data-i18n="work_card4_label">04 · DESIGN SYSTEM</p>
-            <h3 class="work-card__title" data-i18n="work_card4_heading">How I built this Website with no-coding background.</h3>
+            <h3 class="work-card__title" data-i18n="work_card4_heading">How I built this website without a programming degree.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
             <p class="work-card__hover-category" data-i18n="work_card4_label">04 · DESIGN SYSTEM</p>
-            <h3 class="work-card__hover-title" data-i18n="work_card4_heading">How I built this Website with no-coding background.</h3>
+            <h3 class="work-card__hover-title" data-i18n="work_card4_heading">How I built this website without a programming degree.</h3>
             <p class="work-card__summary" data-i18n="work_card4_body">DesignOps System: from a single page to a bilingual multi-page site in Vanilla HTML, CSS and JavaScript code. Built in five months.</p>
           </div>
 
@@ -333,6 +343,41 @@
   </section>
 
   <!-- ============================================================
+       BRIDGE — Positioning · portrait + Canva-highlight heading (PR #35)
+       Between Work and Capabilities; shared/bridge.css, as About's onboarding bridge.
+       The hover caption (≥1024 px) names the portrait; the image's alt describes it.
+       Anchor: #bridge-positioning
+       ============================================================ -->
+  <section class="bridge bridge--positioning" id="bridge-positioning" aria-labelledby="bridge-positioning-heading">
+    <div class="bridge__media">
+      <span class="img-alt-host" alt="Juan Diego Saire — AI Product &amp; Experience Engineer, Lima, Peru." data-i18n-alt="bridge_image_caption">
+        <picture>
+          <source type="image/avif" srcset="assets/img/bridge-positioning/portrait-600.avif 600w, assets/img/bridge-positioning/portrait-900.avif 900w, assets/img/bridge-positioning/portrait-1200.avif 1200w" sizes="(min-width: 1024px) 50vw, 100vw">
+          <source type="image/webp" srcset="assets/img/bridge-positioning/portrait-600.webp 600w, assets/img/bridge-positioning/portrait-900.webp 900w, assets/img/bridge-positioning/portrait-1200.webp 1200w" sizes="(min-width: 1024px) 50vw, 100vw">
+          <img
+            class="bridge__image"
+            src="assets/img/bridge-positioning/portrait-900.webp"
+            alt="Confident black-and-white portrait of Juan Diego Saire standing with purpose, hands on hips in a white shirt."
+            data-i18n-alt="bridge_image_alt"
+            loading="lazy"
+            decoding="async"
+            width="900"
+            height="1349"
+          >
+        </picture>
+      </span>
+      <div class="bridge__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="bridge__content">
+      <span class="bridge__rule" aria-hidden="true"></span>
+      <div class="bridge__heading-wrapper">
+        <h2 class="bridge__heading" id="bridge-positioning-heading"><span data-i18n="bridge_heading">Judge. Verify. Anticipate. The real work when AI writes the code.</span></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        CAPABILITIES — full organism (per-vertical detail deepens at /capabilities/)
        Anchor: #capabilities
        ============================================================ -->
@@ -351,13 +396,13 @@
           <div class="services__media">
             <div class="services__image-slot" aria-hidden="true">
               <span class="img-alt-host" alt="Viable digital products — feasibility to production">
-                <img src="assets/img/services/cap-production.svg" alt="" data-i18n-alt="cap_s1_img_alt" class="services__image">
+                <img src="assets/img/services/cap-production.svg" alt="Build card — from business case to tested release." data-i18n-alt="cap_s1_img_alt" class="services__image">
               </span>
             </div>
           </div>
           <p class="services__pillar-label" data-i18n="cap_s1_label">01 · BUILD</p>
-          <h3 class="services__pillar-title" data-i18n="cap_s1_title">From MVP to Final Release.</h3>
-          <p class="services__pillar-body" data-i18n="cap_s1_body">I translate your problems into functional prototypes and working products before any hard investment.</p>
+          <h3 class="services__pillar-title" data-i18n="cap_s1_title">Validated Builds.</h3>
+          <p class="services__pillar-body" data-i18n="cap_s1_body">I turn business logic into functional interfaces. Test the execution before committing your project budget.</p>
           <a href="#contact" class="services__cta" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
             <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
             <span class="services__cta-icon" aria-hidden="true">
@@ -369,13 +414,13 @@
           <div class="services__media">
             <div class="services__image-slot" aria-hidden="true">
               <span class="img-alt-host" alt="One design standard, governed and adopted at scale">
-                <img src="assets/img/services/cap-adoption.svg" alt="" data-i18n-alt="cap_s2_img_alt" class="services__image">
+                <img src="assets/img/services/cap-adoption.svg" alt="Train card — hands-on workshops to scale." data-i18n-alt="cap_s2_img_alt" class="services__image">
               </span>
             </div>
           </div>
           <p class="services__pillar-label" data-i18n="cap_s2_label">02 · TRAIN</p>
-          <h3 class="services__pillar-title" data-i18n="cap_s2_title">Hands-on Workshops to scale.</h3>
-          <p class="services__pillar-body" data-i18n="cap_s2_body">I upskill teams through practical sessions, teaching the exact systems and AI workflows I build.</p>
+          <h3 class="services__pillar-title" data-i18n="cap_s2_title">Scalable Workflows.</h3>
+          <p class="services__pillar-body" data-i18n="cap_s2_body">I equip your team with the exact AI systems I build. Practical sessions designed to scale your in-house execution.</p>
           <a href="#contact" class="services__cta" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
             <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
             <span class="services__cta-icon" aria-hidden="true">
@@ -387,13 +432,13 @@
           <div class="services__media">
             <div class="services__image-slot" aria-hidden="true">
               <span class="img-alt-host" alt="AI capability multiplier augmenting the whole team">
-                <img src="assets/img/services/cap-augmentation.svg" alt="" data-i18n-alt="cap_s3_img_alt" class="services__image">
+                <img src="assets/img/services/cap-augmentation.svg" alt="Align card — seamless collaboration across departments." data-i18n-alt="cap_s3_img_alt" class="services__image">
               </span>
             </div>
           </div>
           <p class="services__pillar-label" data-i18n="cap_s3_label">03 · ALIGN</p>
-          <h3 class="services__pillar-title" data-i18n="cap_s3_title">Seamless collaboration.</h3>
-          <p class="services__pillar-body" data-i18n="cap_s3_body">By speaking the language of every department, I remove friction to keep execution moving fast.</p>
+          <h3 class="services__pillar-title" data-i18n="cap_s3_title">Unified Execution.</h3>
+          <p class="services__pillar-body" data-i18n="cap_s3_body">I speak the language of every department. I remove operational friction to keep your delivery moving fast.</p>
           <a href="#contact" class="services__cta" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
             <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
             <span class="services__cta-icon" aria-hidden="true">
@@ -420,14 +465,14 @@
                 <div class="services__media">
                   <div class="services__image-slot" aria-hidden="true">
                     <span class="img-alt-host" alt="Viable digital products — feasibility to production">
-                      <img src="assets/img/services/cap-production.svg" alt="" data-i18n-alt="cap_s1_img_alt" class="services__image">
+                      <img src="assets/img/services/cap-production.svg" alt="Build card — from business case to tested release." data-i18n-alt="cap_s1_img_alt" class="services__image">
                     </span>
                   </div>
                 </div>
                 <div class="services__content">
                   <p class="services__pillar-label" data-i18n="cap_s1_label">01 · BUILD</p>
-                  <h3 class="services__pillar-title" data-i18n="cap_s1_title">From MVP to Final Release.</h3>
-                  <p class="services__pillar-body" data-i18n="cap_s1_body">I translate your problems into functional prototypes and working products before any hard investment.</p>
+                  <h3 class="services__pillar-title" data-i18n="cap_s1_title">Validated Builds.</h3>
+                  <p class="services__pillar-body" data-i18n="cap_s1_body">I turn business logic into functional interfaces. Test the execution before committing your project budget.</p>
                   <a href="#contact" class="services__cta services__cta--desktop" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
                     <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
                     <span class="services__cta-icon" aria-hidden="true">
@@ -463,14 +508,14 @@
                 <div class="services__media">
                   <div class="services__image-slot" aria-hidden="true">
                     <span class="img-alt-host" alt="One design standard, governed and adopted at scale">
-                      <img src="assets/img/services/cap-adoption.svg" alt="" data-i18n-alt="cap_s2_img_alt" class="services__image">
+                      <img src="assets/img/services/cap-adoption.svg" alt="Train card — hands-on workshops to scale." data-i18n-alt="cap_s2_img_alt" class="services__image">
                     </span>
                   </div>
                 </div>
                 <div class="services__content">
                   <p class="services__pillar-label" data-i18n="cap_s2_label">02 · TRAIN</p>
-                  <h3 class="services__pillar-title" data-i18n="cap_s2_title">Hands-on Workshops to scale.</h3>
-                  <p class="services__pillar-body" data-i18n="cap_s2_body">I upskill teams through practical sessions, teaching the exact systems and AI workflows I build.</p>
+                  <h3 class="services__pillar-title" data-i18n="cap_s2_title">Scalable Workflows.</h3>
+                  <p class="services__pillar-body" data-i18n="cap_s2_body">I equip your team with the exact AI systems I build. Practical sessions designed to scale your in-house execution.</p>
                   <a href="#contact" class="services__cta services__cta--desktop" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
                     <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
                     <span class="services__cta-icon" aria-hidden="true">
@@ -506,14 +551,14 @@
                 <div class="services__media">
                   <div class="services__image-slot" aria-hidden="true">
                     <span class="img-alt-host" alt="AI capability multiplier augmenting the whole team">
-                      <img src="assets/img/services/cap-augmentation.svg" alt="" data-i18n-alt="cap_s3_img_alt" class="services__image">
+                      <img src="assets/img/services/cap-augmentation.svg" alt="Align card — seamless collaboration across departments." data-i18n-alt="cap_s3_img_alt" class="services__image">
                     </span>
                   </div>
                 </div>
                 <div class="services__content">
                   <p class="services__pillar-label" data-i18n="cap_s3_label">03 · ALIGN</p>
-                  <h3 class="services__pillar-title" data-i18n="cap_s3_title">Seamless collaboration.</h3>
-                  <p class="services__pillar-body" data-i18n="cap_s3_body">By speaking the language of every department, I remove friction to keep execution moving fast.</p>
+                  <h3 class="services__pillar-title" data-i18n="cap_s3_title">Unified Execution.</h3>
+                  <p class="services__pillar-body" data-i18n="cap_s3_body">I speak the language of every department. I remove operational friction to keep your delivery moving fast.</p>
                   <a href="#contact" class="services__cta services__cta--desktop" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
                     <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
                     <span class="services__cta-icon" aria-hidden="true">
@@ -593,21 +638,21 @@
       <div class="ticker__band ticker__band--lane1" role="img" aria-label="Academic and institutional credentials">
         <div class="ticker__track">
           <div class="ticker__group">
-            <img src="assets/img/logos/1__esan-bw.png" data-i18n-alt="home_about_ticker_esan_alt" class="ticker__logo">
-            <img src="assets/img/logos/2__centrum-bw.png" data-i18n-alt="home_about_ticker_centrum_alt" class="ticker__logo">
-            <img src="assets/img/logos/3__uvic-bw.png" data-i18n-alt="home_about_ticker_uvic_alt" class="ticker__logo">
-            <img src="assets/img/logos/4__um-bw.png" data-i18n-alt="home_about_ticker_um_alt" class="ticker__logo">
-            <img src="assets/img/logos/5__bgs-bw.png" data-i18n-alt="home_about_ticker_bgs_alt" class="ticker__logo">
+            <img src="assets/img/logos/1__esan-bw.png" alt="Universidad ESAN" data-i18n-alt="home_about_ticker_esan_alt" class="ticker__logo">
+            <img src="assets/img/logos/2__centrum-bw.png" alt="CENTRUM PUCP Business School" data-i18n-alt="home_about_ticker_centrum_alt" class="ticker__logo">
+            <img src="assets/img/logos/3__uvic-bw.png" alt="University of Victoria" data-i18n-alt="home_about_ticker_uvic_alt" class="ticker__logo">
+            <img src="assets/img/logos/4__um-bw.png" alt="Maastricht University" data-i18n-alt="home_about_ticker_um_alt" class="ticker__logo">
+            <img src="assets/img/logos/5__bgs-bw.png" alt="Beta Gamma Sigma" data-i18n-alt="home_about_ticker_bgs_alt" class="ticker__logo">
           </div>
         </div>
       </div>
       <div class="ticker__band ticker__band--lane2" role="img" aria-label="Industry and applied execution credentials">
         <div class="ticker__track">
           <div class="ticker__group">
-            <img src="assets/img/logos/6__hunt-bw.png" data-i18n-alt="home_about_ticker_hunt_alt" class="ticker__logo">
-            <img src="assets/img/logos/7__lap-bw.png" data-i18n-alt="home_about_ticker_lap_alt" class="ticker__logo">
-            <img src="assets/img/logos/8__hec-bw.png" data-i18n-alt="home_about_ticker_hec_alt" class="ticker__logo">
-            <img src="assets/img/logos/9__utec-bw.png" data-i18n-alt="home_about_ticker_utec_alt" class="ticker__logo">
+            <img src="assets/img/logos/6__hunt-bw.png" alt="Hunt LNG Operating Company" data-i18n-alt="home_about_ticker_hunt_alt" class="ticker__logo">
+            <img src="assets/img/logos/7__lap-bw.png" alt="Lima Airport Partners" data-i18n-alt="home_about_ticker_lap_alt" class="ticker__logo">
+            <img src="assets/img/logos/8__hec-bw.png" alt="HEC Montréal" data-i18n-alt="home_about_ticker_hec_alt" class="ticker__logo">
+            <img src="assets/img/logos/9__utec-bw.png" alt="UTEC University of Engineering and Technology" data-i18n-alt="home_about_ticker_utec_alt" class="ticker__logo">
           </div>
         </div>
       </div>
@@ -618,7 +663,7 @@
        CONTACT — teaser (form + modal live at /contact/)
        Anchor: #contact
        ============================================================ -->
-  <section id="contact" class="section" aria-labelledby="contact-heading">
+  <section id="contact" class="section section--contact-cta" aria-labelledby="contact-heading">
     <div class="section__inner">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar" aria-hidden="true"></span>
@@ -645,20 +690,20 @@
       <div class="footer__grid">
         <div class="footer__content">
 
-          <p class="footer__tagline">
-            <span data-i18n="footer_tagline_pre">Built and governed — </span><span class="purple" data-i18n="footer_tagline_purple">end to end.</span>
-          </p>
-          <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer"
-             class="cta" aria-label="Connect with Juan Diego on LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 24 24"
-                 class="footer__linkedin-icon"
-                 aria-hidden="true"
-                 focusable="false">
-              <path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/>
-            </svg>
-            <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
-          </a>
+          <div class="footer__close">
+            <span class="section__eyebrow-bar footer__bar" aria-hidden="true"></span>
+            <p class="footer__tagline"><span class="footer__line"><span data-i18n="footer_l1_pre">Tested </span><span class="footer__em" data-i18n="footer_l1_em">concepts</span><span data-i18n="footer_l1_post">.</span></span><span class="footer__line purple"><span data-i18n="footer_l2_pre">Protected </span><span class="footer__em" data-i18n="footer_l2_em">budgets</span><span data-i18n="footer_l2_post">.</span></span></p>
+          </div>
+          <div class="footer__links">
+            <a href="https://linkedin.com/in/jdsaire/" target="_blank" rel="noopener noreferrer" class="cta footer__link">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.852 0-2.136 1.445-2.136 2.939v5.667H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" fill="currentColor"/></svg>
+              <span class="cta__label" data-i18n="footer_linkedin">Connect on LinkedIn</span>
+            </a>
+            <a href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer" class="cta footer__link">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__icon" aria-hidden="true" focusable="false"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.575.106.785-.25.785-.556 0-.274-.01-1-.015-1.965-3.195.695-3.87-1.54-3.87-1.54-.523-1.33-1.276-1.684-1.276-1.684-1.043-.713.08-.699.08-.699 1.153.081 1.76 1.184 1.76 1.184 1.025 1.757 2.69 1.25 3.345.955.104-.742.4-1.25.728-1.538-2.55-.29-5.234-1.275-5.234-5.673 0-1.253.448-2.278 1.183-3.081-.119-.29-.513-1.458.112-3.04 0 0 .965-.309 3.16 1.177a10.98 10.98 0 0 1 2.877-.387c.976.004 1.96.132 2.877.387 2.194-1.486 3.157-1.177 3.157-1.177.627 1.582.233 2.75.114 3.04.737.803 1.182 1.828 1.182 3.081 0 4.409-2.688 5.38-5.246 5.665.412.355.78 1.056.78 2.128 0 1.537-.014 2.776-.014 3.154 0 .309.207.668.79.555C20.713 21.386 24 17.077 24 12 24 5.73 18.77.5 12 .5Z" fill="currentColor"/></svg>
+              <span class="cta__label" data-i18n="footer_github">See the code on GitHub</span>
+            </a>
+          </div>
 
         </div>
       </div>
@@ -673,6 +718,7 @@
   </footer>
 
 
+  <script>/* i18n early (PR #35): a repeat visit renders the reader's language from the first layout, so a reload or back/forward restores the scroll position into the layout the reader left. The engines cache each page's merged dictionary; this applies it before any layout and the async load then confirms it. English is the markup itself. */(function(){try{var L=localStorage.getItem('jds-lang')||'ES';if(L==='EN')return;var d=JSON.parse(localStorage.getItem('jds-i18n:'+location.pathname+':'+L)||'null');if(!d)return;var h=document.documentElement,q=function(a,f){var n=document.querySelectorAll('['+a+']');for(var i=0;i<n.length;i++){var k=n[i].getAttribute(a);if(d[k]!==undefined)f(n[i],d[k]);}};h.setAttribute('lang',L==='ES'?'es':'en');h.setAttribute('data-lang',L);q('data-i18n',function(e,v){if(!e.children.length)e.textContent=v;});q('data-i18n-html',function(e,v){e.innerHTML=v;});q('data-i18n-aria',function(e,v){e.setAttribute('aria-label',v);});q('data-i18n-placeholder',function(e,v){e.placeholder=v;});q('data-i18n-alt',function(e,v){e.setAttribute('alt',v);});}catch(e){}})();</script>
   <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

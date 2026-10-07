@@ -326,16 +326,8 @@ body.modal-open {
   display: none;
 }
 
-/* Destinations: one per line, left-aligned to the same gutter as the
-   heading. The shared .cta is inline-flex, which is what set the LinkedIn
-   label against the GitHub icon with 4-5px between them. */
-.contact-channels .cta {
-  display: flex;
-  margin-bottom: 1rem;
-}
-.contact-channels .cta:last-child {
-  margin-bottom: 0;
-}
+/* Destinations (PR35-Q33): the channel row lives in shared/channels.css, shared with About's
+   hero downloads (PR35-Q54). */
 
 /* The one separation between the opening stack and the form, the same
    token that spaces the heading from the first link. The shared .section

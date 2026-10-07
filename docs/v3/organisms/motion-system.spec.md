@@ -2,6 +2,8 @@
 
 Companion to `motion-system.html`. Six specimens, one native capability each. All motion is compositor-first, ships a static end-state, and honours `prefers-reduced-motion`.
 
+**Decoration:** which of these capabilities the site uses, where, and under what floor, budget and exceptions is governed by `decoration-system.spec.md` (PR #35). Its specimen is `decoration-system.html`.
+
 ## Capability table
 
 **01 · Scroll choreography** — `animation-timeline: view()` (CSS, zero JS). Replaces GSAP ScrollTrigger. Static fallback: rows render in place, fully opaque (`@supports` gate; Chromium 115+ only). Reduced motion: same static render. Splice: home page section entrances; brief act transitions.

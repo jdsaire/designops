@@ -11,8 +11,13 @@
   "nav_card4_label": "04 · PORTFOLIO · DESIGN SYSTEM",
   "nav_evolution": "About",
   "nav_cta": "Contact",
-  "footer_tagline_pre": "Built and governed",
-  "footer_tagline_purple": "end to end.",
+  "footer_l1_pre": "Tested ",
+  "footer_l1_em": "concepts",
+  "footer_l1_post": ".",
+  "footer_l2_pre": "Protected ",
+  "footer_l2_em": "budgets",
+  "footer_l2_post": ".",
   "footer_linkedin": "Connect on LinkedIn",
+  "footer_github": "See the code on GitHub",
   "footer_copyright": "© 2026 Juan Diego Saire."
 }

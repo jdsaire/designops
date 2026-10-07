@@ -1,9 +1,15 @@
-/* shared/footer.css — FOOTER — split from main.css lines 1168-1249. See docs/ for the reorg record. */
-/* ============================================================ FOOTER ============================================================ */
+/* shared/footer.css — FOOTER, the one source for all 7 pages (the briefs link it like nav.css; PR #35 G4).
+   G2(c) · PR35-Q31…Q33: the closing statement over the page's last hairline, then ©.
+   - Statement: two lines, always separate; line 2 in brand purple; Sentence case, as the keys are written (PR35-Q40,
+     replacing PR35-Q32's upper case), with the last word of each line in Archivo Italic. Main's section-headline
+     type: 700, clamp(2rem, 4vw, 3.5rem), 1.08, -0.02em.
+   - The closing bar above it is the eyebrow bar's mark (decoration spec v1.1, CLOSING BAR).
+   - F2 from 1024: statement left, the two links stacked right and bottom-aligned; one column below.
+   - Contact carries the statement and © only; its two links sit under the page heading (PR35-Q33). */
 .footer {
   width: 100%;
   background: var(--color-brand-black);
-  padding: clamp(4rem, 6vw, 6rem) 0 clamp(2rem, 3vw, 2.5rem);
+  padding: clamp(3.5rem, 6vw, 6rem) 0 clamp(1.75rem, 3vw, 2.5rem);
   border-top: 1px solid var(--color-border-faint);
 }
 .footer__inner {
@@ -11,62 +17,86 @@
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.footer__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-bottom: 0;
-}
 .footer__content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
 }
-.footer .cta { margin-bottom: 0.75rem; color: var(--color-brand-purple); }
-.footer .cta:hover,
-.footer .cta:focus-visible { color: var(--color-purple-hover); }
-.footer__linkedin-icon {
+
+/* The closing bar: the mark that opens every section closes the page. */
+.footer .footer__bar {
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  background: var(--color-brand-purple);
+  margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
+}
+
+.footer__tagline {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-white);
+}
+.footer__line { display: block; text-wrap: balance; }
+.footer__tagline .purple { color: var(--color-brand-purple); }
+.footer__em { font-style: italic; padding-right: 0.03em; }
+
+/* Links: the conversation channel and the authorship proof. Each row is at least 44 px tall. */
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.footer .footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  color: var(--color-brand-purple);
+  text-decoration: none;
+}
+.footer .footer__link .cta__label { font-size: 1rem; font-weight: var(--fw-bold); color: var(--color-brand-white); }
+.footer .footer__link:hover .cta__label,
+.footer .footer__link:focus-visible .cta__label { color: var(--color-brand-purple); }
+.footer .footer__link:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+.footer__linkedin-icon,
+.footer__icon {
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  vertical-align: middle;
 }
-.footer__tagline {
-  font-size: clamp(1.875rem, 3.6vw, 3rem);
-  font-weight: var(--fw-bold);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--color-brand-white);
-  white-space: nowrap;
-}
-.footer__tagline .purple { color: var(--color-brand-purple); display: block; }
+
+/* ©: ownership, on its own hairline row. */
 .footer__strip {
-  padding-top: 0.75rem;
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  padding-top: 0.9rem;
   border-top: 1px solid var(--color-border-faint);
 }
 .footer__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 1.25rem;
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   color: var(--color-text-dim);
 }
-/* FOOTER — TABLET 768px–1023px */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .footer__grid { grid-template-columns: 1fr; }
-}
 
-/* FOOTER — MOBILE ≤767px */
-@media (max-width: 767px) {
-  .footer__grid { grid-template-columns: 1fr; margin-bottom: 0; }
+/* FOOTER — TABLET 768px–1023px: the links side by side under the statement */
+@media (min-width: 768px) {
+  .footer__links { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: 2.25rem; }
 }
-
-/* ============================================================
-   FOOTER HIDDEN — pending redesign.
-   The footer is withheld site-wide to ease navigation rather than
-   add visual friction. Every rule above is retained so the redesign
-   restores it by deleting this block alone. display:none keeps it
-   out of the tab order and the accessibility tree, so nothing here
-   becomes an invisible focus stop.
-   ============================================================ */
-.footer { display: none; }
+/* FOOTER — DESKTOP ≥1024px: F2 split */
+@media (min-width: 1024px) {
+  .footer__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: clamp(2rem, 5vw, 5rem);
+  }
+  .footer__links { flex-direction: column; align-items: flex-start; }
+}

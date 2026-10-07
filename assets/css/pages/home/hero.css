@@ -12,61 +12,53 @@
     radial-gradient(ellipse 600px 450px at 18% 50%, rgba(161,0,255,0.06) 0%, transparent 60%),
     radial-gradient(ellipse 500px 500px at 72% 30%, rgba(70,0,115,0.09) 0%, transparent 55%),
     radial-gradient(ellipse 320px 320px at 50% 82%, rgba(117,0,192,0.05) 0%, transparent 50%);
-  animation:drift var(--duration-ambient) var(--ease-standard) infinite alternate;
 }
-@keyframes drift { 0% { transform:translate(0,0) scale(1); } 100% { transform:translate(-2.5%,-1.5%) scale(1.02); } }
+/* The gradient holds still (PR35-Q50): with the typing loop's pause button retired, an endless
+   drift would need a WCAG 2.2.2 exception. */
 .hero__scrim { position:absolute; inset:0; background:linear-gradient(110deg,rgba(var(--ground),0.72) 0%,rgba(var(--ground),0.38) 50%,rgba(var(--ground),0.58) 100%); }
 
 .hero__inner {
   position:relative; z-index:1; width:100%; max-width:var(--max-content-width);
   margin:0 auto; padding:clamp(2rem,4vw,3rem) var(--gutter);
-  display:grid; grid-template-columns:1fr; gap:clamp(2rem,4vw,4rem); align-items:center;
+  display:block;
 }
-/* S10C: the headline and its meta row are centred at every breakpoint.
-   The 62fr/38fr split carried no right column, so it collapses to one. */
-.hero__left { display:flex; flex-direction:column; align-items:center; text-align:center; gap:clamp(1rem,1.75vw,1.75rem); }
+/* PR #35: one left-aligned stage, from the top: attribution, then the two-line heading. */
+.hero__stage { position:relative; display:flex; flex-direction:column; align-items:flex-start; width:100%; text-align:left; }
 
-/* Meta stack below the headline: the attribution, with the badge on its
-   own centred line beneath it. */
-.hero__meta { display:flex; flex-direction:column; align-items:center; gap:0.25rem; }
-/* Headline to meta stack: the column's own gap again as margin, doubling the
-   spacing at every breakpoint (the mobile gap is overridden below). */
-.hero__meta { margin-top:clamp(1rem,1.75vw,1.75rem); }
-/* Attribution relocated from the onboarding bridge; its type carries over
-   from .bridge__attribution in shared/bridge.css, margins reset for the row.
-   Colour follows the headline's token: solid white on dark, ink on light. */
-.hero__attribution {
-  font-family:var(--font-primary); font-weight:var(--fw-light);
-  color:var(--color-brand-white); letter-spacing:0.02em;
-  margin:0; font-size:0.875rem; line-height:1.4;
-  text-align:center;
-}
-/* W1: the name carries the weight, the title line follows it on its own line.
-   Both are children of .hero__meta, so the column's 0.25rem gap is the
-   spacing between name, title and badge alike. */
+/* Attribution: name · title (PR35-Q17 retired the "Building in Lima, Peru." badge). */
+.hero__attr { display:flex; flex-wrap:wrap; align-items:baseline; column-gap:0.65em; row-gap:0.3rem; margin-bottom:clamp(1.25rem,2.2vw,2rem); }
+.hero__attribution { margin:0; font-size:1rem; line-height:1.4; letter-spacing:0.01em; color:var(--color-brand-white); }
 .hero__attribution--name { font-weight:var(--fw-bold); }
+.hero__attribution--title { font-weight:var(--fw-regular); }
+.hero__sep { color:var(--color-brand-purple); font-weight:var(--fw-bold); }
 
-.hero__badge {
-  display:inline-flex; align-items:center; gap:0.5rem;
-  padding:0.4rem 0; border:none;
-  color:var(--color-purple-light); font-size:0.8rem; font-weight:var(--fw-medium);
-  letter-spacing:0.03em; width:fit-content;
-  opacity:1; /* static end-state; S3 entrance is driven by hero.js (WAAPI) */
-}
-.hero__badge-dot { width:0.45rem; height:0.45rem; background:var(--color-brand-purple); flex-shrink:0; animation:pulse 2.4s var(--ease-standard) infinite; }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-
-.hero__h1 {
-  font-size:clamp(2.75rem,6.4vw,5.75rem); font-weight:var(--fw-black);
-  line-height:0.95; letter-spacing:-0.025em; text-transform:uppercase;
-  color:var(--color-brand-white);
-  opacity:1; /* static end-state; S3 entrance is driven by hero.js (WAAPI) */
-}
+/* Heading: two lines in Archivo Black, upper case; each line's human word in Archivo Italic,
+   brand purple. hero.js fits each line to the stage width per language and viewport
+   (--l1-size, --l2-size on .hero) and adds .hero--fit; without it the clamp sizes apply
+   and the lines wrap. Tracking stays at 0 for the capitals. */
+.hero__h1 { margin:0; color:var(--color-brand-white); font-weight:var(--fw-black); line-height:1; letter-spacing:0; text-transform:uppercase; }
 .hero__h1-line { display:block; }
-/* W1: the two headline lines sat on the 0.95 leading alone and read as one
-   block. A half-em of air between them separates the claim from its promise. */
-.hero__h1-line + .hero__h1-line { margin-top:0.375em; }
-.hero__h1 .purple { color:var(--color-brand-purple); }
+.hero__h1-line + .hero__h1-line { margin-top:0.14em; }
+.hero__l1 { font-size:var(--l1-size, clamp(2.25rem,8vw,7.5rem)); line-height:1.02; }
+.hero__l2 { font-size:var(--l2-size, clamp(2rem,7vw,6.5rem)); line-height:1.08; }
+.hero--fit .hero__h1-line { white-space:nowrap; }
+.hero__hook { font-style:italic; color:var(--color-brand-purple); padding-right:0.04em; }
+
+
+/* Value proposition: About's highlight (shared/bridge.css .bridge__heading), size reduced only. */
+.hero__sub { margin:clamp(1.75rem,3vw,2.75rem) 0 0; max-width:42rem; }
+.hero__sub .hero__sub-hl.bridge__heading { font-size:1.375rem; }
+
+/* The call to see the work: the shared .cta, spaced on the stage's scale. */
+.hero__stage > .hero__cta { margin:clamp(1.5rem,2.4vw,2.25rem) 0 0; }
+
+/* While hero.js fits the heading, the hero's content box waits unseen, so nothing on it moves
+   after the first paint (a visible box that resizes counts as a layout shift even when its
+   content is hidden). If the script never runs, it shows after 3 s regardless. */
+html.js .hero:not(.hero--fit) .hero__inner { visibility:hidden; animation:hero-show 0s 3s forwards; }
+@keyframes hero-show { to { visibility:visible; } }
+/* While hero.js sets the fitted sizes, nothing on the hero eases (see hero.js, fit). */
+.hero--sizing, .hero--sizing * { transition:none !important; }
 
 .hero__tags {
   display:none; /* hidden — reserved for future pillar overlay iteration */
@@ -94,9 +86,6 @@
 button.cta { background:none; border:none; font-family:var(--font-primary); }
 
 
-@media (min-width:768px) {
-  .hero__attribution { font-size:1rem; }
-}
 @media (min-width:768px) and (max-width:1023px) {
   .hero__inner { grid-template-columns:1fr; gap:2.25rem; }
   .hero__right { padding-top:1.5rem; border-top:1px solid var(--color-border-faint); }
@@ -104,9 +93,13 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 @media (max-width:767px) {
   .hero { padding-top:var(--nav-height); }
   .hero__inner { grid-template-columns:1fr; gap:1.75rem; padding:3rem var(--gutter) 5rem; align-content:center; }
-  .hero__left { gap:1rem; }
-  .hero__meta { margin-top:1rem; }
-  .hero__h1 { font-size:clamp(2.25rem,11vw,3.5rem); }
+  /* Phones (JD's line commands): each line breaks before its post segment;
+     the attribution stacks, name over title. */
+  .hero__seg--post { display:block; }
+  .hero__attr { flex-direction:column; align-items:flex-start; row-gap:0.15rem; }
+  .hero__attribution { font-size:0.9375rem; }
+  .hero__sep { display:none; }
+  .hero__sub .hero__sub-hl.bridge__heading { font-size:1.0625rem; }
   .hero__tags { display:none; }
   .hero__right { padding-top:1.5rem; border-top:1px solid var(--color-border-faint); gap:1.25rem; }
   .hero__stats { gap:1rem; }
@@ -116,6 +109,6 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:0.01ms!important; animation-iteration-count:1!important; transition-duration:0.01ms!important; }
   html { scroll-behavior:auto; }
-  .hero__badge,.hero__h1,.hero__tags,.hero__right { opacity:1; }
+  .hero__h1,.hero__tags,.hero__right { opacity:1; }
 }
 

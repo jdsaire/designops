@@ -336,10 +336,22 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   font-variant-numeric: tabular-nums;
 }
 
-/* Heading row: the whole row is the control's hit area. */
-#evolution .timeline__toggle { align-items: flex-start; }
+/* Heading row: the whole row is the control's hit area, at least 44 px tall. */
+#evolution .timeline__toggle { align-items: flex-start; min-height: 44px; }
 #evolution .jr-head { flex: 1; }
-#evolution .timeline__chevron { margin-top: 0.4rem; }
+/* The chevron follows the title's last word (PR #35, G2(d)). jr-head's flex: 1 stretches the heading block, so the
+   chevron element sat at the row's far edge, 253–646 px from the text. The title's ::after draws it instead: a
+   non-breaking space glues it to the last word, so it lands about 13 px after the text on whichever line the title
+   ends, in both languages (the i18n swap replaces the text, never the pseudo-element). The chevron is a purple SVG
+   painted as the pseudo-element's background: a mask is not applied to an inline box in Safari, which showed a solid
+   purple square there. Open flips it; the old element is hidden. */
+#evolution .timeline__chevron { display: none; }
+#evolution .timeline__title::after {
+  content: "\00a0";
+  padding-right: 1.15em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.2l4 4 4-4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E") no-repeat right 58% / 0.74em 0.74em;
+}
+#evolution .timeline__item.is-open .timeline__title::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 7.8l4-4 4 4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E"); }
 #evolution .jr-sub {
   margin-top: 0.15rem;
   font-size: 0.75rem;
@@ -498,4 +510,26 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   width: auto;
   max-width: 4.5rem;
   object-fit: contain;
+}
+
+/* ── Hero CV downloads (PR35-Q54) ──────────────────────────────
+   The Contact page's channel row (shared/channels.css) under the hero heading. The space from
+   the heading to the first label repeats the bridge's own rule-to-heading space: on phones the
+   44 px targets centre their labels, so the row tucks up by 0.375rem; from 768 the heading
+   wrapper's 1rem plus 1rem matches. Between 1024 and 1279 the split column is narrow (356 px of
+   text at 1024), so About's opening takes 3rem of padding instead of 4rem/5rem: the heading and
+   both links then end inside the first screen, side by side. shared/bridge.css stays as it is,
+   so Main's positioning bridge is untouched. */
+#bridge1-onboarding .bridge__downloads { margin-top: -0.375rem; }
+/* Phones (JD, PR35-Q57, Q59): one row, MD right after PDF, as from 768. The full labels need
+   more than the 260–330 px column, so each wraps inside its own link ("Download CV" over
+   "(PDF)"), beside its icon. */
+@media (max-width: 767px) {
+  #bridge1-onboarding .bridge__downloads { flex-direction: row; align-items: center; }
+}
+@media (min-width: 768px) {
+  #bridge1-onboarding .bridge__downloads { margin-top: 1rem; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #bridge1-onboarding .bridge__content { padding: 3rem; }
 }

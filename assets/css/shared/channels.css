@@ -1,0 +1,26 @@
+/* shared/channels.css — CHANNELS: a row of outbound links, each an icon and a label (PR #35).
+   Contact: the footer's pair, LinkedIn and this site's code on GitHub, under the heading (PR35-Q33).
+   About: the CV downloads under the hero heading (PR35-Q54).
+   Stacked on phones, side by side from 768. Purple icons, white labels, each link at least 44 px
+   tall, named by its visible label in both languages. Icons take .footer__linkedin-icon's size
+   from shared/footer.css, which both pages link. */
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem 2.25rem;
+}
+.contact-channels .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  margin: 0;
+  color: var(--color-brand-purple);
+}
+.contact-channels .cta:hover .cta__label,
+.contact-channels .cta:focus-visible .cta__label { color: var(--color-brand-purple); }
+.contact-channels .cta:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+@media (min-width: 768px) {
+  .contact-channels { flex-direction: row; flex-wrap: wrap; align-items: center; }
+}

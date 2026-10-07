@@ -2,8 +2,8 @@
 /* ===== BRIDGE COMPONENT (shared across 3 instances) =====
    Portrait + Canva-highlight heading. Full-bleed image with
    pure-black vertical gradient on mobile for legibility.
-   Tablet+Desktop: spatial split (text left 50% / image right 50%),
-   no overlay — organism background governs. One rule block drives
+   Desktop (≥1024): spatial split (text left 50% / image right 50%),
+   no overlay — organism background governs. Tablets keep the mobile form. One rule block drives
    all bridge sections (Onboarding, Positioning, Filter).
    ======================================================== */
 .bridge {
@@ -98,8 +98,29 @@
   display: block;
 }
 
-/* ── Tablet + Desktop: spatial split, no overlay ──────────── */
+/* ── Tablet and up: the larger type ─────────────────────────── */
 @media (min-width: 768px) {
+  .bridge__content {
+    padding: 2.5rem;
+  }
+  .bridge__rule {
+    width: 56px;
+    margin-bottom: 2rem;
+  }
+  .bridge__heading {
+    font-size: 2.5rem;
+  }
+  .bridge__attribution {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* ── Desktop: spatial split, no overlay ──────────────────────
+   PR35-Q39: the split starts at 1024. Between 768 and 1023 its half-width column held
+   about 234 px, so a long heading ran one word per line over more than a screen; tablets
+   keep the phone form (full-bleed portrait, heading at the foot over the gradient). */
+@media (min-width: 1024px) {
   .bridge {
     flex-direction: row;
     align-items: center;
@@ -117,17 +138,6 @@
     padding: 4rem 5rem;
     width: 50%;
     max-width: 50%;
-  }
-  .bridge__rule {
-    width: 56px;
-    margin-bottom: 2rem;
-  }
-  .bridge__heading {
-    font-size: 2.5rem;
-  }
-  .bridge__attribution {
-    font-size: 1rem;
-    margin-top: 1.5rem;
   }
 }
 

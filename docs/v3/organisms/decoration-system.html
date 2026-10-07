@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decoration system</title>
+<!-- Live specimen of the decoration system (decoration-system.spec.md, PR35-Q30). It loads the site's own tokens,
+     face and decoration layer, so it shows the shipped code, not a copy; open it from the repository root's server. -->
+<link rel="stylesheet" href="../../../assets/css/base/fonts.css">
+<link rel="stylesheet" href="../../../assets/css/base/tokens.css">
+<link rel="stylesheet" href="../../../assets/css/shared/decoration.css">
+<style>
+html { scroll-behavior: auto; }
+body { background: var(--color-brand-black); color: var(--color-brand-white); font-family: var(--font-primary); font-size: 1rem; line-height: 1.6; }
+:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 3.5vw, 4rem); }
+header.top { padding: clamp(3rem, 7vw, 6rem) 0 2rem; border-bottom: 1px solid var(--color-border-soft); }
+.kicker { display: flex; align-items: center; gap: .75rem; font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--color-text-muted); }
+.kicker .section__eyebrow-bar { width: 2.5rem; height: 3px; background: var(--color-brand-purple); display: block; }
+h1 { font-size: clamp(2.25rem, 1.5rem + 4vw, 4.25rem); font-weight: 900; line-height: 1.05; margin: 1rem 0 0; text-transform: uppercase; }
+.lede { color: var(--color-text-muted); max-width: 62ch; margin-top: 1.25rem; }
+.floor { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .75rem; margin: 2rem 0 0; }
+.floor li { border: 1px solid var(--color-border-soft); padding: .9rem 1rem; font-size: .9rem; color: var(--color-text-muted); }
+.floor b { display: block; color: var(--color-brand-white); font-size: .95rem; margin-bottom: .2rem; }
+.bar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: 1.5rem; font-size: .85rem; color: var(--color-text-muted); }
+button { font: inherit; }
+.btn { min-height: 44px; padding: 0 1rem; border: 1px solid var(--color-border-soft); background: transparent; color: var(--color-brand-white); cursor: pointer; font-weight: 600; font-size: .85rem; }
+.btn:hover { border-color: var(--color-brand-purple); }
+.rm { color: var(--color-purple-light); }
+.spec { padding: clamp(2.5rem, 5vw, 4rem) 0; border-bottom: 1px solid var(--color-border-soft); }
+.spec__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: start; margin-bottom: 1.75rem; }
+.spec__n { font-size: .75rem; font-weight: 700; letter-spacing: .16em; color: var(--color-purple-light); text-transform: uppercase; }
+.spec__title { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 700; line-height: 1.15; margin-top: .35rem; }
+.spec__meta { font-size: .85rem; color: var(--color-text-muted); margin-top: .5rem; max-width: 70ch; }
+.spec__meta code { font-size: .8rem; color: var(--color-brand-white); }
+.stage { border: 1px solid var(--color-border-faint); padding: clamp(1.25rem, 3vw, 2rem); background: var(--surface-sunken); position: relative; overflow: hidden; }
+table.tok { width: 100%; border-collapse: collapse; margin-top: 2rem; font-size: .85rem; }
+table.tok th, table.tok td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--color-border-soft); vertical-align: top; }
+table.tok th { color: var(--color-text-muted); font-weight: 600; }
+table.tok code { color: var(--color-brand-white); }
+footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: .85rem; }
+
+/* demo pieces, styled like the site's own components */
+.eyebrow { display: flex; align-items: center; gap: .75rem; }
+.eyebrow .section__eyebrow-bar { display: block; width: 2.5rem; height: 3px; background: var(--color-brand-purple); }
+.eyebrow span:last-child { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600; }
+.headline { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; margin-top: 1rem; }
+.close .section__eyebrow-bar { display: block; width: 2.5rem; height: 3px; background: var(--color-brand-purple); margin-bottom: 1.25rem; }
+.close p { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; margin: 0; }
+.close p span { display: block; } .close p .purple { color: var(--color-brand-purple); } .close em { font-style: italic; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.cards article { border: 1px solid var(--color-border-soft); padding: 1.1rem 1.2rem; }
+.cards small { font-size: .65rem; letter-spacing: .16em; color: var(--color-purple-light); font-weight: 700; text-transform: uppercase; }
+.cards h4 { font-size: 1.05rem; margin-top: .3rem; }
+.journey__steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; margin: 0; padding: 0; }
+.journey__step { position: relative; border: 1px solid rgba(var(--ink), .35); padding: 1rem 1.1rem; background: var(--surface-card); font-weight: 600; font-size: .95rem; }
+.journey__step:not(:last-child)::after { content: ""; position: absolute; top: 50%; right: -1.4rem; width: 1.4rem; height: 1px; background: rgba(var(--ink), .45); }
+.journey__step--key { border: 2px solid var(--color-brand-purple); }
+.journey__step small { display: block; margin-top: .4rem; font-size: .6rem; letter-spacing: .14em; color: var(--color-purple-light); }
+.gantt__chart { position: relative; height: 220px; }
+.gantt__row { position: absolute; left: 0; right: 0; height: 44px; border-bottom: 1px solid var(--color-border-faint); }
+.gantt__bar { position: absolute; top: 50%; transform: translateY(-50%); height: 1.625rem; background: rgba(var(--ink), .14); border: 1px solid rgba(var(--ink), .35);
+  display: flex; align-items: center; justify-content: flex-end; padding: 0 .5rem; font-size: .7rem; font-weight: 700; }
+.gantt__overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+.gantt__overlay path { fill: none; stroke: var(--color-brand-purple); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.gantt__dep-head { fill: var(--color-brand-purple); }
+.meters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.meters div { border: 1px solid var(--color-border-faint); padding: 1rem; }
+.meters b { font-size: 2rem; font-weight: 900; line-height: 1; }
+.dcell__bar { display: block; height: 4px; background: var(--color-border-soft); margin-top: .7rem; position: relative; overflow: hidden; }
+.dcell__bar i { position: absolute; inset: 0; transform-origin: left; background: var(--color-brand-purple); transform: scaleX(var(--v, 0)); }
+.stat__number { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+.stat__label { color: var(--color-text-muted); margin-top: .5rem; font-size: .9rem; }
+.lane { overflow: hidden; padding: .6rem 0; border-top: 1px solid var(--color-border-faint); }
+.lane__t { display: flex; width: max-content; gap: 3rem; animation: lane-l var(--lane-dur, 20s) linear infinite; }
+.lane--r .lane__t { animation-name: lane-r; }
+.lane:hover .lane__t { animation-play-state: paused; }
+.lane__t span { font-weight: 800; font-size: 1.1rem; letter-spacing: .06em; color: rgba(var(--ink), .55); white-space: nowrap; }
+@keyframes lane-l { to { transform: translateX(-50%); } } @keyframes lane-r { from { transform: translateX(-50%); } to { transform: none; } }
+.net svg, .flow svg { width: 100%; height: auto; display: block; }
+.net circle.n { fill: var(--surface-card); stroke: var(--color-brand-purple); stroke-width: 1.6; }
+.net line { stroke: rgba(var(--ink), .3); stroke-width: 1.2; }
+.net g.b { animation: bob var(--bob-t, 3.2s) ease-in-out infinite alternate; animation-delay: var(--bob-d, 0s); }
+@keyframes bob { from { transform: translateY(calc(var(--amp, 3px) * -1)); } to { transform: translateY(var(--amp, 3px)); } }
+.flow rect { fill: var(--surface-card); stroke: rgba(var(--ink), .6); stroke-width: 1.4; }
+.flow rect.lit { stroke: var(--color-purple-light); stroke-width: 2; }
+.flow path { fill: none; stroke: rgba(var(--ink), .45); stroke-width: 1.4; }
+.flow text { fill: var(--color-brand-white); font: 600 12px var(--font-primary); }
+@media (max-width: 767px) { .cards, .journey__steps, .meters { grid-template-columns: 1fr; } .journey__step:not(:last-child)::after { top: auto; bottom: -1.4rem; left: 1.5rem; right: auto; width: 1px; height: 1.4rem; } .spec__head { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { </style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="kicker"><span class="section__eyebrow-bar" aria-hidden="true"></span><span>Organism · decoration system</span></div>
+  <h1>Decoration system</h1>
+  <p class="lede">Every pattern the site decorates with, live, on the shipped code. A decoration earns its place with one role (message, interaction or aesthetic), stays inside the budget, and meets the floor. It draws a bar, an edge, a fill or a line, never the words.</p>
+  <ul class="floor" aria-label="The floor (PR35-Q29)">
+    <li><b>Final frame</b>Reduced motion, no JavaScript and print all show the end state, in the same layout.</li>
+    <li><b>Nothing flashes</b>The largest change in one place is a 1 px edge or a 4 px meter.</li>
+    <li><b>Text is never hidden or delayed</b>No exceptions (PR35-Q49): About's figures are static and the hero shows at once.</li>
+    <li><b>Contrast and focus intact</b>No pattern uses <code>outline</code>, changes a text colour or lowers an opacity of text.</li>
+  </ul>
+  <div class="bar"><button class="btn" type="button" id="all">Replay every one-shot</button><button class="btn" type="button" id="theme" aria-pressed="false">Light theme</button><span id="rmnote"></span></div>
+</div></header>
+
+<main class="wrap">
+
+<section class="spec" id="sig"><div class="spec__head"><div><p class="spec__n">01 · SIGNATURE · aesthetic</p><h2 class="spec__title">A section starts on its mark</h2>
+  <p class="spec__meta">Every eyebrow bar draws once from the left as its section arrives: <code>scaleX 0 → 1</code>, <code>--duration-deco</code> 500 ms, <code>--ease-decelerate</code>. Purple in both themes (no blend mode). Used on 44 bars. <span class="rm">Reduced motion → drawn.</span></p></div>
+  <button class="btn" type="button" data-replay="sig">Replay</button></div>
+  <div class="stage"><div class="eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><span>The work</span></div><p class="headline">Selected work, measured.</p></div></section>
+
+<section class="spec" id="close"><div class="spec__head"><div><p class="spec__n">02 · CLOSING BAR · aesthetic</p><h2 class="spec__title">The page ends on the mark it opened with</h2>
+  <p class="spec__meta">SIGNATURE on a bar above the closing statement, in the footer of all 7 pages. <span class="rm">Reduced motion → drawn.</span></p></div>
+  <button class="btn" type="button" data-replay="close">Replay</button></div>
+  <div class="stage close"><span class="section__eyebrow-bar" aria-hidden="true"></span><p><span>Tested <em>concepts</em>.</span><span class="purple">Protected <em>budgets</em>.</span></p></div></section>
+
+<section class="spec" id="run"><div class="spec__head"><div><p class="spec__n">03 · RUN · message</p><h2 class="spec__title">An edge passes through the order</h2>
+  <p class="spec__meta">A 1 px brand-purple edge lights each item in reading order, once: <code>--stagger-run</code> 140 ms between items, <code>--hold-run</code> 360 ms each, fading over <code>--duration-ui</code>. The edge is a layer (opacity only), never <code>outline</code>. A long pass shortens its step so it lets go by 1.2 s. Used on 12 components (timelines, ladders, the journey, the relays). <span class="rm">Reduced motion → no pass.</span></p></div>
+  <button class="btn" type="button" data-replay="run">Replay</button></div>
+  <div class="stage"><div class="cards" id="runCards"><article><small>Stop 1</small><h4>First stop</h4><p>What came first.</p></article><article><small>Stop 2</small><h4>Second stop</h4><p>What it led to.</p></article><article><small>Stop 3</small><h4>Third stop</h4><p>Where it ended.</p></article></div></div></section>
+
+<section class="spec" id="emph"><div class="spec__head"><div><p class="spec__n">04 · EMPHASISE · message</p><h2 class="spec__title">The pass lands on the key item</h2>
+  <p class="spec__meta">When RUN reaches the key item its edge swells 6 % and settles (<code>scale 1 → 1.06 → 1</code>, 500 ms); the words stay still. The item then rests in its own state, here the 2 px border. Used on Brief 03's journey ("the missing channel") and act 5's hand-off baton. <span class="rm">Reduced motion → the key item's own state.</span></p></div>
+  <button class="btn" type="button" data-replay="emph">Replay</button></div>
+  <div class="stage"><ol class="journey__steps" id="journey"><li class="journey__step">Arrive</li><li class="journey__step journey__step--key">Pay the fee<small>THE MISSING CHANNEL</small></li><li class="journey__step">Pass the eGate</li><li class="journey__step">Board</li></ol></div></section>
+
+<section class="spec" id="grow"><div class="spec__head"><div><p class="spec__n">05 · GROW + RELATE · message</p><h2 class="spec__title">When, for how long, and what had to finish first</h2>
+  <p class="spec__meta">Each Gantt fill grows from its start behind its label (<code>scaleX</code> on a fill layer, 500 ms, 80 ms apart, 700 ms of stagger at most). Each dependency line starts as the bar it leaves finishes, revealing along its direction through a mask, so it keeps its 5/4 dash; its head appears as it arrives. <code>stroke-dashoffset</code> is the one non-compositor property (motion spec S4). <span class="rm">Reduced motion → full bars, dashed lines.</span></p></div>
+  <button class="btn" type="button" data-replay="grow">Replay</button></div>
+  <div class="stage"><div class="gantt__chart" id="gantt">
+    <div class="gantt__row" style="top:0"><div class="gantt__bar" style="left:0%;width:22%">7 SP</div></div>
+    <div class="gantt__row" style="top:44px"><div class="gantt__bar" style="left:22%;width:30%">13 SP</div></div>
+    <div class="gantt__row" style="top:88px"><div class="gantt__bar" style="left:52%;width:24%">12 SP</div></div>
+    <div class="gantt__row" style="top:132px"><div class="gantt__bar" style="left:76%;width:24%">14 SP</div></div>
+    <svg class="gantt__overlay" aria-hidden="true"></svg>
+  </div></div></section>
+
+<section class="spec" id="meter"><div class="spec__head"><div><p class="spec__n">06 · GROW · meter · message</p><h2 class="spec__title">How much of the target</h2>
+  <p class="spec__meta">Dashboard meters fill to their value once (500 ms, 80 ms apart); the figures above them are static and readable at once. Brief 02's 8 meters. <span class="rm">Reduced motion → at value.</span></p></div>
+  <button class="btn" type="button" data-replay="meter">Replay</button></div>
+  <div class="stage"><div class="meters" id="meters"><div><b>45</b><span class="dcell__bar"><i style="--v:1"></i></span></div><div><b>6</b><span class="dcell__bar"><i style="--v:1"></i></span></div><div><b>3</b><span class="dcell__bar"><i style="--v:.6"></i></span></div><div><b>&lt;7</b><span class="dcell__bar"><i style="--v:.5"></i></span></div></div></div></section>
+
+<section class="spec" id="marquee"><div class="spec__head"><div><p class="spec__n">07 · MARQUEE · aesthetic + message · exception X-1</p><h2 class="spec__title">A deliberate pause before the work</h2>
+  <p class="spec__meta">Main's two credential lanes at 60 px/s in opposite directions; a lane holds still while hovered. Each lane is one labelled image for screen readers. <span class="rm">Reduced motion → static lanes.</span></p></div></div>
+  <div class="stage"><div class="lane" role="img" aria-label="Demo lane"><div class="lane__t" id="lane1"></div></div><div class="lane lane--r" role="img" aria-label="Demo lane"><div class="lane__t" id="lane2"></div></div></div></section>
+
+<section class="spec" id="live"><div class="spec__head"><div><p class="spec__n">08 · LIVE MAP · interaction · exception X-2</p><h2 class="spec__title">The map is live and explorable</h2>
+  <p class="spec__meta">Brief 03's network nodes bob 2–4 px while the map is on screen, on desktop only; frames are requested only while it is on screen. The centre's pulse is retired. <span class="rm">Reduced motion → still.</span></p></div></div>
+  <div class="stage net"><svg viewBox="0 0 600 180" aria-hidden="true"><line x1="300" y1="90" x2="120" y2="50"/><line x1="300" y1="90" x2="140" y2="140"/><line x1="300" y1="90" x2="470" y2="45"/><line x1="300" y1="90" x2="490" y2="130"/><line x1="120" y1="50" x2="140" y2="140"/>
+    <g class="b" style="--bob-d:-.4s;--amp:3px"><circle class="n" cx="120" cy="50" r="16"/></g><g class="b" style="--bob-d:-1.3s;--amp:2px;--bob-t:3.6s"><circle class="n" cx="140" cy="140" r="14"/></g><g class="b" style="--bob-d:-2.1s;--amp:4px;--bob-t:2.9s"><circle class="n" cx="470" cy="45" r="15"/></g><g class="b" style="--bob-d:-.9s;--amp:3px;--bob-t:3.3s"><circle class="n" cx="490" cy="130" r="13"/></g>
+    <circle class="n" cx="300" cy="90" r="26" style="stroke-width:2.4"/></svg></div></section>
+
+<section class="spec" id="token"><div class="spec__head"><div><p class="spec__n">09 · TOKEN · message</p><h2 class="spec__title">The passenger walks the flow once</h2>
+  <p class="spec__meta">Brief 03's flowchart on desktop: a token walks the path when the chart is first seen, lighting each step it passes, then fades; the loop stops after the walk. <span class="rm">Reduced motion → the final frame.</span></p></div>
+  <button class="btn" type="button" data-replay="token">Replay</button></div>
+  <div class="stage flow"><svg viewBox="0 0 600 120" id="flowSvg" aria-hidden="true"><path d="M70 60 H530"/><rect x="20" y="40" width="100" height="40"/><rect x="190" y="40" width="100" height="40"/><rect x="360" y="40" width="100" height="40"/><rect x="480" y="40" width="100" height="40"/>
+    <text x="70" y="64" text-anchor="middle">Register</text><text x="240" y="64" text-anchor="middle">Pay</text><text x="410" y="64" text-anchor="middle">eGate</text><text x="530" y="64" text-anchor="middle">Board</text><circle id="tok" r="5" cx="70" cy="60" fill="#fff" opacity="0"/></svg></div></section>
+
+<section class="spec"><p class="spec__n">Tokens</p><h2 class="spec__title">One clock for every pattern</h2>
+  <table class="tok"><thead><tr><th>Token</th><th>Value</th><th>Used by</th></tr></thead><tbody>
+  <tr><td><code>--duration-ui</code></td><td>250 ms</td><td>state motion; the RUN edge's fade</td></tr>
+  <tr><td><code>--duration-deco</code></td><td>500 ms</td><td>SIGNATURE, CLOSING BAR, GROW, RELATE, EMPHASISE</td></tr>
+  <tr><td><code>--stagger-deco</code></td><td>80 ms (700 ms of stagger at most per sequence)</td><td>GROW, RELATE, meters</td></tr>
+  <tr><td><code>--stagger-run</code> / <code>--hold-run</code></td><td>140 ms / 360 ms (a pass lets go by 1.2 s)</td><td>RUN</td></tr>
+  <tr><td><code>--duration-ambient</code></td><td>7000 ms</td><td>(no pattern since FIELD was retired)</td></tr>
+  <tr><td>Marquee speed</td><td>60 px/s</td><td>MARQUEE</td></tr>
+  <tr><td><code>--ease-decelerate</code> / <code>--ease-standard</code></td><td>(0, 0, .2, 1) / (.4, 0, .2, 1)</td><td>arrivals / EMPHASISE, state motion</td></tr>
+  <tr><td>Trigger</td><td>top edge at 60 % of the viewport, or fully in view</td><td>every one-shot</td></tr>
+  </tbody></table></section>
+</main>
+<footer class="end"><div class="wrap">Decoration system · spec <code>decoration-system.spec.md</code> · companion to <code>motion-system.html</code>.</div></footer>
+
+<script type="module">
+/* Specimen driver: each Replay arms its pattern through the site's own decoration layer, then plays it. */
+import * as D from '../../../assets/js/core/decoration.js';
+(function () {
+  var rm = !D.motion;
+  document.getElementById('rmnote').textContent = rm ? 'Your system asks for reduced motion: every specimen shows its final frame.' : 'Each one-shot plays when you press Replay.';
+  /* the overlay lines, drawn from the bars like the site's Gantt organism */
+  var g = document.getElementById('gantt'), svg = g.querySelector('svg');
+  function lines() {
+    var W = g.clientWidth, H = g.clientHeight, b = [].slice.call(g.querySelectorAll('.gantt__bar')).map(function (x) { var r = x.getBoundingClientRect(), c = g.getBoundingClientRect(); return { l: r.left - c.left, r: r.right - c.left, y: r.top - c.top + r.height / 2 }; });
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); var s = '';
+    for (var i = 0; i < b.length - 1; i++) { var x = b[i].r, y = b[i].y, x2 = b[i + 1].l, y2 = b[i + 1].y; s += '<path d="M' + x + ' ' + y + ' H' + (x + 10) + ' V' + y2 + ' H' + (x2 - 5) + '"></path><rect class="gantt__dep-head" x="' + (x2 - 5) + '" y="' + (y2 - 3) + '" width="5" height="6"></rect>'; }
+    svg.innerHTML = s;
+  }
+  lines(); window.addEventListener('resize', lines);
+  var eyebrowBar = document.querySelector('#sig .section__eyebrow-bar'), closeBar = document.querySelector('#close .section__eyebrow-bar');
+  var A = {
+    sig: function () { D.sig(eyebrowBar)(); },
+    close: function () { D.sig(closeBar)(); },
+    run: function () { D.run([].slice.call(document.getElementById('runCards').children))(); },
+    emph: function () { var j = document.getElementById('journey'); D.run([].slice.call(j.children), j.querySelector('.journey__step--key'), true)(); },
+    grow: function () { lines(); D.grow(g)(); },
+    meter: function () { D.meter([].slice.call(document.querySelectorAll('#meters i')))(); },
+    token: function () {
+      if (rm) return; var t = document.getElementById('tok'), rs = [].slice.call(document.querySelectorAll('#flowSvg rect')), t0 = null, D1 = 2200;
+      (function f(ts) { if (ts === undefined) return requestAnimationFrame(f); if (t0 === null) t0 = ts; var p = Math.min(1, (ts - t0) / D1), x = 70 + 460 * p;
+        t.setAttribute('cx', x); t.setAttribute('opacity', p < 1 ? 1 : 0); rs.forEach(function (r) { var cx = +r.getAttribute('x') + 50; r.classList.toggle('lit', Math.abs(cx - x) < 40); });
+        if (p < 1) requestAnimationFrame(f); else rs.forEach(function (r) { r.classList.remove('lit'); }); })();
+    }
+  };
+  [].forEach.call(document.querySelectorAll('[data-replay]'), function (b) { b.addEventListener('click', function () { A[b.dataset.replay](); }); });
+  document.getElementById('all').addEventListener('click', function () { Object.keys(A).forEach(function (k, i) { setTimeout(A[k], i * 120); }); });
+  document.getElementById('theme').addEventListener('click', function () { var on = document.documentElement.getAttribute('data-theme') !== 'light'; if (on) document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme'); this.setAttribute('aria-pressed', String(on)); });
+  /* lanes at 60 px/s, like the ticker */
+  ['lane1', 'lane2'].forEach(function (id, k) { var el = document.getElementById(id), words = ['LOGO 01', 'LOGO 02', 'LOGO 03', 'LOGO 04', 'LOGO 05', 'LOGO 06'];
+    el.innerHTML = words.concat(words).map(function (w) { return '<span>' + w + '</span>'; }).join(''); el.style.setProperty('--lane-dur', (el.scrollWidth / 2 / 60).toFixed(2) + 's'); });
+  setTimeout(function () { if (!rm) document.getElementById('all').click(); }, 400);
+})();
+</script>
+</body>
+</html>

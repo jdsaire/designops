@@ -1,0 +1,65 @@
+/* shared/decoration.css — the decoration system (docs/v3/organisms/decoration-system.spec.md, PR #35).
+   Floor (PR35-Q29): reduced motion rests on the final frame · nothing flashes · nothing hides or delays text (no
+   exceptions, PR35-Q49) · contrast and focus never lowered · only WCAG 2.2.2 relaxed (X-1, X-2).
+   Patterns draw a bar, an edge, a fill or a line, never the words. core/decoration.js sets every pre-state, and only
+   when motion is allowed, so without JavaScript, under reduced motion and in print the final frame is the only frame.
+   Timing comes from the decoration tokens in tokens.css (and each brief's :root). */
+
+/* Pre-states are applied without a transition, so nothing visibly empties when it is armed. */
+.deco-instant, .deco-instant::before { transition: none !important; }
+
+/* SIGNATURE + CLOSING BAR · every eyebrow bar, and the footer's closing bar, draws once from the left. */
+.deco-sig { transform-origin: left center; transition: transform var(--duration-deco) var(--ease-decelerate); }
+.deco-sig.deco-pre { transform: scaleX(0); }
+/* Armed before first paint by each page's head script, so a bar already on screen draws as the page opens instead of
+   flashing full, then empty. decoration.js takes over at once; if it never runs, a 3 s release shows the bars. */
+@keyframes deco-release { to { transform: none; } }
+html.deco-armed:not(.deco-ready) .section__eyebrow-bar { transform: scaleX(0); transform-origin: left center; animation: deco-release 0s 3s forwards; }
+
+/* RUN · a 1 px brand-purple edge passes through an ordered component once, in reading order. The edge is a
+   pseudo-element layer animated by opacity, never `outline`, so the focus ring stays the page's only outline. Items
+   whose ::after is taken (Brief 03's journey connectors) use ::before. Relay nodes and the hand-off baton are filled
+   purple, so their edge rings 4 px outside them. */
+.deco-run-host { position: relative; }
+.deco-run-item:not(.deco-run--before)::after,
+.deco-run-item.deco-run--before::before {
+  content: ""; position: absolute; inset: var(--deco-edge-inset, 0); z-index: 2; pointer-events: none;
+  border: 1px solid var(--color-brand-purple); border-radius: inherit; opacity: 0;
+  transition: opacity var(--duration-ui) linear;
+}
+.relay__node.deco-run-item, .relay__baton span.deco-run-item { --deco-edge-inset: -4px; }
+.deco-run-item.deco-lit:not(.deco-run--before)::after,
+.deco-run-item.deco-run--before.deco-lit::before { opacity: 1; }
+
+/* EMPHASISE · when the pass lands on the key item, its edge swells 6 % and settles; the words stay still. The item
+   then rests in its own state (the journey's key step keeps its 2 px purple border). */
+@keyframes deco-emph { 0% { transform: none; } 45% { transform: scale(1.06); } 100% { transform: none; } }
+.deco-run-item.deco-emph:not(.deco-run--before)::after,
+.deco-run-item.deco-run--before.deco-emph::before { animation: deco-emph var(--duration-deco) var(--ease-standard) 1 both; }
+
+/* GROW · each Gantt bar's fill grows from its start, behind its label; label, length, dots and milestones stay. The
+   bar's own background moves into ::before for the duration only. */
+.deco-grow-bar { isolation: isolate; background-color: transparent !important; }
+.deco-grow-bar::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--deco-fill); transform-origin: left center;
+  transition: transform var(--duration-deco) var(--ease-decelerate) var(--deco-delay, 0ms);
+}
+.deco-grow-bar.deco-pre::before { transform: scaleX(0); }
+/* GROW · meter: dashboard meters fill to their value; the figures above them are static. */
+.dcell__bar i.deco-meter { transition: transform var(--duration-deco) var(--ease-decelerate) var(--deco-delay, 0ms); }
+.dcell__bar i.deco-meter.deco-pre { transform: scaleX(0); }
+
+/* RELATE · dependency lines reveal along their direction through a mask, so they keep their dash; each arrowhead
+   appears as its line arrives. stroke-dashoffset is the one sanctioned non-compositor property (motion spec S4). */
+.deco-relate-mask { transition: stroke-dashoffset var(--duration-deco) var(--ease-decelerate); }
+.deco-relate-head { transition: opacity 120ms linear var(--deco-delay, 0ms); }
+.deco-relate-head.deco-pre { opacity: 0; }
+
+/* Print shows the final frame. */
+@media print {
+  .deco-sig.deco-pre, html.deco-armed .section__eyebrow-bar { transform: none !important; }
+  .deco-grow-bar.deco-pre::before { transform: none !important; }
+  .dcell__bar i.deco-meter.deco-pre { transform: scaleX(var(--v, 0)) !important; }
+  .deco-relate-mask { stroke-dashoffset: 0 !important; }
+  .deco-relate-head.deco-pre { opacity: 1 !important; }
+}

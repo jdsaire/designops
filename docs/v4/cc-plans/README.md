@@ -16,3 +16,4 @@ Approved deployment plans for v4 and later.
 | Dispatch B · brief Spanish, three-level i18n | `Plan-WB-BriefSpanish.md` |
 | site-wC · Brief 04 multi-page refocus | `Plan-WC-B04-MultipageFocus.md` |
 | site-wD · Brief 03 rebuilt as TUUA Transfer | `Plan-WD-B03-TUUA.md` |
+| PR #35 · Main closing build | `Plan-PR35-MainClosing.md` |

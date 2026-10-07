@@ -1,7 +1,7 @@
 {
   "about_hero_portrait_caption": "Juan Diego Saire — AI Product & Experience Engineer, Lima, Perú.",
-  "about_hero_image_alt": "Juan Diego Saire — AI Product & Experience Engineer.",
-  "about_hero_heading": "Soy un arquitecto de productos y experiencias digitales: combino ingeniería con IA avanzada para dirigir, afinar y desplegar las soluciones que su equipo necesita.",
+  "about_hero_image_alt": "Retrato en blanco y negro de Juan Diego Saire en camisa blanca con mangas arremangadas, inclinándose con una postura segura y lista para construir.",
+  "about_hero_heading": "Ingeniero. MBA. Seis años en tech y diseño. Dirijo la IA para convertir desafíos de negocio en productos digitales blindados.",
   "about_tr_eyebrow": "CREDENCIALES",
   "about_tr_heading": "Los números no mienten.",
   "about_tr_lede": "Trabajo real – resultados reales.",
@@ -48,7 +48,7 @@
   "about_jr_hec_period": "2021 – 2023",
   "about_jr_hec_title": "MicroMasters in UX Design and Evaluation",
   "about_jr_hec_meta": "Virtual · HEC Montréal",
-  "about_jr_hec_body": "Prototipado, análisis de datos y gestión UX,  evolucionando mi formación de estrategia al Design Research.",
+  "about_jr_hec_body": "Prototipado, análisis de datos y gestión UX, evolucionando mi formación de estrategia al Design Research.",
   "about_jr_limafly_period": "Feb 2024 – Oct 2024",
   "about_jr_limafly_title": "LimaFly App",
   "about_jr_limafly_meta": "Prototipo · Figma",
@@ -137,6 +137,9 @@
   "about_jr_ccod_period": "24 Ago 2026",
   "about_jr_ccod_title": "Claude Code 101",
   "about_jr_ccod_meta": "Claude Academy",
-  "about_cv_head": "La versión de una página.",
-  "about_cv_cta": "Descargar CV (PDF)"
+  "about_cv_cta": "Descargar CV (PDF)",
+  "about_cv_cta_md": "Descargar CV (MD)",
+  "contact_eyebrow": "CONTACTO",
+  "contact_headline": "Conversemos.",
+  "chrome_nav_cta": "Iniciar conversación"
 }

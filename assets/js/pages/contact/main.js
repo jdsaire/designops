@@ -6,6 +6,7 @@ import { init as initTheme }   from '../../core/theme.js';
 import { init as initProgress }  from '../../core/progress.js';
 import { init as initNavChrome } from '../../core/navchrome.js';
 import { init as initContact }   from './contact.js';
+import { init as initDecoration } from '../../core/decoration.js';
 
 setPage('contact/i18n/contact');
 
@@ -15,4 +16,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgress();
   initNavChrome({ swapLang });
   initContact();
+  initDecoration();
 });

@@ -65,6 +65,12 @@
   animation: ticker-right var(--ticker-duration, 28s) linear infinite;
 }
 
+/* MARQUEE (decoration spec, exception X-1): a lane holds still while a pointer rests on it, so a logo can be read;
+   it resumes when the pointer leaves. Pointer devices only, so a tap never leaves a lane stuck. */
+@media (hover: hover) {
+  .ticker__band:hover .ticker__track { animation-play-state: paused; }
+}
+
 /* Logo group */
 .ticker__group {
   display: flex;
