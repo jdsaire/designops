@@ -5,9 +5,13 @@
    Elsewhere the italic loads when a page first sets italic text.
 
    'Archivo Fallback' is local Arial reshaped to Archivo's metrics, so text set before the files
-   arrive takes the same room and nothing moves when they swap in. Measured in Chrome on Archivo
-   400 against Arial 400 (a mixed EN/ES sample): advance 0.9839 of Arial; ascent 0.878 em,
-   descent 0.210 em, no line gap. The overrides are divided by size-adjust, which scales them. */
+   arrive takes the same room and little moves when they swap in. Archivo widens with weight far
+   more than Arial does, so each weight band gets its own face: Arial below 550, Arial Bold from
+   550. Advance against Arial, measured in Chrome on the site's own EN/ES copy: 300 0.966 ·
+   400 0.9839 · 500 1.000 · 600 0.951 · 700 0.983 · 800 1.030 · 900 1.097. The 900 band is set
+   at 1.105, where the most headings keep their line count (swept over every page, EN/ES,
+   390–1440). Vertical metrics are the same at every weight (ascent 0.878 em, descent 0.210 em,
+   no line gap); the overrides are divided by size-adjust, which scales them. */
 @font-face {
   font-family: 'Archivo';
   src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
@@ -27,8 +31,63 @@
 @font-face {
   font-family: 'Archivo Fallback';
   src: local('Arial'), local('ArialMT');
+  font-weight: 100 349;
+  size-adjust: 96.60%;
+  ascent-override: 90.89%;
+  descent-override: 21.74%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial'), local('ArialMT');
+  font-weight: 350 449;
   size-adjust: 98.39%;
   ascent-override: 89.24%;
   descent-override: 21.34%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial'), local('ArialMT');
+  font-weight: 450 549;
+  size-adjust: 100.00%;
+  ascent-override: 87.80%;
+  descent-override: 21.00%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 550 649;
+  size-adjust: 95.10%;
+  ascent-override: 92.32%;
+  descent-override: 22.08%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 650 749;
+  size-adjust: 98.27%;
+  ascent-override: 89.35%;
+  descent-override: 21.37%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 750 849;
+  size-adjust: 103.04%;
+  ascent-override: 85.21%;
+  descent-override: 20.38%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 850 900;
+  size-adjust: 110.5%;
+  ascent-override: 79.46%;
+  descent-override: 19.00%;
   line-gap-override: 0%;
 }
