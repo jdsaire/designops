@@ -6,18 +6,14 @@
    before its post segment), so each half is fitted, and both lines shrink together if the stage
    would not end inside the first screen. The sizes go on .hero as --l1-size / --l2-size and
    .hero--fit switches the lines to nowrap; until then the hero's content waits unseen
-   (hero.css). Positions are read from layout (offsets), never from boxes an entrance may be
-   translating, so every mode gets the same layout.
+   (hero.css). Positions are read from layout (offsets), so every mode gets the same layout.
 
    Line 2 rests on one word (IMPACT / IMPACTO): the typing loop, its caret and its pause button
    are retired (PR35-Q48), and line 2 now fills the width like line 1 (PR35-Q51).
 
-   Entrance (G2(e) B): attribution, line 1, line 2, value proposition, call to action;
-   transform + opacity, 500 ms, 80 ms apart, once, after the first fit. Reduced motion keeps the
-   resting hero. */
+   No entrance: the hero shows at once when it is fitted, in every mode (PR35-Q49 revoked X-4). */
 const SLACK = 0.985;          /* fitted lines stop just short of the stage edge */
 const MIN_PHONE_SIZE = 36;    /* px: the phone cap never sets a line smaller */
-const ENTRANCE = { dur: 500, stag: 80 };
 
 function init() {
   const hero = document.querySelector('.hero');
@@ -25,10 +21,8 @@ function init() {
   const h1 = stage && stage.querySelector('.hero__h1');
   if (!h1) return;
   const inner = hero.querySelector('.hero__inner');
-  const l2 = h1.querySelector('.hero__l2');
   const phoneMQ = window.matchMedia('(max-width: 767px)');
-  const reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let fitted = false, entered = false;
+  let fitted = false;
 
   /* Width of a run of inline elements on one line: the union of their boxes. */
   function extent(els) {
@@ -103,34 +97,17 @@ function init() {
     fitted = true;
   }
 
-  /* ── Entrance: once, after the first fit ── */
-  function entrance() {
-    if (entered || reduceMQ.matches || typeof h1.animate !== 'function') return;
-    entered = true;
-    const q = s => stage.querySelector(s);
-    const seq = [q('.hero__attr'), h1.querySelector('.hero__l1'), l2, q('.hero__sub'), q('.hero__cta')];
-    seq.forEach((el, i) => {
-      if (el) el.animate(
-        [{ opacity: 0, transform: 'translateY(1.125rem)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: ENTRANCE.dur, delay: i * ENTRANCE.stag, easing: 'cubic-bezier(0, 0, 0.2, 1)', fill: 'backwards' }
-      );
-    });
-  }
-
   /* ── Boot: the face and the first dictionary, then fit; refit on language and size ── */
   let fontsOK = false, i18nOK = false;
   function ready() {
     if (!fontsOK || !i18nOK) return;
-    const first = !fitted;
     fit();
-    if (first) entrance();
   }
   document.addEventListener('i18n:changed', () => { i18nOK = true; ready(); });
   setTimeout(() => { if (!i18nOK) { i18nOK = true; ready(); } }, 2500);
   const faces = document.fonts ? Promise.all([document.fonts.load('900 100px Archivo'), document.fonts.load('italic 900 100px Archivo')]) : Promise.resolve();
   faces.catch(() => {}).then(() => { fontsOK = true; ready(); });
 
-  reduceMQ.addEventListener('change', () => { if (fitted) fit(); });
   let rt;
   window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (fitted) fit(); }, 80); });
 }
