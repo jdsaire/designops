@@ -942,6 +942,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="panel__slot" id="panelSlot"></div>
 </aside>
 
+<script>/* i18n early (PR #35): a repeat visit renders the reader's language from the first layout, so a reload or back/forward restores the scroll position into the layout the reader left. The engines cache each page's merged dictionary; this applies it before any layout and the async load then confirms it. English is the markup itself. */(function(){try{var L=localStorage.getItem('jds-lang')||'ES';if(L==='EN')return;var d=JSON.parse(localStorage.getItem('jds-i18n:'+location.pathname+':'+L)||'null');if(!d)return;var h=document.documentElement,q=function(a,f){var n=document.querySelectorAll('['+a+']');for(var i=0;i<n.length;i++){var k=n[i].getAttribute(a);if(d[k]!==undefined)f(n[i],d[k]);}};h.setAttribute('lang',L==='ES'?'es':'en');h.setAttribute('data-lang',L);q('data-i18n',function(e,v){if(!e.children.length)e.textContent=v;});q('data-i18n-html',function(e,v){e.innerHTML=v;});q('data-i18n-aria',function(e,v){e.setAttribute('aria-label',v);});q('data-i18n-placeholder',function(e,v){e.placeholder=v;});q('data-i18n-alt',function(e,v){e.setAttribute('alt',v);});}catch(e){}})();</script>
 <script>
 /* ============================================================
    i18n — CHROME/BODY split, mirrors the sibling brief convention.
@@ -996,6 +997,7 @@ function applyI18n(lang){
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ const k=el.getAttribute("data-i18n-placeholder"); if(d[k]!==undefined) el.placeholder=d[k]; });
     document.querySelectorAll("[data-i18n-alt]").forEach(el=>{ const k=el.getAttribute("data-i18n-alt"); if(d[k]!==undefined) el.alt=d[k]; });
     document.querySelectorAll("[data-i18n-html]").forEach(el=>{ const k=el.getAttribute("data-i18n-html"); if(d[k]!==undefined) el.innerHTML=d[k]; });
+    if(lang !== "EN"){ try{ localStorage.setItem("jds-i18n:" + location.pathname + ":" + lang, JSON.stringify(d)); }catch(e){} }   /* read by the i18n early script on the next visit */
     document.dispatchEvent(new CustomEvent("i18n:changed",{ detail:{ lang, dict:d } }));
   });
 }
