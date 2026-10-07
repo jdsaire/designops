@@ -344,4 +344,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .nav__work-item { transition: none; }
+  /* The nav's hide/return slide, the menu's fade, the menu icon and the work caret rest still too: Main and the
+     briefs already stopped them through their own rules; About and Contact did not. */
+  .nav, .nav__overlay, .nav__hamburger span, .nav__work-caret { transition: none; }
 }
