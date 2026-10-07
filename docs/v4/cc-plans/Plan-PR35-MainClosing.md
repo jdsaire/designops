@@ -34,7 +34,7 @@ Each gate is released only by its exact phrase, with an effort checkpoint before
 ### Verification
 Widened matrix 84/84 (errors, overflow, clipped lines, unresolved, unapplied and missing keys); parity and fallbacks; the reload suite in WebKit and Chrome on every Main anchor at 1440 and 390; reduced-motion end states equal to the animated end states; contrast with no new failure in either theme; the chevron gap and its 44 px target; CLS 0 for the font.
 
-## 2. Rulings added during the run (PR35-Q1 to PR35-Q46)
+## 2. Rulings added during the run (PR35-Q1 to PR35-Q58)
 
 Full text in `PRE-MAX-CHANGELOG.md`; lines below are shortened.
 
@@ -51,7 +51,7 @@ Full text in `PRE-MAX-CHANGELOG.md`; lines below are shortened.
 | PR35-Q9 | 10-05 | Archivo chosen as the site-wide typeface after G1 round 1; G1 stays open for the hero variant (round 2, dark-only prototypes, desktop + mobile) |
 | PR35-Q10 | 10-05 | JD's new hero keys (~/Downloads/updated-hero-keys.json) carried exactly as written, EN + ES: line 1 "Design ate coding" / "El diseño aniquiló al código"; line 2 "My [Vision / Method / Care] drives… |
 | PR35-Q11 | 10-05 | headline wording, punctuation and capitals carried exactly as written; XB-0003 risk ("never say coding is dead") accepted under the v1_4 precedent — default under the principal-copy rule, JD may… |
-| PR35-Q12 | 10-05 | EVIDENCE route for the new claims: closing/EVIDENCE-AMENDMENT-PROPOSALS-PR35-v1_0.md (B25, P06, B22 limits note); EVIDENCE.json untouched per brief §9; Cowork applies them at its next EVIDENCE write |
+| PR35-Q12 | 10-05 | EVIDENCE route for the new claims: closing/PR35-run/EVIDENCE-AMENDMENT-PROPOSALS-PR35-v1_0.md (B25, P06, B22 limits note); EVIDENCE.json untouched per brief §9; Cowork applies them at its next EVIDENCE write |
 | PR35-Q13 | 10-05 | italic downloads approved for the G1 round-2 hook comparison: Archivo Italic, Playfair Display Italic, Fraunces Italic (+2 OFL); Instrument Serif Italic already on disk |
 | PR35-Q14 | 10-05 | line-2 word cycle plays once (~3.5 s, under WCAG 2.2.2's 5 s) and lands on Care / dedicación; reduced motion and screen readers get the landed sentence; supersedes PR35-Q8's two-beat hero entrance |
 | PR35-Q15 | 10-05 | About hero heading: Claude Code proposes a rebuilt heading under the existing key (no new keys) strengthening the approved POS-Q17 text around the method; "read and change the code myself" stops… |
@@ -86,6 +86,18 @@ Full text in `PRE-MAX-CHANGELOG.md`; lines below are shortened.
 | PR35-Q44 | 10-07 | cap_s2_title EN now mirrors ES ("Scalable Workflows." / "Flujos Escalables."); JD edited EN |
 | PR35-Q45 | 10-07 | propagation: About meta description + og:description take the new EN heading verbatim (119 chars, in 795aa42); owed to Cowork, not edited here: SPEC-Copy-Main v1.1, KEYS-Main-EN-ES v1.1, POSITIONING… |
 | PR35-Q46 | 10-07 | G5 typo-scan fixes chosen by JD: ES two stray double spaces removed (about_jr_hec_body, designops hero_lede); ES "multi-" joined per RAE ("multipágina" in designops act3_rv2_txt, "multiidioma" in… |
+| PR35-Q47 | 10-07 | JD's on-disk Main edits carried verbatim: hero_sub EN "I build seamless websites and apps, translating business challenges into tested products using advanced AI." / ES "Creo webs y apps impecables,… |
+| PR35-Q48 | 10-07 | hero typing loop retired (JD: tiring over time, and stopping it is a chore): line 2 is static on hero_h1_l2_w3 ("IMPACT" / "IMPACTO"); hero_h1_l2_w1, _w2, hero_motion_pause, hero_motion_play, the… |
+| PR35-Q49 | 10-07 | exceptions: X-3 (About count-up) revoked → static figures (PR35-Q25's original proposal); X-4 (hero entrance) revoked → hero text shows at once; X-1 (ticker, PR35-Q28) and X-2 (B03 network bob) stay… |
+| PR35-Q50 | 10-07 | hero gradient (FIELD) holds still: with the pause button gone an endless 7 s drift would need a 2.2.2 exception |
+| PR35-Q51 | 10-07 | hero line 2 refit to fill the content box like line 1 in each language (was 89 % EN / 96 % ES at 1440, sized for the widest cycling word) |
+| PR35-Q52 | 10-07 | EN line 1 stays "DESIGN ATE CODE." while ES says "DISEÑO DICTA CÓDIGO."; each language keeps its own punch |
+| PR35-Q53 | 10-07 | Main og:description follows the hero: "Design ate code. Impact prevails. I build seamless websites and apps, translating business challenges into tested products using advanced AI."; the search… |
+| PR35-Q54 | 10-07 | the CV is offered in the About hero, under about_hero_heading, in the Contact page's channel row (moved to shared/channels.css, Contact pixel-identical): two download links, PDF and MD, same download… |
+| PR35-Q55 | 10-07 | About ends on Main's Contact organism verbatim ("CONTACT / Let's talk. / Start a conversation →" to ../contact/), keys contact_eyebrow, contact_headline, chrome_nav_cta copied verbatim to About's… |
+| PR35-Q56 | 10-07 | the MD placeholder is JD's file, never extracted from the PDF |
+| PR35-Q57 | 10-07 | phones: the two CV links share one row; JD first asked PDF left / MD right, then revoked it: MD sits right after PDF, as from 768 (/ask on fit: full labels needed 335–339 px against a 260–330 px… |
+| PR35-Q58 | 10-07 | the CV labels merge into one value each, "CV (PDF)" and "CV (MD)" in EN and ES (JD: the button obviously downloads the promised file); the short/full label pair and its hidden spans retire (61e4d40) |
 
 ## 3. Gate sequence as run
 
@@ -104,3 +116,6 @@ Full text in `PRE-MAX-CHANGELOG.md`; lines below are shortened.
 | G4b | effort xhigh (in the G4a release); presented 6 Oct (16 commits `c562387`…`064ac26`); Sentence case footer (PR35-Q40) and Safari root cause (PR35-Q41) during the gate; About chevron fixed for Safari after JD's live review |
 | G4 | RELEASED 7 Oct; JD's on-disk Main and About copy edits carried and confirmed (PR35-Q42…Q45) |
 | G5 | effort High (in the G4 release); typo fixes chosen by JD (PR35-Q46); presented 7 Oct |
+| G5 | iteration opened 7 Oct before the PR: JD's hero copy (PR35-Q47), typing loop retired (Q48), X-3 and X-4 revoked (Q49), gradient still (Q50), line 2 refit (Q51), EN line 1 kept (Q52), Main og:description (Q53) |
+| G5 | iteration round 2 7 Oct: the CV moves to About's hero (PR35-Q54, Q56–Q58), About ends on Main's Contact organism (Q55) |
+| G5 | re-presented 7 Oct after both rounds |
