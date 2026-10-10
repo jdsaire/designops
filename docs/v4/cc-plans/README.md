@@ -17,3 +17,4 @@ Approved deployment plans for v4 and later.
 | site-wC · Brief 04 multi-page refocus | `Plan-WC-B04-MultipageFocus.md` |
 | site-wD · Brief 03 rebuilt as TUUA Transfer | `Plan-WD-B03-TUUA.md` |
 | PR #35 · Main closing build | `Plan-PR35-MainClosing.md` |
+| PR #36 · Public CVs | `Plan-PR36-PublicCVs.md` |
