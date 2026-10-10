@@ -139,6 +139,8 @@
   "about_jr_ccod_meta": "Claude Academy",
   "about_cv_cta": "Descargar CV (PDF)",
   "about_cv_cta_md": "Descargar CV (MD)",
+  "about_cv_href": "../assets/docs/CV_Juan_Diego_Saire_ES.pdf",
+  "about_cv_href_md": "../assets/docs/CV_Juan_Diego_Saire_ES.md",
   "contact_eyebrow": "CONTACTO",
   "contact_headline": "Conversemos.",
   "chrome_nav_cta": "Iniciar conversación"
