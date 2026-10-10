@@ -15,13 +15,14 @@
 function init() {
   var links = Array.prototype.slice.call(document.querySelectorAll('[data-cv-href]'));
   if (!links.length) return;
+  var defaults = links.map(function (a) { return a.getAttribute('href'); });
 
   document.addEventListener('i18n:changed', function (e) {
     var dict = e.detail && e.detail.dict;
     if (!dict) return;
-    links.forEach(function (a) {
+    links.forEach(function (a, i) {
       var href = dict[a.getAttribute('data-cv-href')];
-      if (href !== undefined) a.setAttribute('href', href);
+      a.setAttribute('href', href !== undefined ? href : defaults[i]);
     });
   });
 }
