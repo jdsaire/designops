@@ -64,4 +64,4 @@ reader's language. Copy, labels, layout and Contact are out of scope, and so is 
 |---|---|
 | Plan | RELEASED 9 Oct |
 | G1 | presented 9 Oct; re-presented 10 Oct with the fallback fix; RELEASED 10 Oct |
-| G2 | presented 10 Oct |
+| G2 | presented 10 Oct; RELEASED 10 Oct; PR #36 opened |

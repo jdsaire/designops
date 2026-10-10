@@ -1,6 +1,6 @@
 # Completion report — PR #36 · Public CVs
 
-**Branch:** `deploy/v23-pr36-public-cvs`, from `5ea2182` · **Pull request:** #36, manual merge only (link recorded after opening)
+**Branch:** `deploy/v23-pr36-public-cvs`, from `5ea2182` · **Pull request:** [#36](https://github.com/jdsaire/designops/pull/36), manual merge only
 **Plan:** [Plan-PR36-PublicCVs.md](../cc-plans/Plan-PR36-PublicCVs.md)
 
 ## 1. Commits
@@ -11,9 +11,10 @@ In order, on `deploy/v23-pr36-public-cvs`:
 - `8b6de2a` — "feat(about): link each CV by the reader's language"
 - `19b0e09` — "chore(about): retire the placeholder CV files"
 - `80753b6` — "fix(about): fall back to the English CV when a language has no CV link"
-- (this commit) — "docs: archive the PR #36 plan and completion report"
+- `81e2335` — "docs: archive the PR #36 plan and completion report"
+- (this commit) — "docs: record the PR #36 link in its completion report"
 
-Four commits before this one, one per item. The fix is the re-plan's single correction to G1.
+Five commits before this one, one per item. The fix is the re-plan's single correction to G1.
 
 ## 2. Outcome
 
@@ -31,14 +32,14 @@ The invariants held:
 
 | # | Criterion | Result |
 |---|---|---|
-| 1 | Every gate released only on its phrase | PASS: Plan 9 Oct; G1 10 Oct after one re-presentation; G2 below |
+| 1 | Every gate released only on its phrase | PASS: Plan 9 Oct; G1 10 Oct after one re-presentation; G2 10 Oct |
 | 2 | EN readers get EN files, ES readers ES; live switch flips both; JavaScript off gives EN | PASS: link check 7/7 in Chrome and 7/7 in WebKit on the tip |
 | 3 | Repo files byte-identical to sources; placeholders gone, nothing live links to them | PASS: sha256 4/4, served bytes 4/4; a live-reference search finds 0 (5 historical lines kept, PR36-Q1) |
 | 4 | Labels and layout unchanged | PASS: About's top 1500 px pixel-identical to the baseline in 12/12 cells; page size identical in 12/12 |
 | 5 | Matrix, parity, fallbacks, contrast | PASS: 84/84 with 0 errors, overflow, clipped, unresolved, unapplied and missing keys; parity 0; fallbacks = EN; no colour or layout change, so no new contrast failure |
 | 6 | Engine, early scripts and path helpers unchanged | PASS: none of them appears in `git diff origin/main..HEAD` |
 | 7 | No AI attribution; sole author jdsaire | PASS: 4/4 commits authored and committed by jdsaire; 0 trailers. The only AI product names added are the CV's own skills lines, carried verbatim |
-| 8 | Pushed after G2; PR open, unmerged | recorded after opening |
+| 8 | Pushed after G2; PR open, unmerged | PASS: pushed after `APPROVED PR36 G2`; https://github.com/jdsaire/designops/pull/36 open against main, auto-merge off |
 | 9 | Plan and report archived with index lines; links resolve | PASS: 1/1 internal links under docs/v4 resolve (the new report's link to its plan); docs/v4 had 0 internal Markdown links before |
 
 ## 4. Authorized deviations
