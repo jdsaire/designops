@@ -6,7 +6,8 @@
    (carousel/evolution/contact now run from their dedicated page entries).
    S4: the work tag filter is removed from Main; its module is gone too.
    S10C: the capabilities carousel returns to Main as its mobile form, so
-   its module is imported again, from the page folder that keeps it. */
+   its module is imported again, from the page folder that keeps it.
+   PR #37: the first-visit cue on the phone menu button (navcue.js) runs after the nav chrome. */
 import { init as initI18n, swapLang, setPage } from './core/i18n.js';
 import { init as initTheme }   from './core/theme.js';
 import { init as initProgress }  from './core/progress.js';
@@ -16,6 +17,7 @@ import { init as initWork }      from './pages/home/work.js';
 import { init as initTicker }    from './pages/home/ticker.js';
 import { init as initCarousel }  from './pages/capabilities/carousel.js';
 import { init as initDecoration } from './core/decoration.js';
+import { init as initNavCue }    from './pages/home/navcue.js';
 
 setPage('i18n/main');
 
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initProgress();
   initNavChrome({ swapLang });
+  initNavCue();
   initHero();
   initWork();
   initTicker();

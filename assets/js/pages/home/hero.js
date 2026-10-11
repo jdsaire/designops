@@ -8,6 +8,8 @@
    .hero--fit switches the lines to nowrap; until then the hero's content waits unseen
    (hero.css). Positions are read from layout (offsets), so every mode gets the same layout.
 
+   PR #37: a line is any run of words, so the hero can carry one key per word (see measure).
+
    Line 2 rests on one word (IMPACT / IMPACTO): the typing loop, its caret and its pause button
    are retired (PR35-Q48), and line 2 now fills the width like line 1 (PR35-Q51).
 
@@ -47,9 +49,13 @@ function init() {
     const c1 = c.querySelector('.hero__l1'), c2 = c.querySelector('.hero__l2');
     [c1, c2].forEach(l => { l.style.fontSize = '100px'; l.style.whiteSpace = 'nowrap'; l.style.paddingInlineEnd = '0'; });
     host.appendChild(c); stage.appendChild(host);
+    /* PR #37: a line is any run of words (.hero__seg / .hero__hook / .hero__w); on phones it breaks before its
+       break word (.hero__seg--post, .hero__w--brk) and the wider half sets the size. Empty or undisplayed words
+       give no boxes and so take no width. */
     const w = l => {
-      const seg = s => l.querySelector('.hero__seg--' + s), hook = l.querySelector('.hero__hook');
-      return phone ? Math.max(extent([seg('pre'), hook]), extent([seg('post')])) : extent([seg('pre'), hook, seg('post')]);
+      const words = Array.from(l.querySelectorAll('.hero__seg, .hero__hook, .hero__w')).filter(e => !e.querySelector('.hero__seg, .hero__hook, .hero__w'));
+      const k = words.findIndex(e => e.classList.contains('hero__seg--post') || e.classList.contains('hero__w--brk'));
+      return phone && k > 0 ? Math.max(extent(words.slice(0, k)), extent(words.slice(k))) : extent(words);
     };
     const m = { w1: w(c1), w2: w(c2) };
     host.remove();

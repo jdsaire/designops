@@ -18,3 +18,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | site-wD · Brief 03 rebuilt as TUUA Transfer | `wd-b03-tuua-completion-report.md` |
 | PR #35 · Main closing build | `pr35-main-closing-completion-report.md` |
 | PR #36 · Public CVs | `pr36-public-cvs-completion-report.md` |
+| PR #37 · Navbar cue and Main hero | `pr37-navbar-hero-completion-report.md` |

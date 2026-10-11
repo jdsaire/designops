@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Decoration system</title>
+<!-- v1.3 (PR #37): FILL, CUE RING (X-5) and PULSE (X-6) added, sections 10–12. -->
 <!-- Live specimen of the decoration system (decoration-system.spec.md, PR35-Q30). It loads the site's own tokens,
      face and decoration layer, so it shows the shipped code, not a copy; open it from the repository root's server. -->
 <link rel="stylesheet" href="../../../assets/css/base/fonts.css">
@@ -87,6 +88,21 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
 .flow path { fill: none; stroke: rgba(var(--ink), .45); stroke-width: 1.4; }
 .flow text { fill: var(--color-brand-white); font: 600 12px var(--font-primary); }
 @media (max-width: 767px) { .cards, .journey__steps, .meters { grid-template-columns: 1fr; } .journey__step:not(:last-child)::after { top: auto; bottom: -1.4rem; left: 1.5rem; right: auto; width: 1px; height: 1.4rem; } .spec__head { grid-template-columns: 1fr; } }
+/* v1.3 (PR #37): FILL, CUE RING and PULSE, with the values of pages/home/hero.css and pages/home/navcue.css */
+.fillspec { font-weight: 900; text-transform: uppercase; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; }
+.fillspec em { font-style: italic; color: #FFFFFF; position: relative; z-index: 0; padding: 0 .08em; }
+.fillspec em::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: .12em; bottom: .04em; background: var(--color-brand-purple); transform-origin: left; }
+.fillspec.play em::before { animation: spec-fill .5s cubic-bezier(0,0,.2,1) 1 both; }
+@keyframes spec-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.cuebtn { position: relative; width: 44px; height: 44px; display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: .3rem; background: none; border: 0; }
+.cuebtn span { display: block; width: 1.5rem; height: 1.5px; background: var(--color-brand-white); }
+.cuebtn::after { content: ""; position: absolute; inset: 0; opacity: 0; border: 2px solid var(--color-brand-purple); pointer-events: none; }
+.cuebtn.play::after { animation: spec-ring 1.2s cubic-bezier(0,0,.2,1) 6 both; }
+@keyframes spec-ring { 0% { opacity: 1; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.25); } }
+.pulsename { font-weight: 700; }
+.pulsename::before { content: ""; display: inline-block; width: .45rem; height: .45rem; margin-right: .6em; vertical-align: .08em; background: var(--color-brand-purple); animation: spec-pulse 2.4s var(--ease-standard) infinite; }
+@keyframes spec-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .fillspec.play em::before, .cuebtn.play::after { animation: none; } .pulsename::before { animation: none; } }
 @media (prefers-reduced-motion: reduce) { </style>
 </head>
 <body>
@@ -157,6 +173,20 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
   <div class="stage flow"><svg viewBox="0 0 600 120" id="flowSvg" aria-hidden="true"><path d="M70 60 H530"/><rect x="20" y="40" width="100" height="40"/><rect x="190" y="40" width="100" height="40"/><rect x="360" y="40" width="100" height="40"/><rect x="480" y="40" width="100" height="40"/>
     <text x="70" y="64" text-anchor="middle">Register</text><text x="240" y="64" text-anchor="middle">Pay</text><text x="410" y="64" text-anchor="middle">eGate</text><text x="530" y="64" text-anchor="middle">Board</text><circle id="tok" r="5" cx="70" cy="60" fill="#fff" opacity="0"/></svg></div></section>
 
+<section class="spec" id="fill"><div class="spec__head"><div><p class="spec__n">10 · FILL · message · v1.3</p><h2 class="spec__title">The verb carries the claim</h2>
+  <p class="spec__meta">Main's hero verbs sit white and italic on a brand-purple block (5.30:1, both themes). The block draws from the left once, 500 ms, as the hero shows; the words are in place from the first frame. <span class="rm">Reduced motion → block drawn.</span></p></div>
+  <button class="btn" type="button" data-replay="fill">Replay</button></div>
+  <div class="stage"><p class="fillspec" id="fillSpec">CODE IS <em>CONQUERED.</em></p></div></section>
+
+<section class="spec" id="cue"><div class="spec__head"><div><p class="spec__n">11 · CUE RING · interaction · exception X-5</p><h2 class="spec__title">The menu holds theme and language</h2>
+  <p class="spec__meta">On the first Main view in a browser, at phone width, a purple ring expands from the 44 px menu button and fades, six times (7.2 s). The first tap or scroll stops it for good; it never plays again on that device. <span class="rm">Reduced motion → never starts.</span></p></div>
+  <button class="btn" type="button" data-replay="cue">Replay</button></div>
+  <div class="stage"><button class="cuebtn" id="cueSpec" type="button" aria-label="Demo menu button"><span></span><span></span><span></span></button></div></section>
+
+<section class="spec" id="pulse"><div class="spec__head"><div><p class="spec__n">12 · PULSE · aesthetic · exception X-6</p><h2 class="spec__title">A sign of life beside the name</h2>
+  <p class="spec__meta">A 0.45 rem purple square left of the name in Main's hero dims to 30 % and back every 2.4 s, endlessly. It is decorative and not part of the name's text. <span class="rm">Reduced motion → still, at full opacity.</span></p></div></div>
+  <div class="stage"><p class="pulsename">Juan Diego Saire</p></div></section>
+
 <section class="spec"><p class="spec__n">Tokens</p><h2 class="spec__title">One clock for every pattern</h2>
   <table class="tok"><thead><tr><th>Token</th><th>Value</th><th>Used by</th></tr></thead><tbody>
   <tr><td><code>--duration-ui</code></td><td>250 ms</td><td>state motion; the RUN edge's fade</td></tr>
@@ -194,6 +224,8 @@ import * as D from '../../../assets/js/core/decoration.js';
     emph: function () { var j = document.getElementById('journey'); D.run([].slice.call(j.children), j.querySelector('.journey__step--key'), true)(); },
     grow: function () { lines(); D.grow(g)(); },
     meter: function () { D.meter([].slice.call(document.querySelectorAll('#meters i')))(); },
+    fill: function () { var f = document.getElementById('fillSpec'); f.classList.remove('play'); void f.offsetWidth; f.classList.add('play'); },
+    cue: function () { var c = document.getElementById('cueSpec'); c.classList.remove('play'); void c.offsetWidth; if (!rm) c.classList.add('play'); },
     token: function () {
       if (rm) return; var t = document.getElementById('tok'), rs = [].slice.call(document.querySelectorAll('#flowSvg rect')), t0 = null, D1 = 2200;
       (function f(ts) { if (ts === undefined) return requestAnimationFrame(f); if (t0 === null) t0 = ts; var p = Math.min(1, (ts - t0) / D1), x = 70 + 460 * p;

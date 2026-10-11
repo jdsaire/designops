@@ -1,0 +1,12 @@
+/* home/navcue.css — the first-visit cue on the phone menu button (PR #37: N1, PR37-Q10, Q14).
+   Main only. A purple ring expands from the 44 px button and fades, six times back to back (7.2 s), on the first
+   Main view in a browser; navcue.js adds .nav__hamburger--cue and removes it on the first tap, the first scroll,
+   leaving the phone range, or the ring's own end. Non-text, interaction role; registered in the decoration spec
+   v1.3 (WCAG 2.2.2 exception, floor-rule-2 cover). Reduced motion never starts it. */
+.nav__hamburger::after {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+  border:2px solid var(--color-brand-purple);
+}
+.nav__hamburger--cue::after { animation:nav-cue-ring 1.2s cubic-bezier(0,0,.2,1) 6 both; }
+@keyframes nav-cue-ring { 0% { opacity:1; transform:scale(.7); } 100% { opacity:0; transform:scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .nav__hamburger--cue::after { animation:none; } }

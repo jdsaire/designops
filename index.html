@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="assets/css/shared/progress.css">
   <link rel="stylesheet" href="assets/css/shared/nav.css">
   <link rel="stylesheet" href="assets/css/pages/home/hero.css">
+  <link rel="stylesheet" href="assets/css/pages/home/navcue.css">
   <link rel="stylesheet" href="assets/css/pages/home/work.css">
   <link rel="stylesheet" href="assets/css/shared/section-extras.css">
   <link rel="stylesheet" href="assets/css/pages/home/teaser.css">
@@ -109,7 +110,7 @@
 
     <nav class="nav__overlay-links" aria-label="Mobile navigation">
       <section class="nav__overlay-section" aria-labelledby="ovSitemap">
-        <p class="nav__overlay-eyebrow" id="ovSitemap" data-i18n="nav_group_sitemap">SITEMAP</p>
+        <p class="nav__overlay-eyebrow" id="ovSitemap" data-i18n="nav_group_sitemap">PAGES</p>
         <a href="#top" data-nav-link="#top" class="nav__overlay-link">
         <span data-i18n="nav_home">Home</span>
       </a>
@@ -176,8 +177,9 @@
       <div class="hero__stage">
 
         <!-- Attribution, then the heading: one h1 for both languages, values from the i18n engine.
-             Each line is pre / italic hook / post; phones break before the post segment (PR35-Q48: line 2
-             rests on one word, no typing). -->
+             PR #37 (PR37-Q18, Q25): one key per word, aligned by meaning in both languages. Each line is a pair
+             (EL | — , BUEN | GOOD), a noun, a small word and the emphasised verb, which starts its own row on phones.
+             Line 1's pair shows on phones only; empty words render nothing. -->
         <div class="hero__attr">
           <p class="hero__attribution hero__attribution--name" data-i18n="hero_attribution_name">Juan Diego Saire</p>
           <span class="hero__sep" aria-hidden="true">·</span>
@@ -185,8 +187,8 @@
         </div>
 
         <h1 class="hero__h1">
-          <span class="hero__h1-line hero__l1"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l1_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l1_em">DESIGN</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l1_post">ATE CODE.</span></span>
-          <span class="hero__h1-line hero__l2"><span class="hero__seg hero__seg--pre" data-i18n="hero_h1_l2_pre"></span> <em class="hero__hook" data-i18n="hero_h1_l2_w3">IMPACT</em> <span class="hero__seg hero__seg--post" data-i18n="hero_h1_l2_post">PREVAILS.</span></span>
+          <span class="hero__h1-line hero__l1"><span class="hero__pair"><span class="hero__w hero__w--fn" data-i18n="hero_d1_w1"></span> <span class="hero__w hero__w--fn hero__w--adj" data-i18n="hero_d1_w2">GOOD</span></span> <span class="hero__w hero__w--noun" data-i18n="hero_d1_w3">CODE</span> <span class="hero__w hero__w--fn" data-i18n="hero_d1_w4">IS</span> <em class="hero__w hero__hook hero__w--brk" data-i18n="hero_d1_w5">CONQUERED.</em></span>
+          <span class="hero__h1-line hero__l2"><span class="hero__pair"><span class="hero__w hero__w--fn" data-i18n="hero_d2_w1"></span> <span class="hero__w hero__w--fn hero__w--adj" data-i18n="hero_d2_w2">GOOD</span></span> <span class="hero__w hero__w--noun" data-i18n="hero_d2_w3">DESIGN</span> <span class="hero__w hero__w--fn" data-i18n="hero_d2_w4"></span> <em class="hero__w hero__hook hero__w--brk" data-i18n="hero_d2_w5">PREVAILS.</em></span>
         </h1>
 
         <!-- Value proposition: About's purple highlight (.bridge__heading), size reduced only -->
