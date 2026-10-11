@@ -125,9 +125,12 @@
   outline:2px solid var(--color-brand-purple); outline-offset:2px;
 }
 
-/* Hamburger — hidden at desktop/tablet, real display at ≤767px */
-.nav__hamburger { display:none; flex-direction:column; gap:0.3rem; width:1.5rem; background:none; border:none; cursor:pointer; padding:0; }
-.nav__hamburger span { display:block; width:100%; height:1.5px; background:var(--color-brand-white); transition:transform 250ms var(--ease-standard), opacity 200ms; }
+/* Hamburger — hidden at desktop/tablet, real display at ≤767px.
+   PR #37 (N1, PR37-Q4): a 44×44 target around today's three lines. The negative right margin keeps the lines where
+   they sat against the gutter, so only the tappable area grows. */
+.nav__hamburger { display:none; position:relative; box-sizing:border-box; flex-direction:column; justify-content:center; align-items:center;
+  gap:0.3rem; width:44px; height:44px; min-width:44px; margin-right:calc((1.5rem - 44px) / 2); background:none; border:none; cursor:pointer; padding:0; }
+.nav__hamburger span { display:block; flex:0 0 auto; width:1.5rem; height:1.5px; background:var(--color-brand-white); transition:transform 250ms var(--ease-standard), opacity 200ms; }
 .nav__hamburger--open span:nth-child(1) { transform:translateY(0.45rem) rotate(45deg); }
 .nav__hamburger--open span:nth-child(2) { opacity:0; }
 .nav__hamburger--open span:nth-child(3) { transform:translateY(-0.45rem) rotate(-45deg); }
