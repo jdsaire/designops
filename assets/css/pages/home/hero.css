@@ -29,6 +29,12 @@
 .hero__attr { display:flex; flex-wrap:wrap; align-items:baseline; column-gap:0.65em; row-gap:0.3rem; margin-bottom:clamp(1.25rem,2.2vw,2rem); }
 .hero__attribution { margin:0; font-size:1rem; line-height:1.4; letter-spacing:0.01em; color:var(--color-brand-white); }
 .hero__attribution--name { font-weight:var(--fw-bold); }
+/* PR #37 (PR37-Q24): the pulsing dot left of the name returns (the pre-PR #35 square, without its Lima label). A
+   pseudo-element, so the i18n swap never removes it and it is not part of the name's text. Endless, 2.4 s: a WCAG
+   2.2.2 exception registered in the decoration spec v1.3; reduced motion ends it on its last frame (full opacity). */
+.hero__attribution--name::before { content:""; display:inline-block; width:0.45rem; height:0.45rem; margin-right:0.6em;
+  vertical-align:0.08em; background:var(--color-brand-purple); animation:hero-pulse 2.4s var(--ease-standard) infinite; }
+@keyframes hero-pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 .hero__attribution--title { font-weight:var(--fw-regular); }
 .hero__sep { color:var(--color-brand-purple); font-weight:var(--fw-bold); }
 
@@ -42,12 +48,41 @@
 .hero__l1 { font-size:var(--l1-size, clamp(2.25rem,8vw,7.5rem)); line-height:1.02; }
 .hero__l2 { font-size:var(--l2-size, clamp(2rem,7vw,6.5rem)); line-height:1.08; }
 .hero--fit .hero__h1-line { white-space:nowrap; }
-.hero__hook { font-style:italic; color:var(--color-brand-purple); padding-right:0.04em; }
+/* PR #37 (HX, PR37-Q16, Q23): the verb sits white and italic on a brand-purple block (#FFFFFF on #A100FF, 5.30:1, both
+   themes). The block draws once from the left as the hero shows (0.5 s, a one-shot inside the budget); the words are
+   in place from the first frame. */
+.hero__hook { font-style:italic; color:#FFFFFF; position:relative; z-index:0; padding:0 0.08em; margin:0 0.02em; }
+.hero__hook::before { content:""; position:absolute; z-index:-1; left:0; right:0; top:0.12em; bottom:0.04em;
+  background:var(--color-brand-purple); transform-origin:left; }
+.hero--fit .hero__hook::before { animation:hero-fill .5s cubic-bezier(0,0,.2,1) 1 both; }
+@keyframes hero-fill { from { transform:scaleX(0); } to { transform:scaleX(1); } }
 /* PR #37: one element per word (.hero__w). An empty word renders nothing; the verb (.hero__w--brk) starts its own
    row on phones; line 1's opening pair (EL BUEN / GOOD) is a phone-only phrase, so from 768 it is not displayed
    and the heading reads exactly what it shows. */
 .hero__w:empty { display:none; }
 @media (min-width:768px) { .hero__l1 .hero__pair { display:none; } }
+
+/* HX below 768 (PR37-Q21, Q25, Q28, Q29): small words at 0.45 em, bold; each line opens with a small pair, EL over
+   BUEN (italic), its foot on the noun's baseline. In EN the pair is GOOD alone, turned to read upwards, 0.25 em with
+   tight tracking, and the nouns grow to 1.2 em, so GOOD stays within the noun's capital height. */
+@media (max-width:767px) {
+  .hero__w--fn { font-size:0.45em; font-weight:var(--fw-bold); }
+  .hero__pair { display:inline-block; vertical-align:baseline; line-height:1; }
+  .hero__pair .hero__w--fn { display:block; font-size:0.36em; line-height:1.02; }
+  .hero__pair .hero__w--fn:empty { display:none; }
+  .hero__w--adj { font-style:italic; }
+  html[lang="en"] .hero__pair .hero__w--adj { display:inline-block; writing-mode:vertical-rl; transform:rotate(180deg);
+    font-size:0.25em; letter-spacing:0.02em; line-height:1; }
+  html[lang="en"] .hero__w--noun { font-size:1.2em; }
+}
+/* HX from 768 (W3): small words stand vertical, reading upwards, beside the next word; nouns carry a purple underline.
+   Line 2's EL and BUEN are two vertical words side by side (the pair dissolves into the line). */
+@media (min-width:768px) {
+  .hero__pair { display:contents; }
+  .hero__w--fn { display:inline-block; writing-mode:vertical-rl; transform:rotate(180deg); font-size:0.3em; font-weight:var(--fw-bold);
+    letter-spacing:0.06em; line-height:1; vertical-align:baseline; margin:0 0.08em; }
+  .hero__w--noun { text-decoration:underline; text-decoration-color:var(--color-brand-purple); text-decoration-thickness:0.06em; text-underline-offset:0.08em; }
+}
 
 
 /* Value proposition: About's highlight (shared/bridge.css .bridge__heading), size reduced only. */
