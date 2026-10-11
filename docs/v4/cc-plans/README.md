@@ -18,3 +18,4 @@ Approved deployment plans for v4 and later.
 | site-wD · Brief 03 rebuilt as TUUA Transfer | `Plan-WD-B03-TUUA.md` |
 | PR #35 · Main closing build | `Plan-PR35-MainClosing.md` |
 | PR #36 · Public CVs | `Plan-PR36-PublicCVs.md` |
+| PR #37 · Navbar cue and Main hero | `Plan-PR37-NavbarHero.md` |
