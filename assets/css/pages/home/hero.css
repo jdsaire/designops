@@ -43,6 +43,11 @@
 .hero__l2 { font-size:var(--l2-size, clamp(2rem,7vw,6.5rem)); line-height:1.08; }
 .hero--fit .hero__h1-line { white-space:nowrap; }
 .hero__hook { font-style:italic; color:var(--color-brand-purple); padding-right:0.04em; }
+/* PR #37: one element per word (.hero__w). An empty word renders nothing; the verb (.hero__w--brk) starts its own
+   row on phones; line 1's opening pair (EL BUEN / GOOD) is a phone-only phrase, so from 768 it is not displayed
+   and the heading reads exactly what it shows. */
+.hero__w:empty { display:none; }
+@media (min-width:768px) { .hero__l1 .hero__pair { display:none; } }
 
 
 /* Value proposition: About's highlight (shared/bridge.css .bridge__heading), size reduced only. */
@@ -93,9 +98,9 @@ button.cta { background:none; border:none; font-family:var(--font-primary); }
 @media (max-width:767px) {
   .hero { padding-top:var(--nav-height); }
   .hero__inner { grid-template-columns:1fr; gap:1.75rem; padding:3rem var(--gutter) 5rem; align-content:center; }
-  /* Phones (JD's line commands): each line breaks before its post segment;
+  /* Phones (JD's line commands): each line's verb starts its own row (PR #37: the break word);
      the attribution stacks, name over title. */
-  .hero__seg--post { display:block; }
+  .hero__w--brk { display:block; width:max-content; }
   .hero__attr { flex-direction:column; align-items:flex-start; row-gap:0.15rem; }
   .hero__attribution { font-size:0.9375rem; }
   .hero__sep { display:none; }
