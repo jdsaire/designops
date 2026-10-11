@@ -1,11 +1,12 @@
-# Decoration system — capability spec
+# Decoration system — capability spec (v1.3)
 
 Companion to `decoration-system.html`, the live specimen. It loads the site's own tokens, face and decoration layer,
 so it shows the shipped code, not a copy.
 
 **Code:** `assets/css/shared/decoration.css` and `assets/js/core/decoration.js` (an ES module, loaded on all seven
 pages), with the timing tokens in `assets/css/base/tokens.css` and each brief's own `:root`. MARQUEE, LIVE MAP
-and TOKEN live with their components: `shared/ticker.css` and Brief 03's inline canvases.
+and TOKEN live with their components: `shared/ticker.css` and Brief 03's inline canvases. PR #37's three live with
+theirs: FILL and PULSE in `pages/home/hero.css`, CUE RING in `pages/home/navcue.css` + `pages/home/navcue.js`.
 
 **Provenance (PR #35):**
 - v1.0 was the decoration diagnosis at G2 round 2. Its floor (PR35-Q29), roles and verdicts were approved at G2(a);
@@ -18,6 +19,16 @@ and TOKEN live with their components: `shared/ticker.css` and Brief 03's inline 
 - v1.2 (G5 iteration, PR35-Q48…Q51): the hero's typing loop, caret and pause button are retired, so FIELD holds
   still and the hero shows at once (ENTRANCE and X-4 retired); COUNT and X-3 are retired, so About's figures are
   static. Floor rule 3 now has no exceptions; X-1 and X-2 are the only registered exceptions, both under WCAG 2.2.2.
+
+**v1.3 (PR #37, 11 Oct 2026):** three patterns on Main, all non-text, each with its role.
+- **CUE RING** (X-5, PR37-Q2, Q10, Q14): an interaction cue on the phone menu button, first Main view per browser only.
+  It is the one one-shot allowed past §4's 1.5 s (7.2 s), and it repeats in place, so it relaxes WCAG 2.2.2 and is
+  covered for floor rule 2's "once" test (PR37-Q6).
+- **PULSE** (X-6, PR37-Q24): the square beside the name in Main's hero returns from before PR #35 (D06 reversed;
+  the Lima label stays retired). An endless 2.4 s opacity pulse: WCAG 2.2.2, floor-rule-2 cover.
+- **FILL** (PR37-Q16): the purple block behind each hero verb draws once as the hero shows, 0.5 s; the words are in
+  place from the first frame. Inside the budget; no exception.
+- X-3 and X-4 stay struck (§7); the new exceptions take the next ids. Floor rule 3 still has no exceptions.
 
 ## 1. Scope: what counts as a decoration
 
@@ -36,7 +47,7 @@ and TOKEN live with their components: `shared/ticker.css` and Brief 03's inline 
 | 3. Nothing hides or delays text. Patterns animate a bar, a border, a fill or a line, never the words. No exceptions (PR35-Q49). | Text sampled at 40, 160 and 320 ms after each scroll step: count the text elements in view whose effective opacity is below 0.99. |
 | 4. Contrast and focus are never lowered. | No pattern uses `outline`, changes a text colour, or lowers the opacity of text. Count elements carrying an outline other than `:focus-visible`. |
 
-Only WCAG 2.2.2 may be relaxed, each case named in §7. Floor rule 3 has no exceptions: X-3 and X-4 were revoked by PR35-Q49.
+Only WCAG 2.2.2 may be relaxed, each case named in §7; with it, X-5 and X-6 repeat in place, so rule 2's "once" test is waived for them alone (PR37-Q6) while "nothing flashes" holds (both stay under three changes a second). Floor rule 3 has no exceptions: X-3 and X-4 were revoked by PR35-Q49.
 
 ## 3. Roles
 
@@ -52,12 +63,16 @@ No role means the decoration is retired.
 
 - **One ambient decoration in view at a time.**
   - A component counts once: the ticker's two lanes are one MARQUEE.
-  - Measured at 320, 390, 768, 1024 and 1440: Main shows MARQUEE only; Brief 03 shows the map; reduced motion shows none.
+  - Measured at 320, 390, 768, 1024 and 1440: Main shows PULSE in its first screen and MARQUEE four sections lower, never
+    both in view; Brief 03 shows the map; reduced motion shows none.
 - **Ambient loops are slow and small:**
   - MARQUEE runs at 60 px/s;
   - LIVE MAP bobs 2–4 px.
 - **A loop asks for frames only while on screen.** A one-shot that uses a loop stops it when it is done.
 - **One-shots play once per page view**, at the trigger (§5), and finish within 1.5 s of it. Measured maximum: 1.45 s, Brief 03's act-5 relay, fade included.
+  - The one exception is CUE RING (X-5): an interaction one-shot with its own ceiling, 7.2 s, played once per browser,
+    not per view, and stopped by the first tap or scroll (PR37-Q2, Q14).
+  - FILL plays as the hero is shown (`.hero--fit`), the same beat as the eyebrow bars armed before first paint.
 - **Nothing moves behind body text while it is being read.**
 - **Compositor first.**
   - Patterns animate `transform` and `opacity`.
@@ -95,6 +110,9 @@ No role means the decoration is retired.
 | **LIVE MAP** (X-2) | Interaction: the map is live and explorable | nodes bob 2–4 px on desktop while the map is on screen; hover or tap focuses ties; the centre pulse is retired | still | B03 network (phones show the list and sheet) |
 | **TOKEN** | Message: the passenger's path | on desktop, a token walks the flowchart once when the chart is first seen (about 12–15 s), lighting each step it passes, then fades; the loop then stops; hover redraws on demand | final frame | B03 flowchart |
 | **COUNT** (retired, PR35-Q49) | — | About's track-record figures are static, like the briefs' | the figure | About |
+| **FILL** (PR #37) | Message: the verb that carries the claim | the brand-purple block behind each hero verb draws from the left, `scaleX` 0 → 1, 500 ms, decelerate, as the hero shows; white italic words on it from the first frame (5.30:1) | block drawn | Main hero, 2 verbs |
+| **CUE RING** (X-5, PR #37) | Interaction: the menu holds theme and language | a 2 px brand-purple ring expands from the 44 px menu button and fades, 1.2 s, six times (7.2 s); first Main view per browser, phones only; stops for good on the first tap, scroll, leaving the phone range or its end | the button, still | Main, ≤ 767 px |
+| **PULSE** (X-6, PR #37) | Aesthetic: the opening, a sign of life by the name | a 0.45 rem brand-purple square left of the name, opacity 1 → 0.3 → 1 every 2.4 s, endless | square at full opacity | Main hero, every width |
 
 **Implementation rules:**
 - Pre-states come from script only, and only when motion is allowed.
@@ -112,6 +130,8 @@ No role means the decoration is retired.
 | X-2 | B03 network bob | WCAG 2.2.2 | It moves 2–4 px, on desktop only, and only while on screen. Reduced motion is still. Every role is in the 17-item list beside the map: visible on phones, read by screen readers on desktop. Ties are reachable by hover, tap and the list. |
 | ~~X-3~~ | About track record | revoked by PR35-Q49: the figures are static | — |
 | ~~X-4~~ | Main hero entrance | revoked by PR35-Q49: the hero shows at once | — |
+| X-5 | Main · CUE RING on the phone menu button | WCAG 2.2.2: 7.2 s of repetition with no pause control; floor rule 2's "once" (PR37-Q6, Q10, Q14) | Non-text; the button's name ("Open menu") and its menu are unchanged. Main only, phones only, the first Main view in a browser only (flag `jds-navcue`, set when it starts); the first tap or scroll stops it for good. Never under reduced motion. |
+| X-6 | Main · PULSE beside the name | WCAG 2.2.2: an endless loop with no pause control; floor rule 2's "once" (PR37-Q24) | Decorative and `aria-hidden` (a pseudo-element, not part of the name's text); a 0.45 rem square that dims to 30 %, never flashing. Reduced motion shows it still, at full opacity. |
 
 With the typing loop retired (PR35-Q48), FIELD holds still (PR35-Q50) and needs no exception.
 
@@ -181,6 +201,9 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new.
 | D34 | Page fade (view transitions, 7 pages) | **Keep** (state) | Interaction | §8 |
 | D35 | About/Contact · smooth scroll and nav slide under reduced motion | **Fix** | — | Δ14 |
 | D36 | Dead decoration CSS (B04 meter rules, B03 S6) | **Remove** | — | Δ15 |
+| D37 | Main · hero verb blocks (PR #37) | **New** FILL | Message | one-shot, 500 ms; words never move |
+| D38 | Main · phone menu button cue (PR #37) | **New** CUE RING | Interaction | X-5; 7.2 s once per browser |
+| D39 | Main · square beside the name (PR #37) | **Returned** PULSE (D06 reversed) | Aesthetic | X-6; the Lima label stays retired |
 
 ## 10. Measured at G4b
 
@@ -206,6 +229,18 @@ Branch `deploy/v22-main-closing`, Chrome channel unless stated; WebKit where nam
 - **Light theme:** the briefs' hero bar renders purple (it rendered rgb(94, 255, 0) under S5).
 - **End state after a full scroll:** 0 pre-states, 0 lit edges, 0 masks; Brief 02's lines dashed 5/4; figures final.
   WebKit agrees.
+
+### 10.1 Measured at PR #37 G4 (v1.3)
+
+Branch `deploy/v24-pr37-navbar-hero`, WebKit 27.2 and Chrome 155.
+- **Text hidden or fading:** Main 0 of 338 samples at 390 and 0 of 377 at 1440; the hero's text 0 at 40, 160 and
+  320 ms after it shows, both engines. Every other page as before (Brief 02's disabled arrow, 6 at 390).
+- **Final frame = reduced motion:** 74 of 74 decorated components identical pixel for pixel, at 1440 and at 390.
+- **Layout shift** from decorations: 0.0000 on every page, at 1440 and 390.
+- **Outlines** drawn by anything but focus: 0.
+- **FILL:** 500 ms; the longest one-shot on Main stays 502 ms. **CUE RING:** 7,200 ms on a first visit; still on
+  a reload, after About, under reduced motion and at 768 and wider; stopped by the first tap or scroll.
+  **PULSE:** 2.4 s period, opacity 1 / 0.46 / 0.30 / 0.84 / 1 at 0 / 0.6 / 1.2 / 1.8 / 2.4 s; still under reduced motion.
 
 ## 11. Where it lives, and how to add a pattern
 
