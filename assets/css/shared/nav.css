@@ -351,3 +351,35 @@
      briefs already stopped them through their own rules; About and Contact did not. */
   .nav, .nav__overlay, .nav__hamburger span, .nav__work-caret { transition: none; }
 }
+
+/* ============================================================
+   OPEN MENU (PR #37: M4 · E3 · F2 — PR37-Q11, Q15, Q26, Q27). Phones only: the overlay never paints at 768+.
+   Theme and language come first, then the pages. Each group carries a 16.5 px label; a 4 px purple line opens
+   PAGES and a 2 px grey line separates its clusters (HOME | WORK + its briefs | ABOUT | CONTACT). Every row is
+   at least 44 px. The close is the menu button itself, open: a 44 px purple square with a white X.
+   ============================================================ */
+.nav__hamburger--open { margin-right:0; background:var(--color-brand-purple); }
+.nav__hamburger--open span { height:2px; background:#FFFFFF; }
+.nav__hamburger--open span:nth-child(1) { transform:translateY(calc(0.3rem + 2px)) rotate(45deg); }
+.nav__hamburger--open span:nth-child(3) { transform:translateY(calc(-0.3rem - 2px)) rotate(-45deg); }
+
+.nav__overlay-links { padding:8px 0 24px; row-gap:0; }
+.nav__overlay-links .nav__overlay-section + .nav__overlay-section { border-top:0; border-left:0; margin-top:0; }
+/* Theme and language first (a row of two), the pages after them */
+.nav__overlay-links > .nav__overlay-section + .nav__overlay-section { order:1; padding-bottom:4px; }
+.nav__overlay-links > .nav__overlay-section + .nav__overlay-section + .nav__overlay-section { box-shadow:inset 1px 0 0 var(--color-border-soft); }
+.nav__overlay-links > .nav__overlay-section:first-child { order:2; grid-column:1 / -1; margin-top:20px; border-top:4px solid var(--color-brand-purple); }
+/* Group labels that lead their clusters */
+.nav__overlay-links .nav__overlay-eyebrow { font-size:1.1rem; font-weight:var(--fw-black); letter-spacing:0.08em;
+  color:var(--color-brand-white); padding-top:1.25rem; padding-bottom:0.5rem; }
+/* Pages: roomier rows, separated by cluster */
+.nav__overlay-links .nav__overlay-link { font-size:1.25rem; min-height:44px; box-sizing:border-box; padding-top:1rem; padding-bottom:1rem; border-top:0; border-bottom:0; }
+.nav__overlay-links .nav__overlay-section:first-child > .nav__overlay-link:not(:last-child),
+.nav__overlay-links .nav__overlay-section:first-child > .nav__overlay-group { border-bottom:2px solid var(--color-border-soft); }
+.nav__overlay-section:first-child > .nav__overlay-group { align-self:stretch; width:100%; }
+.nav__overlay-group:first-child .nav__overlay-link:first-child,
+.nav__overlay-links > .nav__overlay-link:first-child { border-top:0; }
+/* Work's briefs ride a purple rail inside Work's cluster */
+.nav__overlay-links .nav__overlay-submenu { align-self:stretch; margin:4px 0 12px var(--gutter); border-left:2px solid var(--color-brand-purple); }
+.nav__overlay-links .nav__overlay-subitem { min-height:44px; display:flex; align-items:center; box-sizing:border-box;
+  border-bottom:0; padding:0.62rem 0.5rem 0.62rem 1rem; }
