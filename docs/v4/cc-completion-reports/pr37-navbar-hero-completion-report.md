@@ -1,6 +1,6 @@
 # Completion report — PR #37 · Navbar cue and Main hero
 
-**Branch:** `deploy/v24-pr37-navbar-hero`, from `6c3ab85` · **Pull request:** #37, manual merge only
+**Branch:** `deploy/v24-pr37-navbar-hero`, from `6c3ab85` · **Pull request:** [#37](https://github.com/jdsaire/designops/pull/37), manual merge only
 **Plan:** [Plan-PR37-NavbarHero.md](../cc-plans/Plan-PR37-NavbarHero.md)
 
 ## 1. Commits
@@ -14,7 +14,8 @@ In order, on `deploy/v24-pr37-navbar-hero`:
 - `718c191` — "feat(main): the hero runs on one key per word, with the new statement"
 - `2df93f5` — "feat(main): the hero's chosen design, with the pulsing dot back by the name"
 - `4bedd0a` — "docs(organisms): decoration spec v1.3 registers the menu cue, the fill and the pulse"
-- (this commit) — "docs: archive the PR #37 plan and completion report"
+- `929a0bc` — "docs: archive the PR #37 plan and completion report"
+- (this commit) — "docs: record the PR #37 link in its completion report"
 
 One commit per item. The plan's single "slot keys" item is split into keys (`718c191`) and design (`2df93f5`), so the
 matrix stays clean after each.
@@ -51,7 +52,7 @@ The invariants held:
 | 7 | Decoration spec v1.3 committed | PASS: `4bedd0a` (.md + live specimen) |
 | 8 | Matrix 84/84; reload at baseline; no new contrast failure; repeat-visit shift 0 | PASS: matrix 84/84 with zeros before every commit; reload 264/264 at 0 px after one re-run; repeat-visit shift 0 on 8/8 pages |
 | 9 | Zero AI attribution; sole author jdsaire | PASS: 7/7 commits authored and committed by jdsaire; 0 trailers |
-| 10 | Pushed after G5; PR open, unmerged | pending G5 |
+| 10 | Pushed after G5; PR open, unmerged | PASS: pushed after `APPROVED PR37 G5`; https://github.com/jdsaire/designops/pull/37 open against main, auto-merge off |
 | 11 | Plan and report archived with index lines; links resolve | PASS: docs/v4 internal links 1 before, 2 after, all resolving |
 | 12 | Deviations listed; the relay ends the report | §4, §8 |
 
@@ -101,7 +102,7 @@ dictionaries, replaced by `hero_d1_w1…w5` and `hero_d2_w1…w5`.
 ## 8. Relay
 
 1. PR #37 built: phone menu button 44 px with a first-visit cue on Main, the open menu redesigned, Main's hero on ten per-word keys with JD's statement.
-2. Branch `deploy/v24-pr37-navbar-hero`, 8 commits from `6c3ab85`, sole author jdsaire, manual merge only.
+2. Branch `deploy/v24-pr37-navbar-hero`, 9 commits from `6c3ab85`, sole author jdsaire; PR https://github.com/jdsaire/designops/pull/37 open, manual merge only.
 3. Regression on the tip: matrix 84/84, parity 0, reload 264/264, floor clean, no real new contrast failure.
 4. Decoration spec v1.3 registers FILL, CUE RING (X-5) and PULSE (X-6).
 5. Owed to Cowork: KEYS v1_2 and POSITIONING v1_7 (§1.1, §12).
