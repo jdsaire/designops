@@ -335,11 +335,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
 .gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
-.gantt__action{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-medium);
-  background:var(--color-brand-black); color:var(--color-brand-white);
-  border:1px solid var(--color-brand-white); padding:.6rem 1.25rem; cursor:pointer; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
-.gantt__action:hover{background:var(--color-brand-white); color:var(--color-brand-black);}
 .gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
 .gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
 .gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
@@ -737,17 +732,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="gantt" id="gantt">
       <div class="gantt__tools">
-        <button class="gantt__action" id="ganttToggleAll" type="button" aria-expanded="false" data-i18n="gantt_expand">Expand all</button>
         <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
           <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
           <button class="gantt__chip" type="button" data-filter="sp" aria-pressed="true" data-i18n="gantt_f_sp">Story points</button>
           <button class="gantt__chip" type="button" data-filter="hours" aria-pressed="false" data-i18n="gantt_f_hours">Hours</button>
           <button class="gantt__chip" type="button" data-filter="milestones" aria-pressed="true" data-i18n="gantt_f_ms">Milestones</button>
-          <button class="gantt__chip" type="button" data-filter="deps" aria-pressed="true" data-i18n="gantt_f_deps">Dependencies</button>
         </div>
       </div>
 
-      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: Foundation leads to The one job. The one job leads to Architecture. Architecture leads to Security layer. Security layer leads to Proof and delivery. The singleton session task in Architecture leads to the execution-lock fix in Proof and delivery.</div>
+      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Foundations leads to 02 The interface. 02 The interface leads to 03 Architecture. 03 Architecture leads to 04 Security layer. 04 Security layer leads to 05 Proof &amp; delivery. The singleton session task in 03 Architecture leads to the execution-lock fix in 05 Proof &amp; delivery.</div>
 
       <div class="gantt__chart" id="ganttChart">
         <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
@@ -1206,27 +1199,27 @@ tabs.forEach(tab=>{
 
   var DATA = {
     epics: [
-      { id:'foundation', name:'Foundation', tasks:[
+      { id:'foundation', name:'01 Foundations', tasks:[
         { id:'scaffold',      name:'Vite + TypeScript scaffold', sp:3, hours:4 },
         { id:'dependencies',  name:'Dependency justification',   sp:2, hours:2 },
         { id:'relative-paths',name:'Relative-path constraint',   sp:2, hours:2 }
       ]},
-      { id:'one-job', name:'The one job', tasks:[
+      { id:'one-job', name:'02 The interface', tasks:[
         { id:'entry-screen',  name:'Entry screen',   sp:3, hours:4 },
         { id:'secure-keypad', name:'Secure keypad',  sp:5, hours:6 },
         { id:'verdict-screen',name:'Verdict screen', sp:5, hours:6 }
       ]},
-      { id:'architecture', name:'Architecture', tasks:[
+      { id:'architecture', name:'03 Architecture', tasks:[
         { id:'singleton-session', name:'Singleton session service', sp:5, hours:6 },
         { id:'observer-state',    name:'Observer flow state',       sp:5, hours:5 },
         { id:'mock-rest',         name:'Mock REST surface',         sp:3, hours:4 }
       ]},
-      { id:'security', name:'Security layer', tasks:[
+      { id:'security', name:'04 Security layer', tasks:[
         { id:'staged-panel',    name:'Staged security panel', sp:5, hours:5 },
         { id:'client-controls', name:'Client-side controls',  sp:5, hours:6 },
         { id:'provenance',      name:'Provenance badging',    sp:2, hours:2 }
       ]},
-      { id:'proof', name:'Proof & delivery', tasks:[
+      { id:'proof', name:'05 Proof & delivery', tasks:[
         { id:'six-scenarios',  name:'Six-scenario protocol',    sp:8, hours:8 },
         { id:'lock-defect',    name:'Execution-lock defect fix', sp:3, hours:3 },
         { id:'ci-gates',       name:'CI gates & deploy',        sp:3, hours:3 }
@@ -1355,22 +1348,15 @@ tabs.forEach(tab=>{
 
   /* ---------- Zoom: expand / collapse ---------- */
   var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
-  var toggleAll = document.getElementById('ganttToggleAll');
   function setExpanded(btn, expanded){
     btn.setAttribute('aria-expanded', String(expanded));
     var list = document.getElementById(btn.getAttribute('aria-controls'));
     if(list) list.hidden = !expanded;
   }
-  function syncToggleAll(){
-    var allOpen = toggles.every(function(b){ return b.getAttribute('aria-expanded') === 'true'; });
-    toggleAll.setAttribute('aria-expanded', String(allOpen));
-    toggleAll.textContent = allOpen ? (toggleAll.dataset.collapse || 'Collapse all phases')
-                                    : (toggleAll.dataset.expand || 'Expand all phases');
-  }
   toggles.forEach(function(btn, i){
     btn.addEventListener('click', function(){
       setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
-      syncToggleAll(); drawConnectors();
+      drawConnectors();
     });
     btn.addEventListener('keydown', function(e){
       var nx = null;
@@ -1381,13 +1367,9 @@ tabs.forEach(tab=>{
       if(nx){ e.preventDefault(); nx.focus(); }
     });
   });
-  toggleAll.addEventListener('click', function(){
-    var open = toggleAll.getAttribute('aria-expanded') !== 'true';
-    toggles.forEach(function(b){ setExpanded(b, open); });
-    syncToggleAll(); drawConnectors();
-  });
 
-  /* ---------- Filters: progressive disclosure ---------- */
+  /* ---------- Filters: progressive disclosure ----------
+     PR38-Q23: dependency connectors are always drawn (no chip); epics open one at a time. */
   var FILTERS = { sp:true, hours:false, milestones:true, deps:true };
   Array.prototype.slice.call(root.querySelectorAll('.gantt__chip')).forEach(function(chip){
     chip.addEventListener('click', function(){
@@ -1437,16 +1419,6 @@ tabs.forEach(tab=>{
     overlay.innerHTML = svg;
   }
   window.addEventListener('resize', drawConnectors);
-
-  /* Keep the toggle-all label translatable: cache both strings up front. */
-  toggleAll.dataset.expand = toggleAll.textContent.trim();
-  toggleAll.dataset.collapse = 'Collapse all phases';
-  document.addEventListener('i18n:changed', function(e){
-    var d = e.detail && e.detail.dict; if(!d) return;
-    if(d.gantt_expand)   toggleAll.dataset.expand   = d.gantt_expand;
-    if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
-    syncToggleAll();
-  });
 
   applyFilters();
 })();
