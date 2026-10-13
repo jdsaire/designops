@@ -1,12 +1,12 @@
 {
   "brief_read": "6 min de lectura",
   "hero_title": "Mi propia web.",
-  "hero_lede": "Conozca los detalles de mi mayor activo personal en la era IA.",
+  "hero_lede": "Cómo diseñé y construí este sitio con IA, de inicio a fin.",
   "hero_role1": "<b>Roles</b> — Product owner · UX designer · Front-end developer",
   "hero_role2": "<b>Duración</b> — Cinco meses · abr – sep 2026",
   "hero_role3": "<b>Alcance</b> — Estrategia UX → design system → desarrollo → operación",
   "hero_live_note": "Usted está leyendo el sitio en vivo ahora mismo.",
-  "hero_short": "La IA ya escribe CVs perfectos: ser competente nunca fue tan falsificable. Los profesionales senior debemos evidenciar nuestro trabajo; por eso lidero el cambio en vez de esperarlo. Esta web es el producto digital más avanzado que he desarrollado, así como la pieza más importante de mi marca personal, diseñada y construida con IA en cinco meses. Conozca a continuación: por qué tenía que existir, cómo evolucionó desde su versión prehistórica y qué cifras dejó en el proceso.",
+  "hero_short": "La IA ya redacta CVs y cartas de presentación: parecer competente nunca fue tan fácil. Un profesional senior debe mostrar su trabajo; por eso actúo ante ese cambio en vez de esperarlo. Esta web es el centro de mi marca personal: un desarrollo front-end que diseñé y construí con IA en cinco meses. Conozca por qué tenía que existir, cómo creció desde una sola página, cómo se construyó y las cifras que dejó.",
   "act0_eyebrow": "Acto 00 · El Contexto",
   "act0_verdict": "Carreras en peligro.",
   "act0_lede": "Marcas personales urgentes.",
@@ -46,7 +46,7 @@
   "act2_s2_x": "Mi primera versión fue en una sola página, ganando <strong>experiencia práctica en desarrollo con IA</strong> con cada implementación.",
   "act2_s3_n": "Nivel 3",
   "act2_s3_t": "Web multipágina (hoy)",
-  "act2_s3_x": "Esta versión se logró con la Especialización Microsoft Front-end. <strong>Mi build más avanzado a la fecha</strong> con copy optimizado a dos idiomas.",
+  "act2_s3_x": "Esta versión se logró con la Especialización Microsoft Front-end. <strong>Siete páginas, cuatro briefs</strong>, copy en dos idiomas.",
   "act2_foot": "Construir un sitio con IA en 2027 exige más que un prompt: exige una orquestación completa, de la investigación a la revisión. Eso distingue este build de los vibe-coders audaces y de los desarrolladores que aún escriben cada línea a mano.",
   "act3_verdict": "El despliegue.",
   "act3_lede": "Commits y pull requests.",
@@ -156,11 +156,11 @@
   "act6_lede": "Habilidades ganadas.",
   "act6_p1_cat": "Gobernanza",
   "act6_p1_t": "Puntos de control obligados",
-  "act6_p1_x": "<strong>El despliegue se detiene en cada hito hasta aprobarlo.</strong> La revisión ocurre en el servidor local antes de llegar a la nube.",
+  "act6_p1_x": "<strong>El despliegue se detiene en cada etapa hasta aprobarlo.</strong> La revisión ocurre en el servidor local antes de publicarlo.",
   "act6_p2_cat": "Seguimiento",
   "act6_p2_t": "Decisiones registradas",
   "act6_p2_x": "Toda decisión es <strong>una regla numerada en un registro maestro</strong>, guardando en automático sin necesidad de un controller.",
   "act6_p3_cat": "Audiencia",
   "act6_p3_t": "Comunicación efectiva",
-  "act6_p3_x": "Cada afirmación se rastreó hasta su fuente y <strong>se optimizó para profesionales ajenos al mundo de Sistemas.</strong>"
+  "act6_p3_x": "Cada afirmación se rastrea a su fuente y <strong>se escribe para profesionales fuera del área de sistemas.</strong>"
 }
