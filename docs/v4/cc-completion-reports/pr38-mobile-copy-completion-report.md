@@ -1,6 +1,6 @@
 # Completion report — PR #38 · Mobile copy
 
-**Branch:** `deploy/v25-pr38-mobile-copy`, from `41ce97b` · **Pull request:** #38, manual merge only
+**Branch:** `deploy/v25-pr38-mobile-copy`, from `41ce97b` · **Pull request:** [#38](https://github.com/jdsaire/designops/pull/38), manual merge only
 **Plan:** [Plan-PR38-MobileCopy.md](../cc-plans/Plan-PR38-MobileCopy.md)
 
 ## 1. Commits
@@ -25,7 +25,8 @@ In order, on `deploy/v25-pr38-mobile-copy`:
 - `c73c3c5` — "fix(brief02): a leaner schedule, numbered epics, dependencies always on"
 - `0fe0d96` — "refactor(briefs): one shared read-time label, only the minutes vary"
 - `cdc5436` — "fix(brief04): two Spanish typos in the architecture cards"
-- (this commit) — "docs: archive the PR #38 plan and completion report"
+- `39471b6` — "docs: archive the PR #38 plan and completion report"
+- (this commit) — "docs: record the PR #38 link in its completion report"
 
 - **One commit per released gate.**
   - Contact had no Round 1 edits, so no commit.
@@ -93,10 +94,11 @@ In order, on `deploy/v25-pr38-mobile-copy`:
 
 - **KEYS and SPEC v1_3:** Round 1 and Round 2 values, the new and retired keys, and the head meta. POSITIONING §4 is closed by PR38-Q4.
 - **The copy-edition and Spanish-copy specs:** updated for review-written Spanish.
-- **PR #39 precedent tasks (PR38-Q25):**
+- **PR #39 precedent tasks (PR38-Q25), four in all:**
   - an EN-only centred text at the smallest breakpoint (Brief 02, Act 04, card 01) and a site sweep;
   - Brief 03's motion extended to the other pages;
-  - a latent case where the mobile menu reverts to the plain ×.
+  - a latent case where the mobile menu reverts to the plain ×;
+  - Brief 02 Act 02's previous/next controls removed in favour of native horizontal scroll, which also drops two untranslated English labels.
 - **Menu close label:** while the menu is open, the visible close still announces "Open menu, expanded". A switching label needs `navchrome.js` (backlog).
 
 ## 8. Relay
