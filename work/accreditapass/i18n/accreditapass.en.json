@@ -128,7 +128,7 @@
   "r1_x": "I conceived, designed and shipped this interface in a stack I had never used, directing the code and debugging it until it held.",
   "r2_n": "The limit",
   "r2_t": "A proof-of-concept architecture",
-  "r2_x": "The data store, sign-in and server run as a proof of concept: enough to prove the product logic, not built for production.",
+  "r2_x": "The data store, sign-in and server run as a proof of concept: enough to prove core logic, not for commercial deployment.",
   "r3_n": "Next step",
   "r3_t": "Impact on a digital team",
   "r3_x": "Next, I bring this end-to-end way of building to the digital team of an established company, as an AI Product & Experience Engineer.",
