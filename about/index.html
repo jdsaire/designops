@@ -39,7 +39,7 @@
     <nav class="nav__inner" role="navigation" aria-label="Primary">
 
       <button class="nav__hamburger" id="hamburger" type="button"
-              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+              aria-label="Open menu" data-i18n-aria="nav_menu_open" aria-expanded="false" aria-controls="navOverlay">
         <span></span><span></span><span></span>
       </button>
 
@@ -59,7 +59,7 @@
             <a class="nav__work-item" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
             <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
             <a class="nav__work-item" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__work-item" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
+            <a class="nav__work-item" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
           </div>
         </div>
         <a href="../about/" data-nav-page="about/" class="nav__link" aria-current="page" data-i18n="nav_evolution">About</a>
@@ -94,7 +94,7 @@
       <a href="../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
         JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
       </a>
-      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu" data-i18n-aria="nav_menu_close">&#215;</button>
     </div>
 
     <nav class="nav__overlay-links" aria-label="Mobile navigation">
@@ -112,7 +112,7 @@
             <a class="nav__overlay-subitem" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
             <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
             <a class="nav__overlay-subitem" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
           </div>
         </div>
         <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
@@ -282,7 +282,7 @@
               <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
             <div class="timeline__panel" id="jr-panel-1">
-              <p class="timeline__body" data-i18n="about_jr_esan_deg_body">Systems-and-process grounding from leading business school in Peru.</p>
+              <p class="timeline__body" data-i18n="about_jr_esan_deg_body">Systems-and-process grounding at Universidad ESAN in Lima, Peru.</p>
             </div>
           </div>
         </li>
@@ -558,7 +558,7 @@
             </div>
             <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-13">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gpm_title">Google Project Management Professional Certificate (v2)</h3>
+                <h3 class="timeline__title" data-i18n="about_jr_gpm_title">Google Project Management Professional Cert. (v2)</h3>
                 <p class="jr-sub" data-i18n="about_jr_gpm_meta">Coursera</p>
               </span>
               <span class="timeline__chevron" aria-hidden="true"></span>
@@ -566,7 +566,7 @@
             <div class="timeline__panel" id="jr-panel-13">
               <p class="jr-links">
                 <a class="jr-link" href="https://www.credly.com/badges/bfb4e52c-6e32-4ae4-94fa-f2bd42d17fbc/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gpm_title" aria-label="Google Project Management Professional Certificate (v2)">View the credential</a>
+                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gpm_title" aria-label="Google Project Management Professional Cert. (v2)">View the credential</a>
               </p>
             </div>
           </div>
@@ -610,7 +610,7 @@
             </div>
             <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-15">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gai_title">Google AI Professional Certificate</h3>
+                <h3 class="timeline__title" data-i18n="about_jr_gai_title">Google AI Professional Cert.</h3>
                 <p class="jr-sub" data-i18n="about_jr_gai_meta">Coursera</p>
               </span>
               <span class="timeline__chevron" aria-hidden="true"></span>
@@ -618,7 +618,7 @@
             <div class="timeline__panel" id="jr-panel-15">
               <p class="jr-links">
                 <a class="jr-link" href="https://www.credly.com/badges/d6a88f66-ff89-43fc-8ee7-62067874ac01/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gai_title" aria-label="Google AI Professional Certificate">View the credential</a>
+                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gai_title" aria-label="Google AI Professional Cert.">View the credential</a>
               </p>
             </div>
           </div>
@@ -636,7 +636,7 @@
             </div>
             <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-16">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gux_title">Google UX Design Professional Certificate (v.3)</h3>
+                <h3 class="timeline__title" data-i18n="about_jr_gux_title">Google UX Design Professional Cert. (v.3)</h3>
                 <p class="jr-sub" data-i18n="about_jr_gux_meta">Coursera</p>
               </span>
               <span class="timeline__chevron" aria-hidden="true"></span>
@@ -644,7 +644,7 @@
             <div class="timeline__panel" id="jr-panel-16">
               <p class="jr-links">
                 <a class="jr-link" href="https://www.credly.com/badges/76456ab7-c694-48c0-ab03-0be6036b085a/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gux_title" aria-label="Google UX Design Professional Certificate (v.3)">View the credential</a>
+                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gux_title" aria-label="Google UX Design Professional Cert. (v.3)">View the credential</a>
               </p>
             </div>
           </div>
@@ -689,7 +689,7 @@
             </div>
             <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-18">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_tv_title">Trust &amp; Verify App</h3>
+                <h3 class="timeline__title" data-i18n="about_jr_tv_title">Trust &amp; Verify App — Payments</h3>
                 <p class="jr-sub" data-i18n="about_jr_tv_meta">Live · repository</p>
               </span>
               <span class="timeline__chevron" aria-hidden="true"></span>
@@ -715,7 +715,7 @@
             </div>
             <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-19">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_msfe_title">Microsoft Front-End Developer Professional Certificate</h3>
+                <h3 class="timeline__title" data-i18n="about_jr_msfe_title">Microsoft Front-End Dev. Professional Cert.</h3>
                 <p class="jr-sub" data-i18n="about_jr_msfe_meta">Coursera</p>
               </span>
               <span class="timeline__chevron" aria-hidden="true"></span>
@@ -723,7 +723,7 @@
             <div class="timeline__panel" id="jr-panel-19">
               <p class="jr-links">
                 <a class="jr-link" href="https://www.credly.com/badges/0555708f-acca-44d2-ad7a-d11b1a62b750/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_msfe_title" aria-label="Microsoft Front-End Developer Professional Certificate">View the credential</a>
+                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_msfe_title" aria-label="Microsoft Front-End Dev. Professional Cert.">View the credential</a>
               </p>
             </div>
           </div>
@@ -845,13 +845,13 @@
             </div>
             <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-24">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_accredita_title">AccreditaPass — 2026 World Cup press-accreditation app</h3>
+                <h3 class="timeline__title" data-i18n="about_jr_accredita_title">AccreditaPass App — 2026 World Cup</h3>
                 <p class="jr-sub" data-i18n="about_jr_accredita_meta">Live · repository</p>
               </span>
               <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
             <div class="timeline__panel" id="jr-panel-24">
-              <p class="timeline__body" data-i18n="about_jr_accredita_body">A press-accreditation companion for journalists covering the 2026 World Cup. Blazor WebAssembly on .NET 10, ASP.NET Core Web API, TypeScript interop layer. 512 front-end and 33 back-end tests. Three languages at exact parity — EN/ES/PT. Real-time communication (SignalR/WebSockets). Full UX dossier.</p>
+              <p class="timeline__body" data-i18n="about_jr_accredita_body">A press-accreditation companion for journalists at the 2026 World Cup. Blazor WebAssembly on .NET 10, optional ASP.NET Core Web API, TypeScript interop layer. 512 front-end and 33 back-end tests. Three languages at exact parity — EN/ES/PT. Real-time updates via SignalR. Full UX dossier.</p>
               <p class="jr-links">
                 <a class="jr-link" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">jdsaire/accreditapass</a>
                 <a class="jr-link" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">jdsaire.github.io/accreditapass</a>

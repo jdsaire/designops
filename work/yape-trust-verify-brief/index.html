@@ -141,6 +141,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .contrast__tag{font-size:.66rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim);}
 .contrast__face--build .contrast__tag{color:var(--color-brand-purple);}
 .contrast__txt{font-size:clamp(.98rem,1.2vw,1.1rem); font-weight:var(--fw-light); color:var(--color-text-muted);}
+/* Body text here is Light (300): a plain <strong> only reaches Regular (400) and never reads as bold. Same rule as Brief 04. */
+.contrast__txt strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .contrast__bridge{grid-column:1 / -1; border-top:1px solid var(--color-border-soft); padding:1rem clamp(1.4rem,2.5vw,2.25rem);
   font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
@@ -176,6 +178,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .stop__n{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.2em; color:var(--color-text-dim); text-transform:uppercase;}
 .stop__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .stop__x{font-size:.95rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
+.stop__x strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .timeline__nav{display:flex; gap:.6rem; margin-top:1rem;}
 .timeline__btn{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center;
   transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
@@ -202,6 +205,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .card:hover{border-color:var(--color-brand-purple);}
 .card__t{font-size:clamp(1.05rem,1.4vw,1.3rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .card__x{font-size:.94rem; font-weight:var(--fw-light); color:var(--color-text-muted); flex-grow:1;}
+.card__x strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 @media (min-width:768px) and (max-width:1023px){ .cardgrid--3{grid-template-columns:1fr 1fr;} }
 @media (max-width:767px){
   .cardgrid--3,.cardgrid--2,.cardgrid--4{grid-template-columns:1fr;}
@@ -301,12 +305,14 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .band__badge{font-size:.58rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; padding:.25rem .55rem;
   background:var(--color-brand-purple); color:var(--color-brand-black);}
 .band__what{font-size:.75rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.band__what strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
 .dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
 .dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
 .dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
 .dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
 .dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
+.dcell__p strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
 .dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
   transition:transform 900ms var(--ease-decelerate);}
@@ -329,11 +335,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
 .gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
-.gantt__action{font-family:inherit; font-size:.9375rem; font-weight:var(--fw-medium);
-  background:var(--color-brand-black); color:var(--color-brand-white);
-  border:1px solid var(--color-brand-white); padding:.6rem 1.25rem; cursor:pointer; min-height:44px;
-  transition:background var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
-.gantt__action:hover{background:var(--color-brand-white); color:var(--color-brand-black);}
 .gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
 .gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
 .gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
@@ -430,7 +431,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <nav class="nav__inner" role="navigation" aria-label="Primary">
 
       <button class="nav__hamburger" id="hamburger" type="button"
-              aria-label="Open menu" aria-expanded="false" aria-controls="navOverlay">
+              aria-label="Open menu" data-i18n-aria="nav_menu_open" aria-expanded="false" aria-controls="navOverlay">
         <span></span><span></span><span></span>
       </button>
 
@@ -450,7 +451,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <a class="nav__work-item" role="menuitem" href="../accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
             <a class="nav__work-item" role="menuitem" href="../yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
             <a class="nav__work-item" role="menuitem" href="../airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__work-item" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
+            <a class="nav__work-item" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
           </div>
         </div>
         <a href="../../about/"    data-nav-page="about/"    class="nav__link" data-i18n="nav_evolution">About</a>
@@ -485,7 +486,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <a href="../../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
         JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
       </a>
-      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu">&#215;</button>
+      <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu" data-i18n-aria="nav_menu_close">&#215;</button>
     </div>
 
     <nav class="nav__overlay-links" aria-label="Mobile navigation">
@@ -503,7 +504,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
             <a class="nav__overlay-subitem" role="menuitem" href="../accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
             <a class="nav__overlay-subitem" role="menuitem" href="../yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
             <a class="nav__overlay-subitem" role="menuitem" href="../airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · DESIGN SYSTEM</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
           </div>
         </div>
         <a href="../../about/"    data-nav-page="about/"    class="nav__overlay-link">
@@ -544,10 +545,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim" data-i18n="brief_read">9 min</span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n">9</span> <span data-i18n="ui_read_min">min read</span></span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Fighting fraudulent payments</h1>
-    <p class="hero__deck" data-i18n="hero_lede">Trust &amp; Verify lets a merchant check that a Yape payment on a customer's screen is real, before the goods leave the counter.</p>
+    <p class="hero__deck" data-i18n="hero_lede">My app lets a merchant check that a Yape payment on a customer's screen is real.</p>
     <div class="kwrow" role="list" aria-label="Case keywords">
       <span class="kw" role="listitem" data-i18n="tag_fintech">Fintech</span>
       <span class="kw" role="listitem" data-i18n="tag_fraud_prevention">Fraud Prevention</span>
@@ -604,7 +605,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="cardgrid cardgrid--3">
       <article class="card">
         <h3 class="card__t" data-i18n="act0_c1_t">Everyone's wallet</h3>
-        <p class="card__x" data-i18n-html="act0_c1_x">Cash still matters in Peru, but its share fell sharply as <strong>fast payments took over daily commerce</strong>, led by Yape and its interbank rival Plin.</p>
+        <p class="card__x" data-i18n-html="act0_c1_x">Cash still matters in Peru, but its share fell sharply as <strong>e-payments took over daily commerce</strong>, led by Yape and other e-wallets.</p>
       </article>
       <article class="card">
         <h3 class="card__t" data-i18n="act0_c2_t">The counter economy</h3>
@@ -612,7 +613,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
       <article class="card">
         <h3 class="card__t" data-i18n="act0_c3_t">The stakes</h3>
-        <p class="card__x" data-i18n-html="act0_c3_x">The most exposed are those financial inclusion meant to serve: small merchants and independent workers, for whom <strong>one fake payment can erase a day's earnings</strong>.</p>
+        <p class="card__x" data-i18n-html="act0_c3_x">The most exposed are small merchants and independent workers, for whom <strong>one fake payment can erase a day's earnings</strong>.</p>
       </article>
     </div>
   </div>
@@ -626,7 +627,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
       </div>
-      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Looking harder won't protect you.</h2>
+      <h2 class="verdict" id="v1" data-i18n="act1_verdict">Easy to fake.</h2>
     </div>
 
     <div class="split">
@@ -677,7 +678,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Scope</span>
       </div>
-      <h2 class="verdict" id="v2" data-i18n="act2_verdict">I didn't clone Yape. I went after its gap.</h2>
+      <h2 class="verdict" id="v2" data-i18n="act2_verdict">The trust gap.</h2>
       <div class="reveal" data-act="act2">
         <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a2" data-panel-title="The purpose" data-panel-title-key="act2_rv_btn" data-i18n="act2_rv_btn">The purpose</button>
         <div class="reveal__body reveal__body--poster" id="rv-a2">
@@ -720,7 +721,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Five phases, sized by effort.</h2>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Measured by effort.</h2>
       <div class="reveal" data-act="act3">
         <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to use the chart" data-panel-title-key="act3_rv_btn" data-i18n="act3_rv_btn">How to read the chart</button>
         <div class="reveal__body reveal__body--poster" id="rv-a3">
@@ -731,17 +732,15 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="gantt" id="gantt">
       <div class="gantt__tools">
-        <button class="gantt__action" id="ganttToggleAll" type="button" aria-expanded="false" data-i18n="gantt_expand">Expand all</button>
         <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
           <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
           <button class="gantt__chip" type="button" data-filter="sp" aria-pressed="true" data-i18n="gantt_f_sp">Story points</button>
           <button class="gantt__chip" type="button" data-filter="hours" aria-pressed="false" data-i18n="gantt_f_hours">Hours</button>
           <button class="gantt__chip" type="button" data-filter="milestones" aria-pressed="true" data-i18n="gantt_f_ms">Milestones</button>
-          <button class="gantt__chip" type="button" data-filter="deps" aria-pressed="true" data-i18n="gantt_f_deps">Dependencies</button>
         </div>
       </div>
 
-      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: Foundation leads to The one job. The one job leads to Architecture. Architecture leads to Security layer. Security layer leads to Proof and delivery. The singleton session task in Architecture leads to the execution-lock fix in Proof and delivery.</div>
+      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Foundations leads to 02 The interface. 02 The interface leads to 03 Architecture. 03 Architecture leads to 04 Security layer. 04 Security layer leads to 05 Proof &amp; delivery. The singleton session task in 03 Architecture leads to the execution-lock fix in 05 Proof &amp; delivery.</div>
 
       <div class="gantt__chart" id="ganttChart">
         <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
@@ -762,8 +761,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act4_verdict">I defend every decision in this stack.</h2>
-      <p class="scan" data-i18n="act4_lede">The four technology decisions behind the build.</p>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Working mechanism.</h2>
+      <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
     </div>
 
     <div class="cardgrid cardgrid--2">
@@ -841,8 +840,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Verifiable by technical leads.</h2>
-      <p class="scan" data-i18n="act5_lede">Compare what was measured with what it means.</p>
+      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Technical rigor.</h2>
+      <p class="scan" data-i18n="act5_lede">Figures and implications.</p>
     </div>
 
     <div class="dash">
@@ -935,8 +934,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">My fastest build wasn't the impossible one.</h2>
-      <p class="scan" data-i18n="act6_lede">Four lessons this build left behind.</p>
+      <h2 class="verdict" id="v6" data-i18n="act6_verdict">Key takeaways.</h2>
+      <p class="scan" data-i18n="act6_lede">Lessons learned.</p>
     </div>
 
     <div class="cardgrid cardgrid--4">
@@ -1200,27 +1199,27 @@ tabs.forEach(tab=>{
 
   var DATA = {
     epics: [
-      { id:'foundation', name:'Foundation', tasks:[
+      { id:'foundation', name:'01 Foundations', tasks:[
         { id:'scaffold',      name:'Vite + TypeScript scaffold', sp:3, hours:4 },
         { id:'dependencies',  name:'Dependency justification',   sp:2, hours:2 },
         { id:'relative-paths',name:'Relative-path constraint',   sp:2, hours:2 }
       ]},
-      { id:'one-job', name:'The one job', tasks:[
+      { id:'one-job', name:'02 The interface', tasks:[
         { id:'entry-screen',  name:'Entry screen',   sp:3, hours:4 },
         { id:'secure-keypad', name:'Secure keypad',  sp:5, hours:6 },
         { id:'verdict-screen',name:'Verdict screen', sp:5, hours:6 }
       ]},
-      { id:'architecture', name:'Architecture', tasks:[
+      { id:'architecture', name:'03 Architecture', tasks:[
         { id:'singleton-session', name:'Singleton session service', sp:5, hours:6 },
         { id:'observer-state',    name:'Observer flow state',       sp:5, hours:5 },
         { id:'mock-rest',         name:'Mock REST surface',         sp:3, hours:4 }
       ]},
-      { id:'security', name:'Security layer', tasks:[
+      { id:'security', name:'04 Security layer', tasks:[
         { id:'staged-panel',    name:'Staged security panel', sp:5, hours:5 },
         { id:'client-controls', name:'Client-side controls',  sp:5, hours:6 },
         { id:'provenance',      name:'Provenance badging',    sp:2, hours:2 }
       ]},
-      { id:'proof', name:'Proof & delivery', tasks:[
+      { id:'proof', name:'05 Proof & delivery', tasks:[
         { id:'six-scenarios',  name:'Six-scenario protocol',    sp:8, hours:8 },
         { id:'lock-defect',    name:'Execution-lock defect fix', sp:3, hours:3 },
         { id:'ci-gates',       name:'CI gates & deploy',        sp:3, hours:3 }
@@ -1349,22 +1348,15 @@ tabs.forEach(tab=>{
 
   /* ---------- Zoom: expand / collapse ---------- */
   var toggles = Array.prototype.slice.call(grid.querySelectorAll('.gantt__toggle'));
-  var toggleAll = document.getElementById('ganttToggleAll');
   function setExpanded(btn, expanded){
     btn.setAttribute('aria-expanded', String(expanded));
     var list = document.getElementById(btn.getAttribute('aria-controls'));
     if(list) list.hidden = !expanded;
   }
-  function syncToggleAll(){
-    var allOpen = toggles.every(function(b){ return b.getAttribute('aria-expanded') === 'true'; });
-    toggleAll.setAttribute('aria-expanded', String(allOpen));
-    toggleAll.textContent = allOpen ? (toggleAll.dataset.collapse || 'Collapse all phases')
-                                    : (toggleAll.dataset.expand || 'Expand all phases');
-  }
   toggles.forEach(function(btn, i){
     btn.addEventListener('click', function(){
       setExpanded(btn, btn.getAttribute('aria-expanded') !== 'true');
-      syncToggleAll(); drawConnectors();
+      drawConnectors();
     });
     btn.addEventListener('keydown', function(e){
       var nx = null;
@@ -1375,13 +1367,9 @@ tabs.forEach(tab=>{
       if(nx){ e.preventDefault(); nx.focus(); }
     });
   });
-  toggleAll.addEventListener('click', function(){
-    var open = toggleAll.getAttribute('aria-expanded') !== 'true';
-    toggles.forEach(function(b){ setExpanded(b, open); });
-    syncToggleAll(); drawConnectors();
-  });
 
-  /* ---------- Filters: progressive disclosure ---------- */
+  /* ---------- Filters: progressive disclosure ----------
+     PR38-Q23: dependency connectors are always drawn (no chip); epics open one at a time. */
   var FILTERS = { sp:true, hours:false, milestones:true, deps:true };
   Array.prototype.slice.call(root.querySelectorAll('.gantt__chip')).forEach(function(chip){
     chip.addEventListener('click', function(){
@@ -1431,16 +1419,6 @@ tabs.forEach(tab=>{
     overlay.innerHTML = svg;
   }
   window.addEventListener('resize', drawConnectors);
-
-  /* Keep the toggle-all label translatable: cache both strings up front. */
-  toggleAll.dataset.expand = toggleAll.textContent.trim();
-  toggleAll.dataset.collapse = 'Collapse all phases';
-  document.addEventListener('i18n:changed', function(e){
-    var d = e.detail && e.detail.dict; if(!d) return;
-    if(d.gantt_expand)   toggleAll.dataset.expand   = d.gantt_expand;
-    if(d.gantt_collapse) toggleAll.dataset.collapse = d.gantt_collapse;
-    syncToggleAll();
-  });
 
   applyFilters();
 })();
