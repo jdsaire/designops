@@ -1,6 +1,6 @@
 # Completion report — PR #39 · Closure figures
 
-**Branch:** `deploy/v26-pr39-closure-figures`, from `6261415` · **Pull request:** #39, manual merge only
+**Branch:** `deploy/v26-pr39-closure-figures`, from `6261415` · **Pull request:** [#39](https://github.com/jdsaire/designops/pull/39), manual merge only
 **Plan:** [Plan-PR39-ClosureFigures.md](../cc-plans/Plan-PR39-ClosureFigures.md)
 
 ## 1. Commits
@@ -13,7 +13,8 @@ In order, on `deploy/v26-pr39-closure-figures`:
 - `1a69c9e` — "fix(brief02): Act 02 drops its arrows; the row scrolls with snap and a peek"
 - `455196a` — "feat(brief04): Act 04's numbered cards light in reading order from 768"
 - `077a1c9` — "feat(brief04): the multi-page column shows its figures, measured at PR #38's merge"
-- (this commit) — "docs: archive the PR #39 plan and completion report"
+- `f45776b` — "docs: archive the PR #39 plan and completion report"
+- (this commit) — "docs: record the PR #39 link in its completion report"
 
 - **One commit per item.** G1 is two commits: the defect on Brief 02, then the same rule on the other three briefs, kept as a separate, droppable commit.
 
@@ -66,7 +67,7 @@ In order, on `deploy/v26-pr39-closure-figures`:
 ## 8. Relay
 
 - **Landed:** 6 commits on `deploy/v26-pr39-closure-figures`, plus this archive. Four PR #38 precedent fixes and Brief 04's closure figures.
-- **Open:** the manual merge of PR #39.
+- **Open:** the manual merge of PR #39 (https://github.com/jdsaire/designops/pull/39).
 - **Next station:** Cowork, the post-deploy sync.
 - **Do there first:** decoration spec v1.4 and EVIDENCE from the run's proposals; KEYS for the new keys.
 - **Then:** PR #40 (mobile organisms, About filters, read time), then PR #41 (hygiene).
