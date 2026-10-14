@@ -156,6 +156,11 @@ function init() {
      Brief 03's journey (the missing channel is its key) and relays (one pass across the hand-off baton) */
   document.querySelectorAll('.timeline__track').forEach(c => { if (c.scrollWidth <= c.clientWidth + 4 && !onScreen(c)) when(c, run(kids(c))); });
   document.querySelectorAll('.ladder-down').forEach(c => { if (!onScreen(c)) when(c, run(kids(c))); });
+  /* PR #39: a numbered card set opts in with data-deco-run="<min width>". It plays only where the whole set fits the
+     view, so a pass never lights a card off screen (Brief 04's architecture cards, 1–4, from 768). */
+  document.querySelectorAll('[data-deco-run]').forEach(c => {
+    if (innerWidth >= (+c.dataset.decoRun || 0) && c.getBoundingClientRect().height <= innerHeight && !onScreen(c)) when(c, run(kids(c)));
+  });
   document.querySelectorAll('.journey__steps').forEach(c => { if (!onScreen(c)) when(c, run(kids(c), c.querySelector('.journey__step--key'), true)); });
   document.querySelectorAll('.relay').forEach(r => { if (!onScreen(r)) when(r, run([...r.querySelectorAll('.relay__node, .relay__baton span')], r.querySelector('.relay__baton span'))); });
   /* GROW + RELATE: the briefs' roadmaps; GROW · meter: Brief 02's dashboard */
