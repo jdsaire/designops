@@ -15,5 +15,8 @@
   "ui_act03_schedule": "Act 03 · The Schedule",
   "ui_act04_architecture": "Act 04 · The Architecture",
   "ui_act05_dashboard": "Act 05 · The Dashboard",
-  "ui_act06_reflection": "Act 06 · The Reflection"
+  "ui_act06_reflection": "Act 06 · The Reflection",
+  "ui_chart_read_btn": "How to read the chart",
+  "ui_sched_mob_t": "See schedule",
+  "ui_sched_mob_x": "Full visual available on desktop."
 }

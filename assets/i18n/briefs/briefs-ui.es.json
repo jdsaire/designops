@@ -15,5 +15,8 @@
   "ui_act03_schedule": "Acto 03 · El Cronograma",
   "ui_act04_architecture": "Acto 04 · La Arquitectura",
   "ui_act05_dashboard": "Acto 05 · El Dashboard",
-  "ui_act06_reflection": "Acto 06 · La Reflexión"
+  "ui_act06_reflection": "Acto 06 · La Reflexión",
+  "ui_chart_read_btn": "Cómo leer el gráfico",
+  "ui_sched_mob_t": "Ver cronograma",
+  "ui_sched_mob_x": "El cronograma completo puede verse desde una pc."
 }
