@@ -248,13 +248,17 @@
       </div>
 
       <div class="jr-controls">
-        <div class="jr-filters" role="group" aria-label="Filter by category"
-             data-i18n-aria="about_jr_filter_group_label">
-          <button class="jr-chip" type="button" data-filter="all" aria-pressed="true" data-i18n="about_jr_filter_all">All</button>
-          <button class="jr-chip" type="button" data-filter="formation" aria-pressed="false" data-i18n="about_jr_filter_formation">Formation</button>
-          <button class="jr-chip" type="button" data-filter="work" aria-pressed="false" data-i18n="about_jr_filter_work">Work</button>
-          <button class="jr-chip" type="button" data-filter="build" aria-pressed="false" data-i18n="about_jr_filter_build">Build</button>
-          <button class="jr-chip" type="button" data-filter="credential" aria-pressed="false" data-i18n="about_jr_filter_credential">Credential</button>
+        <div class="jr-select">
+          <label class="jr-select__label" for="jr-filter" data-i18n="about_jr_filter_group_label">Filter by category</label>
+          <div class="jr-select__wrap">
+            <select class="jr-select__control" id="jr-filter">
+              <option value="all" data-i18n="about_jr_filter_all">All</option>
+              <option value="formation" data-i18n="about_jr_filter_formation">Formation</option>
+              <option value="work" data-i18n="about_jr_filter_work">Work</option>
+              <option value="build" data-i18n="about_jr_filter_build">Build</option>
+              <option value="credential" data-i18n="about_jr_filter_credential">Credential</option>
+            </select>
+          </div>
         </div>
         <div class="jr-countrow">
           <p class="jr-count" id="jr-count" role="status" aria-live="polite" data-key="about_jr_count">25 of 25</p>
