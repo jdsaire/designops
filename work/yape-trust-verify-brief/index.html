@@ -167,7 +167,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .receipt__cap{font-size:.7rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.5;}
 .receipt__cap b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
 
-/* ---- Timeline carousel (Act 02 — the single lateral gesture, 3 stops) ---- */
+/* ---- Timeline (Act 02 — the single lateral gesture, 3 stops). Below 1024 the row scrolls on its own: snap, and the
+        next card peeks; PR #39 retired the arrows (PR38-Q25, option A). ---- */
 .timeline{position:relative; margin-bottom:clamp(1rem,2vw,1.5rem);}
 .timeline__track{display:grid; grid-auto-flow:column; grid-auto-columns:calc(100% - var(--peek-width));
   gap:var(--slide-gap); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem; scrollbar-width:none;}
@@ -179,19 +180,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .stop__t{font-size:clamp(1.05rem,1.4vw,1.25rem); font-weight:var(--fw-bold); letter-spacing:-0.01em;}
 .stop__x{font-size:.95rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
 .stop__x strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.timeline__nav{display:flex; gap:.6rem; margin-top:1rem;}
-.timeline__btn{width:2.75rem; height:2.75rem; border:1px solid var(--color-border-soft); display:grid; place-items:center;
-  transition:border-color var(--duration-ui) var(--ease-standard), color var(--duration-ui) var(--ease-standard);}
-.timeline__btn:hover{border-color:var(--color-brand-purple); color:var(--color-brand-purple);}
-.timeline__btn:disabled{opacity:.3; cursor:default;}
 @media (min-width:1024px){
   .timeline__track{grid-auto-flow:row; grid-template-columns:repeat(3,1fr); grid-auto-columns:unset; overflow:visible; padding-bottom:0;}
-  .timeline__nav{display:none;}
   .timeline::before{content:""; position:absolute; top:-1.1rem; left:0; right:0; height:1px;
     background:linear-gradient(90deg, var(--color-brand-purple), var(--color-border-soft));}
 }
 @media (min-width:768px) and (max-width:1023px){
-  .timeline__track{grid-auto-columns:calc(50% - var(--slide-gap)/2);}
+  .timeline__track{grid-auto-columns:calc((100% - var(--peek-width)) / 2 - var(--slide-gap) / 2);}   /* two cards and a peek of the third */
 }
 
 /* ---- Cards ---- */
@@ -688,7 +683,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
     <div class="timeline">
-      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" aria-label="The adaptation, in three stops">
+      <div class="timeline__track" id="tlTrack" tabindex="0" role="group" data-i18n-aria="act2_aria" aria-label="The adaptation, in three stops">
         <article class="stop">
           <span class="stop__n" data-i18n="act2_s1_n">Pillar 1</span>
           <h3 class="stop__t" data-i18n="act2_s1_t">The gap I mapped</h3>
@@ -704,10 +699,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           <h3 class="stop__t" data-i18n="act2_s3_t">One problem, done fully</h3>
           <p class="stop__x" data-i18n-html="act2_s3_x">Reshaping a successful super app takes years. I chose to learn <strong>what solving one banking problem with front-end really takes</strong>.</p>
         </article>
-      </div>
-      <div class="timeline__nav">
-        <button class="timeline__btn" id="tlPrev" aria-label="Previous stop">←</button>
-        <button class="timeline__btn" id="tlNext" aria-label="Next stop">→</button>
       </div>
     </div>
   </div>
@@ -1159,17 +1150,6 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
   });
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
-
-/* ============ Timeline carousel nav (≤1023) ============ */
-const track = document.getElementById("tlTrack");
-const prev = document.getElementById("tlPrev"), next = document.getElementById("tlNext");
-function stopWidth(){ const s = track.querySelector(".stop"); return s ? s.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24) : 300; }
-/* Reduced motion keeps the swipe track and its arrows; the arrows jump instead of gliding. */
-const tlBehavior = ()=> window.matchMedia("(prefers-reduced-motion:reduce)").matches ? "instant" : "smooth";
-prev.addEventListener("click", ()=> track.scrollBy({left:-stopWidth(), behavior:tlBehavior()}));
-next.addEventListener("click", ()=> track.scrollBy({left: stopWidth(), behavior:tlBehavior()}));
-function syncTl(){ prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4; }
-track.addEventListener("scroll", syncTl, {passive:true}); window.addEventListener("resize", syncTl); syncTl();
 
 /* ============ Dashboard tabs — two-way (Measured / The read) ============ */
 const tabs = [...document.querySelectorAll(".dash__tab")];
