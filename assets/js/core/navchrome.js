@@ -70,11 +70,18 @@ function init(opts) {
     const HIDE_AFTER = 120;  /* accumulated downward travel before hiding; clears
                                 the largest measured smooth-scroll settle (57px) */
     const SHOW_AFTER = 8;    /* any real upward travel brings it straight back */
+    /* PR #39: while the phone menu is open the bar stays. A language swap reflows the page under the overlay and
+       moves scrollY (scroll anchoring); read as a downward scroll, it slid the bar away and uncovered the overlay's
+       own × beneath the purple menu button. The open menu now ignores scrolling and starts the count afresh. */
+    const menuOverlay = document.getElementById('navOverlay');
     let lastScroll = Math.max(0, window.scrollY), travel = 0, ticking = false;
     function onScroll() {
       const cur = Math.max(0, window.scrollY);
       const delta = cur - lastScroll;
       lastScroll = cur;
+      if (menuOverlay && menuOverlay.classList.contains('nav__overlay--open')) {
+        travel = 0; nav.classList.remove('nav--hidden'); ticking = false; return;
+      }
       if (delta === 0) { ticking = false; return; }
       /* Direction changed: start measuring the new direction from zero. */
       if ((delta > 0) !== (travel > 0)) travel = 0;
@@ -203,9 +210,18 @@ function init(opts) {
   const overlay      = document.getElementById('navOverlay');
   const overlayClose = document.getElementById('overlayClose');
 
+  /* PR #39 (PR39-Q2): the open menu button is the visible close, so it is named as one. While open it takes its
+     name from #overlayClose ("Close menu" / "Cerrar menú"), whose label every i18n engine keeps in the reader's
+     language; closed, its own "Open menu" label applies again. A language swap therefore never leaves a stale name. */
+  function nameAsClose(on) {
+    if (!hamburger || !overlayClose) return;
+    if (on) hamburger.setAttribute('aria-labelledby', 'overlayClose');
+    else hamburger.removeAttribute('aria-labelledby');
+  }
   function closeOverlay() {
     if (!overlay) return;
     overlay.classList.remove('nav__overlay--open');
+    nameAsClose(false);
     if (hamburger) { hamburger.setAttribute('aria-expanded', 'false'); hamburger.classList.remove('nav__hamburger--open'); }
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
@@ -215,6 +231,7 @@ function init(opts) {
     overlay.classList.add('nav__overlay--open');
     if (nav) nav.classList.remove('nav--hidden');
     if (hamburger) { hamburger.setAttribute('aria-expanded', 'true'); hamburger.classList.add('nav__hamburger--open'); }
+    nameAsClose(true);
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
