@@ -239,7 +239,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
-.reveal__btn{display:inline-flex; align-items:center; gap:.45rem; font-size:.74rem; font-weight:var(--fw-semibold);
+.reveal__btn{display:inline-flex; align-items:center; gap:.45rem; text-align:left; font-size:.74rem; font-weight:var(--fw-semibold);
   letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
   transition:color var(--duration-ui) var(--ease-standard); min-height:44px;}
 .reveal__btn::before{content:"⊕"; font-size:1rem;}
@@ -367,12 +367,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
 .dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
 .dash__panel[hidden]{display:none;}
-/* A pending figure carries its label and no number. Never a placeholder, never a
-   zero, never a guess: B4 requires the definitive i18n total measured at closure,
-   and S9 is the only thing permitted to fill it. */
-.dcell--pending .dcell__pending{font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
-  font-weight:var(--fw-semibold); color:var(--color-text-dim); border-left:2px solid var(--color-brand-purple);
-  padding-left:.5rem; margin-top:.15rem;}
 /* ---- Paired rows: one metric per row, one value slot per build. Both builds are
         legible without operating anything, which a tablist could not offer. ---- */
 .drows{display:flex; flex-direction:column;}
@@ -783,7 +777,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2" id="act4Cards">
+    <div class="cardgrid cardgrid--2" id="act4Cards" data-deco-run="768">
       <article class="card">
         <p class="catlabel" data-i18n="act4_c1_cat">Speed</p>
         <h3 class="card__t" data-i18n="act4_c1_t">1) Light, fast and built to last</h3>
@@ -875,25 +869,25 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           </div>
       <div class="drow">
         <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m6"><span data-i18n="dash_m6">Commits</span></button></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">561</span></div>
         <div class="drow__v"><span class="dcell__n">286</span></div>
         <p class="drow__desc" id="dmd-m6" data-i18n="dash_m6_d" hidden>Each saved change to the site's code.</p>
       </div>
       <div class="drow">
         <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m7"><span data-i18n="dash_m7">Pull requests</span></button></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">21</span></div>
         <div class="drow__v"><span class="dcell__n">52</span></div>
         <p class="drow__desc" id="dmd-m7" data-i18n="dash_m7_d" hidden>Batches of changes, reviewed before reaching live site.</p>
       </div>
       <div class="drow">
         <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m8"><span data-i18n="dash_m8">Days of public history</span></button></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">45</span></div>
         <div class="drow__v"><span class="dcell__n">71</span></div>
         <p class="drow__desc" id="dmd-m8" data-i18n="dash_m8_d" hidden>Calendar days from the first saved change to the last.</p>
       </div>
       <div class="drow">
         <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m9"><span data-i18n="dash_m9">Active build-days</span></button></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">33</span></div>
         <div class="drow__v"><span class="dcell__n">32</span></div>
         <p class="drow__desc" id="dmd-m9" data-i18n="dash_m9_d" hidden>Days with at least one saved change.</p>
       </div>
@@ -905,13 +899,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <div class="drow">
         <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m1b"><span data-i18n="dash_m1b">Organisms</span></button></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">64</span></div>
         <div class="drow__v"><span class="dcell__n">10</span></div>
         <p class="drow__desc" id="dmd-m1b" data-i18n="dash_m1b_d" hidden>Reusable page sections, such as a hero, a card grid or a contact form.</p>
       </div>
       <div class="drow">
         <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m2"><span data-i18n="dash_m2">Dictionary keys</span></button></div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">990</span></div>
         <div class="drow__v"><span class="dcell__n">175</span></div>
         <p class="drow__desc" id="dmd-m2" data-i18n="dash_m2_d" hidden>Labeled pieces of text, each kept in EN/ES.</p>
       </div>
@@ -925,17 +919,17 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
           </div>
       <div class="drow">
         <div class="drow__l" data-i18n="dash_d1">Commits per day, sustained</div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">12.5</span><span class="dcell__p" data-i18n="dash2_d1_p">561 commits ÷ 45 days</span></div>
         <div class="drow__v"><span class="dcell__n">4.0</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 71 days</span></div>
       </div>
       <div class="drow">
         <div class="drow__l" data-i18n="dash_d2">Pull requests per week</div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">3.3</span><span class="dcell__p" data-i18n="dash2_d2_p">21 PRs ÷ 6.4 weeks</span></div>
         <div class="drow__v"><span class="dcell__n">5.1</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.1 weeks</span></div>
       </div>
       <div class="drow">
         <div class="drow__l" data-i18n="dash_d3">Commits per review gate</div>
-        <div class="drow__v drow__v--pending"><span class="dcell__pending" data-i18n="dash_pending">Measured at closure</span></div>
+        <div class="drow__v"><span class="dcell__n">26.7</span><span class="dcell__p" data-i18n="dash2_d3_p">561 commits ÷ 21 PRs</span></div>
         <div class="drow__v"><span class="dcell__n">5.5</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span></div>
       </div>
         </div>
@@ -961,8 +955,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         </div>
       </div>
 
-      <!-- Hidden until it carries the multi-page source as well (WC-Q45); its keys stay. -->
-      <p class="synthesis" data-i18n="dash_foot" hidden>Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).</p>
+      <!-- Both builds' sources under the dashboard: the single page's method (WC-Q45, restored by PR39-Q8) and the
+           multi-page cut-off, PR #38's merge (SY38-Q9, PR39-Q1). -->
+      <p class="synthesis" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).</p>
+      <p class="synthesis" data-i18n="dash_cutoff">Multi-page figures measured on 12 Oct 2026, at the merge of PR #38.</p>
     </div>
   </div>
 </section>
