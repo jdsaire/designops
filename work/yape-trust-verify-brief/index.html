@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+  <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -329,25 +330,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* ================= ACT 03 · ROADMAP ORGANISM (scoped under .gantt) ================= */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
-.gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
-.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
-.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
-.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
-  background:var(--color-brand-black); color:var(--color-text-muted);
-  border:1px solid var(--g-border); padding:.45rem .9rem; cursor:pointer; min-height:44px;
-  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
-.gantt__chip[aria-pressed="true"]::before{content:"✓ "; color:var(--color-brand-purple);}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
 @media (max-width:767px){ .gantt__chart{border-left:0; border-right:0;} }
 .gantt__grid{min-width:820px;}
-.gantt__axis{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
+.gantt__axis{display:grid; grid-template-columns:minmax(180px,272px) 1fr minmax(96px,130px);
   border-bottom:1px solid var(--g-border); color:var(--color-text-muted); font-size:.8125rem;}
-.gantt__axis > div{padding:.75rem 1rem;}
-.gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
-.gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem;}
+.gantt__axis > div{padding:.75rem 1rem; align-self:end;}
+.gantt__axis-units{position:relative; min-height:3.6rem; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+/* PR40-Q5: the axis states its unit, planned hours, above its ticks */
+.gantt__unit{position:absolute; top:.7rem; left:50%; transform:translateX(-50%); color:var(--color-text-muted); font-size:.75rem; white-space:nowrap;}
+.gantt__tick{position:absolute; top:2.1rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem;}
 .gantt__axis-summary{text-align:right;}
-.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
+.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(180px,272px) 1fr minmax(96px,130px);
   border-bottom:1px solid var(--g-border);}
 .gantt__task-row{background:rgba(var(--ink),0.02);}
 .gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
@@ -375,6 +369,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__sp{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white);
   padding:0 .35rem; white-space:nowrap;}
 .gantt__sp .gantt__hours{font-weight:var(--fw-regular);}
+/* PR40-Q9: a task's "SP · h" sits just past its bar's end (before its start near the axis end), never on it */
+.gantt__bar--task .gantt__sp{position:absolute; left:100%; padding:0 .45rem;}
+.gantt__bar--task.gantt__bar--flip .gantt__sp{left:auto; right:100%;}
 .gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
   transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-black);
   border:2px solid var(--color-brand-purple);}
@@ -712,26 +709,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Measured by effort.</h2>
-      <div class="reveal" data-act="act3">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to use the chart" data-panel-title-key="act3_rv_btn" data-i18n="act3_rv_btn">How to read the chart</button>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Built in one week.</h2>
+      <p class="scan" data-i18n="act3_lede">From research to development.</p>
+      <div class="reveal chart-aside" data-act="act3">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
         <div class="reveal__body reveal__body--poster" id="rv-a3">
-          <p data-i18n-html="act3_rv_txt">The five phases and their tasks are reconstructed from this build's plan and completion record. <strong>Story points measure relative effort</strong> between phases, not a recorded sprint. Hours are planned-capacity estimates, off by default. There is no progress percentage: <strong>a finished build has nothing left to forecast</strong>.</p>
+          <p data-i18n-html="act3_rv_txt">This Gantt chart lays out the build as five phases, reconstructed from its plan and completion record. Each row is one phase, read from left to right on an axis of planned hours, not calendar dates: <strong>the bar's length is the hours planned, and the dashed lines show what had to finish first</strong>. Open a phase to see its tasks, each with its story points and hours.</p>
         </div>
       </div>
     </div>
 
     <div class="gantt" id="gantt">
-      <div class="gantt__tools">
-        <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
-          <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
-          <button class="gantt__chip" type="button" data-filter="sp" aria-pressed="true" data-i18n="gantt_f_sp">Story points</button>
-          <button class="gantt__chip" type="button" data-filter="hours" aria-pressed="false" data-i18n="gantt_f_hours">Hours</button>
-          <button class="gantt__chip" type="button" data-filter="milestones" aria-pressed="true" data-i18n="gantt_f_ms">Milestones</button>
-        </div>
-      </div>
-
-      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Foundations leads to 02 The interface. 02 The interface leads to 03 Architecture. 03 Architecture leads to 04 Security layer. 04 Security layer leads to 05 Proof &amp; delivery. The singleton session task in 03 Architecture leads to the execution-lock fix in 05 Proof &amp; delivery.</div>
+      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Project setup leads to 02 Verification flow. 02 Verification flow leads to 03 Session and data flow. 03 Session and data flow leads to 04 Interface security. 04 Interface security leads to 05 Test and delivery. The singleton session task in 03 Session and data flow leads to the execution-lock fix in 05 Test and delivery.</div>
 
       <div class="gantt__chart" id="ganttChart">
         <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
@@ -741,6 +730,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript.</p></noscript>
     </div>
+
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_sp"><strong>Story Points (SP).</strong> A relative measure of a task's effort against the others, not a unit of time. This build was not run as a formal sprint.</p>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_foundation">Project setup</span><span class="relay__x" data-i18n="act3_m1_x">8 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_one_job">Verification flow</span><span class="relay__x" data-i18n="act3_m2_x">16 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_architecture">Session and data flow</span><span class="relay__x" data-i18n="act3_m3_x">15 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_security">Interface security</span><span class="relay__x" data-i18n="act3_m4_x">13 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_proof">Test and delivery</span><span class="relay__x" data-i18n="act3_m5_x">14 h planned · Live 15 Jul 2026</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="act3HowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="act3HowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
   </div>
 </section>
 
@@ -1179,27 +1186,27 @@ tabs.forEach(tab=>{
 
   var DATA = {
     epics: [
-      { id:'foundation', name:'01 Foundations', tasks:[
+      { id:'foundation', name:'Project setup', tasks:[
         { id:'scaffold',      name:'Vite + TypeScript scaffold', sp:3, hours:4 },
         { id:'dependencies',  name:'Dependency justification',   sp:2, hours:2 },
         { id:'relative-paths',name:'Relative-path constraint',   sp:2, hours:2 }
       ]},
-      { id:'one-job', name:'02 The interface', tasks:[
+      { id:'one-job', name:'Verification flow', tasks:[
         { id:'entry-screen',  name:'Entry screen',   sp:3, hours:4 },
         { id:'secure-keypad', name:'Secure keypad',  sp:5, hours:6 },
         { id:'verdict-screen',name:'Verdict screen', sp:5, hours:6 }
       ]},
-      { id:'architecture', name:'03 Architecture', tasks:[
+      { id:'architecture', name:'Session and data flow', tasks:[
         { id:'singleton-session', name:'Singleton session service', sp:5, hours:6 },
         { id:'observer-state',    name:'Observer flow state',       sp:5, hours:5 },
         { id:'mock-rest',         name:'Mock REST surface',         sp:3, hours:4 }
       ]},
-      { id:'security', name:'04 Security layer', tasks:[
+      { id:'security', name:'Interface security', tasks:[
         { id:'staged-panel',    name:'Staged security panel', sp:5, hours:5 },
         { id:'client-controls', name:'Client-side controls',  sp:5, hours:6 },
         { id:'provenance',      name:'Provenance badging',    sp:2, hours:2 }
       ]},
-      { id:'proof', name:'05 Proof & delivery', tasks:[
+      { id:'proof', name:'Test and delivery', tasks:[
         { id:'six-scenarios',  name:'Six-scenario protocol',    sp:8, hours:8 },
         { id:'lock-defect',    name:'Execution-lock defect fix', sp:3, hours:3 },
         { id:'ci-gates',       name:'CI gates & deploy',        sp:3, hours:3 }
@@ -1221,22 +1228,25 @@ tabs.forEach(tab=>{
   var root = document.getElementById('gantt');
   if(!root) return;
 
-  /* ---------- Derived layout: cumulative story points ---------- */
+  /* ---------- Derived layout: cumulative planned hours (PR40-Q5) ----------
+     The axis is planned-capacity hours, not calendar dates: each task takes its planned hours in plan order.
+     Story points stay as relative effort, in the effort column per phase and on each task's bar. */
   var cursor = 0;
-  DATA.epics.forEach(function(epic){
+  DATA.epics.forEach(function(epic, i){
+    epic.num = (i < 9 ? '0' : '') + (i + 1);
     epic.start = cursor; epic.sp = 0; epic.hours = 0;
     epic.tasks.forEach(function(t){
-      t.start = cursor; cursor += t.sp;
+      t.start = cursor; cursor += t.hours;
       epic.sp += t.sp; epic.hours += t.hours;
     });
     epic.end = cursor;
   });
-  var TOTAL_SP = cursor;
+  var TOTAL = cursor;
   DATA.milestones.forEach(function(m){
     var e = DATA.epics.filter(function(x){ return x.id === m.after; })[0];
     m.at = e ? e.end : 0;
   });
-  function pct(points){ return (points / TOTAL_SP * 100).toFixed(3) + '%'; }
+  function pct(hours){ return (hours / TOTAL * 100).toFixed(3) + '%'; }
   /* Dictionary keys for the chart's own strings (WB-Q24): names render inside
      data-i18n spans the loader translates; DATA keeps the English as fallback. */
   function kid(s){ return s.replace(/-/g,'_'); }
@@ -1251,44 +1261,47 @@ tabs.forEach(tab=>{
 
   function ticksHtml(){
     var h = '';
-    for(var p = 0; p <= TOTAL_SP; p += TICK_STEP){
+    for(var p = 0; p < TOTAL; p += TICK_STEP){
       h += '<span class="gantt__tick" style="left:' + pct(p) + '">' + p + '</span>';
       h += '<span class="gantt__gridline" style="left:' + pct(p) + '"></span>';
     }
     return h;
   }
-  function barHtml(item, cls, id){
-    var span = (item.end !== undefined) ? (item.end - item.start) : item.sp;
-    var label = '<span class="gantt__sp"><span data-layer="sp">' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span></span>' +
-                '<span class="gantt__hours" data-layer="hours" hidden> · ' + item.hours + ' <span data-i18n="gantt_unit_h">h</span></span></span>';
+  /* PR40-Q9: a phase's bar carries no label (its effort sits in the effort column); an opened phase's task bars
+     carry their story points and hours; task rows leave the effort column empty. */
+  function aname(item){ return item.num ? item.num + ' ' + item.name : item.name; }
+  function barHtml(item, cls, id, labelled){
+    var label = labelled ? '<span class="gantt__sp">' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span>' +
+                '<span class="gantt__hours"> · ' + item.hours + ' <span data-i18n="gantt_unit_h">h</span></span></span>' : '';
+    if(labelled && (item.start + item.hours) / TOTAL > 0.8) cls += ' gantt__bar--flip';
     return '<div class="gantt__bar ' + cls + '" data-bar="' + id + '" style="left:' + pct(item.start) +
-           '; width:' + pct(span) + ';" role="img" aria-label="' + item.name + ', ' + span +
+           '; width:' + pct(item.hours) + ';" role="img" aria-label="' + aname(item) + ', ' + item.sp +
            ' story points, ' + item.hours + ' planned hours">' + label + '</div>';
   }
   function summaryHtml(item){
-    return '<b><span data-layer="sp">' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span></span></b>' +
-           '<span class="gantt__hours" data-layer="hours" hidden>' + item.hours + ' <span data-i18n="gantt_unit_h_planned">h planned</span></span>';
+    return '<b>' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span></b>' +
+           '<span class="gantt__hours">' + item.hours + ' <span data-i18n="gantt_unit_h">h</span></span>';
   }
 
   var html = '<div class="gantt__axis" aria-hidden="true"><div data-i18n="gantt_axis_phase">Phase</div>' +
-             '<div class="gantt__axis-units">' + ticksHtml() +
-             '<span class="gantt__tick" style="left:100%">' + TOTAL_SP + '</span></div>' +
+             '<div class="gantt__axis-units"><span class="gantt__unit" data-i18n="gantt_axis_hours">Planned hours</span>' + ticksHtml() +
+             '<span class="gantt__tick" style="left:100%">' + TOTAL + '</span></div>' +
              '<div class="gantt__axis-summary" data-i18n="gantt_axis_effort">Effort</div></div>';
 
   DATA.epics.forEach(function(epic){
     html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
       '<div class="gantt__row">' +
         '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
-          '<span class="gantt__marker" aria-hidden="true">›</span>' + nameHtml(epic) + '</button></div>' +
-        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id) +
+          '<span class="gantt__marker" aria-hidden="true">›</span><span class="gantt__stage-n">' + epic.num + '</span>' + nameHtml(epic) + '</button></div>' +
+        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id, false) +
           '<span data-ms-slot="' + epic.id + '"></span></div>' +
-        '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + epic.sp + ' story points, ' + epic.hours + ' planned hours">' + summaryHtml(epic) + '</div>' +
+        '<div class="gantt__row-summary" aria-label="' + aname(epic) + ' totals: ' + epic.sp + ' story points, ' + epic.hours + ' planned hours">' + summaryHtml(epic) + '</div>' +
       '</div>' +
       '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
     epic.tasks.forEach(function(t){
       html += '<li class="gantt__task-row"><span class="gantt__task-label">' + nameHtml(t) + '</span>' +
-        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id) + '</span>' +
-        '<span class="gantt__task-summary">' + summaryHtml(t) + '</span></li>';
+        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id, true) + '</span>' +
+        '<span class="gantt__task-summary"></span></li>';
     });
     html += '</ul></div>';
   });
@@ -1297,9 +1310,9 @@ tabs.forEach(tab=>{
   DATA.milestones.forEach(function(m){
     var slot = grid.querySelector('[data-ms-slot="' + m.after + '"]');
     if(!slot) return;
-    slot.outerHTML = '<span data-layer="milestones" data-ms-slot-done="' + m.key + '">' +
+    slot.outerHTML = '<span data-ms-slot-done="' + m.key + '">' +
       '<span class="gantt__milestone" style="left:' + pct(m.at) + '" role="img" aria-label="Milestone: ' +
-      m.name + ', at ' + m.at + ' cumulative story points"></span>' +
+      m.name + ', at ' + m.at + ' cumulative planned hours"></span>' +
       '<span class="gantt__milestone-label" style="left:' + pct(m.at) + '">' + nameHtml(m) + '</span></span>';
   });
 
@@ -1307,11 +1320,11 @@ tabs.forEach(tab=>{
   function relabel(d){
     if(!d.gantt_aria_bar) return;
     function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
-    function nm(item){ return d[item.key] || item.name; }
+    function nm(item){ var n = d[item.key] || item.name; return item.num ? item.num + ' ' + n : n; }
     DATA.epics.forEach(function(e){
       var row = grid.querySelector('[data-epic="' + e.id + '"]');
       var bar = grid.querySelector('[data-bar="' + e.id + '"]');
-      if(bar) bar.setAttribute('aria-label', fill(d.gantt_aria_bar, { name:nm(e), sp:e.end - e.start, h:e.hours }));
+      if(bar) bar.setAttribute('aria-label', fill(d.gantt_aria_bar, { name:nm(e), sp:e.sp, h:e.hours }));
       var sum = row && row.querySelector('.gantt__row-summary');
       if(sum && d.gantt_aria_totals) sum.setAttribute('aria-label', fill(d.gantt_aria_totals, { name:nm(e), sp:e.sp, h:e.hours }));
       e.tasks.forEach(function(t){
@@ -1348,27 +1361,6 @@ tabs.forEach(tab=>{
     });
   });
 
-  /* ---------- Filters: progressive disclosure ----------
-     PR38-Q23: dependency connectors are always drawn (no chip); epics open one at a time. */
-  var FILTERS = { sp:true, hours:false, milestones:true, deps:true };
-  Array.prototype.slice.call(root.querySelectorAll('.gantt__chip')).forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var key = chip.getAttribute('data-filter');
-      FILTERS[key] = !FILTERS[key];
-      chip.setAttribute('aria-pressed', String(FILTERS[key]));
-      applyFilters();
-    });
-  });
-  function applyFilters(){
-    ['sp','hours','milestones'].forEach(function(key){
-      Array.prototype.slice.call(root.querySelectorAll('[data-layer="' + key + '"]')).forEach(function(el){
-        el.hidden = !FILTERS[key];
-      });
-    });
-    overlay.classList.toggle('layer-off', !FILTERS.deps);
-    drawConnectors();
-  }
-
   /* ---------- Dependency connectors ---------- */
   function rectOf(id){
     var el = chart.querySelector('[data-bar="' + id + '"]');
@@ -1382,7 +1374,6 @@ tabs.forEach(tab=>{
     return null;
   }
   function drawConnectors(){
-    if(!FILTERS.deps){ overlay.innerHTML = ''; return; }
     var base = chart.getBoundingClientRect();
     overlay.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
     var svg = '';
@@ -1400,7 +1391,7 @@ tabs.forEach(tab=>{
   }
   window.addEventListener('resize', drawConnectors);
 
-  applyFilters();
+  drawConnectors();
 })();
 
 </script>
