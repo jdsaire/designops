@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+  <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -637,7 +638,25 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
     </div>
-    <p class="dash__foot" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="ge1">Starting prototype</span><span class="relay__x" data-i18n="sch_m1_x">28–29 Jul · 28 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="ge2">Usability audit</span><span class="relay__x" data-i18n="sch_m2_x">30–31 Jul · 24 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="ge3">Simulated research</span><span class="relay__x" data-i18n="sch_m3_x">11–14 Aug · 39 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="ge4">Front-end development</span><span class="relay__x" data-i18n="sch_m4_x">14–17 Aug · 51 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="ge5">Feature iteration</span><span class="relay__x" data-i18n="sch_m5_x">18–20 Aug · 37 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">06</span><span class="relay__tx"><span class="relay__t" data-i18n="ge6">Back-end API</span><span class="relay__x" data-i18n="sch_m6_x">20 Aug · 19 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">07</span><span class="relay__tx"><span class="relay__t" data-i18n="ge7">Launch</span><span class="relay__x" data-i18n="sch_m7_x">29–30 Aug · 8 commits · Live 30 Aug</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="schHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
+    <p class="synthesis chart-aside" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
   </div>
 </section>
 
@@ -1068,13 +1087,13 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   var grid = document.getElementById('ganttGrid'); if(!grid) return;
   var AXIS_START = '2026-07-28', AXIS_END = '2026-08-30';
   var EPICS = [
-      { id:'e1', key:'ge1', name:"01 Foundation", start:'2026-07-28', end:'2026-07-29', commits:28, runs:2 },
-      { id:'e2', key:'ge2', name:"02 Usability baseline", start:'2026-07-30', end:'2026-07-31', commits:24, runs:1 },
-      { id:'e3', key:'ge3', name:"03 UX simulation", start:'2026-08-11', end:'2026-08-14', commits:39, runs:5 },
-      { id:'e4', key:'ge4', name:"04 Front-end development", start:'2026-08-14', end:'2026-08-17', commits:51, runs:4 },
-      { id:'e5', key:'ge5', name:"05 Testing and iteration", start:'2026-08-18', end:'2026-08-20', commits:37, runs:2 },
-      { id:'e6', key:'ge6', name:"06 Back-end layer", start:'2026-08-20', end:'2026-08-20', commits:19, runs:1 },
-      { id:'e7', key:'ge7', name:"07 Launch", start:'2026-08-29', end:'2026-08-30', commits:8, runs:1 }
+      { id:'e1', key:'ge1', name:"Starting prototype", start:'2026-07-28', end:'2026-07-29', commits:28, runs:2 },
+      { id:'e2', key:'ge2', name:"Usability audit", start:'2026-07-30', end:'2026-07-31', commits:24, runs:1 },
+      { id:'e3', key:'ge3', name:"Simulated research", start:'2026-08-11', end:'2026-08-14', commits:39, runs:5 },
+      { id:'e4', key:'ge4', name:"Front-end development", start:'2026-08-14', end:'2026-08-17', commits:51, runs:4 },
+      { id:'e5', key:'ge5', name:"Feature iteration", start:'2026-08-18', end:'2026-08-20', commits:37, runs:2 },
+      { id:'e6', key:'ge6', name:"Back-end API", start:'2026-08-20', end:'2026-08-20', commits:19, runs:1 },
+      { id:'e7', key:'ge7', name:"Launch", start:'2026-08-29', end:'2026-08-30', commits:8, runs:1 }
   ];
   var MILESTONES = [ { epic:'e7', at:'2026-08-30', key:'gms_live', name:'Live' } ];
   var DAY = 86400000;
@@ -1093,12 +1112,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   });
   var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div><div class="gantt__axis-units">' + ticks +
              '</div><div class="gantt__axis-summary">Window</div></div>';
-  EPICS.forEach(function(e){
-    var days = spanOf(e);
+  EPICS.forEach(function(e, i){
+    var days = spanOf(e), num = '0' + (i + 1);   /* the epic's number, purple (PR40-Q13); the name key holds the name only */
     html += '<div class="gantt__epic" role="listitem"><div class="gantt__row">' +
-      '<div class="gantt__row-label"><span class="gantt__row-name" data-i18n="' + e.key + '">' + e.name + '</span></div>' +
+      '<div class="gantt__row-label"><span class="gantt__row-name"><span class="gantt__stage-n">' + num + '</span><span data-i18n="' + e.key + '">' + e.name + '</span></span></div>' +
       '<div class="gantt__row-field"><div class="gantt__bar gantt__bar--epic" style="left:' + pct(offset(e.start)) + '; width:' + pct(days) + ';" role="img" aria-label="' +
-        e.name + ', ' + win(e) + ' 2026, ' + days + (days === 1 ? ' day' : ' days') + '"><span class="gantt__span">' + days + 'd</span></div>' +
+        num + ' ' + e.name + ', ' + win(e) + ' 2026, ' + days + (days === 1 ? ' day' : ' days') + '"><span class="gantt__span">' + days + 'd</span></div>' +
         '<span data-ms-slot="' + e.id + '"></span></div>' +
       '<div class="gantt__row-summary"><b>' + win(e) + '</b><span class="gantt__days">' + e.commits + ' commits</span>' +
         '<span class="gantt__days">' + e.runs + (e.runs === 1 ? ' run' : ' runs') + '</span></div>' +
