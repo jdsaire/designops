@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+  <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -735,9 +736,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act3_lede">Commits and pull requests.</p>
     </div>
 
-    <div class="sched__ctas">
+    <div class="sched__ctas chart-aside">
       <div class="reveal" data-act="sch">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="Chart overview" data-panel-title-key="act3_rv1_btn" data-i18n="act3_rv1_btn">Chart overview</button>
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
         <div class="reveal__body reveal__body--poster" id="rv-sch2">
           <p data-i18n-html="act3_rv1_txt">This Gantt chart turns cold project work into a visual summary for tracking purposes. Each row is one stage of the work, read from left to right along the calendar, so you can see <strong>what happened when, how long each deploy took and where overlaps happen</strong>. This visual records completed work, not planned.</p>
         </div>
@@ -759,10 +760,26 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <noscript><p class="gantt__caption" data-i18n="sch_noscript">This chart renders from its data object and requires JavaScript. The reading guide above states the window it draws and its source.</p></noscript>
     </div>
 
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c1">Defect inventory</span><span class="relay__x" data-i18n="sch_m1_x">28 Aug · 1 commit · 1 PR</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c2">Case briefs</span><span class="relay__x" data-i18n="sch_m2_x">30 Aug – 11 Sep · 30 commits · 4 PRs</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c3">Core pages</span><span class="relay__x" data-i18n="sch_m3_x">30 Aug – 20 Sep · 83 commits · 5 PRs</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c4">Themes and artwork</span><span class="relay__x" data-i18n="sch_m4_x">5–6 Sep · 22 commits · 2 PRs</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c5">Bilingual copy</span><span class="relay__x" data-i18n="sch_m5_x">20–26 Sep · 139 commits · 3 PRs</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="schHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
     <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
-    <p class="synthesis" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
-    <p class="synthesis" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
-    <p class="synthesis" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
 </section>
 
 <!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, each with its own label and a technical panel ================= -->
@@ -1446,16 +1463,16 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
             { n:22, key:'sch_pr22', name:'Moved the Trust-Verify app to its own repository', merge:'2026-09-01' },
             { n:23, key:'sch_pr23', name:'Published the Airport brief and retired two draft pages', merge:'2026-09-05' },
             { n:26, key:'sch_pr26', name:'Reviewed and revised this Portfolio Evolution brief', merge:'2026-09-11' } ]},
-        { id:'c3', key:'sch_c3', name:'Home/About/Contact', start:'2026-08-30', end:'2026-09-20', active:6, commits:83, prs:[
+        { id:'c3', key:'sch_c3', name:'Core pages', start:'2026-08-30', end:'2026-09-20', active:6, commits:83, prs:[
             { n:20, key:'sch_pr20', name:'Reorganized the home page around four work cards', merge:'2026-08-31' },
             { n:21, key:'sch_pr21', name:'Refined home navigation, cards and track record', merge:'2026-08-31' },
             { n:27, key:'sch_pr27', name:"Tidied the home page's building blocks", merge:'2026-09-13' },
             { n:28, key:'sch_pr28', name:"Built the About page's journey", merge:'2026-09-16' },
             { n:29, key:'sch_pr29', name:'Finished the Contact page in English and Spanish', merge:'2026-09-20' } ]},
-        { id:'c4', key:'sch_c4', name:'Global mechanisms', start:'2026-09-05', end:'2026-09-06', active:2, commits:22, prs:[
+        { id:'c4', key:'sch_c4', name:'Themes and artwork', start:'2026-09-05', end:'2026-09-06', active:2, commits:22, prs:[
             { n:24, key:'sch_pr24', name:'Added light and dark themes and connected the contact form', merge:'2026-09-05' },
             { n:25, key:'sch_pr25', name:'Drew vector artwork for the work and capability cards', merge:'2026-09-06' } ]},
-        { id:'c5', key:'sch_c5', name:'Copy and i18n waves', start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:[
+        { id:'c5', key:'sch_c5', name:'Bilingual copy', start:'2026-09-20', end:'2026-09-26', active:7, commits:139, prs:[
             { n:30, key:'sch_pr30', name:'Approved copy for Home and About in both languages', merge:'2026-09-22' },
             { n:31, key:'sch_pr31', name:'Split the dictionaries and standardized the briefs', merge:'2026-09-24' },
             { n:32, key:'sch_pr32', name:'Spanish for every brief, on three dictionary levels', merge:'2026-09-26' } ]}
