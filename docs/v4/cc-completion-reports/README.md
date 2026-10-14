@@ -20,3 +20,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #36 · Public CVs | `pr36-public-cvs-completion-report.md` |
 | PR #37 · Navbar cue and Main hero | `pr37-navbar-hero-completion-report.md` |
 | PR #38 · Mobile copy | `pr38-mobile-copy-completion-report.md` |
+| PR #39 · Closure figures | `pr39-closure-figures-completion-report.md` |
