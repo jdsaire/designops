@@ -46,7 +46,7 @@
   "act2_s3_n": "Nivel 3",
   "act2_s3_t": "Web multipágina (hoy)",
   "act2_s3_x": "Esta versión se logró con la Especialización Microsoft Front-end. <strong>Siete páginas, cuatro briefs</strong>, copy en dos idiomas.",
-  "act2_foot": "Construir un sitio con IA en 2027 exige más que un prompt: exige una orquestación completa, de la investigación a la revisión. Eso distingue este build de los vibe-coders audaces y de los desarrolladores que aún escriben cada línea a mano.",
+  "act2_foot": "Construir con IA exige orquestación, de la investigación a la revisión.",
   "act3_verdict": "El despliegue.",
   "act3_lede": "Commits y pull requests.",
   "act3_rv1_txt": "Este diagrama de Gantt convierte el trabajo hecho en el proyecto en un resumen visual para seguimiento. Cada fila es un bloque de trabajo relacionado que se lee de izquierda a derecha en el calendario. Así se ve <strong>qué pasó y cuándo, cuánto duró cada despliegue y dónde hubo conflictos</strong>. Sólo se registra trabajo finalizado, no planeado.",
