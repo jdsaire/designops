@@ -120,3 +120,25 @@
 @media (min-width: 1024px) {
   .hlr__seg--ins { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 }
+
+/* ---- Phone card scrollers (PR40-Q31…Q35): below 768 an act's main card set scrolls sideways in Brief 02 Act 02's
+   pattern (snap, the next card peeks, no arrows: PR38-Q25). Each card shows its place as "01 / 04" (CSS counters,
+   language-neutral; the alt text is empty so assistive tech skips it; on ::before, since the decoration RUN edge owns
+   ::after); the purple detail CTAs inside the cards are
+   hidden; a limit that lived only in a hidden panel is carried by a .swipe-note under the set. From 768 nothing changes. */
+.swipe-note { display: none; }
+@media (max-width: 767px) {
+  .act .swipe { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: calc(100% - var(--peek-width));
+    gap: clamp(1.25rem, 2vw, 2rem); align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem;
+    scrollbar-width: none; counter-reset: swipe 0 swipen 3; }
+  .act .swipe:has(> :nth-child(4)) { counter-reset: swipe 0 swipen 4; }
+  .act .swipe::-webkit-scrollbar { display: none; }
+  .act .swipe > * { margin-top: 0; scroll-snap-align: start; position: relative; counter-increment: swipe; }
+  .act .swipe > *::before { content: counter(swipe, decimal-leading-zero) " / " counter(swipen, decimal-leading-zero) / "";
+    position: absolute; top: clamp(1.3rem, 2.2vw, 1.9rem); right: clamp(1.3rem, 2.2vw, 1.9rem);
+    font-size: .62rem; font-weight: var(--fw-bold); letter-spacing: .2em; color: var(--color-text-dim); }
+  .act .swipe > * > :first-child { padding-right: 3.4rem; }
+  .act .swipe .reveal { display: none; }
+  .act .swipe .pcard__t::before { content: none; }
+  .act .swipe-note { display: block; }
+}
