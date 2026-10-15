@@ -82,6 +82,7 @@
   "b4_x": "Smooth keyboard navigation and screen-reader support, passing starting accessibility checks.",
   "b4_cta": "Technical details",
   "b4_r": "A new change is announced to assistive technology the moment it happens. Skip links, visible focus at all times and clear labels with input validation are built in. To avoid flooding screen readers, help sections and change rows use progressive disclosure, showing detail only when the user asks for it.",
+  "act4_fn_limit": "It is a basic layer that proves the contract, not a production back end.",
   "act5_eyebrow": "Act 05 · The Evaluation",
   "act5_verdict": "Usability audits.",
   "act5_lede": "Diverse and rigorous.",

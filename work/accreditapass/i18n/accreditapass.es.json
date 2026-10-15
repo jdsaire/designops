@@ -82,6 +82,7 @@
   "b4_x": "Navegación fluida por teclado y compatibilidad con lectores de pantalla, aprobando tests de accesibilidad iniciales.",
   "b4_cta": "Detalles técnicos",
   "b4_r": "Cualquier novedad se anuncia a las tecnologías de asistencia en el instante en que ocurre. Se integraron 'skip links', foco visible constante y etiquetas claras con validación en los inputs. Para no saturar los lectores de pantalla, la UI utiliza un modelo de disclosure progresivo en la ayuda y las filas de cambios, revelando los detalles solo cuando el usuario lo necesita.",
+  "act4_fn_limit": "Es una capa básica que prueba el contrato, no un back-end de producción.",
   "act5_eyebrow": "Acto 05 · La Evaluación",
   "act5_verdict": "Pruebas de usabilidad.",
   "act5_lede": "Variadas y rigurosas.",
