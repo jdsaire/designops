@@ -358,69 +358,10 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   padding-bottom:.15rem; transition:color var(--duration-ui) var(--ease-standard);}
 .evidence__link:hover{color:var(--color-brand-purple);}
 
-/* ---- ACT 04 · THE DASHBOARD — master dashboard ---- */
-.dash{border:1px solid var(--color-border-soft); position:relative;}
-.dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
-.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
-  letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
-  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.dash__tab:hover{color:var(--color-brand-white);}
-.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
-.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
-.dash__panel[hidden]{display:none;}
-/* ---- Paired rows: one metric per row, one value slot per build. Both builds are
-        legible without operating anything, which a tablist could not offer. ---- */
-.drows{display:flex; flex-direction:column;}
-.drow{display:grid; grid-template-columns:minmax(9rem,1.4fr) 1fr 1fr; gap:clamp(.75rem,2vw,1.75rem);
-  align-items:baseline; padding:clamp(.8rem,1.5vw,1.1rem) 0;
-  border-bottom:1px solid var(--color-border-faint);}
-.drow--head{padding-top:0; border-bottom:1px solid var(--color-border-soft);}
-.drow--head .drow__v{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.18em;
-  text-transform:uppercase; color:var(--color-text-dim);}
-.drow__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase;
-  color:var(--color-text-muted);}
-.drow__v{display:flex; flex-direction:column; gap:.25rem;}
-.drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem);}
-/* A metric that exists for one build only prints a dash rather than a zero. */
-.drow__v--none{color:var(--color-text-dim); font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-light);}
-/* Each measure names what it counts in an overlay on hover, focus or tap — the same
-   caption the schedule's diamonds use. The description stays in the row, hidden, as
-   the button's accessible description and the overlay's text. */
-.drow__toggle{font:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit; text-align:left;
-  background:none; border:0; padding:0; cursor:pointer; min-height:44px;
-  text-decoration:underline dotted; text-underline-offset:.35em; text-decoration-color:var(--color-text-dim);}
-.drow__toggle:hover,.drow__toggle:focus-visible,.drow__toggle.is-active{color:var(--color-brand-white); text-decoration-color:var(--color-brand-purple);}
-.drow__desc{display:none;}
-@media (max-width:1023px), (hover:none){
-  .drow__toggle{cursor:default; text-decoration:none; pointer-events:none;}
-}
-.dash__cap{position:absolute; z-index:6; max-width:13rem; padding:.55rem .75rem; pointer-events:none;
-  background:var(--color-brand-black); border:1px solid var(--color-brand-purple);
-  font-size:.8125rem; line-height:1.45; color:var(--color-text-muted); letter-spacing:0; text-transform:none;}
-@media (max-width:767px){
-  .drow{grid-template-columns:1fr 1fr; gap:.35rem .75rem;}
-  .drow__l{grid-column:1 / -1;}
-  .drow--head .drow__l{display:none;}
-}
-
-.dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
-.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
-.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
-.dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
-.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
-.dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 /* Three across at tablet as well as desktop: the default cardgrid--3 drops to two
    columns below 1024, which would leave this row of three as two-and-one. */
 @media (min-width:768px) and (max-width:1023px){
   .cardgrid--hold{grid-template-columns:repeat(3,1fr);}
-}
-.dash__foot{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
-  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-@media (max-width:1023px){ .dash__grid{grid-template-columns:1fr 1fr;} }
-@media (max-width:767px){
-  .dash__grid{grid-template-columns:1fr 1fr;}
-  .dash__grid--derived{grid-template-columns:1fr;}
-  .dash__tab{font-size:.6rem; letter-spacing:.1em;}
 }
 
 /* ---- ACT 05 · THE REFLECTION ---- */
@@ -430,7 +371,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   font-size:.72rem; font-weight:var(--fw-light); color:var(--color-text-muted);}
 .synthesis strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .synthesis + .synthesis{margin-top:.75rem;}
-.dash .synthesis{margin:0 clamp(1.4rem,2.5vw,2.25rem) clamp(1.4rem,2.5vw,2.25rem);}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
@@ -856,7 +796,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — paired values per metric ================= -->
+<!-- ================= ACT 05 · THE DASHBOARD — paired figures and what they mean ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
     <div class="act__head">
@@ -869,114 +809,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     </div>
 
 
-    <!-- Paired values per metric. Both builds sit on one surface with no control to
-         operate: a tablist made each column a click away from the other, which is the
-         opposite of a comparison. A dash means the metric exists for one build only. -->
-    <div class="dash" id="dash">
-      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
-        <button class="dash__tab" role="tab" id="tab-m" aria-selected="true"  aria-controls="dp-m" data-i18n="ui_tab_measure">Measure</button>
-        <button class="dash__tab" role="tab" id="tab-d" aria-selected="false" aria-controls="dp-d" data-i18n="dash_tab2">Derived</button>
-        <button class="dash__tab" role="tab" id="tab-r" aria-selected="false" aria-controls="dp-r" data-i18n="dash_tab3">Insights</button>
+    <!-- The figures, "What it means" and two insights in one panel at every width (PR40-Q25, Q26, Q28); from 768 each
+         figure is drawn as what it says and up to three footnotes follow, hidden on phones. -->
+    <div class="hlr">
+      <div class="hlr__seg hlr__seg--figs"><span class="hlr__h" data-i18n="ui_dash_figs_h">The figures</span>
+        <ul class="hl__list">
+          <li class="hl__item"><span class="hl__n">561 vs 286</span><span class="viz viz--vs"><span class="viz__big">561<span class="viz__of"> vs 286</span></span><span class="viz__rows"><span class="viz__row"><span class="viz__tag" data-i18n="ui_dash_v2">V2</span><span class="viz__track"><span class="viz__fill viz__fill--0" style="width:100.0%"></span></span></span><span class="viz__row"><span class="viz__tag" data-i18n="ui_dash_v1">V1</span><span class="viz__track"><span class="viz__fill viz__fill--1" style="width:51.0%"></span></span></span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="dash_hl1_l">Commits</span><span class="hl__x" data-i18n="dash_hl1_x">In 45 days on the multi-page site, against 71 on the landing page.</span></span></li>
+          <li class="hl__item"><span class="hl__n">64 vs 10</span><span class="viz viz--vs"><span class="viz__big">64<span class="viz__of"> vs 10</span></span><span class="viz__rows"><span class="viz__row"><span class="viz__tag" data-i18n="ui_dash_v2">V2</span><span class="viz__track"><span class="viz__fill viz__fill--0" style="width:100.0%"></span></span></span><span class="viz__row"><span class="viz__tag" data-i18n="ui_dash_v1">V1</span><span class="viz__track"><span class="viz__fill viz__fill--1" style="width:15.6%"></span></span></span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="dash_hl2_l">Organisms</span><span class="hl__x" data-i18n="dash_hl2_x">Reusable page sections, across 7 pages against 1.</span></span></li>
+          <li class="hl__item"><span class="hl__n">990 vs 175</span><span class="viz viz--vs"><span class="viz__big">990<span class="viz__of"> vs 175</span></span><span class="viz__rows"><span class="viz__row"><span class="viz__tag" data-i18n="ui_dash_v2">V2</span><span class="viz__track"><span class="viz__fill viz__fill--0" style="width:100.0%"></span></span></span><span class="viz__row"><span class="viz__tag" data-i18n="ui_dash_v1">V1</span><span class="viz__track"><span class="viz__fill viz__fill--1" style="width:17.7%"></span></span></span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="dash_hl3_l">Dictionary keys</span><span class="hl__x" data-i18n="dash_hl3_x">Labeled pieces of text, each kept in EN/ES.</span></span></li>
+        </ul></div>
+      <div class="hlr__baton"><span data-i18n="ui_dash_means">What it means</span></div>
+      <div class="hlr__seg hlr__seg--ins">
+        <p class="ins" data-i18n-html="dash_ins1"><strong>Reviewed, not rushed.</strong> In both builds nothing shipped without passing a check set first; the second started from a written list of known defects.</p>
+        <p class="ins" data-i18n-html="dash_ins2"><strong>What transfers.</strong> What a team gains is not this code. It is the way of working that made the second build cheaper.</p>
       </div>
-
-      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
-        <div class="drows">
-          <div class="drow drow--head" aria-hidden="true">
-            <div class="drow__l"></div><div class="drow__v" data-i18n="dash_col_multi">Multi-page (v2)</div><div class="drow__v" data-i18n="dash_col_single">Landing page (v1)</div>
-          </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m6"><span data-i18n="dash_m6">Commits</span></button></div>
-        <div class="drow__v"><span class="dcell__n">561</span></div>
-        <div class="drow__v"><span class="dcell__n">286</span></div>
-        <p class="drow__desc" id="dmd-m6" data-i18n="dash_m6_d" hidden>Each saved change to the site's code.</p>
-      </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m7"><span data-i18n="dash_m7">Pull requests</span></button></div>
-        <div class="drow__v"><span class="dcell__n">21</span></div>
-        <div class="drow__v"><span class="dcell__n">52</span></div>
-        <p class="drow__desc" id="dmd-m7" data-i18n="dash_m7_d" hidden>Batches of changes, reviewed before reaching live site.</p>
-      </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m8"><span data-i18n="dash_m8">Days of public history</span></button></div>
-        <div class="drow__v"><span class="dcell__n">45</span></div>
-        <div class="drow__v"><span class="dcell__n">71</span></div>
-        <p class="drow__desc" id="dmd-m8" data-i18n="dash_m8_d" hidden>Calendar days from the first saved change to the last.</p>
-      </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m9"><span data-i18n="dash_m9">Active build-days</span></button></div>
-        <div class="drow__v"><span class="dcell__n">33</span></div>
-        <div class="drow__v"><span class="dcell__n">32</span></div>
-        <p class="drow__desc" id="dmd-m9" data-i18n="dash_m9_d" hidden>Days with at least one saved change.</p>
-      </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m1a"><span data-i18n="dash_m1a">Pages</span></button></div>
-        <div class="drow__v"><span class="dcell__n">7</span></div>
-        <div class="drow__v"><span class="dcell__n">1</span></div>
-        <p class="drow__desc" id="dmd-m1a" data-i18n="dash_m1a_d" hidden>Separate screens a visitor can open.</p>
-      </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m1b"><span data-i18n="dash_m1b">Organisms</span></button></div>
-        <div class="drow__v"><span class="dcell__n">64</span></div>
-        <div class="drow__v"><span class="dcell__n">10</span></div>
-        <p class="drow__desc" id="dmd-m1b" data-i18n="dash_m1b_d" hidden>Reusable page sections, such as a hero, a card grid or a contact form.</p>
-      </div>
-      <div class="drow">
-        <div class="drow__l"><button class="drow__toggle" type="button" aria-describedby="dmd-m2"><span data-i18n="dash_m2">Dictionary keys</span></button></div>
-        <div class="drow__v"><span class="dcell__n">990</span></div>
-        <div class="drow__v"><span class="dcell__n">175</span></div>
-        <p class="drow__desc" id="dmd-m2" data-i18n="dash_m2_d" hidden>Labeled pieces of text, each kept in EN/ES.</p>
-      </div>
-        </div>
-      </div>
-
-      <div class="dash__panel" id="dp-d" role="tabpanel" aria-labelledby="tab-d" hidden>
-        <div class="drows">
-          <div class="drow drow--head" aria-hidden="true">
-            <div class="drow__l"></div><div class="drow__v" data-i18n="dash_col_multi">Multi-page (v2)</div><div class="drow__v" data-i18n="dash_col_single">Landing page (v1)</div>
-          </div>
-      <div class="drow">
-        <div class="drow__l" data-i18n="dash_d1">Commits per day, sustained</div>
-        <div class="drow__v"><span class="dcell__n">12.5</span><span class="dcell__p" data-i18n="dash2_d1_p">561 commits ÷ 45 days</span></div>
-        <div class="drow__v"><span class="dcell__n">4.0</span><span class="dcell__p" data-i18n="dash_d1_p">286 commits ÷ 71 days</span></div>
-      </div>
-      <div class="drow">
-        <div class="drow__l" data-i18n="dash_d2">Pull requests per week</div>
-        <div class="drow__v"><span class="dcell__n">3.3</span><span class="dcell__p" data-i18n="dash2_d2_p">21 PRs ÷ 6.4 weeks</span></div>
-        <div class="drow__v"><span class="dcell__n">5.1</span><span class="dcell__p" data-i18n="dash_d2_p">52 PRs ÷ 10.1 weeks</span></div>
-      </div>
-      <div class="drow">
-        <div class="drow__l" data-i18n="dash_d3">Commits per review gate</div>
-        <div class="drow__v"><span class="dcell__n">26.7</span><span class="dcell__p" data-i18n="dash2_d3_p">561 commits ÷ 21 PRs</span></div>
-        <div class="drow__v"><span class="dcell__n">5.5</span><span class="dcell__p" data-i18n="dash_d3_p">286 commits ÷ 52 PRs</span></div>
-      </div>
-        </div>
-      </div>
-
-      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
-        <!-- Three cards on the Act 02 chassis, read left to right: what the ratio was,
-             what the second build did with it, and what of that transfers. No label and
-             no ladder here — this row is a sequence, not a climb. -->
-        <div class="cardgrid cardgrid--3 cardgrid--hold">
-          <article class="card">
-            <h3 class="card__t" data-i18n="dash_r1_t">Reviewed, not rushed</h3>
-            <p class="card__x" data-i18n="dash_r1">286 commits went through 52 review gates. Nothing shipped without passing a check I set for myself first.</p>
-          </article>
-          <article class="card">
-            <h3 class="card__t" data-i18n="dash2_r1_t">The habit carried</h3>
-            <p class="card__x" data-i18n="dash2_r1">The multi-page build kept that habit, starting from a written list of known defects rather than nothing.</p>
-          </article>
-          <article class="card">
-            <h3 class="card__t" data-i18n="dash_r3_t">What transfers</h3>
-            <p class="card__x" data-i18n="dash_r3">What a team gains is not this code. It is the way of working that made the second build cheaper.</p>
-          </article>
-        </div>
-      </div>
-
-      <!-- Both builds' sources under the dashboard: the single page's method (WC-Q45, restored by PR39-Q8) and the
-           multi-page cut-off, PR #38's merge (SY38-Q9, PR39-Q1). -->
-      <p class="synthesis" data-i18n="dash_foot">Method: public commit history — jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).</p>
-      <p class="synthesis" data-i18n="dash_cutoff">Multi-page figures measured on 12 Oct 2026, at the merge of PR #38.</p>
     </div>
+    <p class="synthesis chart-aside" data-i18n-html="dash_fn1"><strong>Method.</strong> Landing-page figures from the public commit history, jdigital and legacy-desops summed, 24 Apr – 04 Jul 2026 (71 days).</p>
+    <p class="synthesis chart-aside" data-i18n-html="dash_fn2"><strong>Cut-off.</strong> Multi-page figures measured on 12 Oct 2026, at the merge of PR #38.</p>
+    <p class="synthesis chart-aside" data-i18n-html="dash_fn3"><strong>Review gates.</strong> 21 pull requests in 45 days on the multi-page site, against 52 in 71 on the landing page.</p>
   </div>
 </section>
 
@@ -1208,38 +1058,6 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
   });
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
-
-/* ============ Dashboard tabs ============
-   Two tiers now: which build, and which level within it. Both are one-of-n, so
-   both are tablists, and each resolves its panel from aria-controls rather than
-   from a hardcoded id map — the build panels each own a level tablist, and a map
-   would have to know about both tiers. Arrow keys move between tabs in the same
-   list, which is the pattern the role expects. ============ */
-document.querySelectorAll('[role="tablist"]').forEach(list=>{
-  const tabs = [...list.querySelectorAll('[role="tab"]')];
-  function select(tab){
-    tabs.forEach(t=>{
-      const sel = t === tab;
-      t.setAttribute("aria-selected", String(sel));
-      t.tabIndex = sel ? 0 : -1;
-      const panel = document.getElementById(t.getAttribute("aria-controls"));
-      if(panel) panel.hidden = !sel;
-    });
-    const panel = document.getElementById(tab.getAttribute("aria-controls"));
-  }
-  tabs.forEach((tab,i)=>{
-    tab.tabIndex = tab.getAttribute("aria-selected") === "true" ? 0 : -1;
-    tab.addEventListener("click", ()=> select(tab));
-    tab.addEventListener("keydown", e=>{
-      let nx = null;
-      if(e.key === "ArrowRight") nx = tabs[(i+1) % tabs.length];
-      if(e.key === "ArrowLeft")  nx = tabs[(i-1+tabs.length) % tabs.length];
-      if(e.key === "Home")       nx = tabs[0];
-      if(e.key === "End")        nx = tabs[tabs.length-1];
-      if(nx){ e.preventDefault(); nx.focus(); select(nx); }
-    });
-  });
-});
 
 /* ============================================================
    ACT 03 · SCHEDULE ORGANISM — data-driven, calendar-scaled.
@@ -1484,63 +1302,6 @@ document.querySelectorAll('[role="tablist"]').forEach(list=>{
     var dict = e.detail && e.detail.dict;
     if(dict) instances.forEach(function(inst){ if(inst) inst.draw(dict); });
   });
-})();
-
-/* ============ Dashboard measures: a plain description in an overlay ============
-   Hover, focus or tap a measure to read what it counts; a second tap, Escape or a
-   tap elsewhere closes it. Placed above the label, or below it near the top, and
-   kept inside the dashboard. */
-(function measureCaptions(){
-  const dash = document.querySelector(".dash");
-  if(!dash) return;
-  const cap = document.createElement("div");
-  cap.className = "dash__cap"; cap.setAttribute("aria-hidden","true"); cap.hidden = true;
-  dash.appendChild(cap);
-  let current = null, pinned = false;
-  /* Desktop only (WC-Q42): a wide screen with a mouse or trackpad. On phones and
-     tablets the labels stay plain, out of the tab order, and screen readers still
-     read each description through aria-describedby. */
-  const desk = window.matchMedia("(min-width:1024px) and (hover:hover)");
-  const toggles = dash.querySelectorAll(".drow__toggle");
-  function mode(){
-    if(!desk.matches) hide();
-    toggles.forEach(b=>{ if(desk.matches) b.removeAttribute("tabindex"); else b.setAttribute("tabindex","-1"); });
-  }
-  /* To the right of the label, centred on it, so no figure is covered; where the
-     row leaves too little room beside a long label (phone widths), below it. */
-  function place(btn){
-    cap.style.maxWidth = ""; cap.style.left = "0px"; cap.style.top = "0px";
-    const c = dash.getBoundingClientRect(), r = btn.getBoundingClientRect();
-    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize), pad = 8, gap = 12;
-    const x = r.right - c.left + gap, room = dash.clientWidth - x - pad;
-    if(room >= 9 * rem){
-      cap.style.maxWidth = Math.min(13 * rem, room) + "px";
-      cap.style.left = x + "px";
-      cap.style.top = Math.max(pad, r.top - c.top + (r.height - cap.offsetHeight) / 2) + "px";
-    } else {
-      const w = cap.offsetWidth;
-      cap.style.left = Math.max(pad, Math.min(r.left - c.left, dash.clientWidth - w - pad)) + "px";
-      cap.style.top = (r.bottom - c.top + 6) + "px";
-    }
-  }
-  function show(btn){
-    const d = document.getElementById(btn.getAttribute("aria-describedby"));
-    if(!d) return;
-    if(current && current !== btn) current.classList.remove("is-active");
-    current = btn; btn.classList.add("is-active");
-    cap.textContent = d.textContent; cap.hidden = false; place(btn);
-  }
-  function hide(){ if(current) current.classList.remove("is-active"); current = null; pinned = false; cap.hidden = true; }
-  dash.addEventListener("pointerover", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned) show(b); });
-  dash.addEventListener("pointerout", e=>{ const b = e.target.closest(".drow__toggle"); if(b && e.pointerType === "mouse" && !pinned && !b.contains(e.relatedTarget)) hide(); });
-  dash.addEventListener("click", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(!b) return; if(pinned && current === b){ hide(); return; } show(b); pinned = true; });
-  dash.addEventListener("focusin", e=>{ if(!desk.matches) return; const b = e.target.closest(".drow__toggle"); if(b && !pinned) show(b); });
-  dash.addEventListener("focusout", e=>{ if(!pinned && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(".drow__toggle"))) hide(); });
-  document.addEventListener("click", e=>{ if(current && !e.target.closest(".drow__toggle")) hide(); });
-  document.addEventListener("keydown", e=>{ if(e.key === "Escape" && current) hide(); });
-  window.addEventListener("resize", ()=>{ if(current) place(current); });
-  desk.addEventListener("change", mode);
-  mode();
 })();
 
 </script>
