@@ -142,3 +142,14 @@
   .act .swipe .pcard__t::before { content: none; }
   .act .swipe-note { display: block; }
 }
+
+/* ---- Read time per breakpoint and language (PR #40 G7): the hero's .read__n holds four numbers, measured on the tip
+   with rt.js's method (words the width shows, panels opened, ÷230, rounded up): EN/ES × phone (below 768) / from 768.
+   One shows, chosen by html[lang] (set before first layout by the early i18n script and on every swap) and the width.
+   No lang="es" (no script) reads as EN. No keys, no script. ---- */
+.read__n .rt { display: none; }
+html:not([lang="es"]) .read__n .rt--en.rt--d, html[lang="es"] .read__n .rt--es.rt--d { display: inline; }
+@media (max-width: 767px) {
+  html:not([lang="es"]) .read__n .rt--en.rt--d, html[lang="es"] .read__n .rt--es.rt--d { display: none; }
+  html:not([lang="es"]) .read__n .rt--en.rt--m, html[lang="es"] .read__n .rt--es.rt--m { display: inline; }
+}
