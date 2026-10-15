@@ -102,7 +102,7 @@
   "act4_c4_x": "Before trusting the build, I wrote a <strong>six-scenario test protocol</strong> from the case research: does it tell a fake from a real payment, and does it avoid misfiring under pressure?",
   "act4_c4_rv_btn": "What the six scenarios check",
   "act4_c4_rv_txt": "1: a forged amount on a real operation number is <strong>caught and named</strong>. 2: an unreadable security code never counts as a mismatch. 3: a double-tap or mid-flight cancel <strong>never fires the check twice</strong>. 4: the action stays inert until its preconditions hold. 5: the busy overlay truly blocks the page. 6: privacy masking never leaks a full name or number.",
-  "act4_synthesis": "Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. <strong>Treating it as proof is the trap the tool exists to close.</strong>",
+  "act4_synthesis": "<strong>Only the operation number comes from the bank</strong>; the rest can be faked.",
   "act5_verdict": "Technical rigor.",
   "act5_lede": "Figures and implications.",
   "act5_hl1_v1": "all passing",
@@ -133,6 +133,5 @@
   "act6_h4_tag": "The choice",
   "act6_h4_t": "One problem, not a redesign",
   "act6_h4_x": "Banking is too wide to enter everywhere at once. A short study aimed at <strong>one real fraud mechanism</strong>, seen purely through front-end eyes, not as UX, redesign or innovation theatre.",
-  "act6_sequel": "The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong>.",
   "independence": "<strong>An independent case study.</strong> Not affiliated with, endorsed by, or connected to Yape or BCP. Built against fabricated fixtures. No real payment, account, or ledger is involved."
 }

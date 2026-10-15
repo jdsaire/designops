@@ -102,7 +102,7 @@
   "act4_c4_x": "Antes de confiar en el build, escribí un <strong>protocolo de prueba de seis escenarios</strong> basado en la investigación del caso: ¿distingue un pago falso de uno real, y evita fallar bajo presión?",
   "act4_c4_rv_btn": "Los seis escenarios",
   "act4_c4_rv_txt": "1: un monto falsificado sobre un número de operación real <strong>se detecta y se nombra</strong>. 2: un código de seguridad ilegible nunca cuenta como discrepancia. 3: un doble toque o una cancelación a mitad del proceso <strong>nunca dispara el chequeo dos veces</strong>. 4: la acción permanece inactiva hasta cumplir sus precondiciones. 5: la capa de espera bloquea realmente la página. 6: el enmascarado nunca filtra un nombre o número completo.",
-  "act4_synthesis": "De los cinco campos de un comprobante, cuatro (monto, destinatario, fecha e incluso el código de seguridad) son texto que quien crea la imagen puede definir. Solo el número de operación lo escribe el propio registro del banco. El código de seguridad parece prueba y viene en cada comprobante, pero es texto en la misma imagen. <strong>Tratarlo como prueba es la trampa que esta herramienta existe para cerrar.</strong>",
+  "act4_synthesis": "<strong>Solo el número de operación viene del banco</strong>; lo demás se falsifica.",
   "act5_verdict": "Rigor técnico.",
   "act5_lede": "Cifras e implicaciones.",
   "act5_hl1_v1": "todas aprobadas",
@@ -133,6 +133,5 @@
   "act6_h4_tag": "La elección",
   "act6_h4_t": "Un problema, no un rediseño",
   "act6_h4_x": "El sector bancario es muy amplio para cubrir todos los frentes a la vez. Un estudio corto apuntó a <strong>un solo mecanismo real de fraude</strong>, visto solo desde el front-end, no como UX, rediseño ni teatro de innovación.",
-  "act6_sequel": "La brecha que no cerré: esta app verifica un registro fabricado. <strong>El mismo chequeo contra el registro real de un banco es una conversación de backend</strong>.",
   "independence": "<strong>Un caso de estudio independiente.</strong> No está afiliado, respaldado ni vinculado a Yape ni a BCP. Construido contra fixtures fabricados. No interviene ningún pago, cuenta ni registro contable real."
 }

@@ -346,8 +346,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 /* ---- ACT 06 · THE REFLECTION ---- */
 .house .card__t{display:flex; flex-direction:column; gap:.3rem;}
 .house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-brand-purple);}
-.sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
@@ -548,7 +546,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="cardgrid cardgrid--3">
+    <div class="cardgrid cardgrid--3 swipe" tabindex="0" role="group" aria-labelledby="v0">
       <article class="card">
         <h3 class="card__t" data-i18n="act0_c1_t">Everyone's wallet</h3>
         <p class="card__x" data-i18n-html="act0_c1_x">Cash still matters in Peru, but its share fell sharply as <strong>e-payments took over daily commerce</strong>, led by Yape and other e-wallets.</p>
@@ -717,7 +715,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2">
+    <div class="cardgrid cardgrid--2 swipe" tabindex="0" role="group" aria-labelledby="v4">
       <article class="card">
         <h3 class="card__t" data-i18n="act4_c1_t">React — one source of truth for every screen</h3>
         <p class="card__x" data-i18n-html="act4_c1_x">React draws every screen from the app's data, never the reverse, so <strong>what the merchant sees always matches what the app knows</strong>. In a trust tool, that guarantee is the product.</p>
@@ -763,7 +761,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="synthesis" data-i18n-html="act4_synthesis">Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. <strong>Treating it as proof is the trap the tool exists to close.</strong></p>
+    <p class="synthesis" data-i18n-html="act4_synthesis"><strong>Only the operation number comes from the bank</strong>; the rest can be faked.</p>
 
     <!-- The build links again, where a technical reader wants them (Brief 01 pattern, W2A-G3-Q2). -->
     <p class="scan act__foot" data-i18n="ui_arch_foot">For more, access the repository.</p>
@@ -829,7 +827,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act6_lede">Lessons learned.</p>
     </div>
 
-    <div class="cardgrid cardgrid--4">
+    <div class="cardgrid cardgrid--4 swipe" tabindex="0" role="group" aria-labelledby="v6">
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_h1_tag">The ceiling</span><span data-i18n="act6_h1_t">Territory I thought was closed</span></h3>
         <p class="card__x" data-i18n-html="act6_h1_x">I thought app development belonged to career developers. This build broke that ceiling: I now <strong>work the technical side while owning every strategic call</strong>, starting with the stack.</p>
@@ -848,7 +846,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="sequel" data-i18n-html="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong>.</p>
 
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
     <div class="notes" id="disclosure">
