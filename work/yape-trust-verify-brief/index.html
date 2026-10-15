@@ -283,49 +283,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .evidence__link:hover{color:var(--color-brand-purple);}
 
 /* ---- SIMULATED marker — the one place staged content is named ---- */
-/* ---- ACT 05 · THE DASHBOARD ---- */
-.dash{border:1px solid var(--color-border-soft);}
-.dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
-.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
-  letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
-  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.dash__tab:hover{color:var(--color-brand-white);}
-.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
-.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
-.dash__panel[hidden]{display:none;}
-
-/* Provenance band — measured only in this act; staged content lives in Act 04 Card 3 */
-.band{border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem); display:flex; flex-direction:column; gap:1rem;}
-.band--measured{border-left:3px solid var(--color-brand-purple);}
-.band__head{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;}
-.band__badge{font-size:.58rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; padding:.25rem .55rem;
-  background:var(--color-brand-purple); color:var(--color-brand-black);}
-.band__what{font-size:.75rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.band__what strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
-.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
-.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
-.dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
-.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
-.dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.dcell__p strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
-.dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
-  transition:transform 900ms var(--ease-decelerate);}
-.dash__read{display:flex; flex-direction:column; gap:1.1rem; max-width:52rem;}
-.dash__readline{font-size:clamp(1.15rem,1.7vw,1.5rem); font-weight:var(--fw-light); line-height:1.45;}
-.dash__readline strong{font-weight:var(--fw-bold);}
-.dash__readsub{font-size:.95rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.dash__recos{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem;}
-.dash__reco{border-left:3px solid var(--color-brand-purple); padding:.6rem 0 .6rem 1rem;
-  font-size:1rem; font-weight:var(--fw-medium);}
-.dash__foot{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
-  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-@media (max-width:1023px){ .dash__grid{grid-template-columns:1fr 1fr;} }
-@media (max-width:767px){
-  .dash__grid{grid-template-columns:1fr 1fr;}
-  .dash__tab{font-size:.6rem; letter-spacing:.1em;}
-}
 
 /* ================= ACT 03 · ROADMAP ORGANISM (scoped under .gantt) ================= */
 .gantt{--g-border:var(--color-border-soft);}
@@ -383,7 +340,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:52rem; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
-.gantt .layer-off{visibility:hidden;}
 .gantt [hidden]{display:none !important;}
 .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
 
@@ -404,8 +360,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  /* Timelines keep their layout under reduced motion (decoration spec floor rule 1); only their motion stops. */
-  .dcell__bar i{transform:scaleX(var(--v,0));}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
 
@@ -830,7 +784,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — measured only; staged lives in Act 04 Card 3 ================= -->
+<!-- ================= ACT 05 · THE DASHBOARD — measured figures and what they mean; staged lives in Act 04 Card 3 ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
@@ -842,85 +796,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act5_lede">Figures and implications.</p>
     </div>
 
-    <div class="dash">
-      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
-        <button class="dash__tab" id="tab-m" role="tab" aria-selected="true" aria-controls="dp-m" data-i18n="ui_tab_measure">Measure</button>
-        <button class="dash__tab" id="tab-r" role="tab" aria-selected="false" aria-controls="dp-r" data-i18n="act5_tab_r">The insight</button>
+    <!-- The figures, "What it means" and two insights in one panel at every width (PR40-Q25, Q26, Q28); from 768 each
+         figure is drawn as what it says and up to three footnotes follow, hidden on phones. -->
+    <div class="hlr">
+      <div class="hlr__seg hlr__seg--figs"><span class="hlr__h" data-i18n="ui_dash_figs_h">The figures</span>
+        <ul class="hl__list">
+          <li class="hl__item"><span class="hl__n">45/45</span><span class="viz viz--meter"><span class="viz__big">45<span class="viz__of">/45</span></span><span class="viz__bar" aria-hidden="true"><span class="viz__seg viz__seg--0" style="flex-grow:1"></span></span><span class="viz__legend"><span class="viz__key viz__key--0" data-i18n="act5_hl1_v1">all passing</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl1_l">Assertions passing</span><span class="hl__x" data-i18n="act5_hl1_x">Across six fraud scenarios. None waived.</span></span></li>
+          <li class="hl__item"><span class="hl__n">5</span><span class="viz viz--chips"><span class="viz__big">5</span><span class="viz__chips"><span class="viz__chip">Typecheck</span><span class="viz__chip">Tests</span><span class="viz__chip">Build</span><span class="viz__chip">Drift</span><span class="viz__chip" data-i18n="act5_hl2_c5">Paths</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl2_l">CI gates per push</span><span class="hl__x" data-i18n="act5_hl2_x">Typecheck, tests, build, drift and paths.</span></span></li>
+          <li class="hl__item"><span class="hl__n"><7</span><span class="viz viz--week"><span class="viz__big">&lt;7</span><span class="viz__week" aria-hidden="true"><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span></span><span class="viz__legend"><span class="viz__key viz__key--0" data-i18n="act5_hl3_v1">one week</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl3_l">Days, research to deployed app</span><span class="hl__x" data-i18n="act5_hl3_x">First app build, first use of this stack.</span></span></li>
+        </ul></div>
+      <div class="hlr__baton"><span data-i18n="ui_dash_means">What it means</span></div>
+      <div class="hlr__seg hlr__seg--ins">
+        <p class="ins" data-i18n-html="act5_ins1"><strong>The fastest artifact in this portfolio is also its most technical.</strong> That inversion is the finding.</p>
+        <p class="ins" data-i18n-html="act5_ins2"><strong>What transfers.</strong> Any stack a client's problem requires is now within reach, with every decision owned and every claim checkable.</p>
       </div>
-
-      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
-        <div class="band band--measured">
-          <div class="band__head">
-            <span class="band__badge" data-i18n="band_m_badge">Build · measured</span>
-            <span class="band__what" data-i18n-html="band_m_what">Counted from the repository and the recorded test run. <strong>Verifiable at the linked source.</strong></span>
-          </div>
-          <div class="dash__grid">
-            <div class="dcell">
-              <span class="dcell__n"><span>45</span></span>
-              <span class="dcell__l" data-i18n="m1_l">Assertions passing</span>
-              <span class="dcell__p" data-i18n-html="m1_p"><strong>45 of 45.</strong> None waived.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>6</span></span>
-              <span class="dcell__l" data-i18n="m2_l">Protocol scenarios</span>
-              <span class="dcell__p" data-i18n-html="m2_p"><strong>All six pass.</strong></span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>0</span></span>
-              <span class="dcell__l" data-i18n="m3_l">Backend services</span>
-              <span class="dcell__p" data-i18n-html="m3_p"><strong>Front-end only</strong>, by constraint.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>5</span></span>
-              <span class="dcell__l" data-i18n="m4_l">CI gates per push</span>
-              <span class="dcell__p" data-i18n-html="m4_p"><strong>Typecheck, tests, build, drift, paths.</strong></span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>5</span></span>
-              <span class="dcell__l" data-i18n="m5_l">Security controls running in the client</span>
-              <span class="dcell__p" data-i18n-html="m5_p"><strong>Secure keypad</strong>, shuffled digits, execution lock, blocking overlay, privacy masking.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>3</span></span>
-              <span class="dcell__l" data-i18n="m6_l">API endpoints consumed</span>
-              <span class="dcell__p" data-i18n-html="m6_p">Real request handling <strong>against mock fixtures</strong>.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0.6"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n">&lt;7</span>
-              <span class="dcell__l" data-i18n="m7_l">Days, research to deployed app</span>
-              <span class="dcell__p" data-i18n-html="m7_p"><strong>First app build</strong>, first use of this stack.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0.5"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>0</span></span>
-              <span class="dcell__l" data-i18n="m8_l">Lines of code typed by hand</span>
-              <span class="dcell__p" data-i18n-html="m8_p">Every line directed, reviewed and understood. <strong>None typed.</strong></span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
-        <div class="dash__read">
-          <p class="dash__readline" data-i18n-html="r1"><strong>The fastest artifact in this portfolio is also its most technical.</strong> That inversion is the finding.</p>
-          <ul class="dash__recos">
-            <li class="dash__reco" data-i18n-html="r2_1">Entering app development, with a new stack, security discipline and testing rigor, <strong>looked reserved for career developers</strong>.</li>
-            <li class="dash__reco" data-i18n-html="r2_2">Directed properly, it took <strong>under a week</strong> and produced the only work here a stranger can verify by running a test suite.</li>
-            <li class="dash__reco" data-i18n-html="r2_3">Entering a new stack is now cheap; <strong>what stays scarce is knowing what to build</strong> and how to prove it holds.</li>
-          </ul>
-          <p class="dash__reco" data-i18n-html="r3">What transfers: <strong>any stack a client's problem requires is now within reach</strong>, with every decision owned and every claim checkable.</p>
-        </div>
-      </div>
-
-      <p class="dash__foot" data-i18n="act5_foot">Method — figures counted from the repository and the recorded test run (Node 24.18.0, Vitest 3.2.7, TypeScript 5.9.3, 15 Jul 2026), verifiable at the linked source. Staged security demonstrations are described, and badged, in The Architecture above.</p>
     </div>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn1"><strong>Method.</strong> Figures counted from the repository and the recorded test run (Node 24.18.0, Vitest 3.2.7, TypeScript 5.9.3, 15 Jul 2026), verifiable at the linked source. Staged security demonstrations are described, and badged, in The Architecture above.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn2"><strong>Front-end only.</strong> No backend services, by constraint; 3 API endpoints consumed, with real request handling against mock fixtures.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn3"><strong>In the client.</strong> Security controls run in the browser, among them a secure keypad, shuffled digits, an execution lock, a blocking overlay and privacy masking.</p>
   </div>
 </section>
 
@@ -1157,19 +1050,6 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
   });
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
-
-/* ============ Dashboard tabs — two-way (Measured / The read) ============ */
-const tabs = [...document.querySelectorAll(".dash__tab")];
-const panels = { "tab-m":"dp-m", "tab-r":"dp-r" };
-tabs.forEach(tab=>{
-  tab.addEventListener("click", ()=>{
-    tabs.forEach(t=>{
-      const sel = t===tab;
-      t.setAttribute("aria-selected", String(sel));
-      document.getElementById(panels[t.id]).hidden = !sel;
-    });
-  });
-});
 
 /* ============================================================
    ACT 03 · ROADMAP ORGANISM — data-driven, effort-scaled.
