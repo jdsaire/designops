@@ -427,42 +427,65 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   #evolution .jr-item .timeline__marker { transition: none; }
 }
 
-/* ---- JOURNEY · category filters and sort (S10-B) ----
+/* ---- JOURNEY · category filter (S10-B; a select since PR #40) ----
    Square by the universal reset, tokens in both themes, and no colour is
-   asked to carry the category: the chip's own word does that. */
+   asked to carry the category: the option's own word does that. */
 #evolution .jr-controls {
   max-width: 46rem;
   margin: 0 auto clamp(1.25rem, 2.5vw, 2rem);
 }
-#evolution .jr-filters {
+/* The filter is Contact's select, rule for rule (contact.css: .form-group, .form-label, .form-select,
+   .select-wrapper; PR #40, JD at G1): one field across the column at every width, the platform's picker
+   on phones, and focus shown by the purple border alone, never an outline on top of it. */
+#evolution .jr-select {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-#evolution .jr-chip {
-  font-family: inherit;
-  font-size: 0.6875rem;
+#evolution .jr-select__label {
+  font-size: 0.7rem;
   font-weight: var(--fw-semibold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  background: none;
-  border: 1px solid var(--color-border-soft);
-  padding: 0.35rem 0.7rem;
-  cursor: pointer;
-  transition: color var(--duration-ui) var(--ease-standard),
-              border-color var(--duration-ui) var(--ease-standard),
-              background-color var(--duration-ui) var(--ease-standard);
 }
-#evolution .jr-chip:hover { color: var(--color-brand-white); }
-#evolution .jr-chip[aria-pressed="true"] {
+#evolution .jr-select__wrap {
+  position: relative;
+}
+#evolution .jr-select__wrap::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--color-text-muted);
+  pointer-events: none;
+}
+#evolution .jr-select__control {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
   color: var(--color-brand-white);
-  background: var(--surface-card);
-  border-color: var(--color-brand-purple);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  padding: 0.875rem 2.5rem 0.875rem 1rem;
+  width: 100%;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color var(--duration-ui) var(--ease-standard),
+              background var(--duration-ui) var(--ease-standard);
 }
-#evolution .jr-chip:focus-visible {
-  outline: 2px solid var(--color-brand-purple);
-  outline-offset: 3px;
+#evolution .jr-select__control:hover {
+  background: var(--surface-input);
+  border-color: var(--color-border-hover);
+}
+#evolution .jr-select__control:focus {
+  border-color: var(--color-brand-purple);
+  background: var(--surface-input);
 }
 #evolution .jr-countrow {
   display: flex;
@@ -485,7 +508,7 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   #evolution .jr-count { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #evolution .jr-chip,
+  #evolution .jr-select__control,
   #evolution .jr-link { transition: none; }
 }
 

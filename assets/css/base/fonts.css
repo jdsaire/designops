@@ -12,13 +12,68 @@
    at 1.105, where the most headings keep their line count (swept over every page, EN/ES,
    390–1440). Vertical metrics are the same at every weight (ascent 0.878 em, descent 0.210 em,
    no line gap); the overrides are divided by size-adjust, which scales them. */
+/* The ampersand (PR #40, PR40-Q8, JD's pick A): Archivo's own "&" reads poorly, so "&" alone comes from Arial
+   (Roboto on Android), through a unicode-range face in the same family. A unicode-range face only joins the
+   faces it shares every other descriptor with, so the upright face is declared once per weight band (the same
+   file, fetched once) and each band gets its "&" face: Arial below 550, Arial Bold to 799, Arial Black above.
+   Its vertical metrics are Archivo's, so a line holding "&" keeps its height. Where none of those fonts exists,
+   the "&" face fails and Archivo's own glyph shows. The italic keeps Archivo's "&". */
 @font-face {
   font-family: 'Archivo';
   src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
-  font-weight: 100 900;
+  font-weight: 100 549;
   font-stretch: 62% 125%;
   font-style: normal;
   font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: local('Arial'), local('ArialMT'), local('Roboto'), local('Roboto-Regular');
+  font-weight: 100 549;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  unicode-range: U+0026;
+  ascent-override: 87.8%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
+  font-weight: 550 799;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Roboto Bold'), local('Roboto-Bold');
+  font-weight: 550 799;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  unicode-range: U+0026;
+  ascent-override: 87.8%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
+  font-weight: 800 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: local('Arial Black'), local('Arial-Black'), local('Roboto Black'), local('Roboto-Black');
+  font-weight: 800 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  unicode-range: U+0026;
+  ascent-override: 87.8%;
+  descent-override: 21%;
+  line-gap-override: 0%;
 }
 @font-face {
   font-family: 'Archivo';

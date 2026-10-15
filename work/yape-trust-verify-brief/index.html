@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+  <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -282,72 +283,22 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .evidence__link:hover{color:var(--color-brand-purple);}
 
 /* ---- SIMULATED marker — the one place staged content is named ---- */
-/* ---- ACT 05 · THE DASHBOARD ---- */
-.dash{border:1px solid var(--color-border-soft);}
-.dash__tabs{display:flex; border-bottom:1px solid var(--color-border-soft);}
-.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.7rem; font-weight:var(--fw-semibold);
-  letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim);
-  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.dash__tab:hover{color:var(--color-brand-white);}
-.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
-.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
-.dash__panel[hidden]{display:none;}
-
-/* Provenance band — measured only in this act; staged content lives in Act 04 Card 3 */
-.band{border:1px solid var(--color-border-soft); padding:clamp(1.1rem,2vw,1.5rem); display:flex; flex-direction:column; gap:1rem;}
-.band--measured{border-left:3px solid var(--color-brand-purple);}
-.band__head{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;}
-.band__badge{font-size:.58rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; padding:.25rem .55rem;
-  background:var(--color-brand-purple); color:var(--color-brand-black);}
-.band__what{font-size:.75rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.band__what strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.dash__grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
-.dcell{border:1px solid var(--color-border-faint); padding:clamp(1rem,1.8vw,1.5rem); display:flex; flex-direction:column; gap:.3rem;}
-.dcell__n{font-size:clamp(1.8rem,3vw,2.7rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
-.dcell__n small{font-size:.55em; font-weight:var(--fw-bold); color:var(--color-text-muted);}
-.dcell__l{font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
-.dcell__p{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.dcell__p strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
-.dcell__bar{height:4px; background:var(--color-border-soft); margin-top:.55rem; position:relative; overflow:hidden;}
-.dcell__bar i{position:absolute; inset:0; transform-origin:left; background:var(--color-brand-purple); transform:scaleX(var(--v,0));
-  transition:transform 900ms var(--ease-decelerate);}
-.dash__read{display:flex; flex-direction:column; gap:1.1rem; max-width:52rem;}
-.dash__readline{font-size:clamp(1.15rem,1.7vw,1.5rem); font-weight:var(--fw-light); line-height:1.45;}
-.dash__readline strong{font-weight:var(--fw-bold);}
-.dash__readsub{font-size:.95rem; color:var(--color-text-muted); font-weight:var(--fw-light);}
-.dash__recos{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem;}
-.dash__reco{border-left:3px solid var(--color-brand-purple); padding:.6rem 0 .6rem 1rem;
-  font-size:1rem; font-weight:var(--fw-medium);}
-.dash__foot{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
-  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-@media (max-width:1023px){ .dash__grid{grid-template-columns:1fr 1fr;} }
-@media (max-width:767px){
-  .dash__grid{grid-template-columns:1fr 1fr;}
-  .dash__tab{font-size:.6rem; letter-spacing:.1em;}
-}
 
 /* ================= ACT 03 · ROADMAP ORGANISM (scoped under .gantt) ================= */
 .gantt{--g-border:var(--color-border-soft);}
 .gantt *{border-radius:0; box-shadow:none;}
-.gantt__tools{display:flex; align-items:center; gap:1.25rem; padding:0 0 1.5rem; flex-wrap:wrap;}
-.gantt__filters{display:flex; gap:.5rem; flex-wrap:wrap;}
-.gantt__filters-label{color:var(--color-text-muted); font-size:.8125rem; align-self:center; margin-right:.25rem;}
-.gantt__chip{font-family:inherit; font-size:.8125rem; font-weight:var(--fw-medium);
-  background:var(--color-brand-black); color:var(--color-text-muted);
-  border:1px solid var(--g-border); padding:.45rem .9rem; cursor:pointer; min-height:44px;
-  transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-.gantt__chip[aria-pressed="true"]{color:var(--color-brand-white); border-color:var(--color-brand-purple);}
-.gantt__chip[aria-pressed="true"]::before{content:"✓ "; color:var(--color-brand-purple);}
 .gantt__chart{position:relative; border:1px solid var(--g-border); overflow-x:auto;}
 @media (max-width:767px){ .gantt__chart{border-left:0; border-right:0;} }
 .gantt__grid{min-width:820px;}
-.gantt__axis{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
+.gantt__axis{display:grid; grid-template-columns:minmax(180px,272px) 1fr minmax(96px,130px);
   border-bottom:1px solid var(--g-border); color:var(--color-text-muted); font-size:.8125rem;}
-.gantt__axis > div{padding:.75rem 1rem;}
-.gantt__axis-units{position:relative; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
-.gantt__tick{position:absolute; top:.75rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem;}
+.gantt__axis > div{padding:.75rem 1rem; align-self:end;}
+.gantt__axis-units{position:relative; min-height:3.6rem; border-left:1px solid var(--g-border); border-right:1px solid var(--g-border);}
+/* PR40-Q5: the axis states its unit, planned hours, above its ticks */
+.gantt__unit{position:absolute; top:.7rem; left:50%; transform:translateX(-50%); color:var(--color-text-muted); font-size:.75rem; white-space:nowrap;}
+.gantt__tick{position:absolute; top:2.1rem; transform:translateX(-50%); color:var(--color-text-dim); font-size:.75rem;}
 .gantt__axis-summary{text-align:right;}
-.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(180px,240px) 1fr minmax(96px,130px);
+.gantt__row,.gantt__task-row{display:grid; grid-template-columns:minmax(180px,272px) 1fr minmax(96px,130px);
   border-bottom:1px solid var(--g-border);}
 .gantt__task-row{background:rgba(var(--ink),0.02);}
 .gantt__row-label{padding:.75rem 1rem; display:flex; align-items:center;}
@@ -375,6 +326,9 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__sp{font-size:.6875rem; font-weight:var(--fw-semibold); color:var(--color-brand-white);
   padding:0 .35rem; white-space:nowrap;}
 .gantt__sp .gantt__hours{font-weight:var(--fw-regular);}
+/* PR40-Q9: a task's "SP · h" sits just past its bar's end (before its start near the axis end), never on it */
+.gantt__bar--task .gantt__sp{position:absolute; left:100%; padding:0 .45rem;}
+.gantt__bar--task.gantt__bar--flip .gantt__sp{left:auto; right:100%;}
 .gantt__milestone{position:absolute; top:50%; width:.875rem; height:.875rem;
   transform:translate(-50%,-50%) rotate(45deg); background:var(--color-brand-black);
   border:2px solid var(--color-brand-purple);}
@@ -386,15 +340,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light);
   margin-top:1rem; max-width:52rem; line-height:1.6;}
 .gantt__caption b{color:var(--color-text-muted); font-weight:var(--fw-semibold);}
-.gantt .layer-off{visibility:hidden;}
 .gantt [hidden]{display:none !important;}
 .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;}
 
 /* ---- ACT 06 · THE REFLECTION ---- */
 .house .card__t{display:flex; flex-direction:column; gap:.3rem;}
 .house__tag{font-size:.6rem; font-weight:var(--fw-bold); letter-spacing:.2em; text-transform:uppercase; color:var(--color-brand-purple);}
-.sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
-.sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
 .convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
@@ -407,8 +358,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation:none!important; transition:none!important;}
-  /* Timelines keep their layout under reduced motion (decoration spec floor rule 1); only their motion stops. */
-  .dcell__bar i{transform:scaleX(var(--v,0));}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
 }
 
@@ -540,7 +489,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n">9</span> <span data-i18n="ui_read_min">min read</span></span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">8</span><span class="rt rt--en rt--m">5</span><span class="rt rt--es rt--d">9</span><span class="rt rt--es rt--m">6</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Fighting fraudulent payments</h1>
     <p class="hero__deck" data-i18n="hero_lede">My app lets a merchant check that a Yape payment on a customer's screen is real.</p>
@@ -597,7 +546,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
 
-    <div class="cardgrid cardgrid--3">
+    <div class="cardgrid cardgrid--3 swipe" tabindex="0" role="group" aria-labelledby="v0">
       <article class="card">
         <h3 class="card__t" data-i18n="act0_c1_t">Everyone's wallet</h3>
         <p class="card__x" data-i18n-html="act0_c1_x">Cash still matters in Peru, but its share fell sharply as <strong>e-payments took over daily commerce</strong>, led by Yape and other e-wallets.</p>
@@ -712,26 +661,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Measured by effort.</h2>
-      <div class="reveal" data-act="act3">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to use the chart" data-panel-title-key="act3_rv_btn" data-i18n="act3_rv_btn">How to read the chart</button>
+      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Built in one week.</h2>
+      <p class="scan" data-i18n="act3_lede">From research to development.</p>
+      <div class="reveal chart-aside" data-act="act3">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
         <div class="reveal__body reveal__body--poster" id="rv-a3">
-          <p data-i18n-html="act3_rv_txt">The five phases and their tasks are reconstructed from this build's plan and completion record. <strong>Story points measure relative effort</strong> between phases, not a recorded sprint. Hours are planned-capacity estimates, off by default. There is no progress percentage: <strong>a finished build has nothing left to forecast</strong>.</p>
+          <p data-i18n-html="act3_rv_txt">This Gantt chart lays out the build as five phases, reconstructed from its plan and completion record. Each row is one phase, read from left to right on an axis of planned hours, not calendar dates: <strong>the bar's length is the hours planned, and the dashed lines show what had to finish first</strong>. Open a phase to see its tasks, each with its story points and hours.</p>
         </div>
       </div>
     </div>
 
     <div class="gantt" id="gantt">
-      <div class="gantt__tools">
-        <div class="gantt__filters" role="group" aria-label="Progressive disclosure filters">
-          <span class="gantt__filters-label" data-i18n="gantt_show">Show:</span>
-          <button class="gantt__chip" type="button" data-filter="sp" aria-pressed="true" data-i18n="gantt_f_sp">Story points</button>
-          <button class="gantt__chip" type="button" data-filter="hours" aria-pressed="false" data-i18n="gantt_f_hours">Hours</button>
-          <button class="gantt__chip" type="button" data-filter="milestones" aria-pressed="true" data-i18n="gantt_f_ms">Milestones</button>
-        </div>
-      </div>
-
-      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Foundations leads to 02 The interface. 02 The interface leads to 03 Architecture. 03 Architecture leads to 04 Security layer. 04 Security layer leads to 05 Proof &amp; delivery. The singleton session task in 03 Architecture leads to the execution-lock fix in 05 Proof &amp; delivery.</div>
+      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Project setup leads to 02 Verification flow. 02 Verification flow leads to 03 Session and data flow. 03 Session and data flow leads to 04 Interface security. 04 Interface security leads to 05 Test and delivery. The singleton session task in 03 Session and data flow leads to the execution-lock fix in 05 Test and delivery.</div>
 
       <div class="gantt__chart" id="ganttChart">
         <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
@@ -741,6 +682,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript.</p></noscript>
     </div>
+
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_sp"><strong>Story Points (SP).</strong> A relative measure of a task's effort against the others, not a unit of time. This build was not run as a formal sprint.</p>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_foundation">Project setup</span><span class="relay__x" data-i18n="act3_m1_x">8 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_one_job">Verification flow</span><span class="relay__x" data-i18n="act3_m2_x">16 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_architecture">Session and data flow</span><span class="relay__x" data-i18n="act3_m3_x">15 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_security">Interface security</span><span class="relay__x" data-i18n="act3_m4_x">13 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_proof">Test and delivery</span><span class="relay__x" data-i18n="act3_m5_x">14 h planned · Live 15 Jul 2026</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="act3HowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="act3HowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
   </div>
 </section>
 
@@ -756,7 +715,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2">
+    <div class="cardgrid cardgrid--2 swipe" tabindex="0" role="group" aria-labelledby="v4">
       <article class="card">
         <h3 class="card__t" data-i18n="act4_c1_t">React — one source of truth for every screen</h3>
         <p class="card__x" data-i18n-html="act4_c1_x">React draws every screen from the app's data, never the reverse, so <strong>what the merchant sees always matches what the app knows</strong>. In a trust tool, that guarantee is the product.</p>
@@ -802,7 +761,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="synthesis" data-i18n-html="act4_synthesis">Of the five fields on a receipt, four — amount, recipient, date, even the security code — are text whoever makes the image can set. Only the operation number is written by the bank's own record. The security code looks like proof and ships on every receipt; it is text on the same image. <strong>Treating it as proof is the trap the tool exists to close.</strong></p>
+    <p class="synthesis" data-i18n-html="act4_synthesis"><strong>Only the operation number comes from the bank</strong>; the rest can be faked.</p>
 
     <!-- The build links again, where a technical reader wants them (Brief 01 pattern, W2A-G3-Q2). -->
     <p class="scan act__foot" data-i18n="ui_arch_foot">For more, access the repository.</p>
@@ -823,7 +782,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — measured only; staged lives in Act 04 Card 3 ================= -->
+<!-- ================= ACT 05 · THE DASHBOARD — measured figures and what they mean; staged lives in Act 04 Card 3 ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
@@ -835,85 +794,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act5_lede">Figures and implications.</p>
     </div>
 
-    <div class="dash">
-      <div class="dash__tabs" role="tablist" aria-label="Dashboard levels">
-        <button class="dash__tab" id="tab-m" role="tab" aria-selected="true" aria-controls="dp-m" data-i18n="ui_tab_measure">Measure</button>
-        <button class="dash__tab" id="tab-r" role="tab" aria-selected="false" aria-controls="dp-r" data-i18n="act5_tab_r">The insight</button>
+    <!-- The figures, "What it means" and two insights in one panel at every width (PR40-Q25, Q26, Q28); from 768 each
+         figure is drawn as what it says and up to three footnotes follow, hidden on phones. -->
+    <div class="hlr">
+      <div class="hlr__seg hlr__seg--figs"><span class="hlr__h" data-i18n="ui_dash_figs_h">The figures</span>
+        <ul class="hl__list">
+          <li class="hl__item"><span class="hl__n">45/45</span><span class="viz viz--meter"><span class="viz__big">45<span class="viz__of">/45</span></span><span class="viz__bar" aria-hidden="true"><span class="viz__seg viz__seg--0" style="flex-grow:1"></span></span><span class="viz__legend"><span class="viz__key viz__key--0" data-i18n="act5_hl1_v1">all passing</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl1_l">Assertions passing</span><span class="hl__x" data-i18n="act5_hl1_x">Across six fraud scenarios. None waived.</span></span></li>
+          <li class="hl__item"><span class="hl__n">5</span><span class="viz viz--chips"><span class="viz__big">5</span><span class="viz__chips"><span class="viz__chip">Typecheck</span><span class="viz__chip">Tests</span><span class="viz__chip">Build</span><span class="viz__chip">Drift</span><span class="viz__chip" data-i18n="act5_hl2_c5">Paths</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl2_l">CI gates per push</span><span class="hl__x" data-i18n="act5_hl2_x">Typecheck, tests, build, drift and paths.</span></span></li>
+          <li class="hl__item"><span class="hl__n"><7</span><span class="viz viz--week"><span class="viz__big">&lt;7</span><span class="viz__week" aria-hidden="true"><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span><span class="viz__day"></span></span><span class="viz__legend"><span class="viz__key viz__key--0" data-i18n="act5_hl3_v1">one week</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl3_l">Days, research to deployed app</span><span class="hl__x" data-i18n="act5_hl3_x">First app build, first use of this stack.</span></span></li>
+        </ul></div>
+      <div class="hlr__baton"><span data-i18n="ui_dash_means">What it means</span></div>
+      <div class="hlr__seg hlr__seg--ins">
+        <p class="ins" data-i18n-html="act5_ins1"><strong>The fastest artifact in this portfolio is also its most technical.</strong> That inversion is the finding.</p>
+        <p class="ins" data-i18n-html="act5_ins2"><strong>What transfers.</strong> Any stack a client's problem requires is now within reach, with every decision owned and every claim checkable.</p>
       </div>
-
-      <div class="dash__panel" id="dp-m" role="tabpanel" aria-labelledby="tab-m">
-        <div class="band band--measured">
-          <div class="band__head">
-            <span class="band__badge" data-i18n="band_m_badge">Build · measured</span>
-            <span class="band__what" data-i18n-html="band_m_what">Counted from the repository and the recorded test run. <strong>Verifiable at the linked source.</strong></span>
-          </div>
-          <div class="dash__grid">
-            <div class="dcell">
-              <span class="dcell__n"><span>45</span></span>
-              <span class="dcell__l" data-i18n="m1_l">Assertions passing</span>
-              <span class="dcell__p" data-i18n-html="m1_p"><strong>45 of 45.</strong> None waived.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>6</span></span>
-              <span class="dcell__l" data-i18n="m2_l">Protocol scenarios</span>
-              <span class="dcell__p" data-i18n-html="m2_p"><strong>All six pass.</strong></span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>0</span></span>
-              <span class="dcell__l" data-i18n="m3_l">Backend services</span>
-              <span class="dcell__p" data-i18n-html="m3_p"><strong>Front-end only</strong>, by constraint.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>5</span></span>
-              <span class="dcell__l" data-i18n="m4_l">CI gates per push</span>
-              <span class="dcell__p" data-i18n-html="m4_p"><strong>Typecheck, tests, build, drift, paths.</strong></span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>5</span></span>
-              <span class="dcell__l" data-i18n="m5_l">Security controls running in the client</span>
-              <span class="dcell__p" data-i18n-html="m5_p"><strong>Secure keypad</strong>, shuffled digits, execution lock, blocking overlay, privacy masking.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:1"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>3</span></span>
-              <span class="dcell__l" data-i18n="m6_l">API endpoints consumed</span>
-              <span class="dcell__p" data-i18n-html="m6_p">Real request handling <strong>against mock fixtures</strong>.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0.6"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n">&lt;7</span>
-              <span class="dcell__l" data-i18n="m7_l">Days, research to deployed app</span>
-              <span class="dcell__p" data-i18n-html="m7_p"><strong>First app build</strong>, first use of this stack.</span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0.5"></i></span>
-            </div>
-            <div class="dcell">
-              <span class="dcell__n"><span>0</span></span>
-              <span class="dcell__l" data-i18n="m8_l">Lines of code typed by hand</span>
-              <span class="dcell__p" data-i18n-html="m8_p">Every line directed, reviewed and understood. <strong>None typed.</strong></span>
-              <span class="dcell__bar" aria-hidden="true"><i style="--v:0"></i></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dash__panel" id="dp-r" role="tabpanel" aria-labelledby="tab-r" hidden>
-        <div class="dash__read">
-          <p class="dash__readline" data-i18n-html="r1"><strong>The fastest artifact in this portfolio is also its most technical.</strong> That inversion is the finding.</p>
-          <ul class="dash__recos">
-            <li class="dash__reco" data-i18n-html="r2_1">Entering app development, with a new stack, security discipline and testing rigor, <strong>looked reserved for career developers</strong>.</li>
-            <li class="dash__reco" data-i18n-html="r2_2">Directed properly, it took <strong>under a week</strong> and produced the only work here a stranger can verify by running a test suite.</li>
-            <li class="dash__reco" data-i18n-html="r2_3">Entering a new stack is now cheap; <strong>what stays scarce is knowing what to build</strong> and how to prove it holds.</li>
-          </ul>
-          <p class="dash__reco" data-i18n-html="r3">What transfers: <strong>any stack a client's problem requires is now within reach</strong>, with every decision owned and every claim checkable.</p>
-        </div>
-      </div>
-
-      <p class="dash__foot" data-i18n="act5_foot">Method — figures counted from the repository and the recorded test run (Node 24.18.0, Vitest 3.2.7, TypeScript 5.9.3, 15 Jul 2026), verifiable at the linked source. Staged security demonstrations are described, and badged, in The Architecture above.</p>
     </div>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn1"><strong>Method.</strong> Figures counted from the repository and the recorded test run (Node 24.18.0, Vitest 3.2.7, TypeScript 5.9.3, 15 Jul 2026), verifiable at the linked source. Staged security demonstrations are described, and badged, in The Architecture above.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn2"><strong>Front-end only.</strong> No backend services, by constraint; 3 API endpoints consumed, with real request handling against mock fixtures.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn3"><strong>In the client.</strong> Security controls run in the browser, among them a secure keypad, shuffled digits, an execution lock, a blocking overlay and privacy masking.</p>
   </div>
 </section>
 
@@ -929,7 +827,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act6_lede">Lessons learned.</p>
     </div>
 
-    <div class="cardgrid cardgrid--4">
+    <div class="cardgrid cardgrid--4 swipe" tabindex="0" role="group" aria-labelledby="v6">
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_h1_tag">The ceiling</span><span data-i18n="act6_h1_t">Territory I thought was closed</span></h3>
         <p class="card__x" data-i18n-html="act6_h1_x">I thought app development belonged to career developers. This build broke that ceiling: I now <strong>work the technical side while owning every strategic call</strong>, starting with the stack.</p>
@@ -948,7 +846,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
 
-    <p class="sequel" data-i18n-html="act6_sequel">The gap I did not close: this app checks a fabricated record. <strong>The same check, against a bank's real one, is a backend conversation</strong>.</p>
 
     <!-- Disclosure notes — footnotes before the close (W2A-G3-Q2). -->
     <div class="notes" id="disclosure">
@@ -1151,19 +1048,6 @@ document.querySelectorAll(".reveal__btn").forEach(btn=>{
 });
 mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorAll(".reveal__btn[aria-expanded='true']").forEach(b=>{ b.setAttribute("aria-expanded","false"); const bd=document.getElementById(b.getAttribute("aria-controls")); if(bd) bd.hidden=true; }); });
 
-/* ============ Dashboard tabs — two-way (Measured / The read) ============ */
-const tabs = [...document.querySelectorAll(".dash__tab")];
-const panels = { "tab-m":"dp-m", "tab-r":"dp-r" };
-tabs.forEach(tab=>{
-  tab.addEventListener("click", ()=>{
-    tabs.forEach(t=>{
-      const sel = t===tab;
-      t.setAttribute("aria-selected", String(sel));
-      document.getElementById(panels[t.id]).hidden = !sel;
-    });
-  });
-});
-
 /* ============================================================
    ACT 03 · ROADMAP ORGANISM — data-driven, effort-scaled.
    Instantiation contract: only the DATA object is edited per
@@ -1179,27 +1063,27 @@ tabs.forEach(tab=>{
 
   var DATA = {
     epics: [
-      { id:'foundation', name:'01 Foundations', tasks:[
+      { id:'foundation', name:'Project setup', tasks:[
         { id:'scaffold',      name:'Vite + TypeScript scaffold', sp:3, hours:4 },
         { id:'dependencies',  name:'Dependency justification',   sp:2, hours:2 },
         { id:'relative-paths',name:'Relative-path constraint',   sp:2, hours:2 }
       ]},
-      { id:'one-job', name:'02 The interface', tasks:[
+      { id:'one-job', name:'Verification flow', tasks:[
         { id:'entry-screen',  name:'Entry screen',   sp:3, hours:4 },
         { id:'secure-keypad', name:'Secure keypad',  sp:5, hours:6 },
         { id:'verdict-screen',name:'Verdict screen', sp:5, hours:6 }
       ]},
-      { id:'architecture', name:'03 Architecture', tasks:[
+      { id:'architecture', name:'Session and data flow', tasks:[
         { id:'singleton-session', name:'Singleton session service', sp:5, hours:6 },
         { id:'observer-state',    name:'Observer flow state',       sp:5, hours:5 },
         { id:'mock-rest',         name:'Mock REST surface',         sp:3, hours:4 }
       ]},
-      { id:'security', name:'04 Security layer', tasks:[
+      { id:'security', name:'Interface security', tasks:[
         { id:'staged-panel',    name:'Staged security panel', sp:5, hours:5 },
         { id:'client-controls', name:'Client-side controls',  sp:5, hours:6 },
         { id:'provenance',      name:'Provenance badging',    sp:2, hours:2 }
       ]},
-      { id:'proof', name:'05 Proof & delivery', tasks:[
+      { id:'proof', name:'Test and delivery', tasks:[
         { id:'six-scenarios',  name:'Six-scenario protocol',    sp:8, hours:8 },
         { id:'lock-defect',    name:'Execution-lock defect fix', sp:3, hours:3 },
         { id:'ci-gates',       name:'CI gates & deploy',        sp:3, hours:3 }
@@ -1221,22 +1105,25 @@ tabs.forEach(tab=>{
   var root = document.getElementById('gantt');
   if(!root) return;
 
-  /* ---------- Derived layout: cumulative story points ---------- */
+  /* ---------- Derived layout: cumulative planned hours (PR40-Q5) ----------
+     The axis is planned-capacity hours, not calendar dates: each task takes its planned hours in plan order.
+     Story points stay as relative effort, in the effort column per phase and on each task's bar. */
   var cursor = 0;
-  DATA.epics.forEach(function(epic){
+  DATA.epics.forEach(function(epic, i){
+    epic.num = (i < 9 ? '0' : '') + (i + 1);
     epic.start = cursor; epic.sp = 0; epic.hours = 0;
     epic.tasks.forEach(function(t){
-      t.start = cursor; cursor += t.sp;
+      t.start = cursor; cursor += t.hours;
       epic.sp += t.sp; epic.hours += t.hours;
     });
     epic.end = cursor;
   });
-  var TOTAL_SP = cursor;
+  var TOTAL = cursor;
   DATA.milestones.forEach(function(m){
     var e = DATA.epics.filter(function(x){ return x.id === m.after; })[0];
     m.at = e ? e.end : 0;
   });
-  function pct(points){ return (points / TOTAL_SP * 100).toFixed(3) + '%'; }
+  function pct(hours){ return (hours / TOTAL * 100).toFixed(3) + '%'; }
   /* Dictionary keys for the chart's own strings (WB-Q24): names render inside
      data-i18n spans the loader translates; DATA keeps the English as fallback. */
   function kid(s){ return s.replace(/-/g,'_'); }
@@ -1251,44 +1138,47 @@ tabs.forEach(tab=>{
 
   function ticksHtml(){
     var h = '';
-    for(var p = 0; p <= TOTAL_SP; p += TICK_STEP){
+    for(var p = 0; p < TOTAL; p += TICK_STEP){
       h += '<span class="gantt__tick" style="left:' + pct(p) + '">' + p + '</span>';
       h += '<span class="gantt__gridline" style="left:' + pct(p) + '"></span>';
     }
     return h;
   }
-  function barHtml(item, cls, id){
-    var span = (item.end !== undefined) ? (item.end - item.start) : item.sp;
-    var label = '<span class="gantt__sp"><span data-layer="sp">' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span></span>' +
-                '<span class="gantt__hours" data-layer="hours" hidden> · ' + item.hours + ' <span data-i18n="gantt_unit_h">h</span></span></span>';
+  /* PR40-Q9: a phase's bar carries no label (its effort sits in the effort column); an opened phase's task bars
+     carry their story points and hours; task rows leave the effort column empty. */
+  function aname(item){ return item.num ? item.num + ' ' + item.name : item.name; }
+  function barHtml(item, cls, id, labelled){
+    var label = labelled ? '<span class="gantt__sp">' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span>' +
+                '<span class="gantt__hours"> · ' + item.hours + ' <span data-i18n="gantt_unit_h">h</span></span></span>' : '';
+    if(labelled && (item.start + item.hours) / TOTAL > 0.8) cls += ' gantt__bar--flip';
     return '<div class="gantt__bar ' + cls + '" data-bar="' + id + '" style="left:' + pct(item.start) +
-           '; width:' + pct(span) + ';" role="img" aria-label="' + item.name + ', ' + span +
+           '; width:' + pct(item.hours) + ';" role="img" aria-label="' + aname(item) + ', ' + item.sp +
            ' story points, ' + item.hours + ' planned hours">' + label + '</div>';
   }
   function summaryHtml(item){
-    return '<b><span data-layer="sp">' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span></span></b>' +
-           '<span class="gantt__hours" data-layer="hours" hidden>' + item.hours + ' <span data-i18n="gantt_unit_h_planned">h planned</span></span>';
+    return '<b>' + item.sp + ' <span data-i18n="gantt_unit_sp">SP</span></b>' +
+           '<span class="gantt__hours">' + item.hours + ' <span data-i18n="gantt_unit_h">h</span></span>';
   }
 
   var html = '<div class="gantt__axis" aria-hidden="true"><div data-i18n="gantt_axis_phase">Phase</div>' +
-             '<div class="gantt__axis-units">' + ticksHtml() +
-             '<span class="gantt__tick" style="left:100%">' + TOTAL_SP + '</span></div>' +
+             '<div class="gantt__axis-units"><span class="gantt__unit" data-i18n="gantt_axis_hours">Planned hours</span>' + ticksHtml() +
+             '<span class="gantt__tick" style="left:100%">' + TOTAL + '</span></div>' +
              '<div class="gantt__axis-summary" data-i18n="gantt_axis_effort">Effort</div></div>';
 
   DATA.epics.forEach(function(epic){
     html += '<div class="gantt__epic" data-epic="' + epic.id + '">' +
       '<div class="gantt__row">' +
         '<div class="gantt__row-label"><button class="gantt__toggle" type="button" aria-expanded="false" aria-controls="gtasks-' + epic.id + '" role="treeitem">' +
-          '<span class="gantt__marker" aria-hidden="true">›</span>' + nameHtml(epic) + '</button></div>' +
-        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id) +
+          '<span class="gantt__marker" aria-hidden="true">›</span><span class="gantt__stage-n">' + epic.num + '</span>' + nameHtml(epic) + '</button></div>' +
+        '<div class="gantt__row-field">' + barHtml(epic, 'gantt__bar--epic', epic.id, false) +
           '<span data-ms-slot="' + epic.id + '"></span></div>' +
-        '<div class="gantt__row-summary" aria-label="' + epic.name + ' totals: ' + epic.sp + ' story points, ' + epic.hours + ' planned hours">' + summaryHtml(epic) + '</div>' +
+        '<div class="gantt__row-summary" aria-label="' + aname(epic) + ' totals: ' + epic.sp + ' story points, ' + epic.hours + ' planned hours">' + summaryHtml(epic) + '</div>' +
       '</div>' +
       '<ul class="gantt__task-list" id="gtasks-' + epic.id + '" hidden role="group">';
     epic.tasks.forEach(function(t){
       html += '<li class="gantt__task-row"><span class="gantt__task-label">' + nameHtml(t) + '</span>' +
-        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id) + '</span>' +
-        '<span class="gantt__task-summary">' + summaryHtml(t) + '</span></li>';
+        '<span class="gantt__task-field">' + barHtml(t, 'gantt__bar--task', t.id, true) + '</span>' +
+        '<span class="gantt__task-summary"></span></li>';
     });
     html += '</ul></div>';
   });
@@ -1297,9 +1187,9 @@ tabs.forEach(tab=>{
   DATA.milestones.forEach(function(m){
     var slot = grid.querySelector('[data-ms-slot="' + m.after + '"]');
     if(!slot) return;
-    slot.outerHTML = '<span data-layer="milestones" data-ms-slot-done="' + m.key + '">' +
+    slot.outerHTML = '<span data-ms-slot-done="' + m.key + '">' +
       '<span class="gantt__milestone" style="left:' + pct(m.at) + '" role="img" aria-label="Milestone: ' +
-      m.name + ', at ' + m.at + ' cumulative story points"></span>' +
+      m.name + ', at ' + m.at + ' cumulative planned hours"></span>' +
       '<span class="gantt__milestone-label" style="left:' + pct(m.at) + '">' + nameHtml(m) + '</span></span>';
   });
 
@@ -1307,11 +1197,11 @@ tabs.forEach(tab=>{
   function relabel(d){
     if(!d.gantt_aria_bar) return;
     function fill(tpl, v){ return tpl.replace(/\{(\w+)\}/g, function(_, k){ return v[k]; }); }
-    function nm(item){ return d[item.key] || item.name; }
+    function nm(item){ var n = d[item.key] || item.name; return item.num ? item.num + ' ' + n : n; }
     DATA.epics.forEach(function(e){
       var row = grid.querySelector('[data-epic="' + e.id + '"]');
       var bar = grid.querySelector('[data-bar="' + e.id + '"]');
-      if(bar) bar.setAttribute('aria-label', fill(d.gantt_aria_bar, { name:nm(e), sp:e.end - e.start, h:e.hours }));
+      if(bar) bar.setAttribute('aria-label', fill(d.gantt_aria_bar, { name:nm(e), sp:e.sp, h:e.hours }));
       var sum = row && row.querySelector('.gantt__row-summary');
       if(sum && d.gantt_aria_totals) sum.setAttribute('aria-label', fill(d.gantt_aria_totals, { name:nm(e), sp:e.sp, h:e.hours }));
       e.tasks.forEach(function(t){
@@ -1348,27 +1238,6 @@ tabs.forEach(tab=>{
     });
   });
 
-  /* ---------- Filters: progressive disclosure ----------
-     PR38-Q23: dependency connectors are always drawn (no chip); epics open one at a time. */
-  var FILTERS = { sp:true, hours:false, milestones:true, deps:true };
-  Array.prototype.slice.call(root.querySelectorAll('.gantt__chip')).forEach(function(chip){
-    chip.addEventListener('click', function(){
-      var key = chip.getAttribute('data-filter');
-      FILTERS[key] = !FILTERS[key];
-      chip.setAttribute('aria-pressed', String(FILTERS[key]));
-      applyFilters();
-    });
-  });
-  function applyFilters(){
-    ['sp','hours','milestones'].forEach(function(key){
-      Array.prototype.slice.call(root.querySelectorAll('[data-layer="' + key + '"]')).forEach(function(el){
-        el.hidden = !FILTERS[key];
-      });
-    });
-    overlay.classList.toggle('layer-off', !FILTERS.deps);
-    drawConnectors();
-  }
-
   /* ---------- Dependency connectors ---------- */
   function rectOf(id){
     var el = chart.querySelector('[data-bar="' + id + '"]');
@@ -1382,7 +1251,6 @@ tabs.forEach(tab=>{
     return null;
   }
   function drawConnectors(){
-    if(!FILTERS.deps){ overlay.innerHTML = ''; return; }
     var base = chart.getBoundingClientRect();
     overlay.setAttribute('viewBox', '0 0 ' + base.width + ' ' + base.height);
     var svg = '';
@@ -1400,7 +1268,7 @@ tabs.forEach(tab=>{
   }
   window.addEventListener('resize', drawConnectors);
 
-  applyFilters();
+  drawConnectors();
 })();
 
 </script>

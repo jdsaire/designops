@@ -21,3 +21,4 @@ Approved deployment plans for v4 and later.
 | PR #37 · Navbar cue and Main hero | `Plan-PR37-NavbarHero.md` |
 | PR #38 · Mobile copy | `Plan-PR38-MobileCopy.md` |
 | PR #39 · Closure figures | `Plan-PR39-ClosureFigures.md` |
+| PR #40 · Mobile organisms | `Plan-PR40-MobileOrganisms.md` |

@@ -1,0 +1,155 @@
+/* shared/brief-charts.css — the briefs' chart and dashboard standard (PR #40; PR40-Q1, Q3, Q12, Q13, Q25–Q29).
+   Linked by Briefs 01, 02 and 04, and by every future brief with a chart or a dashboard act.
+
+   Every width:
+   - footnotes under a chart are .synthesis (Brief 04's rules, the shared standard: PR40-Q12);
+   - a Gantt numbers each epic with a purple .gantt__stage-n span rendered from its index; the name key
+     holds the name only (Brief 04's pattern, the shared standard: PR40-Q13).
+
+   Phones (below 768), in a schedule act:
+   - the Gantt, the "+" panels before it and the footnotes after it (.chart-aside) are hidden (PR38-Q27 (5),
+     PR40-Q3);
+   - the reader gets the act's editorial text, a vertical relay timeline (Brief 03's relay organism: the epic
+     number in the node, its name as the heading, one line of body) and the purple card pointing to the desktop
+     view (Brief 03 Act 02's). Brief 03 keeps its own inline relay rules; these are the phone half of them,
+     scoped to .relay--sched. RUN (core/decoration.js) already plays on every .relay; reduced motion = final frame.
+   From 768 the Gantt renders as before and nothing phone-only shows.
+
+   The dashboard act (PR40-Q25, Q26, Q28, Q29), every width: one panel in Brief 03 Act 05's relay pattern,
+   "The figures" (.hlr__seg--figs) → purple baton "What it means" → the two insight statements (.ins) on the
+   card surface, at the card text's size. Up to three .synthesis.chart-aside footnotes follow it.
+   - Phones: each figure in solid white (.hl__n) above its label and line; no encodings, no footnotes, no card.
+   - From 768: each figure is drawn as what it says (.viz): direction (small before, diagonal arrow, large
+     after), share (split bar), completeness (full meter), count (the named items as chips), span (a seven-day
+     strip), comparison (two bars on one scale). Static: no motion pattern is added. */
+
+.synthesis { border-left: 3px solid var(--color-brand-purple); padding: .2rem 0 .2rem 1.15rem;
+  margin-top: clamp(1.5rem, 2.5vw, 2rem); max-width: 52rem;
+  font-size: .72rem; font-weight: var(--fw-light); color: var(--color-text-muted); }
+.synthesis strong { color: var(--color-brand-white); font-weight: var(--fw-semibold); }
+.synthesis + .synthesis { margin-top: .75rem; }
+
+.gantt__stage-n { color: var(--color-brand-purple); margin-right: .35em; }
+
+.relay--sched, .desk-how { display: none; }
+
+@media (max-width: 767px) {
+  .gantt, .act .chart-aside { display: none; }
+
+  .relay--sched { display: block; margin-top: clamp(1.6rem, 3vw, 2.4rem); border: 1px solid rgba(var(--ink), .5); }
+  .relay--sched .relay__seg { padding: 1.2rem 1.2rem 1.4rem; }
+  .relay--sched .relay__track { list-style: none; position: relative; display: grid; grid-template-columns: 1fr; gap: .9rem; margin: 0; padding: 0; }
+  .relay--sched .relay__track::before { content: ""; position: absolute; left: 17px; top: 17px; bottom: 17px; border-left: 2px solid var(--color-brand-purple); }
+  .relay--sched .relay__st { position: relative; display: flex; flex-direction: row; align-items: flex-start; gap: .8rem; text-align: left; }
+  .relay--sched .relay__node { position: relative; z-index: 1; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto;
+    font-size: .74rem; font-weight: var(--fw-bold); background: var(--color-brand-purple); color: var(--color-on-brand); }
+  .relay--sched .relay__tx { display: flex; flex-direction: column; gap: .2rem; padding-top: .4rem; }
+  .relay--sched .relay__t { font-size: .92rem; font-weight: var(--fw-semibold); color: var(--color-brand-white); line-height: 1.25; }
+  .relay--sched .relay__x { font-size: .74rem; line-height: 1.4; color: var(--color-text-muted); font-weight: var(--fw-light); }
+
+  /* where to see the full visual (Brief 03, WD-Q54): a laptop beside two lines, after the content it supplements */
+  .desk-how { display: grid; grid-template-columns: auto 1fr; column-gap: 1rem; align-items: center; background: var(--color-brand-purple); color: var(--color-on-brand);
+    padding: 1rem 1.2rem; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+  .desk-how__i { grid-row: 1 / 3; align-self: center; flex: none; width: 3rem; height: 2.5rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: miter; }
+  .desk-how__t { font-size: .68rem; font-weight: var(--fw-bold); letter-spacing: .16em; text-transform: uppercase; }
+  .desk-how__x { font-size: .92rem; line-height: 1.45; font-weight: var(--fw-regular, 400); margin-top: .3rem; }
+}
+
+/* ---- The dashboard act: one panel, figures then what they mean ---- */
+.hlr { margin-top: clamp(1.6rem, 3vw, 2.4rem); border: 1px solid rgba(var(--ink), .5); }
+.hlr__seg { padding: 1.2rem 1.2rem 1.4rem; }
+.hlr__seg--ins { background: var(--surface-card); display: grid; gap: 1rem; }
+.hlr__h { display: block; font-size: .66rem; font-weight: var(--fw-semibold); letter-spacing: .16em; text-transform: uppercase; color: var(--color-purple-light); margin-bottom: 1.1rem; }
+.hlr__baton { position: relative; height: 2.6rem; display: grid; place-items: center start; padding-left: 1.2rem; }
+.hlr__baton::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px solid var(--color-brand-purple); }
+.hlr__baton span { position: relative; padding: .25rem .6rem; font-size: .6rem; font-weight: var(--fw-bold); letter-spacing: .16em; text-transform: uppercase;
+  background: var(--color-brand-purple); color: var(--color-on-brand); }
+.ins { margin: 0; font-size: .94rem; line-height: 1.55; font-weight: var(--fw-light); color: var(--color-text-muted); border-left: 3px solid var(--color-brand-purple); padding: .15rem 0 .15rem 1.1rem; }
+.ins strong { color: var(--color-brand-white); font-weight: var(--fw-semibold); }
+
+.hl__list { list-style: none; margin: 0; padding: 0; }
+.hl__n { display: block; font-size: clamp(1.8rem, 3vw, 2.7rem); font-weight: var(--fw-black); line-height: 1; letter-spacing: -.02em; color: var(--color-brand-white); white-space: nowrap; }
+.hl__tx { display: flex; flex-direction: column; gap: .3rem; }
+.hl__l { font-size: .68rem; font-weight: var(--fw-medium); letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-muted); }
+.hl__x { font-size: .78rem; color: var(--color-text-dim); font-weight: var(--fw-light); line-height: 1.45; }
+.viz { display: none; }
+
+@media (max-width: 767px) {
+  .hl__item { display: flex; flex-direction: column; gap: .6rem; padding: 1rem 0; }
+  .hl__item:first-child { padding-top: 0; }
+  .hl__item + .hl__item { border-top: 1px solid var(--color-border-faint); }
+}
+@media (min-width: 768px) {
+  .hl__n { display: none; }
+  .hl__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .hl__item { border: 1px solid var(--color-border-faint); padding: clamp(1rem, 1.8vw, 1.5rem); display: flex; flex-direction: column; gap: 1rem; }
+  .viz { display: flex; flex-direction: column; justify-content: flex-end; gap: .6rem; min-height: 6.2rem; }
+  .viz__big, .viz__to { font-size: clamp(2.6rem, 4.4vw, 3.6rem); font-weight: var(--fw-black); line-height: .9; letter-spacing: -.03em; color: var(--color-brand-white); white-space: nowrap; }
+  .viz__of { font-size: .42em; font-weight: var(--fw-bold); letter-spacing: 0; color: var(--color-text-muted); }
+  /* direction: the before is small and quiet, the arrow says which way, the after carries the weight */
+  .viz--delta { flex-direction: row; justify-content: flex-start; align-items: center; gap: .4rem; }
+  .viz__from { font-size: clamp(1.3rem, 2vw, 1.7rem); font-weight: var(--fw-bold); line-height: 1; color: var(--color-text-muted); }
+  .viz--down .viz__from { align-self: flex-start; }
+  .viz--down .viz__to { align-self: flex-end; }
+  .viz--up .viz__from { align-self: flex-end; }
+  .viz--up .viz__to { align-self: flex-start; }
+  .viz__arr { flex: none; width: 2.6rem; height: 2.6rem; fill: none; stroke: var(--color-brand-purple); stroke-width: 3.2; stroke-linecap: square; }
+  /* share, completeness, span: a 0.5 rem bar under the figure */
+  .viz__bar { display: flex; gap: 2px; height: .5rem; }
+  .viz__seg--0 { background: var(--color-brand-purple); }
+  .viz__seg--1 { background: rgba(var(--ink), .35); }
+  .viz__legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .72rem; color: var(--color-text-muted); }
+  .viz__key b { color: var(--color-brand-white); font-weight: var(--fw-semibold); }
+  .viz__key::before { content: ""; display: inline-block; width: .55rem; height: .55rem; margin-right: .4rem; vertical-align: baseline; }
+  .viz__key--0::before { background: var(--color-brand-purple); }
+  .viz__key--1::before { background: rgba(var(--ink), .35); }
+  /* count: the named items themselves */
+  .viz__chips { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .viz__chip { font-size: .6rem; font-weight: var(--fw-semibold); letter-spacing: .1em; text-transform: uppercase; color: var(--color-brand-white); border: 1px solid var(--color-brand-purple); padding: .22rem .45rem; }
+  .viz__week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .viz__day { height: .5rem; border: 1px solid var(--color-brand-purple); }
+  /* comparison: two bars on one scale */
+  .viz__rows { display: grid; gap: .35rem; }
+  .viz__row { display: grid; grid-template-columns: 1.6rem 1fr; align-items: center; gap: .5rem; }
+  .viz__tag { font-size: .62rem; font-weight: var(--fw-bold); letter-spacing: .1em; color: var(--color-text-muted); }
+  .viz__track { height: .5rem; background: rgba(var(--ink), .08); }
+  .viz__fill { display: block; height: 100%; }
+  .viz__fill--0 { background: var(--color-brand-purple); }
+  .viz__fill--1 { background: rgba(var(--ink), .35); }
+}
+@media (min-width: 1024px) {
+  .hlr__seg--ins { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+/* ---- Phone card scrollers (PR40-Q31…Q35): below 768 an act's main card set scrolls sideways in Brief 02 Act 02's
+   pattern (snap, the next card peeks, no arrows: PR38-Q25). Each card shows its place as "01 / 04" (CSS counters,
+   language-neutral; the alt text is empty so assistive tech skips it; on ::before, since the decoration RUN edge owns
+   ::after); the purple detail CTAs inside the cards are
+   hidden; a limit that lived only in a hidden panel is carried by a .swipe-note under the set. From 768 nothing changes. */
+.swipe-note { display: none; }
+@media (max-width: 767px) {
+  .act .swipe { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: calc(100% - var(--peek-width));
+    gap: clamp(1.25rem, 2vw, 2rem); align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem;
+    scrollbar-width: none; counter-reset: swipe 0 swipen 3; }
+  .act .swipe:has(> :nth-child(4)) { counter-reset: swipe 0 swipen 4; }
+  .act .swipe::-webkit-scrollbar { display: none; }
+  .act .swipe > * { margin-top: 0; scroll-snap-align: start; position: relative; counter-increment: swipe; }
+  .act .swipe > *::before { content: counter(swipe, decimal-leading-zero) " / " counter(swipen, decimal-leading-zero) / "";
+    position: absolute; top: clamp(1.3rem, 2.2vw, 1.9rem); right: clamp(1.3rem, 2.2vw, 1.9rem);
+    font-size: .62rem; font-weight: var(--fw-bold); letter-spacing: .2em; color: var(--color-text-dim); }
+  .act .swipe > * > :first-child { padding-right: 3.4rem; }
+  .act .swipe .reveal { display: none; }
+  .act .swipe .pcard__t::before { content: none; }
+  .act .swipe-note { display: block; }
+}
+
+/* ---- Read time per breakpoint and language (PR #40 G7): the hero's .read__n holds four numbers, measured on the tip
+   with rt.js's method (words the width shows, panels opened, ÷230, rounded up): EN/ES × phone (below 768) / from 768.
+   One shows, chosen by html[lang] (set before first layout by the early i18n script and on every swap) and the width.
+   No lang="es" (no script) reads as EN. No keys, no script. ---- */
+.read__n .rt { display: none; }
+html:not([lang="es"]) .read__n .rt--en.rt--d, html[lang="es"] .read__n .rt--es.rt--d { display: inline; }
+@media (max-width: 767px) {
+  html:not([lang="es"]) .read__n .rt--en.rt--d, html[lang="es"] .read__n .rt--es.rt--d { display: none; }
+  html:not([lang="es"]) .read__n .rt--en.rt--m, html[lang="es"] .read__n .rt--es.rt--m { display: inline; }
+}

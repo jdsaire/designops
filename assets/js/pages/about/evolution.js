@@ -28,7 +28,7 @@ function init() {
   var current = null;
   var ticking = 0;
 
-  var chips = Array.prototype.slice.call(document.querySelectorAll('.jr-chip'));
+  var select = document.getElementById('jr-filter');
   var countEl = document.getElementById('jr-count');
   var emptyEl = document.getElementById('jr-empty');
   var filter = 'all';
@@ -197,13 +197,14 @@ function init() {
     advance();
   }
 
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      filter = chip.dataset.filter;
-      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+  /* The filter is a native select, Contact's control (PR #40): the platform's own picker on phones, the
+     keyboard and screen reader for free, and its options swap language through data-i18n like any text. */
+  if (select) {
+    select.addEventListener('change', function () {
+      filter = select.value;
       apply(true);
     });
-  });
+  }
 
   document.addEventListener('i18n:changed', function (e) {
     dict = e.detail && e.detail.dict;

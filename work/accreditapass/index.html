@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+  <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -220,30 +221,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   font-size:.625rem; color:var(--color-text-dim); white-space:nowrap;}
 .gantt__caption{font-size:.72rem; color:var(--color-text-dim); font-weight:var(--fw-light); margin-top:1rem; max-width:70ch; line-height:1.6;}
 .gantt [hidden]{display:none !important;}
-.dash__foot{border-top:0; padding:.9rem 0 0; font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light); max-width:70ch; line-height:1.6;}
-/* ---- Evidence dashboard — Brief 04's paired rows, mobile first: label on its own line,
-        two values beneath; from 768 the label takes the first column. ---- */
-.dash{border:1px solid var(--color-border-soft);}
-.dash__panel{padding:clamp(1.4rem,2.5vw,2.25rem);}
-.dash__note{border-top:1px solid var(--color-border-faint); padding:.9rem clamp(1.4rem,2.5vw,2.25rem);
-  font-size:.68rem; color:var(--color-text-dim); font-weight:var(--fw-light); line-height:1.6;}
-.drows{display:flex; flex-direction:column;}
-.drow{display:grid; grid-template-columns:1fr 1fr; gap:.35rem .75rem; align-items:baseline;
-  padding:clamp(.8rem,1.5vw,1.1rem) 0; border-bottom:1px solid var(--color-border-faint);}
-.drow__l{grid-column:1 / -1; font-size:.68rem; font-weight:var(--fw-medium); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted);}
-.drow--head{padding-top:0; border-bottom:1px solid var(--color-border-soft);}
-.drow--head .drow__l{display:none;}
-/* The panel label sits in the header cell, visible at every width. */
-.drow--head .drow__l--cap{display:block;}
-.drow--head .drow__v{font-size:.62rem; font-weight:var(--fw-bold); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim);}
-.drow__v{display:flex; flex-direction:column; gap:.25rem;}
-.drow__v .dcell__n{font-size:clamp(1.4rem,2.2vw,2rem); font-weight:var(--fw-black); line-height:1; letter-spacing:-0.02em;}
-.drow__t{font-size:.95rem; font-weight:var(--fw-medium); color:var(--color-brand-white);}
-@media (min-width:768px){
-  .drow{grid-template-columns:minmax(9rem,1.4fr) 1fr 1fr; gap:clamp(.75rem,2vw,1.75rem);}
-  .drow__l{grid-column:auto;}
-  .drow--head .drow__l{display:block;}
-}
 .sequel{margin-top:clamp(1.25rem,2vw,1.6rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light); max-width:52rem;}
 /* ---- Descending ladder (Brief 04, Act 06): claim highest, next lowest. One column on phones. ---- */
 @media (min-width:768px){
@@ -259,18 +236,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
-/* ---- Test tabs — Brief 04's dashboard tablist. Without script every panel shows, stacked,
-        each under its own caption; the tablist appears only when script can drive it. ---- */
-.dash__tabs{display:none; border-bottom:1px solid var(--color-border-soft);}
-.js .dash__tabs{display:flex;}
-.dash__tab{flex:1; min-height:44px; padding:.9rem .5rem; font-size:.6rem; font-weight:var(--fw-semibold);
-  letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim);
-  border-bottom:3px solid transparent; transition:color var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);}
-@media (min-width:768px){ .dash__tab{font-size:.7rem; letter-spacing:.16em;} }
-.dash__tab:hover{color:var(--color-brand-white);}
-.dash__tab[aria-selected="true"]{color:var(--color-brand-white); border-bottom-color:var(--color-brand-purple);}
-.dash__panel[hidden]{display:none;}
-.dash__panel + .dash__panel{border-top:1px solid var(--color-border-faint);}
 /* ---- Disclosure notes — footnotes before the close, standard on all four briefs (W2A-G3-Q2):
         Brief 02's small notice type with a purple rule on the left; two columns from 768 when there are two. ---- */
 .notes{margin-top:clamp(2.5rem,5vw,4rem); scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
@@ -464,7 +429,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n">8</span> <span data-i18n="ui_read_min">min read</span></span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">7</span><span class="rt rt--en rt--m">4</span><span class="rt rt--es rt--d">9</span><span class="rt rt--es rt--m">4</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The World Cup like never before</h1>
     <p class="hero__deck"><span data-i18n="hero_deck">My app guides press teams in their journey across the tournament.</span></p>
@@ -510,7 +475,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v1" data-i18n="act1_verdict">Conditional approval.</h2>
       <p class="scan" data-i18n="act1_lede">Valid pass, but trip wasted.</p>
     </div>
-    <div class="cardgrid cardgrid--2 pcards">
+    <div class="cardgrid cardgrid--2 pcards swipe" tabindex="0" role="group" aria-labelledby="v1">
       <article class="card pcard">
         <h3 class="card__t pcard__t" data-i18n="p1_t">Refusals with no reason</h3>
         <p class="card__x" data-i18n="p1_x">Access withdrawn without a reason breaks the journalist's logistics and leaves no way to respond.</p>
@@ -567,7 +532,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <p class="scan" data-i18n="act2_lede">Informed decisions before any code.</p>
     </div>
     <div class="timeline">
-      <div class="timeline__track" role="group" aria-label="The UX simulation, in three runs">
+      <div class="timeline__track swipe" tabindex="0" role="group" aria-label="The UX simulation, in three runs">
         <article class="card">
           <p class="catlabel" data-i18n="l1_n">Round 1 · Research</p>
           <h3 class="card__t" data-i18n="l1_t">Silence breaks trust</h3>
@@ -603,6 +568,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         </article>
       </div>
     </div>
+    <p class="synthesis swipe-note" data-i18n="disclosure2_lead">Simulated design research.</p>
     <!-- The how-might-we the runs produced, and its answer — on the Similar-work chassis. -->
     <div class="convert" id="hmw">
       <p class="convert__nextlabel" data-i18n="hmw_label">The design challenge</p>
@@ -637,7 +603,25 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
       <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
     </div>
-    <p class="dash__foot" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="ge1">Starting prototype</span><span class="relay__x" data-i18n="sch_m1_x">28–29 Jul · 28 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="ge2">Usability audit</span><span class="relay__x" data-i18n="sch_m2_x">30–31 Jul · 24 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="ge3">Simulated research</span><span class="relay__x" data-i18n="sch_m3_x">11–14 Aug · 39 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="ge4">Front-end development</span><span class="relay__x" data-i18n="sch_m4_x">14–17 Aug · 51 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="ge5">Feature iteration</span><span class="relay__x" data-i18n="sch_m5_x">18–20 Aug · 37 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">06</span><span class="relay__tx"><span class="relay__t" data-i18n="ge6">Back-end API</span><span class="relay__x" data-i18n="sch_m6_x">20 Aug · 19 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">07</span><span class="relay__tx"><span class="relay__t" data-i18n="ge7">Launch</span><span class="relay__x" data-i18n="sch_m7_x">29–30 Aug · 8 commits · Live 30 Aug</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="schHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
+    <p class="synthesis chart-aside" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
   </div>
 </section>
 
@@ -652,7 +636,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v4" data-i18n="act4_verdict">A trilingual app.</h2>
       <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
     </div>
-    <div class="cardgrid cardgrid--2 pcards">
+    <div class="cardgrid cardgrid--2 pcards swipe" tabindex="0" role="group" aria-labelledby="v4">
       <article class="card pcard">
         <p class="catlabel" data-i18n="b1_n">Front-end decisions</p>
         <h3 class="card__t pcard__t" data-i18n="b1_t">Runs entirely in the browser</h3>
@@ -699,6 +683,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </article>
     </div>
     <!-- The build links again, where a technical reader wants them. -->
+    <p class="synthesis swipe-note" data-i18n="act4_fn_limit">It is a basic layer that proves the contract, not a production back end.</p>
     <p class="scan act__foot" data-i18n="ui_arch_foot">For more, access the repository.</p>
     <div class="ctaset">
       <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
@@ -717,7 +702,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE TEST — first version against final, in three tabs (Brief 04's dashboard) ================= -->
+<!-- ================= ACT 05 · THE TEST — the audits' figures and what they mean ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
@@ -728,97 +713,24 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v5" data-i18n="act5_verdict">Usability audits.</h2>
       <p class="scan" data-i18n="act5_lede">Diverse and rigorous.</p>
     </div>
-    <div class="dash">
-      <div class="dash__tabs" role="tablist" aria-label="Test figures">
-        <button class="dash__tab" role="tab" id="tab-1" aria-selected="true" aria-controls="dp-1" data-i18n="dash_tab1">Severity</button>
-        <button class="dash__tab" role="tab" id="tab-2" aria-selected="false" aria-controls="dp-2" data-i18n="dash_tab2">Heuristics</button>
-        <button class="dash__tab" role="tab" id="tab-3" aria-selected="false" aria-controls="dp-3" data-i18n="dash_tab3">Accessibility</button>
+    <!-- The figures, "What it means" and two insights in one panel at every width (PR40-Q25, Q26, Q28); from 768 each
+         figure is drawn as what it says and up to three footnotes follow, hidden on phones. -->
+    <div class="hlr">
+      <div class="hlr__seg hlr__seg--figs"><span class="hlr__h" data-i18n="ui_dash_figs_h">The figures</span>
+        <ul class="hl__list">
+          <li class="hl__item"><span class="hl__n">4 → 1</span><span class="viz viz--delta viz--down"><span class="viz__from">4</span><svg class="viz__arr" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M7 9 L30 32"/><path d="M30 18 V32 H16"/></svg><span class="viz__to">1</span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl1_l">Critical findings</span><span class="hl__x" data-i18n="act5_hl1_x">Simulated audits, first to second.</span></span></li>
+          <li class="hl__item"><span class="hl__n">8 → 18</span><span class="viz viz--delta viz--up"><span class="viz__from">8</span><svg class="viz__arr" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M7 32 L30 9"/><path d="M16 9 H30 V23"/></svg><span class="viz__to">18</span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl2_l">WCAG checks passing</span><span class="hl__x" data-i18n="act5_hl2_x">Simulated audits, first to second.</span></span></li>
+          <li class="hl__item"><span class="hl__n">545</span><span class="viz viz--split"><span class="viz__big">545</span><span class="viz__bar" aria-hidden="true"><span class="viz__seg viz__seg--0" style="flex-grow:512"></span><span class="viz__seg viz__seg--1" style="flex-grow:33"></span></span><span class="viz__legend"><span class="viz__key viz__key--0"><b>512</b> <span data-i18n="act5_hl3_v1">front-end</span></span><span class="viz__key viz__key--1"><b>33</b> <span data-i18n="act5_hl3_v2">back-end</span></span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="act5_hl3_l">Automated tests</span><span class="hl__x" data-i18n="act5_hl3_x">512 front-end and 33 back-end, in xUnit and bUnit.</span></span></li>
+        </ul></div>
+      <div class="hlr__baton"><span data-i18n="ui_dash_means">What it means</span></div>
+      <div class="hlr__seg hlr__seg--ins">
+        <p class="ins" data-i18n-html="act5_ins1"><strong>Fixed, not just found.</strong> 18 of the first audit's 26 findings were fixed before the second; half the critical ones by turning editable forms into read-only cards.</p>
+        <p class="ins" data-i18n-html="act5_ins2"><strong>What transfers.</strong> Audits that end in fixes, with what stays open written down.</p>
       </div>
-      <div class="dash__panel" id="dp-1" role="tabpanel" aria-labelledby="tab-1">
-        <div class="drows">
-          <div class="drow drow--head">
-            <div class="drow__l drow__l--cap"><div class="reveal" data-act="act5"><button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-t1" data-panel-title="Severity details" data-panel-title-key="act5_t1_cta" data-i18n="act5_t1_cta">Severity details</button></div></div>
-            <div class="drow__v" data-i18n="act5_tbl_h2">Audit 1</div>
-            <div class="drow__v" data-i18n="act5_tbl_h3">Audit 2</div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="act5_tbl_r1_m">Critical</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_a">4</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r1_b">1</span></div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="act5_tbl_r2_m">Major</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_a">12</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r2_b">2</span></div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="act5_tbl_r3_m">Minor</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_a">10</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="act5_tbl_r3_b">2</span></div>
-          </div>
-        </div>
-        <div class="reveal__body reveal__body--poster" id="rv-t1">
-            <p data-i18n="act5_t1_r">Audit 1: 26 findings. Moving from editable forms to read-only EventCards resolved half of the critical findings; labeled inputs and relative links closed the rest, alongside 15 fixes across major and minor findings. Audit 2 raised one new critical (false "Access withdrawn" states on unplayed matches), fixed in v13 by bounding status to changes already in effect, a release that also shipped the withdraw action and aria-live announcements for new changes. v13 was not re-audited.</p>
-        </div>
-      </div>
-      <div class="dash__panel" id="dp-2" role="tabpanel" aria-labelledby="tab-2">
-        <div class="drows">
-          <div class="drow drow--head">
-            <div class="drow__l drow__l--cap"><div class="reveal" data-act="act5"><button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-t2" data-panel-title="Heuristics details" data-panel-title-key="act5_t2_cta" data-i18n="act5_t2_cta">Heuristics details</button></div></div>
-            <div class="drow__v" data-i18n="act5_tbl_h2">Audit 1</div>
-            <div class="drow__v" data-i18n="act5_tbl_h3">Audit 2</div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="t2_r1_m">Fail</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r1_a">5</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r1_b">2</span></div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="t2_r2_m">Partial</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r2_a">4</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r2_b">1</span></div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="t2_r3_m">Pass</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r3_a">1</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t2_r3_b">7</span></div>
-          </div>
-        </div>
-        <div class="reveal__body reveal__body--poster" id="rv-t2">
-            <p data-i18n="act5_t2_r">From 5 fails at the first evaluation to 7 passes at the second. Match with the real world (read-only cards), recognition over recall (previous values in view) and flexibility (search, filters and skip links) now pass, as do error prevention and error recovery. User control and consistency were addressed in v13, which lets pending requests be withdrawn and unifies how their status is displayed, without a re-audit.</p>
-        </div>
-      </div>
-      <div class="dash__panel" id="dp-3" role="tabpanel" aria-labelledby="tab-3">
-        <div class="drows">
-          <div class="drow drow--head">
-            <div class="drow__l drow__l--cap"><div class="reveal" data-act="act5"><button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-t3" data-panel-title="WCAG details" data-panel-title-key="act5_t3_cta" data-i18n="act5_t3_cta">WCAG details</button></div></div>
-            <div class="drow__v" data-i18n="act5_tbl_h2">Audit 1</div>
-            <div class="drow__v" data-i18n="act5_tbl_h3">Audit 2</div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="t3_r1_m">Pass</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r1_a">8</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r1_b">18</span></div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="t3_r2_m">Fail</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r2_a">12</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r2_b">1</span></div>
-          </div>
-          <div class="drow">
-            <div class="drow__l" data-i18n="t3_r3_m">Open</div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r3_a">3</span></div>
-            <div class="drow__v"><span class="dcell__n" data-i18n="t3_r3_b">3</span></div>
-          </div>
-        </div>
-        <div class="reveal__body reveal__body--poster" id="rv-t3">
-            <p data-i18n="act5_t3_r">From 12 initial fails to 18 passes. Fixes covered explicit label-for pairing, skip links, visible focus rings, alert roles for errors and recomputed contrast (up to 8.32:1 in dark mode). The one remaining fail (4.1.3, on the conditional status) was fixed in v13. Target size, reflow at 320 px and the Spanish sign-out row stay open because neither audit ran in a browser.</p>
-        </div>
-      </div>
-      <p class="dash__note" data-i18n="act5_footnote_audits">Audit 1 measured the pre-reframing app at commit 0653b4e. Audit 2 measured the build at b37066d. Both used simulated task-attempts and participants; neither involved a real user.</p>
-      <p class="dash__note" data-i18n="act5_footnote_disposition">All 26 first-audit findings got a disposition: 18 fixed, 5 not applicable, 2 open and 1 partly fixed.</p>
-      <p class="dash__note" data-i18n="act5_footnote_tests">512 front-end and 33 back-end automated tests, in xUnit and bUnit.</p>
     </div>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn1"><strong>Method.</strong> Audit 1 measured the pre-reframing app at commit 0653b4e; Audit 2 measured the build at b37066d. Both used simulated task-attempts and participants; neither involved a real user.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn2"><strong>Heuristics.</strong> From 5 fails at the first audit to 7 passes at the second.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act5_fn3"><strong>Still open.</strong> Target size, reflow at 320 px and the Spanish sign-out row, because neither audit ran in a browser.</p>
   </div>
 </section>
 
@@ -833,7 +745,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <h2 class="verdict" id="v6" data-i18n="act6_verdict">Final claims.</h2>
       <p class="scan" data-i18n="act6_lede">Gains, Limits, Future.</p>
     </div>
-    <div class="cardgrid cardgrid--3 ladder-down">
+    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v6">
       <article class="card">
         <p class="catlabel" data-i18n="r1_n">The milestone</p>
         <h3 class="card__t" data-i18n="r1_t">From concept to working interface</h3>
@@ -1068,13 +980,13 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   var grid = document.getElementById('ganttGrid'); if(!grid) return;
   var AXIS_START = '2026-07-28', AXIS_END = '2026-08-30';
   var EPICS = [
-      { id:'e1', key:'ge1', name:"01 Foundation", start:'2026-07-28', end:'2026-07-29', commits:28, runs:2 },
-      { id:'e2', key:'ge2', name:"02 Usability baseline", start:'2026-07-30', end:'2026-07-31', commits:24, runs:1 },
-      { id:'e3', key:'ge3', name:"03 UX simulation", start:'2026-08-11', end:'2026-08-14', commits:39, runs:5 },
-      { id:'e4', key:'ge4', name:"04 Front-end development", start:'2026-08-14', end:'2026-08-17', commits:51, runs:4 },
-      { id:'e5', key:'ge5', name:"05 Testing and iteration", start:'2026-08-18', end:'2026-08-20', commits:37, runs:2 },
-      { id:'e6', key:'ge6', name:"06 Back-end layer", start:'2026-08-20', end:'2026-08-20', commits:19, runs:1 },
-      { id:'e7', key:'ge7', name:"07 Launch", start:'2026-08-29', end:'2026-08-30', commits:8, runs:1 }
+      { id:'e1', key:'ge1', name:"Starting prototype", start:'2026-07-28', end:'2026-07-29', commits:28, runs:2 },
+      { id:'e2', key:'ge2', name:"Usability audit", start:'2026-07-30', end:'2026-07-31', commits:24, runs:1 },
+      { id:'e3', key:'ge3', name:"Simulated research", start:'2026-08-11', end:'2026-08-14', commits:39, runs:5 },
+      { id:'e4', key:'ge4', name:"Front-end development", start:'2026-08-14', end:'2026-08-17', commits:51, runs:4 },
+      { id:'e5', key:'ge5', name:"Feature iteration", start:'2026-08-18', end:'2026-08-20', commits:37, runs:2 },
+      { id:'e6', key:'ge6', name:"Back-end API", start:'2026-08-20', end:'2026-08-20', commits:19, runs:1 },
+      { id:'e7', key:'ge7', name:"Launch", start:'2026-08-29', end:'2026-08-30', commits:8, runs:1 }
   ];
   var MILESTONES = [ { epic:'e7', at:'2026-08-30', key:'gms_live', name:'Live' } ];
   var DAY = 86400000;
@@ -1093,12 +1005,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   });
   var html = '<div class="gantt__axis" aria-hidden="true"><div>Phase</div><div class="gantt__axis-units">' + ticks +
              '</div><div class="gantt__axis-summary">Window</div></div>';
-  EPICS.forEach(function(e){
-    var days = spanOf(e);
+  EPICS.forEach(function(e, i){
+    var days = spanOf(e), num = '0' + (i + 1);   /* the epic's number, purple (PR40-Q13); the name key holds the name only */
     html += '<div class="gantt__epic" role="listitem"><div class="gantt__row">' +
-      '<div class="gantt__row-label"><span class="gantt__row-name" data-i18n="' + e.key + '">' + e.name + '</span></div>' +
+      '<div class="gantt__row-label"><span class="gantt__row-name"><span class="gantt__stage-n">' + num + '</span><span data-i18n="' + e.key + '">' + e.name + '</span></span></div>' +
       '<div class="gantt__row-field"><div class="gantt__bar gantt__bar--epic" style="left:' + pct(offset(e.start)) + '; width:' + pct(days) + ';" role="img" aria-label="' +
-        e.name + ', ' + win(e) + ' 2026, ' + days + (days === 1 ? ' day' : ' days') + '"><span class="gantt__span">' + days + 'd</span></div>' +
+        num + ' ' + e.name + ', ' + win(e) + ' 2026, ' + days + (days === 1 ? ' day' : ' days') + '"><span class="gantt__span">' + days + 'd</span></div>' +
         '<span data-ms-slot="' + e.id + '"></span></div>' +
       '<div class="gantt__row-summary"><b>' + win(e) + '</b><span class="gantt__days">' + e.commits + ' commits</span>' +
         '<span class="gantt__days">' + e.runs + (e.runs === 1 ? ' run' : ' runs') + '</span></div>' +
@@ -1112,28 +1024,6 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
       '<span class="gantt__milestone-label" style="left:' + l + '" data-i18n="' + m.key + '">' + m.name + '</span></span>';
   });
 })();
-
-/* ============ Test tabs (Act 05) — Brief 04's tablist; panels ship open, script folds the unselected ============ */
-document.querySelectorAll('[role="tablist"]').forEach(list=>{
-  const tabs = [...list.querySelectorAll('[role="tab"]')];
-  function select(tab){
-    tabs.forEach(t=>{
-      const sel = t === tab;
-      t.setAttribute("aria-selected", String(sel));
-      t.tabIndex = sel ? 0 : -1;
-      const panel = document.getElementById(t.getAttribute("aria-controls"));
-      if(panel) panel.hidden = !sel;
-    });
-  }
-  tabs.forEach((tab,i)=>{
-    tab.addEventListener("click", ()=> select(tab));
-    tab.addEventListener("keydown", e=>{
-      const nx = e.key === "ArrowRight" ? tabs[(i+1) % tabs.length] : e.key === "ArrowLeft" ? tabs[(i-1+tabs.length) % tabs.length] : null;
-      if(nx){ e.preventDefault(); select(nx); nx.focus(); }
-    });
-  });
-  select(tabs.find(t=>t.getAttribute("aria-selected")==="true") || tabs[0]);
-});
 
 </script>
 <script type="module">

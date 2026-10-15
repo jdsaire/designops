@@ -152,10 +152,11 @@ function init() {
   document.querySelectorAll('.section__eyebrow-bar').forEach(bar => { if (shown(bar)) when(bar.parentElement, sig(bar)); });
   h.classList.add('deco-ready');
   const kids = c => [...c.children];
-  /* RUN: timelines (a swipe track keeps its items off screen, so it is skipped: Brief 02 below 1024), ladders,
+  /* RUN: timelines and ladders (a swipe track keeps its items off screen, so it is skipped: Brief 02's timeline below
+     1024, every phone card scroller below 768, PR40-Q31),
      Brief 03's journey (the missing channel is its key) and relays (one pass across the hand-off baton) */
   document.querySelectorAll('.timeline__track').forEach(c => { if (c.scrollWidth <= c.clientWidth + 4 && !onScreen(c)) when(c, run(kids(c))); });
-  document.querySelectorAll('.ladder-down').forEach(c => { if (!onScreen(c)) when(c, run(kids(c))); });
+  document.querySelectorAll('.ladder-down').forEach(c => { if (c.scrollWidth <= c.clientWidth + 4 && !onScreen(c)) when(c, run(kids(c))); });
   /* PR #39: a numbered card set opts in with data-deco-run="<min width>". It plays only where the whole set fits the
      view, so a pass never lights a card off screen (Brief 04's architecture cards, 1–4, from 768). */
   document.querySelectorAll('[data-deco-run]').forEach(c => {
