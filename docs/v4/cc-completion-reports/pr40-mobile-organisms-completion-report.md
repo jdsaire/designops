@@ -1,6 +1,6 @@
 # Completion report — PR #40 · Mobile organisms
 
-**Branch:** `deploy/v27-pr40-mobile-organisms`, from `a083cab` · **Pull request:** #40 (link recorded after opening), manual merge only
+**Branch:** `deploy/v27-pr40-mobile-organisms`, from `a083cab` · **Pull request:** [#40](https://github.com/jdsaire/designops/pull/40), manual merge only
 **Plan:** [Plan-PR40-MobileOrganisms.md](../cc-plans/Plan-PR40-MobileOrganisms.md)
 
 ## 1. Commits
@@ -23,7 +23,8 @@ In order, on `deploy/v27-pr40-mobile-organisms`:
 - `91b78f2` — "feat(brief02): on phones the context, architecture and reflection cards scroll sideways; a one-line receipt footnote; the closing sequel goes"
 - `8c4d12e` — "feat(brief04): on phones the context, problem, evolution, architecture and reflection cards scroll sideways; a one-line evolution footnote"
 - `c76755e` — "feat(briefs): each brief's read time matches the reader's language and screen — four measured numbers, one shown"
-- (this commit) — "docs: archive the PR #40 plan and completion report"
+- `4bcfd21` — "docs: archive the PR #40 plan and completion report"
+- (this commit) — "docs: record the PR #40 link in its completion report"
 
 - **One commit per item.** Each gate's build was committed only after its release phrase: one shared commit, then one per brief. Brief 02's G6 commit kept `ui_tab_measure` and Brief 04's retired it, where its last reference went, so no commit leaves a missing key. Parity and missing keys are 0 on every commit's tree.
 
@@ -68,7 +69,7 @@ In order, on `deploy/v27-pr40-mobile-organisms`:
    - contrast 270 on the tip against 292 on the base. Of the 26 not in the base, 24 are the purple epic numbers at 3.96:1, ruled in PR40-Q13 (Brief 04's already failed the same way on the base), and 2 are Brief 04's chart button, which already failed at 3.96:1 under its old label.
 9. **Untouched files:** `work/airport/` is byte-identical to `a083cab`; no governing file, skill or key sheet was edited. Proposals were written to `closing/PR40-run/`: spec v1.5, EVIDENCE, keys-for-sync and the read-time rule.
 10. **Attribution:** sole author and committer jdsaire on every commit; no trailer; branch name clean.
-11. **Push:** only after `APPROVED PR40 G8` (recorded below once opened).
+11. **Push:** only after `APPROVED PR40 G8`; the branch alone was pushed and PR [#40](https://github.com/jdsaire/designops/pull/40) opened against main, unmerged, auto-merge off.
 12. **Archive:** harness copied to `closing/PR40-run/harness/` with a README. This plan and report are archived with index lines; `docs/v4` internal links went from 4 to 5, all resolving.
 
 ## 4. Authorized deviations
@@ -144,7 +145,7 @@ Per-key tables with level, EN, ES, reason and evidence are in `closing/PR40-run/
 ## 8. Relay
 
 - **Landed:** 16 commits on `deploy/v27-pr40-mobile-organisms`, plus this archive. About dropdown, phone schedules, the dashboard panel, phone card scrollers, read time per screen and language.
-- **Open:** the manual merge of PR #40.
+- **Open:** the manual merge of PR #40 (https://github.com/jdsaire/designops/pull/40).
 - **Next station:** Cowork, the post-deploy sync.
 - **Do there first:** decoration spec v1.5 and EVIDENCE from the run's proposals; KEYS for the regional keys.
 - **Then:** PR #41 (hygiene), with the backlog lines this run opened.
