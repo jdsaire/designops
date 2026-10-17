@@ -38,6 +38,7 @@ python3 -m http.server 8000
 | [`i18n/`](i18n/) | Main's own English and Spanish dictionaries |
 | [`logos/`](logos/) | The site mark, in its states |
 | [`docs/`](docs/README.md) | **The project's records, not the site:** every build's plan and report, the specs, the standing rules |
+| [`tools/`](tools/README.md) | The checks anyone can run: dictionary parity, links, unused keys, key order. Python 3, nothing to install |
 | [`.github/`](.github/) | A Pages workflow file and the pull-request template |
 | `.nojekyll` | Tells GitHub Pages to serve every file as it is |
 | `.gitignore` | Keeps system, editor and secret files out of the repository |
