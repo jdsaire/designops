@@ -35,6 +35,7 @@ python3 -m http.server 8000
 | [`about/`](about/README.md), [`contact/`](contact/README.md) | One folder per page: the page and its own dictionaries |
 | [`work/`](work/README.md) | The four briefs, one folder each, plus two retired addresses that still answer |
 | [`assets/`](assets/README.md) | Everything shared: styles, scripts, the site-wide dictionaries, images, fonts, the CVs |
+| [`DICTIONARIES.md`](DICTIONARIES.md) | Every English/Spanish dictionary pair, by level, with its key counts |
 | [`i18n/`](i18n/) | Main's own English and Spanish dictionaries |
 | [`logos/`](logos/) | The site mark, in its states |
 | [`docs/`](docs/README.md) | **The project's records, not the site:** every build's plan and report, the specs, the standing rules |
@@ -48,6 +49,7 @@ The folder layout follows one rule: what belongs to one page lives in that page'
 ## Where the decisions live
 
 - [`docs/README.md`](docs/README.md): every run's plan and completion report, the specs and the history, indexed by type.
+- [`DICTIONARIES.md`](DICTIONARIES.md): where every word on the site lives, in both languages.
 - [`docs/v4/STANDING-RULES.md`](docs/v4/STANDING-RULES.md): rules that outlive the run that introduced them, each with its reason.
 - [`docs/v3/organisms/`](docs/v3/organisms/README.md): the decoration, motion and roadmap specs, each with a live specimen page.
 

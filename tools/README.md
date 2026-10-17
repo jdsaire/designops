@@ -9,4 +9,4 @@ The checks anyone can run on a fresh clone, from the repository root, with Pytho
 | [`orphans.py`](orphans.py) | Anyone who removed markup or script. `python3 tools/orphans.py`: every dictionary key is still used somewhere |
 | [`order.py`](order.py) | Anyone who added keys to a page. `python3 tools/order.py` reports how many keys sit out of page order; `--write <page>` reorders that page's pair, values untouched. A report, so it fails only with `--strict` |
 
-Visual checks (screenshots across widths, themes, languages and browsers) need a headless browser and live with each run's records, outside the repository.
+The dictionaries these tools read are listed in [`../DICTIONARIES.md`](../DICTIONARIES.md). Visual checks (screenshots across widths, themes, languages and browsers) need a headless browser and live with each run's records, outside the repository.
