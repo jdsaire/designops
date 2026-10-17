@@ -587,45 +587,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SCHEDULE — five weeks on a calendar axis, epics collapsed ================= -->
-<section class="act" id="sched" aria-labelledby="vsch">
-  <div class="container">
-    <div class="act__head">
-      <div class="section__eyebrow">
-        <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
-      </div>
-      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Built in five weeks.</h2>
-      <p class="scan" data-i18n="sch_lede">From sketch to finished build.</p>
-    </div>
-    <div class="gantt" id="gantt">
-      <div class="gantt__chart" id="ganttChart">
-        <div class="gantt__grid" id="ganttGrid" role="list" aria-label="The build on a calendar axis: seven phases, sized in days."></div>
-      </div>
-      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
-    </div>
-
-    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
-    <div class="relay relay--sched">
-      <div class="relay__seg"><ol class="relay__track">
-        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="ge1">Starting prototype</span><span class="relay__x" data-i18n="sch_m1_x">28–29 Jul · 28 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="ge2">Usability audit</span><span class="relay__x" data-i18n="sch_m2_x">30–31 Jul · 24 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="ge3">Simulated research</span><span class="relay__x" data-i18n="sch_m3_x">11–14 Aug · 39 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="ge4">Front-end development</span><span class="relay__x" data-i18n="sch_m4_x">14–17 Aug · 51 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="ge5">Feature iteration</span><span class="relay__x" data-i18n="sch_m5_x">18–20 Aug · 37 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">06</span><span class="relay__tx"><span class="relay__t" data-i18n="ge6">Back-end API</span><span class="relay__x" data-i18n="sch_m6_x">20 Aug · 19 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">07</span><span class="relay__tx"><span class="relay__t" data-i18n="ge7">Launch</span><span class="relay__x" data-i18n="sch_m7_x">29–30 Aug · 8 commits · Live 30 Aug</span></span></li>
-      </ol></div>
-    </div>
-    <aside class="desk-how" aria-labelledby="schHowT">
-      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
-      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
-      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
-    </aside>
-    <p class="synthesis chart-aside" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
-  </div>
-</section>
-
 <!-- ================= ACT 04 · THE ARCHITECTURE — four decisions, plain on the card, technical in the panel ================= -->
 <section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
@@ -703,15 +664,54 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE TEST — the audits' figures and what they mean ================= -->
+<!-- ================= ACT 05 · THE SCHEDULE — five weeks on a calendar axis, epics collapsed ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evaluation</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act05_schedule">Act 05 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Usability audits.</h2>
+      <h2 class="verdict" id="v5" data-i18n="sch_verdict">Built in five weeks.</h2>
+      <p class="scan" data-i18n="sch_lede">From sketch to finished build.</p>
+    </div>
+    <div class="gantt" id="gantt">
+      <div class="gantt__chart" id="ganttChart">
+        <div class="gantt__grid" id="ganttGrid" role="list" aria-label="The build on a calendar axis: seven phases, sized in days."></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
+    </div>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="ge1">Starting prototype</span><span class="relay__x" data-i18n="sch_m1_x">28–29 Jul · 28 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="ge2">Usability audit</span><span class="relay__x" data-i18n="sch_m2_x">30–31 Jul · 24 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="ge3">Simulated research</span><span class="relay__x" data-i18n="sch_m3_x">11–14 Aug · 39 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="ge4">Front-end development</span><span class="relay__x" data-i18n="sch_m4_x">14–17 Aug · 51 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="ge5">Feature iteration</span><span class="relay__x" data-i18n="sch_m5_x">18–20 Aug · 37 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">06</span><span class="relay__tx"><span class="relay__t" data-i18n="ge6">Back-end API</span><span class="relay__x" data-i18n="sch_m6_x">20 Aug · 19 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">07</span><span class="relay__tx"><span class="relay__t" data-i18n="ge7">Launch</span><span class="relay__x" data-i18n="sch_m7_x">29–30 Aug · 8 commits · Live 30 Aug</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="schHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
+    <p class="synthesis chart-aside" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE TEST — the audits' figures and what they mean ================= -->
+<section class="act" id="act6" aria-labelledby="v6">
+  <div class="container">
+    <div class="act__head">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Evaluation</span>
+      </div>
+      <h2 class="verdict" id="v6" data-i18n="act5_verdict">Usability audits.</h2>
       <p class="scan" data-i18n="act5_lede">Diverse and rigorous.</p>
     </div>
     <!-- The figures, "What it means" and two insights in one panel at every width (PR40-Q25, Q26, Q28); from 768 each
@@ -735,18 +735,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE CLOSE — claim, limit, next, on a descending ladder ================= -->
-<section class="act" id="act6" aria-labelledby="v6">
+<!-- ================= ACT 07 · THE CLOSE — claim, limit, next, on a descending ladder ================= -->
+<section class="act" id="act7" aria-labelledby="v7">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Closure</span>
+        <span class="section__eyebrow-text" data-i18n="act7_eyebrow">Act 07 · The Closure</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">Final claims.</h2>
+      <h2 class="verdict" id="v7" data-i18n="act6_verdict">Final claims.</h2>
       <p class="scan" data-i18n="act6_lede">Gains, Limits, Future.</p>
     </div>
-    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v6">
+    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v7">
       <article class="card">
         <p class="catlabel" data-i18n="r1_n">The milestone</p>
         <h3 class="card__t" data-i18n="r1_t">From concept to working interface</h3>
