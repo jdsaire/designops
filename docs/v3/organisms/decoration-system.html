@@ -65,11 +65,6 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
 .gantt__overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
 .gantt__overlay path { fill: none; stroke: var(--color-brand-purple); stroke-width: 1.5; stroke-dasharray: 5 4; }
 .gantt__dep-head { fill: var(--color-brand-purple); }
-.meters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-.meters div { border: 1px solid var(--color-border-faint); padding: 1rem; }
-.meters b { font-size: 2rem; font-weight: 900; line-height: 1; }
-.dcell__bar { display: block; height: 4px; background: var(--color-border-soft); margin-top: .7rem; position: relative; overflow: hidden; }
-.dcell__bar i { position: absolute; inset: 0; transform-origin: left; background: var(--color-brand-purple); transform: scaleX(var(--v, 0)); }
 .stat__number { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1; letter-spacing: -.02em; }
 .stat__label { color: var(--color-text-muted); margin-top: .5rem; font-size: .9rem; }
 .lane { overflow: hidden; padding: .6rem 0; border-top: 1px solid var(--color-border-faint); }
@@ -87,7 +82,7 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
 .flow rect.lit { stroke: var(--color-purple-light); stroke-width: 2; }
 .flow path { fill: none; stroke: rgba(var(--ink), .45); stroke-width: 1.4; }
 .flow text { fill: var(--color-brand-white); font: 600 12px var(--font-primary); }
-@media (max-width: 767px) { .cards, .journey__steps, .meters { grid-template-columns: 1fr; } .journey__step:not(:last-child)::after { top: auto; bottom: -1.4rem; left: 1.5rem; right: auto; width: 1px; height: 1.4rem; } .spec__head { grid-template-columns: 1fr; } }
+@media (max-width: 767px) { .cards, .journey__steps { grid-template-columns: 1fr; } .journey__step:not(:last-child)::after { top: auto; bottom: -1.4rem; left: 1.5rem; right: auto; width: 1px; height: 1.4rem; } .spec__head { grid-template-columns: 1fr; } }
 /* v1.3 (PR #37): FILL, CUE RING and PULSE, with the values of pages/home/hero.css and pages/home/navcue.css */
 .fillspec { font-weight: 900; text-transform: uppercase; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; }
 .fillspec em { font-style: italic; color: #FFFFFF; position: relative; z-index: 0; padding: 0 .08em; }
@@ -152,10 +147,8 @@ footer.end { padding: 2.5rem 0 4rem; color: var(--color-text-muted); font-size: 
     <svg class="gantt__overlay" aria-hidden="true"></svg>
   </div></div></section>
 
-<section class="spec" id="meter"><div class="spec__head"><div><p class="spec__n">06 · GROW · meter · message</p><h2 class="spec__title">How much of the target</h2>
-  <p class="spec__meta">Dashboard meters fill to their value once (500 ms, 80 ms apart); the figures above them are static and readable at once. Brief 02's 8 meters. <span class="rm">Reduced motion → at value.</span></p></div>
-  <button class="btn" type="button" data-replay="meter">Replay</button></div>
-  <div class="stage"><div class="meters" id="meters"><div><b>45</b><span class="dcell__bar"><i style="--v:1"></i></span></div><div><b>6</b><span class="dcell__bar"><i style="--v:1"></i></span></div><div><b>3</b><span class="dcell__bar"><i style="--v:.6"></i></span></div><div><b>&lt;7</b><span class="dcell__bar"><i style="--v:.5"></i></span></div></div></div></section>
+<section class="spec" id="meter"><div class="spec__head"><div><p class="spec__n">06 · GROW · meter · retired</p><h2 class="spec__title">Retired with Brief 02's dashboard</h2>
+  <p class="spec__meta">Its one use, Brief 02's eight dashboard meters, left the site with the dashboard (PR40-Q28). The code went in PR #41; spec v1.5 §6 keeps the row as a record.</p></div></div></section>
 
 <section class="spec" id="marquee"><div class="spec__head"><div><p class="spec__n">07 · MARQUEE · aesthetic + message · exception X-1</p><h2 class="spec__title">A deliberate pause before the work</h2>
   <p class="spec__meta">Main's two credential lanes at 60 px/s in opposite directions; a lane holds still while hovered. Each lane is one labelled image for screen readers. <span class="rm">Reduced motion → static lanes.</span></p></div></div>
@@ -223,7 +216,6 @@ import * as D from '../../../assets/js/core/decoration.js';
     run: function () { D.run([].slice.call(document.getElementById('runCards').children))(); },
     emph: function () { var j = document.getElementById('journey'); D.run([].slice.call(j.children), j.querySelector('.journey__step--key'), true)(); },
     grow: function () { lines(); D.grow(g)(); },
-    meter: function () { D.meter([].slice.call(document.querySelectorAll('#meters i')))(); },
     fill: function () { var f = document.getElementById('fillSpec'); f.classList.remove('play'); void f.offsetWidth; f.classList.add('play'); },
     cue: function () { var c = document.getElementById('cueSpec'); c.classList.remove('play'); void c.offsetWidth; if (!rm) c.classList.add('play'); },
     token: function () {
