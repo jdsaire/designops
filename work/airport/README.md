@@ -1,6 +1,6 @@
 # work/airport/
 
-Brief 03 · TUUA Transfer, served at `/work/airport/`: "Paying what was never paid". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
+Brief 03 · TUUA Transfer, served at `/work/airport/`: "Paying what was never paid". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) and its relay tracks (`relay.css`) from [`../../assets/`](../../assets/README.md).
 
 | File | Who it's for |
 |---|---|

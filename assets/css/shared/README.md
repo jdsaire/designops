@@ -8,7 +8,8 @@ Components that appear on more than one page. Each file says in its first commen
 | [`footer.css`](footer.css) | The footer and its closing statement. All 7 pages |
 | [`progress.css`](progress.css) | The scroll progress bar at the top. All 7 pages |
 | [`decoration.css`](decoration.css) | The decoration patterns, governed by [`../../../docs/v3/organisms/decoration-system.spec.md`](../../../docs/v3/organisms/decoration-system.spec.md). All 7 pages |
-| [`brief-charts.css`](brief-charts.css) | The briefs' charts, phone timelines, dashboard panel, card scrollers and read-time switch. Briefs 01, 02 and 04 |
+| [`relay.css`](relay.css) | The relay organism: Brief 03's handoff tracks and one-row relays, and the phone schedule timeline of Briefs 01, 02 and 04. All four briefs |
+| [`brief-charts.css`](brief-charts.css) | The briefs' charts, dashboard panel, card scrollers and read-time switch. Briefs 01, 02 and 04 |
 | [`bridge.css`](bridge.css) | The portrait-and-heading bridge. Main and About |
 | [`ticker.css`](ticker.css) | The credentials ticker. Main |
 | [`channels.css`](channels.css) | A row of outbound links, each an icon and a label. About and Contact |
