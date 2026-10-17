@@ -1,7 +1,7 @@
 # Plan — PR #41 · Repository hygiene (P-CC-PR41-RepoHygiene-v1_0)
 
 **Branch:** `deploy/v28-pr41-repo-hygiene`, from `069c7d4` (origin/main after PR #40)
-**Pull request:** #41, manual merge only
+**Pull request:** [#41](https://github.com/jdsaire/designops/pull/41), manual merge only
 **Dispatch:** `BRIEF-CC-PR41-RepoHygiene-v1_6.md` → `P-CC-PR41-RepoHygiene-v1_0.xml`, both in `out/active/PRE-MAX/closing/` outside this repository
 
 This file holds the plan as approved and the rulings taken at its gates. The run's full working plan and records are in
@@ -50,3 +50,4 @@ Each gate stopped and released only on its exact phrase. Commits landed only aft
 | G1 | `APPROVED PR41 G1`; 45f2df1, 262e323, 31ef8f5, b67c972 | 17 Oct 2026 |
 | G1b | `APPROVED PR41 G1B`, given before the gate report; the commits waited for a clean tip regression; 44e7c68, b217ed9, dfade70, 56d5d06, a7de102, 0c93fe1, ebb40fe | 17 Oct 2026 |
 | G2 | `APPROVED PR41 G2. DELETE BRANCHES: all merged`; 0d69fe8, 6f81823; 35 merged remote branches named for deletion after the push | 17 Oct 2026 |
+| G3 | `APPROVED PR41 G3`; the archive committed, the branch pushed, [PR #41](https://github.com/jdsaire/designops/pull/41) opened against main, unmerged | 17 Oct 2026 |

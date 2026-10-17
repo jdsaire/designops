@@ -1,6 +1,6 @@
 # Completion report — PR #41 · Repository hygiene
 
-**Branch:** `deploy/v28-pr41-repo-hygiene`, from `069c7d4` · **Pull request:** #41, manual merge only
+**Branch:** `deploy/v28-pr41-repo-hygiene`, from `069c7d4` · **Pull request:** [#41](https://github.com/jdsaire/designops/pull/41), manual merge only
 **Plan:** [Plan-PR41-RepoHygiene.md](../cc-plans/Plan-PR41-RepoHygiene.md)
 
 ## 1. Commits
@@ -24,7 +24,8 @@ In order, on `deploy/v28-pr41-repo-hygiene`:
 - `ebb40fe` — "fix(brief01): Act 02's track name in English and Spanish"
 - `0d69fe8` — "chore(tools): checks anyone can run with Python 3: parity, links, unused keys, key order"
 - `6f81823` — "docs: a root map of every English/Spanish dictionary pair, with key counts"
-- (this commit) — "docs: archive the PR #41 plan and completion report"
+- `4dd5100` — "docs: archive the PR #41 plan and completion report"
+- (this commit) — "docs: record the PR #41 link in its completion report"
 
 - **One commit per item.** The spec is alone in its commit; SR-3 and SR-4 are one commit each; each clean-up is its own commit, Brief 04's and Brief 02's `.synthesis` separately. Each clean-up commit carries the README lines it changes (SR-4). Parity and missing keys are 0 on every commit's tree.
 
@@ -60,7 +61,7 @@ In order, on `deploy/v28-pr41-repo-hygiene`:
    - 0 references to Brief 03's arrow styles, the inline `.synthesis` copies, `meter()`, the `.dash` scan and `.dcell__bar`;
    - Brief 01's track name in EN and ES, both engines, after a language swap; parity 0, orphans 0.
 10. **Claims and attribution:** no README claim beyond POSITIONING v1_9 and EVIDENCE; never-list scan 0; sole author and committer jdsaire on every commit; no trailer.
-11. **Push:** only after `APPROVED PR41 G3`; the branch alone, PR against main, unmerged, auto-merge off.
+11. **Push:** only after `APPROVED PR41 G3`; the branch alone was pushed and PR [#41](https://github.com/jdsaire/designops/pull/41) opened against main, unmerged, auto-merge off.
 12. **Archive:** this plan and report with index lines in both `docs/v4` READMEs, `docs/v4/README.md` and `docs/README.md`; the harness copied to `closing/PR41-run/harness/`.
 
 ## 4. Authorized deviations
@@ -97,7 +98,7 @@ In order, on `deploy/v28-pr41-repo-hygiene`:
 ## 9. Relay
 
 - **Landed:** 17 commits on `deploy/v28-pr41-repo-hygiene`, plus this archive. Spec v1.5, SR-3, SR-4, the template; a README in every folder; six invisible clean-ups; the dictionary map, tools and branch list.
-- **Open:** the manual merge of PR #41; the deletion of the 35 merged branches JD named.
+- **Open:** the manual merge of PR #41 (https://github.com/jdsaire/designops/pull/41); the deletion of the 35 merged branches JD named.
 - **Next station:** Cowork, the post-deploy sync (`/post-deploy-sync` for PR #41).
 - **Do there first:** KEYS-Main for `act2_aria`; the register for the new documentation standard.
 - **Then:** PR #42 (the Solution act), the first PR under SR-4.
