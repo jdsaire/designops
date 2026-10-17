@@ -149,12 +149,10 @@
   padding:0 var(--gutter); height:var(--nav-height);
   border-bottom:1px solid var(--color-border-faint); flex-shrink:0;
 }
-.nav__overlay-close {
-  background:none; border:none; cursor:pointer; color:var(--color-brand-white);
-  font-size:1.5rem; line-height:1; padding:0.25rem;
-  display:flex; align-items:center; transition:opacity var(--duration-ui) var(--ease-standard);
-}
-.nav__overlay-close:hover { opacity:0.7; }
+/* The overlay's own × has been covered by the open menu button since PR #39, which is the visible close.
+   It stays in the markup as that button's name source (aria-labelledby, kept in the reader's language by the
+   i18n engines; navchrome.js), so it is hidden rather than removed (PR #41, PR41-Q1). */
+.nav__overlay-close { display:none; }
 .nav__overlay-logo {
   display:inline-flex; align-items:baseline; gap:0.5rem; flex-shrink:0;
   font-weight:var(--fw-black); letter-spacing:-0.01em; font-size:1.05rem;

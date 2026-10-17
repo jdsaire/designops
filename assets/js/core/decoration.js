@@ -117,19 +117,6 @@ function grow(chart) {
   };
 }
 
-/* GROW · meter: dashboard meters fill to their value once. */
-function meter(meters) {
-  meters = meters.filter(shown);
-  if (!motion || !meters.length) return noop;
-  const { DUR, STAG } = clock(), s = stagger(meters.length, STAG);
-  meters.forEach(m => m.classList.add('deco-meter'));
-  preset(meters); meters.forEach((m, i) => m.style.setProperty('--deco-delay', Math.round(i * s) + 'ms'));
-  return () => {
-    frame(() => meters.forEach(m => m.classList.remove('deco-pre')));
-    setTimeout(() => meters.forEach(m => m.style.removeProperty('--deco-delay')), (meters.length - 1) * s + DUR + 60);
-  };
-}
-
 /* The Gantt organism draws its bars from data and redraws them on resize and language changes, so a chart is
    re-armed until it plays. */
 function gantt(chart) {
@@ -164,13 +151,9 @@ function init() {
   });
   document.querySelectorAll('.journey__steps').forEach(c => { if (!onScreen(c)) when(c, run(kids(c), c.querySelector('.journey__step--key'), true)); });
   document.querySelectorAll('.relay').forEach(r => { if (!onScreen(r)) when(r, run([...r.querySelectorAll('.relay__node, .relay__baton span')], r.querySelector('.relay__baton span'))); });
-  /* GROW + RELATE: the briefs' roadmaps; GROW · meter: Brief 02's dashboard */
+  /* GROW + RELATE: the briefs' roadmaps (GROW · meter retired with Brief 02's dashboard: PR40-Q28, spec v1.5) */
   const scan = () => document.querySelectorAll('.gantt__chart').forEach(gantt);
   scan(); window.addEventListener('load', scan);
-  document.querySelectorAll('.dash').forEach(dash => {
-    const ms = [...dash.querySelectorAll('.dcell__bar i')];
-    if (ms.length && !onScreen(dash)) when(ms[0].closest('.band') || dash, meter(ms));
-  });
 }
 
-export { init, motion, sig, run, grow, meter };
+export { init, motion, sig, run, grow };

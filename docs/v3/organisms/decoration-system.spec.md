@@ -1,4 +1,4 @@
-# Decoration system — capability spec (v1.4)
+# Decoration system — capability spec (v1.5)
 
 Companion to `decoration-system.html`, the live specimen. It loads the site's own tokens, face and decoration layer,
 so it shows the shipped code, not a copy.
@@ -41,6 +41,26 @@ theirs: FILL and PULSE in `pages/home/hero.css`, CUE RING in `pages/home/navcue.
 - Phones of Briefs 01, 02 and 04 receive Brief 03's relay motion through PR #40's mobile schedule; RUN already runs every
   relay, so only the "Used on" count changes, reported by PR #40.
 
+**v1.5 (PR #40, merged at `069c7d4`, 14 Oct 2026; PR40-Q3, Q5, Q9, Q26, Q28, Q31; SY40):** three new rows, one pattern retired,
+one guard generalised, and v1.4's budget finding withdrawn.
+- **RUN on the phone schedules** (D41, PR40-Q3): below 768, Briefs 01, 02 and 04 replace the Gantt with a relay timeline
+  (`.relay--sched`); RUN plays on it through `core/decoration.js`'s existing `.relay` hook, with no new code.
+  Used on: 13 → 16 components. GROW and RELATE play from 768 only, where the Gantts are shown.
+- **Brief 02's GROW runs over planned hours** (PR40-Q5, Q9): its bars are sized in cumulative planned hours, not story
+  points; the filter chips are retired, so the only labels are the task "SP · h" labels shown when a phase is opened.
+- **The dashboard act panel** (D42, PR40-Q26, Q28): every brief's dashboard act is one static panel at every width. It adds
+  no motion pattern; its eyebrow keeps SIGNATURE.
+- **GROW · meter retired** (PR40-Q28): Brief 02's dashboard, its one use, is gone. Used on: 1 → 0. `meter()`, the `.dash`
+  scan and the `.dcell__bar` rules are dead code, removed by PR #41.
+- **RUN skips a set that scrolls sideways** (D43, PR40-Q31): v1.4 already skipped a sideways-scrolling timeline; PR #40 gives
+  ladders the same guard, since phone card sets now scroll (twelve sets below 768). One rule now covers both (§6).
+- **v1.4's known breach is withdrawn** (§4): measured per element, no Brief 02 one-shot exceeded 1.5 s on the base. The
+  1,498–1,533 ms of v1.4 was the section-level grouping of Act 06's two eyebrow bars (two SIGNATURE one-shots fired at
+  different scroll steps) measured as one span. §11's checks now measure each one-shot per element.
+- **Read time per screen and language** (PR40-Q2, G7): the hero read time switches by `html[lang]` and width through
+  `display` only. It is not a decoration: no motion, no layout shift (CLS 0.0000).
+- §10.3 records PR #40's measurements at its G8 tip.
+
 ## 1. Scope: what counts as a decoration
 
 | Kind | Definition | Governed by |
@@ -80,10 +100,11 @@ No role means the decoration is retired.
   - MARQUEE runs at 60 px/s;
   - LIVE MAP bobs 2–4 px.
 - **A loop asks for frames only while on screen.** A one-shot that uses a loop stops it when it is done.
-- **One-shots play once per page view**, at the trigger (§5), and finish within 1.5 s of it. Measured maximum: 1.45 s, Brief 03's act-5 relay, fade included.
-  - **Known breach (v1.4, SY39-Q1):** on PR #39's base (`6261415`), Brief 02's schedule (GROW + RELATE) measures 1,498–1,533 ms
-    at 390, against 1,234 ms at 1440. It predates PR #39 and is not an exception. PR #40 hides the schedule below 768, which
-    removes it on phones, and re-measures its relay timeline against 1.5 s.
+- **One-shots play once per page view**, at the trigger (§5), and finish within 1.5 s of it. Measured per element (§11),
+  the longest at PR #40's tip is 1,467 ms: Brief 03 in WebKit at 1440. Brief 01's phone relay (7 nodes) runs 1,450 ms at 390
+  (§10.3).
+  - v1.4's known breach is withdrawn (v1.5): per element, Brief 02's schedule took 1,233 ms at 390 on `6261415`; the
+    1,498–1,533 ms was Act 06's two eyebrow bars grouped as one span (§10.2, corrected).
   - The one exception is CUE RING (X-5): an interaction one-shot with its own ceiling, 7.2 s, played once per browser,
     not per view, and stopped by the first tap or scroll (PR37-Q2, Q14).
   - FILL plays as the hero is shown (`.hero--fit`), the same beat as the eyebrow bars armed before first paint.
@@ -113,11 +134,11 @@ No role means the decoration is retired.
 |---|---|---|---|---|
 | **SIGNATURE** | Aesthetic: a section starts | the bar draws from the left, `scaleX` 0 → 1, 500 ms, decelerate; no blend mode, no opacity change | bar drawn | 44 eyebrow bars: Main 4, About 3, Contact 2, B01 8, B02 9, B03 9, B04 9 |
 | **CLOSING BAR** | Aesthetic: the closing beat | SIGNATURE, on a bar above the closing statement ("Tested concepts. / Protected budgets.", sentence case, PR35-Q40) | bar drawn | the footer on all 7 pages |
-| **RUN** | Message: order | a 1 px brand-purple edge layer lights each item in reading order, 140 ms apart, held 360 ms, fading over 250 ms; nothing moves, nothing hides | no edge | 13 components: timelines (B01, B04 ×3, and B02 from 1024 up, where all 3 stops show), ladders (B01, B04), the B03 journey, the B03 relays (act 1, act 5 as one pass, act 6), the B04 architecture cards 1–4 (from 768, where the set fits the view; v1.4) |
+| **RUN** | Message: order | a 1 px brand-purple edge layer lights each item in reading order, 140 ms apart, held 360 ms, fading over 250 ms; nothing moves, nothing hides | no edge | 16 components: timelines (B01, B04 ×3, and B02 from 1024 up, where all 3 stops show), ladders (B01, B04), the B03 journey, the B03 relays (act 1, act 5 as one pass, act 6), the B04 architecture cards 1–4 (from 768, where the set fits the view; v1.4), the phone schedules of B01, B02 and B04 (below 768, `.relay--sched`; v1.5). RUN skips any card set that scrolls sideways at the current width; the final frame shows (v1.5) |
 | **EMPHASISE** | Message: the key item | as the pass lands on it, the key item's edge swells `scale` 1 → 1.06 → 1 over 500 ms; the words stay still; the item rests in its own state | the item's own state | B03 journey step 2 ("the missing channel", 2 px border); B03 act-5 HANDOFF baton |
-| **GROW** | Message: when and for how long | each Gantt fill grows from its start behind its label (`scaleX` on a fill layer), 500 ms, 80 ms apart, in schedule order; labels, lengths, dots and milestones stay | bars full | B01 (7 bars), B02 (5), B04 (5) |
-| **GROW · meter** | Message: how much of the target | each meter fills to its value, 500 ms, 80 ms apart; the figures are static | meters at value | B02's 8 meters |
-| **RELATE** | Message: what had to finish first | each dependency line starts as the bar it leaves finishes and reveals along its direction through a mask, 500 ms; it keeps its 5/4 dash, and its arrowhead appears as it arrives | dashed lines with heads | B02 (5 lines) |
+| **GROW** | Message: when and for how long | each Gantt fill grows from its start behind its label (`scaleX` on a fill layer), 500 ms, 80 ms apart, in schedule order; labels, lengths, dots and milestones stay | bars full | B01 (7 bars), B02 (5), B04 (5), from 768 (below 768 the Gantts are hidden). B02's bars are sized in planned hours; its labels are the task "SP · h" labels shown when a phase is opened (v1.5) |
+| **GROW · meter** (retired, PR40-Q28) | — | Brief 02's dashboard, its one use, is gone | — | none (was B02's 8 meters) |
+| **RELATE** | Message: what had to finish first | each dependency line starts as the bar it leaves finishes and reveals along its direction through a mask, 500 ms; it keeps its 5/4 dash, and its arrowhead appears as it arrives | dashed lines with heads | B02 (5 lines), from 768 |
 | **FIELD** (retired, PR35-Q50) | Aesthetic: the opening | the hero gradient holds still; an endless drift without the retired pause button would need a 2.2.2 exception | still | Main hero |
 | **ENTRANCE** (retired, PR35-Q49) | — | the hero shows at once when it is fitted | in place | Main hero |
 | **MARQUEE** (X-1) | Aesthetic + Message: a deliberate pause before the work (PR35-Q28) | two lanes at 60 px/s in opposite directions; a lane holds while hovered; a logo lifts from .55 to 1 opacity on hover | static lanes | Main ticker |
@@ -174,7 +195,7 @@ These are interaction feedback, outside the decoration budget.
 
 ## 9. Verdicts per component
 
-v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1, D37–D39 in v1.3, D40 in v1.4.
+v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1, D37–D39 in v1.3, D40 in v1.4, D41–D43 in v1.5.
 
 | # | Component | Verdict (v1.1) | Role | Note |
 |---|---|---|---|---|
@@ -206,7 +227,7 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1
 | D26 | Main/About · bridge portraits | Keep, still | — | — |
 | D27 | Main · hero entrance (G2(e) B) | **Retired** (PR35-Q49) | — | the hero shows at once |
 | D28 | Main · hero typing loop + caret | **Retired** (PR35-Q48) | — | line 2 rests on IMPACT / IMPACTO |
-| D29 | B02 · dashboard meters (8) | **Extend** GROW · meter | Message | Δ8 |
+| D29 | B02 · dashboard meters (8) | **Retired** with the dashboard (PR40-Q28; was Extend GROW · meter) | — | Δ8; the code goes in PR #41 |
 | D30 | Briefs · S5 hero bar (blend difference) | **Retire** into SIGNATURE | — | green on the light theme (Δ9) |
 | D31 | B02/B04 · timeline restack under reduced motion | **Retire** the restack; B02's arrows retired (PR #39) | — | Δ13; the row scrolls natively, with snap and a peek |
 | D32 | B03 · canvas loops off screen | **Fix**: frames only while on screen | — | Δ12 |
@@ -218,6 +239,9 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1
 | D38 | Main · phone menu button cue (PR #37) | **New** CUE RING | Interaction | X-5; 7.2 s once per browser |
 | D39 | Main · square beside the name (PR #37) | **Returned** PULSE (D06 reversed) | Aesthetic | X-6; the Lima label stays retired |
 | D40 | B04 · architecture cards (numbered 1–4) (PR #39) | **New** RUN from 768 | Message | order; skipped where the set is taller than the view (phones) |
+| D41 | B01/B02/B04 · phone schedule (`.relay--sched`) (PR #40) | **New** RUN below 768 | Message | order; the existing `.relay` hook, no new code |
+| D42 | B01/B02/B04 · dashboard act panel (`.hlr`) (PR #40) | **None**: static encodings | — | PR40-Q26: no new motion pattern; figures static (PR35-Q25) |
+| D43 | Phone card scrollers (`.swipe`, 12 sets) (PR #40) | **RUN skipped** below 768 | — | sets scroll sideways (§6 RUN guard); ladders and timelines keep RUN from 768 |
 
 ## 10. Measured at G4b
 
@@ -267,6 +291,30 @@ Branch `deploy/v26-pr39-closure-figures`, Chrome channel and WebKit.
 - **Layout shift** from decorations: 0.0000. **Outlines** drawn by anything but focus: 0.
 - **Longest one-shot, Brief 02 at 390:** 1,533 ms on the base `6261415` (1,498–1,533 ms across runs), 1,234 ms at 1440.
   Pre-existing; recorded under §4's known breach.
+  - **Corrected in v1.5:** that figure grouped Act 06's two eyebrow bars (two SIGNATURE one-shots, 500 ms each, at different
+    scroll steps) by section and class as one span. Measured per element, Brief 02's schedule took 1,233 ms at 390 and 1,235 ms
+    at 320 on the same base; no Brief 02 one-shot exceeded 1.5 s. The breach line is withdrawn from §4.
+
+### 10.3 Measured at PR #40 (v1.5)
+
+Branch `deploy/v27-pr40-mobile-organisms`, tip `c76755e` (G8), Chrome channel and WebKit, per element.
+- **Text hidden or fading:** 0 on all 7 pages at 390 and 1440, both engines.
+- **Final frame = reduced motion:** 292 of 292 component frames.
+- **Layout shift** from decorations: 0.0000 everywhere. **Outlines** drawn by anything but focus: 0.
+- **Longest one-shot per page (ms):**
+
+| Page | 390 Chrome | 390 WebKit | 1440 Chrome | 1440 WebKit |
+|---|---|---|---|---|
+| Main | 501 | 499 | 500 | 501 |
+| About | 516 | 501 | 500 | 499 |
+| Contact | 501 | 500 | 500 | 484 |
+| B01 | 1450 | 1450 | 967 | 967 |
+| B02 | 1160 | 1167 | 1234 | 1234 |
+| B03 | 1449 | 1452 | 1448 | 1467 |
+| B04 | 1150 | 1167 | 1000 | 1017 |
+
+- **Phone schedule relays (D41):** B01 7 nodes, B02 5, B04 5; each ≤ 1,450 ms at 320 and 390 (G3, per element).
+- **Read time:** the hero's four numbers switch through `display` by `html[lang]` and width; no motion, CLS 0.0000 (G7).
 
 ## 11. Where it lives, and how to add a pattern
 
@@ -275,14 +323,17 @@ Branch `deploy/v26-pr39-closure-figures`, Chrome channel and WebKit.
   head script. That script adds `deco-armed` when motion is allowed. Contact's CSP lists that script's hash.
 - **Every pattern is an arm/play pair.** `arm(target)` sets the pre-state, only when motion is allowed, without a
   transition, and returns `play()`. The page plays it from `when(component)`; the specimen plays it from a button.
-  Exports: `sig`, `run`, `grow`, `meter`, `motion`.
+  Exports: `sig`, `run`, `grow`, `meter`, `motion` (`meter` has no use since v1.5; PR #41 removes it).
 - **Opt-in RUN on a set (v1.4):** `data-deco-run="<min width>"` on a container runs RUN over its children only at that
   width or wider, and only when the whole set fits the viewport height, so a pass never lights an item off screen
   (Brief 04's architecture cards use it from 768).
+- **Sideways guard (v1.5):** RUN skips a timeline, a ladder or any card set whose track scrolls sideways at the current width
+  (`scrollWidth > clientWidth + 4`), and the final frame shows.
 - **A new pattern** names its role (§3), fits the budget (§4), takes its timing from the tokens (§5), and draws a bar,
   an edge, a fill or a line, never the words. Its final frame is the markup's own state. It needs a row in §6 and in
   §9, and an exception in §7 if it relaxes anything.
 - **Checks before a pattern ships:**
+  - the longest one-shot, measured per element, never per section and class (v1.5);
   - the hidden-text sample (§2 rule 3);
   - the reduced-motion pixel comparison (§2 rule 1);
   - layout shift;
