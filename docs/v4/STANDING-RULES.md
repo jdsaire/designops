@@ -53,3 +53,21 @@ hash is recomputed whenever that script changes.
 control, so a meta tag is the only vehicle available. `frame-ancestors`, `report-uri` and `sandbox`
 are inert in a meta policy, which means this page has no clickjacking protection from CSP. The
 policy covers `contact/` alone; extending it to the other seven pages is CC-3's.
+
+---
+
+## SR-3 · A brief's read time is measured, never estimated
+
+**In force from:** PR #40 (mobile organisms), 14 Oct 2026; ratified in the PR #40 sync (SY40-Q7), 16 Oct 2026.
+
+A brief's hero read time is four numbers: English and Spanish, each for phones (below 768 px) and for 768 px and
+up. Each is measured on the merged tip: the words the width shows in `main`, with reveal panels opened, divided by
+230, rounded up. The hero shows one, chosen by `html[lang]` and the width in
+`assets/css/shared/brief-charts.css`, with no keys and no script. Where all four round to the same number, the
+brief shows that number alone.
+
+**Why.** Phones show less than desktop (no charts, no chart footnotes, no in-card panels) and Spanish runs longer
+than English, so a single number misstated three of four readers. The numbers live in markup and go stale silently.
+
+**How to apply.** Re-measure all four numbers whenever copy changes or what a width shows changes, before the run
+that made the change closes, and record per-cell words and minutes in the run's records.
