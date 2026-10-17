@@ -1,85 +1,63 @@
-# DesignOps Portfolio — Juan Diego Saire
+# designops
 
-A single-page web portfolio for one seat: **UX Engineer / DesignOps Specialist** —
-the strategist who takes digital products from feasible to shipped.
+The source of Juan Diego Saire's portfolio site, in English and Spanish: Main, About, Contact and four case-study briefs, written in plain HTML, CSS and JavaScript with no framework and no build step.
 
-This site is both the argument and the evidence. It makes the case for hiring one
-operator who reads the code, runs the repo, and directs the build — and it does so
-on an operating layer that operator designed, built, and governs end to end.
+**Live:** https://jdsaire.github.io/designops/
 
-## What this is
+## What you'll find on the site
 
-A focused employability variant of the JDigital portfolio, narrowed to a single
-DesignOps hiring argument. Every section is built to land that argument fast:
+| Page | Path | What it is |
+|---|---|---|
+| Main | [`index.html`](index.html) | The front page: the offer, the work, the capabilities, a way in to every brief |
+| About | [`about/`](about/README.md) | The journey, the credentials and the CV downloads |
+| Contact | [`contact/`](contact/README.md) | The contact form and the outbound links |
+| Brief 01 · AccreditaPass · sports | [`work/accreditapass/`](work/accreditapass/README.md) | Never miss a match |
+| Brief 02 · Trust & Verify · banking | [`work/yape-trust-verify-brief/`](work/yape-trust-verify-brief/README.md) | The screenshot says paid. My app asks the bank. |
+| Brief 03 · TUUA Transfer · airport | [`work/airport/`](work/airport/README.md) | Paying what was never paid |
+| Brief 04 · Portfolio · software | [`work/portfolio-evolution/`](work/portfolio-evolution/README.md) | A design system I built and govern end to end |
 
-- A **3-second** read: the headline states the problem (products stall between
-  strategy and launch) and the resolution (I take them from feasible to shipped).
-- A **10-second** read: three proven builds, three mandates, and a track record
-  in hard numbers — enough for a hiring manager to qualify the fit before scrolling.
+Every page switches between English and Spanish and between a dark and a light theme from its menu.
 
-## Goal
+## Run it locally
 
-Demonstrate fit for a design organization scaling one system across many markets —
-turning a shared standard into something local teams can actually run, day to day.
-The copy demonstrates capability through proof, never through superlatives.
-
-## Features
-
-- **Design system, governed end to end** — global tokens (color, typography,
-  spacing), reusable organisms, and a custom EN/ES internationalization engine,
-  hand-written in native HTML/CSS/JS.
-- **Bilingual engine (SwapLang)** — `data-i18n` driven, fetch-on-demand dictionaries.
-- **Accessibility** — WCAG AA target: keyboard navigation, focus states, image
-  alt text, `prefers-reduced-motion` support, and contrast-checked brand purple.
-- **Responsive** — verified at mobile (375px), tablet (768px), and desktop (1440px).
-- **Zero frameworks** — vanilla HTML/CSS/JS, deployed on GitHub Pages.
-
-## Structure
-
-Organized per organism, split between shared (used across sections) and home
-(page-specific) concerns — a layout that carries forward as the site grows past
-a single page:
-
-```
-index.html                       # single-page document
-assets/
-  css/
-    base/                        # reset + global design tokens
-    shared/                      # nav, footer, bridge, ticker, section extras
-    home/                        # hero, work, capabilities, evolution, contact
-  js/
-    core/i18n.js                 # EN/ES dictionary engine
-    home/                        # per-section behavior modules (ES modules)
-    main.js                      # module entry point, wires up each section
-  i18n/                          # en.json / es.json dictionaries
-  img/                           # bridge, work, and institution-logo assets
-logos/                           # brand mark placeholder
-work/                            # reserved for upcoming case-study pages
-docs/                            # planning briefs and execution notes
-.github/workflows/               # CI workflow (not the active Pages deploy path)
-```
-
-## Sections
-
-Hero · Bridge · Work · Capabilities · Evolution · Track Record · Contact
-
-## Local preview
-
-No build step, but the JS is loaded as ES modules, which browsers only execute
-over `http(s)://` (not `file://`). Serve the repo root with any static server:
+The scripts load as ES modules, which browsers run only over `http://`, not from a `file://` path. Serve the repository root with any static server:
 
 ```sh
 python3 -m http.server 8000
-# then visit http://localhost:8000/
+# then open http://localhost:8000/
 ```
+
+## Where things live
+
+| Path | What it is |
+|---|---|
+| [`index.html`](index.html) | Main. It stays at the root, where every path on the site is resolved from |
+| [`about/`](about/README.md), [`contact/`](contact/README.md) | One folder per page: the page and its own dictionaries |
+| [`work/`](work/README.md) | The four briefs, one folder each, plus two retired addresses that still answer |
+| [`assets/`](assets/README.md) | Everything shared: styles, scripts, the site-wide dictionaries, images, fonts, the CVs |
+| [`i18n/`](i18n/) | Main's own English and Spanish dictionaries |
+| [`logos/`](logos/) | The site mark, in its states |
+| [`docs/`](docs/README.md) | **The project's records, not the site:** every build's plan and report, the specs, the standing rules |
+| [`.github/`](.github/) | A Pages workflow file and the pull-request template |
+| `.nojekyll` | Tells GitHub Pages to serve every file as it is |
+| `.gitignore` | Keeps system, editor and secret files out of the repository |
+
+The folder layout follows one rule: what belongs to one page lives in that page's folder; what is shared stays in `assets/`. [`docs/v3/IA-CONVENTION.md`](docs/v3/IA-CONVENTION.md) sets it out, with the paths that can never move.
+
+## Where the decisions live
+
+- [`docs/README.md`](docs/README.md): every run's plan and completion report, the specs and the history, indexed by type.
+- [`docs/v4/STANDING-RULES.md`](docs/v4/STANDING-RULES.md): rules that outlive the run that introduced them, each with its reason.
+- [`docs/v3/organisms/`](docs/v3/organisms/README.md): the decoration, motion and roadmap specs, each with a live specimen page.
+
+## How a change ships
+
+Each change starts as a written brief and becomes a plan, approved before any file changes. It is built in gates, each reviewed on a local server and released by an exact phrase, and it ends with a completion report archived under [`docs/`](docs/README.md). Every pull request follows [`.github/pull_request_template.md`](.github/pull_request_template.md), and its documentation travels with it (SR-4 in the standing rules): the READMEs, indexes and maps that list a file change in the same pull request as the file.
 
 ## Deployment
 
-GitHub Pages serves this repository directly from the `main` branch root — no
-build step, no Actions deploy required. Pushing to `main` publishes immediately.
-The `.nojekyll` file at the repo root disables Jekyll so all assets are served
-verbatim.
+GitHub Pages serves this repository from the root of `main`, with no build step: what is merged is what is live. Pull requests are merged by hand.
 
 ## Author
 
-Juan Diego Saire — DesignOps. [LinkedIn](https://linkedin.com/in/jdsaire/)
+Juan Diego Saire, AI Product & Experience Engineer. [LinkedIn](https://linkedin.com/in/jdsaire/)
