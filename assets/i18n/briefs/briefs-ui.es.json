@@ -13,6 +13,8 @@
   "ui_act01_problem": "Acto 01 · El Problema",
   "ui_act03_solution": "Act 03 · The Solution",
   "ui_illus_label": "Illustration",
+  "ui_carousel_prev": "Previous",
+  "ui_carousel_next": "Next",
   "ui_act05_schedule": "Acto 05 · El Cronograma",
   "ui_act04_architecture": "Acto 04 · La Arquitectura",
   "ui_act06_dashboard": "Acto 06 · El Dashboard",

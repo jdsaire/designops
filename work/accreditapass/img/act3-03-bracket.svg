@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Plan on conditions, not guesses</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="400" cy="260" r="230" fill="url(#glow)"/>
+  <!-- a knockout bracket pinned to a wall, two flight paths leaving it: one certain, one conditional -->
+  <g fill="none" stroke="#9A6BFF" stroke-width="2.5"><path d="M110 120 H170 V180 H110 M110 240 H170 V300 H110 M110 360 H170 V420 H110"/><path d="M170 150 H230 V270 H170 M170 390 H230 V330"/><path d="M230 210 H290 V360 H230"/></g>
+  <circle cx="110" cy="120" r="5" fill="#9A6BFF"/><circle cx="110" cy="420" r="5" fill="#9A6BFF"/><circle cx="290" cy="210" r="5" fill="#9A6BFF"/>
+  <rect x="276" y="268" width="28" height="28" fill="url(#g)"/>
+  <path d="M304 282 C420 200 520 150 600 140" fill="none" stroke="#9A6BFF" stroke-width="2.5"/>
+  <path d="M304 290 C420 330 520 370 600 380" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-dasharray="8 8"/>
+  <path d="M600 126 l26 14 l-26 14 l6 -14 Z" fill="#9A6BFF"/><path d="M600 366 l26 14 l-26 14 l6 -14 Z" fill="#9A6BFF" opacity="0.7"/>
+  <rect x="640" y="112" width="56" height="56" fill="url(#g)"/><path d="M656 140 l8 8 l15 -17" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="square"/>
+  <rect x="640" y="352" width="56" height="56" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-dasharray="6 6"/>
+  <path d="M659 370 C659 358 677 358 677 370 C677 378 668 379 668 388" fill="none" stroke="#9A6BFF" stroke-width="3.5"/><rect x="665" y="394" width="6" height="6" fill="#9A6BFF"/>
+</svg>

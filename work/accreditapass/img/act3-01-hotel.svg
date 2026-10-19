@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Know what your pass opens</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="430" cy="280" r="230" fill="url(#glow)"/>
+  <!-- the night before, a hotel room: the window, the bed, a journalist checking tomorrow's match -->
+  <rect x="96" y="72" width="150" height="150" fill="none" stroke="#9A6BFF" stroke-width="2.5"/><path d="M171 72 V222 M96 147 H246" stroke="#9A6BFF" stroke-width="1.5" opacity="0.5"/>
+  <path d="M218 98 A22 22 0 1 0 226 132 A17 17 0 1 1 218 98 Z" fill="#9A6BFF" opacity="0.8"/>
+  <path d="M200 330 H660 V404 H200 Z" fill="none" stroke="#9A6BFF" stroke-width="2.5"/><path d="M640 250 V404" stroke="#9A6BFF" stroke-width="2.5"/><rect x="560" y="300" width="70" height="30" rx="8" fill="none" stroke="#9A6BFF" stroke-width="2" opacity="0.6"/>
+  <path d="M200 404 V430 M660 404 V430" stroke="#9A6BFF" stroke-width="2.5"/>
+  <g opacity="1"><circle cx="320" cy="241.6" r="21.75" fill="none" stroke="#9A6BFF" stroke-width="3"/><path d="M279.4 350.35 C279.4 280.75 360.6 280.75 360.6 350.35" fill="none" stroke="#9A6BFF" stroke-width="3"/><path d="M285.2 350.35 H386.7 V404" fill="none" stroke="#9A6BFF" stroke-width="3"/></g>
+  <path d="M354.8 301.05 Q376.4 300.65000000000003 398.0 282.65000000000003" fill="none" stroke="#9A6BFF" stroke-width="3"/>
+  <circle cx="422.0" cy="254.65000000000003" r="82.8" fill="url(#glow)"/><rect x="395.0" y="208.65000000000003" width="54" height="92" rx="6" fill="url(#g)"/><path d="M411.0 254.65000000000003 l8 8 l15 -17" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="square"/>
+</svg>

@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -587,7 +588,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SOLUTION — 5 slides, one schematic illustration each (PR #42) ================= -->
+<!-- ================= ACT 03 · THE SOLUTION — 3 storyboard slides, the CTA below the carousel (PR #42) ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head">
@@ -595,35 +596,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="sol_verdict">A record, not a status page.</h2>
-      <p class="scan" data-i18n="sol_lede">Every change, kept and explained.</p>
+      <h2 class="verdict" id="v3" data-i18n="sol_verdict">Your pass, always current.</h2>
+      <p class="scan" data-i18n="sol_lede">Three reasons to open it every matchday.</p>
     </div>
 
     <div class="dl" data-dl>
       <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
         <ol class="dl__track">
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-01-log.svg" alt="A ledger with a new line added below the earlier ones" data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">The log</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · Nothing is overwritten</h3><p class="dl__body" data-i18n="sol_s1_x">A status page shows only today. AccreditaPass, a press-accreditation companion app, keeps every change to a pass as a new line in its log, so a journalist sees how today&#x27;s access came to be.</p></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-hotel.svg" alt="The night before, in a hotel room: a journalist sits on the bed holding a phone with a green check for tomorrow&#x27;s match." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">Before you travel</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · Know what your pass opens</h3><p class="dl__body" data-i18n="sol_s1_x">AccreditaPass, a press-accreditation companion app, shows what your accreditation permits, match by match, before you book the trip.</p></div>
           </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-02-conditions.svg" alt="A path that forks, one branch marked with a question mark" data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Conditions</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · Conditions, not decisions</h3><p class="dl__body" data-i18n="sol_s2_x">A knockout change that depends on a match nobody has played yet is written as a condition. The record never presents a guess as a decision already taken.</p></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-train.svg" alt="On a train to the stadium: the phone lights up with an arrow pointing to a different gate." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">On the way</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · Hear about a change before the gate</h3><p class="dl__body" data-i18n="sol_s2_x">When your access changes, the record updates on its own and tells you why and what to do next, before you reach the stadium.</p></div>
           </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-03-age.svg" alt="A card with a small clock in its corner" data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">Freshness</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · Data that states its age</h3><p class="dl__body" data-i18n="sol_s3_x">Every screen says how old the data on it is. A journalist can tell at a glance whether an answer is current, before relying on it.</p></div>
-          </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="04 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-04-gate-check.svg" alt="A turnstile with a check mark beside a match ticket" data-i18n-alt="sol_s4_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s4_l">Before the gate</p><h3 class="dl__title" data-i18n="sol_s4_t">04 · A gate check before the gate</h3><p class="dl__body" data-i18n="sol_s4_x">Each match carries a simulated gate check, so a journalist can test their access to that fixture before setting out for the stadium.</p></div>
-          </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="05 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-05-no-guess.svg" alt="A match card with two blank team badges" data-i18n-alt="sol_s5_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s5_l">Only what is known</p><h3 class="dl__title" data-i18n="sol_s5_t">05 · It never reads ahead</h3><p class="dl__body" data-i18n="sol_s5_x">Until a match is played, the app never names the teams in it. It shows what is known, and never a guess dressed as a fact.</p><a class="dl__cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-bracket.svg" alt="A bracket pinned to a wall, two flight paths leaving it, one marked &quot;if they win&quot;." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">For the knockouts</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · Plan on conditions, not guesses</h3><p class="dl__body" data-i18n="sol_s3_x">Knockout access that depends on a match not yet played is shown as a condition, so you book flights on what is likely.</p></div>
           </li>
         </ol>
       </div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+    </div>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -1073,10 +1073,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: sessionStore("b01:ui") });   // Act 03 · The Solution keeps its slide across a reload
 </script>
 </body>
 </html>
