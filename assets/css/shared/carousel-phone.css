@@ -94,3 +94,10 @@
   [data-dl-num] .dl__slide{counter-increment:dl-slide;}
   [data-dl-num] .dl__label::before{content:counter(dl-slide, decimal-leading-zero) " · ";}
 }
+
+/* Both carousels · the label in dark theme (PR42-Q36): brand purple reads 3.96:1 on black, under AA's 4.5:1 for this
+   size, so dark uses the light purple; light theme keeps brand purple (5.3:1 on white). */
+@media (max-width:767px){
+  html:not([data-theme="light"]) .section--services .services__pillar-label,
+  html:not([data-theme="light"]) .dl__label{color:var(--color-purple-light);}
+}
