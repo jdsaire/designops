@@ -150,6 +150,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+@media (max-width:767px){ #act0 .scanstack{display:none;} }   /* phones: Act 00's purple disclosure hides, its three cards carry the facts (PR42-Q27, as PR40-Q3) */
 
 /* Role strip — three stacked lines */
 .rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
@@ -660,23 +661,23 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
       <h2 class="verdict" id="v3" data-i18n="sol_verdict">Paid means paid.</h2>
-      <p class="scan" data-i18n="sol_lede">Three reasons to check every sale.</p>
+      <p class="scan" data-i18n="sol_lede">How it helps high-traffic shops.</p>
     </div>
 
     <div class="dl" data-dl>
       <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
         <ol class="dl__track">
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
-            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-stall.svg" alt="A market stall: a customer holds up a phone, the merchant&#x27;s phone shows a check, a bag changes hands." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">At the counter</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · Know it&#x27;s paid before the goods leave</h3><p class="dl__body" data-i18n="sol_s1_x">Trust &amp; Verify, a payment-verification app for merchants, checks the payment against its record instead of the screenshot. Here it runs on fabricated fixtures.</p></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-stall.svg" alt="Market stall: the merchant&#x27;s phone shows a green check mark and the shopping bag changes hands." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">At the counter</p><h3 class="dl__title" data-i18n="sol_s1_t">Know it is paid before handing the order</h3><p class="dl__body" data-i18n="sol_s1_x">Trust &amp; Verify confirms if the transfer occurred by checking the bank operation rather than a screenshot, protecting your store merchandise.</p></div>
           </li>
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
-            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-fake.svg" alt="The amount on a customer&#x27;s screenshot circled, the customer turning away from the counter." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">When it&#x27;s fake</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · See what doesn&#x27;t match, and say why</h3><p class="dl__body" data-i18n="sol_s2_x">A forged payment is caught and its false field named, so you can tell the customer exactly why the sale stops.</p></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-mismatch.svg" alt="The merchant&#x27;s phone flags a mismatch beside the customer&#x27;s screenshot." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Fake screenshots</p><h3 class="dl__title" data-i18n="sol_s2_t">See what does not match and say why</h3><p class="dl__body" data-i18n="sol_s2_x">The app highlights the exact discrepancy against the customer's payment receipt, allowing you to explain calmly why the purchase cannot proceed.</p></div>
           </li>
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
-            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-queue.svg" alt="A busy counter with a queue: a keypad with shuffled digits, a name hidden behind dots." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">In front of the queue</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · Safe to use in front of the queue</h3><p class="dl__body" data-i18n="sol_s3_x">The code goes in on a keypad with shuffled digits that no other keyboard can read, and the customer&#x27;s name and number stay masked.</p></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-queue.svg" alt="Busy checkout: a keypad with scrambled digits and a name protected behind dots." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">With a busy queue</p><h3 class="dl__title" data-i18n="sol_s3_t">Type securely in front of everyone</h3><p class="dl__body" data-i18n="sol_s3_x">A randomized numeric keypad makes your keystrokes hard to follow, and customer names and phone numbers stay masked at every checkout.</p></div>
           </li>
         </ol>
       </div>
