@@ -35,13 +35,5 @@
 .dl__nav:hover, .dl__nav:focus-visible{border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
 .dl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
 @media (min-width:768px) and (max-width:1023px){ .dl__slide{grid-template-columns:45fr 55fr; gap:clamp(1.5rem,3vw,2.5rem);} }
-@media (max-width:767px){
-  .dl__viewport{margin-right:0; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
-  .dl__viewport::-webkit-scrollbar{display:none;}
-  .dl__track{gap:1rem; transform:none !important; transition:none;}
-  .dl__slide{flex:0 0 calc(100% - var(--peek-width)); grid-template-columns:1fr; gap:1.25rem; align-items:start; align-content:start; scroll-snap-align:start;}   /* the next slide peeks (PR42-Q3); rows keep their size */
-  .dl__cta{display:none;}   /* phones: the slides stand alone (Brief 03, iteration 6) */
-  .dl__slide:not(.is-on){opacity:1;}
-  .dl__ctrl{justify-content:flex-start; padding-right:0;}
-}
+/* Below 768: shared/carousel-phone.css, Main's capabilities phone carousel style (PR #42) */
 @media (prefers-reduced-motion:reduce){ .dl__track, .dl__slide{transition:none;} }

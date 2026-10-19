@@ -29,7 +29,7 @@ export function init({ store } = {}) {
     function paint() {
       slides.forEach((s, k) => { const on = k === i; s.classList.toggle('is-on', on);
         if (phone.matches) { s.removeAttribute('aria-hidden'); s.inert = false; } else { s.setAttribute('aria-hidden', String(!on)); s.inert = !on; } });
-      if (count) count.textContent = pad(i + 1) + ' / ' + pad(n);
+      if (count) count.textContent = phone.matches ? (i + 1) + ' / ' + n : pad(i + 1) + ' / ' + pad(n);   // phones: Main's "1 / 3" (PR #42)
       root.dataset.index = i; ui.set('dl', i || null);
     }
     function go(k, smooth) {
