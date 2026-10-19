@@ -254,6 +254,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
+.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}   /* Act 00 (PR #42), as Briefs 02 and 04 */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; text-align:left; font-size:.74rem; font-weight:var(--fw-semibold);
   letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
@@ -462,6 +463,45 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <div class="reveal__body reveal__body--poster" id="rv-hero">
         <p data-i18n="hero_rv_txt">104 matches, 16 stadiums and three countries, with no guarantee a press pass is valid for every match. Venues change, spaces shrink and knockout quotas hang on a goal nobody has scored. Without timely notice, journalists run into reality at the stadium gate. AccreditaPass removes that friction: a personal record that shows what changed, why, and the action plan for the best coverage.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 00 · THE CONTEXT — the tournament in three facts, on Brief 02 Act 00's chassis (PR #42) ================= -->
+<section class="act" id="act0" aria-labelledby="v0">
+  <div class="container">
+    <div class="act__head">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+      </div>
+      <h2 class="verdict" id="v0" data-i18n="act0_verdict">The 2026 World Cup.</h2>
+    </div>
+
+    <div class="scanstack">
+      <div class="reveal" data-act="act0">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0" data-panel-title="The tournament in three facts" data-panel-title-key="act0_rv_btn" data-i18n="act0_rv_btn">The tournament in three facts</button>
+        <div class="reveal__body reveal__body--poster" id="rv-a0">
+          <p data-i18n="act0_scan1">The first World Cup with 48 teams: 104 matches in 16 host cities across three countries.</p>
+          <p data-i18n="act0_scan2">By the quarter-finals, 5,230 accredited media representatives had attended the tournament.</p>
+          <p data-i18n="act0_scan3">Accreditation did not guarantee access: some accredited reporters were never granted U.S. visa appointments.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cardgrid cardgrid--3 swipe" tabindex="0" role="group" aria-labelledby="v0">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c1_t">Tournament scale</h3>
+        <p class="card__x" data-i18n="act0_c1_x">The 2026 World Cup was the first with 48 teams: 104 matches in 16 host cities across three countries (Canada, Mexico, United States), 11 June – 19 July 2026.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c2_t">Press scale</h3>
+        <p class="card__x" data-i18n="act0_c2_x">By the quarter-finals, 5,230 accredited media representatives from around the world had attended the 2026 World Cup, checking in at stadiums 33,146 times; 282 official press conferences had been held.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c3_t">Accreditation without access</h3>
+        <p class="card__x" data-i18n="act0_c3_x">Accreditation did not guarantee access at the 2026 World Cup: Iranian reporters holding tournament accreditation were never granted U.S. visa appointments; one reporter counts more than 20 colleagues who sought appointments in Ankara and never got one.</p>
+      </article>
     </div>
   </div>
 </section>
