@@ -27,6 +27,7 @@ The project's records: how the site was built and decided, run by run. The site 
 | PR #39 · Closure figures | [plan](v4/cc-plans/Plan-PR39-ClosureFigures.md) | [report](v4/cc-completion-reports/pr39-closure-figures-completion-report.md) |
 | PR #40 · Mobile organisms | [plan](v4/cc-plans/Plan-PR40-MobileOrganisms.md) | [report](v4/cc-completion-reports/pr40-mobile-organisms-completion-report.md) |
 | PR #41 · Repository hygiene | [plan](v4/cc-plans/Plan-PR41-RepoHygiene.md) | [report](v4/cc-completion-reports/pr41-repo-hygiene-completion-report.md) |
+| PR #42 · Solution act | [plan](v4/cc-plans/Plan-PR42-SolutionAct.md) | [report](v4/cc-completion-reports/pr42-solution-act-completion-report.md) |
 | Wave 5 · Master assembly | [plan](v3/cc-plans/Plan-Wave5-MasterAssembly.md) | [report](v3/cc-completion-reports/wave-5-masterassembly-completion-report.md) |
 | Wave 5 · Task 5.6 · Spanish keys closed | [plan](v3/cc-plans/Plan-Wave5-Task56-ESKeysClose.md) | [report](v3/cc-completion-reports/wave-5-task56-eskeysclose-completion-report.md) |
 | Wave 6 · Task 6.2 · Surgical refinements | [plan](v3/cc-plans/Plan-Wave6-Task62-SurgicalRefinements.md) | [report](v3/cc-completion-reports/wave-6-task62-surgical-refinements-completion-report.md) |

@@ -23,3 +23,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #39 · Closure figures | `pr39-closure-figures-completion-report.md` |
 | PR #40 · Mobile organisms | `pr40-mobile-organisms-completion-report.md` |
 | PR #41 · Repository hygiene | `pr41-repo-hygiene-completion-report.md` |
+| PR #42 · Solution act | `pr42-solution-act-completion-report.md` |
