@@ -255,6 +255,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
 .scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}   /* Act 00 (PR #42), as Briefs 02 and 04 */
+@media (max-width:767px){ #act0 .scanstack{display:none;} }   /* phones: Act 00's purple disclosure hides, its three cards carry the facts (PR42-Q27, as PR40-Q3) */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; text-align:left; font-size:.74rem; font-weight:var(--fw-semibold);
   letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
@@ -480,27 +481,27 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <div class="scanstack">
       <div class="reveal" data-act="act0">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0" data-panel-title="The tournament in three facts" data-panel-title-key="act0_rv_btn" data-i18n="act0_rv_btn">The tournament in three facts</button>
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0" data-panel-title="Championship scale" data-panel-title-key="act0_rv_btn" data-i18n="act0_rv_btn">Championship scale</button>
         <div class="reveal__body reveal__body--poster" id="rv-a0">
-          <p data-i18n="act0_scan1">The first World Cup with 48 teams: 104 matches in 16 host cities across three countries.</p>
-          <p data-i18n="act0_scan2">By the quarter-finals, 5,230 accredited media representatives had attended the tournament.</p>
-          <p data-i18n="act0_scan3">Accreditation did not guarantee access: some accredited reporters were never granted U.S. visa appointments.</p>
+          <p data-i18n="act0_scan1">The first 48-team tournament: 104 matches in 16 host cities across Canada, Mexico, and the United States.</p>
+          <p data-i18n="act0_scan2">By the quarter-finals, over 5,000 media members logged 33,146 stadium entries and 282 press conferences.</p>
+          <p data-i18n="act0_scan3">Pass clearance did not guarantee entry: several working journalists were never granted consular visa slots.</p>
         </div>
       </div>
     </div>
 
     <div class="cardgrid cardgrid--3 swipe" tabindex="0" role="group" aria-labelledby="v0">
       <article class="card">
-        <h3 class="card__t" data-i18n="act0_c1_t">Tournament scale</h3>
-        <p class="card__x" data-i18n="act0_c1_x">The 2026 World Cup was the first with 48 teams: 104 matches in 16 host cities across three countries (Canada, Mexico, United States), 11 June – 19 July 2026.</p>
+        <h3 class="card__t" data-i18n="act0_c1_t">Geographic sprawl</h3>
+        <p class="card__x" data-i18n-html="act0_c1_x">With 48 teams, the event held <strong>104 matches across 16 venues</strong> in three countries, from 11 June to 19 July 2026.</p>
       </article>
       <article class="card">
-        <h3 class="card__t" data-i18n="act0_c2_t">Press scale</h3>
-        <p class="card__x" data-i18n="act0_c2_x">By the quarter-finals, 5,230 accredited media representatives from around the world had attended the 2026 World Cup, checking in at stadiums 33,146 times; 282 official press conferences had been held.</p>
+        <h3 class="card__t" data-i18n="act0_c2_t">Press attendance</h3>
+        <p class="card__x" data-i18n-html="act0_c2_x">By the quarter-finals, 5,230 press members logged <strong>33,146 stadium check-ins</strong> and 282 official briefings.</p>
       </article>
       <article class="card">
-        <h3 class="card__t" data-i18n="act0_c3_t">Accreditation without access</h3>
-        <p class="card__x" data-i18n="act0_c3_x">Accreditation did not guarantee access at the 2026 World Cup: Iranian reporters holding tournament accreditation were never granted U.S. visa appointments; one reporter counts more than 20 colleagues who sought appointments in Ankara and never got one.</p>
+        <h3 class="card__t" data-i18n="act0_c3_t">Visa roadblocks</h3>
+        <p class="card__x" data-i18n-html="act0_c3_x">A pass <strong>did not guarantee entry</strong>. Reporters got no visa slots; one counted over 20 colleagues without one in Ankara, Türkiye.</p>
       </article>
     </div>
   </div>
