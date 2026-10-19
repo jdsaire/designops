@@ -1,6 +1,6 @@
 # Completion report · PR #42 · Solution act
 
-Author: jdsaire. Base `b4def28` (PR #41 merged). Branch `deploy/v29-pr42-solution-act`. Plan: [`../cc-plans/Plan-PR42-SolutionAct.md`](../cc-plans/Plan-PR42-SolutionAct.md). Pull request: opened at release, its URL recorded in the last commit of this file.
+Author: jdsaire. Base `b4def28` (PR #41 merged). Branch `deploy/v29-pr42-solution-act`. Plan: [`../cc-plans/Plan-PR42-SolutionAct.md`](../cc-plans/Plan-PR42-SolutionAct.md). Pull request: https://github.com/jdsaire/designops/pull/42 (merged by hand).
 
 ## What a reader now sees
 
@@ -70,7 +70,7 @@ Storyboard prototypes at JD's request: 27 for the Solution cards (3 per card), 3
 
 ```
 PIPELINE RELAY — PR #42 Solution act closed
-Landed:      PR#42 pushed at <sha> · <n> commits · Plan + G1–G7 with G6b (merge: JD)
+Landed:      PR#42 pushed · 34 commits · Plan + G1–G7 with G6b (merge: JD)
 Open:        EVIDENCE notes B01/B24/B33 · POSITIONING v1_10 · KEYS v1_6 · spec v1.6 · brief amendments
 Next:        PR #43 — per the PRE-MAX backlog, set at the sync
 Go to:       COWORK  (post-deploy-sync, then the next brief + CC trigger)
