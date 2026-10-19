@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -660,7 +661,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SOLUTION — 5 slides, one schematic illustration each (PR #42) ================= -->
+<!-- ================= ACT 03 · THE SOLUTION — 3 storyboard slides, the CTA below the carousel (PR #42) ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head">
@@ -668,35 +669,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="sol_verdict">Read it your way.</h2>
-      <p class="scan" data-i18n="sol_lede">Five ways the site adapts to you.</p>
+      <h2 class="verdict" id="v3" data-i18n="sol_verdict">Proof you can open.</h2>
+      <p class="scan" data-i18n="sol_lede">Three reasons to read on.</p>
     </div>
 
     <div class="dl" data-dl>
       <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
         <ol class="dl__track">
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-01-ten-seconds.svg" alt="A stopwatch beside a short paragraph" data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">In seconds</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · The 10-second version</h3><p class="dl__body" data-i18n="sol_s1_x">Every brief opens with a 10-second version: the whole case in one short read, before the first act begins.</p></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-running.svg" alt="A hiring manager opens a running app on a phone, straight from a brief." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">Running work</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · Open the work, not a mockup</h3><p class="dl__body" data-i18n="sol_s1_x">Two of the briefs link apps you can open and use today, and this site is itself a third build you can inspect.</p></div>
           </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-02-read-time.svg" alt="A phone and a monitor, each with its own clock" data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Your read time</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · Minutes measured for your screen</h3><p class="dl__body" data-i18n="sol_s2_x">The read time at the top is measured, not estimated, for your language and your screen. A phone shows less than a desktop, and the number says so.</p></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-checkable.svg" alt="A finger tracing a figure on a page down to its source." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Checkable</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · Every claim can be checked</h3><p class="dl__body" data-i18n="sol_s2_x">Figures carry their sources, and the site&#x27;s build history is public, change by change, so nothing has to be taken on trust.</p></div>
           </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-03-on-demand.svg" alt="A page with a panel sliding out from its right edge" data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">On demand</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · Detail when you ask</h3><p class="dl__body" data-i18n="sol_s3_x">Deeper explanations open only when you ask: in a side panel on a wide screen, in place on a phone. The page stays short until you want more.</p></div>
-          </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="04 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-04-sources.svg" alt="A number joined by a thin line to a footnote below it" data-i18n-alt="sol_s4_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s4_l">Sources</p><h3 class="dl__title" data-i18n="sol_s4_t">04 · The source beside the figure</h3><p class="dl__body" data-i18n="sol_s4_x">Figures carry their sources in footnotes right below them, so a claim can be checked without leaving the page.</p></div>
-          </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="05 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-05-settings.svg" alt="Two language tags beside a sun and a moon" data-i18n-alt="sol_s5_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s5_l">Your settings</p><h3 class="dl__title" data-i18n="sol_s5_t">05 · Your language, your theme</h3><p class="dl__body" data-i18n="sol_s5_x">Switch between English and Spanish, light and dark, from any page. The site keeps your choice as you move from page to page.</p><a class="dl__cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_repo">Read the repository</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-honest.svg" alt="A &quot;simulated&quot; badge pinned to the corner of a chart." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">Honest by design</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · Honest about what isn&#x27;t real</h3><p class="dl__body" data-i18n="sol_s3_x">Simulated research and test data are badged as simulated, and each brief states its limits, so a reader always knows what was measured.</p></div>
           </li>
         </ol>
       </div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+    </div>
+    <div class="ctaset">
+      <a class="cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="ui_cta_repo">Read the repository</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -1347,10 +1347,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: sessionStore("b04:ui") });   // Act 03 · The Solution keeps its slide across a reload
 </script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Open the work, not a mockup</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="420" cy="250" r="230" fill="url(#glow)"/>
+  <!-- a hiring manager opens a running app on a phone, straight from a brief -->
+  <rect x="110" y="80" width="220" height="300" fill="none" stroke="#9A6BFF" stroke-width="2.5"/>
+  <rect x="134" y="106" width="120" height="12" fill="#9A6BFF" opacity="0.7"/><rect x="134" y="140" width="170" height="8" fill="#9A6BFF" opacity="0.45"/><rect x="134" y="160" width="150" height="8" fill="#9A6BFF" opacity="0.45"/><rect x="134" y="180" width="164" height="8" fill="#9A6BFF" opacity="0.45"/><rect x="134" y="214" width="130" height="8" fill="#9A6BFF" opacity="0.45"/><rect x="134" y="234" width="160" height="8" fill="#9A6BFF" opacity="0.45"/>
+  <rect x="134" y="276" width="110" height="30" fill="none" stroke="#9A6BFF" stroke-width="2.5"/><path d="M226 285 l8 6 l-8 6" fill="none" stroke="#9A6BFF" stroke-width="2.5"/>
+  <path d="M250 292 C320 300 360 260 404 226" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-dasharray="7 7"/>
+  <g opacity="1"><circle cx="520" cy="247.5" r="20.25" fill="none" stroke="#9A6BFF" stroke-width="3"/><path d="M482.2 348.75 C482.2 283.95 557.8 283.95 557.8 348.75" fill="none" stroke="#9A6BFF" stroke-width="3"/><path d="M501.1 348.75 V450 M538.9 348.75 V450" fill="none" stroke="#9A6BFF" stroke-width="3"/></g>
+  <path d="M487.6 302.85 Q471.8 297.65 456.0 279.65" fill="none" stroke="#9A6BFF" stroke-width="3"/>
+  <circle cx="432.0" cy="251.64999999999998" r="86.4" fill="url(#glow)"/><rect x="404.0" y="203.64999999999998" width="56" height="96" rx="6" fill="url(#g)"/><circle cx="432.0" cy="251.64999999999998" r="7" fill="#FFFFFF"/><circle cx="432.0" cy="251.64999999999998" r="14" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.7"/>
+</svg>
