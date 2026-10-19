@@ -4,7 +4,8 @@
    From 768 the track translates (420 ms, spec §8 state motion) with a peek of the next slide; below 768 it scrolls
    sideways with snap and the same peek (PR42-Q3, after PR40-Q31). The media box takes its ground from the theme,
    and its drawings are transparent SVGs, so both themes read (PR42-Q2). Every drawn image carries the
-   "Illustration" tag (PR42-Q6). In Act 03 · The Solution the CTA follows the carousel, never a card. Reduced
+   "Illustration" tag (PR42-Q6). In Act 03 · The Solution the CTA sits under each slide's body from 768 and below the
+   carousel on phones (PR42-Q31). Reduced
    motion: no transition. */
 .dl{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .dl__viewport{overflow:hidden; margin-right:calc(-1 * var(--gutter)); outline:none;}
@@ -26,7 +27,8 @@
 .dl__cta:hover .dl__cta-i, .dl__cta:focus-visible .dl__cta-i{background:var(--color-purple-hover);}
 .dl__cta-i svg, .dl__nav svg{width:.95rem; height:.95rem; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 .dl__cta-i svg{stroke:var(--color-on-brand);}
-.dl + .ctaset{margin-top:clamp(1.6rem,3vw,2.4rem);}   /* the CTA sits below the carousel at every width, never in a card (PR #42) */
+.dl + .ctaset{margin-top:clamp(1.6rem,3vw,2.4rem);}   /* below 768: the single CTA sits below the carousel (PR #42) */
+@media (min-width:768px){ .dl + .ctaset{display:none;} }   /* from 768: each slide carries it under its body instead (PR42-Q31) */
 .dl__ctrl{display:flex; align-items:center; justify-content:flex-end; gap:.75rem; margin-top:clamp(1.25rem,2vw,1.75rem); padding-right:var(--peek-width);}
 .dl__nav{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
   transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
