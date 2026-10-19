@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -650,7 +651,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SOLUTION — 5 slides, one schematic illustration each (PR #42) ================= -->
+<!-- ================= ACT 03 · THE SOLUTION — 3 storyboard slides, the CTA below the carousel (PR #42) ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head">
@@ -658,35 +659,34 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="sol_verdict">A verdict that explains itself.</h2>
-      <p class="scan" data-i18n="sol_lede">Why, not just what.</p>
+      <h2 class="verdict" id="v3" data-i18n="sol_verdict">Paid means paid.</h2>
+      <p class="scan" data-i18n="sol_lede">Three reasons to check every sale.</p>
     </div>
 
     <div class="dl" data-dl>
       <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
         <ol class="dl__track">
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-01-reasoning.svg" alt="A checklist with a mark beside each line" data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">The reasoning</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · Field by field</h3><p class="dl__body" data-i18n="sol_s1_x">Trust &amp; Verify, a payment-verification app for merchants, shows its reasoning one field at a time, so the merchant leaves knowing why a payment holds, not just whether it does.</p></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-stall.svg" alt="A market stall: a customer holds up a phone, the merchant&#x27;s phone shows a check, a bag changes hands." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">At the counter</p><h3 class="dl__title" data-i18n="sol_s1_t">01 · Know it&#x27;s paid before the goods leave</h3><p class="dl__body" data-i18n="sol_s1_x">Trust &amp; Verify, a payment-verification app for merchants, checks the payment against its record instead of the screenshot. Here it runs on fabricated fixtures.</p></div>
           </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-02-defaults.svg" alt="A form with two optional fields drawn as dashed outlines" data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Plain defaults</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · No field you&#x27;ve never heard of</h3><p class="dl__body" data-i18n="sol_s2_x">Optional fields start as &quot;not shown&quot;. A tool that demands a field its user has never heard of fails the very person it is for.</p></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-fake.svg" alt="The amount on a customer&#x27;s screenshot circled, the customer turning away from the counter." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">When it&#x27;s fake</p><h3 class="dl__title" data-i18n="sol_s2_t">02 · See what doesn&#x27;t match, and say why</h3><p class="dl__body" data-i18n="sol_s2_x">A forged payment is caught and its false field named, so you can tell the customer exactly why the sale stops.</p></div>
           </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-03-not-checked.svg" alt="A verdict card with one line marked as not checked" data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">Candour</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · It says what it didn&#x27;t check</h3><p class="dl__body" data-i18n="sol_s3_x">A verdict is always within reach, and it names what was left unchecked. The merchant sees exactly how much the answer rests on.</p></div>
-          </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="04 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-04-step-links.svg" alt="Five connected dots, each carrying its own link symbol" data-i18n-alt="sol_s4_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s4_l">Every step</p><h3 class="dl__title" data-i18n="sol_s4_t">04 · A link for every step</h3><p class="dl__body" data-i18n="sol_s4_x">Each step of the check has its own address, so a step can be reopened or shared as a link instead of living only on one screen.</p></div>
-          </li>
-          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="05 / 05">
-            <div class="dl__media" hidden><img class="dl__img" src="img/act3-05-languages.svg" alt="Two speech bubbles marked EN and ES" data-i18n-alt="sol_s5_alt" width="768" height="512"></div>
-            <div class="dl__content"><p class="dl__label" data-i18n="sol_s5_l">Two languages</p><h3 class="dl__title" data-i18n="sol_s5_t">05 · English or Spanish, remembered</h3><p class="dl__body" data-i18n="sol_s5_x">Every screen switches between English and Spanish and keeps the choice for the next visit. The app is live on fabricated fixtures: try a sample payment.</p><a class="dl__cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-queue.svg" alt="A busy counter with a queue: a keypad with shuffled digits, a name hidden behind dots." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">In front of the queue</p><h3 class="dl__title" data-i18n="sol_s3_t">03 · Safe to use in front of the queue</h3><p class="dl__body" data-i18n="sol_s3_x">The code goes in on a keypad with shuffled digits that no other keyboard can read, and the customer&#x27;s name and number stay masked.</p></div>
           </li>
         </ol>
       </div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+    </div>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -1315,10 +1315,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: sessionStore("b02:ui") });   // Act 03 · The Solution keeps its slide across a reload
 </script>
 </body>
 </html>
