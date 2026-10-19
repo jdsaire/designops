@@ -11,7 +11,7 @@ The source of Juan Diego Saire's portfolio site, in English and Spanish: Main, A
 | Main | [`index.html`](index.html) | The front page: the offer, the work, the capabilities, a way in to every brief |
 | About | [`about/`](about/README.md) | The journey, the credentials and the CV downloads |
 | Contact | [`contact/`](contact/README.md) | The contact form and the outbound links |
-| Brief 01 · AccreditaPass · sports | [`work/accreditapass/`](work/accreditapass/README.md) | Never miss a match |
+| Brief 01 · AccreditaPass · sports | [`work/accreditapass/`](work/accreditapass/README.md) | AccreditaPass, a press-accreditation companion app: never miss a match |
 | Brief 02 · Trust & Verify · banking | [`work/yape-trust-verify-brief/`](work/yape-trust-verify-brief/README.md) | The screenshot says paid. My app asks the bank. |
 | Brief 03 · TUUA Transfer · airport | [`work/airport/`](work/airport/README.md) | Paying what was never paid |
 | Brief 04 · Portfolio · software | [`work/portfolio-evolution/`](work/portfolio-evolution/README.md) | A design system I built and govern end to end |

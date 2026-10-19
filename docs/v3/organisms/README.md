@@ -8,4 +8,4 @@ Reference implementations, each a single self-contained file with its capability
 
 **Instantiation contract:** a page re-targets the roadmap organism by editing its `DATA` object alone — markup, CSS and logic never change. The files here are the canonical reference; pages splice their own copy inline to stay self-contained, matching the established brief-page grammar.
 
-Consumers so far: Brief 04 (`work/yape-trust-verify-brief/`) instantiates the roadmap organism in Act 03 and carries the motion system's cross-document view-transition capability.
+Consumers so far: Brief 02 (`work/yape-trust-verify-brief/`) instantiates the roadmap organism in Act 05 and carries the motion system's cross-document view-transition capability.

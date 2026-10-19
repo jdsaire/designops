@@ -4,7 +4,7 @@ The four case-study briefs, one folder each, served at `/work/<folder>/`. Each b
 
 | Folder | Who it's for |
 |---|---|
-| [`accreditapass/`](accreditapass/README.md) | Brief 01 · AccreditaPass · sports |
+| [`accreditapass/`](accreditapass/README.md) | Brief 01 · AccreditaPass, a press-accreditation companion app · sports |
 | [`yape-trust-verify-brief/`](yape-trust-verify-brief/README.md) | Brief 02 · Trust & Verify · banking |
 | [`airport/`](airport/README.md) | Brief 03 · TUUA Transfer · airport |
 | [`portfolio-evolution/`](portfolio-evolution/README.md) | Brief 04 · Portfolio · software |

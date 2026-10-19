@@ -8,7 +8,7 @@ The site's shared images. Each subfolder holds one kind; the files are images on
 | [`badges/`](badges/) | The credential badges on About |
 | [`bridge-positioning/`](bridge-positioning/) | The portrait on Main, in three sizes and two formats |
 | [`work/`](work/) | The art on Main's work cards |
-| [`services/`](services/) | The capability icons on Main |
+| [`services/`](services/) | The capability illustrations on Main |
 | [`bridge1_onboarding.svg`](bridge1_onboarding.svg) | The bridge artwork on Main, About and Contact |
 | [`jdigital-logo-mini2.svg`](jdigital-logo-mini2.svg) | The small mark on Contact |
 
