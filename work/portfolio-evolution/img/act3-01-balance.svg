@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Senior judgment turned into software</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="384" cy="250" r="230" fill="url(#glow)"/>
+  <!-- judgment as a balance: the business case and the code, level -->
+  <path d="M384 110 V390 M314 390 H454" fill="none" stroke="#9A6BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><circle cx="384" cy="104" r="12" fill="url(#g)"/>
+  <path d="M220 150 H548" fill="none" stroke="#9A6BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M232 150 L182 270 M232 150 L282 270 M536 150 L486 270 M536 150 L586 270" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M172 270 Q232 312 292 270 Z" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><path d="M476 270 Q536 312 596 270 Z" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <g fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"><path d="M206 262 V234 M226 262 V218 M246 262 V226 M266 262 V206"/></g>
+  <rect x="496" y="206" width="80" height="56" rx="6" fill="url(#g)"/><path d="M522 224 l-10 10 l10 10 M550 224 l10 10 l-10 10 M542 220 l-8 28" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

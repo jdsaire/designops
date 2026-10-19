@@ -11,13 +11,14 @@
 
 | Gate | Released by |
 |---|---|
-| Plan | `APPROVED PR<n> PLAN` |
+| Plan | Accept plan and Auto Mode (Plan Mode) |
 
 ## Checks run
 
 | Check | Result |
 |---|---|
-| Matrix (7 pages × 390/768/1440 × dark/light × EN/ES) | |
+| Regression matrix (once, at the regression gate) | |
+| Evidence assets (scope ruled by /ask) | |
 | Parity (`python3 tools/parity.py`) | |
 | Links (`python3 tools/links.py`) | |
 | Read time (SR-3, where copy or a width's content changed) | |

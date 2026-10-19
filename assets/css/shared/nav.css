@@ -126,11 +126,11 @@
 }
 
 /* Hamburger — hidden at desktop/tablet, real display at ≤767px.
-   PR #37 (N1, PR37-Q4): a 44×44 target around today's three lines. The negative right margin keeps the lines where
-   they sat against the gutter, so only the tappable area grows. */
+   PR #37 (N1, PR37-Q4): a 44×44 target. PR #42 (G6b): the purple box is the button in both states, at the open X's
+   position; only the symbol changes on tap (three lines → X), both centred on the box's axis. */
 .nav__hamburger { display:none; position:relative; box-sizing:border-box; flex-direction:column; justify-content:center; align-items:center;
-  gap:0.3rem; width:44px; height:44px; min-width:44px; margin-right:calc((1.5rem - 44px) / 2); background:none; border:none; cursor:pointer; padding:0; }
-.nav__hamburger span { display:block; flex:0 0 auto; width:1.5rem; height:1.5px; background:var(--color-brand-white); transition:transform 250ms var(--ease-standard), opacity 200ms; }
+  gap:0.3rem; width:44px; height:44px; min-width:44px; margin-right:0; background:var(--color-brand-purple); border:none; cursor:pointer; padding:0; }
+.nav__hamburger span { display:block; flex:0 0 auto; width:1.5rem; height:2px; background:#FFFFFF; transition:transform 250ms var(--ease-standard), opacity 200ms; }
 .nav__hamburger--open span:nth-child(1) { transform:translateY(0.45rem) rotate(45deg); }
 .nav__hamburger--open span:nth-child(2) { opacity:0; }
 .nav__hamburger--open span:nth-child(3) { transform:translateY(-0.45rem) rotate(-45deg); }
@@ -354,7 +354,7 @@
    OPEN MENU (PR #37: M4 · E3 · F2 — PR37-Q11, Q15, Q26, Q27). Phones only: the overlay never paints at 768+.
    Theme and language come first, then the pages. Each group carries a 16.5 px label; a 4 px purple line opens
    PAGES and a 2 px grey line separates its clusters (HOME | WORK + its briefs | ABOUT | CONTACT). Every row is
-   at least 44 px. The close is the menu button itself, open: a 44 px purple square with a white X.
+   at least 44 px. The close is the menu button itself, open: the same 44 px purple square, now with a white X.
    ============================================================ */
 .nav__hamburger--open { margin-right:0; background:var(--color-brand-purple); }
 .nav__hamburger--open span { height:2px; background:#FFFFFF; }

@@ -25,6 +25,8 @@
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel-phone.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -253,6 +255,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
 .card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 ---- */
+.scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}   /* Act 00 (PR #42), as Briefs 02 and 04 */
+@media (max-width:767px){ #act0 .scanstack{display:none;} }   /* phones: Act 00's purple disclosure hides, its three cards carry the facts (PR42-Q27, as PR40-Q3) */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; text-align:left; font-size:.74rem; font-weight:var(--fw-semibold);
   letter-spacing:.1em; text-transform:uppercase; color:var(--color-brand-purple); padding:.35rem 0;
@@ -430,7 +434,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">7</span><span class="rt rt--en rt--m">4</span><span class="rt rt--es rt--d">9</span><span class="rt rt--es rt--m">4</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">8</span><span class="rt rt--en rt--m">5</span><span class="rt rt--es rt--d">10</span><span class="rt rt--es rt--m">5</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">The World Cup like never before</h1>
     <p class="hero__deck"><span data-i18n="hero_deck">My app guides press teams in their journey across the tournament.</span></p>
@@ -461,6 +465,45 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       <div class="reveal__body reveal__body--poster" id="rv-hero">
         <p data-i18n="hero_rv_txt">104 matches, 16 stadiums and three countries, with no guarantee a press pass is valid for every match. Venues change, spaces shrink and knockout quotas hang on a goal nobody has scored. Without timely notice, journalists run into reality at the stadium gate. AccreditaPass removes that friction: a personal record that shows what changed, why, and the action plan for the best coverage.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACT 00 · THE CONTEXT — the tournament in three facts, on Brief 02 Act 00's chassis (PR #42) ================= -->
+<section class="act" id="act0" aria-labelledby="v0">
+  <div class="container">
+    <div class="act__head">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+      </div>
+      <h2 class="verdict" id="v0" data-i18n="act0_verdict">The 2026 World Cup.</h2>
+    </div>
+
+    <div class="scanstack">
+      <div class="reveal" data-act="act0">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a0" data-panel-title="Championship scale" data-panel-title-key="act0_rv_btn" data-i18n="act0_rv_btn">Championship scale</button>
+        <div class="reveal__body reveal__body--poster" id="rv-a0">
+          <p data-i18n="act0_scan1">The first 48-team tournament: 104 matches in 16 host cities across Canada, Mexico, and the United States.</p>
+          <p data-i18n="act0_scan2">By the quarter-finals, over 5,000 media members logged 33,146 stadium entries and 282 press conferences.</p>
+          <p data-i18n="act0_scan3">Pass clearance did not guarantee entry: several working journalists were never granted consular visa slots.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cardgrid cardgrid--3 swipe" tabindex="0" role="group" aria-labelledby="v0">
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c1_t">Geographic sprawl</h3>
+        <p class="card__x" data-i18n-html="act0_c1_x">With 48 teams, the event held <strong>104 matches across 16 venues</strong> in three countries, from 11 June to 19 July 2026.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c2_t">Press attendance</h3>
+        <p class="card__x" data-i18n-html="act0_c2_x">By the quarter-finals, 5,230 press members logged <strong>33,146 stadium check-ins</strong> and 282 official briefings.</p>
+      </article>
+      <article class="card">
+        <h3 class="card__t" data-i18n="act0_c3_t">Visa roadblocks</h3>
+        <p class="card__x" data-i18n-html="act0_c3_x">A pass <strong>did not guarantee entry</strong>. Reporters got no visa slots; one counted over 20 colleagues without one in Ankara, Türkiye.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -587,42 +630,43 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE SCHEDULE — five weeks on a calendar axis, epics collapsed ================= -->
-<section class="act" id="sched" aria-labelledby="vsch">
+<!-- ================= ACT 03 · THE SOLUTION — 3 storyboard slides, the CTA below the carousel (PR #42) ================= -->
+<section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
-      <h2 class="verdict" id="vsch" data-i18n="sch_verdict">Built in five weeks.</h2>
-      <p class="scan" data-i18n="sch_lede">From sketch to finished build.</p>
-    </div>
-    <div class="gantt" id="gantt">
-      <div class="gantt__chart" id="ganttChart">
-        <div class="gantt__grid" id="ganttGrid" role="list" aria-label="The build on a calendar axis: seven phases, sized in days."></div>
-      </div>
-      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
+      <h2 class="verdict" id="v3" data-i18n="sol_verdict">Press logistics secured.</h2>
+      <p class="scan" data-i18n="sol_lede">How this app backs your daily coverage.</p>
     </div>
 
-    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
-    <div class="relay relay--sched">
-      <div class="relay__seg"><ol class="relay__track">
-        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="ge1">Starting prototype</span><span class="relay__x" data-i18n="sch_m1_x">28–29 Jul · 28 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="ge2">Usability audit</span><span class="relay__x" data-i18n="sch_m2_x">30–31 Jul · 24 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="ge3">Simulated research</span><span class="relay__x" data-i18n="sch_m3_x">11–14 Aug · 39 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="ge4">Front-end development</span><span class="relay__x" data-i18n="sch_m4_x">14–17 Aug · 51 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="ge5">Feature iteration</span><span class="relay__x" data-i18n="sch_m5_x">18–20 Aug · 37 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">06</span><span class="relay__tx"><span class="relay__t" data-i18n="ge6">Back-end API</span><span class="relay__x" data-i18n="sch_m6_x">20 Aug · 19 commits</span></span></li>
-        <li class="relay__st"><span class="relay__node">07</span><span class="relay__tx"><span class="relay__t" data-i18n="ge7">Launch</span><span class="relay__x" data-i18n="sch_m7_x">29–30 Aug · 8 commits · Live 30 Aug</span></span></li>
-      </ol></div>
+    <div class="dl" data-dl data-dl-num>
+      <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
+        <ol class="dl__track">
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-hotel.svg" alt="At night in a hotel room: a hand holds a phone showing a green check." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">Before departure</p><h3 class="dl__title" data-i18n="sol_s1_t">Confirm matches on your press slate</h3><p class="dl__body" data-i18n="sol_s1_x">AccreditaPass clarifies which fixtures you are authorized to cover so you can book flights and hotels without risking your travel budget.</p><a class="dl__cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-train.svg" alt="On a train to the stadium: a generic phone displays an arrow pointing to a new entrance." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">To the stadium</p><h3 class="dl__title" data-i18n="sol_s2_t">Know in time if your access shifts</h3><p class="dl__body" data-i18n="sol_s2_x">If your credential changes in transit, the app explains the reason and directs you where to go so you reach the right gate.</p><a class="dl__cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-bracket.svg" alt="A wall bracket showing two flight routes, one marked with the note &#x27;if they win&#x27;." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">Knockout stage</p><h3 class="dl__title" data-i18n="sol_s3_t">Plan on certainty, not on guesswork</h3><p class="dl__body" data-i18n="sol_s3_x">During knockout rounds, the app shows each fixture conditioned on previous outcomes so you can book flights knowing what each result would change.</p><a class="dl__cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+        </ol>
+      </div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
     </div>
-    <aside class="desk-how" aria-labelledby="schHowT">
-      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
-      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
-      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
-    </aside>
-    <p class="synthesis chart-aside" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -703,15 +747,54 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE TEST — the audits' figures and what they mean ================= -->
+<!-- ================= ACT 05 · THE SCHEDULE — five weeks on a calendar axis, epics collapsed ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Evaluation</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act05_schedule">Act 05 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Usability audits.</h2>
+      <h2 class="verdict" id="v5" data-i18n="sch_verdict">Built in five weeks.</h2>
+      <p class="scan" data-i18n="sch_lede">From sketch to finished build.</p>
+    </div>
+    <div class="gantt" id="gantt">
+      <div class="gantt__chart" id="ganttChart">
+        <div class="gantt__grid" id="ganttGrid" role="list" aria-label="The build on a calendar axis: seven phases, sized in days."></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This chart draws from its data with JavaScript.</p></noscript>
+    </div>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="ge1">Starting prototype</span><span class="relay__x" data-i18n="sch_m1_x">28–29 Jul · 28 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="ge2">Usability audit</span><span class="relay__x" data-i18n="sch_m2_x">30–31 Jul · 24 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="ge3">Simulated research</span><span class="relay__x" data-i18n="sch_m3_x">11–14 Aug · 39 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="ge4">Front-end development</span><span class="relay__x" data-i18n="sch_m4_x">14–17 Aug · 51 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="ge5">Feature iteration</span><span class="relay__x" data-i18n="sch_m5_x">18–20 Aug · 37 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">06</span><span class="relay__tx"><span class="relay__t" data-i18n="ge6">Back-end API</span><span class="relay__x" data-i18n="sch_m6_x">20 Aug · 19 commits</span></span></li>
+        <li class="relay__st"><span class="relay__node">07</span><span class="relay__tx"><span class="relay__t" data-i18n="ge7">Launch</span><span class="relay__x" data-i18n="sch_m7_x">29–30 Aug · 8 commits · Live 30 Aug</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="schHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
+    <p class="synthesis chart-aside" data-i18n="sch_note">Reconstructed from the public commit history of github.com/jdsaire/accreditapass: 206 commits across 16 runs, 28 Jul – 30 Aug 2026. The research, ideation and specification dossiers were written outside the repository, so their bars mark the day each one entered it. Nothing was committed from 1 to 10 August or from 21 to 28 August.</p>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE TEST — the audits' figures and what they mean ================= -->
+<section class="act" id="act6" aria-labelledby="v6">
+  <div class="container">
+    <div class="act__head">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Evaluation</span>
+      </div>
+      <h2 class="verdict" id="v6" data-i18n="act5_verdict">Usability audits.</h2>
       <p class="scan" data-i18n="act5_lede">Diverse and rigorous.</p>
     </div>
     <!-- The figures, "What it means" and two insights in one panel at every width (PR40-Q25, Q26, Q28); from 768 each
@@ -735,18 +818,18 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE CLOSE — claim, limit, next, on a descending ladder ================= -->
-<section class="act" id="act6" aria-labelledby="v6">
+<!-- ================= ACT 07 · THE CLOSE — claim, limit, next, on a descending ladder ================= -->
+<section class="act" id="act7" aria-labelledby="v7">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Closure</span>
+        <span class="section__eyebrow-text" data-i18n="act7_eyebrow">Act 07 · The Closure</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">Final claims.</h2>
+      <h2 class="verdict" id="v7" data-i18n="act6_verdict">Final claims.</h2>
       <p class="scan" data-i18n="act6_lede">Gains, Limits, Future.</p>
     </div>
-    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v6">
+    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v7">
       <article class="card">
         <p class="catlabel" data-i18n="r1_n">The milestone</p>
         <h3 class="card__t" data-i18n="r1_t">From concept to working interface</h3>
@@ -1032,10 +1115,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: sessionStore("b01:ui") });   // Act 03 · The Solution keeps its slide across a reload
 </script>
 </body>
 </html>

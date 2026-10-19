@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Know which matches your pass covers</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="330" cy="250" r="230" fill="url(#glow)"/>
+  <rect x="470" y="70" width="220" height="220" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <path d="M580 70 V290 M470 180 H690" fill="none" stroke="#9A6BFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+  <path d="M650 104 A24 24 0 1 0 660 144 A18 18 0 1 1 650 104 Z" fill="#9A6BFF" opacity="0.7"/>
+  <circle cx="330" cy="250" r="220.0" fill="url(#glow)"/><rect x="267.5" y="140.0" width="125.0" height="220.0" rx="17.5" fill="url(#g)"/><path d="M300.0 250 l22.5 22.5 l42.5 -47.5" fill="none" stroke="#FFFFFF" stroke-width="10.0" stroke-linecap="square"/><path d="M261.5 261.0 C237.5 316.0 237.5 386.4 277.5 408.4" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><path d="M396.5 239.0 q22 6 0 22 M396.5 276.4 q22 6 0 22 M396.5 313.8 q18 6 0 20" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><path d="M277.5 408.4 L307.5 459.0 M386.5 360.0 L412.5 459.0" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</svg>

@@ -251,9 +251,9 @@ function init(opts) {
     /* Nested Work disclosure inside the overlay. */
     const overlayWorkTrigger = document.getElementById('overlayWorkTrigger');
     const overlayWorkMenu = document.getElementById('overlayWorkMenu');
-    /* W1: the overlay's Work group opens expanded — the sitemap shows every
-       destination at once, and the chevron collapses it. */
-    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null, true);
+    /* The overlay's Work group opens collapsed (PR #42 G6b, reversing W1): a tap on
+       Work shows the briefs a reader can open. */
+    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null, false);
     /* Flat links close the overlay on navigation; Work items too. */
     overlay.querySelectorAll('.nav__overlay-link, .nav__overlay-subitem').forEach(el => {
       el.addEventListener('click', () => { if (el.tagName === 'A') closeOverlay(); });

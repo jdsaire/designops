@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel-phone.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -445,42 +447,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .chain__n:not(:last-child)::before{left:auto; right:-1.85rem; bottom:auto; top:calc(50% - 1.6rem);}
 }
 
-/* Act 03 · deliverables carousel (WD-Q78): jdigital Services / Main's capabilities carousel, ported in-page */
+/* Act 03 · deliverables carousel (WD-Q78): its rules live in shared/carousel.css since PR #42 (PR42-Q5); the anchors stay here */
 #a4-screens, #a4-flow{scroll-margin-top:calc(var(--nav-height) + 1.5rem);}
-.dl{margin-top:clamp(1.6rem,3vw,2.4rem);}
-.dl__viewport{overflow:hidden; margin-right:calc(-1 * var(--gutter)); outline:none;}
-.dl__viewport:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
-.dl__track{list-style:none; display:flex; gap:clamp(3rem,4vw,4rem); transition:transform 420ms var(--ease-standard);}
-.dl__slide{flex:0 0 calc(100% - var(--peek-width)); min-width:0; display:grid; grid-template-columns:51fr 49fr; gap:clamp(2rem,4vw,4rem); align-items:center;
-  transition:opacity 420ms var(--ease-standard);}
-.dl__slide:not(.is-on){opacity:.35;}
-.dl__media{aspect-ratio:3 / 2; overflow:hidden; background:#0A0A0A; border:1px solid var(--color-border-soft);}
-.dl__img{display:block; width:100%; height:100%; object-fit:cover;}
-.dl__label{font-size:.8rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-purple-light); margin-bottom:.75rem;}
-.dl__title{font-size:clamp(1.25rem,1.75vw,1.625rem); font-weight:var(--fw-bold); line-height:1.25; letter-spacing:-.015em; color:var(--color-brand-white);}
-.dl__body{font-size:clamp(.98rem,1.1vw,1.06rem); line-height:1.65; color:var(--color-text-muted); font-weight:var(--fw-light); margin-top:1rem;}
-.dl__cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; margin-top:1.25rem;}
-.dl__cta-l{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white);}
-.dl__cta-i{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:var(--color-brand-purple); transition:background var(--duration-ui) var(--ease-standard);}
-.dl__cta:hover .dl__cta-i, .dl__cta:focus-visible .dl__cta-i{background:var(--color-purple-hover);}
-.dl__cta-i svg, .dl__nav svg{width:.95rem; height:.95rem; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
-.dl__cta-i svg{stroke:var(--color-on-brand);}
-.dl__ctrl{display:flex; align-items:center; justify-content:flex-end; gap:.75rem; margin-top:clamp(1.25rem,2vw,1.75rem); padding-right:var(--peek-width);}
-.dl__nav{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
-  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
-.dl__nav:hover, .dl__nav:focus-visible{border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
-.dl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
-@media (min-width:768px) and (max-width:1023px){ .dl__slide{grid-template-columns:45fr 55fr; gap:clamp(1.5rem,3vw,2.5rem);} }
-@media (max-width:767px){
-  .dl__viewport{margin-right:0; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
-  .dl__viewport::-webkit-scrollbar{display:none;}
-  .dl__track{gap:1rem; transform:none !important; transition:none;}
-  .dl__slide{flex:0 0 100%; grid-template-columns:1fr; gap:1.25rem; align-items:start; align-content:start; scroll-snap-align:start;}   /* rows keep their size; the track's equal height no longer widens one slide's gap */
-  .dl__cta{display:none;}   /* phones: the slides stand alone (iteration 6) */
-  .dl__slide:not(.is-on){opacity:1;}
-  .dl__ctrl{justify-content:flex-start; padding-right:0;}
-}
-@media (prefers-reduced-motion:reduce){ .dl__track, .dl__slide{transition:none;} }
 
 /* CHASSIS PASS · Act 05 handoff boundary: the relay organism lives in shared/relay.css (PR #41, PR41-Q2) */
 
@@ -883,23 +851,23 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
         <ol class="dl__track">
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 05">
-            <div class="dl__media"><img class="dl__img" src="img/act3-01-platform.svg" alt="A phone flow linked to back-office reports and sync" data-i18n-alt="act3_img1_alt" width="768" height="512"></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-platform.svg" alt="A phone flow linked to back-office reports and sync" data-i18n-alt="act3_img1_alt" width="768" height="512"></div>
             <div class="dl__content"><p class="dl__label" data-i18n="act3_b1">Technical scopes</p><h3 class="dl__title" data-i18n="act3_l1_t">01 · Platform scope</h3><p class="dl__body" data-i18n="act3_l1_x">Passenger side: data capture, card payment, and an e-receipt with an eGate QR. Back office: sales reports reconciled with gateway and real-time sync with airport's fee system, sized for 4 million+ passengers a year.</p></div>
           </li>
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 05">
-            <div class="dl__media"><img class="dl__img" src="img/act3-02-gateway.svg" alt="A payment card beside a security shield, synced both ways" data-i18n-alt="act3_img2_alt" width="768" height="512"></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-gateway.svg" alt="A payment card beside a security shield, synced both ways" data-i18n-alt="act3_img2_alt" width="768" height="512"></div>
             <div class="dl__content"><p class="dl__label" data-i18n="act3_b1">Technical scopes</p><h3 class="dl__title" data-i18n="act3_l2_t">02 · Payment gateway scope</h3><p class="dl__body" data-i18n="act3_l2_x">E-payments confirmed in real time, returning the data for e-receipt and access QR. PCI DSS certified, 99.9% availability and peaks of 1,500 transactions an hour, with daily reconciliation and chargeback reports.</p></div>
           </li>
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 05">
-            <div class="dl__media"><img class="dl__img" src="img/act3-03-mockup.svg" alt="Four phone screens fanned out, the second highlighted" data-i18n-alt="act3_img3_alt" width="768" height="512"></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-mockup.svg" alt="Four phone screens fanned out, the second highlighted" data-i18n-alt="act3_img3_alt" width="768" height="512"></div>
             <div class="dl__content"><p class="dl__label" data-i18n="act3_b2">Experience</p><h3 class="dl__title" data-i18n="act3_l3_t">03 · Screen mockup and web prototype</h3><p class="dl__body" data-i18n="act3_l3_x">Four mobile screens: personal data, email code, card payment and the QR ticket for the eGate. A clickable mockup of the full flow was used in the web review with stakeholders.</p><a class="dl__cta" href="#a4-screens"><span class="dl__cta-l" data-i18n="act3_l3_go">See the screens</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
           </li>
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="04 / 05">
-            <div class="dl__media"><img class="dl__img" src="img/act3-04-casuistry.svg" alt="Three benchmarks feeding one estimate, sized into four channels" data-i18n-alt="act3_img4_alt" width="768" height="512"></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-04-casuistry.svg" alt="Three benchmarks feeding one estimate, sized into four channels" data-i18n-alt="act3_img4_alt" width="768" height="512"></div>
             <div class="dl__content"><p class="dl__label" data-i18n="act3_b3">Operations</p><h3 class="dl__title" data-i18n="act3_l4_t">04 · Operational casuistry</h3><p class="dl__body" data-i18n="act3_l4_x">Three models of e-payment in transport put initial web adoption at 5–7% of int-int passengers. Demand was split across web, cash desks, eGate POS and mobile POS, so PlanOps could size counters and queues.</p></div>
           </li>
           <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="05 / 05">
-            <div class="dl__media"><img class="dl__img" src="img/act3-05-process.svg" alt="A four-lane blueprint crossed by the online payment flow" data-i18n-alt="act3_img5_alt" width="768" height="512"></div>
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-05-process.svg" alt="A four-lane blueprint crossed by the online payment flow" data-i18n-alt="act3_img5_alt" width="768" height="512"></div>
             <div class="dl__content"><p class="dl__label" data-i18n="act3_b3">Operations</p><h3 class="dl__title" data-i18n="act3_l5_t">05 · Process map</h3><p class="dl__body" data-i18n="act3_l5_x">A service blueprint of the payment experience, differentiating tasks performed by the passenger, front office, back office and automation.</p><a class="dl__cta" href="#a4-flow"><span class="dl__cta-l" data-i18n="act3_l5_go">See the flowchart</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
           </li>
         </ol>
@@ -1278,33 +1246,6 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   (uiState.get("rv") || []).forEach(id=>{ const b = btns.find(x=>x.getAttribute("aria-controls")===id); if(b && b.getAttribute("aria-expanded")!=="true") b.click(); });
   const mo = new MutationObserver(save); btns.forEach(b=> mo.observe(b, { attributes:true, attributeFilter:["aria-expanded"] })); }
 
-/* ============ Act 03 deliverables carousel — translate on desktop, swipe on phones (Main's capabilities carousel) ============ */
-document.querySelectorAll('[data-dl]').forEach(root=>{
-  const vp = root.querySelector('.dl__viewport'), track = root.querySelector('.dl__track'), slides = [...track.children];
-  const count = root.querySelector('.dl__count'), n = slides.length, phone = window.matchMedia('(max-width:767px)');
-  const pad = v => String(v).padStart(2,'0'); let i = 0;
-  const step = ()=> slides[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
-  function paint(){ slides.forEach((s,k)=>{ const on = k === i; s.classList.toggle('is-on', on);
-      if(phone.matches){ s.removeAttribute('aria-hidden'); s.inert = false; } else { s.setAttribute('aria-hidden', String(!on)); s.inert = !on; } });
-    count.textContent = pad(i+1) + ' / ' + pad(n); root.dataset.index = i; uiState.set('dl', i || null); }
-  function go(k, smooth){ i = (k + n) % n;
-    if(phone.matches){ track.style.transform = ''; vp.scrollTo({ left: slides[i].offsetLeft, behavior: smooth === false ? 'auto' : 'smooth' }); }
-    else track.style.transform = 'translateX(-' + (i * step()) + 'px)';
-    paint(); }
-  root.querySelectorAll('.dl__nav').forEach(b=> b.addEventListener('click', ()=> go(i + (+b.dataset.step))));
-  vp.addEventListener('keydown', e=>{ if(e.key === 'ArrowLeft'){ e.preventDefault(); go(i-1); } if(e.key === 'ArrowRight'){ e.preventDefault(); go(i+1); } });
-  let x0 = 0, y0 = 0;
-  vp.addEventListener('touchstart', e=>{ x0 = e.changedTouches[0].screenX; y0 = e.changedTouches[0].screenY; }, { passive:true });
-  vp.addEventListener('touchend', e=>{ if(phone.matches) return; const dx = e.changedTouches[0].screenX - x0, dy = e.changedTouches[0].screenY - y0;
-    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? i+1 : i-1); }, { passive:true });
-  let tick = false;
-  vp.addEventListener('scroll', ()=>{ if(!phone.matches || tick) return; tick = true; requestAnimationFrame(()=>{ const k = Math.round(vp.scrollLeft / (slides[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0)));
-    if(k !== i && k >= 0 && k < n){ i = k; paint(); } tick = false; }); }, { passive:true });
-  let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=> go(i, false), 120); });
-  phone.addEventListener('change', ()=> go(i, false));
-  go(Math.min(n - 1, Math.max(0, +uiState.get('dl') || 0)), false);   // a reload keeps the slide
-});
-
 /* ============ Act 02 stakeholder network — canvas rings, card, sheet, ring list ============ */
 (function(){
   const root = document.querySelector('[data-net]'); if(!root) return;
@@ -1594,10 +1535,12 @@ document.querySelectorAll('[data-dl]').forEach(root=>{
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: uiState });   // Act 03: the slide survives a reload, under the page's own b03:ui key
 </script>
 </body>
 </html>

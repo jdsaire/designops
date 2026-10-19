@@ -23,3 +23,4 @@ Approved deployment plans for v4 and later.
 | PR #39 · Closure figures | `Plan-PR39-ClosureFigures.md` |
 | PR #40 · Mobile organisms | `Plan-PR40-MobileOrganisms.md` |
 | PR #41 · Repository hygiene | `Plan-PR41-RepoHygiene.md` |
+| PR #42 · Solution act | `Plan-PR42-SolutionAct.md` |

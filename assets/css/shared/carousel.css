@@ -1,0 +1,39 @@
+/* shared/carousel.css — the slide carousel (.dl): Brief 03's Act 03 deliverables carousel (WD-Q78), one source for
+   all four briefs since PR #42 (PR42-Q1, Q5), where it also carries Act 03 · The Solution in Briefs 01, 02 and 04.
+   Linked by Briefs 01–04 after shared/relay.css; driven by core/carousel.js.
+   From 768 the track translates (420 ms, spec §8 state motion) with a peek of the next slide; below 768 it scrolls
+   sideways with snap and the same peek (PR42-Q3, after PR40-Q31). The media box takes its ground from the theme,
+   and its drawings are transparent SVGs, so both themes read (PR42-Q2). Every drawn image carries the
+   "Illustration" tag (PR42-Q6). In Act 03 · The Solution the CTA sits under each slide's body from 768 and below the
+   carousel on phones (PR42-Q31). Reduced
+   motion: no transition. */
+.dl{margin-top:clamp(1.6rem,3vw,2.4rem);}
+.dl__viewport{overflow:hidden; margin-right:calc(-1 * var(--gutter)); outline:none;}
+.dl__viewport:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
+.dl__track{list-style:none; display:flex; gap:clamp(3rem,4vw,4rem); transition:transform 420ms var(--ease-standard);}
+.dl__slide{flex:0 0 calc(100% - var(--peek-width)); min-width:0; display:grid; grid-template-columns:51fr 49fr; gap:clamp(2rem,4vw,4rem); align-items:center;
+  transition:opacity 420ms var(--ease-standard);}
+.dl__slide:not(.is-on){opacity:.35;}
+.dl__media{position:relative; aspect-ratio:3 / 2; overflow:hidden; background:rgba(var(--ink),.03); border:1px solid var(--color-border-soft);}
+.dl__img{display:block; width:100%; height:100%; object-fit:cover;}
+.dl__tag{position:absolute; left:.75rem; top:.75rem; padding:.3rem .55rem; font-size:.66rem; font-weight:var(--fw-semibold); letter-spacing:.14em;
+  text-transform:uppercase; line-height:1; color:var(--color-text-muted); background:rgba(var(--ground),.85); border:1px solid var(--color-border-soft);}
+.dl__label{font-size:.8rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-purple-light); margin-bottom:.75rem;}
+.dl__title{font-size:clamp(1.25rem,1.75vw,1.625rem); font-weight:var(--fw-bold); line-height:1.25; letter-spacing:-.015em; color:var(--color-brand-white);}
+.dl__body{font-size:clamp(.98rem,1.1vw,1.06rem); line-height:1.65; color:var(--color-text-muted); font-weight:var(--fw-light); margin-top:1rem;}
+.dl__cta{display:inline-flex; align-items:center; gap:.75rem; min-height:44px; margin-top:1.25rem;}
+.dl__cta-l{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white);}
+.dl__cta-i{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:var(--color-brand-purple); transition:background var(--duration-ui) var(--ease-standard);}
+.dl__cta:hover .dl__cta-i, .dl__cta:focus-visible .dl__cta-i{background:var(--color-purple-hover);}
+.dl__cta-i svg, .dl__nav svg{width:.95rem; height:.95rem; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+.dl__cta-i svg{stroke:var(--color-on-brand);}
+.dl + .ctaset{margin-top:clamp(1.6rem,3vw,2.4rem);}   /* below 768: the single CTA sits below the carousel (PR #42) */
+@media (min-width:768px){ .dl + .ctaset{display:none;} }   /* from 768: each slide carries it under its body instead (PR42-Q31) */
+.dl__ctrl{display:flex; align-items:center; justify-content:flex-end; gap:.75rem; margin-top:clamp(1.25rem,2vw,1.75rem); padding-right:var(--peek-width);}
+.dl__nav{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
+  transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+.dl__nav:hover, .dl__nav:focus-visible{border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
+.dl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
+@media (min-width:768px) and (max-width:1023px){ .dl__slide{grid-template-columns:45fr 55fr; gap:clamp(1.5rem,3vw,2.5rem);} }
+/* Below 768: shared/carousel-phone.css, Main's capabilities phone carousel style (PR #42) */
+@media (prefers-reduced-motion:reduce){ .dl__track, .dl__slide{transition:none;} }

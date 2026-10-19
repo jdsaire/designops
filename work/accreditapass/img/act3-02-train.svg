@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <title>Know in time if your access shifts</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="430" cy="270" r="230" fill="url(#glow)"/>
+  <rect x="430" y="80" width="260" height="160" rx="30" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M462 212 C484 160 636 160 658 212 Z" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><path d="M450 212 H670" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M340 120 H410 M318 146 H404 M352 172 H410" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <path d="M210 250 V420 H430 M210 250 C210 230 230 226 240 226" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <circle cx="300" cy="240.9" r="23.2" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><path d="M256.5 365.6 C256.5 293.1 343.5 293.1 343.5 365.6" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/><path d="M268.1 365.6 H372.5 V412" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M337.7 298.90000000000003 Q367.7 324.90000000000003 397.7 264.90000000000003" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <circle cx="419.7" cy="232.90000000000003" r="96.80000000000001" fill="url(#glow)"/><rect x="392.2" y="184.50000000000003" width="55.00000000000001" height="96.80000000000001" rx="7.700000000000001" fill="url(#g)"/><path d="M405.4 232.90000000000003 H431.8 M421.9 221.90000000000003 L432.9 232.90000000000003 L421.9 243.90000000000003" fill="none" stroke="#FFFFFF" stroke-width="4.4" stroke-linecap="square"/>
+</svg>

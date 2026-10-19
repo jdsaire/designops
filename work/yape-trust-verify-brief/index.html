@@ -25,6 +25,8 @@
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel-phone.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -149,6 +151,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   font-size:.9rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .contrast__bridge strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 .scanstack{display:flex; flex-direction:column; gap:.9rem; margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+@media (max-width:767px){ #act0 .scanstack{display:none;} }   /* phones: Act 00's purple disclosure hides, its three cards carry the facts (PR42-Q27, as PR40-Q3) */
 
 /* Role strip — three stacked lines */
 .rolestrip{display:flex; flex-direction:column; gap:.55rem; padding:1.1rem 0;
@@ -486,7 +489,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">8</span><span class="rt rt--en rt--m">5</span><span class="rt rt--es rt--d">9</span><span class="rt rt--es rt--m">6</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">8</span><span class="rt rt--en rt--m">6</span><span class="rt rt--es rt--d">9</span><span class="rt rt--es rt--m">6</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">Fighting fraudulent payments</h1>
     <p class="hero__deck" data-i18n="hero_lede">My app lets a merchant check that a Yape payment on a customer's screen is real.</p>
@@ -650,53 +653,43 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE BUILD SHAPE — roadmap organism, effort-scaled ================= -->
+<!-- ================= ACT 03 · THE SOLUTION — 3 storyboard slides, the CTA below the carousel (PR #42) ================= -->
 <section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act3_verdict">Built in one week.</h2>
-      <p class="scan" data-i18n="act3_lede">From research to development.</p>
-      <div class="reveal chart-aside" data-act="act3">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a3" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
-        <div class="reveal__body reveal__body--poster" id="rv-a3">
-          <p data-i18n-html="act3_rv_txt">This Gantt chart lays out the build as five phases, reconstructed from its plan and completion record. Each row is one phase, read from left to right on an axis of planned hours, not calendar dates: <strong>the bar's length is the hours planned, and the dashed lines show what had to finish first</strong>. Open a phase to see its tasks, each with its story points and hours.</p>
-        </div>
-      </div>
+      <h2 class="verdict" id="v3" data-i18n="sol_verdict">Paid means paid.</h2>
+      <p class="scan" data-i18n="sol_lede">How it helps high-traffic shops.</p>
     </div>
 
-    <div class="gantt" id="gantt">
-      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Project setup leads to 02 Verification flow. 02 Verification flow leads to 03 Session and data flow. 03 Session and data flow leads to 04 Interface security. 04 Interface security leads to 05 Test and delivery. The singleton session task in 03 Session and data flow leads to the execution-lock fix in 05 Test and delivery.</div>
-
-      <div class="gantt__chart" id="ganttChart">
-        <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
-        <div class="gantt__grid" id="ganttGrid" role="tree"
-             aria-label="Brief 04 build shape: five phases with task rows, sized in story points. Dependencies are listed before this chart."
-             aria-describedby="ganttDepList"></div>
+    <div class="dl" data-dl data-dl-num>
+      <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
+        <ol class="dl__track">
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-stall.svg" alt="Market stall: the merchant&#x27;s phone shows a green check mark and the shopping bag changes hands." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">At the counter</p><h3 class="dl__title" data-i18n="sol_s1_t">Know it is paid before handing the order</h3><p class="dl__body" data-i18n="sol_s1_x">Trust &amp; Verify confirms if the transfer occurred by checking the bank operation rather than a screenshot, protecting your store merchandise.</p><a class="dl__cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-mismatch.svg" alt="The merchant&#x27;s phone flags a mismatch beside the customer&#x27;s screenshot." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Fake screenshots</p><h3 class="dl__title" data-i18n="sol_s2_t">See what does not match and say why</h3><p class="dl__body" data-i18n="sol_s2_x">The app highlights the exact discrepancy against the customer's payment receipt, allowing you to explain calmly why the purchase cannot proceed.</p><a class="dl__cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-queue.svg" alt="Busy checkout: a keypad with scrambled digits and a name protected behind dots." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">With a busy queue</p><h3 class="dl__title" data-i18n="sol_s3_t">Type securely in front of everyone</h3><p class="dl__body" data-i18n="sol_s3_x">A randomized numeric keypad makes your keystrokes hard to follow, and customer names and phone numbers stay masked at every checkout.</p><a class="dl__cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_live_app">Open the running application</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+        </ol>
       </div>
-      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript.</p></noscript>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
     </div>
-
-    <p class="synthesis chart-aside" data-i18n-html="act3_fn_sp"><strong>Story Points (SP).</strong> A relative measure of a task's effort against the others, not a unit of time. This build was not run as a formal sprint.</p>
-
-    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
-    <div class="relay relay--sched">
-      <div class="relay__seg"><ol class="relay__track">
-        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_foundation">Project setup</span><span class="relay__x" data-i18n="act3_m1_x">8 h planned</span></span></li>
-        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_one_job">Verification flow</span><span class="relay__x" data-i18n="act3_m2_x">16 h planned</span></span></li>
-        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_architecture">Session and data flow</span><span class="relay__x" data-i18n="act3_m3_x">15 h planned</span></span></li>
-        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_security">Interface security</span><span class="relay__x" data-i18n="act3_m4_x">13 h planned</span></span></li>
-        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_proof">Test and delivery</span><span class="relay__x" data-i18n="act3_m5_x">14 h planned · Live 15 Jul 2026</span></span></li>
-      </ol></div>
+    <div class="ctaset">
+      <a class="cta" href="https://jdsaire.github.io/trust-verify/" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="ui_cta_live_app">Open the running application</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
-    <aside class="desk-how" aria-labelledby="act3HowT">
-      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
-      <p class="desk-how__t" id="act3HowT" data-i18n="ui_sched_mob_t">See schedule</p>
-      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
-    </aside>
   </div>
 </section>
 
@@ -779,15 +772,65 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — measured figures and what they mean; staged lives in Act 04 Card 3 ================= -->
+<!-- ================= ACT 05 · THE BUILD SHAPE — roadmap organism, effort-scaled ================= -->
 <section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act05_schedule">Act 05 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act5_verdict">Technical rigor.</h2>
+      <h2 class="verdict" id="v5" data-i18n="act3_verdict">Built in one week.</h2>
+      <p class="scan" data-i18n="act3_lede">From research to development.</p>
+      <div class="reveal chart-aside" data-act="act5">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-a5" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
+        <div class="reveal__body reveal__body--poster" id="rv-a5">
+          <p data-i18n-html="act3_rv_txt">This Gantt chart lays out the build as five phases, reconstructed from its plan and completion record. Each row is one phase, read from left to right on an axis of planned hours, not calendar dates: <strong>the bar's length is the hours planned, and the dashed lines show what had to finish first</strong>. Open a phase to see its tasks, each with its story points and hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gantt" id="gantt">
+      <div class="visually-hidden" id="ganttDepList" data-i18n="gantt_deps_text">Dependencies: 01 Project setup leads to 02 Verification flow. 02 Verification flow leads to 03 Session and data flow. 03 Session and data flow leads to 04 Interface security. 04 Interface security leads to 05 Test and delivery. The singleton session task in 03 Session and data flow leads to the execution-lock fix in 05 Test and delivery.</div>
+
+      <div class="gantt__chart" id="ganttChart">
+        <svg class="gantt__overlay" id="ganttOverlay" aria-hidden="true"></svg>
+        <div class="gantt__grid" id="ganttGrid" role="tree"
+             aria-label="Brief 04 build shape: five phases with task rows, sized in story points. Dependencies are listed before this chart."
+             aria-describedby="ganttDepList"></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="gantt_noscript">This component renders from its data object and requires JavaScript.</p></noscript>
+    </div>
+
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_sp"><strong>Story Points (SP).</strong> A relative measure of a task's effort against the others, not a unit of time. This build was not run as a formal sprint.</p>
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_foundation">Project setup</span><span class="relay__x" data-i18n="act3_m1_x">8 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_one_job">Verification flow</span><span class="relay__x" data-i18n="act3_m2_x">16 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_architecture">Session and data flow</span><span class="relay__x" data-i18n="act3_m3_x">15 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_security">Interface security</span><span class="relay__x" data-i18n="act3_m4_x">13 h planned</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="gantt_ph_proof">Test and delivery</span><span class="relay__x" data-i18n="act3_m5_x">14 h planned · Live 15 Jul 2026</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="act3HowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="act3HowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= ACT 06 · THE DASHBOARD — measured figures and what they mean; staged lives in Act 04 Card 3 ================= -->
+<section class="act" id="act6" aria-labelledby="v6">
+  <div class="container">
+    <div class="act__head">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="ui_act06_dashboard">Act 06 · The Dashboard</span>
+      </div>
+      <h2 class="verdict" id="v6" data-i18n="act5_verdict">Technical rigor.</h2>
       <p class="scan" data-i18n="act5_lede">Figures and implications.</p>
     </div>
 
@@ -812,19 +855,19 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE REFLECTION — 4 house cards ================= -->
-<section class="act" id="act6" aria-labelledby="v6">
+<!-- ================= ACT 07 · THE REFLECTION — 4 house cards ================= -->
+<section class="act" id="act7" aria-labelledby="v7">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act07_reflection">Act 07 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v6" data-i18n="act6_verdict">Key takeaways.</h2>
+      <h2 class="verdict" id="v7" data-i18n="act6_verdict">Key takeaways.</h2>
       <p class="scan" data-i18n="act6_lede">Lessons learned.</p>
     </div>
 
-    <div class="cardgrid cardgrid--4 swipe" tabindex="0" role="group" aria-labelledby="v6">
+    <div class="cardgrid cardgrid--4 swipe" tabindex="0" role="group" aria-labelledby="v7">
       <article class="card house">
         <h3 class="card__t"><span class="house__tag" data-i18n="act6_h1_tag">The ceiling</span><span data-i18n="act6_h1_t">Territory I thought was closed</span></h3>
         <p class="card__x" data-i18n-html="act6_h1_x">I thought app development belonged to career developers. This build broke that ceiling: I now <strong>work the technical side while owning every strategic call</strong>, starting with the stack.</p>
@@ -1274,10 +1317,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: sessionStore("b02:ui") });   // Act 03 · The Solution keeps its slide across a reload
 </script>
 </body>
 </html>

@@ -202,77 +202,7 @@
   }
 }
 
-/* SERVICES — MOBILE ≤767px */
-@media (max-width: 767px) {
-  .section--services { padding: clamp(2.5rem, 8vw, 3.5rem) 0; }
-
-  /* carousel-outer: visible so touch-scroll events reach inner carousel on all mobile browsers */
-  .section--services .services__carousel-outer { overflow: visible; }
-
-  /* Carousel contained within section__inner — no bleed */
-  .section--services .services__carousel {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .section--services .services__carousel::-webkit-scrollbar { display: none; }
-
-  /* Track: disable JS transform; gap: 0 eliminates inter-card gap artifact during swipe */
-  .section--services .services__slides {
-    transform: none !important;
-    transition: none;
-    gap: 0;
-  }
-
-  /* One card at a time — full carousel width */
-  .section--services .services__slide {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-  }
-
-  /* Image: 4:3 on mobile */
-  .section--services .services__image-slot {
-    aspect-ratio: 4 / 3;
-  }
-
-  .services__slide-inner {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    align-items: start;
-  }
-  .services__media  { order: 1; }
-  .services__content { order: 2; }
-  .services__pillar-title { font-size: clamp(1.125rem, 4.5vw, 1.375rem); }
-  .services__pillar-body  { font-size: 1rem; margin-bottom: 0; }
-  .services__mobile-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-    margin-top: 1.25rem;
-  }
-  .services__mobile-footer > .services__cta {
-    align-self: flex-start;   /* left-anchor CTA; nav stays flex-end */
-    display: none;
-  }
-  .services__mobile-nav {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .services__counter--mobile {
-    font-size: 0.875rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-brand-white);
-    letter-spacing: 0.04em;
-    min-width: 2.5rem;
-    text-align: center;
-  }
-  .services__cta--desktop { display: none; }
-  .services__controls     { display: none; }
-}
+/* SERVICES — MOBILE ≤767px: in shared/carousel-phone.css since PR #42 (one phone carousel style for Main and the briefs) */
 
 /* Desktop/tablet: hide mobile-only footer */
 @media (min-width: 768px) {

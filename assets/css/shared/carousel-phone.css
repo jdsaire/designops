@@ -1,0 +1,103 @@
+/* shared/carousel-phone.css — one phone carousel style (below 768) for Main's capabilities carousel and the briefs'
+   slide carousel (.dl), PR #42. Main's rules are moved here verbatim from pages/capabilities/capabilities.css; the
+   briefs' .dl inherits them: one full-width slide at a time with no peek and no gap, the purple label, white body,
+   the counter at the right ("1 / 3", set by core/carousel.js below 768), and, where a carousel asks for it with
+   [data-dl-num], a number before each label ("01 · "). Kept from the briefs on purpose: 3:2 storyboards and 44 px
+   arrows (the site's touch target). Linked by Main after capabilities.css and by Briefs 01–04 after carousel.css. */
+
+/* Main · capabilities (moved from capabilities.css) */
+@media (max-width: 767px) {
+  .section--services { padding: clamp(2.5rem, 8vw, 3.5rem) 0; }
+
+  /* carousel-outer: visible so touch-scroll events reach inner carousel on all mobile browsers */
+  .section--services .services__carousel-outer { overflow: visible; }
+
+  /* Carousel contained within section__inner — no bleed */
+  .section--services .services__carousel {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .section--services .services__carousel::-webkit-scrollbar { display: none; }
+
+  /* Track: disable JS transform; gap: 0 eliminates inter-card gap artifact during swipe */
+  .section--services .services__slides {
+    transform: none !important;
+    transition: none;
+    gap: 0;
+  }
+
+  /* One card at a time — full carousel width */
+  .section--services .services__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  /* Image: 4:3 on mobile */
+  .section--services .services__image-slot {
+    aspect-ratio: 4 / 3;
+  }
+
+  .services__slide-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .services__media  { order: 1; }
+  .services__content { order: 2; }
+  .services__pillar-title { font-size: clamp(1.125rem, 4.5vw, 1.375rem); }
+  .services__pillar-body  { font-size: 1rem; margin-bottom: 0; }
+  .services__mobile-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+  .services__mobile-footer > .services__cta {
+    align-self: flex-start;   /* left-anchor CTA; nav stays flex-end */
+    display: none;
+  }
+  .services__mobile-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .services__counter--mobile {
+    font-size: 0.875rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-brand-white);
+    letter-spacing: 0.04em;
+    min-width: 2.5rem;
+    text-align: center;
+  }
+  .services__cta--desktop { display: none; }
+  .services__controls     { display: none; }
+}
+
+
+/* Briefs · slide carousel (.dl) */
+@media (max-width:767px){
+  .dl__viewport{margin-right:0; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  .dl__viewport::-webkit-scrollbar{display:none;}
+  .dl__track{gap:0; transform:none !important; transition:none;}
+  .dl__slide{flex:0 0 100%; grid-template-columns:1fr; gap:1.25rem; align-items:start; align-content:start; scroll-snap-align:start;}
+  .dl__slide:not(.is-on){opacity:1;}
+  .dl__label{color:var(--color-brand-purple);}
+  .dl__body{color:var(--color-brand-white);}
+  .dl__cta{display:none;}   /* phones: the slides stand alone; the brief's CTA sits below the carousel */
+  .dl__ctrl{justify-content:flex-end; padding-right:0;}
+  .dl__nav{border-color:var(--color-border-soft);}
+  [data-dl-num] .dl__track{counter-reset:dl-slide;}
+  [data-dl-num] .dl__slide{counter-increment:dl-slide;}
+  [data-dl-num] .dl__label::before{content:counter(dl-slide, decimal-leading-zero) " · ";}
+}
+
+/* Both carousels · the label in dark theme (PR42-Q36): brand purple reads 3.96:1 on black, under AA's 4.5:1 for this
+   size, so dark uses the light purple; light theme keeps brand purple (5.3:1 on white). */
+@media (max-width:767px){
+  html:not([data-theme="light"]) .section--services .services__pillar-label,
+  html:not([data-theme="light"]) .dl__label{color:var(--color-purple-light);}
+}

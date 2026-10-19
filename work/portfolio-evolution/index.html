@@ -25,6 +25,8 @@
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel.css">
+<link rel="stylesheet" href="../../assets/css/shared/carousel-phone.css">
 <style>
 /* ================= CHASSIS TOKENS — live designops :root, verbatim ================= */
 html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
@@ -518,7 +520,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   <div class="container hero__inner">
     <div class="section__eyebrow" style="margin-bottom:0;">
       <span class="section__eyebrow-bar"></span>
-      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">6</span><span class="rt rt--en rt--m">4</span><span class="rt rt--es rt--d">7</span><span class="rt rt--es rt--m">4</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
+      <span class="section__eyebrow-text"><span data-i18n="ui_brief_eyebrow">Work brief</span> <span class="dim">·</span> <span class="dim"><span class="read__n"><span class="rt rt--en rt--d">7</span><span class="rt rt--en rt--m">5</span><span class="rt rt--es rt--d">7</span><span class="rt rt--es rt--m">5</span></span> <span data-i18n="ui_read_min">min read</span></span></span>
     </div>
     <h1 class="hero__h1" id="heroTitle" data-i18n="hero_title">This web. My web.</h1>
     <p class="hero__deck" data-i18n="hero_lede">How I built and deployed this site with AI, end to end.</p>
@@ -660,77 +662,59 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 03 · THE MULTIPAGE SCHEDULE — one days-axis Gantt; the first schedule in a panel ================= -->
-<section class="act" id="sched" aria-labelledby="vsch">
+<!-- ================= ACT 03 · THE SOLUTION — 3 storyboard slides, the CTA below the carousel (PR #42) ================= -->
+<section class="act" id="act3" aria-labelledby="v3">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_schedule">Act 03 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
       </div>
-      <h2 class="verdict" id="vsch" data-i18n="act3_verdict">The rollout.</h2>
-      <p class="scan" data-i18n="act3_lede">Commits and pull requests.</p>
+      <h2 class="verdict" id="v3" data-i18n="sol_verdict">The testament</h2>
+      <p class="scan" data-i18n="sol_lede">Crushing generic noise.</p>
     </div>
 
-    <div class="sched__ctas chart-aside">
-      <div class="reveal" data-act="sch">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
-        <div class="reveal__body reveal__body--poster" id="rv-sch2">
-          <p data-i18n-html="act3_rv1_txt">This Gantt chart turns cold project work into a visual summary for tracking purposes. Each row is one stage of the work, read from left to right along the calendar, so you can see <strong>what happened when, how long each deploy took and where overlaps happen</strong>. This visual records completed work, not planned.</p>
-        </div>
+    <div class="dl" data-dl data-dl-num>
+      <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="v3" tabindex="0">
+        <ol class="dl__track">
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-01-balance.svg" alt="A balance scale holding the business case and the code, level." data-i18n-alt="sol_s1_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s1_l">Strategy &amp; tech</p><h3 class="dl__title" data-i18n="sol_s1_t">Senior judgment turned into software</h3><p class="dl__body" data-i18n="sol_s1_x">I launched this independent product lab to prove that solutions make a real impact when you build, test and deploy them yourself.</p><a class="dl__cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_repo">Read the repository</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-02-components.svg" alt="Modular components arranged across mobile and desktop screens." data-i18n-alt="sol_s2_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s2_l">Visual rigor</p><h3 class="dl__title" data-i18n="sol_s2_t">Refined design, solid build</h3><p class="dl__body" data-i18n="sol_s2_x">I built a modular component system that delivers fluid navigation, accessibility and a seamless finish.</p><a class="dl__cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_repo">Read the repository</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/act3-03-releases.svg" alt="A release history showing continuous shipping." data-i18n-alt="sol_s3_alt" width="768" height="512"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="sol_s3_l">Delivery cadence</p><h3 class="dl__title" data-i18n="sol_s3_t">Continuous releases and improvements</h3><p class="dl__body" data-i18n="sol_s3_x">I keep shipping improvements to prove rapid execution, autonomy and a constant focus on business impact.</p><a class="dl__cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="ui_cta_repo">Read the repository</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+        </ol>
       </div>
-      <div class="reveal" data-act="sch">
-        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="The first schedule" data-panel-title-key="act3_rv2_btn" data-i18n="act3_rv2_btn">The first schedule</button>
-        <div class="reveal__body reveal__body--poster" id="rv-sch1">
-          <p data-i18n-html="act3_rv2_txt">Before this site, a one-page version of this portfolio was built and tested internally. Work was carried out from 24 Apr to 04 Jul 2026. <strong>Epic 01: Single Page</strong> built section by section: hero, work, capabilities, and contact. <strong>Epic 02: Repo Hygiene</strong> prepared the handoff. In total, two GitHub repositories ('jdigital' and 'legacy-desops') carried 240 and 46 commits respectively in public history across 32 active build-days.</p>
-        </div>
-      </div>
+      <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
     </div>
-
-    <div class="gantt" id="gantt2">
-      <div class="gantt__chart" id="gantt2Chart">
-        <div class="gantt__grid" id="gantt2Grid" role="group" data-i18n-aria="sch_aria_chart"
-             aria-label="The multi-page build on a calendar axis: five stages, each with a duration bar and its pull requests as numbered diamonds on their merge dates."
-             ></div>
-      </div>
-      <noscript><p class="gantt__caption" data-i18n="sch_noscript">This chart renders from its data object and requires JavaScript. The reading guide above states the window it draws and its source.</p></noscript>
+    <div class="ctaset">
+      <a class="cta" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">
+        <span class="cta__label" data-i18n="ui_cta_repo">Read the repository</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
     </div>
-
-
-    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
-    <div class="relay relay--sched">
-      <div class="relay__seg"><ol class="relay__track">
-        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c1">Defect inventory</span><span class="relay__x" data-i18n="sch_m1_x">28 Aug · 1 commit · 1 PR</span></span></li>
-        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c2">Case briefs</span><span class="relay__x" data-i18n="sch_m2_x">30 Aug – 11 Sep · 30 commits · 4 PRs</span></span></li>
-        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c3">Core pages</span><span class="relay__x" data-i18n="sch_m3_x">30 Aug – 20 Sep · 83 commits · 5 PRs</span></span></li>
-        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c4">Themes and artwork</span><span class="relay__x" data-i18n="sch_m4_x">5–6 Sep · 22 commits · 2 PRs</span></span></li>
-        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c5">Bilingual copy</span><span class="relay__x" data-i18n="sch_m5_x">20–26 Sep · 139 commits · 3 PRs</span></span></li>
-      </ol></div>
-    </div>
-    <aside class="desk-how" aria-labelledby="schHowT">
-      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
-      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
-      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
-    </aside>
-    <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
-    <p class="synthesis chart-aside" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
-    <p class="synthesis chart-aside" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
-    <p class="synthesis chart-aside" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
+  </div>
 </section>
 
 <!-- ================= ACT 04 · THE ARCHITECTURE — 4 cards, each with its own label and a technical panel ================= -->
-<section class="act" id="act3" aria-labelledby="v3">
+<section class="act" id="act4" aria-labelledby="v4">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
         <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
       </div>
-      <h2 class="verdict" id="v3" data-i18n="act4_verdict">Scalable portfolio.</h2>
+      <h2 class="verdict" id="v4" data-i18n="act4_verdict">Scalable portfolio.</h2>
       <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
     </div>
 
-    <div class="cardgrid cardgrid--2 swipe" id="act4Cards" data-deco-run="768" tabindex="0" role="group" aria-labelledby="v3">
+    <div class="cardgrid cardgrid--2 swipe" id="act4Cards" data-deco-run="768" tabindex="0" role="group" aria-labelledby="v4">
       <article class="card">
         <p class="catlabel" data-i18n="act4_c1_cat">Speed</p>
         <h3 class="card__t" data-i18n="act4_c1_t">1) Light, fast and built to last</h3>
@@ -792,15 +776,73 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 05 · THE DASHBOARD — paired figures and what they mean ================= -->
-<section class="act" id="act4" aria-labelledby="v4">
+<!-- ================= ACT 05 · THE MULTIPAGE SCHEDULE — one days-axis Gantt; the first schedule in a panel ================= -->
+<section class="act" id="act5" aria-labelledby="v5">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act05_dashboard">Act 05 · The Dashboard</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act05_schedule">Act 05 · The Schedule</span>
       </div>
-      <h2 class="verdict" id="v4" data-i18n="act5_verdict">V2 vs V1.</h2>
+      <h2 class="verdict" id="v5" data-i18n="act3_verdict">The rollout.</h2>
+      <p class="scan" data-i18n="act3_lede">Commits and pull requests.</p>
+    </div>
+
+    <div class="sched__ctas chart-aside">
+      <div class="reveal" data-act="act5">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch2" data-panel-title="How to read the chart" data-panel-title-key="ui_chart_read_btn" data-i18n="ui_chart_read_btn">How to read the chart</button>
+        <div class="reveal__body reveal__body--poster" id="rv-sch2">
+          <p data-i18n-html="act3_rv1_txt">This Gantt chart turns cold project work into a visual summary for tracking purposes. Each row is one stage of the work, read from left to right along the calendar, so you can see <strong>what happened when, how long each deploy took and where overlaps happen</strong>. This visual records completed work, not planned.</p>
+        </div>
+      </div>
+      <div class="reveal" data-act="act5">
+        <button class="reveal__btn" type="button" aria-expanded="false" aria-controls="rv-sch1" data-panel-title="The first schedule" data-panel-title-key="act3_rv2_btn" data-i18n="act3_rv2_btn">The first schedule</button>
+        <div class="reveal__body reveal__body--poster" id="rv-sch1">
+          <p data-i18n-html="act3_rv2_txt">Before this site, a one-page version of this portfolio was built and tested internally. Work was carried out from 24 Apr to 04 Jul 2026. <strong>Epic 01: Single Page</strong> built section by section: hero, work, capabilities, and contact. <strong>Epic 02: Repo Hygiene</strong> prepared the handoff. In total, two GitHub repositories ('jdigital' and 'legacy-desops') carried 240 and 46 commits respectively in public history across 32 active build-days.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gantt" id="gantt2">
+      <div class="gantt__chart" id="gantt2Chart">
+        <div class="gantt__grid" id="gantt2Grid" role="group" data-i18n-aria="sch_aria_chart"
+             aria-label="The multi-page build on a calendar axis: five stages, each with a duration bar and its pull requests as numbered diamonds on their merge dates."
+             ></div>
+      </div>
+      <noscript><p class="gantt__caption" data-i18n="sch_noscript">This chart renders from its data object and requires JavaScript. The reading guide above states the window it draws and its source.</p></noscript>
+    </div>
+
+
+    <!-- Phones (PR #40): the schedule as a vertical relay, then where to see the full Gantt. Hidden from 768. -->
+    <div class="relay relay--sched">
+      <div class="relay__seg"><ol class="relay__track">
+        <li class="relay__st"><span class="relay__node">01</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c1">Defect inventory</span><span class="relay__x" data-i18n="sch_m1_x">28 Aug · 1 commit · 1 PR</span></span></li>
+        <li class="relay__st"><span class="relay__node">02</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c2">Case briefs</span><span class="relay__x" data-i18n="sch_m2_x">30 Aug – 11 Sep · 30 commits · 4 PRs</span></span></li>
+        <li class="relay__st"><span class="relay__node">03</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c3">Core pages</span><span class="relay__x" data-i18n="sch_m3_x">30 Aug – 20 Sep · 83 commits · 5 PRs</span></span></li>
+        <li class="relay__st"><span class="relay__node">04</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c4">Themes and artwork</span><span class="relay__x" data-i18n="sch_m4_x">5–6 Sep · 22 commits · 2 PRs</span></span></li>
+        <li class="relay__st"><span class="relay__node">05</span><span class="relay__tx"><span class="relay__t" data-i18n="sch_c5">Bilingual copy</span><span class="relay__x" data-i18n="sch_m5_x">20–26 Sep · 139 commits · 3 PRs</span></span></li>
+      </ol></div>
+    </div>
+    <aside class="desk-how" aria-labelledby="schHowT">
+      <svg class="desk-how__i" viewBox="0 0 48 40" width="48" height="40" aria-hidden="true" focusable="false"><path d="M8 5h32v23H8zM3 32h42l-3 5H6z"/></svg>
+      <p class="desk-how__t" id="schHowT" data-i18n="ui_sched_mob_t">See schedule</p>
+      <p class="desk-how__x" data-i18n="ui_sched_mob_x">Full visual available on desktop.</p>
+    </aside>
+    <!-- Notes for the technical reader: commits, pull requests, source (WC-Q22). -->
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_commits"><strong>Commits.</strong> A commit is one saved change to the site's code, with a note on what changed.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_prs"><strong>Pull requests.</strong> A pull request is a set of commits proposed together, reviewed, then merged into the live site.</p>
+    <p class="synthesis chart-aside" data-i18n-html="act3_fn_source"><strong>Source.</strong> The public history of github.com/jdsaire/designops, 28 Aug – 26 Sep 2026.</p>  </div>
+</section>
+
+<!-- ================= ACT 06 · THE DASHBOARD — paired figures and what they mean ================= -->
+<section class="act" id="act6" aria-labelledby="v6">
+  <div class="container">
+    <div class="act__head">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar"></span>
+        <span class="section__eyebrow-text" data-i18n="ui_act06_dashboard">Act 06 · The Dashboard</span>
+      </div>
+      <h2 class="verdict" id="v6" data-i18n="act5_verdict">V2 vs V1.</h2>
       <p class="scan" data-i18n="act5_lede">Baseline contrast.</p>
     </div>
 
@@ -826,21 +868,21 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
-<!-- ================= ACT 06 · THE REFLECTION — three lesson cards, descending ================= -->
-<section class="act" id="act5" aria-labelledby="v5">
+<!-- ================= ACT 07 · THE REFLECTION — three lesson cards, descending ================= -->
+<section class="act" id="act7" aria-labelledby="v7">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act06_reflection">Act 06 · The Reflection</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act07_reflection">Act 07 · The Reflection</span>
       </div>
-      <h2 class="verdict" id="v5" data-i18n="act6_verdict">True legacy.</h2>
+      <h2 class="verdict" id="v7" data-i18n="act6_verdict">True legacy.</h2>
       <p class="scan" data-i18n="act6_lede">Key takeaways.</p>
     </div>
 
     <!-- Three cards on the Act 04 chassis, one lesson of the multi-page pipeline each,
          descending, so the ladder falls where Act 02's climbs. -->
-    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v5">
+    <div class="cardgrid cardgrid--3 ladder-down swipe" tabindex="0" role="group" aria-labelledby="v7">
       <article class="card">
         <p class="catlabel" data-i18n="act6_p1_cat">Governance</p>
         <h3 class="card__t" data-i18n="act6_p1_t">Checkpoints that hold</h3>
@@ -1306,10 +1348,12 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
+  import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initCarousel({ store: sessionStore("b04:ui") });   // Act 03 · The Solution keeps its slide across a reload
 </script>
 </body>
 </html>
