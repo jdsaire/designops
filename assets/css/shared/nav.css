@@ -381,3 +381,15 @@
 .nav__overlay-links .nav__overlay-submenu { align-self:stretch; margin:4px 0 12px var(--gutter); border-left:2px solid var(--color-brand-purple); }
 .nav__overlay-links .nav__overlay-subitem { min-height:44px; display:flex; align-items:center; box-sizing:border-box;
   border-bottom:0; padding:0.62rem 0.5rem 0.62rem 1rem; }
+
+/* ---- Phone-menu icons (PR #43, PR43A-Q1…Q8). One 24-unit line icon per row, drawn like the theme switch's
+   glyphs; it takes the row's colour, so a muted row has a muted icon and the current row's icon is white.
+   Decorative: aria-hidden, no tab stop; the label stays the accessible name. The overlay never paints at 768+. ---- */
+.nav__ov-row { display:inline-flex; align-items:center; gap:0.85rem; }
+.nav__ov-icon {
+  flex:0 0 auto; width:24px; height:24px; display:block;
+  fill:none; stroke:currentColor; stroke-width:1.9;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.nav__overlay-subitem { gap:0.7rem; }
+.nav__overlay-subitem .nav__ov-icon { width:20px; height:20px; }
