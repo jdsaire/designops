@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/brief-index.css">
+<link rel="stylesheet" href="../../assets/css/shared/brief-ending.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <link rel="stylesheet" href="../../assets/css/shared/carousel.css">
@@ -237,11 +238,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .ctaset .cta__icon svg{width:.9rem; height:.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 @media (min-width:768px){ .ctaset{flex-direction:row; flex-wrap:wrap; gap:.5rem 2rem;} }
 /* ---- Close — standard on all four briefs (W2A-G3-Q2): Next steps, Main's contact CTA, two related briefs. ---- */
-.close{margin-top:clamp(2.5rem,5vw,4rem); border-top:1px solid var(--color-border-soft); padding-top:clamp(2rem,4vw,3rem);}
-.close .section__eyebrow{margin-bottom:clamp(1.25rem,2vw,1.75rem);}
-.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
-.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 /* ---- Reveal system (⊕): accordion ≤1023 / side-panel ≥1024 — approved mechanics ---- */
 .reveal{margin-top:auto;}
 .reveal__btn{display:inline-flex; align-items:center; gap:.45rem; text-align:left; font-size:.74rem; font-weight:var(--fw-semibold);
@@ -373,9 +370,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 .sequel{margin-top:clamp(1.5rem,2.5vw,2rem); font-size:.95rem; color:var(--color-text-dim); font-weight:var(--fw-light);}
 .sequel strong{color:var(--color-brand-white); font-weight:var(--fw-semibold);}
 
-.convert__next{margin-top:clamp(1.75rem,3vw,2.5rem);}
 .convert__nextlabel{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); font-weight:var(--fw-semibold); margin-bottom:.9rem;}
-.card--continuity .card__t::after{content:" →"; color:var(--color-brand-purple);}
 
 /* ================= FOOTER: assets/css/shared/footer.css (PR #35, one source for all pages) ================= */
 .cta__label{font-weight:var(--fw-bold); color:var(--color-brand-white);}
@@ -927,34 +922,57 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 
     <!-- The end of the brief: the closing rule (PR #43, PR43-Q10) -->
     <hr class="brief-end" data-brief-end>
-    <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
-    <div class="close">
-      <div class="section__eyebrow">
-        <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
-      </div>
-      <div class="ctaset">
-        <a class="cta" href="../../contact/" data-nav-page="contact/">
-          <span class="cta__label" data-i18n="ui_contact_cta">Start a conversation</span>
-          <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
-        </a>
-      </div>
-      <div class="convert__next">
-        <p class="convert__nextlabel" data-i18n="ui_keep_exploring">Keep exploring</p>
-        <div class="cardgrid cardgrid--2">
-          <a class="card card--continuity" href="../accreditapass/">
-            <h3 class="card__t" data-i18n="rel_accreditapass_t">AccreditaPass</h3>
-            <p class="card__x" data-i18n="rel_accreditapass_x">Meet the tracker built for World Cup reporters.</p>
-          </a>
-          <a class="card card--continuity" href="../yape-trust-verify-brief/">
-            <h3 class="card__t" data-i18n="rel_verify_t">Verify App</h3>
-            <p class="card__x" data-i18n="rel_verify_x">Verify that a customer payment is genuine.</p>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
+
+<!-- ================= THE ENDING — after the closing rule: Keep exploring (the other three briefs, by relation) and
+     the Contact organism of Main and About (PR #43 G2b; PR43-Q5…Q7, Q12, Q13) ================= -->
+<div class="brief-ending">
+  <section class="section brief-more" aria-labelledby="moreH">
+    <div class="section__inner">
+      <div class="act__head">
+        <div class="section__eyebrow">
+          <span class="section__eyebrow-bar"></span>
+          <span class="section__eyebrow-text" data-i18n="ui_next_steps">Next steps</span>
+        </div>
+        <h2 class="verdict" id="moreH" data-i18n="ui_keep_exploring">Keep exploring</h2>
+        <p class="scan" data-i18n="ui_more_lede">Read the case closest to yours.</p>
+      </div>
+      <div class="dl" data-dl="more">
+        <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="moreH" tabindex="0">
+          <ol class="dl__track">
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="../../assets/img/work/accreditapass.svg" alt="" width="640" height="512" loading="lazy" decoding="async"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="work_card1_label">SPORTS</p><h3 class="dl__title" data-i18n="work_card1_heading">Boosting media teams at the FIFA World Cup 2026.</h3><p class="dl__body" data-i18n="work_card1_body">AccreditaPass: a Blazor and .NET app that tracks the whole journey of journalists across 3 countries and 16 stadiums. Built in five weeks.</p><a class="dl__cta" href="../accreditapass/"><span class="dl__cta-l" data-i18n="work_card_cta">Access Brief</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="../../assets/img/work/yape-trust-verify.svg" alt="" width="640" height="512" loading="lazy" decoding="async"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="work_card2_label">BANKING</p><h3 class="dl__title" data-i18n="work_card2_heading">Yape photo says paid. This app validates it safely.</h3><p class="dl__body" data-i18n="work_card2_body">Trust &amp; Verify: a React and TypeScript app that lets a merchant check a Yape payment is genuine. Built in under a week.</p><a class="dl__cta" href="../yape-trust-verify-brief/"><span class="dl__cta-l" data-i18n="work_card_cta">Access Brief</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="../../assets/img/work/airport.svg" alt="" width="640" height="512" loading="lazy" decoding="async"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="work_card3_label">AIRPORT</p><h3 class="dl__title" data-i18n="work_card3_heading">Paying a fee Lima's airport had never charged.</h3><p class="dl__body" data-i18n="work_card3_body">TUUA Transfer: the web payment flow I designed for international transfer passengers at Jorge Chávez. Handed over in 2025.</p><a class="dl__cta" href="../airport/"><span class="dl__cta-l" data-i18n="work_card_cta">Access Brief</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+          </li>
+          </ol>
+        </div>
+        <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--contact-cta" aria-labelledby="contact-heading">
+    <div class="section__inner">
+      <div class="section__eyebrow">
+        <span class="section__eyebrow-bar" aria-hidden="true"></span>
+        <p class="section__eyebrow-text" data-i18n="contact_eyebrow">CONTACT</p>
+      </div>
+      <h2 class="section__headline" id="contact-heading" data-i18n="contact_headline">Let's talk.</h2>
+      <a class="cta" href="../../contact/" data-nav-page="contact/" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
+        <span class="cta__label" data-i18n="chrome_nav_cta">Start a conversation</span>
+        <span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span>
+      </a>
+    </div>
+  </section>
+</div>
 </main>
 
 <!-- ================= FOOTER — live organism strings, verbatim ================= -->
