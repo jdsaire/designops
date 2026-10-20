@@ -30,7 +30,8 @@
 .dl + .ctaset{margin-top:clamp(1.6rem,3vw,2.4rem);}   /* below 768: the single CTA sits below the carousel (PR #42) */
 @media (min-width:768px){ .dl + .ctaset{display:none;} }   /* from 768: each slide carries it under its body instead (PR42-Q31) */
 .dl__ctrl{display:flex; align-items:center; justify-content:flex-end; gap:.75rem; margin-top:clamp(1.25rem,2vw,1.75rem); padding-right:var(--peek-width);}
-.dl__nav{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
+.dl__nav{width:44px; height:44px; display:inline-flex; background:none; padding:0;   /* pages without the briefs' button reset (Main) */
+   align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
   transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
 .dl__nav:hover, .dl__nav:focus-visible{border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
 .dl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}
