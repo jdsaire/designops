@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="assets/css/shared/section-extras.css">
   <link rel="stylesheet" href="assets/css/pages/home/teaser.css">
   <link rel="stylesheet" href="assets/css/pages/capabilities/capabilities.css">
+  <link rel="stylesheet" href="assets/css/shared/carousel.css">
   <link rel="stylesheet" href="assets/css/shared/carousel-phone.css">
   <link rel="stylesheet" href="assets/css/shared/footer.css">
   <link rel="stylesheet" href="assets/css/shared/decoration.css">
@@ -394,65 +395,27 @@
         <h2 class="section__headline" id="capabilities-heading" data-i18n="capabilities_headline">My Value Propositions.</h2>
         <p class="section__lede" data-i18n="capabilities_lede">Accelerate your success.</p>
       </div>
-      <ul class="teaser__triptych" role="list">
-        <li class="teaser__item">
-          <div class="services__media">
-            <div class="services__image-slot" aria-hidden="true">
-              <span class="illus-tag" data-i18n="ui_illus_label">Illustration</span>
-              <span class="img-alt-host" alt="Viable digital products — feasibility to production">
-                <img src="assets/img/services/cap-production.svg" alt="A vault ring locked around banknotes: a budget kept safe." data-i18n-alt="cap_s1_img_alt" class="services__image">
-              </span>
-            </div>
-          </div>
-          <p class="services__pillar-label" data-i18n="cap_s1_label">01 · BUILD</p>
-          <h3 class="services__pillar-title" data-i18n="cap_s1_title">Validated Builds.</h3>
-          <p class="services__pillar-body" data-i18n="cap_s1_body">I turn business logic into working web apps. Test the execution before committing your project budget.</p>
-          <a href="#contact" class="services__cta" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
-            <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-            <span class="services__cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-        </li>
-        <li class="teaser__item">
-          <div class="services__media">
-            <div class="services__image-slot" aria-hidden="true">
-              <span class="illus-tag" data-i18n="ui_illus_label">Illustration</span>
-              <span class="img-alt-host" alt="One design standard, governed and adopted at scale">
-                <img src="assets/img/services/cap-adoption.svg" alt="Train card — hands-on workshops to scale." data-i18n-alt="cap_s2_img_alt" class="services__image">
-              </span>
-            </div>
-          </div>
-          <p class="services__pillar-label" data-i18n="cap_s2_label">02 · TRAIN</p>
-          <h3 class="services__pillar-title" data-i18n="cap_s2_title">Scalable Workflows.</h3>
-          <p class="services__pillar-body" data-i18n="cap_s2_body">I equip your team with the exact AI systems I build. Practical sessions to scale your in-house execution.</p>
-          <a href="#contact" class="services__cta" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
-            <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-            <span class="services__cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-        </li>
-        <li class="teaser__item">
-          <div class="services__media">
-            <div class="services__image-slot" aria-hidden="true">
-              <span class="illus-tag" data-i18n="ui_illus_label">Illustration</span>
-              <span class="img-alt-host" alt="AI capability multiplier augmenting the whole team">
-                <img src="assets/img/services/cap-augmentation.svg" alt="Align card — seamless collaboration across departments." data-i18n-alt="cap_s3_img_alt" class="services__image">
-              </span>
-            </div>
-          </div>
-          <p class="services__pillar-label" data-i18n="cap_s3_label">03 · ALIGN</p>
-          <h3 class="services__pillar-title" data-i18n="cap_s3_title">Unified Execution.</h3>
-          <p class="services__pillar-body" data-i18n="cap_s3_body">I speak the language of every division. I remove operational friction to keep your delivery moving.</p>
-          <a href="#contact" class="services__cta" aria-label="Start a conversation" data-i18n-aria="chrome_nav_cta">
-            <span class="services__cta-label" data-i18n="cap_slide_cta">Start a conversation.</span>
-            <span class="services__cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-          </a>
-        </li>
-      </ul>
+      <!-- From 768: the three pillars as the briefs' slide carousel (shared/carousel.css + core/carousel.js), no CTA
+           on any slide (PR #43 G2c, PR43-Q14); below 768 the phone carousel further down carries them. -->
+      <div class="dl" data-dl="cap">
+        <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="capabilities-heading" tabindex="0">
+          <ol class="dl__track">
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="assets/img/services/cap-production.svg" alt="A vault ring locked around banknotes: a budget kept safe." data-i18n-alt="cap_s1_img_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="cap_s1_label">01 · BUILD</p><h3 class="dl__title" data-i18n="cap_s1_title">Validated Builds.</h3><p class="dl__body" data-i18n="cap_s1_body">I turn business logic into working web apps. Test the execution before committing your project budget.</p></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="assets/img/services/cap-adoption.svg" alt="Train card — hands-on workshops to scale." data-i18n-alt="cap_s2_img_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="cap_s2_label">02 · TRAIN</p><h3 class="dl__title" data-i18n="cap_s2_title">Scalable Workflows.</h3><p class="dl__body" data-i18n="cap_s2_body">I equip your team with the exact AI systems I build. Practical sessions to scale your in-house execution.</p></div>
+          </li>
+          <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+            <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="assets/img/services/cap-augmentation.svg" alt="Align card — seamless collaboration across departments." data-i18n-alt="cap_s3_img_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+            <div class="dl__content"><p class="dl__label" data-i18n="cap_s3_label">03 · ALIGN</p><h3 class="dl__title" data-i18n="cap_s3_title">Unified Execution.</h3><p class="dl__body" data-i18n="cap_s3_body">I speak the language of every division. I remove operational friction to keep your delivery moving.</p></div>
+          </li>
+          </ol>
+        </div>
+        <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+      </div>
 
       <!-- Mobile carousel (S10C) — the legacy slide chassis that capabilities/
            inherited from jdsaire/legacy-desops, carrying the three pillars
