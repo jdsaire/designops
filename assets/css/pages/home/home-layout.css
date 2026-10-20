@@ -37,7 +37,7 @@
    from tablet up, the triptych stays and the carousel is withheld. Hidden
    forms are display:none, so assistive tech meets each pillar once. */
 @media (max-width: 767px) {
-  #capabilities .dl { display: none; }   /* the phone carousel below carries the pillars (PR #43) */
+  #capabilities .teaser__triptych { display: none; }
   /* The chassis bleeds its track into the right gutter, a peek device from
      the desktop carousel. With one full-width slide it only pushed each slide
      to the screen edge: 0px right margin against the gutter on the left, the
@@ -55,9 +55,12 @@
   #capabilities .services__dots { display: none; }
 }
 
-/* ---- CAPABILITIES · from 768 the pillars are a slide carousel (PR #43, PR43-Q14) ----
-   The briefs' chassis, no CTA on any slide: Main's Contact organism carries the conversation. */
-#capabilities .dl { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+/* ---- CAPABILITIES · per-vertical CTAs hidden (S4D · F3.6) ----
+   Main's Contact organism already carries a conversation CTA, which makes
+   three more redundant. Markup and cap_slide_cta are retained: the key stays
+   in both dictionaries and the child page still references it six times.
+   Deleting this one rule restores all three. */
+.teaser__triptych .services__cta { display: none; }
 
 /* ---- CAPABILITIES · lede centring (S4D-fix) ----
    shared/designops-variant.css gives auto margins to .evolution__header and
