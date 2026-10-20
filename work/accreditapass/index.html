@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+<link rel="stylesheet" href="../../assets/css/shared/brief-index.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
   <link rel="stylesheet" href="../../assets/css/shared/brief-charts.css">
 <link rel="stylesheet" href="../../assets/css/shared/carousel.css">
@@ -469,13 +470,37 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   </div>
 </section>
 
+<!-- ================= INDEX — the acts, one link each; only the line below the eyebrow is sticky (PR #43, PR43A-Q9…Q14) ================= -->
+<div class="idx-eb">
+  <div class="section__eyebrow">
+    <span class="section__eyebrow-bar"></span>
+    <span class="section__eyebrow-text" id="idxL" data-i18n="ui_idx_eb">INDEX</span>
+  </div>
+</div>
+<nav class="idx" data-idx aria-labelledby="idxL">
+  <div class="idx__in">
+    <div class="idx__pick"><select class="idx__select" aria-labelledby="idxL"><option value="" disabled hidden data-i18n="ui_idx_eb">INDEX</option></select></div>
+    <ol class="idx__list" id="idxList">
+      <li><a href="#act0"><span class="idx__n">00 · </span><span class="idx__t" data-i18n="ui_idx_context">Context</span></a></li>
+      <li><a href="#act1"><span class="idx__n">01 · </span><span class="idx__t" data-i18n="ui_idx_problem">Problem</span></a></li>
+      <li><a href="#act2"><span class="idx__n">02 · </span><span class="idx__t" data-i18n="act2_idx">UX Simulation</span></a></li>
+      <li><a href="#act3"><span class="idx__n">03 · </span><span class="idx__t" data-i18n="ui_idx_solution">Solution</span></a></li>
+      <li><a href="#act4"><span class="idx__n">04 · </span><span class="idx__t" data-i18n="ui_idx_architecture">Architecture</span></a></li>
+      <li><a href="#act5"><span class="idx__n">05 · </span><span class="idx__t" data-i18n="ui_idx_schedule">Schedule</span></a></li>
+      <li><a href="#act6"><span class="idx__n">06 · </span><span class="idx__t" data-i18n="act6_idx">Evaluation</span></a></li>
+      <li><a href="#act7"><span class="idx__n">07 · </span><span class="idx__t" data-i18n="act7_idx">Closure</span></a></li>
+    </ol>
+  </div>
+  <div class="idx__line" aria-hidden="true"><i></i></div>
+</nav>
+
 <!-- ================= ACT 00 · THE CONTEXT — the tournament in three facts, on Brief 02 Act 00's chassis (PR #42) ================= -->
 <section class="act" id="act0" aria-labelledby="v0">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act00_context">Act 00 · Context</span>
       </div>
       <h2 class="verdict" id="v0" data-i18n="act0_verdict">The 2026 World Cup.</h2>
     </div>
@@ -514,7 +539,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · Problem</span>
       </div>
       <h2 class="verdict" id="v1" data-i18n="act1_verdict">Conditional approval.</h2>
       <p class="scan" data-i18n="act1_lede">Valid pass, but trip wasted.</p>
@@ -636,7 +661,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · The Solution</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act03_solution">Act 03 · Solution</span>
       </div>
       <h2 class="verdict" id="v3" data-i18n="sol_verdict">Press logistics secured.</h2>
       <p class="scan" data-i18n="sol_lede">How this app backs your daily coverage.</p>
@@ -676,7 +701,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · The Architecture</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act04_architecture">Act 04 · Architecture</span>
       </div>
       <h2 class="verdict" id="v4" data-i18n="act4_verdict">A trilingual app.</h2>
       <p class="scan" data-i18n="act4_lede">Integrated technical stack.</p>
@@ -753,7 +778,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act05_schedule">Act 05 · The Schedule</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act05_schedule">Act 05 · Schedule</span>
       </div>
       <h2 class="verdict" id="v5" data-i18n="sch_verdict">Built in five weeks.</h2>
       <p class="scan" data-i18n="sch_lede">From sketch to finished build.</p>
@@ -792,7 +817,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Evaluation</span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · Evaluation</span>
       </div>
       <h2 class="verdict" id="v6" data-i18n="act5_verdict">Usability audits.</h2>
       <p class="scan" data-i18n="act5_lede">Diverse and rigorous.</p>
@@ -824,7 +849,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act7_eyebrow">Act 07 · The Closure</span>
+        <span class="section__eyebrow-text" data-i18n="act7_eyebrow">Act 07 · Closure</span>
       </div>
       <h2 class="verdict" id="v7" data-i18n="act6_verdict">Final claims.</h2>
       <p class="scan" data-i18n="act6_lede">Gains, Limits, Future.</p>
@@ -854,6 +879,8 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <p class="note"><strong data-i18n="disclosure2_lead">Simulated design research.</strong> <span data-i18n="disclosure2_body">The studies documented here involved no real users. Every dataset, workshop participant and usability test is a synthetic artifact created to demonstrate the method, not the result of recruitment.</span></p>
       </div>
     </div>
+    <!-- The end of the brief: the closing rule (PR #43, PR43-Q10) -->
+    <hr class="brief-end" data-brief-end>
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
     <div class="close">
       <div class="section__eyebrow">
@@ -1116,11 +1143,13 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
   import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
+  import { init as initIndex }    from "../../assets/js/core/brief-index.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
   initCarousel({ store: sessionStore("b01:ui") });   // Act 03 · The Solution keeps its slide across a reload
+  initIndex();   // the act index between the hero and Act 00 (PR #43)
 </script>
 </body>
 </html>

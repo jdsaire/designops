@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+<link rel="stylesheet" href="../../assets/css/shared/brief-index.css">
 <link rel="stylesheet" href="../../assets/css/shared/relay.css">
 <link rel="stylesheet" href="../../assets/css/shared/carousel.css">
 <link rel="stylesheet" href="../../assets/css/shared/carousel-phone.css">
@@ -688,13 +689,36 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
   </div>
 </section>
 
+<!-- ================= INDEX — the acts, one link each; only the line below the eyebrow is sticky (PR #43, PR43A-Q9…Q14) ================= -->
+<div class="idx-eb">
+  <div class="section__eyebrow">
+    <span class="section__eyebrow-bar"></span>
+    <span class="section__eyebrow-text" id="idxL" data-i18n="ui_idx_eb">INDEX</span>
+  </div>
+</div>
+<nav class="idx" data-idx aria-labelledby="idxL">
+  <div class="idx__in">
+    <div class="idx__pick"><select class="idx__select" aria-labelledby="idxL"><option value="" disabled hidden data-i18n="ui_idx_eb">INDEX</option></select></div>
+    <ol class="idx__list" id="idxList">
+      <li><a href="#act0"><span class="idx__n">00 · </span><span class="idx__t" data-i18n="ui_idx_context">Context</span></a></li>
+      <li><a href="#act1"><span class="idx__n">01 · </span><span class="idx__t" data-i18n="ui_idx_problem">Problem</span></a></li>
+      <li><a href="#act2"><span class="idx__n">02 · </span><span class="idx__t" data-i18n="act2_idx">Stakeholders</span></a></li>
+      <li><a href="#act3"><span class="idx__n">03 · </span><span class="idx__t" data-i18n="ui_idx_scope">Scope</span></a></li>
+      <li><a href="#act4"><span class="idx__n">04 · </span><span class="idx__t" data-i18n="act4_idx">Design</span></a></li>
+      <li><a href="#act5"><span class="idx__n">05 · </span><span class="idx__t" data-i18n="act5_idx">Handoff</span></a></li>
+      <li><a href="#act6"><span class="idx__n">06 · </span><span class="idx__t" data-i18n="act6_idx">Contrast</span></a></li>
+    </ol>
+  </div>
+  <div class="idx__line" aria-hidden="true"><i></i></div>
+</nav>
+
 <!-- ================= ACT 00 · THE CONTEXT ================= -->
 <section class="act" id="act0" aria-labelledby="v0">
   <div class="container">
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act0_eyebrow">Act 00 · The Context</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act00_context">Act 00 · Context</span>
       </div>
       <h2 class="verdict" id="v0" data-i18n="act0_verdict">Pay for a plane change.</h2>
       <p class="scan" data-i18n="act0_lede">Pain point between flights.</p>
@@ -727,7 +751,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · The Problem</span>
+        <span class="section__eyebrow-text" data-i18n="ui_act01_problem">Act 01 · Problem</span>
       </div>
       <h2 class="verdict" id="v1" data-i18n="act1_verdict">Can't collect the fee.</h2>
       <p class="scan" data-i18n="act1_lede">The income at stake.</p>
@@ -758,7 +782,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · The Stakeholders</span>
+        <span class="section__eyebrow-text" data-i18n="act2_eyebrow">Act 02 · Stakeholders</span>
       </div>
       <h2 class="verdict" id="v2" data-i18n="act2_verdict">Key divisions.</h2>
       <p class="scan" data-i18n="act2_lede">Main contributions.</p>
@@ -841,7 +865,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · Scope &amp; Deliverables</span>
+        <span class="section__eyebrow-text" data-i18n="act3_eyebrow">Act 03 · Scope</span>
       </div>
       <h2 class="verdict" id="v3" data-i18n="act3_verdict">Delivered artifacts.</h2>
       <p class="scan" data-i18n="act3_lede">The deliverables I produced.</p>
@@ -883,7 +907,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · The Design</span>
+        <span class="section__eyebrow-text" data-i18n="act4_eyebrow">Act 04 · Design</span>
       </div>
       <h2 class="verdict" id="v4" data-i18n="act4_verdict">From sign-up to eGate.</h2>
       <p class="scan" data-i18n="act4_lede">The payment flow I designed.</p>
@@ -978,7 +1002,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · The Handoff</span>
+        <span class="section__eyebrow-text" data-i18n="act5_eyebrow">Act 05 · Handoff</span>
       </div>
       <h2 class="verdict" id="v5" data-i18n="act5_verdict">Unlocked tasks.</h2>
       <p class="scan" data-i18n="act5_lede">Continuing the work.</p>
@@ -1004,7 +1028,7 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
     <div class="act__head">
       <div class="section__eyebrow">
         <span class="section__eyebrow-bar"></span>
-        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · The Contrast</span>
+        <span class="section__eyebrow-text" data-i18n="act6_eyebrow">Act 06 · Contrast</span>
       </div>
       <h2 class="verdict" id="v6" data-i18n="act6_verdict">Changes to the flow.</h2>
       <p class="scan" data-i18n="act6_lede">One year later.</p>
@@ -1026,6 +1050,8 @@ html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B
       </div>
     </div>
 
+    <!-- The end of the brief: the closing rule (PR #43, PR43-Q10) -->
+    <hr class="brief-end" data-brief-end>
     <!-- Close — Next steps, contact, two related briefs (W2A-G3-Q2). -->
     <div class="close">
       <div class="section__eyebrow">
@@ -1536,11 +1562,13 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
   import { init as initCarousel } from "../../assets/js/core/carousel.js";
+  import { init as initIndex }    from "../../assets/js/core/brief-index.js";
   initTheme();
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
   initCarousel({ store: uiState });   // Act 03: the slide survives a reload, under the page's own b03:ui key
+  initIndex();   // the act index between the hero and Act 00 (PR #43)
 </script>
 </body>
 </html>
