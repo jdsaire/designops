@@ -45,6 +45,13 @@ function swapLang(lang) {
       if (dict[key] !== undefined) el.textContent = dict[key];
     });
 
+    /* markup inside a value (<strong>, <b>), from the dictionaries only — the rule the early script and the briefs'
+       engine already apply (PR #43: About's insights) */
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+
     /* aria-label swap for CTA anchor */
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const key = el.dataset.i18nAria;
