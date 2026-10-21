@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="384" cy="240" r="230" fill="url(#glow)"/>
+  <rect x="70" y="50" width="628" height="230" rx="0" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linejoin="round" opacity="0.6"/>
+  <path d="M227 50 V280 M384 50 V280 M541 50 V280" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+  <path d="M70 236 H698" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <path d="M110 258 H220 M300 258 H460 M540 258 H660" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+  <path d="M300 186 L470 176 L520 150 L536 152 L512 182 L560 184 L576 172 L586 174 L576 196 L470 198 L300 196 Z" fill="url(#g)"/>
+  <path d="M392 182 L432 140 L452 142 L430 184 Z M396 198 L434 226 L452 224 L428 196 Z" fill="url(#g)"/>
+  <path d="M120 400 H648" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M160 400 V470 M608 400 V470" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <circle cx="250" cy="316" r="18.0" fill="none" stroke="#9A6BFF" stroke-width="3" opacity="1"/>
+  <path d="M215.8 386.2 C215.8 348.4 284.2 348.4 284.2 386.2" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <circle cx="518" cy="316" r="18.0" fill="none" stroke="#9A6BFF" stroke-width="3" opacity="1"/>
+  <path d="M483.8 386.2 C483.8 348.4 552.2 348.4 552.2 386.2" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <rect x="332" y="360" width="104" height="40" rx="4" fill="url(#g)"/>
+  <rect x="346" y="372" width="60" height="5" rx="3.5" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="346" y="384" width="40" height="5" rx="3.5" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="200" y="384" width="80" height="16" rx="2" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linejoin="round" opacity="0.7"/>
+  <rect x="488" y="384" width="80" height="16" rx="2" fill="none" stroke="#9A6BFF" stroke-width="2.5" stroke-linejoin="round" opacity="0.7"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="512" viewBox="0 0 768 512" preserveAspectRatio="xMidYMid meet">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A100FF"/><stop offset="1" stop-color="#8C00D9"/></linearGradient><radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#A100FF" stop-opacity="0.22"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="384" cy="270" r="230" fill="url(#glow)"/>
+  <path d="M40 380 H728" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M80 380 V200 h30 V380 M130 380 V150 h26 V380" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M180 380 V280 a60 60 0 0 1 120 0 V380 Z" fill="url(#g)" opacity="1"/>
+  <path d="M110 260 H180 M143 150 V124" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M300 330 C380 330 380 230 460 230" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-dasharray="8 10" stroke-linejoin="round" opacity="0.7"/>
+  <path d="M540 380 V230 M590 380 V230" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M520 230 L530 180 H600 L610 230 Z" fill="url(#g)" opacity="1"/>
+  <path d="M528 196 H602" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M565 180 V150" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M480 380 V330 H660 V380" fill="none" stroke="#9A6BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+  <path d="M500 345 H640" fill="none" stroke="#9A6BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <path d="M600 120 L700 112 L726 96 L734 98 L720 118 L746 120 L752 112 L758 113 L752 126 L700 128 L600 126 Z" fill="url(#g)" opacity="0.9"/>
+</svg>
