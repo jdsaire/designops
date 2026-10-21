@@ -1,6 +1,6 @@
 # Completion report · PR #43 · About and the Lab
 
-**Branch:** `deploy/v30-pr43-about-lab` on `6348002` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR43-AboutLab.md`](../cc-plans/Plan-PR43-AboutLab.md) (as accepted; the About rounds after G3 were ruled in the run, PR43-Q17…Q30) · **PR:** the URL is printed in the PR's own record at push.
+**Branch:** `deploy/v30-pr43-about-lab` on `6348002` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR43-AboutLab.md`](../cc-plans/Plan-PR43-AboutLab.md) (as accepted; the About rounds after G3 were ruled in the run, PR43-Q17…Q30) · **PR:** https://github.com/jdsaire/designops/pull/43
 
 ## What a reader now sees
 
