@@ -10,7 +10,7 @@
   "ui_cta_live_app": "Open the running application",
   "ui_disclosure_label": "Disclosure notes",
   "ui_arch_foot": "For more, access the repository.",
-  "ui_idx_eb": "INDEX",
+  "ui_idx_eb": "TABLE OF CONTENTS",
   "ui_idx_context": "Context",
   "ui_idx_problem": "Problem",
   "ui_idx_scope": "Scope",
@@ -30,7 +30,6 @@
   "ui_sched_mob_t": "See schedule",
   "ui_sched_mob_x": "Full visual available on desktop.",
   "ui_dash_figs_h": "The figures",
-  "ui_dash_means": "What it means",
   "ui_dash_v2": "V2",
   "ui_dash_v1": "V1"
 }

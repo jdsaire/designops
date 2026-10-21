@@ -55,23 +55,36 @@ html.idx-nav-off .idx.is-stuck{transform:translateY(calc(-1 * var(--nav-height))
   .idx__list a{font-size:.6rem; letter-spacing:.03em; padding:.5rem .5rem;}
 }
 
-/* ---- Below 768: the bar (M3), a native select on the Contact form's dropdown ---- */
+/* ---- Below 768: the bar (M3), drawn as the Contact form (contact.css .contact-form-box, .form-label, .form-select,
+   .select-wrapper, values verbatim): a sunken box with a hairline border holding the eyebrow, then one field (no
+   field label: the eyebrow names it). The box scrolls with the page; only the field's row stays (it sticks under the nav, the eyebrow's part
+   of the box does not), so the sticky band stays one field tall. ---- */
 @media (max-width:767px){
-  .idx__in{padding:.5rem var(--gutter);}
+  :root{--idx-box:clamp(1.5rem, 4vw, 3rem);}   /* Contact's .contact-form-box padding */
+  .idx-eb{padding:0 var(--gutter);}
+  .idx-eb .section__eyebrow{background:var(--surface-sunken); border:1px solid var(--border-hairline); border-bottom:0;
+    padding:var(--idx-box) var(--idx-box) .75rem; flex-direction:row; align-items:center; gap:.75rem;}
+  .idx-eb .section__eyebrow-bar{width:1.5rem;}
+  .idx-eb .section__eyebrow-text{line-height:1.55;}   /* the briefs' eyebrow line height, on About too */
+  .idx{margin:0 var(--gutter); background:var(--surface-sunken); -webkit-backdrop-filter:none; backdrop-filter:none;
+    border:1px solid var(--border-hairline); border-top:0;}
+  .idx.is-stuck{border-top:1px solid var(--border-hairline);}
+  .idx__in{padding:0 var(--idx-box) .75rem;}
+  .idx.is-stuck .idx__in{padding:.5rem var(--idx-box);}
   .idx__list{display:none;}
-  .idx__pick{display:block; position:relative;}
-  .idx__pick::after{content:""; position:absolute; right:1rem; top:50%; transform:translateY(-50%); width:0; height:0;
-    border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--color-text-muted);
-    pointer-events:none;}
-  .idx__select{appearance:none; -webkit-appearance:none; display:block; width:100%; min-height:44px; cursor:pointer;
-    padding:.7rem 2.5rem .7rem 1rem; border-radius:0; font-family:var(--font-primary); font-size:.8rem;
-    font-weight:var(--fw-semibold); letter-spacing:.08em; text-transform:uppercase;
-    color:var(--color-brand-white); background:var(--surface-raised); border:1px solid var(--border-hairline);
-    outline:none; transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
-  .idx__select:hover{background:var(--surface-input);}
+  .idx__pick{display:block;}
+  .idx__field{position:relative; flex:1; min-width:0;}
+  .idx__field::after{content:''; position:absolute; right:1rem; top:50%; transform:translateY(-50%); width:0; height:0;
+    border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--color-text-muted); pointer-events:none;}
+  .idx__select{appearance:none; -webkit-appearance:none; display:block; width:100%; min-height:44px; cursor:pointer; border-radius:0;
+    font-family:var(--font-primary); font-size:0.95rem; color:var(--color-brand-white); background:var(--surface-raised);
+    border:1px solid var(--border-hairline); padding:0.875rem 2.5rem 0.875rem 1rem; outline:none;
+    text-overflow:ellipsis; white-space:nowrap; overflow:hidden;
+    transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+  .idx__select:hover{background:var(--surface-input); border-color:rgba(var(--ink), 0.22);}   /* Contact's --color-border-hover */
   .idx__select:focus{border-color:var(--color-brand-purple); background:var(--surface-input);}
-  .idx__select:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
-  .idx__line{display:block; height:2px; background:var(--color-border-soft); position:relative; overflow:hidden;}
+  .idx__line{display:block; height:2px; margin:0 var(--idx-box) var(--idx-box); background:var(--color-border-soft); position:relative; overflow:hidden;}   /* inside the box, under the field */
+  .idx.is-stuck .idx__line{margin:0 var(--idx-box) .5rem;}
   .idx__line i{position:absolute; inset:0; background:var(--color-brand-purple); transform:scaleX(0); transform-origin:left center;}
 }
 

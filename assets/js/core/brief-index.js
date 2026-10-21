@@ -4,8 +4,8 @@
      first target nothing is current. aria-current="true" on its link; no live region (the reader is already on the
      heading, and announcing every change while scrolling is noise);
    - from 768 the links are N equal buttons (--idx-n set here);
-   - below 768 a native select carries the same entries (the Contact form's dropdown, PR43-Q8: no n/N counter, the
-     entry's own number states the position); its options are built from the links, so the names stay in one place,
+   - below 768 a native select carries the same entries, in a box drawn as the Contact form's (one field, named by the
+     eyebrow; the first entry is the default; PR43-Q8: no n/N counter, the entry's own number states the position); its options are built from the links, so the names stay in one place,
      and it follows the current entry; picking one scrolls there. A progress line tracks the page 1:1;
    - jumping, by link or by select, lands the target below the sticky chrome (the page's scroll padding,
      shared/brief-index.css, --idx-h measured here) and moves focus to its heading so reading continues there;
@@ -57,7 +57,7 @@ export function init() {
       if (k !== current) {
         current = k;
         links.forEach((a, i) => { if (i === k) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-        if (select) select.selectedIndex = k + 1;   // option 0 is the INDEX placeholder
+        if (select) select.selectedIndex = Math.max(0, k);   // before the first entry the field shows it (no placeholder)
       }
       // stuck: the line sits at its sticky top (the eyebrow above it has scrolled past the nav)
       const navH = nav ? nav.offsetHeight : 0;
@@ -82,7 +82,7 @@ export function init() {
       const h = heads[i];
       if (h) setTimeout(() => h.focus({ preventScroll: true }), 0);   // after the browser's own anchor scroll starts
     }));
-    if (select) select.addEventListener('change', () => { const i = select.selectedIndex - 1; if (i >= 0) go(i); });
+    if (select) select.addEventListener('change', () => go(select.selectedIndex));
 
     // the nav's hide / return, mirrored on <html> so the stylesheet can lift the stuck line by the nav's height
     if (nav) {

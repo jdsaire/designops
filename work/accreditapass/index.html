@@ -72,6 +72,9 @@ html { font-size: clamp(15px, 0.35vw + 0.75rem, 17px); -webkit-text-size-adjust:
      drop shadow (line 280). Without them the Work dropdown renders
      transparent on this page, which does not link tokens.css. */
   --surface-panel:rgba(8,8,8,0.97); --shadow-3:rgba(0,0,0,0.55);
+  /* Consumed by shared/brief-index.css — the phone index is drawn as Contact's field (PR #43): its strokes and
+     its hover/focus surface. Verbatim from tokens.css. */
+  --border-hairline:#222222; --surface-input:#161616;
 }
 html[data-theme="light"]{
   --color-brand-black:#FFFFFF;
@@ -84,6 +87,7 @@ html[data-theme="light"]{
   --ink:0,0,0; --ground:255,255,255;
   --surface-sunken:#F7F7F7; --surface-card:#F2F2F2; --surface-raised:#EDEDED;
   --surface-panel:rgba(250,250,250,0.97); --shadow-3:rgba(0,0,0,0.16);
+  --border-hairline:#D8D8D8; --surface-input:#E8E8E8;
 }
 html{transition:background-color 200ms var(--ease-standard);}
 @media (prefers-reduced-motion:reduce){ html{transition:none;} }
@@ -470,12 +474,12 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
 <div class="idx-eb">
   <div class="section__eyebrow">
     <span class="section__eyebrow-bar"></span>
-    <span class="section__eyebrow-text" id="idxL" data-i18n="ui_idx_eb">INDEX</span>
+    <span class="section__eyebrow-text" id="idxL" data-i18n="ui_idx_eb">TABLE OF CONTENTS</span>
   </div>
 </div>
 <nav class="idx" data-idx aria-labelledby="idxL">
   <div class="idx__in">
-    <div class="idx__pick"><select class="idx__select" aria-labelledby="idxL"><option value="" disabled hidden data-i18n="ui_idx_eb">INDEX</option></select></div>
+    <div class="idx__pick"><span class="idx__field"><select class="idx__select" id="idxSel" aria-labelledby="idxL"></select></span></div>
     <ol class="idx__list" id="idxList">
       <li><a href="#act0"><span class="idx__n">00 · </span><span class="idx__t" data-i18n="ui_idx_context">Context</span></a></li>
       <li><a href="#act1"><span class="idx__n">01 · </span><span class="idx__t" data-i18n="ui_idx_problem">Problem</span></a></li>

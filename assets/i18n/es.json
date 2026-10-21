@@ -16,6 +16,7 @@
   "ui_illus_label": "Ilustración",
   "ui_carousel_prev": "Anterior",
   "ui_carousel_next": "Siguiente",
+  "ui_dash_means": "Qué significan",
   "work_card1_label": "DEPORTES",
   "work_card1_heading": "App para equipos de prensa en el Mundial FIFA 2026.",
   "work_card1_body": "AccreditaPass: una app en Blazor y .NET que acompaña todo el recorrido de los periodistas en 3 países y 16 estadios. Construida en cinco semanas.",
