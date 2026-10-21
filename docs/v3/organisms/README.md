@@ -8,4 +8,6 @@ Reference implementations, each a single self-contained file with its capability
 
 **Instantiation contract:** a page re-targets the roadmap organism by editing its `DATA` object alone — markup, CSS and logic never change. The files here are the canonical reference; pages splice their own copy inline to stay self-contained, matching the established brief-page grammar.
 
+Shared standards that live in the site's own stylesheets rather than here (PR #43): the editorial head (`assets/css/shared/editorial.css`), the display opening (`shared/display.css`) and the dashboard (`shared/dashboard.css`).
+
 Consumers so far: Brief 02 (`work/yape-trust-verify-brief/`) instantiates the roadmap organism in Act 05 and carries the motion system's cross-document view-transition capability.

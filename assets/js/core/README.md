@@ -9,5 +9,6 @@ The modules every page runs. Two of them, `i18n.js` and `paths.js`, decide where
 | [`theme.js`](theme.js) | Anyone changing the dark and light themes |
 | [`navchrome.js`](navchrome.js) | Anyone changing the navigation's behaviour: the Work menu, the phone menu, the bar on scroll |
 | [`progress.js`](progress.js) | Anyone changing the scroll progress bar |
-| [`carousel.js`](carousel.js) | Anyone changing the briefs' Act 03 slide carousel: steps, swipe, count, the slide kept across a reload |
+| [`carousel.js`](carousel.js) | Anyone changing the slide carousel (briefs' Act 03 and Keep exploring, About's manifestos): steps, swipe, count, the slide kept across a reload; it sets the slide index and CSS computes the offset |
+| [`brief-index.js`](brief-index.js) | Anyone changing a brief's index: the current act, the phone select, the progress line, and the fold at the closing rule |
 | [`decoration.js`](decoration.js) | Anyone changing a decoration pattern; the spec is [`../../../docs/v3/organisms/decoration-system.spec.md`](../../../docs/v3/organisms/decoration-system.spec.md) |
