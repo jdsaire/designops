@@ -4,7 +4,7 @@
   "ui_ten_sec_version": "Versión de 10 segundos",
   "ui_next_steps": "Próximos pasos",
   "ui_keep_exploring": "Explorar más",
-  "ui_more_lede": "Read the case closest to yours.",
+  "ui_more_lede": "Lea el caso más cercano al suyo.",
   "ui_cta_github": "Visitar mi GitHub",
   "ui_cta_repo": "Ver el repositorio",
   "ui_cta_live_app": "Abrir la aplicación",
@@ -29,7 +29,6 @@
   "ui_chart_read_btn": "Cómo leer el gráfico",
   "ui_sched_mob_t": "Ver cronograma",
   "ui_sched_mob_x": "El cronograma completo puede verse desde una pc.",
-  "ui_dash_figs_h": "Las cifras",
   "ui_dash_v2": "V2",
   "ui_dash_v1": "V1"
 }
