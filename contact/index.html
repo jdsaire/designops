@@ -33,6 +33,8 @@
   <link rel="stylesheet" href="../assets/css/shared/nav.css">
   <link rel="stylesheet" href="../assets/css/shared/page-hero.css">
   <link rel="stylesheet" href="../assets/css/shared/section-extras.css">
+  <link rel="stylesheet" href="../assets/css/shared/editorial.css">
+  <link rel="stylesheet" href="../assets/css/shared/display.css">
   <link rel="stylesheet" href="../assets/css/pages/contact/contact.css">
   <link rel="stylesheet" href="../assets/css/shared/channels.css">
   <link rel="stylesheet" href="../assets/css/shared/footer.css">
@@ -161,12 +163,9 @@
     <div class="section__inner pagehero__inner">
 
       <div class="contact-intro">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="contact_eyebrow">CONTACT</p>
-        </div>
-        <h1 class="pagehero__h1" data-i18n="contact_page_headline">One DM away.</h1>
-        <p class="pagehero__deck" data-i18n="contact_lede">Tell me about your project.</p>
+        <p class="ah-label" data-i18n="contact_arc_label">Open to work</p>
+        <h1 class="ah" id="contact-h"><span class="ah__line"><span class="ah__noun" data-i18n="contact_arc_pre">ONE</span> <em class="ah__hook" data-i18n="contact_arc_k">DM</em> <span class="ah__noun" data-i18n="contact_arc_post">AWAY.</span></span></h1>
+        <p class="ah-sub"><span class="bridge__heading" data-i18n="contact_arc_sub">Make the lab yours.</span></p>
       </div>
 
       <div class="contact-channels">
@@ -248,7 +247,7 @@
 
           <div class="form-group" id="field-message">
             <label class="form-label" for="contactMessage">
-              <span data-i18n="contact_msg_label">Requirement details</span>
+              <span data-i18n="contact_msg_label">Details</span>
               <span class="asterisk">*</span>
             </label>
             <textarea class="form-textarea" id="contactMessage" name="message"
