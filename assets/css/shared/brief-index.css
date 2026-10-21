@@ -1,0 +1,109 @@
+/* shared/brief-index.css — the index between a page's hero and its first act (PR #43; PR43A-Q9…Q14 and the 20 Oct
+   amendment, refined at G2: PR43-Q8, Q9). Briefs 01–04 list their acts, About its two arcs. One list of in-page
+   links, plus a native select below 768:
+   - from 768, a sticky row of N equal buttons (D2) across the content column: quiet grey like the navbar's Work
+     dropdown, its hover on hover (tint, left rule, white, bold), and the current one lit (purple rule, blurred
+     purple tint, bold white);
+   - below 768, a sticky bar (M3): the act list as a native select on the Contact form's dropdown, the picker the
+     phone already knows, and a progress line under it.
+   An eyebrow ("INDEX" / "ÍNDICE") names the landmark and scrolls away with the page; only the line is sticky. The
+   line follows the nav: when the nav slides away it rises by the nav's height with the nav's own timing (§8 state
+   motion). Script: core/brief-index.js. The component owns no copy: numbers are markup, names are keys. */
+
+.idx-eb{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter) 1rem;}
+.idx-eb .section__eyebrow{margin:0;}
+
+.idx{position:sticky; top:var(--nav-height); z-index:60;
+  background:rgba(var(--ground),.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-top:1px solid var(--color-border-faint); border-bottom:1px solid var(--color-border-soft);
+  transition:transform 350ms var(--ease-standard);}
+html.idx-nav-off .idx.is-stuck{transform:translateY(calc(-1 * var(--nav-height)));}
+.idx + .act, .idx + section{border-top-color:transparent;}   /* the line already draws the boundary */
+.idx__in{position:relative; max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+.idx__list{list-style:none; margin:0; padding:0;}
+.idx a{color:inherit; text-decoration:none;}
+.idx__n{font-variant-numeric:tabular-nums; white-space:pre;}
+/* Bold on hover and when current: each name reserves its bold width so a button never changes size. */
+.idx__t{display:inline-grid;}
+.idx__t::after{content:attr(data-text); font-weight:var(--fw-bold); visibility:hidden; height:0; overflow:hidden;
+  grid-area:1 / 1; pointer-events:none; user-select:none;}
+.idx__pick, .idx__line{display:none;}
+
+/* ---- From 768: N equal buttons (D2) ---- */
+@media (min-width:768px){
+  .idx__list{display:grid; grid-template-columns:repeat(var(--idx-n, 8), minmax(0, 1fr)); gap:2px; padding:6px 0;}
+  .idx__list a{display:flex; flex-direction:column; align-items:flex-start; justify-content:center; height:100%; min-height:44px; padding:.55rem .8rem;
+    font-size:.72rem; font-weight:var(--fw-medium); letter-spacing:.1em; line-height:1.3; text-transform:uppercase;
+    color:var(--color-text-muted); background:rgba(var(--ink),.025);
+    box-shadow:inset 2px 0 0 transparent;
+    transition:color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard),
+               box-shadow var(--duration-ui) var(--ease-standard);}
+  .idx__list .idx__n{color:var(--color-text-dim); transition:color var(--duration-ui) var(--ease-standard);}
+  /* hover: the navbar's Work dropdown, inherited (S4D polish): white and bold, the 10 % tint, the left rule */
+  .idx__list a:hover, .idx__list a:focus-visible{color:var(--color-brand-white); font-weight:var(--fw-bold);
+    background:rgba(161,0,255,.10); box-shadow:inset 2px 0 0 var(--color-brand-purple);}
+  /* current: the lit button — a 3 px purple rule on the left, a blurred purple tint, bold white */
+  .idx__list a[aria-current]{color:var(--color-brand-white); font-weight:var(--fw-bold);
+    background:rgba(161,0,255,.18); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    box-shadow:inset 3px 0 0 var(--color-brand-purple), inset 0 0 18px rgba(161,0,255,.22);}
+  .idx__list a:hover .idx__n, .idx__list a:focus-visible .idx__n, .idx__list a[aria-current] .idx__n{color:var(--color-purple-light);}
+  .idx__list a:focus-visible{outline-offset:-2px;}
+}
+/* Every button carries its number above its name; a long name wraps, hyphenated in the page's language, inside it. */
+@media (min-width:768px){ .idx__t{max-width:100%; hyphens:auto; -webkit-hyphens:auto; overflow-wrap:break-word;} }
+@media (min-width:768px) and (max-width:1199px){
+  .idx__list a{font-size:.6rem; letter-spacing:.03em; padding:.5rem .5rem;}
+}
+
+/* ---- Below 768: the bar (M3), drawn as the Contact form (contact.css .contact-form-box, .form-label, .form-select,
+   .select-wrapper, values verbatim): a sunken box with a hairline border holding the eyebrow, then one field (no
+   field label: the eyebrow names it). The box scrolls with the page; only the field's row stays (it sticks under the nav, the eyebrow's part
+   of the box does not), so the sticky band stays one field tall. ---- */
+@media (max-width:767px){
+  :root{--idx-box:clamp(1.5rem, 4vw, 3rem);}   /* Contact's .contact-form-box padding */
+  .idx-eb{padding:0 var(--gutter);}
+  .idx-eb .section__eyebrow{background:var(--surface-sunken); border:1px solid var(--border-hairline); border-bottom:0;
+    padding:var(--idx-box) var(--idx-box) .75rem; flex-direction:row; align-items:center; gap:.75rem;}
+  .idx-eb .section__eyebrow-bar{width:1.5rem;}
+  .idx-eb .section__eyebrow-text{line-height:1.55;}   /* the briefs' eyebrow line height, on About too */
+  .idx{margin:0 var(--gutter); background:var(--surface-sunken); -webkit-backdrop-filter:none; backdrop-filter:none;
+    border:1px solid var(--border-hairline); border-top:0;}
+  .idx.is-stuck{border-top:1px solid var(--border-hairline);}
+  .idx__in{padding:0 var(--idx-box) .75rem;}
+  .idx.is-stuck .idx__in{padding:.5rem var(--idx-box);}
+  .idx__list{display:none;}
+  .idx__pick{display:block;}
+  .idx__field{position:relative; flex:1; min-width:0;}
+  .idx__field::after{content:''; position:absolute; right:1rem; top:50%; transform:translateY(-50%); width:0; height:0;
+    border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--color-text-muted); pointer-events:none;}
+  .idx__select{appearance:none; -webkit-appearance:none; display:block; width:100%; min-height:44px; cursor:pointer; border-radius:0;
+    font-family:var(--font-primary); font-size:0.95rem; color:var(--color-brand-white); background:var(--surface-raised);
+    border:1px solid var(--border-hairline); padding:0.875rem 2.5rem 0.875rem 1rem; outline:none;
+    text-overflow:ellipsis; white-space:nowrap; overflow:hidden;
+    transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
+  .idx__select:hover{background:var(--surface-input); border-color:rgba(var(--ink), 0.22);}   /* Contact's --color-border-hover */
+  .idx__select:focus{border-color:var(--color-brand-purple); background:var(--surface-input);}
+  .idx__line{display:block; height:2px; margin:0 var(--idx-box) var(--idx-box); background:var(--color-border-soft); position:relative; overflow:hidden;}   /* inside the box, under the field */
+  .idx.is-stuck .idx__line{margin:0 var(--idx-box) .5rem;}
+  .idx__line i{position:absolute; inset:0; background:var(--color-brand-purple); transform:scaleX(0); transform-origin:left center;}
+}
+
+/* ---- The end of the brief (PR43-Q10, prototype A · Closing rule): a 4 px purple rule across the content column
+   with a square terminator, then the ending on a sunken full-bleed surface (shared/brief-ending.css). Once the rule rises past the index
+   line, the line folds away (opacity + rise, 250 ms; §8 state motion, instant under reduced motion) and returns
+   when the reader scrolls back above it: the ending is not an act. ---- */
+.brief-end{display:block; position:relative; height:4px; margin:clamp(3rem,6vw,5rem) 0 0; padding:0; border:0;
+  background:var(--color-brand-purple); overflow:visible;}
+.brief-end::after{content:""; position:absolute; right:0; top:50%; width:14px; height:14px; transform:translateY(-50%);
+  background:var(--color-brand-purple);}
+.idx{transition:transform 350ms var(--ease-standard), opacity 250ms var(--ease-standard);}
+.idx.is-done{opacity:0; transform:translateY(-100%) !important; pointer-events:none; visibility:hidden;
+  transition:opacity 250ms var(--ease-standard), transform 250ms var(--ease-standard), visibility 0s linear 250ms;}
+
+/* Jumps land each heading below the nav and the line, and a focused element is scrolled clear of them too
+   (WCAG 2.2 SC 2.4.11). --idx-h is measured by the script, which also sets html.has-idx. */
+html.has-idx{scroll-padding-top:calc(var(--nav-height) + 3px + var(--idx-h, 48px) + .75rem);}
+
+@media (prefers-reduced-motion:reduce){
+  .idx, .idx.is-done, .idx *, .idx *::after, .idx *::before{transition:none !important;}
+}

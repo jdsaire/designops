@@ -24,3 +24,4 @@ Approved deployment plans for v4 and later.
 | PR #40 · Mobile organisms | `Plan-PR40-MobileOrganisms.md` |
 | PR #41 · Repository hygiene | `Plan-PR41-RepoHygiene.md` |
 | PR #42 · Solution act | `Plan-PR42-SolutionAct.md` |
+| PR #43 · About and the Lab | `Plan-PR43-AboutLab.md` |

@@ -1,229 +1,71 @@
-/* home/evolution.css — EVOLUTION organism (banner: ABOUT) — split from main.css lines 968-1167. See docs/ for the reorg record. */
-/* ============================================================ ABOUT ============================================================ */
+/* pages/about/evolution.css — About (PR #43 G3: chassis B v2, PR43B-Q15). Two arcs, Lab first, each with three
+   organisms: a manifesto carousel (shared/carousel.css), its milestones on the S10-B journey rail (G3 round 3,
+   PR43-Q22: one vertical timeline per arc at every width, square nodes) and its figures (shared/brief-charts.css).
+   This file carries only what is About's own: the arc and organism heads, and the journey's rail, nodes, rows,
+   marks, plates, links and filter (re-scoped from #evolution to .tl). */
 
-/* About header — desktop/tablet center, mobile left (mirrors Capabilities) */
-.about__header {
-  text-align: center;
-  margin-bottom: clamp(1rem, 2vw, 1.75rem);
-}
-.about__header .section__eyebrow {
-  align-items: center;
-}
-.about__header .section__lede {
-  margin-left: auto;
-  margin-right: auto;
-}
+/* ---- Arcs and organism heads ---- */
+/* One separation opens and closes each arc (PR43-Q27): hero or closing rule → the date label, and subline → the
+   first organism's eyebrow, the same in Lab and Pre-Lab. Fluid: 60 px at 390 (JD's phone pick), 202 px at 1440 (his
+   desktop pick), capped at 12.6 rem. */
+.arc { --arc-gap: clamp(4rem, 14vw, 12.6rem); padding-top: var(--arc-gap); }
+.arc--lab { padding-bottom: 0; }   /* the closing rule ends Lab; Pre-Lab's own gap follows it */
+.ah-sub + .org { margin-top: var(--arc-gap); }
+/* The slogan, its date label and its subline: shared/display.css (shared with Contact, PR43-Q29) */
+/* The threshold between the arcs (PR43-Q29, prototype B): the closing rule with the figures' tag on its left
+   ("THE THRESHOLD" / "EL UMBRAL"); the block is the tag's height, the 4 px rule runs through its middle, the square end
+   stays. */
+.arc-th { position: relative; display: flex; align-items: center; margin: clamp(3rem, 6vw, 5rem) 0 0; }
+.arc-th::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 4px; transform: translateY(-50%); background: var(--color-brand-purple); }
+.arc-th__t { position: relative; margin-left: clamp(1rem, 3vw, 2.25rem); padding: .45rem .9rem; background: var(--color-brand-purple);
+  font-size: .78rem; font-weight: var(--fw-bold); letter-spacing: .18em; line-height: 1.2; text-transform: uppercase; color: var(--color-on-brand); white-space: nowrap; }
+.arc-th__end { position: absolute; right: 0; top: 50%; width: 14px; height: 14px; transform: translateY(-50%); background: var(--color-brand-purple); }
+/* The closing rules between the arcs and after Pre-Lab (G3 round 1; kept without the index, PR43-Q24): the briefs'
+   closing rule (shared/brief-index.css .brief-end), a 4 px purple rule with a square end. */
+.arc-end { display: block; position: relative; height: 4px; margin: clamp(3rem, 6vw, 5rem) 0 0; padding: 0; border: 0;
+  background: var(--color-brand-purple); overflow: visible; }
+.arc-end::after { content: ""; position: absolute; right: 0; top: 50%; width: 14px; height: 14px; transform: translateY(-50%);
+  background: var(--color-brand-purple); }
+.org { margin-top: clamp(3rem, 6vw, 5rem); scroll-margin-top: calc(var(--nav-height) + 1.5rem); }   /* a slide CTA to an organism lands its eyebrow clear of the nav */
+.org__head { margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
+/* .org__verdict, the eyebrow spacing, the lede and the centring: shared/editorial.css (PR43-Q29) */
+
+
+/* ---- Milestones: the S10-B journey, one per arc (PR43-Q22, prototype D) ----
+   The rail, the square node and the chevron are .timeline's (shared/designops-variant.css); these rules are scoped to
+   .tl so they win on specificity, never on load order. Each entry's first row (category, date, mark) is one fixed
+   height, --row, the tallest mark's; the node sits on that row's centre line and the rail runs from the first node's
+   centre to the last's, so every node lines up with its own entry at every width. */
+.tl { --row: 3rem; }
+/* The live measure (HEAD #evolution .jr-controls, .jr-track; PR43-Q24): one 46 rem column, centred; the filter spans it
+   and the count sits on its own row below. */
+.tl .jr-controls { max-width: 46rem; margin: 0 auto clamp(1.25rem, 2.5vw, 2rem); }
+.tl .jr-track { position: relative; max-width: 46rem; margin: 0 auto; }
+.tl .timeline::before { top: calc(var(--row) / 2); bottom: auto; height: var(--rail, 0px); }
+.tl .jr-fill { position: absolute; left: 0; top: calc(var(--row) / 2); width: 2px; height: 0; background: var(--color-brand-purple);
+  transition: height var(--duration-ui) var(--ease-decelerate); }
+.tl .jr-item .timeline__marker { top: calc(var(--row) / 2 - 6px); background: var(--color-border-soft);
+  transition: background var(--duration-ui) var(--ease-standard), transform var(--duration-ui) var(--ease-decelerate); }
+.tl .jr-item.is-past .timeline__marker { background: var(--color-purple-light); }
+.tl .jr-item.is-current .timeline__marker { background: var(--color-brand-purple); transform: translateX(-50%) scale(1.35); }
+.tl .jr-meta { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.5rem; height: var(--row); margin-bottom: 0.3rem; }
+.tl .jr-class { font-size: 0.625rem; font-weight: var(--fw-semibold); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-text-muted); border: 1px solid var(--color-border-soft); padding: 0.1rem 0.4rem; white-space: nowrap; }
+.tl .jr-period { font-size: 0.75rem; color: var(--color-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Heading row: the whole row is the control's hit area, at least 44 px tall; the chevron follows the title's last
+   word (PR #35, G2(d)), painted as a background so Safari draws it (a mask on an inline box shows a square there). */
+.tl .timeline__toggle { align-items: flex-start; min-height: 44px; }
+.tl .jr-head { flex: 1; }
+.tl .timeline__title::after { content: "\00a0"; padding-right: 1.15em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.2l4 4 4-4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E") no-repeat right 58% / 0.74em 0.74em; }
+.tl .timeline__item.is-open .timeline__title::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 7.8l4-4 4 4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E"); }
+.tl .jr-sub { margin-top: 0.15rem; font-size: 0.75rem; font-weight: var(--fw-regular); line-height: 1.5; color: var(--color-text-muted); }
 @media (max-width: 767px) {
-  .about__header { text-align: left; }
-  .about__header .section__eyebrow { align-items: flex-start; }
-  .about__header .section__lede { margin-left: 0; margin-right: 0; }
+  .tl .jr-meta { gap: 0.4rem; }
+  .tl .timeline__item { padding-bottom: clamp(1.25rem, 4vw, 1.75rem); }
 }
-
-.about-sticky-scene { position: relative; }
-
-/* Base track — 3-column grid on desktop/tablet */
-.about-cards-track {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 1.8vw, 1.75rem);
-  padding-top: clamp(1.5rem, 2.5vw, 2.5rem);
-  padding-bottom: clamp(3rem, 5vw, 5rem);
-}
-
-/* Base card */
-.about-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.about-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 400ms var(--ease-standard);
-  z-index: 0;
-}
-.about-card--blue { background-color: #0041f0; }
-.about-card--blue::before {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent           0px,
-    transparent           14px,
-    rgba(255,255,255,.08) 14px,
-    rgba(255,255,255,.08) 16px
-  );
-}
-.about-card--red { background-color: #e3062e; }
-.about-card--red::before {
-  background-image:
-    radial-gradient(ellipse at 105% 110%, transparent 13%, rgba(255,255,255,.08) 14%, rgba(255,255,255,.08) 16%, transparent 17%),
-    radial-gradient(ellipse at 105% 110%, transparent 26%, rgba(255,255,255,.08) 27%, rgba(255,255,255,.08) 29%, transparent 30%),
-    radial-gradient(ellipse at 105% 110%, transparent 39%, rgba(255,255,255,.08) 40%, rgba(255,255,255,.08) 42%, transparent 43%),
-    radial-gradient(ellipse at 105% 110%, transparent 52%, rgba(255,255,255,.08) 53%, rgba(255,255,255,.08) 55%, transparent 56%),
-    radial-gradient(ellipse at 105% 110%, transparent 65%, rgba(255,255,255,.08) 66%, rgba(255,255,255,.08) 68%, transparent 69%),
-    radial-gradient(ellipse at 105% 110%, transparent 78%, rgba(255,255,255,.08) 79%, rgba(255,255,255,.08) 81%, transparent 82%);
-}
-.about-card--indigo { background-color: #431ea0; }
-.about-card--indigo::before {
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent           0px,
-    transparent           22px,
-    rgba(255,255,255,.08) 22px,
-    rgba(255,255,255,.08) 24px
-  );
-}
-.about-card:hover::before,
-.about-card:focus-within::before { opacity: 0; }
-.about-card__content {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  padding: clamp(2rem, 4vw, 3rem);
-}
-.about-card__principle {
-  position: absolute;
-  top: clamp(2rem, 4vw, 3rem);
-  left:   clamp(2rem, 4vw, 3rem);
-  right:  clamp(2rem, 4vw, 3rem);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: var(--fw-bold);
-  color: var(--color-on-brand);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  white-space: pre-line;
-  transition: opacity 400ms var(--ease-standard), transform 400ms var(--ease-standard);
-}
-.about-card__body {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: clamp(2rem, 4vw, 3rem);
-  font-size: clamp(1.1rem, 1.265vw, 1.21rem);
-  font-weight: var(--fw-regular);
-  line-height: 1.45;
-  text-align: left;
-  color: var(--color-on-brand);
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 400ms var(--ease-standard), transform 400ms var(--ease-standard);
-}
-.about-card:hover .about-card__principle,
-.about-card:focus-within .about-card__principle,
-.about-card.is-active .about-card__principle { opacity: 0; transform: translateY(-10px); }
-.about-card:hover .about-card__body,
-.about-card:focus-within .about-card__body,
-.about-card.is-active .about-card__body { opacity: 1; transform: translateY(0); }
-
-/* Pagination dots — hidden on desktop */
-.about__dots {
-  display: none;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
-}
-.about__dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  background: rgba(var(--ink),0.22);
-  border: none;
-  cursor: pointer;
-  transition:
-    background var(--duration-ui) var(--ease-standard),
-    width      var(--duration-ui) var(--ease-standard);
-}
-.about__dot--active { background: var(--color-brand-purple); width: 1.25rem; }
-
-/* ABOUT — TABLET 768px–1023px: 3-column grid */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .about-cards-track {
-    grid-template-columns: repeat(3, 1fr);
-    overflow-x: unset;
-    scroll-snap-type: unset;
-    padding: clamp(2rem, 4vw, 3rem) 0;
-    margin: 0;
-  }
-  .about-card {
-    flex: unset;
-    max-width: unset;
-    width: 100%;
-    margin-left: 0 !important;
-    scroll-snap-align: unset;
-    aspect-ratio: 4 / 3;
-  }
-  .about-card__body { font-size: clamp(1.1rem, 1.265vw, 1.21rem); }
-  .about__dots { display: none; }
-}
-
-/* ABOUT — MOBILE ≤767px: carousel with bleed peek */
-@media (max-width: 767px) {
-  .about-cards-track {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 0.75rem;
-    padding: clamp(1.25rem, 4vw, 2rem) var(--gutter) 1rem;
-    margin: 0 calc(-1 * var(--gutter));
-    scrollbar-width: none;
-  }
-  .about-cards-track::-webkit-scrollbar { display: none; }
-  .about-card {
-    flex: 0 0 80vw;
-    width: auto;
-    max-width: none;
-    margin-left: 0 !important;
-    scroll-snap-align: center;
-    aspect-ratio: 4 / 3;
-  }
-  .about-card__principle { font-size: clamp(1.375rem, 5vw, 1.75rem); }
-  .about-card__body { font-size: 1.1rem; }
-  .about__dots { display: flex; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .about-card::before, .about-card__principle, .about-card__body {
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* ---- TRACK RECORD · relocated from Main (S10C) ----
-   The organism moved here from index.html, and these rules moved with it
-   from pages/home/home-layout.css. about/ links shared/designops-variant.css
-   after this file, so each override is scoped to #track-record to win on
-   specificity rather than on load order. */
-
-/* Fifth figure hidden (S4D · F3.8). The bilingual-engine key count goes
-   stale every time the dictionaries grow or shrink. Hidden rather than
-   maintained; markup and both dictionary values are retained, and deleting
-   this rule restores it. */
-#track-record .track-record__stats .stat:nth-child(5) { display: none; }
-
-/* Grid after the fifth figure was hidden (S4D-fix). The shared grid is
-   repeat(5, 1fr); hiding the fifth stat left its column standing empty.
-   Four columns close the gap. */
-@media (min-width: 901px) {
-  #track-record .track-record__stats { grid-template-columns: repeat(4, 1fr); }
-}
-/* Two-column band: keep the columns, left-align the text inside each.
-   Below 480px the shared staircase drops to one column and already
-   left-aligns, so the treatment is consistent across both. */
-@media (max-width: 900px) {
-  #track-record .track-record__stats .stat,
-  #track-record .track-record__stats .stat__number,
-  #track-record .track-record__stats .stat__label { text-align: left; }
+  .tl .jr-fill, .tl .jr-item .timeline__marker { transition: none; }
 }
 
 /* ---- JOURNEY · institution and platform marks (S10-B) ----
@@ -240,7 +82,7 @@
    makes them 50% taller too - the proportions are kept, not stretched. HEC
    keeps the wordmark it already had, nothing re-framed or re-treated, at
    that same width. */
-#evolution .jr-mark {
+.tl .jr-mark {
   --s: 2rem;        /* one height for every mark, a credential mark's own */
   --cvw: 1024;
   --cvh: 768;
@@ -250,7 +92,7 @@
   width: var(--s);
   flex: 0 0 auto;
 }
-#evolution .jr-mark__img {
+.tl .jr-mark__img {
   display: block;
   width: calc(var(--s) * var(--cvw) / var(--cw));
   height: calc(var(--s) * var(--cvh) / var(--ch));
@@ -258,24 +100,24 @@
   margin-left: calc(-1 * var(--s) * var(--cl) / var(--cw));
   margin-top: calc(-1 * var(--s) * var(--ct) / var(--ch));
 }
-#evolution .jr-mark[data-mark="esan"]    { --cl:158; --ct:280; --cw:213; --ch:213; }
-#evolution .jr-mark[data-mark="centrum"] { --cl:118; --ct:267; --cw:234; --ch:234; }
-#evolution .jr-mark[data-mark="uvic"]    { --cl:125; --ct:246; --cw:273; --ch:273; }
-#evolution .jr-mark[data-mark="um"]      { --cl:7;   --ct:295; --cw:185; --ch:185; }
-#evolution .jr-mark[data-mark="hunt"]    { --cl:121; --ct:-4;  --cw:771; --ch:771; --s: 3rem; }
-#evolution .jr-mark[data-mark="utec"]    { --cl:587; --ct:227; --cw:270; --ch:270; }
-#evolution .jr-mark[data-mark="lap"]     { --cl:202; --ct:67;  --cw:626; --ch:626; --s: 3rem; }
+.tl .jr-mark[data-mark="esan"]    { --cl:158; --ct:280; --cw:213; --ch:213; }
+.tl .jr-mark[data-mark="centrum"] { --cl:118; --ct:267; --cw:234; --ch:234; }
+.tl .jr-mark[data-mark="uvic"]    { --cl:125; --ct:246; --cw:273; --ch:273; }
+.tl .jr-mark[data-mark="um"]      { --cl:7;   --ct:295; --cw:185; --ch:185; }
+.tl .jr-mark[data-mark="hunt"]    { --cl:121; --ct:-4;  --cw:771; --ch:771; --s: 3rem; }
+.tl .jr-mark[data-mark="utec"]    { --cl:587; --ct:227; --cw:270; --ch:270; }
+.tl .jr-mark[data-mark="lap"]     { --cl:202; --ct:67;  --cw:626; --ch:626; --s: 3rem; }
 
 /* HEC Montreal: the institution's own mark with its plate removed and its
    viewBox trimmed to the letterforms, so there is nothing left to crop. */
-#evolution .jr-mark[data-mark="hec"] {
+.tl .jr-mark[data-mark="hec"] {
   --s: 3rem;         /* 50% wider than the square badges, as directed */
   width: var(--s);
   overflow: visible;
   display: inline-flex;
   align-items: center;   /* the wordmark is shorter than the square; centre it */
 }
-#evolution .jr-mark[data-mark="hec"] .jr-mark__img {
+.tl .jr-mark[data-mark="hec"] .jr-mark__img {
   width: var(--s);   /* Lima Airport's width; the height follows the wordmark */
   height: auto;
   margin: 0;
@@ -284,90 +126,35 @@
 /* The logo files are white on transparent and vanish on the light ground;
    shared/ticker.css already inverts the same files on Main. HEC's letterforms
    are black, so they take the opposite treatment - the one GitHub needs. */
-html[data-theme="light"] #evolution .jr-mark:not(.jr-mark--platform):not([data-mark="hec"]) .jr-mark__img { filter: invert(1); }
-#evolution .jr-mark[data-mark="hec"] .jr-mark__img { filter: invert(1); }
-html[data-theme="light"] #evolution .jr-mark[data-mark="hec"] .jr-mark__img { filter: none; }
+html[data-theme="light"] .tl .jr-mark:not(.jr-mark--platform):not([data-mark="hec"]) .jr-mark__img { filter: invert(1); }
+.tl .jr-mark[data-mark="hec"] .jr-mark__img { filter: invert(1); }
+html[data-theme="light"] .tl .jr-mark[data-mark="hec"] .jr-mark__img { filter: none; }
 
 /* Platform marks on the Build items: vector, nothing to clip. GitHub's mark
    is near-black and disappears on the dark ground, not the light one. */
-#evolution .jr-mark--platform {
+.tl .jr-mark--platform {
   overflow: visible;
   width: auto;
   height: 1.6rem;   /* 20% under the credential marks, principal's direction at G5 */
 }
-#evolution .jr-mark--platform .jr-mark__img {
+.tl .jr-mark--platform .jr-mark__img {
   height: 1.6rem;
   width: auto;
   max-width: 1.6rem;
   margin: 0;
 }
-#evolution .jr-mark--platform[data-mark="figma"] .jr-mark__img { max-width: 1.12rem; }
-#evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: invert(1); }
-html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: none; }
-
-/* ---- JOURNEY · sequence layout (S10-B) ----
-   Every value below resolves to a token already defined in base/tokens.css,
-   in both themes. The organism keeps the .timeline rail, marker and chevron
-   from shared/designops-variant.css; these rules are scoped to #evolution so
-   they win on specificity rather than on load order (the #track-record
-   precedent), and so no other page that links the shared file is touched.
-   No new hue, no radius: the universal border-radius:0 holds. */
-
-/* The collapsed item states what it is and when, before the control is used. */
-#evolution .jr-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.3rem;
-}
-#evolution .jr-class {
-  font-size: 0.625rem;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border-soft);
-  padding: 0.1rem 0.4rem;
-}
-#evolution .jr-period {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Heading row: the whole row is the control's hit area, at least 44 px tall. */
-#evolution .timeline__toggle { align-items: flex-start; min-height: 44px; }
-#evolution .jr-head { flex: 1; }
-/* The chevron follows the title's last word (PR #35, G2(d)). jr-head's flex: 1 stretches the heading block, so the
-   chevron element sat at the row's far edge, 253–646 px from the text. The title's ::after draws it instead: a
-   non-breaking space glues it to the last word, so it lands about 13 px after the text on whichever line the title
-   ends, in both languages (the i18n swap replaces the text, never the pseudo-element). The chevron is a purple SVG
-   painted as the pseudo-element's background: a mask is not applied to an inline box in Safari, which showed a solid
-   purple square there. Open flips it; the old element is hidden. */
-#evolution .timeline__chevron { display: none; }
-#evolution .timeline__title::after {
-  content: "\00a0";
-  padding-right: 1.15em;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.2l4 4 4-4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E") no-repeat right 58% / 0.74em 0.74em;
-}
-#evolution .timeline__item.is-open .timeline__title::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 7.8l4-4 4 4' fill='none' stroke='%23A100FF' stroke-width='2.3'/%3E%3C/svg%3E"); }
-#evolution .jr-sub {
-  margin-top: 0.15rem;
-  font-size: 0.75rem;
-  font-weight: var(--fw-regular);
-  line-height: 1.5;
-  color: var(--color-text-muted);
-}
+.tl .jr-mark--platform[data-mark="figma"] .jr-mark__img { max-width: 1.12rem; }
+.tl .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: invert(1); }
+html[data-theme="light"] .tl .jr-mark--platform[data-mark="github"] .jr-mark__img { filter: none; }
 
 /* Outbound links inside a body — Build artifacts and credential pages. */
-#evolution .jr-links {
+.tl .jr-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
   margin-top: 0.55rem;
 }
-#evolution .jr-link {
+.tl .jr-link {
   font-size: 0.8rem;
   font-weight: var(--fw-medium);
   color: var(--color-purple-light);
@@ -375,84 +162,34 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   text-underline-offset: 0.2em;
   transition: color var(--duration-ui) var(--ease-standard);
 }
-#evolution .jr-link:hover { color: var(--color-brand-white); }
-#evolution .jr-link:focus-visible {
+.tl .jr-link:hover { color: var(--color-brand-white); }
+.tl .jr-link:focus-visible {
   outline: 2px solid var(--color-brand-purple);
   outline-offset: 3px;
-}
-
-@media (max-width: 767px) {
-  #evolution .jr-meta { gap: 0.4rem; }
-  #evolution .timeline__item { padding-bottom: clamp(1.25rem, 4vw, 1.75rem); }
-}
-
-
-/* ---- JOURNEY · rail, reading position and disclosure states (S10-B) ----
-   The rail itself is .timeline::before from the shared stylesheet. The fill
-   is a sibling of the list rather than a child, so the <ol> keeps only <li>
-   children and the markup stays valid. */
-#evolution .jr-track {
-  position: relative;
-  max-width: 46rem;   /* the list's own measure, so the fill sits on the rail
-                         rather than at the section's left edge */
-  margin: 0 auto;
-}
-#evolution .jr-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 2px;
-  height: 0;
-  background: var(--color-brand-purple);
-  transition: height var(--duration-ui) var(--ease-decelerate);
-}
-
-/* State is carried by the rail and the node, never by dimming the text.
-   Measured: dropping an upcoming item to the prototype's 0.42 opacity takes
-   muted body copy to about 2.3:1 on the dark ground, which G1's AA condition
-   forbids. The node states carry the same information at no contrast cost. */
-#evolution .jr-item .timeline__marker {
-  background: var(--color-border-soft);
-  transition: background var(--duration-ui) var(--ease-standard),
-              transform var(--duration-ui) var(--ease-decelerate);
-}
-#evolution .jr-item.is-past .timeline__marker { background: var(--color-purple-light); }
-#evolution .jr-item.is-current .timeline__marker {
-  background: var(--color-brand-purple);
-  transform: translateX(-50%) scale(1.35);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #evolution .jr-fill,
-  #evolution .jr-item .timeline__marker { transition: none; }
 }
 
 /* ---- JOURNEY · category filter (S10-B; a select since PR #40) ----
    Square by the universal reset, tokens in both themes, and no colour is
    asked to carry the category: the option's own word does that. */
-#evolution .jr-controls {
-  max-width: 46rem;
-  margin: 0 auto clamp(1.25rem, 2.5vw, 2rem);
-}
 /* The filter is Contact's select, rule for rule (contact.css: .form-group, .form-label, .form-select,
    .select-wrapper; PR #40, JD at G1): one field across the column at every width, the platform's picker
    on phones, and focus shown by the purple border alone, never an outline on top of it. */
-#evolution .jr-select {
+.tl .jr-select {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-#evolution .jr-select__label {
+.tl .jr-select__label {
   font-size: 0.7rem;
   font-weight: var(--fw-semibold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
-#evolution .jr-select__wrap {
+.tl .jr-select__wrap {
   position: relative;
 }
-#evolution .jr-select__wrap::after {
+.tl .jr-select__wrap::after {
   content: '';
   position: absolute;
   right: 1rem;
@@ -464,7 +201,7 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   border-top: 6px solid var(--color-text-muted);
   pointer-events: none;
 }
-#evolution .jr-select__control {
+.tl .jr-select__control {
   font-family: var(--font-primary);
   font-size: 0.95rem;
   color: var(--color-brand-white);
@@ -479,37 +216,37 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
   transition: border-color var(--duration-ui) var(--ease-standard),
               background var(--duration-ui) var(--ease-standard);
 }
-#evolution .jr-select__control:hover {
+.tl .jr-select__control:hover {
   background: var(--surface-input);
   border-color: var(--color-border-hover);
 }
-#evolution .jr-select__control:focus {
+.tl .jr-select__control:focus {
   border-color: var(--color-brand-purple);
   background: var(--surface-input);
 }
-#evolution .jr-countrow {
+.tl .jr-countrow {
   display: flex;
   align-items: center;
   margin-top: 0.7rem;
 }
-#evolution .jr-count {
+.tl .jr-count {
   font-size: 0.75rem;
   color: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
 }
-#evolution .jr-empty {
+.tl .jr-empty {
   font-size: 0.9rem;
   color: var(--color-text-muted);
   padding: 1rem 0 0.5rem;
 }
-#evolution .jr-empty[hidden] { display: none; }
+.tl .jr-empty[hidden] { display: none; }
 
 @media (max-width: 767px) {
-  #evolution .jr-count { width: 100%; }
+  .tl .jr-count { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #evolution .jr-select__control,
-  #evolution .jr-link { transition: none; }
+  .tl .jr-select__control,
+  .tl .jr-link { transition: none; }
 }
 
 /* ---- JOURNEY · the credential marks (S10-B) ----
@@ -524,11 +261,11 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
    The files themselves are trimmed to their own content box; no mark is
    recoloured, and the white inside the Microsoft frame's rounded corners is
    the issuer's own artwork and stays. */
-#evolution .jr-plate {
+.tl .jr-plate {
   display: inline-flex;
   align-items: center;
 }
-#evolution .jr-plate__img {
+.tl .jr-plate__img {
   height: 2rem;
   width: auto;
   max-width: 4.5rem;
@@ -556,3 +293,6 @@ html[data-theme="light"] #evolution .jr-mark--platform[data-mark="github"] .jr-m
 @media (min-width: 1024px) and (max-width: 1279px) {
   #bridge1-onboarding .bridge__content { padding: 3rem; }
 }
+
+/* ---- Pre-Lab's four figures: four across from 1024, two by two from 768 (brief-charts.css sets three) ---- */
+/* .hlr--4: shared/dashboard.css (PR43-Q30) */

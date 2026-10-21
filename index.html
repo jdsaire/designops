@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="assets/css/pages/home/navcue.css">
   <link rel="stylesheet" href="assets/css/pages/home/work.css">
   <link rel="stylesheet" href="assets/css/shared/section-extras.css">
+  <link rel="stylesheet" href="assets/css/shared/editorial.css">
   <link rel="stylesheet" href="assets/css/pages/home/teaser.css">
   <link rel="stylesheet" href="assets/css/pages/capabilities/capabilities.css">
   <link rel="stylesheet" href="assets/css/shared/carousel-phone.css">
@@ -55,8 +56,8 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a href="#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
-        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      <a href="#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — Product Lab. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
 
       <!-- CENTER nav links -->
@@ -68,10 +69,10 @@
             <span class="nav__work-caret" aria-hidden="true"></span>
           </button>
           <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
-            <a class="nav__work-item" role="menuitem" href="work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
-            <a class="nav__work-item" role="menuitem" href="work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
-            <a class="nav__work-item" role="menuitem" href="work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__work-item" role="menuitem" href="work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
+            <a class="nav__work-item" role="menuitem" href="work/accreditapass/"      data-nav-work="accreditapass/"><span class="nav__work-num">01 · </span><span data-i18n="nav_card1_label">ACCREDITAPASS · SPORTS</span></a>
+            <a class="nav__work-item" role="menuitem" href="work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"><span class="nav__work-num">02 · </span><span data-i18n="nav_card2_label">TRUST &amp; VERIFY · BANKING</span></a>
+            <a class="nav__work-item" role="menuitem" href="work/airport/"             data-nav-work="airport/"><span class="nav__work-num">03 · </span><span data-i18n="nav_card3_label">TUUA TRANSFER · AIRPORT</span></a>
+            <a class="nav__work-item" role="menuitem" href="work/portfolio-evolution/" data-nav-work="portfolio-evolution/"><span class="nav__work-num">04 · </span><span data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></a>
           </div>
         </div>
         <a href="about/"    data-nav-page="about/"    class="nav__link" data-i18n="nav_evolution">About</a>
@@ -103,8 +104,8 @@
   <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
 
     <div class="nav__overlay-header">
-      <a href="#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
-        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      <a href="#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — Product Lab. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
       <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu" data-i18n-aria="nav_menu_close">&#215;</button>
     </div>
@@ -113,25 +114,25 @@
       <section class="nav__overlay-section" aria-labelledby="ovSitemap">
         <p class="nav__overlay-eyebrow" id="ovSitemap" data-i18n="nav_group_sitemap">PAGES</p>
         <a href="#top" data-nav-link="#top" class="nav__overlay-link">
-        <span data-i18n="nav_home">Home</span>
+        <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/></svg><span data-i18n="nav_home">Home</span></span>
       </a>
       <div class="nav__overlay-group">
           <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
                   aria-expanded="false" aria-controls="overlayWorkMenu">
-            <span data-i18n="nav_work">Work</span>
+            <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg><span data-i18n="nav_work">Work</span></span>
           </button>
           <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work">
-            <a class="nav__overlay-subitem" role="menuitem" href="work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="work/accreditapass/"      data-nav-work="accreditapass/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 2.8h6"/><path d="M12 2.8V6"/><rect x="5.5" y="6" width="13" height="15"/><circle cx="12" cy="11.6" r="2.3"/><path d="M8.5 17.5h7"/></svg><span data-i18n="nav_card1_label">ACCREDITAPASS · SPORTS</span></a>
+            <a class="nav__overlay-subitem" role="menuitem" href="work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.1 7.5 9.5 4.4-1.4 7.5-4.9 7.5-9.5V6z"/><path d="M8.6 12.2l2.4 2.4 4.5-4.6"/></svg><span data-i18n="nav_card2_label">TRUST &amp; VERIFY · BANKING</span></a>
+            <a class="nav__overlay-subitem" role="menuitem" href="work/airport/"             data-nav-work="airport/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8c.8 0 1.4.7 1.4 1.6v5l7.1 4.3v1.9l-7.1-2.2v4.3l2 1.5V21L12 20l-3.4 1v-1.8l2-1.5v-4.3l-7.1 2.2v-1.9l7.1-4.3v-5c0-.9.6-1.6 1.4-1.6z"/></svg><span data-i18n="nav_card3_label">TUUA TRANSFER · AIRPORT</span></a>
+            <a class="nav__overlay-subitem" role="menuitem" href="work/portfolio-evolution/" data-nav-work="portfolio-evolution/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15"/><path d="M3 8.5h18"/><path d="M10 12l-2 2 2 2M14 12l2 2-2 2"/></svg><span data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></a>
           </div>
         </div>
         <a href="about/"    data-nav-page="about/"    class="nav__overlay-link">
-          <span data-i18n="nav_evolution">About</span>
+          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c.8-3.9 3.8-6 7.5-6s6.7 2.1 7.5 6"/></svg><span data-i18n="nav_evolution">About</span></span>
         </a>
         <a href="contact/"      data-nav-page="contact/"      class="nav__overlay-link">
-          <span data-i18n="nav_cta">Contact</span>
+          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg><span data-i18n="nav_cta">Contact</span></span>
         </a>
       </section>
 
@@ -231,12 +232,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card1_label">01 · SPORTS</p>
+            <p class="work-card__category"><span class="work-card__num">01 · </span><span data-i18n="work_card1_label">SPORTS</span></p>
             <h3 class="work-card__title" data-i18n="work_card1_heading">Boosting media teams at the FIFA World Cup 2026.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card1_label">01 · SPORTS</p>
+            <p class="work-card__hover-category"><span class="work-card__num">01 · </span><span data-i18n="work_card1_label">SPORTS</span></p>
             <h3 class="work-card__hover-title" data-i18n="work_card1_heading">Boosting media teams at the FIFA World Cup 2026.</h3>
             <p class="work-card__summary" data-i18n="work_card1_body">AccreditaPass: a Blazor and .NET app that tracks the whole journey of journalists across 3 countries and 16 stadiums. Built in five weeks.</p>
           </div>
@@ -258,12 +259,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card2_label">02 · BANKING</p>
+            <p class="work-card__category"><span class="work-card__num">02 · </span><span data-i18n="work_card2_label">BANKING</span></p>
             <h3 class="work-card__title" data-i18n="work_card2_heading">Yape photo says paid. This app validates it safely.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card2_label">02 · BANKING</p>
+            <p class="work-card__hover-category"><span class="work-card__num">02 · </span><span data-i18n="work_card2_label">BANKING</span></p>
             <h3 class="work-card__hover-title" data-i18n="work_card2_heading">Yape photo says paid. This app validates it safely.</h3>
             <p class="work-card__summary" data-i18n="work_card2_body">Trust &amp; Verify: a React and TypeScript app that lets a merchant check a Yape payment is genuine. Built in under a week.</p>
           </div>
@@ -285,12 +286,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card3_label">03 · AIRPORT</p>
+            <p class="work-card__category"><span class="work-card__num">03 · </span><span data-i18n="work_card3_label">AIRPORT</span></p>
             <h3 class="work-card__title" data-i18n="work_card3_heading">Paying a fee Lima's airport had never charged.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card3_label">03 · AIRPORT</p>
+            <p class="work-card__hover-category"><span class="work-card__num">03 · </span><span data-i18n="work_card3_label">AIRPORT</span></p>
             <h3 class="work-card__hover-title" data-i18n="work_card3_heading">Paying a fee Lima's airport had never charged.</h3>
             <p class="work-card__summary" data-i18n="work_card3_body">TUUA Transfer: the web payment flow I designed for international transfer passengers at Jorge Chávez. Handed over in 2025.</p>
           </div>
@@ -312,12 +313,12 @@
           </div>
 
           <div class="work-card__default">
-            <p class="work-card__category" data-i18n="work_card4_label">04 · SOFTWARE</p>
+            <p class="work-card__category"><span class="work-card__num">04 · </span><span data-i18n="work_card4_label">SOFTWARE</span></p>
             <h3 class="work-card__title" data-i18n="work_card4_heading">How I built this website with no coding degree.</h3>
           </div>
 
           <div class="work-card__hover" aria-hidden="true">
-            <p class="work-card__hover-category" data-i18n="work_card4_label">04 · SOFTWARE</p>
+            <p class="work-card__hover-category"><span class="work-card__num">04 · </span><span data-i18n="work_card4_label">SOFTWARE</span></p>
             <h3 class="work-card__hover-title" data-i18n="work_card4_heading">How I built this website with no coding degree.</h3>
             <p class="work-card__summary" data-i18n="work_card4_body">DesignOps System: from a single page to a bilingual multi-page site in Vanilla HTML, CSS and JavaScript code. Built in five months.</p>
           </div>

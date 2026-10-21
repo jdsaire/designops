@@ -1,4 +1,4 @@
-# Decoration system — capability spec (v1.5)
+# Decoration system — capability spec (v1.6)
 
 Companion to `decoration-system.html`, the live specimen. It loads the site's own tokens, face and decoration layer,
 so it shows the shipped code, not a copy.
@@ -60,6 +60,20 @@ one guard generalised, and v1.4's budget finding withdrawn.
 - **Read time per screen and language** (PR40-Q2, G7): the hero read time switches by `html[lang]` and width through
   `display` only. It is not a decoration: no motion, no layout shift (CLS 0.0000).
 - §10.3 records PR #40's measurements at its G8 tip.
+
+**v1.6 (PR #42, merged at `6348002`, 19 Oct 2026; PR42-Q1, Q3, Q5, Q30, Q34, Q36; SY42-Q4):** no new decoration, pattern,
+exception or one-shot. Three records of state motion and chrome.
+- **One slide carousel for the four briefs** (D44, PR42-Q1, Q5): Brief 03's `.dl` moves to `shared/carousel.css` +
+  `core/carousel.js` and also carries Act 03 · The Solution in Briefs 01, 02 and 04. From 768 the track translates (420 ms,
+  §8); below 768 it scrolls sideways with snap, one full-width slide at a time with no peek, in Main's capabilities phone
+  style (`shared/carousel-phone.css`, PR42-Q34, which replaces PR42-Q3's phone peek). Under reduced motion: no transition
+  (measured at G3: `0s` on all four briefs, Chrome and WebKit).
+- **The phone label in dark theme** (PR42-Q36): below 768, the label of both phone carousels (Main capabilities, the briefs'
+  `.dl`) uses the light purple in dark theme, since brand purple reads 3.96:1 on black; light theme keeps brand purple. A
+  colour rule, not motion.
+- **The phone menu button's closed state is the purple 44 px box** (PR #42 G6b): only the symbol changes on tap (three
+  lines ↔ X), the box stays. CUE RING (X-5) is unchanged around the same box.
+- §10.4 records PR #42's measurements.
 
 ## 1. Scope: what counts as a decoration
 
@@ -186,7 +200,7 @@ These are interaction feedback, outside the decoration budget.
 | Anchor scroll (`scroll-behavior: smooth`) | all pages | auto on Main and the briefs; **still smooth on About and Contact** | auto everywhere |
 | Page fade (cross-document view transitions) | all 7 pages | off | keep |
 | Theme switch (background, 200 ms) | all pages | off | keep |
-| Carousels: Main capabilities (420 ms), Main work dots, B03 deliverables (420 ms), B03 screens strip, About cards on phones | — | off | keep |
+| Carousels: Main capabilities (420 ms), Main work dots, **the brief slide carousel `.dl` (420 ms): B03 deliverables and Act 03 · The Solution in B01, B02, B04 (v1.6)**, B03 screens strip, About cards on phones | `shared/carousel.css` + `core/carousel.js`; phones: `shared/carousel-phone.css` (v1.6) | off | keep (`.dl` measured `0s` under reduced motion on all four briefs, v1.6) |
 | Disclosures: About's 25 panels (`max-height`, 320 ms), brief reveals, brief side panel (320 ms), B03 map sheet (320 ms) | — | off | keep (`max-height` is the named layout exception for disclosures) |
 | Hover and focus: work-card reveal + 3° tilt, About card reveal (400 ms), CTA icons, ticker logos, journey step border, card borders, chips, tabs, dots | — | off or flat | keep |
 | Scroll-linked: progress bar (`scaleX`), About journey rail and markers | — | rail instant | keep |
@@ -195,7 +209,7 @@ These are interaction feedback, outside the decoration budget.
 
 ## 9. Verdicts per component
 
-v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1, D37–D39 in v1.3, D40 in v1.4, D41–D43 in v1.5.
+v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1, D37–D39 in v1.3, D40 in v1.4, D41–D43 in v1.5, D44 in v1.6.
 
 | # | Component | Verdict (v1.1) | Role | Note |
 |---|---|---|---|---|
@@ -242,6 +256,7 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1
 | D41 | B01/B02/B04 · phone schedule (`.relay--sched`) (PR #40) | **New** RUN below 768 | Message | order; the existing `.relay` hook, no new code |
 | D42 | B01/B02/B04 · dashboard act panel (`.hlr`) (PR #40) | **None**: static encodings | — | PR40-Q26: no new motion pattern; figures static (PR35-Q25) |
 | D43 | Phone card scrollers (`.swipe`, 12 sets) (PR #40) | **RUN skipped** below 768 | — | sets scroll sideways (§6 RUN guard); ladders and timelines keep RUN from 768 |
+| D44 | Brief slide carousel `.dl` (B03 Act 03; Act 03 · The Solution in B01, B02, B04) (PR #42) | **Keep** (state) | Interaction | §8 register; one shared source; no new pattern |
 
 ## 10. Measured at G4b
 
@@ -314,6 +329,19 @@ Branch `deploy/v27-pr40-mobile-organisms`, tip `c76755e` (G8), Chrome channel an
 | B04 | 1150 | 1167 | 1000 | 1017 |
 
 - **Phone schedule relays (D41):** B01 7 nodes, B02 5, B04 5; each ≤ 1,450 ms at 320 and 390 (G3, per element).
+
+### 10.4 Measured at PR #42 (v1.6)
+
+Branch `deploy/v29-pr42-solution-act`, G6 re-run on `d76f0c6` (19 Oct 2026), Chrome and WebKit; source: the PR #42 completion
+report (criterion 6) and its gate lines in PRE-MAX-CHANGELOG.
+- **Text hidden or fading:** 0 (floor, 7 pages).
+- **Final frame = reduced motion:** frames identical on all 7 pages, both engines, 390 and 1440.
+- **Layout shift:** 0.0000 on all 7 pages, both widths, on a plain server (the review server's `no-store` header caused
+  0.0001–0.0002, traced to font delay and excluded).
+- **Longest one-shot:** 1,450 ms (unchanged from §10.3).
+- **Carousel suite:** 32/32 cases per engine, EN and ES, including the CTA placement and the phone count "1 / N".
+- **Contrast:** 264 failures vs 270 at the base `b4def28` (the dark phone label fixed 24 that the inherited brand purple added;
+  the only new one is Brief 01 Act 00's purple reveal button, the known 3.96:1 class).
 - **Read time:** the hero's four numbers switch through `display` by `html[lang]` and width; no motion, CLS 0.0000 (G7).
 
 ## 11. Where it lives, and how to add a pattern
@@ -323,10 +351,15 @@ Branch `deploy/v27-pr40-mobile-organisms`, tip `c76755e` (G8), Chrome channel an
   head script. That script adds `deco-armed` when motion is allowed. Contact's CSP lists that script's hash.
 - **Every pattern is an arm/play pair.** `arm(target)` sets the pre-state, only when motion is allowed, without a
   transition, and returns `play()`. The page plays it from `when(component)`; the specimen plays it from a button.
-  Exports: `sig`, `run`, `grow`, `meter`, `motion` (`meter` has no use since v1.5; PR #41 removes it).
+  Exports: `sig`, `run`, `grow`, `motion` (`meter` removed by PR #41, PR41-Q3).
 - **Opt-in RUN on a set (v1.4):** `data-deco-run="<min width>"` on a container runs RUN over its children only at that
   width or wider, and only when the whole set fits the viewport height, so a pass never lights an item off screen
   (Brief 04's architecture cards use it from 768).
+- **The slide carousel (v1.6):** `shared/carousel.css` (from 768: translate, a peek of the next slide, 420 ms) and
+  `core/carousel.js` (arrows, the "01 / 0N" count, the viewport scroll reset on the desktop path after a resize) serve
+  the four briefs; `shared/carousel-phone.css` holds the phone style below 768 for Main's capabilities and the briefs'
+  `.dl` (full width, no peek, no gap, the counter at the right, `[data-dl-num]` labels numbered by CSS, the dark-theme
+  light-purple label). State motion only; it adds nothing to §4's budget.
 - **Sideways guard (v1.5):** RUN skips a timeline, a ladder or any card set whose track scrolls sideways at the current width
   (`scrollWidth > clientWidth + 4`), and the final frame shows.
 - **A new pattern** names its role (§3), fits the budget (§4), takes its timing from the tokens (§5), and draws a bar,

@@ -10,7 +10,11 @@
 .dl{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .dl__viewport{overflow:hidden; margin-right:calc(-1 * var(--gutter)); outline:none;}
 .dl__viewport:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
-.dl__track{list-style:none; display:flex; gap:clamp(3rem,4vw,4rem); transition:transform 420ms var(--ease-standard);}
+.dl__track{list-style:none; display:flex; --dl-gap:clamp(3rem,4vw,4rem); gap:var(--dl-gap); transition:transform 420ms var(--ease-standard);
+  transform:translateX(calc(var(--dl-i, 0) * -1 * (100% - var(--peek-width) + var(--dl-gap))));}
+/* The offset is computed here, not in pixels by the script (PR #43, PR43-Q23): a translate percentage resolves against
+   the track's width, which is the slide's 100%, so the current slide stays in the frame at every width during a live
+   resize, where a pixel offset went stale and showed a dimmed neighbour. Only a change of --dl-i animates. */
 .dl__slide{flex:0 0 calc(100% - var(--peek-width)); min-width:0; display:grid; grid-template-columns:51fr 49fr; gap:clamp(2rem,4vw,4rem); align-items:center;
   transition:opacity 420ms var(--ease-standard);}
 .dl__slide:not(.is-on){opacity:.35;}
@@ -30,7 +34,8 @@
 .dl + .ctaset{margin-top:clamp(1.6rem,3vw,2.4rem);}   /* below 768: the single CTA sits below the carousel (PR #42) */
 @media (min-width:768px){ .dl + .ctaset{display:none;} }   /* from 768: each slide carries it under its body instead (PR42-Q31) */
 .dl__ctrl{display:flex; align-items:center; justify-content:flex-end; gap:.75rem; margin-top:clamp(1.25rem,2vw,1.75rem); padding-right:var(--peek-width);}
-.dl__nav{width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
+.dl__nav{width:44px; height:44px; display:inline-flex; background:none; padding:0;   /* pages without the briefs' button reset (Main) */
+   align-items:center; justify-content:center; color:var(--color-brand-white); border:1px solid rgba(var(--ink),.5); cursor:pointer;
   transition:border-color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard);}
 .dl__nav:hover, .dl__nav:focus-visible{border-color:var(--color-brand-purple); background:rgba(161,0,255,.08);}
 .dl__count{min-width:3.6rem; text-align:center; font-size:.875rem; font-weight:var(--fw-bold); letter-spacing:.04em; font-variant-numeric:tabular-nums; color:var(--color-brand-white);}

@@ -1,0 +1,46 @@
+/* shared/brief-ending.css — how every brief ends (PR #43 G2b; PR43-Q5…Q7, Q12, Q13). After the closing rule
+   (shared/brief-index.css) the brief hands the reader on, on a sunken full-bleed surface, in two organisms:
+   1. Keep exploring: the briefs' slide carousel (.dl, shared/carousel.css + core/carousel.js) with the other three
+      briefs, ordered by their relation to this one, each slide carrying Main's locked work card (label, heading,
+      body, "Access Brief") over Main's own work illustration;
+   2. Contact: Main's and About's Contact organism, the same markup and keys.
+   The briefs do not link page-hero.css or section-extras.css (their global .cta would restyle every brief CTA), so
+   the organism's rules are reproduced here verbatim, scoped to .brief-ending (the precedent page-hero.css records). */
+
+.act:has(> .container > .brief-end){padding-bottom:0;}   /* the rule closes the last act; the ending starts under it */
+.brief-ending{background:var(--surface-sunken);}
+
+/* ---- Section frame and headline (verbatim: page-hero.css .section, .section__inner; section-extras.css
+   .section__headline), scoped ---- */
+.brief-ending .section{position:relative; padding:clamp(4rem,7vw,7.5rem) 0;}
+.brief-ending .section + .section{border-top:1px solid var(--color-border-faint);}
+.brief-ending .section__inner{max-width:var(--max-content-width); margin:0 auto; padding:0 var(--gutter);}
+.brief-ending .section__headline{font-size:clamp(2rem,4vw,3.5rem); font-weight:var(--fw-bold); line-height:1.08;
+  letter-spacing:-0.02em; color:var(--color-brand-white);}
+
+/* ---- 1 · Keep exploring ---- */
+.brief-more .act__head{margin-bottom:clamp(1.75rem,3vw,2.5rem);}
+.brief-more .dl__img{object-fit:cover;}   /* Main's 5:4 work art fills the 3:2 frame, as it fills Main's cards */
+@media (max-width:767px){
+  .brief-more .dl__cta{display:inline-flex; margin-top:1rem;}   /* each slide is the way to its brief, on phones too */
+}
+
+/* ---- 2 · Contact (verbatim: section-extras.css .section--contact-cta; page-hero.css .cta), scoped ---- */
+@media (min-width:768px){
+  .brief-ending .section--contact-cta .section__inner{text-align:center;}
+  .brief-ending .section--contact-cta .section__eyebrow{align-items:center;}
+}
+.brief-ending .section--contact-cta .cta{display:inline-flex; align-items:center; gap:0.75rem; cursor:pointer; width:fit-content;
+  padding:0.125rem 0; margin-top:clamp(2rem,3.5vw,3.5rem); min-height:44px;}
+.brief-ending .section--contact-cta .cta__label{font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em;}
+.brief-ending .section--contact-cta .cta__icon{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem;
+  background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard);}
+.brief-ending .section--contact-cta .cta:hover .cta__icon, .brief-ending .section--contact-cta .cta:focus-visible .cta__icon{background:var(--color-purple-hover);}
+.brief-ending .section--contact-cta .cta__icon svg{width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2;
+  stroke-linecap:round; stroke-linejoin:round;}
+@media (max-width:767px){
+  .brief-ending .section--contact-cta .cta__icon{width:1.75rem; height:1.75rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  .brief-ending .section--contact-cta .cta__icon{transition:none;}
+}

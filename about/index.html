@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About · Juan Diego Saire — AI Product &amp; Experience Engineer</title>
-  <meta name="description" content="Engineer. MBA. Six years in tech and design. I direct AI to turn business challenges into bulletproof digital products.">
+  <meta name="description" content="Engineer. MBA. Six years in tech &amp; design. I direct AI to turn business challenges into bulletproof websites and apps.">
   <link rel="icon" type="image/svg+xml" href="../logos/jdigital-logo-default.svg">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="About · Juan Diego Saire — AI Product &amp; Experience Engineer">
-  <meta property="og:description" content="Engineer. MBA. Six years in tech and design. I direct AI to turn business challenges into bulletproof digital products.">
+  <meta property="og:description" content="Engineer. MBA. Six years in tech &amp; design. I direct AI to turn business challenges into bulletproof websites and apps.">
   <meta property="og:image" content="../assets/img/bridge1_onboarding.svg">
   <meta property="og:locale" content="en_US">
 
@@ -23,8 +23,14 @@
   <link rel="stylesheet" href="../assets/css/shared/nav.css">
   <link rel="stylesheet" href="../assets/css/shared/page-hero.css">
   <link rel="stylesheet" href="../assets/css/shared/section-extras.css">
+  <link rel="stylesheet" href="../assets/css/shared/editorial.css">
+  <link rel="stylesheet" href="../assets/css/shared/display.css">
   <link rel="stylesheet" href="../assets/css/shared/bridge.css">
   <link rel="stylesheet" href="../assets/css/shared/channels.css">
+  <link rel="stylesheet" href="../assets/css/shared/carousel.css">
+  <link rel="stylesheet" href="../assets/css/shared/carousel-phone.css">
+  <link rel="stylesheet" href="../assets/css/shared/brief-charts.css">
+  <link rel="stylesheet" href="../assets/css/shared/dashboard.css">
   <link rel="stylesheet" href="../assets/css/pages/about/evolution.css">
   <link rel="stylesheet" href="../assets/css/shared/footer.css">
   <link rel="stylesheet" href="../assets/css/shared/decoration.css">
@@ -43,8 +49,8 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a href="../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — DesignOps. Home.">
-        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      <a href="../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — Product Lab. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
 
       <!-- CENTER nav links -->
@@ -56,10 +62,10 @@
             <span class="nav__work-caret" aria-hidden="true"></span>
           </button>
           <div class="nav__work-menu" id="workMenu" role="menu" aria-label="Work" hidden>
-            <a class="nav__work-item" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
-            <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
-            <a class="nav__work-item" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__work-item" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
+            <a class="nav__work-item" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"><span class="nav__work-num">01 · </span><span data-i18n="nav_card1_label">ACCREDITAPASS · SPORTS</span></a>
+            <a class="nav__work-item" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"><span class="nav__work-num">02 · </span><span data-i18n="nav_card2_label">TRUST &amp; VERIFY · BANKING</span></a>
+            <a class="nav__work-item" role="menuitem" href="../work/airport/"             data-nav-work="airport/"><span class="nav__work-num">03 · </span><span data-i18n="nav_card3_label">TUUA TRANSFER · AIRPORT</span></a>
+            <a class="nav__work-item" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/"><span class="nav__work-num">04 · </span><span data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></a>
           </div>
         </div>
         <a href="../about/" data-nav-page="about/" class="nav__link" aria-current="page" data-i18n="nav_evolution">About</a>
@@ -91,8 +97,8 @@
   <div class="nav__overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
 
     <div class="nav__overlay-header">
-      <a href="../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — DesignOps. Home.">
-        JD·SAIRE <small data-i18n="chrome_wordmark_sub">DesignOps</small>
+      <a href="../#top" data-nav-link="#top" class="nav__overlay-logo" aria-label="Juan Diego Saire — Product Lab. Home.">
+        JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
       <button class="nav__overlay-close" id="overlayClose" aria-label="Close menu" data-i18n-aria="nav_menu_close">&#215;</button>
     </div>
@@ -101,25 +107,25 @@
       <section class="nav__overlay-section" aria-labelledby="ovSitemap">
         <p class="nav__overlay-eyebrow" id="ovSitemap" data-i18n="nav_group_sitemap">PAGES</p>
         <a href="#top" data-nav-link="#top" class="nav__overlay-link">
-        <span data-i18n="nav_home">Home</span>
+        <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/></svg><span data-i18n="nav_home">Home</span></span>
       </a>
       <div class="nav__overlay-group">
           <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayWorkTrigger" type="button"
                   aria-expanded="false" aria-controls="overlayWorkMenu">
-            <span data-i18n="nav_work">Work</span>
+            <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg><span data-i18n="nav_work">Work</span></span>
           </button>
           <div class="nav__overlay-submenu" id="overlayWorkMenu" role="menu" aria-label="Work">
-            <a class="nav__overlay-subitem" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"      data-i18n="nav_card1_label">01 · ACCREDITAPASS · SPORTS</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"          data-i18n="nav_card2_label">02 · TRUST &amp; VERIFY · BANKING</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="../work/airport/"             data-nav-work="airport/"             data-i18n="nav_card3_label">03 · TUUA TRANSFER · AIRPORT</a>
-            <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/" data-i18n="nav_card4_label">04 · PORTFOLIO · SOFTWARE</a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/accreditapass/"      data-nav-work="accreditapass/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 2.8h6"/><path d="M12 2.8V6"/><rect x="5.5" y="6" width="13" height="15"/><circle cx="12" cy="11.6" r="2.3"/><path d="M8.5 17.5h7"/></svg><span data-i18n="nav_card1_label">ACCREDITAPASS · SPORTS</span></a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/yape-trust-verify-brief/"          data-nav-work="yape-trust-verify-brief/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.1 7.5 9.5 4.4-1.4 7.5-4.9 7.5-9.5V6z"/><path d="M8.6 12.2l2.4 2.4 4.5-4.6"/></svg><span data-i18n="nav_card2_label">TRUST &amp; VERIFY · BANKING</span></a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/airport/"             data-nav-work="airport/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8c.8 0 1.4.7 1.4 1.6v5l7.1 4.3v1.9l-7.1-2.2v4.3l2 1.5V21L12 20l-3.4 1v-1.8l2-1.5v-4.3l-7.1 2.2v-1.9l7.1-4.3v-5c0-.9.6-1.6 1.4-1.6z"/></svg><span data-i18n="nav_card3_label">TUUA TRANSFER · AIRPORT</span></a>
+            <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15"/><path d="M3 8.5h18"/><path d="M10 12l-2 2 2 2M14 12l2 2-2 2"/></svg><span data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></a>
           </div>
         </div>
         <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
-          <span data-i18n="nav_evolution">About</span>
+          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c.8-3.9 3.8-6 7.5-6s6.7 2.1 7.5 6"/></svg><span data-i18n="nav_evolution">About</span></span>
         </a>
         <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
-          <span data-i18n="nav_cta">Contact</span>
+          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg><span data-i18n="nav_cta">Contact</span></span>
         </a>
       </section>
 
@@ -176,7 +182,7 @@
         <h1
           class="bridge__heading"
           id="bridge1-onboarding-heading"
-        ><span data-i18n="about_hero_heading">Engineer. MBA. Six years in tech and design. I direct AI to turn business challenges into bulletproof digital products.</span></h1>
+        ><span data-i18n="about_hero_heading">Engineer. MBA. Six years in tech &amp; design. I direct AI to turn business challenges into bulletproof websites and apps.</span></h1>
       </div>
       <!-- The CV, offered at the opening (PR35-Q54): the Contact page's channel row (shared/channels.css).
            Each link carries the English file as its default; pages/about/cv.js points it at the
@@ -195,79 +201,457 @@
   </section>
 
   <!-- ============================================================
-       TRACK RECORD — editorial + figures
-       Relocated from Main (S10C); the credential tickers stayed on Main.
-       Anchor: #track-record
+       ARC 01 · LAB — anchor #lab (PR43B-Q2): manifesto carousel, milestones, figures (chassis B v2, PR43B-Q15).
+       Copy: ABOUT-COPY-LOCK-v1_0, injected (PR42-Q41).
        ============================================================ -->
-  <section class="section section--track-record" id="track-record" aria-label="Track record">
+  <section class="section arc arc--lab" id="lab" aria-labelledby="lab-h">
     <div class="section__inner">
-      <div class="track-record__header">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="about_tr_eyebrow">TRACK RECORD</p>
+      <p class="ah-label" data-i18n="about_lab_h_date">Since Oct 2025</p>
+      <h2 class="ah" id="lab-h"><span class="ah__line"><span class="ah__noun" data-i18n="about_lab_h_n1">LAB</span> <em class="ah__hook" data-i18n="about_lab_h_k1">OPEN.</em></span><span class="ah__line"><span class="ah__noun" data-i18n="about_lab_h_n2">BUILDS</span> <em class="ah__hook" data-i18n="about_lab_h_k2">GO LIVE.</em></span></h2>
+      <p class="ah-sub"><span class="bridge__heading" data-i18n="about_arc_lab_h">Welcome to my R&amp;D Lab.</span></p>
+      <div class="org" id="lab-manifesto">
+        <div class="org__head">
+          <div class="section__eyebrow">
+            <span class="section__eyebrow-bar" aria-hidden="true"></span>
+            <p class="section__eyebrow-text" data-i18n="about_lab_m_eb">THE MANIFESTO</p>
+          </div>
+          <h3 class="org__verdict" data-i18n="about_lab_m_verdict" id="lab-m-v">Real software – zero noise.</h3>
+          <p class="section__lede" data-i18n="about_lab_m_lede">How the lab works and where it goes.</p>
         </div>
-        <h2 class="section__headline" data-i18n="about_tr_heading">Figures don't lie.</h2>
-        <p class="section__lede" data-i18n="about_tr_lede">Real work – real results.</p>
+          <div class="dl" data-dl="lab">
+            <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="lab-m-v" tabindex="0">
+              <ol class="dl__track">
+              <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+                <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/lab-s1-desk.svg" alt="Workspace desk with a notebook, coffee, and an open laptop in Lima." data-i18n-alt="about_lab_s1_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+                <div class="dl__content"><p class="dl__label" data-i18n="about_lab_s1_l">My operation</p><h3 class="dl__title" data-i18n="about_lab_s1_t">An independent product lab</h3><p class="dl__body" data-i18n="about_lab_s1_x">I work on my own, designing, coding, and publishing complete web solutions with a rigorous standard of execution.</p><a class="dl__cta" href="#lab-timeline"><span class="dl__cta-l" data-i18n="about_lab_s1_cta">Explore builds</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+              </li>
+              <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+                <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/lab-s2-review.svg" alt="A written prompt guides an AI that drafts code changes; a review lens approves them." data-i18n-alt="about_lab_s2_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+                <div class="dl__content"><p class="dl__label" data-i18n="about_lab_s2_l">My method</p><h3 class="dl__title" data-i18n="about_lab_s2_t">AI direction and code review</h3><p class="dl__body" data-i18n="about_lab_s2_x">I direct each build's architecture, audit generated code, and fine-tune the exact lines needed for delivery.</p><a class="dl__cta" href="https://github.com/jdsaire" target="_blank" rel="noopener noreferrer"><span class="dl__cta-l" data-i18n="about_lab_s2_cta">View code on GitHub</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+              </li>
+              <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+                <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/lab-s3-room.svg" alt="A rising path of blocks leads from a laptop to corporate towers." data-i18n-alt="about_lab_s3_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+                <div class="dl__content"><p class="dl__label" data-i18n="about_lab_s3_l">My next chapter</p><h3 class="dl__title" data-i18n="about_lab_s3_t">Back to the corporate league</h3><p class="dl__body" data-i18n="about_lab_s3_x">I bring built and tested methods to Product, AI, or New Business leadership teams tackling ambitious targets.</p><a class="dl__cta" href="../contact/"><span class="dl__cta-l" data-i18n="about_lab_s3_cta">Start a conversation</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+              </li>
+              </ol>
+            </div>
+            <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+          </div>
       </div>
-
-      <div class="track-record__stats">
-        <div class="stat">
-          <div class="stat__number">130,000+</div>
-          <div class="stat__label" data-i18n="about_tr_stat1_label">Monthly impacted passengers from intervention</div>
+      <div class="org" id="lab-timeline">
+        <div class="org__head">
+          <div class="section__eyebrow">
+            <span class="section__eyebrow-bar" aria-hidden="true"></span>
+            <p class="section__eyebrow-text" data-i18n="about_lab_t_eb">THE MILESTONES</p>
+          </div>
+          <h3 class="org__verdict" data-i18n="about_lab_t_verdict" id="lab-t-v">New testament.</h3>
+          <p class="section__lede" data-i18n="about_lab_t_lede">My digital footprint.</p>
         </div>
-        <div class="stat">
-          <div class="stat__number">70</div>
-          <div class="stat__label" data-i18n="about_tr_stat2_label">Staff trained, Satisfaction 3.88/4</div>
-        </div>
-        <div class="stat">
-          <div class="stat__number">1,200+</div>
-          <div class="stat__label" data-i18n="about_tr_stat3_label">University students taught</div>
-        </div>
-        <div class="stat">
-          <div class="stat__number">29</div>
-          <div class="stat__label" data-i18n="about_tr_stat4_label">Project teams mentored</div>
-        </div>
-        <div class="stat">
-          <div class="stat__number">700+</div>
-          <div class="stat__label" data-i18n="about_tr_stat5_label">Keys in the bilingual engine I built and run</div>
-        </div>
+          <div class="tl" data-tl>
+            <div class="jr-controls" hidden>
+              <div class="jr-select">
+                <label class="jr-select__label" for="lab-filter" data-i18n="about_jr_filter_group_label">Filter by category</label>
+                <div class="jr-select__wrap">
+                  <select class="jr-select__control tl__filter" id="lab-filter">
+                  <option value="all" data-i18n="about_jr_filter_all">All</option>
+                  <option value="build" data-i18n="about_jr_filter_build">Build</option>
+                  <option value="credential" data-i18n="about_jr_filter_credential">Credential</option>
+                  </select>
+                </div>
+              </div>
+              <div class="jr-countrow">
+                <p class="jr-count tl__count" role="status" aria-live="polite" data-key="about_jr_count">12 of 12</p>
+              </div>
+            </div>
+            <div class="jr-track">
+              <span class="jr-fill" aria-hidden="true"></span>
+              <ol class="timeline jr-sequence" role="list">
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20251210" data-ord="1">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_mck_period">10 Dec 2025</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/forward.png"
+                alt="McKinsey.org Forward Program" data-i18n-alt="about_jr_cred_mck_alt"
+                width="320" height="320" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-1">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_mck_title">McKinsey.org Forward Program</h4>
+                <p class="jr-sub" data-i18n="about_jr_mck_meta">McKinsey.org</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-1">
+              <p class="jr-links">
+              <a class="jr-link" href="https://www.credly.com/badges/2ac22836-7de6-483c-8787-bd416905a68e/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_mck_title" aria-label="McKinsey.org Forward Program">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260317" data-ord="2">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_gai_period">17 Mar 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-ai.png"
+                alt="Google AI Professional Certificate" data-i18n-alt="about_jr_cred_gai_alt"
+                width="320" height="287" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-2">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_gai_title">Google AI Professional Cert.</h4>
+                <p class="jr-sub" data-i18n="about_jr_gai_meta">Coursera</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-2">
+              <p class="jr-links">
+              <a class="jr-link" href="https://www.credly.com/badges/d6a88f66-ff89-43fc-8ee7-62067874ac01/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gai_title" aria-label="Google AI Professional Cert.">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260430" data-ord="3">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_gux_period">30 Apr 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-ux.png"
+                alt="Google UX Design Professional Certificate (v3)" data-i18n-alt="about_jr_cred_gux_alt"
+                width="320" height="268" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-3">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_gux_title">Google UX Design Professional Cert. (v.3)</h4>
+                <p class="jr-sub" data-i18n="about_jr_gux_meta">Coursera</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-3">
+              <p class="jr-links">
+              <a class="jr-link" href="https://www.credly.com/badges/76456ab7-c694-48c0-ab03-0be6036b085a/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gux_title" aria-label="Google UX Design Professional Cert. (v.3)">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="build" data-sort="20260706" data-ord="4">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
+              <span class="jr-period" data-i18n="about_jr_single_period">24 Apr 2026 – 04 Jul 2026</span>
+              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
+                alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
+                width="32" height="32" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-4">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_single_title">Single-page portfolio (v1)</h4>
+                <p class="jr-sub" data-i18n="about_jr_single_meta">Live · two repositories</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-4">
+              <p class="timeline__body" data-i18n="about_jr_single_body">Vanilla HTML/CSS/JS, token-based visual system, bilingual i18n, WCAG AA. 32 active build-days across a 71-day window and 52 pull requests.</p>
+              <p class="jr-links">
+              <a class="jr-link" href="https://github.com/jdsaire/jdigital" target="_blank" rel="noopener noreferrer">jdsaire/jdigital</a>
+              <a class="jr-link" href="https://github.com/jdsaire/legacy-desops" target="_blank" rel="noopener noreferrer">jdsaire/legacy-desops</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="build" data-sort="20260731" data-ord="5">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
+              <span class="jr-period" data-i18n="about_jr_tv_period">Jul 2026</span>
+              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
+                alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
+                width="32" height="32" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-5">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_tv_title">Trust &amp; Verify App — Payments</h4>
+                <p class="jr-sub" data-i18n="about_jr_tv_meta">Live · repository</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-5">
+              <p class="timeline__body" data-i18n="about_jr_tv_body">React and TypeScript build with simulated data to verify payments. Secure keypad, double-click prevention, 45/45 tests in 6 fraud cases, 5 CI checks.</p>
+              <p class="jr-links">
+              <a class="jr-link" href="https://github.com/jdsaire/trust-verify" target="_blank" rel="noopener noreferrer">jdsaire/trust-verify</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260804" data-ord="6">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_msfe_period">4 Aug 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/microsoft-front.png"
+                alt="Microsoft Front-End Developer Professional Certificate" data-i18n-alt="about_jr_cred_msfe_alt"
+                width="320" height="318" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-6">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_msfe_title">Microsoft Front-End Dev. Professional Cert.</h4>
+                <p class="jr-sub" data-i18n="about_jr_msfe_meta">Coursera</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-6">
+              <p class="jr-links">
+              <a class="jr-link" href="https://www.credly.com/badges/0555708f-acca-44d2-ad7a-d11b1a62b750/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_msfe_title" aria-label="Microsoft Front-End Dev. Professional Cert.">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260805" data-ord="7">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_gpy_period">5 Aug 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-python.png"
+                alt="Google Data Analysis with Python" data-i18n-alt="about_jr_cred_gpy_alt"
+                width="320" height="268" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-7">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_gpy_title">Google Data Analysis with Python</h4>
+                <p class="jr-sub" data-i18n="about_jr_gpy_meta">Coursera</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-7">
+              <p class="jr-links">
+              <a class="jr-link" href="https://www.credly.com/badges/99989940-aa29-4b62-8e50-1b76c50a8ba8/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gpy_title" aria-label="Google Data Analysis with Python">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260824" data-ord="8">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_c101_period">24 Aug 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/academy-101.png"
+                alt="Claude 101" data-i18n-alt="about_jr_cred_c101_alt"
+                width="304" height="320" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-8">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_c101_title">Claude 101</h4>
+                <p class="jr-sub" data-i18n="about_jr_c101_meta">Claude Academy</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-8">
+              <p class="jr-links">
+              <a class="jr-link" href="https://academy.claude.com/verify/21f9308f4917a741aec5ca4d4ac4417e" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_c101_title" aria-label="Claude 101">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260824" data-ord="9">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_ccow_period">24 Aug 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/academy-cowork.png"
+                alt="Introduction to Claude Cowork" data-i18n-alt="about_jr_cred_ccow_alt"
+                width="304" height="320" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-9">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_ccow_title">Introduction to Claude Cowork</h4>
+                <p class="jr-sub" data-i18n="about_jr_ccow_meta">Claude Academy</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-9">
+              <p class="jr-links">
+              <a class="jr-link" href="https://academy.claude.com/verify/6ba66ec6525a2fdbe7a36c5e3b6f3cf1" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_ccow_title" aria-label="Introduction to Claude Cowork">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="credential" data-sort="20260824" data-ord="10">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
+              <span class="jr-period" data-i18n="about_jr_ccod_period">24 Aug 2026</span>
+              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/academy-code-101.png"
+                alt="Claude Code 101" data-i18n-alt="about_jr_cred_ccod_alt"
+                width="304" height="320" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-10">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_ccod_title">Claude Code 101</h4>
+                <p class="jr-sub" data-i18n="about_jr_ccod_meta">Claude Academy</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-10">
+              <p class="jr-links">
+              <a class="jr-link" href="https://academy.claude.com/verify/e68a4264bac9b5a2fa7a31a52ccf0891" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_ccod_title" aria-label="Claude Code 101">View the credential</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="build" data-sort="20260830" data-ord="11">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
+              <span class="jr-period" data-i18n="about_jr_accredita_period">Jul 2026 – 30 Aug 2026</span>
+              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
+                alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
+                width="32" height="32" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-11">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_accredita_title">AccreditaPass App — 2026 World Cup</h4>
+                <p class="jr-sub" data-i18n="about_jr_accredita_meta">Live · repository</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-11">
+              <p class="timeline__body" data-i18n="about_jr_accredita_body">Press-accreditation companion (2026 World Cup, simulated data). Blazor on .NET 10, optional Web API, 512 front-end and 33 back-end automated tests.</p>
+              <p class="jr-links">
+              <a class="jr-link" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">jdsaire/accreditapass</a>
+              <a class="jr-link" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">jdsaire.github.io/accreditapass</a>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline__item jr-item" data-class="build" data-sort="99999999" data-ord="12">
+          <span class="timeline__marker" aria-hidden="true"></span>
+          <div class="timeline__content">
+            <div class="jr-meta">
+              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
+              <span class="jr-period" data-i18n="about_jr_apex_period">Present</span>
+              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
+                alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
+                width="32" height="32" loading="lazy" decoding="async"></span>
+            </div>
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="lab-tl-12">
+              <span class="jr-head">
+                <h4 class="timeline__title" data-i18n="about_jr_apex_title">Multi-page portfolio (v2)</h4>
+                <p class="jr-sub" data-i18n="about_jr_apex_meta">Live · repository</p>
+              </span>
+            </button>
+            <div class="timeline__panel" id="lab-tl-12">
+              <p class="timeline__body" data-i18n="about_jr_apex_body">This site – developed and governed end-to-end.</p>
+              <p class="jr-links">
+              <a class="jr-link" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">jdsaire/designops</a>
+              </p>
+            </div>
+          </div>
+        </li>
+              </ol>
+            </div>
+            <p class="jr-empty tl__empty" hidden data-i18n="about_jr_empty">No items in this category.</p>
+          </div>
       </div>
+      <div class="org" id="lab-figures">
+        <div class="org__head">
+          <div class="section__eyebrow">
+            <span class="section__eyebrow-bar" aria-hidden="true"></span>
+            <p class="section__eyebrow-text" data-i18n="about_lab_f_eb">THE DASHBOARD</p>
+          </div>
+          <h3 class="org__verdict" data-i18n="about_lab_f_verdict" id="lab-f-v">The lab in numbers.</h3>
+          <p class="section__lede" data-i18n="about_lab_f_lede">Proof against frauds.</p>
+        </div>
+          <div class="hlr hlr--3">
+            <div class="hlr__seg hlr__seg--figs"><span class="hlr__h" data-i18n="ui_dash_figs_h">The figures</span><ul class="hl__list">
+              <li class="hl__item"><span class="hl__n">3</span><span class="viz"><span class="viz__big">3</span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_lab_f1_l">Live builds</span><span class="hl__x" data-i18n="about_lab_f1_x">Each build is ready for live interaction.</span></span></li>
+              <li class="hl__item"><span class="hl__n">3</span><span class="viz"><span class="viz__big">3</span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_lab_f2_l">Tech stacks</span><span class="hl__x" data-i18n="about_lab_f2_x">A distinct tech stack for each build.</span></span></li>
+              <li class="hl__item"><span class="hl__n">1</span><span class="viz"><span class="viz__big">1</span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_lab_f3_l">Year of applied AI</span><span class="hl__x" data-i18n="about_lab_f3_x">Building with AI since October 2025.</span></span></li>
+            </ul></div>
+            <div class="hlr__baton"><span data-i18n="ui_dash_means">What it means</span></div>
+            <div class="hlr__seg hlr__seg--ins"><p class="ins" data-i18n-html="about_lab_ins1"><strong>Technical range without boilerplate.</strong> Each build adopted a tailored architecture to solve specific issues.</p><p class="ins" data-i18n-html="about_lab_ins2"><strong>Technical transparency.</strong> Source repositories and deployments are public so audits are possible.</p></div>
+          </div>
+      </div>
+      <!-- the rule between the arcs (a divider only: the index stays) (PR43-Q18; the briefs' closing rule, shared/brief-index.css) -->
+      <div class="arc-th" role="separator" aria-labelledby="arc-th-t"><span class="arc-th__t" id="arc-th-t" data-i18n="about_threshold">The threshold</span><span class="arc-th__end" aria-hidden="true"></span></div>
     </div>
   </section>
 
-<section class="section section--alt section--evolution" id="evolution" aria-labelledby="evolution-heading">
+  <!-- ============================================================
+       ARC 02 · PRE-LAB — anchor #pre-lab (PR43B-Q23)
+       ============================================================ -->
+  <section class="section arc arc--pre-lab" id="pre-lab" aria-labelledby="pre-lab-h">
     <div class="section__inner">
-
-      <div class="evolution__header">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="about_jr_eyebrow">EVOLUTION</p>
-        </div>
-        <h2 class="section__headline" id="evolution-heading" data-i18n="about_jr_heading">About Juan Diego.</h2>
-        <p class="section__lede" data-i18n="about_jr_lede">My history – from ideator to builder.</p>
-      </div>
-
-      <div class="jr-controls">
-        <div class="jr-select">
-          <label class="jr-select__label" for="jr-filter" data-i18n="about_jr_filter_group_label">Filter by category</label>
-          <div class="jr-select__wrap">
-            <select class="jr-select__control" id="jr-filter">
-              <option value="all" data-i18n="about_jr_filter_all">All</option>
-              <option value="formation" data-i18n="about_jr_filter_formation">Formation</option>
-              <option value="work" data-i18n="about_jr_filter_work">Work</option>
-              <option value="build" data-i18n="about_jr_filter_build">Build</option>
-              <option value="credential" data-i18n="about_jr_filter_credential">Credential</option>
-            </select>
+      <p class="ah-label" data-i18n="about_pre_h_date">Up to 2025</p>
+      <h2 class="ah" id="pre-lab-h"><span class="ah__line"><span class="ah__noun" data-i18n="about_pre_h_n1">RIGOR</span> <em class="ah__hook" data-i18n="about_pre_h_k1">EARNED.</em></span><span class="ah__line"><span class="ah__noun" data-i18n="about_pre_h_n2">IMPACT</span> <em class="ah__hook" data-i18n="about_pre_h_k2">MEASURED.</em></span></h2>
+      <p class="ah-sub"><span class="bridge__heading" data-i18n="about_arc_pre_h">The Pre-Lab era.</span></p>
+      <div class="org" id="pre-lab-manifesto">
+        <div class="org__head">
+          <div class="section__eyebrow">
+            <span class="section__eyebrow-bar" aria-hidden="true"></span>
+            <p class="section__eyebrow-text" data-i18n="about_pre_m_eb">THE LEGACY</p>
           </div>
+          <h3 class="org__verdict" data-i18n="about_pre_m_verdict" id="pre-lab-m-v">Closed cycles.</h3>
+          <p class="section__lede" data-i18n="about_pre_m_lede">The pre-lab chapters.</p>
         </div>
-        <div class="jr-countrow">
-          <p class="jr-count" id="jr-count" role="status" aria-live="polite" data-key="about_jr_count">25 of 25</p>
-        </div>
+          <div class="dl" data-dl="pre">
+            <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="pre-lab-m-v" tabindex="0">
+              <ol class="dl__track">
+              <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
+                <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/pre-s1-tarmac.svg" alt="Technical closeout meeting by windows overlooking the airport tarmac." data-i18n-alt="about_pre_s1_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+                <div class="dl__content"><p class="dl__label" data-i18n="about_pre_s1_l">The peak</p><h3 class="dl__title" data-i18n="about_pre_s1_t">Payment mockup for the new terminal</h3><p class="dl__body" data-i18n="about_pre_s1_x">I designed and evaluated the passenger fee experience, concluding my technical role upon handoff to airport IT.</p><a class="dl__cta" href="../work/airport/"><span class="dl__cta-l" data-i18n="about_pre_s1_cta">Explore project</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+              </li>
+              <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
+                <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/pre-s2-office.svg" alt="A natural-gas plant and an airport control tower, joined by one line." data-i18n-alt="about_pre_s2_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+                <div class="dl__content"><p class="dl__label" data-i18n="about_pre_s2_l">The industries</p><h3 class="dl__title" data-i18n="about_pre_s2_t">Operations in critical assets</h3><p class="dl__body" data-i18n="about_pre_s2_x">Experience in projects at natural-gas plant, and the design of an airport payment channel sized for 4 million+ passengers a year.</p><a class="dl__cta" href="#pre-lab-figures"><span class="dl__cta-l" data-i18n="about_pre_s2_cta">See the dashboard</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+              </li>
+              <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
+                <div class="dl__media"><span class="dl__tag" data-i18n="ui_illus_label">Illustration</span><img class="dl__img" src="img/pre-s3-classroom.svg" alt="A lecturer among students; a screen projects a web page, an app and code." data-i18n-alt="about_pre_s3_alt" width="768" height="512" loading="lazy" decoding="async"></div>
+                <div class="dl__content"><p class="dl__label" data-i18n="about_pre_s3_l">The classroom</p><h3 class="dl__title" data-i18n="about_pre_s3_t">Six years in university classrooms</h3><p class="dl__body" data-i18n="about_pre_s3_x">After my MBA, I lectured at two Peruvian universities, in person and remotely.</p><a class="dl__cta" href="../contact/"><span class="dl__cta-l" data-i18n="about_pre_s3_cta">Invite me to teach</span><span class="dl__cta-i" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></span></a></div>
+              </li>
+              </ol>
+            </div>
+            <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+          </div>
       </div>
-
-      <div class="jr-track">
-        <span class="jr-fill" aria-hidden="true"></span>
-        <ol class="timeline jr-sequence" id="jr-sequence" role="list">
+      <div class="org" id="pre-lab-timeline">
+        <div class="org__head">
+          <div class="section__eyebrow">
+            <span class="section__eyebrow-bar" aria-hidden="true"></span>
+            <p class="section__eyebrow-text" data-i18n="about_pre_t_eb">THE MILESTONES</p>
+          </div>
+          <h3 class="org__verdict" data-i18n="about_pre_t_verdict" id="pre-lab-t-v">Grounding and scale.</h3>
+          <p class="section__lede" data-i18n="about_pre_t_lede">The old testament.</p>
+        </div>
+          <div class="tl" data-tl>
+            <div class="jr-controls">
+              <div class="jr-select">
+                <label class="jr-select__label" for="pre-filter" data-i18n="about_jr_filter_group_label">Filter by category</label>
+                <div class="jr-select__wrap">
+                  <select class="jr-select__control tl__filter" id="pre-filter">
+                  <option value="all" data-i18n="about_jr_filter_all">All</option>
+                  <option value="formation" data-i18n="about_jr_filter_formation">Formation</option>
+                  <option value="work" data-i18n="about_jr_filter_work">Work</option>
+                  <option value="build" data-i18n="about_jr_filter_build">Build</option>
+                  <option value="credential" data-i18n="about_jr_filter_credential">Credential</option>
+                  </select>
+                </div>
+              </div>
+              <div class="jr-countrow">
+                <p class="jr-count tl__count" role="status" aria-live="polite" data-key="about_jr_count">13 of 13</p>
+              </div>
+            </div>
+            <div class="jr-track">
+              <span class="jr-fill" aria-hidden="true"></span>
+              <ol class="timeline jr-sequence" role="list">
         <li class="timeline__item jr-item" data-class="formation" data-sort="20100000" data-ord="1">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -275,22 +659,20 @@
               <span class="jr-class" data-i18n="about_jr_class_formation">Formation</span>
               <span class="jr-period" data-i18n="about_jr_esan_deg_period">2010 – 2014</span>
               <span class="jr-mark" data-mark="esan"><img class="jr-mark__img" src="../assets/img/logos/1__esan-bw.png"
-                    alt="ESAN University" data-i18n-alt="about_jr_mark_esan_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="ESAN University" data-i18n-alt="about_jr_mark_esan_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-1">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-1">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_esan_deg_title">Industrial Engineering</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_esan_deg_title">Industrial Engineering</h4>
                 <p class="jr-sub" data-i18n="about_jr_esan_deg_meta">Degree · ESAN University</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-1">
-              <p class="timeline__body" data-i18n="about_jr_esan_deg_body">Systems-and-process grounding at Universidad ESAN in Lima, Peru.</p>
+            <div class="timeline__panel" id="pre-tl-1">
+              <p class="timeline__body" data-i18n="about_jr_esan_deg_body">Systems and process grounding at Universidad ESAN in Lima, Peru.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="work" data-sort="20150500" data-ord="2">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -298,22 +680,20 @@
               <span class="jr-class" data-i18n="about_jr_class_work">Work</span>
               <span class="jr-period" data-i18n="about_jr_hunt_period">May 2015 – Apr 2016</span>
               <span class="jr-mark" data-mark="hunt"><img class="jr-mark__img" src="../assets/img/logos/6__hunt-bw.png"
-                    alt="Hunt LNG" data-i18n-alt="about_jr_mark_hunt_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="Hunt LNG" data-i18n-alt="about_jr_mark_hunt_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-2">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-2">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_hunt_title">Projects and Contracts Intern</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_hunt_title">Projects and Contracts Intern</h4>
                 <p class="jr-sub" data-i18n="about_jr_hunt_meta">Internship · Hunt LNG</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-2">
-              <p class="timeline__body" data-i18n="about_jr_hunt_body">Quality control across 35 projects, holding contractor deliverables to quality standards at South America’s first natural gas liquefaction plant.</p>
+            <div class="timeline__panel" id="pre-tl-2">
+              <p class="timeline__body" data-i18n="about_jr_hunt_body">Quality control across 35 projects at South America's first natural-gas liquefaction plant.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="formation" data-sort="20160000" data-ord="3">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -321,22 +701,20 @@
               <span class="jr-class" data-i18n="about_jr_class_formation">Formation</span>
               <span class="jr-period" data-i18n="about_jr_centrum_period">2016 – 2017</span>
               <span class="jr-mark" data-mark="centrum"><img class="jr-mark__img" src="../assets/img/logos/2__centrum-bw.png"
-                    alt="CENTRUM PUCP" data-i18n-alt="about_jr_mark_centrum_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="CENTRUM PUCP" data-i18n-alt="about_jr_mark_centrum_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-3">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-3">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_centrum_title">Tricontinental MBA</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_centrum_title">Tricontinental MBA</h4>
                 <p class="jr-sub" data-i18n="about_jr_centrum_meta">Full-time · CENTRUM PUCP</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-3">
-              <p class="timeline__body" data-i18n="about_jr_centrum_body">Master of Business Administration fully taught in English for a cohort of 12 students. Order of Merit: 1.</p>
+            <div class="timeline__panel" id="pre-tl-3">
+              <p class="timeline__body" data-i18n="about_jr_centrum_body">MBA taught in English to a cohort of 12 students. Order of Merit: 1.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="formation" data-sort="20170100" data-ord="4">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -344,22 +722,20 @@
               <span class="jr-class" data-i18n="about_jr_class_formation">Formation</span>
               <span class="jr-period" data-i18n="about_jr_uvic_period">Jan 2017 – Mar 2017</span>
               <span class="jr-mark" data-mark="uvic"><img class="jr-mark__img" src="../assets/img/logos/3__uvic-bw.png"
-                    alt="University of Victoria" data-i18n-alt="about_jr_mark_uvic_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="University of Victoria" data-i18n-alt="about_jr_mark_uvic_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-4">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-4">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_uvic_title">MBA exchange term 1</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_uvic_title">MBA exchange term 1</h4>
                 <p class="jr-sub" data-i18n="about_jr_uvic_meta">Canada · University of Victoria</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-4">
-              <p class="timeline__body" data-i18n="about_jr_uvic_body">Coursework: 'Global Leadership and Cultural Intelligence', 'Language, Communication &amp; Global Business', 'Mandarin Chinese I', and others.</p>
+            <div class="timeline__panel" id="pre-tl-4">
+              <p class="timeline__body" data-i18n="about_jr_uvic_body">Coursework: 'Global Leadership and Cultural Intelligence', 'Language, Communication &amp; Global Business', and others.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="formation" data-sort="20170400" data-ord="5">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -367,22 +743,20 @@
               <span class="jr-class" data-i18n="about_jr_class_formation">Formation</span>
               <span class="jr-period" data-i18n="about_jr_maas_period">Apr 2017 – May 2017</span>
               <span class="jr-mark" data-mark="um"><img class="jr-mark__img" src="../assets/img/logos/4__um-bw.png"
-                    alt="Maastricht University" data-i18n-alt="about_jr_mark_um_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="Maastricht University" data-i18n-alt="about_jr_mark_um_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-5">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-5">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_maas_title">MBA exchange term 2</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_maas_title">MBA exchange term 2</h4>
                 <p class="jr-sub" data-i18n="about_jr_maas_meta">Netherlands · Maastricht University</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-5">
-              <p class="timeline__body" data-i18n="about_jr_maas_body">Coursework: 'European Business Context', 'Europe's Entrepreneurial Environment', 'Mandarin Chinese II', and others.</p>
+            <div class="timeline__panel" id="pre-tl-5">
+              <p class="timeline__body" data-i18n="about_jr_maas_body">Coursework: 'European Business Context', 'Europe's Entrepreneurial Environment', and 'Mandarin Chinese II'.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="work" data-sort="20180300" data-ord="6">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -390,22 +764,20 @@
               <span class="jr-class" data-i18n="about_jr_class_work">Work</span>
               <span class="jr-period" data-i18n="about_jr_esan_lec_period">Mar 2018 – Feb 2024</span>
               <span class="jr-mark" data-mark="esan"><img class="jr-mark__img" src="../assets/img/logos/1__esan-bw.png"
-                    alt="ESAN University" data-i18n-alt="about_jr_mark_esan_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="ESAN University" data-i18n-alt="about_jr_mark_esan_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-6">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-6">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_esan_lec_title">Part-Time Lecturer</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_esan_lec_title">Part-Time Lecturer</h4>
                 <p class="jr-sub" data-i18n="about_jr_esan_lec_meta">Contract · ESAN University</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-6">
-              <p class="timeline__body" data-i18n="about_jr_esan_lec_body">Calculus I, Creative Processes and other courses to 1,200+ students, plus a term at the Army's Military School.</p>
+            <div class="timeline__panel" id="pre-tl-6">
+              <p class="timeline__body" data-i18n="about_jr_esan_lec_body">Calculus I, Creative Processes and other courses to 1,200+ undergraduate students and military cadets.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="credential" data-sort="20181114" data-ord="7">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -413,22 +785,20 @@
               <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
               <span class="jr-period" data-i18n="about_jr_bgs_period">14 Nov 2018</span>
               <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/bgs-member.png"
-                    alt="Beta Gamma Sigma" data-i18n-alt="about_jr_cred_bgs_alt"
-                    width="320" height="202" loading="lazy" decoding="async"></span>
+                alt="Beta Gamma Sigma" data-i18n-alt="about_jr_cred_bgs_alt"
+                width="320" height="202" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-7">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-7">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_bgs_title">Lifetime Membership</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_bgs_title">Lifetime Membership</h4>
                 <p class="jr-sub" data-i18n="about_jr_bgs_meta">Beta Gamma Sigma</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-7">
-              <p class="timeline__body" data-i18n="about_jr_bgs_body">Inducted on academic merit through the CENTRUM PUCP Business School chapter. Membership record: CH-5231…385.</p>
+            <div class="timeline__panel" id="pre-tl-7">
+              <p class="timeline__body" data-i18n="about_jr_bgs_body">Inducted on academic merit through CENTRUM PUCP Business School. Membership record: CH-5231…385.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="work" data-sort="20190100" data-ord="8">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -436,22 +806,20 @@
               <span class="jr-class" data-i18n="about_jr_class_work">Work</span>
               <span class="jr-period" data-i18n="about_jr_utec_period">Jan 2019 – Dec 2022</span>
               <span class="jr-mark" data-mark="utec"><img class="jr-mark__img" src="../assets/img/logos/9__utec-bw.png"
-                    alt="UTEC" data-i18n-alt="about_jr_mark_utec_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="UTEC" data-i18n-alt="about_jr_mark_utec_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-8">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-8">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_utec_title">Part-Time Lecturer</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_utec_title">Part-Time Lecturer</h4>
                 <p class="jr-sub" data-i18n="about_jr_utec_meta">Contract · UTEC</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-8">
-              <p class="timeline__body" data-i18n="about_jr_utec_body">29 teams guided in UX Design and Evaluation across 11 project sections at three levels, generating Community of Practice environments.</p>
+            <div class="timeline__panel" id="pre-tl-8">
+              <p class="timeline__body" data-i18n="about_jr_utec_body">Guided 29 teams across 11 sections and 3 levels of UX projects, fostering Community of Practice environments.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="formation" data-sort="20210000" data-ord="9">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -459,48 +827,44 @@
               <span class="jr-class" data-i18n="about_jr_class_formation">Formation</span>
               <span class="jr-period" data-i18n="about_jr_hec_period">2021 – 2023</span>
               <span class="jr-mark" data-mark="hec"><img class="jr-mark__img" src="../assets/img/logos/hec-montreal-square.svg"
-                    alt="HEC Montréal" data-i18n-alt="about_jr_mark_hec_alt"
-                    width="1127" height="1127" loading="lazy" decoding="async"></span>
+                alt="HEC Montréal" data-i18n-alt="about_jr_mark_hec_alt"
+                width="1127" height="1127" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-9">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-9">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_hec_title">MicroMasters in UX Design and Evaluation</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_hec_title">MicroMasters in UX Design and Evaluation</h4>
                 <p class="jr-sub" data-i18n="about_jr_hec_meta">Online · HEC Montréal</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-9">
-              <p class="timeline__body" data-i18n="about_jr_hec_body">Prototyping, data analysis and management. The credential that turns my strategy background into a design-research one.</p>
+            <div class="timeline__panel" id="pre-tl-9">
+              <p class="timeline__body" data-i18n="about_jr_hec_body">Prototyping, data analysis and UX management, advancing strategy into Design Research.</p>
             </div>
           </div>
         </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20220203" data-ord="10">
+        <li class="timeline__item jr-item" data-skip hidden data-class="credential" data-sort="20220203" data-ord="10">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
             <div class="jr-meta">
               <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
               <span class="jr-period" data-i18n="about_jr_ibm_period">3 Feb 2022</span>
               <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/ibm-design.png"
-                    alt="Basic Principles of Design" data-i18n-alt="about_jr_cred_ibm_alt"
-                    width="320" height="301" loading="lazy" decoding="async"></span>
+                alt="Basic Principles of Design" data-i18n-alt="about_jr_cred_ibm_alt"
+                width="320" height="301" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-10">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-10">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_ibm_title">Basic Principles of Design</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_ibm_title">Basic Principles of Design</h4>
                 <p class="jr-sub" data-i18n="about_jr_ibm_meta">IBM-SkillsBuild</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-10">
+            <div class="timeline__panel" id="pre-tl-10">
               <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/76fc4e6a-5aa1-4aa3-98de-c80ab3e2e0c5/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_ibm_title" aria-label="Basic Principles of Design">View the credential</a>
+              <a class="jr-link" href="https://www.credly.com/badges/76fc4e6a-5aa1-4aa3-98de-c80ab3e2e0c5/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_ibm_title" aria-label="Basic Principles of Design">View the credential</a>
               </p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="build" data-sort="20241031" data-ord="11">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -508,25 +872,23 @@
               <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
               <span class="jr-period" data-i18n="about_jr_limafly_period">Feb 2024 – Oct 2024</span>
               <span class="jr-mark jr-mark--platform" data-mark="figma"><img class="jr-mark__img" src="../assets/img/logos/figma-mark.svg"
-                    alt="Figma" data-i18n-alt="about_jr_mark_figma_alt"
-                    width="32" height="32" loading="lazy" decoding="async"></span>
+                alt="Figma" data-i18n-alt="about_jr_mark_figma_alt"
+                width="32" height="32" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-11">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-11">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_limafly_title">LimaFly App</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_limafly_title">LimaFly App</h4>
                 <p class="jr-sub" data-i18n="about_jr_limafly_meta">Prototype · Figma</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-11">
-              <p class="timeline__body" data-i18n="about_jr_limafly_body">A high-fidelity prototype of the full passenger journey. Built on a scalable design system with visual tokens, components with variants and Auto Layout.</p>
+            <div class="timeline__panel" id="pre-tl-11">
+              <p class="timeline__body" data-i18n="about_jr_limafly_body">High-fidelity passenger journey prototype built on a design system with visual tokens and variants.</p>
               <p class="jr-links">
-                <a class="jr-link" href="https://www.figma.com/proto/eKUnb9I5927kDrdXbYrFCJ/LimaFly-Mockup?node-id=3210-4511&amp;starting-point-node-id=3358%3A1824&amp;page-id=2949%3A3524" target="_blank" rel="noopener noreferrer">Figma prototype</a>
+              <a class="jr-link" href="https://www.figma.com/proto/eKUnb9I5927kDrdXbYrFCJ/LimaFly-Mockup?node-id=3210-4511&amp;starting-point-node-id=3358%3A1824&amp;page-id=2949%3A3524" target="_blank" rel="noopener noreferrer">Figma prototype</a>
               </p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="work" data-sort="20250500" data-ord="12">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -534,22 +896,20 @@
               <span class="jr-class" data-i18n="about_jr_class_work">Work</span>
               <span class="jr-period" data-i18n="about_jr_lap_period">May 2025 – Oct 2025</span>
               <span class="jr-mark" data-mark="lap"><img class="jr-mark__img" src="../assets/img/logos/7__lap-bw.png"
-                    alt="Lima Airport Partners" data-i18n-alt="about_jr_mark_lap_alt"
-                    width="1024" height="768" loading="lazy" decoding="async"></span>
+                alt="Lima Airport Partners" data-i18n-alt="about_jr_mark_lap_alt"
+                width="1024" height="768" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-12">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-12">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_lap_title">Processes and Innovation Specialist</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_lap_title">Processes and Innovation Specialist</h4>
                 <p class="jr-sub" data-i18n="about_jr_lap_meta">Contract · Lima Airport Partners</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-12">
-              <p class="timeline__body" data-i18n="about_jr_lap_body">Cross-functional role: weekly portfolio tracking, workshop delivery, and direct coordination with leaders to implement new revenue stream.</p>
+            <div class="timeline__panel" id="pre-tl-12">
+              <p class="timeline__body" data-i18n="about_jr_lap_body">EVM tracking across 12 innovation projects, 3 agile workshops, and the TUUA mockup I designed for airport IT.</p>
             </div>
           </div>
         </li>
-
         <li class="timeline__item jr-item" data-class="credential" data-sort="20250830" data-ord="13">
           <span class="timeline__marker" aria-hidden="true"></span>
           <div class="timeline__content">
@@ -557,347 +917,53 @@
               <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
               <span class="jr-period" data-i18n="about_jr_gpm_period">30 Aug 2025</span>
               <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-pm.png"
-                    alt="Google Project Management Professional Certificate (v2)" data-i18n-alt="about_jr_cred_gpm_alt"
-                    width="320" height="269" loading="lazy" decoding="async"></span>
+                alt="Google Project Management Professional Certificate (v2)" data-i18n-alt="about_jr_cred_gpm_alt"
+                width="320" height="269" loading="lazy" decoding="async"></span>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-13">
+            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="pre-tl-13">
               <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gpm_title">Google Project Management Professional Cert. (v2)</h3>
+                <h4 class="timeline__title" data-i18n="about_jr_gpm_title">Google Project Management Professional Cert. (v2)</h4>
                 <p class="jr-sub" data-i18n="about_jr_gpm_meta">Coursera</p>
               </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
             </button>
-            <div class="timeline__panel" id="jr-panel-13">
+            <div class="timeline__panel" id="pre-tl-13">
               <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/bfb4e52c-6e32-4ae4-94fa-f2bd42d17fbc/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gpm_title" aria-label="Google Project Management Professional Cert. (v2)">View the credential</a>
+              <a class="jr-link" href="https://www.credly.com/badges/bfb4e52c-6e32-4ae4-94fa-f2bd42d17fbc/public_url" target="_blank" rel="noopener noreferrer"
+              data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gpm_title" aria-label="Google Project Management Professional Cert. (v2)">View the credential</a>
               </p>
             </div>
           </div>
         </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20251210" data-ord="14">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_mck_period">10 Dec 2025</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/forward.png"
-                    alt="McKinsey.org Forward Program" data-i18n-alt="about_jr_cred_mck_alt"
-                    width="320" height="320" loading="lazy" decoding="async"></span>
+              </ol>
             </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-14">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_mck_title">McKinsey.org Forward Program</h3>
-                <p class="jr-sub" data-i18n="about_jr_mck_meta">McKinsey.org</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-14">
-              <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/2ac22836-7de6-483c-8787-bd416905a68e/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_mck_title" aria-label="McKinsey.org Forward Program">View the credential</a>
-              </p>
-            </div>
+            <p class="jr-empty tl__empty" hidden data-i18n="about_jr_empty">No items in this category.</p>
           </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260317" data-ord="15">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_gai_period">17 Mar 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-ai.png"
-                    alt="Google AI Professional Certificate" data-i18n-alt="about_jr_cred_gai_alt"
-                    width="320" height="287" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-15">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gai_title">Google AI Professional Cert.</h3>
-                <p class="jr-sub" data-i18n="about_jr_gai_meta">Coursera</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-15">
-              <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/d6a88f66-ff89-43fc-8ee7-62067874ac01/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gai_title" aria-label="Google AI Professional Cert.">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260430" data-ord="16">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_gux_period">30 Apr 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-ux.png"
-                    alt="Google UX Design Professional Certificate (v3)" data-i18n-alt="about_jr_cred_gux_alt"
-                    width="320" height="268" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-16">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gux_title">Google UX Design Professional Cert. (v.3)</h3>
-                <p class="jr-sub" data-i18n="about_jr_gux_meta">Coursera</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-16">
-              <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/76456ab7-c694-48c0-ab03-0be6036b085a/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gux_title" aria-label="Google UX Design Professional Cert. (v.3)">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="build" data-sort="20260706" data-ord="17">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
-              <span class="jr-period" data-i18n="about_jr_single_period">24 Apr 2026 – 04 Jul 2026</span>
-              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
-                    alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
-                    width="32" height="32" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-17">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_single_title">Single-page portfolio (v1)</h3>
-                <p class="jr-sub" data-i18n="about_jr_single_meta">Live · two repositories</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-17">
-              <p class="timeline__body" data-i18n="about_jr_single_body">Vanilla HTML/CSS/JS, token-based visual system, bilingual i18n engine, WCAG AA. 32 active build-days inside a 71-day window and 52 pull requests.</p>
-              <p class="jr-links">
-                <a class="jr-link" href="https://github.com/jdsaire/jdigital" target="_blank" rel="noopener noreferrer">jdsaire/jdigital</a>
-                <a class="jr-link" href="https://github.com/jdsaire/legacy-desops" target="_blank" rel="noopener noreferrer">jdsaire/legacy-desops</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="build" data-sort="20260731" data-ord="18">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
-              <span class="jr-period" data-i18n="about_jr_tv_period">Jul 2026</span>
-              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
-                    alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
-                    width="32" height="32" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-18">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_tv_title">Trust &amp; Verify App — Payments</h3>
-                <p class="jr-sub" data-i18n="about_jr_tv_meta">Live · repository</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-18">
-              <p class="timeline__body" data-i18n="about_jr_tv_body">A React and TypeScript build for merchants to verify that payments are genuine. Secure keypad with randomized digits, double-click prevention, private-data protection. 45/45 automated tests across 6 fraud scenarios and 5 CI checks.</p>
-              <p class="jr-links">
-                <a class="jr-link" href="https://github.com/jdsaire/trust-verify" target="_blank" rel="noopener noreferrer">jdsaire/trust-verify</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260804" data-ord="19">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_msfe_period">4 Aug 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/microsoft-front.png"
-                    alt="Microsoft Front-End Developer Professional Certificate" data-i18n-alt="about_jr_cred_msfe_alt"
-                    width="320" height="318" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-19">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_msfe_title">Microsoft Front-End Dev. Professional Cert.</h3>
-                <p class="jr-sub" data-i18n="about_jr_msfe_meta">Coursera</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-19">
-              <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/0555708f-acca-44d2-ad7a-d11b1a62b750/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_msfe_title" aria-label="Microsoft Front-End Dev. Professional Cert.">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260805" data-ord="20">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_gpy_period">5 Aug 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/google-python.png"
-                    alt="Google Data Analysis with Python" data-i18n-alt="about_jr_cred_gpy_alt"
-                    width="320" height="268" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-20">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_gpy_title">Google Data Analysis with Python</h3>
-                <p class="jr-sub" data-i18n="about_jr_gpy_meta">Coursera</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-20">
-              <p class="jr-links">
-                <a class="jr-link" href="https://www.credly.com/badges/99989940-aa29-4b62-8e50-1b76c50a8ba8/public_url" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_gpy_title" aria-label="Google Data Analysis with Python">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260824" data-ord="21">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_c101_period">24 Aug 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/academy-101.png"
-                    alt="Claude 101" data-i18n-alt="about_jr_cred_c101_alt"
-                    width="304" height="320" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-21">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_c101_title">Claude 101</h3>
-                <p class="jr-sub" data-i18n="about_jr_c101_meta">Claude Academy</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-21">
-              <p class="jr-links">
-                <a class="jr-link" href="https://academy.claude.com/verify/21f9308f4917a741aec5ca4d4ac4417e" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_c101_title" aria-label="Claude 101">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260824" data-ord="22">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_ccow_period">24 Aug 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/academy-cowork.png"
-                    alt="Introduction to Claude Cowork" data-i18n-alt="about_jr_cred_ccow_alt"
-                    width="304" height="320" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-22">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_ccow_title">Introduction to Claude Cowork</h3>
-                <p class="jr-sub" data-i18n="about_jr_ccow_meta">Claude Academy</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-22">
-              <p class="jr-links">
-                <a class="jr-link" href="https://academy.claude.com/verify/6ba66ec6525a2fdbe7a36c5e3b6f3cf1" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_ccow_title" aria-label="Introduction to Claude Cowork">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="credential" data-sort="20260824" data-ord="23">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_credential">Credential</span>
-              <span class="jr-period" data-i18n="about_jr_ccod_period">24 Aug 2026</span>
-              <span class="jr-plate"><img class="jr-plate__img" src="../assets/img/badges/academy-code-101.png"
-                    alt="Claude Code 101" data-i18n-alt="about_jr_cred_ccod_alt"
-                    width="304" height="320" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-23">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_ccod_title">Claude Code 101</h3>
-                <p class="jr-sub" data-i18n="about_jr_ccod_meta">Claude Academy</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-23">
-              <p class="jr-links">
-                <a class="jr-link" href="https://academy.claude.com/verify/e68a4264bac9b5a2fa7a31a52ccf0891" target="_blank" rel="noopener noreferrer"
-                   data-i18n="about_jr_link_credential" data-i18n-aria="about_jr_ccod_title" aria-label="Claude Code 101">View the credential</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="build" data-sort="20260830" data-ord="24">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
-              <span class="jr-period" data-i18n="about_jr_accredita_period">Jul 2026 – 30 Aug 2026</span>
-              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
-                    alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
-                    width="32" height="32" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-24">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_accredita_title">AccreditaPass App — 2026 World Cup</h3>
-                <p class="jr-sub" data-i18n="about_jr_accredita_meta">Live · repository</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-24">
-              <p class="timeline__body" data-i18n="about_jr_accredita_body">A press-accreditation companion for journalists at the 2026 World Cup. Blazor WebAssembly on .NET 10, optional ASP.NET Core Web API, TypeScript interop layer. 512 front-end and 33 back-end tests. Three languages at exact parity — EN/ES/PT. Real-time updates via SignalR. Full UX dossier.</p>
-              <p class="jr-links">
-                <a class="jr-link" href="https://github.com/jdsaire/accreditapass" target="_blank" rel="noopener noreferrer">jdsaire/accreditapass</a>
-                <a class="jr-link" href="https://jdsaire.github.io/accreditapass/" target="_blank" rel="noopener noreferrer">jdsaire.github.io/accreditapass</a>
-              </p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline__item jr-item" data-class="build" data-sort="99999999" data-ord="25">
-          <span class="timeline__marker" aria-hidden="true"></span>
-          <div class="timeline__content">
-            <div class="jr-meta">
-              <span class="jr-class" data-i18n="about_jr_class_build">Build</span>
-              <span class="jr-period" data-i18n="about_jr_apex_period">Present</span>
-              <span class="jr-mark jr-mark--platform" data-mark="github"><img class="jr-mark__img" src="../assets/img/logos/github-mark.svg"
-                    alt="GitHub" data-i18n-alt="about_jr_mark_github_alt"
-                    width="32" height="32" loading="lazy" decoding="async"></span>
-            </div>
-            <button class="timeline__toggle" type="button" aria-expanded="false" aria-controls="jr-panel-25">
-              <span class="jr-head">
-                <h3 class="timeline__title" data-i18n="about_jr_apex_title">Multi-page portfolio (v2)</h3>
-                <p class="jr-sub" data-i18n="about_jr_apex_meta">Live · repository</p>
-              </span>
-              <span class="timeline__chevron" aria-hidden="true"></span>
-            </button>
-            <div class="timeline__panel" id="jr-panel-25">
-              <p class="timeline__body" data-i18n="about_jr_apex_body">This site – developed and governed end-to-end.</p>
-              <p class="jr-links">
-                <a class="jr-link" href="https://github.com/jdsaire/designops" target="_blank" rel="noopener noreferrer">jdsaire/designops</a>
-              </p>
-            </div>
-          </div>
-        </li>
-        </ol>
-        <p class="jr-empty" id="jr-empty" hidden data-i18n="about_jr_empty">No items in this category.</p>
       </div>
-
+      <div class="org" id="pre-lab-figures">
+        <div class="org__head">
+          <div class="section__eyebrow">
+            <span class="section__eyebrow-bar" aria-hidden="true"></span>
+            <p class="section__eyebrow-text" data-i18n="about_pre_f_eb">THE DASHBOARD</p>
+          </div>
+          <h3 class="org__verdict" data-i18n="about_pre_f_verdict" id="pre-lab-f-v">Rigor and reach.</h3>
+          <p class="section__lede" data-i18n="about_pre_f_lede">Proof from industry.</p>
+        </div>
+          <div class="hlr hlr--4">
+            <div class="hlr__seg hlr__seg--figs"><span class="hlr__h" data-i18n="ui_dash_figs_h">The figures</span><ul class="hl__list">
+              <li class="hl__item"><span class="hl__n">130,000+</span><span class="viz"><span class="viz__big">130,000+</span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_pre_f1_l">Passengers a month</span><span class="hl__x" data-i18n="about_pre_f1_x">International transfer passengers pay it on airport IT's platform.</span></span></li>
+              <li class="hl__item"><span class="hl__n">3.88/4</span><span class="viz"><span class="viz__big">3.88<span class="viz__of"> / 4</span></span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_pre_f2_l">70 colleagues</span><span class="hl__x" data-i18n="about_pre_f2_x">Rating across 3 agile workshops facilitated at Lima Airport.</span></span></li>
+              <li class="hl__item"><span class="hl__n">1,200+</span><span class="viz"><span class="viz__big">1,200+</span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_pre_f3_l">Students taught</span><span class="hl__x" data-i18n="about_pre_f3_x">In person and remote, at ESAN.</span></span></li>
+              <li class="hl__item"><span class="hl__n">29</span><span class="viz"><span class="viz__big">29</span></span><span class="hl__tx"><span class="hl__l" data-i18n="about_pre_f4_l">UX teams guided</span><span class="hl__x" data-i18n="about_pre_f4_x">Design and evaluation projects guided at UTEC.</span></span></li>
+            </ul></div>
+            <div class="hlr__baton"><span data-i18n="ui_dash_means">What it means</span></div>
+            <div class="hlr__seg hlr__seg--ins"><p class="ins" data-i18n-html="about_pre_ins1"><strong>Hands-on experience before code.</strong> Early career years instilled operational rigor in heavy industry and airport operations.</p><p class="ins" data-i18n-html="about_pre_ins2"><strong>Teaching structured the method.</strong> Lecturing design and processes formed the conceptual clarity to guide technical teams.</p></div>
+          </div>
+      </div>
+      <!-- the closing rule: past it the index folds away before Contact (PR43-Q18; the briefs' closing rule, shared/brief-index.css) -->
+      <hr class="arc-end">
     </div>
   </section>
 
-  <!-- CONTACT — Main's Contact organism, verbatim (PR35-Q55): after the timeline, the next
-       invitation is a conversation. The CV moved to the hero (PR35-Q54). -->
   <section id="contact" class="section section--contact-cta" aria-labelledby="contact-heading">
     <div class="section__inner">
       <div class="section__eyebrow">

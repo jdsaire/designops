@@ -1,0 +1,25 @@
+/* shared/display.css — the display opening (PR #43; PR43-Q18…Q20, Q24, Q27, Q29): a pulsing label, a display title in
+   Main's hero grammar (upper case, the hook white italic on a purple block) and a subline on Main's sub-headline
+   highlight. About opens each arc with it; Contact opens its page with it. pages/about/slogan.js sizes each title to
+   its column and keeps label, title and subline inside the viewport; without it the clamp size applies. */
+.ah { margin: 0; color: var(--color-brand-white); font-weight: var(--fw-black); line-height: 1; letter-spacing: 0; text-transform: uppercase; }
+.ah__line { display: block; font-size: var(--ah-size, clamp(2.25rem, 7vw, 6.5rem)); line-height: 1.04; }
+.ah.is-fit .ah__line { white-space: nowrap; }
+.ah__line + .ah__line { margin-top: 0.14em; }
+.ah__noun:empty { display: none; }
+.ah__hook { font-style: italic; color: #FFFFFF; position: relative; z-index: 0; padding: 0 0.08em; margin: 0 0.02em; }
+.ah__hook::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 0.12em; bottom: 0.04em; background: var(--color-brand-purple); }
+/* The date label: Main's attribution name with its pulsing square (pages/home/hero.css .hero__attribution--name). */
+.ah-label { margin: 0 0 clamp(1.25rem, 2.2vw, 2rem); font-size: 1rem; line-height: 1.4; letter-spacing: 0.01em; font-weight: var(--fw-bold); color: var(--color-brand-white); }
+.ah-label::before { content: ""; display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.6em; vertical-align: 0.08em;
+  background: var(--color-brand-purple); animation: ah-pulse 2.4s var(--ease-standard) infinite; }
+@keyframes ah-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (max-width: 767px) { .ah-label { font-size: 0.9375rem; } }
+@media (prefers-reduced-motion: reduce) { .ah-label::before { animation: none; } }
+.ah-sub { margin: clamp(1rem, 2vw, 1.5rem) 0 0; max-width: 42rem; text-wrap: balance; }   /* no lone word on the second line ("I+D.") */
+.ah-sub .bridge__heading { font-size: 1.375rem; }
+@media (max-width: 767px) { .ah-sub .bridge__heading { font-size: 1.0625rem; } }
+/* the highlight itself (shared/bridge.css .bridge__heading), restated so a page without bridge.css shows it */
+.ah-sub .bridge__heading { font-family: var(--font-primary); font-weight: var(--fw-black); color: var(--color-brand-white); letter-spacing: -0.01em; margin: 0;
+  background-color: rgba(161, 0, 255, 0.50); padding: 0.1em 0.4em; border-radius: 8px; line-height: 1.60;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; display: inline; }

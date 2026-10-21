@@ -1,0 +1,43 @@
+/* shared/editorial.css — the site's editorial heads, one standard for every page (PR #43, PR43-Q29). An editorial is an
+   eyebrow (shared/page-hero.css .section__eyebrow), a heading and, where it has one, a lede:
+   - Main's section heads (.work__header, .capabilities__header, .evolution__header: .section__headline, .section__lede);
+   - About's organism heads (.org__head: .org__verdict, .section__lede);
+   - the briefs' act heads (.act__head: .verdict, .scan).
+   Measured before (21 Oct): three sizes and two weights (700 on Main, 900 on the briefs and About), eyebrow→heading at
+   36, 53 and 15 px, and ledes missing on About. Ruled: Main's headline (700, clamp 2–3.5 rem), Main's spacing (eyebrow
+   →heading clamp(1.5rem,2.5vw,2.5rem), heading→lede 1rem) and Main's lede. Centred from 768 only on Main's section
+   heads and About's organism heads; left on the briefs; left everywhere below 768. The Contact block and the page
+   heroes are not editorials here (their own treatment). Linked by Main, About, Contact and the four briefs. */
+
+/* ---- The heading ---- */
+.section__headline, .org__verdict, .act__head > .verdict {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-white);
+}
+
+/* ---- The lede ---- */
+.section__lede, .act__head > .scan {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  font-weight: var(--fw-light);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+.section__lede { margin-top: 1rem; }
+
+/* ---- Eyebrow → heading: the eyebrow's own margin (shared/page-hero.css), the same in every head. The briefs' act head
+   is a flex column with a 1rem gap (kept for its reveal buttons), so its eyebrow gives that gap back. ---- */
+.org__head > .section__eyebrow { margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem); }
+.act__head > .section__eyebrow { margin-bottom: calc(clamp(1.5rem, 2.5vw, 2.5rem) - 1rem); }
+
+/* ---- Alignment: centred from 768 on Main's section heads and About's organism heads ---- */
+@media (min-width: 768px) {
+  .work__header, .capabilities__header, .evolution__header, .org__head { text-align: center; }
+  .work__header .section__eyebrow, .capabilities__header .section__eyebrow, .evolution__header .section__eyebrow,
+  .org__head .section__eyebrow { align-items: center; }
+  .work__header .section__lede, .capabilities__header .section__lede, .evolution__header .section__lede,
+  .org__head .section__lede { margin-left: auto; margin-right: auto; }
+}

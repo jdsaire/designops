@@ -44,71 +44,7 @@
   .desk-how__x { font-size: .92rem; line-height: 1.45; font-weight: var(--fw-regular, 400); margin-top: .3rem; }
 }
 
-/* ---- The dashboard act: one panel, figures then what they mean ---- */
-.hlr { margin-top: clamp(1.6rem, 3vw, 2.4rem); border: 1px solid rgba(var(--ink), .5); }
-.hlr__seg { padding: 1.2rem 1.2rem 1.4rem; }
-.hlr__seg--ins { background: var(--surface-card); display: grid; gap: 1rem; }
-.hlr__h { display: block; font-size: .66rem; font-weight: var(--fw-semibold); letter-spacing: .16em; text-transform: uppercase; color: var(--color-purple-light); margin-bottom: 1.1rem; }
-.hlr__baton { position: relative; height: 2.6rem; display: grid; place-items: center start; padding-left: 1.2rem; }
-.hlr__baton::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px solid var(--color-brand-purple); }
-.hlr__baton span { position: relative; padding: .25rem .6rem; font-size: .6rem; font-weight: var(--fw-bold); letter-spacing: .16em; text-transform: uppercase;
-  background: var(--color-brand-purple); color: var(--color-on-brand); }
-.ins { margin: 0; font-size: .94rem; line-height: 1.55; font-weight: var(--fw-light); color: var(--color-text-muted); border-left: 3px solid var(--color-brand-purple); padding: .15rem 0 .15rem 1.1rem; }
-.ins strong { color: var(--color-brand-white); font-weight: var(--fw-semibold); }
-
-.hl__list { list-style: none; margin: 0; padding: 0; }
-.hl__n { display: block; font-size: clamp(1.8rem, 3vw, 2.7rem); font-weight: var(--fw-black); line-height: 1; letter-spacing: -.02em; color: var(--color-brand-white); white-space: nowrap; }
-.hl__tx { display: flex; flex-direction: column; gap: .3rem; }
-.hl__l { font-size: .68rem; font-weight: var(--fw-medium); letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-muted); }
-.hl__x { font-size: .78rem; color: var(--color-text-dim); font-weight: var(--fw-light); line-height: 1.45; }
-.viz { display: none; }
-
-@media (max-width: 767px) {
-  .hl__item { display: flex; flex-direction: column; gap: .6rem; padding: 1rem 0; }
-  .hl__item:first-child { padding-top: 0; }
-  .hl__item + .hl__item { border-top: 1px solid var(--color-border-faint); }
-}
-@media (min-width: 768px) {
-  .hl__n { display: none; }
-  .hl__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .hl__item { border: 1px solid var(--color-border-faint); padding: clamp(1rem, 1.8vw, 1.5rem); display: flex; flex-direction: column; gap: 1rem; }
-  .viz { display: flex; flex-direction: column; justify-content: flex-end; gap: .6rem; min-height: 6.2rem; }
-  .viz__big, .viz__to { font-size: clamp(2.6rem, 4.4vw, 3.6rem); font-weight: var(--fw-black); line-height: .9; letter-spacing: -.03em; color: var(--color-brand-white); white-space: nowrap; }
-  .viz__of { font-size: .42em; font-weight: var(--fw-bold); letter-spacing: 0; color: var(--color-text-muted); }
-  /* direction: the before is small and quiet, the arrow says which way, the after carries the weight */
-  .viz--delta { flex-direction: row; justify-content: flex-start; align-items: center; gap: .4rem; }
-  .viz__from { font-size: clamp(1.3rem, 2vw, 1.7rem); font-weight: var(--fw-bold); line-height: 1; color: var(--color-text-muted); }
-  .viz--down .viz__from { align-self: flex-start; }
-  .viz--down .viz__to { align-self: flex-end; }
-  .viz--up .viz__from { align-self: flex-end; }
-  .viz--up .viz__to { align-self: flex-start; }
-  .viz__arr { flex: none; width: 2.6rem; height: 2.6rem; fill: none; stroke: var(--color-brand-purple); stroke-width: 3.2; stroke-linecap: square; }
-  /* share, completeness, span: a 0.5 rem bar under the figure */
-  .viz__bar { display: flex; gap: 2px; height: .5rem; }
-  .viz__seg--0 { background: var(--color-brand-purple); }
-  .viz__seg--1 { background: rgba(var(--ink), .35); }
-  .viz__legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .72rem; color: var(--color-text-muted); }
-  .viz__key b { color: var(--color-brand-white); font-weight: var(--fw-semibold); }
-  .viz__key::before { content: ""; display: inline-block; width: .55rem; height: .55rem; margin-right: .4rem; vertical-align: baseline; }
-  .viz__key--0::before { background: var(--color-brand-purple); }
-  .viz__key--1::before { background: rgba(var(--ink), .35); }
-  /* count: the named items themselves */
-  .viz__chips { display: flex; flex-wrap: wrap; gap: .3rem; }
-  .viz__chip { font-size: .6rem; font-weight: var(--fw-semibold); letter-spacing: .1em; text-transform: uppercase; color: var(--color-brand-white); border: 1px solid var(--color-brand-purple); padding: .22rem .45rem; }
-  .viz__week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
-  .viz__day { height: .5rem; border: 1px solid var(--color-brand-purple); }
-  /* comparison: two bars on one scale */
-  .viz__rows { display: grid; gap: .35rem; }
-  .viz__row { display: grid; grid-template-columns: 1.6rem 1fr; align-items: center; gap: .5rem; }
-  .viz__tag { font-size: .62rem; font-weight: var(--fw-bold); letter-spacing: .1em; color: var(--color-text-muted); }
-  .viz__track { height: .5rem; background: rgba(var(--ink), .08); }
-  .viz__fill { display: block; height: 100%; }
-  .viz__fill--0 { background: var(--color-brand-purple); }
-  .viz__fill--1 { background: rgba(var(--ink), .35); }
-}
-@media (min-width: 1024px) {
-  .hlr__seg--ins { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-}
+/* ---- The dashboard act: shared/dashboard.css since PR #43 (PR43-Q30), shared with About ---- */
 
 /* ---- Phone card scrollers (PR40-Q31…Q35): below 768 an act's main card set scrolls sideways in Brief 02 Act 02's
    pattern (snap, the next card peeks, no arrows: PR38-Q25). Each card shows its place as "01 / 04" (CSS counters,
