@@ -10,7 +10,11 @@
 .dl{margin-top:clamp(1.6rem,3vw,2.4rem);}
 .dl__viewport{overflow:hidden; margin-right:calc(-1 * var(--gutter)); outline:none;}
 .dl__viewport:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:4px;}
-.dl__track{list-style:none; display:flex; gap:clamp(3rem,4vw,4rem); transition:transform 420ms var(--ease-standard);}
+.dl__track{list-style:none; display:flex; --dl-gap:clamp(3rem,4vw,4rem); gap:var(--dl-gap); transition:transform 420ms var(--ease-standard);
+  transform:translateX(calc(var(--dl-i, 0) * -1 * (100% - var(--peek-width) + var(--dl-gap))));}
+/* The offset is computed here, not in pixels by the script (PR #43, PR43-Q23): a translate percentage resolves against
+   the track's width, which is the slide's 100%, so the current slide stays in the frame at every width during a live
+   resize, where a pixel offset went stale and showed a dimmed neighbour. Only a change of --dl-i animates. */
 .dl__slide{flex:0 0 calc(100% - var(--peek-width)); min-width:0; display:grid; grid-template-columns:51fr 49fr; gap:clamp(2rem,4vw,4rem); align-items:center;
   transition:opacity 420ms var(--ease-standard);}
 .dl__slide:not(.is-on){opacity:.35;}
