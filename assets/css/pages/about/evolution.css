@@ -5,37 +5,30 @@
    marks, plates, links and filter (re-scoped from #evolution to .tl). */
 
 /* ---- Arcs and organism heads ---- */
-/* Each arc opens on a slogan in Main's hero grammar (pages/home/hero.css, PR43-Q18…Q20, Q24): upper case, the hook
-   white italic on a purple block, left-aligned like Main's hero. Under it, the lock's arc line on Main's sub-headline
-   highlight (shared/bridge.css .bridge__heading at hero.css's sizes). pages/about/slogan.js fits both lines to the
-   column and keeps slogan and subline inside the viewport; without it the clamp size applies. */
-.ah { margin: 0; color: var(--color-brand-white); font-weight: var(--fw-black); line-height: 1; letter-spacing: 0; text-transform: uppercase; }
-.ah__line { display: block; font-size: var(--ah-size, clamp(2.25rem, 7vw, 6.5rem)); line-height: 1.04; }
-.ah.is-fit .ah__line { white-space: nowrap; }
-.ah__line + .ah__line { margin-top: 0.14em; }
-.ah__noun:empty { display: none; }
-.ah__hook { font-style: italic; color: #FFFFFF; position: relative; z-index: 0; padding: 0 0.08em; margin: 0 0.02em; }
-.ah__hook::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 0.12em; bottom: 0.04em; background: var(--color-brand-purple); }
-.ah-sub { margin: clamp(1rem, 2vw, 1.5rem) 0 0; max-width: 42rem; text-wrap: balance; }   /* no lone word on the second line ("I+D.") */
-.ah-sub .bridge__heading { font-size: 1.375rem; }
-@media (max-width: 767px) { .ah-sub .bridge__heading { font-size: 1.0625rem; } }
+/* One separation opens and closes each arc (PR43-Q27): hero or closing rule → the date label, and subline → the
+   first organism's eyebrow, the same in Lab and Pre-Lab. Fluid: 60 px at 390 (JD's phone pick), 202 px at 1440 (his
+   desktop pick), capped at 12.6 rem. */
+.arc { --arc-gap: clamp(4rem, 14vw, 12.6rem); padding-top: var(--arc-gap); }
+.arc--lab { padding-bottom: 0; }   /* the closing rule ends Lab; Pre-Lab's own gap follows it */
+.ah-sub + .org { margin-top: var(--arc-gap); }
+/* The slogan, its date label and its subline: shared/display.css (shared with Contact, PR43-Q29) */
+/* The threshold between the arcs (PR43-Q29, prototype B): the closing rule with the figures' tag on its left
+   ("THE THRESHOLD" / "EL UMBRAL"); the block is the tag's height, the 4 px rule runs through its middle, the square end
+   stays. */
+.arc-th { position: relative; display: flex; align-items: center; margin: clamp(3rem, 6vw, 5rem) 0 0; }
+.arc-th::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 4px; transform: translateY(-50%); background: var(--color-brand-purple); }
+.arc-th__t { position: relative; margin-left: clamp(1rem, 3vw, 2.25rem); padding: .45rem .9rem; background: var(--color-brand-purple);
+  font-size: .78rem; font-weight: var(--fw-bold); letter-spacing: .18em; line-height: 1.2; text-transform: uppercase; color: var(--color-on-brand); white-space: nowrap; }
+.arc-th__end { position: absolute; right: 0; top: 50%; width: 14px; height: 14px; transform: translateY(-50%); background: var(--color-brand-purple); }
 /* The closing rules between the arcs and after Pre-Lab (G3 round 1; kept without the index, PR43-Q24): the briefs'
    closing rule (shared/brief-index.css .brief-end), a 4 px purple rule with a square end. */
 .arc-end { display: block; position: relative; height: 4px; margin: clamp(3rem, 6vw, 5rem) 0 0; padding: 0; border: 0;
   background: var(--color-brand-purple); overflow: visible; }
 .arc-end::after { content: ""; position: absolute; right: 0; top: 50%; width: 14px; height: 14px; transform: translateY(-50%);
   background: var(--color-brand-purple); }
-.org { margin-top: clamp(3rem, 6vw, 5rem); }
+.org { margin-top: clamp(3rem, 6vw, 5rem); scroll-margin-top: calc(var(--nav-height) + 1.5rem); }   /* a slide CTA to an organism lands its eyebrow clear of the nav */
 .org__head { margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
-.org__head .section__eyebrow { margin-bottom: 0.9rem; }
-/* Editorials centred from 768 and left below, as the live About's header (shared/designops-variant.css
-   .evolution__header; PR43-Q24). */
-@media (min-width: 768px) {
-  .org__head { text-align: center; }
-  .org__head .section__eyebrow { align-items: center; }
-}
-/* the briefs' verdict, value for value (the brief pages' .verdict): no reduction for a subsection (PR43-Q18) */
-.org__verdict { font-size: clamp(1.75rem, 4vw, 3.25rem); font-weight: var(--fw-black); line-height: 1.08; letter-spacing: -0.02em; color: var(--color-brand-white); }
+/* .org__verdict, the eyebrow spacing, the lede and the centring: shared/editorial.css (PR43-Q29) */
 
 
 /* ---- Milestones: the S10-B journey, one per arc (PR43-Q22, prototype D) ----
@@ -302,5 +295,4 @@ html[data-theme="light"] .tl .jr-mark--platform[data-mark="github"] .jr-mark__im
 }
 
 /* ---- Pre-Lab's four figures: four across from 1024, two by two from 768 (brief-charts.css sets three) ---- */
-@media (min-width: 768px) { .hlr--4 .hl__list { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .hlr--4 .hl__list { grid-template-columns: repeat(4, 1fr); } }
+/* .hlr--4: shared/dashboard.css (PR43-Q30) */

@@ -19,7 +19,7 @@ function init() {
 
   const instances = [...document.querySelectorAll('[data-tl]')].map(root => {
     const seq = root.querySelector('.timeline'), fill = root.querySelector('.jr-fill');
-    const items = [...seq.querySelectorAll('.timeline__item')];
+    const items = [...seq.querySelectorAll('.timeline__item:not([data-skip])')];   // [data-skip]: kept in the markup, never shown (PR43-Q29)
     const select = root.querySelector('.tl__filter'), countEl = root.querySelector('.tl__count'), emptyEl = root.querySelector('.tl__empty');
     let openItem = null, current = null, filter = 'all';
     const visible = () => items.filter(n => !n.hidden);
@@ -88,6 +88,7 @@ function init() {
       visible().sort((a, b) => (Number(a.dataset.sort) - Number(b.dataset.sort)) || (Number(a.dataset.ord) - Number(b.dataset.ord)))
         .forEach(n => seq.appendChild(n));
       items.filter(n => n.hidden).forEach(n => seq.appendChild(n));
+      seq.querySelectorAll('[data-skip]').forEach(n => seq.appendChild(n));
       renderControls(); rail(); current = undefined; advance();
       if (resetScroll) {
         const top = root.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
