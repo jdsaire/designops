@@ -13,7 +13,7 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else None
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 G = ['assets/i18n/{lc}.json']
-R = ['assets/i18n/briefs/briefs-ui.{lc}.json', 'assets/i18n/briefs/tags.{lc}.json', 'assets/i18n/briefs/related.{lc}.json']
+R = ['assets/i18n/briefs/briefs-ui.{lc}.json', 'assets/i18n/briefs/tags.{lc}.json']
 PAGES = {
     'main': ('index.html', G, ['i18n/main.{lc}.json']),
     'about': ('about/index.html', G, ['about/i18n/about.{lc}.json']),
