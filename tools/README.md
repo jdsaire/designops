@@ -1,6 +1,6 @@
 # tools/
 
-The checks anyone can run on a fresh clone, from the repository root, with Python 3 and nothing to install. Each prints what it found and ends with one line to read: `failures: 0` means clean. The pull-request template asks for the first two on every change.
+The checks anyone can run on a fresh clone, from the repository root, with Python 3 and nothing to install. Each prints what it found and ends with one line to read: `failures: 0` means clean (`order.py` ends with `out of place: 0`). The pull-request template asks for the first two on every change.
 
 | File | Who it's for |
 |---|---|

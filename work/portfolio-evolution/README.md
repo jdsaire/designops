@@ -1,6 +1,6 @@
 # work/portfolio-evolution/
 
-Brief 04 · Portfolio, served at `/work/portfolio-evolution/`: "A design system I built and govern end to end". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
+Brief 04 · Portfolio, served at `/work/portfolio-evolution/`: "This web. My web.". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
 
 | File | Who it's for |
 |---|---|

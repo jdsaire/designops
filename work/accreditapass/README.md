@@ -1,6 +1,6 @@
 # work/accreditapass/
 
-Brief 01 · AccreditaPass, a press-accreditation companion app, served at `/work/accreditapass/`: "Never miss a match". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
+Brief 01 · AccreditaPass, a press-accreditation companion app, served at `/work/accreditapass/`: "The World Cup like never before". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
 
 | File | Who it's for |
 |---|---|
