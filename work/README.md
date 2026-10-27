@@ -5,7 +5,7 @@ The four case-study briefs, one folder each, served at `/work/<folder>/`. Each b
 | Folder | Who it's for |
 |---|---|
 | [`accreditapass/`](accreditapass/README.md) | Brief 01 · AccreditaPass, a press-accreditation companion app · sports |
-| [`yape-trust-verify-brief/`](yape-trust-verify-brief/README.md) | Brief 02 · Trust & Verify · banking |
+| [`trust-verify-brief/`](trust-verify-brief/README.md) | Brief 02 · Trust & Verify · banking |
 | [`airport/`](airport/README.md) | Brief 03 · TUUA Transfer · airport |
 | [`portfolio-evolution/`](portfolio-evolution/README.md) | Brief 04 · Portfolio · software |
 | [`designops-system/`](designops-system/index.html), [`front-end-evolution/`](front-end-evolution/index.html) | Readers arriving at a retired address. Each holds one page that forwards to `portfolio-evolution/`, so the old link still answers instead of returning 404 |

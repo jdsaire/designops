@@ -1,4 +1,4 @@
-# work/yape-trust-verify-brief/docs/
+# work/trust-verify-brief/docs/
 
 Brief 02's first copy record and site specification, from its July 2026 build, kept as history. The page no longer reads them: its live copy is in [`../i18n/`](../i18n/).
 

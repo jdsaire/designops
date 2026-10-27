@@ -19,7 +19,7 @@ PAGES = {
     'about': ('about/index.html', G, ['about/i18n/about.{lc}.json']),
     'contact': ('contact/index.html', G, ['contact/i18n/contact.{lc}.json']),
     'b01': ('work/accreditapass/index.html', G + R, ['work/accreditapass/i18n/accreditapass.{lc}.json']),
-    'b02': ('work/yape-trust-verify-brief/index.html', G + R, ['work/yape-trust-verify-brief/i18n/yape-trust-verify.{lc}.json']),
+    'b02': ('work/trust-verify-brief/index.html', G + R, ['work/trust-verify-brief/i18n/yape-trust-verify.{lc}.json']),
     'b03': ('work/airport/index.html', G + R, ['work/airport/i18n/airport.{lc}.json']),
     'b04': ('work/portfolio-evolution/index.html', G + R, ['work/portfolio-evolution/i18n/designops.{lc}.json']),
 }

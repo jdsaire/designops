@@ -12,7 +12,7 @@ PAGES = {
     'about': ('about/index.html', 'about/i18n/about'),
     'contact': ('contact/index.html', 'contact/i18n/contact'),
     'b01': ('work/accreditapass/index.html', 'work/accreditapass/i18n/accreditapass'),
-    'b02': ('work/yape-trust-verify-brief/index.html', 'work/yape-trust-verify-brief/i18n/yape-trust-verify'),
+    'b02': ('work/trust-verify-brief/index.html', 'work/trust-verify-brief/i18n/yape-trust-verify'),
     'b03': ('work/airport/index.html', 'work/airport/i18n/airport'),
     'b04': ('work/portfolio-evolution/index.html', 'work/portfolio-evolution/i18n/designops'),
 }

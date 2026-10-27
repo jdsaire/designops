@@ -11,7 +11,7 @@ Every word the site shows comes from an English and a Spanish dictionary, one pa
 | Page | About | [`about/i18n/about.en.json`](about/i18n/about.en.json) | [`about/i18n/about.es.json`](about/i18n/about.es.json) | 210 | 210 |
 | Page | Contact | [`contact/i18n/contact.en.json`](contact/i18n/contact.en.json) | [`contact/i18n/contact.es.json`](contact/i18n/contact.es.json) | 29 | 29 |
 | Local | Brief 01 · AccreditaPass | [`work/accreditapass/i18n/accreditapass.en.json`](work/accreditapass/i18n/accreditapass.en.json) | [`work/accreditapass/i18n/accreditapass.es.json`](work/accreditapass/i18n/accreditapass.es.json) | 146 | 146 |
-| Local | Brief 02 · Trust & Verify | [`work/yape-trust-verify-brief/i18n/yape-trust-verify.en.json`](work/yape-trust-verify-brief/i18n/yape-trust-verify.en.json) | [`work/yape-trust-verify-brief/i18n/yape-trust-verify.es.json`](work/yape-trust-verify-brief/i18n/yape-trust-verify.es.json) | 148 | 148 |
+| Local | Brief 02 · Trust & Verify | [`work/trust-verify-brief/i18n/yape-trust-verify.en.json`](work/trust-verify-brief/i18n/yape-trust-verify.en.json) | [`work/trust-verify-brief/i18n/yape-trust-verify.es.json`](work/trust-verify-brief/i18n/yape-trust-verify.es.json) | 148 | 148 |
 | Local | Brief 03 · TUUA Transfer | [`work/airport/i18n/airport.en.json`](work/airport/i18n/airport.en.json) | [`work/airport/i18n/airport.es.json`](work/airport/i18n/airport.es.json) | 250 | 250 |
 | Local | Brief 04 · Portfolio | [`work/portfolio-evolution/i18n/designops.en.json`](work/portfolio-evolution/i18n/designops.en.json) | [`work/portfolio-evolution/i18n/designops.es.json`](work/portfolio-evolution/i18n/designops.es.json) | 160 | 160 |
 | | **Total** | | | **1,085** | **1,085** |

@@ -1,6 +1,6 @@
-# work/yape-trust-verify-brief/
+# work/trust-verify-brief/
 
-Brief 02 · Trust & Verify, served at `/work/yape-trust-verify-brief/`: "The screenshot says paid. My app asks the bank." The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
+Brief 02 · Trust & Verify, served at `/work/trust-verify-brief/`: "The screenshot says paid. My app asks the bank." The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) from [`../../assets/`](../../assets/README.md).
 
 | File | Who it's for |
 |---|---|
