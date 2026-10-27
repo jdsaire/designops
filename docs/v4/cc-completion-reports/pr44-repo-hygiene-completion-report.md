@@ -1,6 +1,6 @@
 # Completion report · PR #44 · Repository hygiene + carry-ins
 
-**Branch:** `deploy/v31-pr44-repo-hygiene` on `1930b8c` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR44-RepoHygiene.md`](../cc-plans/Plan-PR44-RepoHygiene.md) (as accepted; rulings made in the run below) · **PR:** printed at release
+**Branch:** `deploy/v31-pr44-repo-hygiene` on `1930b8c` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR44-RepoHygiene.md`](../cc-plans/Plan-PR44-RepoHygiene.md) (as accepted; rulings made in the run below) · **PR:** https://github.com/jdsaire/designops/pull/44
 
 ## What a reader now sees
 
@@ -13,7 +13,7 @@
 
 ## Commits
 
-`187405a` Main offer meta and fallback · `10e24fa` related pair removed · `c341349` unused illustration removed · `8cc1f9c` decoration spec v1.7 · `41daeb4` Brief 02 ledes · `7eaaa61` ES read time · `0bdb340` Brief 02 slug · `4ee6ebb` old-slug stub · `eac0d38` CHANGELOG.md · `35e4448` docs/ by type · `4ace29a` docs/v4 README · `32f6b11` retired addresses · `4ccfe78` IA-CONVENTION · `32cab9e` root README · `027e007` READMEs and counts · then this archive commit.
+`187405a` Main offer meta and fallback · `10e24fa` related pair removed · `c341349` unused illustration removed · `8cc1f9c` decoration spec v1.7 · `41daeb4` Brief 02 ledes · `7eaaa61` ES read time · `0bdb340` Brief 02 slug · `4ee6ebb` old-slug stub · `eac0d38` CHANGELOG.md · `35e4448` docs/ by type · `4ace29a` docs/v4 README · `32f6b11` retired addresses · `4ccfe78` IA-CONVENTION · `32cab9e` root README · `027e007` READMEs and counts · then the archive commit and this release commit.
 
 ## Results per success criterion
 
@@ -25,7 +25,7 @@
 | Brief 02 slug | new address 200; old address 200 and forwards; `git grep` of the old slug outside `docs/` finds only the stub and the retired-address rows |
 | Read time (SR-3) | Brief 02 EN and ES, phone and desktop: shown = computed |
 | Performance (live site, Lighthouse 13.5.0, 7 pages × phone/desktop × 3 runs) | 11/14 cells meet the bar; desktop 7/7; misses: About phone LCP 4.58 s, Contact phone CLS 0.164, Brief 04 phone CLS 0.135. Diagnostic only, no tuning |
-| Regression (G7) | recorded at release |
+| Regression (G7) | 132 cells (Chrome 84, WebKit 48) vs `1930b8c`: 107 identical; 24 differ, all Brief 02, taller by the three ledes (intended); 1 Main cell transient, identical on re-run (12/12); CLS and longest one-shot equal to base |
 | Attribution | author and committer jdsaire on every commit; 0 findings in messages, branch name and added lines |
 
 ## Rulings in the run
