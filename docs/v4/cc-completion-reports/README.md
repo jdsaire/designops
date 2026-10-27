@@ -25,3 +25,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #41 · Repository hygiene | `pr41-repo-hygiene-completion-report.md` |
 | PR #42 · Solution act | `pr42-solution-act-completion-report.md` |
 | PR #43 · About and the Lab | `pr43-about-lab-completion-report.md` |
+| PR #44 · Repository hygiene + carry-ins | `pr44-repo-hygiene-completion-report.md` |

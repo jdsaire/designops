@@ -1,4 +1,4 @@
-# Decoration system — capability spec (v1.6)
+# Decoration system — capability spec (v1.7)
 
 Companion to `decoration-system.html`, the live specimen. It loads the site's own tokens, face and decoration layer,
 so it shows the shipped code, not a copy.
@@ -74,6 +74,26 @@ exception or one-shot. Three records of state motion and chrome.
 - **The phone menu button's closed state is the purple 44 px box** (PR #42 G6b): only the symbol changes on tap (three
   lines ↔ X), the box stays. CUE RING (X-5) is unchanged around the same box.
 - §10.4 records PR #42's measurements.
+
+**v1.7 (PR #43, merged at `8bb2915`, 21 Oct 2026; PR43-Q10, Q22, Q23, Q24, Q27, Q29; SY43-Q9):** no new pattern and no new
+exception id. One exception widened, four records of state motion, one static mark.
+- **PULSE reused by the display label** (X-6 widened, PR43-Q27, Q29): the 2.4 s square from Main's hero opens the display
+  label of About's two arcs ("Since Oct 2025", "Up to 2025") and of Contact ("Open to work"), in `shared/display.css`.
+  Same role, same WCAG 2.2.2 cover, same final frame: still at full opacity under reduced motion. One PULSE in view at a
+  time holds: the labels sit a full arc apart and Contact has one.
+- **The carousel offset is computed by CSS from the slide index** (PR43-Q23): from 768 the track's offset follows the width
+  through a resize, so no stale offset and no 35 %-opacity neighbour are left in the frame. It now serves About's two
+  manifestos and the briefs' **Keep exploring** as well (§8, §11).
+- **The brief index** (PR43A-Q9, Q10, PR43-Q8, Q10, Q15, Q16): a sticky line of the four briefs' acts under the nav, with
+  the TABLE OF CONTENTS / CONTENIDO eyebrow that scrolls away; the line folds away (opacity and rise, 250 ms) once the
+  **closing rule** after the last act passes it, and returns above it. Instant under reduced motion. About carries no
+  index (PR43-Q24).
+- **About's journey** (PR43-Q22): the sideways relay of G3 is withdrawn; each arc keeps S10-B's vertical rail with its
+  square nodes and reading states (grey ahead, light purple passed, purple and larger where the reader is), the rail
+  running from the first node to the last. Lab 12 entries, Pre-Lab 13. Scroll-linked state motion, as before (§8).
+- **The threshold** (PR43-Q29): a tag on the closing rule between About's two arcs ("The threshold" / "El umbral"). Static;
+  not a decoration and not motion.
+- §10.5 records PR #43's measurements.
 
 ## 1. Scope: what counts as a decoration
 
@@ -161,7 +181,7 @@ No role means the decoration is retired.
 | **COUNT** (retired, PR35-Q49) | — | About's track-record figures are static, like the briefs' | the figure | About |
 | **FILL** (PR #37) | Message: the verb that carries the claim | the brand-purple block behind each hero verb draws from the left, `scaleX` 0 → 1, 500 ms, decelerate, as the hero shows; white italic words on it from the first frame (5.30:1) | block drawn | Main hero, 2 verbs |
 | **CUE RING** (X-5, PR #37) | Interaction: the menu holds theme and language | a 2 px brand-purple ring expands from the 44 px menu button and fades, 1.2 s, six times (7.2 s); first Main view per browser, phones only; stops for good on the first tap, scroll, leaving the phone range or its end | the button, still | Main, ≤ 767 px |
-| **PULSE** (X-6, PR #37) | Aesthetic: the opening, a sign of life by the name | a 0.45 rem brand-purple square left of the name, opacity 1 → 0.3 → 1 every 2.4 s, endless | square at full opacity | Main hero, every width |
+| **PULSE** (X-6, PR #37) | Aesthetic: the opening, a sign of life by the name | a 0.45 rem brand-purple square left of the name or the display label, opacity 1 → 0.3 → 1 every 2.4 s, endless | square at full opacity | Main hero; the display label of About's two arcs and of Contact (v1.7); every width |
 
 **Implementation rules:**
 - Pre-states come from script only, and only when motion is allowed.
@@ -180,7 +200,7 @@ No role means the decoration is retired.
 | ~~X-3~~ | About track record | revoked by PR35-Q49: the figures are static | — |
 | ~~X-4~~ | Main hero entrance | revoked by PR35-Q49: the hero shows at once | — |
 | X-5 | Main · CUE RING on the phone menu button | WCAG 2.2.2: 7.2 s of repetition with no pause control; floor rule 2's "once" (PR37-Q6, Q10, Q14) | Non-text; the button's name ("Open menu") and its menu are unchanged. Main only, phones only, the first Main view in a browser only (flag `jds-navcue`, set when it starts); the first tap or scroll stops it for good. Never under reduced motion. |
-| X-6 | Main · PULSE beside the name | WCAG 2.2.2: an endless loop with no pause control; floor rule 2's "once" (PR37-Q24) | Decorative and `aria-hidden` (a pseudo-element, not part of the name's text); a 0.45 rem square that dims to 30 %, never flashing. Reduced motion shows it still, at full opacity. |
+| X-6 | Main · PULSE beside the name; About and Contact · PULSE on the display label (v1.7, PR43-Q27, Q29) | WCAG 2.2.2: an endless loop with no pause control; floor rule 2's "once" (PR37-Q24) | Decorative and `aria-hidden` (a pseudo-element, not part of the name's text); a 0.45 rem square that dims to 30 %, never flashing. Reduced motion shows it still, at full opacity. |
 
 With the typing loop retired (PR35-Q48), FIELD holds still (PR35-Q50) and needs no exception.
 
@@ -200,16 +220,17 @@ These are interaction feedback, outside the decoration budget.
 | Anchor scroll (`scroll-behavior: smooth`) | all pages | auto on Main and the briefs; **still smooth on About and Contact** | auto everywhere |
 | Page fade (cross-document view transitions) | all 7 pages | off | keep |
 | Theme switch (background, 200 ms) | all pages | off | keep |
-| Carousels: Main capabilities (420 ms), Main work dots, **the brief slide carousel `.dl` (420 ms): B03 deliverables and Act 03 · The Solution in B01, B02, B04 (v1.6)**, B03 screens strip, About cards on phones | `shared/carousel.css` + `core/carousel.js`; phones: `shared/carousel-phone.css` (v1.6) | off | keep (`.dl` measured `0s` under reduced motion on all four briefs, v1.6) |
+| Carousels: Main capabilities (420 ms), Main work dots, **the brief slide carousel `.dl` (420 ms): B03 deliverables and Act 03 · The Solution in B01, B02, B04 (v1.6); About's two manifestos and the briefs' Keep exploring (v1.7)**, B03 screens strip | `shared/carousel.css` + `core/carousel.js`, the offset computed by CSS from the slide index (v1.7); phones: `shared/carousel-phone.css` (v1.6) | off | keep (`.dl` measured `0s` under reduced motion on all four briefs, v1.6) |
+| Brief index: sticky line, current act, the fold past the closing rule (opacity + rise, 250 ms) (v1.7) | Briefs 01–04: `shared/brief-index.css` + `core/brief-index.js` | — | keep (instant under reduced motion) |
 | Disclosures: About's 25 panels (`max-height`, 320 ms), brief reveals, brief side panel (320 ms), B03 map sheet (320 ms) | — | off | keep (`max-height` is the named layout exception for disclosures) |
 | Hover and focus: work-card reveal + 3° tilt, About card reveal (400 ms), CTA icons, ticker logos, journey step border, card borders, chips, tabs, dots | — | off or flat | keep |
-| Scroll-linked: progress bar (`scaleX`), About journey rail and markers | — | rail instant | keep |
+| Scroll-linked: progress bar (`scaleX`), About journey rails and square nodes, one per arc, first node to last (v1.7) | — | rail instant | keep |
 | Hero pause-button slot shift (280 ms, translate) | Main | off | retired with the typing loop (PR35-Q48) |
 | Contact form fields and success modal (300 ms) | Contact | off | keep |
 
 ## 9. Verdicts per component
 
-v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1, D37–D39 in v1.3, D40 in v1.4, D41–D43 in v1.5, D44 in v1.6.
+v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1, D37–D39 in v1.3, D40 in v1.4, D41–D43 in v1.5, D44 in v1.6, D45–D49 in v1.7.
 
 | # | Component | Verdict (v1.1) | Role | Note |
 |---|---|---|---|---|
@@ -257,6 +278,11 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1
 | D42 | B01/B02/B04 · dashboard act panel (`.hlr`) (PR #40) | **None**: static encodings | — | PR40-Q26: no new motion pattern; figures static (PR35-Q25) |
 | D43 | Phone card scrollers (`.swipe`, 12 sets) (PR #40) | **RUN skipped** below 768 | — | sets scroll sideways (§6 RUN guard); ladders and timelines keep RUN from 768 |
 | D44 | Brief slide carousel `.dl` (B03 Act 03; Act 03 · The Solution in B01, B02, B04) (PR #42) | **Keep** (state) | Interaction | §8 register; one shared source; no new pattern |
+| D45 | About arcs and Contact · display label square (PR #43) | **Reuse** PULSE | Aesthetic | X-6 widened; still under reduced motion |
+| D46 | All carousels · offset through a resize (PR #43) | **Fix** (state) | Interaction | offset computed by CSS from the index (PR43-Q23) |
+| D47 | Briefs 01–04 · index line and closing rule (PR #43) | **Keep** (state) | Interaction | §8 register; 250 ms fold, instant under reduced motion |
+| D48 | About · journey rails, Lab 12 and Pre-Lab 13 nodes (PR #43) | **Keep** (state) | Interaction | S10-B's rail and square nodes; the sideways relay withdrawn (PR43-Q22) |
+| D49 | About · the threshold tag (PR #43) | **None**: static | — | a tag on the closing rule, no motion |
 
 ## 10. Measured at G4b
 
@@ -344,6 +370,18 @@ report (criterion 6) and its gate lines in PRE-MAX-CHANGELOG.
   the only new one is Brief 01 Act 00's purple reveal button, the known 3.96:1 class).
 - **Read time:** the hero's four numbers switch through `display` by `html[lang]` and width; no motion, CLS 0.0000 (G7).
 
+### 10.5 Measured at PR #43 (v1.7)
+
+Branch `deploy/v30-pr43-about-lab`, G6 on the tip against the base `6348002` (21 Oct 2026); source: the PR #43 completion
+report (results per criterion) and its gate lines in PRE-MAX-CHANGELOG.
+- **Scoped regression (as ruled, PR43-Q30):** 61 cells (Chrome 42, WebKit 12, light 7): 60 clean, 1 transient 404 not
+  reproducible; Main identical to the base; every difference maps to a ruling.
+- **Component checks:** carousel resize, editorial heads, dashboard, arc spacing, viewport fit, illustrations: 0 failures,
+  Chrome and WebKit.
+- **Read time:** 40 cells, shown = computed.
+- **Not re-measured by PR #43:** the longest one-shot (1,450 ms at §10.4), layout shift and contrast. PR #44 re-measures them
+  in its one regression matrix.
+
 ## 11. Where it lives, and how to add a pattern
 
 - **A page opts in** by linking `shared/decoration.css`, calling `init()` from `core/decoration.js` (Main, About and
@@ -360,6 +398,10 @@ report (criterion 6) and its gate lines in PRE-MAX-CHANGELOG.
   the four briefs; `shared/carousel-phone.css` holds the phone style below 768 for Main's capabilities and the briefs'
   `.dl` (full width, no peek, no gap, the counter at the right, `[data-dl-num]` labels numbered by CSS, the dark-theme
   light-purple label). State motion only; it adds nothing to §4's budget.
+- **The display opening (v1.7):** `shared/display.css` draws the pulsing label, the display title in Main's hero grammar and
+  the subline; About opens each arc with it and Contact opens its page with it. PULSE is its only motion (X-6).
+- **The brief index (v1.7):** `shared/brief-index.css` + `core/brief-index.js` on the four briefs; the closing rule after the
+  last act folds the line. State motion only.
 - **Sideways guard (v1.5):** RUN skips a timeline, a ladder or any card set whose track scrolls sideways at the current width
   (`scrollWidth > clientWidth + 4`), and the final frame shows.
 - **A new pattern** names its role (§3), fits the budget (§4), takes its timing from the tokens (§5), and draws a bar,
@@ -378,3 +420,6 @@ report (criterion 6) and its gate lines in PRE-MAX-CHANGELOG.
 - About's journey rail animates `height` and could animate `scaleY`. It is state motion, unchanged.
 - The work cards transition `box-shadow`, which never changes, because the universal reset zeroes it.
 - The briefs' favicon 404 (backlog).
+- **SIGNATURE's count (v1.7):** §6 still reads v1.6's 44 bars. The markup holds 66 eyebrow-bar elements on the seven pages at
+  `1930b8c` (Main 5, About 8, Contact 2, Briefs 01, 02 and 04 13 each, Brief 03 12) and 55 at `6348002`, so v1.6's 44 was a
+  different count. The number of bars SIGNATURE plays at each width is not yet measured; the next spec version records it.

@@ -7,17 +7,16 @@ Every word the site shows comes from an English and a Spanish dictionary, one pa
 | Global | Every page: navigation, footer, menus, the carousel buttons and the shared Contact and dashboard labels | [`assets/i18n/en.json`](assets/i18n/en.json) | [`assets/i18n/es.json`](assets/i18n/es.json) | 44 | 44 |
 | Regional | The four briefs: shared interface labels | [`assets/i18n/briefs/briefs-ui.en.json`](assets/i18n/briefs/briefs-ui.en.json) | [`assets/i18n/briefs/briefs-ui.es.json`](assets/i18n/briefs/briefs-ui.es.json) | 32 | 32 |
 | Regional | The four briefs: tags | [`assets/i18n/briefs/tags.en.json`](assets/i18n/briefs/tags.en.json) | [`assets/i18n/briefs/tags.es.json`](assets/i18n/briefs/tags.es.json) | 17 | 17 |
-| Regional | The four briefs: related-brief cards, empty since PR #43 (Keep exploring uses Main's work-card keys, now global); kept until its deletion is approved | [`assets/i18n/briefs/related.en.json`](assets/i18n/briefs/related.en.json) | [`assets/i18n/briefs/related.es.json`](assets/i18n/briefs/related.es.json) | 0 | 0 |
 | Page | Main | [`i18n/main.en.json`](i18n/main.en.json) | [`i18n/main.es.json`](i18n/main.es.json) | 49 | 49 |
 | Page | About | [`about/i18n/about.en.json`](about/i18n/about.en.json) | [`about/i18n/about.es.json`](about/i18n/about.es.json) | 210 | 210 |
 | Page | Contact | [`contact/i18n/contact.en.json`](contact/i18n/contact.en.json) | [`contact/i18n/contact.es.json`](contact/i18n/contact.es.json) | 29 | 29 |
 | Local | Brief 01 · AccreditaPass | [`work/accreditapass/i18n/accreditapass.en.json`](work/accreditapass/i18n/accreditapass.en.json) | [`work/accreditapass/i18n/accreditapass.es.json`](work/accreditapass/i18n/accreditapass.es.json) | 146 | 146 |
-| Local | Brief 02 · Trust & Verify | [`work/yape-trust-verify-brief/i18n/yape-trust-verify.en.json`](work/yape-trust-verify-brief/i18n/yape-trust-verify.en.json) | [`work/yape-trust-verify-brief/i18n/yape-trust-verify.es.json`](work/yape-trust-verify-brief/i18n/yape-trust-verify.es.json) | 148 | 148 |
+| Local | Brief 02 · Trust & Verify | [`work/trust-verify-brief/i18n/yape-trust-verify.en.json`](work/trust-verify-brief/i18n/yape-trust-verify.en.json) | [`work/trust-verify-brief/i18n/yape-trust-verify.es.json`](work/trust-verify-brief/i18n/yape-trust-verify.es.json) | 151 | 151 |
 | Local | Brief 03 · TUUA Transfer | [`work/airport/i18n/airport.en.json`](work/airport/i18n/airport.en.json) | [`work/airport/i18n/airport.es.json`](work/airport/i18n/airport.es.json) | 250 | 250 |
 | Local | Brief 04 · Portfolio | [`work/portfolio-evolution/i18n/designops.en.json`](work/portfolio-evolution/i18n/designops.en.json) | [`work/portfolio-evolution/i18n/designops.es.json`](work/portfolio-evolution/i18n/designops.es.json) | 160 | 160 |
-| | **Total** | | | **1,085** | **1,085** |
+| | **Total** | | | **1,088** | **1,088** |
 
-Main, About and Contact load the global pair and their own; each brief loads the global pair, the three regional pairs and its own. Within a pair the keys follow the order in which the page uses them, so a dictionary reads top to bottom like its page; `python3 tools/order.py --strict` reads 0 on all seven pages since PR #42.
+Main, About and Contact load the global pair and their own; each brief loads the global pair, the two regional pairs and its own. Within a pair the keys follow the order in which the page uses them, so a dictionary reads top to bottom like its page; `python3 tools/order.py --strict` reads 0 on all seven pages since PR #42.
 
 ## Check them
 
