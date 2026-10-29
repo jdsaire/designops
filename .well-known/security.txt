@@ -1,0 +1,4 @@
+Contact: https://jdsaire.com/report/
+Expires: 2027-10-27T23:59:59-05:00
+Preferred-Languages: en, es
+Canonical: https://jdsaire.com/.well-known/security.txt
