@@ -1,9 +1,9 @@
 /* shared/legal.css — the legal row in the footer strip and the site's one overlay mechanism, on every page (PR #45,
    AIE-Q26; STRATEGY v3_3 §6; PR45-Q17, Q21, Q23, Q25, Q26).
-   - Row: © first, then Report an issue (the only page: uppercase, a bug icon), Terms of use and License, then the
-     privacy cluster: Privacy policy and Your privacy choices. One row from 1024 px; stacked and left-aligned from 768
-     to 1023; below 768 one 44 px row per item, so each is an easy tap. The overlays carry ↗; the choices control its
-     toggle. Hover and focus turn a label white and heavier without changing its width, so nothing beside it moves.
+   - Row: © first, then Report an issue (the only page: uppercase, a bug icon), Terms of use, License, Privacy policy
+     and Your privacy choices, the related pair last, every item the same distance apart (PR45-Q30). One row from
+     1024 px; stacked and left-aligned from 768 to 1023; below 768 one 44 px row per item, so each is an easy tap. Each
+     icon sits before its label: the overlays' ↗, the choices control's switch (shared/switch.css). Hover and focus turn a label white and heavier without changing its width, so nothing beside it moves.
    - Overlays (variant A, PR45-Q23): a dark card centred on a blurred scrim, the purple top rule, the title beside the
      navbar's close (the 44 px purple square with a white X, shared/nav.css), the text scrolling inside the card when it
      runs taller than the screen, actions in the site's CTA (shared/cta.css). Any future overlay uses these classes.
@@ -59,16 +59,6 @@
   stroke-linejoin: round;
 }
 .legal__icon--out { width: 0.75em; height: 0.75em; stroke-width: 2.2; }
-.legal__toggle {
-  display: inline-block;
-  width: 1.75rem;
-  height: 0.875rem;
-  flex-shrink: 0;
-}
-/* The privacy cluster: a hairline before it in a row, a gap before it in a stack. */
-@media (min-width: 768px) {
-  .legal__links .legal__cluster { padding-left: 1.25rem; border-left: 1px solid var(--color-border-faint); }
-}
 @media (min-width: 1024px) {
   .footer__meta.legal {
     flex-direction: row;
@@ -78,13 +68,12 @@
   }
   .legal__links { justify-content: flex-end; }
 }
-/* Phones: one row per item, full width, 44 px tall, hairlines between them; the privacy cluster after a gap. */
+/* Phones: one row per item, full width, 44 px tall, hairlines between them, the same spacing throughout (PR45-Q30). */
 @media (max-width: 767px) {
   .footer__meta.legal { align-items: stretch; gap: 1rem; }
   .legal__links { flex-direction: column; align-items: stretch; flex-wrap: nowrap; }
   .legal__links li { border-top: 1px solid var(--color-border-faint); }
   .legal__links li:last-child { border-bottom: 1px solid var(--color-border-faint); }
-  .legal__links .legal__cluster { margin-top: 1rem; }
   .legal__link { width: 100%; min-height: 44px; padding: 0.5rem 0; }
 }
 

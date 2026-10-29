@@ -7,6 +7,7 @@ Components that appear on more than one page. Each file says in its first commen
 | [`nav.css`](nav.css) | The navigation bar, the Work menu and the phone menu. All 7 pages |
 | [`footer.css`](footer.css) | The footer and its closing statement. All 7 pages |
 | [`legal.css`](legal.css) | The footer's legal row and the site's one overlay (terms, license, privacy policy, privacy choices), and links inside a sentence. Every page |
+| [`switch.css`](switch.css) | The site's one on/off switch: a purple pill with a round white knob. Every page (the footer's privacy choices) |
 | [`cta.css`](cta.css) | The site's one call to action: a bold label beside a purple arrow square. Main, About, Contact and the report page; the four briefs still carry their own copy |
 | [`progress.css`](progress.css) | The scroll progress bar at the top. All 7 pages |
 | [`decoration.css`](decoration.css) | The decoration patterns, governed by [`../../../docs/v3/organisms/decoration-system.spec.md`](../../../docs/v3/organisms/decoration-system.spec.md). All 7 pages |
