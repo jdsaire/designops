@@ -4,11 +4,11 @@
 
 I build high-performing websites and apps, translating business challenges into tested products using advanced AI.
 
-This repository is the source of my portfolio site, in English and Spanish. The site is the front of **Product Lab**, an independent product lab: [the lab, on About](https://jdsaire.github.io/designops/about/#lab).
+This repository is the source of my portfolio site, in English and Spanish. The site is the front of **Product Lab**, an independent product lab: [the lab, on About](https://jdsaire.com/about/#lab).
 
 **How I build.** I direct the AI on what to build and how, then I read the codebase it produced and change the exact lines that need changing. I don't write every line by hand, and I don't claim to build without touching code.
 
-**Live:** https://jdsaire.github.io/designops/ · [LinkedIn](https://linkedin.com/in/jdsaire/)
+**Live:** https://jdsaire.com/ · [LinkedIn](https://linkedin.com/in/jdsaire/)
 
 ## The four briefs
 
