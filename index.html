@@ -724,10 +724,10 @@
         <div class="footer__meta legal">
           <span data-i18n="legal_copyright">© 2026 Juan Diego Saire</span>
           <ul class="legal__links">
-            <li><a class="legal__link" href="privacy/" data-i18n="legal_privacy">Privacy policy</a></li>
-            <li><a class="legal__link" href="report/" data-i18n="legal_report">Report an issue</a></li>
-            <li><button type="button" class="legal__link" data-legal-open="legalTerms" aria-haspopup="dialog" data-i18n="legal_terms">Terms of use</button></li>
-            <li><button type="button" class="legal__link" data-legal-open="legalLicense" aria-haspopup="dialog" data-i18n="legal_license">License</button></li>
+            <li><a class="legal__link legal__link--page" href="report/"><svg class="legal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 7.2a2.5 2.5 0 0 1 5 0"/><path d="M8 10a4 4 0 0 1 8 0v4a4 4 0 0 1-8 0z"/><path d="M12 10v8"/><path d="M8 12H4.5M16 12h3.5M8.3 16H5.5M15.7 16h2.8M8.6 8.4 6.5 6.5M15.4 8.4l2.1-1.9"/></svg><span data-i18n="legal_report">Report an issue</span></a></li>
+            <li><button type="button" class="legal__link" data-legal-open="legalTerms" aria-haspopup="dialog"><span data-i18n="legal_terms">Terms of use</span><svg class="legal__icon legal__icon--out" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></button></li>
+            <li><button type="button" class="legal__link" data-legal-open="legalLicense" aria-haspopup="dialog"><span data-i18n="legal_license">License</span><svg class="legal__icon legal__icon--out" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></button></li>
+            <li class="legal__cluster"><button type="button" class="legal__link" data-legal-open="legalPrivacy" aria-haspopup="dialog"><span data-i18n="legal_privacy">Privacy policy</span><svg class="legal__icon legal__icon--out" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></button></li>
             <li><button type="button" class="legal__link" data-legal-open="legalChoices" aria-haspopup="dialog"><svg class="legal__toggle" viewBox="0 0 28 14" aria-hidden="true" focusable="false"><rect x="0.75" y="0.75" width="26.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="16" y="3" width="8" height="8" fill="currentColor"/></svg><span data-i18n="legal_choices">Your privacy choices</span></button></li>
           </ul>
         </div>
@@ -736,29 +736,53 @@
     </div>
   </footer>
 
-<!-- Legal overlays (PR #45, AIE-Q26): opened from the footer row; core/legal.js -->
+<!-- Legal overlays (PR #45, AIE-Q26; PR45-Q18, Q23): the site's one overlay (shared/legal.css), opened from the footer row and
+     from links inside sentences; core/legal.js -->
 <div class="legal-dialog" id="legalTerms" role="dialog" aria-modal="true" aria-labelledby="legalTermsT" aria-hidden="true">
   <div class="legal-dialog__window">
-    <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <h2 class="legal-dialog__title" id="legalTermsT" data-i18n="terms_title">Terms of use</h2>
+    <div class="legal-dialog__head"><div class="legal-dialog__heading"><span class="legal-dialog__rule" aria-hidden="true"></span><h2 class="legal-dialog__title" id="legalTermsT" data-i18n="terms_title">Terms of use</h2></div><button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><span></span><span></span></button></div>
     <div class="legal-dialog__body" data-i18n-list="terms_body"><p>Personal portfolio with no commercial services. Content does not guarantee:</p><ul><li>Continuous uptime or zero technical flaws,</li><li>Binding professional advice,</li><li>Results from applying its ideas, methods or code.</li></ul><p>External links are reference only, and I'm not responsible for their content. Governed by the laws of Peru.</p></div>
   </div>
 </div>
 <div class="legal-dialog" id="legalLicense" role="dialog" aria-modal="true" aria-labelledby="legalLicenseT" aria-hidden="true">
   <div class="legal-dialog__window">
-    <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <h2 class="legal-dialog__title" id="legalLicenseT" data-i18n="license_title">License</h2>
-    <p class="legal-dialog__body" data-i18n="license_body">© 2026 Juan Diego Saire. All rights reserved. The text, images, design and code of this site and its repository may not be copied or reused without written permission. Third-party names and logos in the case studies belong to their owners and appear only to identify them.</p>
+    <div class="legal-dialog__head"><div class="legal-dialog__heading"><span class="legal-dialog__rule" aria-hidden="true"></span><h2 class="legal-dialog__title" id="legalLicenseT" data-i18n="license_title">License</h2></div><button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><span></span><span></span></button></div>
+    <div class="legal-dialog__body"><p data-i18n="license_body">© 2026 Juan Diego Saire. All rights reserved. The text, images, design and code of this site and its repository may not be copied or reused without written permission. Third-party names and logos in the case studies belong to their owners and appear only to identify them.</p></div>
+  </div>
+</div>
+<div class="legal-dialog" id="legalPrivacy" role="dialog" aria-modal="true" aria-labelledby="legalPrivacyT" aria-hidden="true">
+  <div class="legal-dialog__window">
+    <div class="legal-dialog__head"><div class="legal-dialog__heading"><span class="legal-dialog__rule" aria-hidden="true"></span><h2 class="legal-dialog__title" id="legalPrivacyT" data-i18n="privacy_h1">Privacy policy</h2></div><button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><span></span><span></span></button></div>
+    <div class="legal-dialog__body">
+      <p class="legal-dialog__meta" data-i18n="privacy_updated">Last updated: 28 October 2026</p>
+      <h3 data-i18n="privacy_s1_h">Who is responsible</h3>
+      <p data-i18n="privacy_s1_x">This site is run by Juan Diego Saire, an individual based in Lima, Peru. I am responsible for the personal data described here.</p>
+      <h3 data-i18n="privacy_s2_h">What its forms collect</h3>
+      <p data-i18n="privacy_s2_x">Only what you send through its two forms: the contact form (What brings you here?, Full name, Corporate email and Details) and the issue report form (Report category, Affected page, Browser, Device, Details of what happened, Full name and Email). Nothing else is collected while you browse.</p>
+      <h3 data-i18n="privacy_s3_h">Why</h3>
+      <p data-i18n="privacy_s3_x">To read what you send, reply to it, and fix what you report. Your data is not used for marketing, newsletters or profiling, and it is never sold.</p>
+      <h3 data-i18n="privacy_s4_h">Who processes it</h3>
+      <p data-i18n="privacy_s4_x">Both forms are delivered by Web3Forms, operated by Web3Creative from India. Under its Data Processing Agreement, Web3Forms stores submissions on Amazon Web Services for up to three years, and its spam filters (CleanTalk and Akismet) receive your IP address and email address. Your message then reaches my inbox, hosted by Google.</p>
+      <h3 data-i18n="privacy_s5_h">Transfers outside Peru</h3>
+      <p data-i18n="privacy_s5_x">Because of these providers, your data is processed outside Peru, including in India, the United States and other regions where they operate. By ticking the consent box on either form, you agree to this transfer.</p>
+      <h3 data-i18n="privacy_s6_h">How long it is kept</h3>
+      <p data-i18n="privacy_s6_x">I keep what you send for as long as our conversation needs it, and delete it from my inbox twelve months after the last reply. The copy held by Web3Forms follows its own three-year limit.</p>
+      <h3 data-i18n="privacy_s7_h">Your rights</h3>
+      <p data-i18n-link="privacy_s7_x|privacy_s7_link" data-href="report/?reason=privacy">You can ask to access, correct or delete your data, or object to its use, under Peru's Personal Data Protection Law (Law 29733), by sending a privacy request from <a href="report/?reason=privacy">the report page</a>. If you are not satisfied with my answer, you can complain to Peru's National Authority for Personal Data Protection.</p>
+      <h3 data-i18n="privacy_s8_h">Cookies and tracking</h3>
+      <p data-i18n-link="privacy_s8_x|legal_choices" data-legal-target="legalChoices">This site sets no cookies, runs no analytics and loads no trackers. It keeps only your theme, language, page text and menu state in your own browser, and you can clear them from “<button type="button" class="legal__inline" data-legal-open="legalChoices" aria-haspopup="dialog">Your privacy choices</button>” at the foot of any page.</p>
+      <h3 data-i18n="privacy_s9_h">Changes</h3>
+      <p data-i18n="privacy_s9_x">If this policy changes, the date at the top changes with it.</p>
+    </div>
   </div>
 </div>
 <div class="legal-dialog" id="legalChoices" role="dialog" aria-modal="true" aria-labelledby="legalChoicesT" aria-hidden="true">
   <div class="legal-dialog__window">
-    <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <h2 class="legal-dialog__title" id="legalChoicesT" data-i18n="choices_title">Your privacy choices</h2>
-    <p class="legal-dialog__body" data-i18n="choices_body">No cookies, no trackers. This device keeps only your theme, language, page text and menu state.</p>
+    <div class="legal-dialog__head"><div class="legal-dialog__heading"><span class="legal-dialog__rule" aria-hidden="true"></span><h2 class="legal-dialog__title" id="legalChoicesT" data-i18n="choices_title">Your privacy choices</h2></div><button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><span></span><span></span></button></div>
+    <div class="legal-dialog__body"><p data-i18n="choices_body">No cookies, no trackers. This device keeps only your theme, language, page text and menu state.</p></div>
     <div class="legal-dialog__actions">
-      <button type="button" class="legal-dialog__btn" data-legal-clear data-i18n="choices_button">Clear my saved preferences</button>
-      <a class="legal-dialog__link" href="privacy/" data-i18n="choices_link">Read the privacy policy</a>
+      <button type="button" class="cta" data-legal-clear><span class="cta__label" data-i18n="choices_button">Clear my saved preferences</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></button>
+      <button type="button" class="cta" data-legal-open="legalPrivacy" aria-haspopup="dialog"><span class="cta__label" data-i18n="choices_link">Read the privacy policy</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></button>
     </div>
     <p class="legal-dialog__done" role="status" data-legal-done hidden data-i18n="choices_done">Cleared. The site is back to its defaults.</p>
   </div>

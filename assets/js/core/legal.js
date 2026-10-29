@@ -1,6 +1,6 @@
-/* core/legal.js — the legal row's three overlays (terms, license, privacy choices), the privacy choice, sentences
-   with linked words, and the terms' list (PR #45, AIE-Q26, Q62: "Report an issue" is a plain link to /report/, no
-   overlay).
+/* core/legal.js — the site's overlays (terms, license, privacy policy, privacy choices; PR45-Q18, Q23), the privacy
+   choice, sentences with linked words, and the terms' list (PR #45, AIE-Q26, Q62: "Report an issue" is a plain link
+   to /report/, no overlay).
    Each overlay follows Contact's success modal (pages/contact/contact.js): it opens from its control in the row,
    moves focus to its close button, keeps Tab inside, closes on Escape, on the close button or on a click on the
    backdrop, and returns focus to the control that opened it.
@@ -99,10 +99,15 @@ function init(opts) {
     if (opener && typeof opener.focus === 'function') opener.focus();
   };
 
+  /* One overlay at a time. Opening one from inside another (the policy from choices, choices from the policy) swaps
+     them in place and keeps the first opener, so closing returns focus to the control in the page. */
   const show = (dialog, from) => {
-    if (open) close();
-    opener = from || document.activeElement;
+    const swap = !!open;
+    if (open) { open.classList.remove('is-active'); open.setAttribute('aria-hidden', 'true'); }
+    if (!swap) opener = from || document.activeElement;
     open = dialog;
+    const win = dialog.querySelector('.legal-dialog__window');
+    if (win) win.scrollTop = 0;
     dialog.classList.add('is-active');
     dialog.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
