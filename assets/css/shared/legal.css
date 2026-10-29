@@ -1,20 +1,20 @@
 /* shared/legal.css — the legal row in the footer strip and its four overlays, on every page (PR #45, AIE-Q26;
    STRATEGY v3_3 §6).
-   - Row: © left, the five controls right, in one row from 1024 px; stacked and centered below. Each control is at
+   - Row: © left, the five controls right, in one row from 1024 px; stacked and left-aligned below (PR45-Q17). Each control is at
      least 24 × 24 px (WCAG 2.2 target size), in the © line's type.
    - Overlays: Contact's success modal (pages/contact/contact.css), with its scrim, window, purple top rule and close
      button; the text left-aligned and scrolling inside the window when it runs taller than the screen.
    - The scroll lock (body.modal-open) is Contact's rule, repeated here so every page carries it. */
 .footer__meta.legal {
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
   gap: 0.5rem;
 }
 .legal__links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   column-gap: 1.25rem;
   row-gap: 0.25rem;
@@ -37,8 +37,9 @@
   text-decoration: none;
   cursor: pointer;
 }
+/* Hover and focus as the navbar's labels (shared/nav.css): white and bold (PR45-Q21). */
 .legal__link:hover,
-.legal__link:focus-visible { color: var(--color-brand-purple); }
+.legal__link:focus-visible { color: var(--color-brand-white); font-weight: var(--fw-bold); }
 .legal__link:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
 .legal__toggle {
   display: inline-block;
