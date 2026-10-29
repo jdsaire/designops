@@ -7,6 +7,7 @@ Components that appear on more than one page. Each file says in its first commen
 | [`nav.css`](nav.css) | The navigation bar, the Work menu and the phone menu. All 7 pages |
 | [`footer.css`](footer.css) | The footer and its closing statement. All 7 pages |
 | [`legal.css`](legal.css) | The footer's legal row, its three overlays and links inside a sentence. Every page |
+| [`cta.css`](cta.css) | The site's one call to action: a bold label beside a purple arrow square. Main, About, Contact and the report page; the four briefs still carry their own copy |
 | [`progress.css`](progress.css) | The scroll progress bar at the top. All 7 pages |
 | [`decoration.css`](decoration.css) | The decoration patterns, governed by [`../../../docs/v3/organisms/decoration-system.spec.md`](../../../docs/v3/organisms/decoration-system.spec.md). All 7 pages |
 | [`relay.css`](relay.css) | The relay organism: Brief 03's handoff tracks and one-row relays, and the phone schedule timeline of Briefs 01, 02 and 04. All four briefs |
