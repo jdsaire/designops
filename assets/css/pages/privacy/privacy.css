@@ -1,0 +1,19 @@
+/* pages/privacy/privacy.css — the privacy policy (PR #45): Main's editorial heading and lede (shared/editorial.css),
+   then nine short sections in reading measure. Type and colour from the tokens; left-aligned at every width. */
+.privacy__inner { max-width: 44rem; }
+.privacy__h {
+  margin: clamp(2rem, 3vw, 2.5rem) 0 0.5rem;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  color: var(--color-brand-white);
+}
+.privacy__x {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: var(--fw-light);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+.privacy__x a { color: var(--color-brand-purple); text-decoration: underline; text-underline-offset: 0.15em; }
+.privacy__x a:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 2px; }

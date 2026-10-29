@@ -2,7 +2,7 @@
 For each page's own EN/ES pair, compares the key order with the order in which the page's markup first uses each key
 (data-i18n, -html, -aria, -alt, -placeholder) and reports how many keys sit out of place (the fewest moves).
 Keys the page's script renders (absent from the markup) are left where they are.
-`--write <page>` (main, about, contact, b01, b02, b03, b04) rewrites that pair in page order, values untouched, EN and
+`--write <page>` (main, about, contact, b01, b02, b03, b04, privacy) rewrites that pair in page order, values untouched, EN and
 ES alike: script-rendered keys go right after the key that shares their longest name prefix.
 Report only: the exit code is 0 unless --strict is given. Standard library only."""
 import bisect, collections, json, os, re, sys
@@ -15,6 +15,7 @@ PAGES = {
     'b02': ('work/trust-verify-brief/index.html', 'work/trust-verify-brief/i18n/yape-trust-verify'),
     'b03': ('work/airport/index.html', 'work/airport/i18n/airport'),
     'b04': ('work/portfolio-evolution/index.html', 'work/portfolio-evolution/i18n/designops'),
+    'privacy': ('privacy/index.html', 'privacy/i18n/privacy'),
 }
 ATTR = re.compile(r'data-i18n(?:-html|-aria|-alt|-placeholder)?="([^"]+)"')
 
