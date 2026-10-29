@@ -26,3 +26,4 @@ Approved deployment plans for v4 and later.
 | PR #42 · Solution act | `Plan-PR42-SolutionAct.md` |
 | PR #43 · About and the Lab | `Plan-PR43-AboutLab.md` |
 | PR #44 · Repository hygiene + carry-ins | `Plan-PR44-RepoHygiene.md` |
+| PR #45 · Go-live: legal row, report page, domain, content policy | `Plan-PR45-GoLive.md` |
