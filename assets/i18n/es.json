@@ -57,5 +57,8 @@
   "choices_body": "Cero cookies y cero rastreadores. Solo se guarda en su equipo el tema, el idioma, el texto del sitio y el estado del menú.",
   "choices_button": "Borrar mis preferencias guardadas",
   "choices_link": "Leer la política de privacidad",
-  "choices_done": "Listo. El sitio volvió a sus valores predeterminados."
+  "choices_done": "Listo. El sitio volvió a sus valores predeterminados.",
+  "consent_checkbox": "Acepto que lo que envío se procese según la política de privacidad, incluida su transferencia fuera del Perú.",
+  "consent_link": "política de privacidad",
+  "consent_error": "Acepte la política de privacidad para enviar."
 }

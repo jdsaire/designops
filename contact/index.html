@@ -259,6 +259,17 @@
             <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="contact_err_msg">Enter your message.</span>
           </div>
 
+          <!-- Consent (PR #45, Ley 29733; shared with /report/): unticked; submit waits for it through contact.js's validation.
+               No name, so the form service receives exactly what it received before. The line and its linked words are
+               consent_checkbox and consent_link, joined by core/legal.js. -->
+          <div class="form-group form-group--consent" id="field-consent">
+            <label class="form-consent" for="contactConsent">
+              <input class="form-checkbox" type="checkbox" id="contactConsent" required aria-describedby="hint-consent">
+              <span class="form-consent__text"><span data-i18n-link="consent_checkbox|consent_link" data-href="../privacy/">I agree that what I send is processed as described in the <a href="../privacy/">privacy policy</a>, including its transfer outside Peru.</span> <span class="asterisk">*</span></span>
+            </label>
+            <span class="error-hint" id="hint-consent" role="status" aria-live="polite" data-i18n="consent_error">Please accept the privacy policy to send.</span>
+          </div>
+
           <div id="footerActions">
             <p class="mandatory-footnote"><span class="asterisk">*</span> <span data-i18n="contact_mandatory_footnote">Required field.</span></p>
 

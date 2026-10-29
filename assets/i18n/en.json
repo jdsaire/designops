@@ -57,5 +57,8 @@
   "choices_body": "No cookies, no trackers. This device keeps only your theme, language, page text and menu state.",
   "choices_button": "Clear my saved preferences",
   "choices_link": "Read the privacy policy",
-  "choices_done": "Cleared. The site is back to its defaults."
+  "choices_done": "Cleared. The site is back to its defaults.",
+  "consent_checkbox": "I agree that what I send is processed as described in the privacy policy, including its transfer outside Peru.",
+  "consent_link": "privacy policy",
+  "consent_error": "Please accept the privacy policy to send."
 }
