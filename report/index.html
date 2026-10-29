@@ -25,8 +25,6 @@
   <link rel="stylesheet" href="../assets/css/shared/section-extras.css">
   <link rel="stylesheet" href="../assets/css/shared/editorial.css">
   <link rel="stylesheet" href="../assets/css/shared/display.css">
-  <link rel="stylesheet" href="../assets/css/shared/carousel.css">
-  <link rel="stylesheet" href="../assets/css/shared/carousel-phone.css">
   <link rel="stylesheet" href="../assets/css/pages/contact/contact.css">
   <link rel="stylesheet" href="../assets/css/pages/report/report.css">
   <link rel="stylesheet" href="../assets/css/shared/channels.css">
@@ -153,9 +151,8 @@
 
   <main id="main">
 
-  <!-- The issue report page (PR #45 G1b; AIE-Q60…Q63, Q71): Contact's opening, an editorial head, Brief 01 Act 03's
-       slide carousel (shared/carousel.css + carousel-phone.css, core/carousel.js; three slides, no CTAs), then the
-       form in three columns from 1024, two from 768 (Contact's tablet pattern), one below (PR45-Q13). The form keeps
+  <!-- The issue report page (PR #45 G1b; AIE-Q60…Q63, Q71): Contact's opening, then the form in two columns from
+       768 and one below (PR45-Q15, Q16). The form keeps
        Contact's ids, so contact.css and contact.js apply unchanged; its own layout is pages/report/report.css. Same
        form service with the subject "Site issue report". Not in the nav; linked from the footer row, Contact, the
        privacy policy and security.txt. Every string is COPY-PR45-REPORT-LOCK's, or a reused site key. -->
@@ -164,42 +161,10 @@
 
       <div class="contact-intro">
         <p class="ah-label" data-i18n="report_arc_label">Report an issue</p>
-        <h1 class="ah" id="report-h"><span class="ah__line"><span class="ah__noun" data-i18n="report_arc_pre">REFINING</span> <em class="ah__hook" data-i18n="report_arc_k">THIS SITE.</em></span></h1>
-        <p class="ah-sub"><span class="bridge__heading" data-i18n="report_arc_sub">Prioritizing your experience.</span></p>
+        <h1 class="ah" id="report-h"><span class="ah__line"><span class="ah__noun" data-i18n="report_arc_pre">THE LAB</span> <em class="ah__hook" data-i18n="report_arc_k">EVOLVES.</em></span></h1>
+        <p class="ah-sub"><span class="bridge__heading" data-i18n="report_arc_sub">Your contributions, appreciated.</span></p>
       </div>
 
-    </div>
-  </section>
-
-  <!-- Editorial head (shared/editorial.css, the briefs' standard; left-aligned at every width) and the carousel.
-       Text-only slides: the lock carries no image; the eyebrows already number the slides, so no data-dl-num. -->
-  <section class="section report-lab" aria-labelledby="report-ed-h">
-    <div class="section__inner">
-      <header class="report-editorial">
-        <div class="section__eyebrow">
-          <span class="section__eyebrow-bar" aria-hidden="true"></span>
-          <p class="section__eyebrow-text" data-i18n="report_editorial_eyebrow">PURPOSE</p>
-        </div>
-        <h2 class="section__headline" id="report-ed-h" data-i18n="report_editorial_verdict">The lab evolves.</h2>
-        <p class="section__lede" data-i18n="report_editorial_lede">Contributions appreciated.</p>
-      </header>
-
-      <div class="dl report-slides" data-dl>
-        <div class="dl__viewport" role="region" aria-roledescription="carousel" aria-labelledby="report-ed-h" tabindex="0">
-          <ol class="dl__track">
-            <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="01 / 03">
-              <div class="dl__content"><p class="dl__label" data-i18n="report_slide_1_eyebrow">01 · EVOLUTION</p><h3 class="dl__title" data-i18n="report_slide_1_title">Every report contributes to the lab.</h3><p class="dl__body" data-i18n="report_slide_1_body">I design and maintain this portfolio on my own. When you point out a bug, it helps me spot blind spots and raise the standard of my work.</p></div>
-            </li>
-            <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="02 / 03">
-              <div class="dl__content"><p class="dl__label" data-i18n="report_slide_2_eyebrow">02 · SCOPE</p><h3 class="dl__title" data-i18n="report_slide_2_title">Issues that disrupt your browsing</h3><p class="dl__body" data-i18n="report_slide_2_body">Report functional and security bugs such as broken links, copy mistakes, pages that fail to load, or elements overlapping on your device.</p></div>
-            </li>
-            <li class="dl__slide" role="group" aria-roledescription="slide" aria-label="03 / 03">
-              <div class="dl__content"><p class="dl__label" data-i18n="report_slide_3_eyebrow">03 · RESTRICTIONS</p><h3 class="dl__title" data-i18n="report_slide_3_title">Tests and reports out of scope</h3><p class="dl__body" data-i18n="report_slide_3_body">Automated scanners, attempts to access others' data, denial-of-service tests, and attacks on servers are not accepted. Only functional and security issues will be processed.</p></div>
-            </li>
-          </ol>
-        </div>
-        <div class="dl__ctrl"><button class="dl__nav" type="button" data-step="-1" aria-label="Previous" data-i18n-aria="ui_carousel_prev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dl__count" aria-live="polite" aria-atomic="true">01 / 03</span><button class="dl__nav" type="button" data-step="1" aria-label="Next" data-i18n-aria="ui_carousel_next"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"/></svg></button></div>
-      </div>
     </div>
   </section>
 
@@ -223,34 +188,8 @@
           <!-- Honeypot. Real people never see it; bots fill it and are dropped. -->
           <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" aria-hidden="true">
 
-          <!-- Column 1 · identity -->
-          <div class="report-col report-col--identity">
-            <div class="form-group" id="field-name">
-              <label class="form-label" for="reportName">
-                <span data-i18n="report_name_label">Full name</span>
-                <span class="asterisk">*</span>
-              </label>
-              <input class="form-input" type="text" id="reportName" name="fullName"
-                     placeholder="Your name" required aria-describedby="hint-name"
-                     maxlength="100" autocomplete="name"
-                     data-i18n-placeholder="report_name_placeholder">
-              <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="report_err_name">Enter your full name.</span>
-            </div>
-            <div class="form-group" id="field-email">
-              <label class="form-label" for="reportEmail">
-                <span data-i18n="report_email_label">Email</span>
-                <span class="asterisk">*</span>
-              </label>
-              <input class="form-input" type="email" id="reportEmail" name="email"
-                     placeholder="you@example.com" required aria-describedby="hint-email"
-                     maxlength="150" autocomplete="email"
-                     data-i18n-placeholder="report_email_placeholder">
-              <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="report_err_email">Enter a valid email.</span>
-            </div>
-          </div>
-
-          <!-- Column 2 · context: reason (AIE-Q73), then page, theme, browser, device (AIE-Q74). Theme, browser and
-               device are optional: their placeholder stays selectable so a choice can be undone. -->
+          <!-- Left column · context: reason (AIE-Q73), then page, browser, device (AIE-Q74, PR45-Q16). Browser and device
+               are optional: their placeholder stays selectable so a choice can be undone. -->
           <div class="report-col report-col--context">
             <div class="form-group" id="field-reason">
               <label class="form-label" for="reportReason">
@@ -273,7 +212,7 @@
             </div>
 
             <!-- The page names are the nav's own keys, in the nav overlay's order, each with the nav's icon (cloned from
-                 this page's overlay by pages/report/main.js), shown uppercase, no numbering (PR45-Q12). A customizable
+                 this page's overlay by pages/report/main.js), shown uppercase, no numbering (PR45-Q12, Q18). A customizable
                  select (appearance: base-select) that stays a real <select>, so Contact's validator reads it. -->
             <div class="form-group" id="field-page">
               <label class="form-label" for="reportPage">
@@ -291,19 +230,9 @@
                   <option value="portfolio" data-icon='[data-nav-work="portfolio-evolution/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></option>
                   <option value="about" data-icon='.nav__overlay-link[data-nav-page="about/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_evolution">About</span></option>
                   <option value="contact" data-icon='.nav__overlay-link[data-nav-page="contact/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_cta">Contact</span></option>
-                  <option value="privacy"><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="legal_privacy">Privacy policy</span></option>
                 </select>
               </div>
               <span class="error-hint" id="hint-page" role="status" aria-live="polite" data-i18n="report_err_page">Tell me where you saw it.</span>
-            </div>
-
-            <div class="form-group" id="field-theme">
-              <label class="form-label" for="reportTheme"><span data-i18n="report_theme_label">Visual theme</span></label>
-              <div class="select-wrapper">
-                <select class="form-select" id="reportTheme" name="theme">
-                  <option value="" selected data-i18n="report_reason_placeholder">Select one</option>
-                </select>
-              </div>
             </div>
 
             <div class="form-group" id="field-browser">
@@ -334,8 +263,30 @@
             </div>
           </div>
 
-          <!-- Column 3 · details -->
-          <div class="report-col report-col--details">
+          <!-- Right column · identity, then the details, whose box fills what the left column leaves (PR45-Q16) -->
+          <div class="report-col report-col--person">
+            <div class="form-group" id="field-name">
+              <label class="form-label" for="reportName">
+                <span data-i18n="report_name_label">Full name</span>
+                <span class="asterisk">*</span>
+              </label>
+              <input class="form-input" type="text" id="reportName" name="fullName"
+                     placeholder="Your name" required aria-describedby="hint-name"
+                     maxlength="100" autocomplete="name"
+                     data-i18n-placeholder="report_name_placeholder">
+              <span class="error-hint" id="hint-name" role="status" aria-live="polite" data-i18n="report_err_name">Enter your full name.</span>
+            </div>
+            <div class="form-group" id="field-email">
+              <label class="form-label" for="reportEmail">
+                <span data-i18n="report_email_label">Email</span>
+                <span class="asterisk">*</span>
+              </label>
+              <input class="form-input" type="email" id="reportEmail" name="email"
+                     placeholder="you@example.com" required aria-describedby="hint-email"
+                     maxlength="150" autocomplete="email"
+                     data-i18n-placeholder="report_email_placeholder">
+              <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="report_err_email">Enter a valid email.</span>
+            </div>
             <div class="form-group" id="field-message">
               <label class="form-label" for="reportMessage">
                 <span data-i18n="report_msg_label">Details of what happened</span>

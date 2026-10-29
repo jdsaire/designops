@@ -1,16 +1,14 @@
 /* pages/report/main.js — the issue report page's entry (PR #45 G1b; AIE-Q60…Q63, Q71).
    Contact's entry with the report page's dictionary: the same form organism (pages/contact/contact.js, which finds
-   the form and its success modal by their ids and validates every required field), the display opening's fit, and
-   Brief 01 Act 03's carousel (core/carousel.js), whose slide survives a reload under report:ui as on About and the
-   briefs (core/legal.js clears it). Two small behaviours of its own: ?reason=<value> preselects that reason (the
-   privacy policy links ?reason=privacy), and the page select's options borrow the nav overlay's icons (PR45-Q12).
+   the form and its success modal by their ids and validates every required field) and the display opening's fit.
+   Two small behaviours of its own: ?reason=<value> preselects that reason (the privacy policy links
+   ?reason=privacy), and the page select's options borrow the nav overlay's icons (PR45-Q12).
    paths.js arrives transitively via i18n.js + navchrome.js. */
 import { init as initI18n, swapLang, setPage } from '../../core/i18n.js';
 import { init as initTheme }   from '../../core/theme.js';
 import { init as initProgress }  from '../../core/progress.js';
 import { init as initNavChrome } from '../../core/navchrome.js';
 import { init as initLegal }   from '../../core/legal.js';
-import { init as initSlides, sessionStore } from '../../core/carousel.js';
 import { init as initContact }   from '../contact/contact.js';
 import { init as initDecoration } from '../../core/decoration.js';
 import { init as initSlogan } from '../about/slogan.js';
@@ -18,8 +16,7 @@ import { init as initSlogan } from '../about/slogan.js';
 setPage('report/i18n/report');
 
 /* Each page option names, in data-icon, the nav overlay row it stands for; its icon is cloned from there, so the
-   form shows the same drawing as the phone menu and no icon is drawn twice. An option with no row (the privacy
-   policy) keeps an empty slot, so the names stay aligned. */
+   form shows the same drawing as the phone menu and no icon is drawn twice. */
 function pageIcons() {
   const overlay = document.getElementById('navOverlay');
   if (!overlay) return;
@@ -43,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgress();
   initNavChrome({ swapLang });
   initLegal({ swapLang });
-  initSlides({ store: sessionStore('report:ui') });
   initContact();
   initReport();
   initSlogan();

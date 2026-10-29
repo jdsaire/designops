@@ -16,8 +16,8 @@ Components that appear on more than one page. Each file says in its first commen
 | [`display.css`](display.css) | The display opening: pulsing label, display title in Main's hero grammar, purple subline. About's arcs and the Contact page |
 | [`brief-index.css`](brief-index.css) | The sticky index under a brief's hero (buttons from 768, a select below) and the closing rule that ends a brief. All four briefs |
 | [`brief-ending.css`](brief-ending.css) | How a brief ends: the Keep exploring carousel and the Contact organism. All four briefs |
-| [`carousel.css`](carousel.css) | The slide carousel: Act 03 in all four briefs, Keep exploring at their end, and About's two manifestos, with its illustration tag and per-slide call to action from 768. The offset follows the layout through a resize. All four briefs, About and the report page |
-| [`carousel-phone.css`](carousel-phone.css) | One phone carousel style below 768, for Main's capabilities carousel and the briefs' Act 03. Main, all four briefs, About and the report page |
+| [`carousel.css`](carousel.css) | The slide carousel: Act 03 in all four briefs, Keep exploring at their end, and About's two manifestos, with its illustration tag and per-slide call to action from 768. The offset follows the layout through a resize. All four briefs and About |
+| [`carousel-phone.css`](carousel-phone.css) | One phone carousel style below 768, for Main's capabilities carousel and the briefs' Act 03. Main and all four briefs |
 | [`bridge.css`](bridge.css) | The portrait-and-heading bridge. Main and About |
 | [`ticker.css`](ticker.css) | The credentials ticker. Main |
 | [`channels.css`](channels.css) | A row of outbound links, each an icon and a label. About and Contact |
