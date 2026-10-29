@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/progress.css">
 <link rel="stylesheet" href="../../assets/css/shared/footer.css">
+<link rel="stylesheet" href="../../assets/css/shared/legal.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
 <link rel="stylesheet" href="../../assets/css/shared/brief-index.css">
 <link rel="stylesheet" href="../../assets/css/shared/brief-ending.css">
@@ -960,12 +961,47 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
       </div>
     </div>
     <div class="footer__strip">
-      <div class="footer__meta">
-        <span data-i18n="footer_copyright">© 2026 Juan Diego Saire.</span>
+      <div class="footer__meta legal">
+        <span data-i18n="legal_copyright">© 2026 Juan Diego Saire</span>
+        <ul class="legal__links">
+          <li><a class="legal__link" href="../../privacy/" data-i18n="legal_privacy">Privacy policy</a></li>
+          <li><a class="legal__link" href="../../report/" data-i18n="legal_report">Report an issue</a></li>
+          <li><button type="button" class="legal__link" data-legal-open="legalTerms" aria-haspopup="dialog" data-i18n="legal_terms">Terms of use</button></li>
+          <li><button type="button" class="legal__link" data-legal-open="legalLicense" aria-haspopup="dialog" data-i18n="legal_license">License</button></li>
+          <li><button type="button" class="legal__link" data-legal-open="legalChoices" aria-haspopup="dialog"><svg class="legal__toggle" viewBox="0 0 28 14" aria-hidden="true" focusable="false"><rect x="0.75" y="0.75" width="26.5" height="12.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="16" y="3" width="8" height="8" fill="currentColor"/></svg><span data-i18n="legal_choices">Your privacy choices</span></button></li>
+        </ul>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- Legal overlays (PR #45, AIE-Q26): opened from the footer row; core/legal.js -->
+<div class="legal-dialog" id="legalTerms" role="dialog" aria-modal="true" aria-labelledby="legalTermsT" aria-hidden="true">
+  <div class="legal-dialog__window">
+    <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h2 class="legal-dialog__title" id="legalTermsT" data-i18n="terms_title">Terms of use</h2>
+    <div class="legal-dialog__body" data-i18n-list="terms_body"><p>Personal portfolio with no commercial services. Content does not guarantee:</p><ul><li>Continuous uptime or zero technical flaws,</li><li>Binding professional advice,</li><li>Results from applying its ideas, methods or code.</li></ul><p>External links are reference only, and I'm not responsible for their content. Governed by the laws of Peru.</p></div>
+  </div>
+</div>
+<div class="legal-dialog" id="legalLicense" role="dialog" aria-modal="true" aria-labelledby="legalLicenseT" aria-hidden="true">
+  <div class="legal-dialog__window">
+    <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h2 class="legal-dialog__title" id="legalLicenseT" data-i18n="license_title">License</h2>
+    <p class="legal-dialog__body" data-i18n="license_body">© 2026 Juan Diego Saire. All rights reserved. The text, images, design and code of this site and its repository may not be copied or reused without written permission. Third-party names and logos in the case studies belong to their owners and appear only to identify them.</p>
+  </div>
+</div>
+<div class="legal-dialog" id="legalChoices" role="dialog" aria-modal="true" aria-labelledby="legalChoicesT" aria-hidden="true">
+  <div class="legal-dialog__window">
+    <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close" data-i18n-aria="legal_close"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h2 class="legal-dialog__title" id="legalChoicesT" data-i18n="choices_title">Your privacy choices</h2>
+    <p class="legal-dialog__body" data-i18n="choices_body">No cookies, no trackers. This device keeps only your theme, language, page text and menu state.</p>
+    <div class="legal-dialog__actions">
+      <button type="button" class="legal-dialog__btn" data-legal-clear data-i18n="choices_button">Clear my saved preferences</button>
+      <a class="legal-dialog__link" href="../../privacy/" data-i18n="choices_link">Read the privacy policy</a>
+    </div>
+    <p class="legal-dialog__done" role="status" data-legal-done hidden data-i18n="choices_done">Cleared. The site is back to its defaults.</p>
+  </div>
+</div>
 
 <!-- ================= DESKTOP SIDE PANEL ================= -->
 <aside class="panel" id="panel" aria-label="Detail panel" aria-hidden="true">
@@ -1167,6 +1203,7 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initProgress } from "../../assets/js/core/progress.js";
   import { init as initDecoration } from "../../assets/js/core/decoration.js";
   import { init as initNavChrome } from "../../assets/js/core/navchrome.js";
+  import { init as initLegal }     from "../../assets/js/core/legal.js";
   import { init as initTheme }    from "../../assets/js/core/theme.js";
   import { init as initCarousel, sessionStore } from "../../assets/js/core/carousel.js";
   import { init as initIndex }    from "../../assets/js/core/brief-index.js";
@@ -1174,6 +1211,7 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   initProgress();
   initDecoration();
   initNavChrome({ swapLang: window.swapLang });
+  initLegal({ swapLang: window.swapLang });   // the footer's legal row and overlays (PR #45)
   initCarousel({ store: sessionStore("b01:ui") });   // Act 03 · The Solution keeps its slide across a reload
   initIndex();   // the act index between the hero and Act 00 (PR #43)
 </script>

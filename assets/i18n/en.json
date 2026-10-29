@@ -42,5 +42,20 @@
   "footer_l2_post": ".",
   "footer_linkedin": "Connect on LinkedIn",
   "footer_github": "See the code on GitHub",
-  "footer_copyright": "© 2026 Juan Diego Saire."
+  "legal_copyright": "© 2026 Juan Diego Saire",
+  "legal_privacy": "Privacy policy",
+  "legal_report": "Report an issue",
+  "legal_terms": "Terms of use",
+  "legal_license": "License",
+  "legal_choices": "Your privacy choices",
+  "legal_close": "Close",
+  "terms_title": "Terms of use",
+  "terms_body": "Personal portfolio with no commercial services. Content does not guarantee:\n• Continuous uptime or zero technical flaws,\n• Binding professional advice,\n• Results from applying its ideas, methods or code.\nExternal links are reference only, and I'm not responsible for their content. Governed by the laws of Peru.",
+  "license_title": "License",
+  "license_body": "© 2026 Juan Diego Saire. All rights reserved. The text, images, design and code of this site and its repository may not be copied or reused without written permission. Third-party names and logos in the case studies belong to their owners and appear only to identify them.",
+  "choices_title": "Your privacy choices",
+  "choices_body": "No cookies, no trackers. This device keeps only your theme, language, page text and menu state.",
+  "choices_button": "Clear my saved preferences",
+  "choices_link": "Read the privacy policy",
+  "choices_done": "Cleared. The site is back to its defaults."
 }

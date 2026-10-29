@@ -5,6 +5,7 @@ import { init as initI18n, swapLang, setPage } from '../../core/i18n.js';
 import { init as initTheme }   from '../../core/theme.js';
 import { init as initProgress }  from '../../core/progress.js';
 import { init as initNavChrome } from '../../core/navchrome.js';
+import { init as initLegal }   from '../../core/legal.js';
 import { init as initContact }   from './contact.js';
 import { init as initDecoration } from '../../core/decoration.js';
 import { init as initSlogan } from '../about/slogan.js';   // the display opening's title fit, shared with About (PR43-Q29)
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initProgress();
   initNavChrome({ swapLang });
+  initLegal({ swapLang });   // the footer's legal row and overlays (PR #45)
   initContact();
   initSlogan();
   initDecoration();

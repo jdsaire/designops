@@ -1,0 +1,178 @@
+/* shared/legal.css — the legal row in the footer strip and its four overlays, on every page (PR #45, AIE-Q26;
+   STRATEGY v3_3 §6).
+   - Row: © left, the five controls right, in one row from 1024 px; stacked and centered below. Each control is at
+     least 24 × 24 px (WCAG 2.2 target size), in the © line's type.
+   - Overlays: Contact's success modal (pages/contact/contact.css), with its scrim, window, purple top rule and close
+     button; the text left-aligned and scrolling inside the window when it runs taller than the screen.
+   - The scroll lock (body.modal-open) is Contact's rule, repeated here so every page carries it. */
+.footer__meta.legal {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+.legal__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1.25rem;
+  row-gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.legal__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 24px;
+  min-width: 24px;
+  margin: 0;
+  padding: 0.25rem 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--color-text-dim);
+  text-decoration: none;
+  cursor: pointer;
+}
+.legal__link:hover,
+.legal__link:focus-visible { color: var(--color-brand-purple); }
+.legal__link:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+.legal__toggle {
+  display: inline-block;
+  width: 1.75rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .footer__meta.legal {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    gap: 1.25rem;
+  }
+  .legal__links { justify-content: flex-end; }
+}
+
+body.modal-open { overflow: hidden; }
+
+.legal-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: var(--scrim-modal);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-ui) var(--ease-standard),
+              visibility 0s linear var(--duration-ui);
+}
+/* Visible from the first frame on opening, so focus can move inside at once; hidden only after the fade on closing. */
+.legal-dialog.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--duration-ui) var(--ease-standard), visibility 0s;
+}
+.legal-dialog__window {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  padding: 3.5rem 2.5rem 3rem;
+  background-color: var(--color-brand-white);
+  color: var(--color-brand-black);
+  font-family: var(--font-primary);
+  text-align: left;
+  transform: translateY(30px) scale(0.96);
+  transition: transform 300ms var(--ease-standard);
+}
+.legal-dialog__window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-brand-purple);
+}
+.legal-dialog.is-active .legal-dialog__window { transform: translateY(0) scale(1); }
+.legal-dialog__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--ground), 0.04);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-ui) var(--ease-standard);
+}
+.legal-dialog__close:hover { background: rgba(var(--ground), 0.08); }
+.legal-dialog__close svg { width: 1rem; height: 1rem; stroke: var(--color-brand-black); }
+.legal-dialog__close:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+.legal-dialog__title {
+  font-size: 1.75rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+}
+.legal-dialog__body {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(var(--ground), 0.6);
+  margin: 0 0 1rem;
+}
+.legal-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.legal-dialog__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  color: var(--color-brand-purple);
+  font-weight: var(--fw-bold);
+}
+.legal-dialog__btn {
+  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-brand-purple);
+  color: var(--color-brand-white);
+  border: 0;
+  font: inherit;
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}
+.legal-dialog__btn:focus-visible,
+.legal-dialog__link:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+.legal-dialog__done { margin: 1rem 0 0; font-size: 0.95rem; color: var(--color-brand-black); }
+/* The terms' list (render note: the "• " lines) and an overlay opener inside a sentence (the policy's cookies section). */
+.legal-dialog__body p { margin: 0 0 0.5rem; }
+.legal-dialog__body ul { margin: 0 0 0.5rem; padding-left: 1.25rem; list-style: disc; }
+.legal-dialog__body li { margin: 0 0 0.25rem; }
+.legal__inline {
+  display: inline;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--color-brand-purple);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+.legal__inline:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 2px; }

@@ -42,5 +42,20 @@
   "footer_l2_post": ".",
   "footer_linkedin": "Conectar en LinkedIn",
   "footer_github": "Ver el código en GitHub",
-  "footer_copyright": "© 2026 Juan Diego Saire."
+  "legal_copyright": "© 2026 Juan Diego Saire",
+  "legal_privacy": "Política de privacidad",
+  "legal_report": "Reportar un problema",
+  "legal_terms": "Términos de uso",
+  "legal_license": "Licencia",
+  "legal_choices": "Preferencias de privacidad",
+  "legal_close": "Cerrar",
+  "terms_title": "Términos de uso",
+  "terms_body": "Este es un portafolio personal y no ofrece servicios comerciales. El contenido no garantiza:\n• Funcionamiento continuo ni ausencia de fallas técnicas,\n• Asesoría profesional vinculante,\n• Resultados al aplicar sus ideas, métodos o código.\nLos enlaces a terceros son solo referencia y no respondo por su contenido. Rigen las leyes del Perú.",
+  "license_title": "Licencia",
+  "license_body": "© 2026 Juan Diego Saire. Todos los derechos reservados. El texto, las imágenes, el diseño y el código de este sitio y de su repositorio no pueden copiarse ni reutilizarse sin autorización por escrito. Los nombres y logotipos de terceros en los casos de estudio pertenecen a sus propietarios y aparecen solo para identificarlos.",
+  "choices_title": "Preferencias de privacidad",
+  "choices_body": "Cero cookies y cero rastreadores. Solo se guarda en su equipo el tema, el idioma, el texto del sitio y el estado del menú.",
+  "choices_button": "Borrar mis preferencias guardadas",
+  "choices_link": "Leer la política de privacidad",
+  "choices_done": "Listo. El sitio volvió a sus valores predeterminados."
 }
