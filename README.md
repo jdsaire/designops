@@ -21,14 +21,15 @@ Each brief is one case study, in English and Spanish. The line beside it is the 
 | Brief 03 · TUUA Transfer · airport | [`work/airport/`](work/airport/README.md) | Paying what was never paid — I designed the web prototype of new fee charged by Lima Airport. |
 | Brief 04 · Portfolio · software | [`work/portfolio-evolution/`](work/portfolio-evolution/README.md) | This web. My web. — How I built and deployed this site with AI, end to end. |
 
-Main ([`index.html`](index.html)), [About](about/README.md) and [Contact](contact/README.md) complete the site. Every page switches between English and Spanish, and between a dark and a light theme.
+Main ([`index.html`](index.html)), [About](about/README.md) and [Contact](contact/README.md) complete the site, with a page for reporting a problem with it ([`report/`](report/README.md)). Every page switches between English and Spanish, and between a dark and a light theme, and ends on the legal row: terms, license, the privacy policy and your privacy choices.
 
 ## Where everything lives
 
 | Path | What it is |
 |---|---|
 | [`index.html`](index.html), [`i18n/`](i18n/) | Main and its own dictionaries. Main stays at the root, where every path on the site is resolved from |
-| [`about/`](about/README.md), [`contact/`](contact/README.md) | One folder per page: the page and its own dictionaries |
+| [`about/`](about/README.md), [`contact/`](contact/README.md), [`report/`](report/README.md) | One folder per page: the page and its own dictionaries |
+| [`.well-known/`](.well-known/README.md) | Files other software looks for at a fixed address: `security.txt` |
 | [`work/`](work/README.md) | The four briefs, one folder each, plus the retired addresses that still answer |
 | [`assets/`](assets/README.md) | Everything shared: styles, scripts, the site-wide dictionaries, images, fonts, the CVs |
 | [`logos/`](logos/) | The site mark, in its states |
@@ -41,10 +42,10 @@ Main ([`index.html`](index.html)), [About](about/README.md) and [Contact](contac
 
 | PR | Merged | What a reader sees | Plan · Report |
 |---|---|---|---|
+| [#45](https://github.com/jdsaire/designops/pull/45) | pending merge | A legal row on every page (terms, license, privacy policy, privacy choices) in one dark overlay; a page to report an issue; consent on both forms; the site's links, canonicals and a content policy on jdsaire.com | [plan](docs/v4/cc-plans/Plan-PR45-GoLive.md) · [report](docs/v4/cc-completion-reports/pr45-go-live-completion-report.md) |
+| [#44](https://github.com/jdsaire/designops/pull/44) | 27 Oct 2026 | This repository opens on who built it, with this changelog; Brief 02 moves to `work/trust-verify-brief/` and gains three act ledes | [plan](docs/v4/cc-plans/Plan-PR44-RepoHygiene.md) · [report](docs/v4/cc-completion-reports/pr44-repo-hygiene-completion-report.md) |
 | [#43](https://github.com/jdsaire/designops/pull/43) | 21 Oct 2026 | About rebuilt around the lab; an index on every brief; icons in the phone menu | [plan](docs/v4/cc-plans/Plan-PR43-AboutLab.md) · [report](docs/v4/cc-completion-reports/pr43-about-lab-completion-report.md) |
 | [#42](https://github.com/jdsaire/designops/pull/42) | 19 Oct 2026 | Each brief explains its solution in three illustrated reasons; Brief 01 gains its context | [plan](docs/v4/cc-plans/Plan-PR42-SolutionAct.md) · [report](docs/v4/cc-completion-reports/pr42-solution-act-completion-report.md) |
 | [#41](https://github.com/jdsaire/designops/pull/41) | 17 Oct 2026 | A README in every folder, a dictionary map and the checks in `tools/`; six invisible clean-ups | [plan](docs/v4/cc-plans/Plan-PR41-RepoHygiene.md) · [report](docs/v4/cc-completion-reports/pr41-repo-hygiene-completion-report.md) |
-| [#40](https://github.com/jdsaire/designops/pull/40) | 15 Oct 2026 | Phone layouts for schedules, dashboards and card scrollers | [plan](docs/v4/cc-plans/Plan-PR40-MobileOrganisms.md) · [report](docs/v4/cc-completion-reports/pr40-mobile-organisms-completion-report.md) |
-| [#39](https://github.com/jdsaire/designops/pull/39) | 14 Oct 2026 | Brief 04's figures measured, plus four fixes | [plan](docs/v4/cc-plans/Plan-PR39-ClosureFigures.md) · [report](docs/v4/cc-completion-reports/pr39-closure-figures-completion-report.md) |
 
 The full list, from the first pull request: [`CHANGELOG.md`](CHANGELOG.md).
