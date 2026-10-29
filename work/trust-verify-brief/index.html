@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Content policy (PR #45, PR45-Q7; SR-2): everything loads from this origin. Inline scripts and <style> blocks are
+     allowed by hash, so a changed byte needs a new hash; style attributes stay allowed (the briefs' computed chart
+     positions). A meta tag can't carry frame-ancestors, report-to or sandbox: those wait for the response header. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI=' 'sha256-95Ei3SaRiWecmBO6b8YLSDtQDgBZZEkbURt57noLpVw=' 'sha256-YUhvCLCf8JOCDpng+X811D3jzf4R5/yL92ExJLUBjIc='; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'sha256-fvWxrexw8zWaozEFo9O2xoJpoQUVodrvSK8JEVZim74='; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
 <title>The screenshot says paid. My app asks the bank. · Juan Diego Saire</title>
 <meta name="description" content="Peru's favorite payment app has a counterfeit problem. To close it, I entered a stack I had never touched — and set one rule: prove every claim.">
 <link rel="canonical" href="https://jdsaire.com/work/trust-verify-brief/">

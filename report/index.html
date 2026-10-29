@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Content policy (PR #45, PR45-Q7; SR-2): everything loads from this origin. Inline scripts and <style> blocks are
+       allowed by hash, so a changed byte needs a new hash; style attributes stay allowed (the briefs' computed chart
+       positions). A meta tag can't carry frame-ancestors, report-to or sandbox: those wait for the response header. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI='; style-src 'self' 'unsafe-inline'; style-src-elem 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
   <title>Report an issue · Juan Diego Saire — Product Lab</title>
   <meta name="description" content="Found a bug, a broken link or a security or privacy issue on this site? Report it in one message.">
   <link rel="canonical" href="https://jdsaire.com/report/">
