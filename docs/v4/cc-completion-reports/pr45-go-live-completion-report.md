@@ -1,6 +1,6 @@
 # Completion report · PR #45 · Go-live
 
-**Branch:** `deploy/v32-pr45-go-live` on `320ec66` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR45-GoLive.md`](../cc-plans/Plan-PR45-GoLive.md) (as accepted, with its two deltas; rulings made in the run below) · **PR:** opened at the regression gate; its address is added in the release commit.
+**Branch:** `deploy/v32-pr45-go-live` on `320ec66` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR45-GoLive.md`](../cc-plans/Plan-PR45-GoLive.md) (as accepted, with its two deltas; rulings made in the run below) · **PR:** https://github.com/jdsaire/designops/pull/45
 
 ## What a reader now sees
 
@@ -13,7 +13,7 @@
 
 ## Commits
 
-`957f167` legal row and overlays · `9ee864b` privacy page · `0c9dbf5` security.txt · `4d99916` Contact consent · `71b170e` report page · `72ad70c` Contact's report line · `9b98436` dictionary map · `6a74c47` footer row alignment and hover · `2b24712` report: hero and form only · `201e499` report: details first · `bd9fd32` shared/cta.css · `9a59db4` navbar hover · `c51a720` one overlay, privacy as an overlay, footer row · `9e3be94` the pill switch, even spacing · `62ba790` release dates · `1eef46c` jdsaire.com links · `a3b7908` canonical and og:url · `f7f844d` content-security policy · then the documentation commits of G4 and the release commit.
+`957f167` legal row and overlays · `9ee864b` privacy page · `0c9dbf5` security.txt · `4d99916` Contact consent · `71b170e` report page · `72ad70c` Contact's report line · `9b98436` dictionary map · `6a74c47` footer row alignment and hover · `2b24712` report: hero and form only · `201e499` report: details first · `bd9fd32` shared/cta.css · `9a59db4` navbar hover · `c51a720` one overlay, privacy as an overlay, footer row · `9e3be94` the pill switch, even spacing · `62ba790` release dates · `1eef46c` jdsaire.com links · `a3b7908` canonical and og:url · `f7f844d` content-security policy · `2ff96a2` README and CHANGELOG · `6d73866` archive · `72a1494` consent link contrast · then this release commit.
 
 ## Results per success criterion
 
@@ -28,7 +28,7 @@
 | 6 · Domain | 0 live designops github.io links outside the CV pair (routed to M4) and one copy record; 13 app links unchanged; canonical and og:url on every page |
 | 7 · CSP | On 11 pages (8 + the 3 retired routes): 0 violations, 0 console errors, 0 failed requests over 88 cells in EN and ES, Chrome and WebKit |
 | 8 · Lab check | Recorded as a preview; the accepted fix missed and was dropped by ruling (PR45-Q31); the bar is measured on jdsaire.com at the sync |
-| 9 · Regression | The regression gate's matrix (added at release) |
+| 9 · Regression | 192 cells against 320ec66: every cell differs by the new footer; 0 unintended differences (5 above-footer cells read as capture noise); one new contrast fault fixed in `72a1494`, axe 0 on re-check |
 | 10 · Checks and docs | `parity`, `links`, `orphans` 0 and `order --strict` 0 at every commit; READMEs, DICTIONARIES.md (11 pairs, 1,166 keys per language), CHANGELOG and this report match the tip |
 | 11 · Authorship | Sole author jdsaire; the attribution grep reads 0; manual merge |
 
