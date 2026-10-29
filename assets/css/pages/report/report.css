@@ -2,9 +2,9 @@
    Contact's (pages/contact/contact.css, shared/channels.css, shared/display.css), kept unchanged through Contact's
    ids. Two things live here: the form's columns, and the page select with the nav's icons (PR45-Q12). */
 
-/* ---- The form's columns (PR45-Q16): context · person. Below 768 they stack in Contact's flex column (context
-   first); from 768 two columns: category, page, browser and device on the left; name, email and the details on the
-   right, the details box growing only to the left column's height. Contact's own placements (#field-message,
+/* ---- The form's columns (PR45-Q16, Q24): context · person. Below 768 they stack in Contact's flex column (context
+   first); from 768 two columns: category, page, browser and device on the left; the details, then name and email,
+   on the right, the details box growing only to the left column's height. Contact's own placements (#field-message,
    .form-row) no longer reach these fields: they aren't grid items. ---- */
 #contact .report-col {
   display: flex;

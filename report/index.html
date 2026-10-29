@@ -152,7 +152,7 @@
   <main id="main">
 
   <!-- The issue report page (PR #45 G1b; AIE-Q60…Q63, Q71): Contact's opening, then the form in two columns from
-       768 and one below (PR45-Q15, Q16). The form keeps
+       768 and one below (PR45-Q15, Q16, Q24). The form keeps
        Contact's ids, so contact.css and contact.js apply unchanged; its own layout is pages/report/report.css. Same
        form service with the subject "Site issue report". Not in the nav; linked from the footer row, Contact, the
        privacy policy and security.txt. Every string is COPY-PR45-REPORT-LOCK's, or a reused site key. -->
@@ -263,8 +263,19 @@
             </div>
           </div>
 
-          <!-- Right column · identity, then the details, whose box fills what the left column leaves (PR45-Q16) -->
+          <!-- Right column · the details first, the identity last (PR45-Q24); the details box fills what the left column leaves -->
           <div class="report-col report-col--person">
+            <div class="form-group" id="field-message">
+              <label class="form-label" for="reportMessage">
+                <span data-i18n="report_msg_label">Details of what happened</span>
+                <span class="asterisk">*</span>
+              </label>
+              <textarea class="form-textarea" id="reportMessage" name="message"
+                        placeholder="Describe what you were doing, what you expected to see, and what happened on your screen." required aria-describedby="hint-message"
+                        maxlength="2000"
+                        data-i18n-placeholder="report_msg_placeholder"></textarea>
+              <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="report_err_msg">Describe what happened.</span>
+            </div>
             <div class="form-group" id="field-name">
               <label class="form-label" for="reportName">
                 <span data-i18n="report_name_label">Full name</span>
@@ -286,17 +297,6 @@
                      maxlength="150" autocomplete="email"
                      data-i18n-placeholder="report_email_placeholder">
               <span class="error-hint" id="hint-email" role="status" aria-live="polite" data-i18n="report_err_email">Enter a valid email.</span>
-            </div>
-            <div class="form-group" id="field-message">
-              <label class="form-label" for="reportMessage">
-                <span data-i18n="report_msg_label">Details of what happened</span>
-                <span class="asterisk">*</span>
-              </label>
-              <textarea class="form-textarea" id="reportMessage" name="message"
-                        placeholder="Describe what you were doing, what you expected to see, and what happened on your screen." required aria-describedby="hint-message"
-                        maxlength="2000"
-                        data-i18n-placeholder="report_msg_placeholder"></textarea>
-              <span class="error-hint" id="hint-message" role="status" aria-live="polite" data-i18n="report_err_msg">Describe what happened.</span>
             </div>
           </div>
 
