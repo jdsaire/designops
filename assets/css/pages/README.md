@@ -8,3 +8,4 @@ Styles that belong to one page, one folder per page. The four briefs keep theirs
 | [`capabilities/`](capabilities/README.md) | Main's capabilities carousel, kept in its own folder from when it had a page of its own |
 | [`about/`](about/README.md) | About |
 | [`contact/`](contact/README.md) | Contact |
+| [`report/`](report/README.md) | The issue report page |

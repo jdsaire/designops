@@ -71,14 +71,4 @@
   max-width: 32em;
 }
 
-/* ---- CTA atoms (verbatim from pages/home/hero.css:68–73) ----
-   The shared footer's LinkedIn link uses .cta + .cta__label, and these
-   dedicated pages do NOT link hero.css, so without this reproduction the
-   footer (and the About CV / Contact destination affordances, which reuse
-   the same idiom) would render unstyled. Same reproduction precedent as above. */
-.cta { display:inline-flex; align-items:center; gap:0.75rem; cursor:pointer; width:fit-content; padding:0.125rem 0; margin-bottom:2rem; }
-.cta__label { font-size:1rem; font-weight:var(--fw-bold); color:var(--color-brand-white); letter-spacing:0.005em; }
-.cta__icon { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:var(--color-brand-purple); flex-shrink:0; transition:background var(--duration-ui) var(--ease-standard); }
-.cta:hover .cta__icon, .cta:focus-visible .cta__icon { background:var(--color-purple-hover); }
-.cta__icon svg { width:0.9rem; height:0.9rem; fill:none; stroke:var(--color-on-brand); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-button.cta { background:none; border:none; font-family:var(--font-primary); }
+/* ---- CTA atoms: shared/cta.css (PR #45, PR45-Q20), linked by every page. ---- */

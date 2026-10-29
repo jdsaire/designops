@@ -22,6 +22,7 @@ PAGES = {
     'b02': ('work/trust-verify-brief/index.html', G + R, ['work/trust-verify-brief/i18n/yape-trust-verify.{lc}.json']),
     'b03': ('work/airport/index.html', G + R, ['work/airport/i18n/airport.{lc}.json']),
     'b04': ('work/portfolio-evolution/index.html', G + R, ['work/portfolio-evolution/i18n/designops.{lc}.json']),
+    'report': ('report/index.html', G, ['report/i18n/report.{lc}.json']),
 }
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 find = {'parity': [], 'missing': [], 'shadow': [], 'fallback': []}

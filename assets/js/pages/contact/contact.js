@@ -30,7 +30,9 @@ function init() {
     const group = el.closest('.form-group');
     if (!group) return true;
     let ok = true;
-    if (el.required && !el.value.trim()) {
+    if (el.type === 'checkbox') {
+      ok = !el.required || el.checked;   // the consent box (PR #45)
+    } else if (el.required && !el.value.trim()) {
       ok = false;
     } else if (el.type === 'email' && el.value.trim()) {
       ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());

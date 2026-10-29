@@ -46,6 +46,14 @@ function swapTheme(theme) {
   document.dispatchEvent(new CustomEvent('theme:changed', { detail: { theme: light ? 'light' : 'dark' } }));
 }
 
+/* The site's default, applied without saving it: the legal row's "Clear my saved preferences" (core/legal.js, PR #45)
+   has just removed the saved choice, and a first visit saves none. */
+function resetTheme() {
+  document.documentElement.removeAttribute('data-theme');
+  reflect(false);
+  document.dispatchEvent(new CustomEvent('theme:changed', { detail: { theme: 'dark' } }));
+}
+
 function init() {
   const light = stored() === 'light';
   /* Re-assert rather than assume: the head script may not have run if a
@@ -62,4 +70,4 @@ function init() {
   });
 }
 
-export { swapTheme, init };
+export { swapTheme, resetTheme, init };

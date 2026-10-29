@@ -26,3 +26,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #42 · Solution act | `pr42-solution-act-completion-report.md` |
 | PR #43 · About and the Lab | `pr43-about-lab-completion-report.md` |
 | PR #44 · Repository hygiene + carry-ins | `pr44-repo-hygiene-completion-report.md` |
+| PR #45 · Go-live: legal row, report page, domain, content policy | `pr45-go-live-completion-report.md` |

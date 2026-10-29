@@ -8,6 +8,7 @@ import { init as initI18n, swapLang, setPage } from '../../core/i18n.js';
 import { init as initTheme }   from '../../core/theme.js';
 import { init as initProgress }  from '../../core/progress.js';
 import { init as initNavChrome } from '../../core/navchrome.js';
+import { init as initLegal }   from '../../core/legal.js';
 import { init as initEvolution } from './evolution.js';
 import { init as initCv }        from './cv.js';
 import { init as initDecoration } from '../../core/decoration.js';
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initProgress();
   initNavChrome({ swapLang });
+  initLegal({ swapLang });   // the footer's legal row and overlays (PR #45)
   initEvolution();
   initSlides({ store: sessionStore('about:ui') });   // the two manifesto carousels (PR #43)
   initSlogan();  // the arc slogans fit their column (PR #43)

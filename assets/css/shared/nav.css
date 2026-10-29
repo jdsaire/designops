@@ -300,21 +300,18 @@
    NAV POLISH (S4D-fix) — hover weight and the Work dropdown.
    ============================================================ */
 
-/* Hover and keyboard focus resolve to solid white AND bold. The default
-   stays muted and unweighted. font-variation-settings is paired with
-   font-weight so a variable face thickens without a second file. */
+/* Hover and keyboard focus resolve to solid white and heavier. The default
+   stays muted and unweighted. The weight is drawn with a hairline shadow on
+   either side, not set with font-weight: bold is wider than medium, and the
+   labels beside the hovered one used to move (PR #45, PR45-Q25). Same rule
+   as the footer's legal row (shared/legal.css). */
 .nav__link:hover,
 .nav__link:focus-visible,
 .nav__work-trigger:hover,
 .nav__work-trigger:focus-visible {
   color: var(--color-brand-white);
-  font-weight: var(--fw-bold);
+  text-shadow: 0.35px 0 0 currentColor, -0.35px 0 0 currentColor;
 }
-/* Bold is wider than medium, so hovering nudges the labels to its right by
-   a pixel or two. Reserving the bold width in CSS is not possible here: the
-   label text arrives from the i18n dictionary at runtime and changes with
-   language, so no static width or pseudo-element content can stand in for
-   it. The shift is measured and reported rather than papered over. */
 
 /* ---- Work dropdown ---- */
 .nav__work-menu {

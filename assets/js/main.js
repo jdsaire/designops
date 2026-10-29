@@ -12,6 +12,7 @@ import { init as initI18n, swapLang, setPage } from './core/i18n.js';
 import { init as initTheme }   from './core/theme.js';
 import { init as initProgress }  from './core/progress.js';
 import { init as initNavChrome } from './core/navchrome.js';
+import { init as initLegal }    from './core/legal.js';
 import { init as initHero }      from './pages/home/hero.js';
 import { init as initWork }      from './pages/home/work.js';
 import { init as initTicker }    from './pages/home/ticker.js';
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initProgress();
   initNavChrome({ swapLang });
+  initLegal({ swapLang });   // the footer's legal row and overlays (PR #45)
   initNavCue();
   initHero();
   initWork();

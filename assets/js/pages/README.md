@@ -8,3 +8,4 @@ Scripts that belong to one page, one folder per page. The four briefs keep their
 | [`capabilities/`](capabilities/README.md) | Main's capabilities carousel |
 | [`about/`](about/README.md) | About |
 | [`contact/`](contact/README.md) | Contact |
+| [`report/`](report/README.md) | The issue report page |
