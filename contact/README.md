@@ -1,6 +1,6 @@
 # contact/
 
-The Contact page, served at `/contact/`: a three-field form and the outbound links. The form posts to Web3Forms; the page carries its own content-security policy, derived as standing rule SR-2 describes ([`../docs/v4/STANDING-RULES.md`](../docs/v4/STANDING-RULES.md)).
+The Contact page, served at `/contact/`: the form with its consent box, the outbound links, and a line to the [issue report page](../report/README.md). The form posts to Web3Forms; the page carries its own content-security policy, derived as standing rule SR-2 describes ([`../docs/v4/STANDING-RULES.md`](../docs/v4/STANDING-RULES.md)).
 
 | File | Who it's for |
 |---|---|

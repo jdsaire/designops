@@ -143,6 +143,20 @@ body.modal-open {
   display: block;
 }
 
+/* The line to the issue report page, under the channel row (PR #45 G1b; PR45-Q9): muted, the whole line a link. */
+.contact-report { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+.contact-report a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.contact-report a:hover,
+.contact-report a:focus-visible { color: var(--color-brand-purple); }
+.contact-report a:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+
 /* Consent (PR #45): the box and its line, the box at least 24 px; the line links the privacy policy. */
 #contact .form-consent {
   display: flex;
