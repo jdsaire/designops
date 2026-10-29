@@ -1,0 +1,90 @@
+/* pages/report/report.css — the issue report page's own layout (PR #45 G1b; AIE-Q71). Everything else is shared:
+   the opening and the form are Contact's (pages/contact/contact.css, shared/channels.css, shared/display.css, kept
+   unchanged through Contact's ids), the editorial head is shared/editorial.css, and the carousel is Brief 01 Act
+   03's (shared/carousel.css + carousel-phone.css, core/carousel.js). Three things live here: the text-only slide,
+   the form's columns, and the page select with the nav's icons (PR45-Q12). */
+
+/* ---- Text-only slides: the lock carries no image, so one column held to a reading measure instead of the 51/49
+   media grid (carousel.css, and its 45/55 from 768 to 1023). ---- */
+@media (min-width: 768px) {
+  .report-slides .dl__slide { grid-template-columns: 1fr; }
+}
+.report-slides .dl__content { max-width: 40rem; }
+
+/* ---- The form's columns (PR45-Q13): identity · context · details. Below 768 they stack in Contact's flex column;
+   768–1023 is Contact's tablet pattern (identity and context on the left, details on the right); 1024 and up, three
+   columns. The wrappers take Contact's field gap; the details column grows the textarea to the row's height.
+   Contact's own placements (#field-message, .form-row) no longer reach these fields: they aren't grid items. ---- */
+#contact .report-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+@media (min-width: 768px) {
+  #contact .report-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  #contact .report-col--identity { grid-column: 1; grid-row: 1; }
+  #contact .report-col--context  { grid-column: 1; grid-row: 2; }
+  #contact .report-col--details  { grid-column: 2; grid-row: 1 / span 2; }
+  #contact .report-col--details #field-message { flex: 1; }
+  #contact .report-form #field-consent { grid-column: 1 / -1; }
+}
+@media (min-width: 1024px) {
+  #contact .report-form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #contact .report-col--context { grid-column: 2; grid-row: 1; }
+  #contact .report-col--details { grid-column: 3; grid-row: 1; }
+}
+
+/* ---- The page select (PR45-Q12): a customizable select, so each option carries the nav's icon (cloned from the
+   page's own overlay by pages/report/main.js), the names in uppercase, no numbering. It stays a real <select>, so
+   Contact's validator and the form data read it. The closed box matches the other selects (Contact's .form-select
+   and the wrapper's chevron); the picker uses the tokens, one 44 px row per page. Where base-select isn't supported
+   the select renders natively, text only. ---- */
+#contact .form-select--pages,
+#contact .form-select--pages::picker(select) { appearance: base-select; }
+#contact .form-select--pages { display: flex; align-items: center; }
+#contact .form-select--pages::picker-icon { display: none; }
+#contact .form-select__button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+#contact .form-select--pages selectedcontent,
+#contact .form-select--pages option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+#contact .form-select--pages selectedcontent { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#contact .form-select--pages::picker(select) {
+  margin-top: 0.25rem;
+  padding: 0.25rem 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  color: var(--color-brand-white);
+}
+#contact .form-select--pages option {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+#contact .form-select--pages option::checkmark { display: none; }
+#contact .form-select--pages option[hidden] { display: none; }   /* the placeholder, as in a native select */
+#contact .form-select--pages option:hover,
+#contact .form-select--pages option:focus-visible { color: var(--color-brand-white); background: rgba(161, 0, 255, 0.08); outline: none; }
+#contact .form-select--pages option:checked { color: var(--color-brand-white); }
+#contact .page-opt__name { text-transform: uppercase; letter-spacing: 0.04em; }   /* the names only; the placeholder keeps its case */
+#contact .page-opt__icon { flex: 0 0 auto; display: inline-flex; width: 20px; height: 20px; }
+#contact .page-opt__icon .nav__ov-icon { width: 20px; height: 20px; }
+/* Closed box: the chosen page's icon at the text's height, so the box matches the other selects. */
+#contact .form-select--pages selectedcontent .page-opt__icon,
+#contact .form-select--pages selectedcontent .nav__ov-icon { width: 1em; height: 1em; }
+#contact .form-select--pages selectedcontent { line-height: inherit; }

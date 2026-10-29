@@ -9,3 +9,4 @@ Scripts that belong to one page, one folder per page. The four briefs keep their
 | [`about/`](about/README.md) | About |
 | [`contact/`](contact/README.md) | Contact |
 | [`privacy/`](privacy/README.md) | The privacy policy |
+| [`report/`](report/README.md) | The issue report page |

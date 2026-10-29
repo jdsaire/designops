@@ -23,6 +23,7 @@ PAGES = {
     'b03': ('work/airport/index.html', G + R, ['work/airport/i18n/airport.{lc}.json']),
     'b04': ('work/portfolio-evolution/index.html', G + R, ['work/portfolio-evolution/i18n/designops.{lc}.json']),
     'privacy': ('privacy/index.html', G, ['privacy/i18n/privacy.{lc}.json']),
+    'report': ('report/index.html', G, ['report/i18n/report.{lc}.json']),
 }
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 find = {'parity': [], 'missing': [], 'shadow': [], 'fallback': []}

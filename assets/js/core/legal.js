@@ -6,14 +6,15 @@
    backdrop, and returns focus to the control that opened it.
    "Clear my saved preferences" removes the values this site keeps on the device, and nothing else, then shows the
    site's defaults: dark, Spanish (PR45-Q2). The values: localStorage jds-theme, jds-lang, jds-navcue and the
-   jds-i18n:<path>:<lang> dictionary cache; sessionStorage jds-navcue and each page's carousel state (<page>:ui).
+   jds-i18n:<path>:<lang> dictionary cache; sessionStorage jds-navcue and each page's carousel state (<page>:ui,
+   the report page's included).
    Page entries pass their swapLang, as they do to navchrome.js; the defaults are saved again by the site the
    moment it applies them, as on a first visit. */
 import { resetTheme } from './theme.js';
 
 const LOCAL_PREFIXES   = ['jds-theme', 'jds-lang', 'jds-navcue', 'jds-i18n:'];
 const SESSION_PREFIXES = ['jds-navcue'];
-const SESSION_KEYS     = ['about:ui', 'b01:ui', 'b02:ui', 'b03:ui', 'b04:ui'];
+const SESSION_KEYS     = ['about:ui', 'b01:ui', 'b02:ui', 'b03:ui', 'b04:ui', 'report:ui'];
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function sweep(store, test) {
