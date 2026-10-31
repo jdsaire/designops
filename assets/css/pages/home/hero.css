@@ -92,10 +92,11 @@
 /* The call to see the work: the shared .cta, spaced on the stage's scale. */
 .hero__stage > .hero__cta { margin:clamp(1.5rem,2.4vw,2.25rem) 0 0; }
 
-/* While hero.js fits the heading, the hero's content box waits unseen, so nothing on it moves
-   after the first paint (a visible box that resizes counts as a layout shift even when its
-   content is hidden). If the script never runs, it shows after 3 s regardless. */
-html.js .hero:not(.hero--fit) .hero__inner { visibility:hidden; animation:hero-show 0s 3s forwards; }
+/* While hero.js fits the heading, only the heading waits unseen (PR #46, PR46-Q6): the attribution, the value
+   proposition and the call paint with the first layout. The heading's box holds the fitted Spanish height (measured
+   360–1920 px: 60 vw below 768, 17.5 vw from 768, capped with the stage), so they stay put when it shows. If the
+   script never runs, it shows after 3 s regardless. */
+html.js .hero:not(.hero--fit) .hero__h1 { visibility:hidden; min-height:min(17.5vw,15.75rem); animation:hero-show 0s 3s forwards; }
 @keyframes hero-show { to { visibility:visible; } }
 /* While hero.js sets the fitted sizes, nothing on the hero eases (see hero.js, fit). */
 .hero--sizing, .hero--sizing * { transition:none !important; }
@@ -135,6 +136,7 @@ html.js .hero:not(.hero--fit) .hero__inner { visibility:hidden; animation:hero-s
   .hero__attribution { font-size:0.9375rem; }
   .hero__sep { display:none; }
   .hero__sub .hero__sub-hl.bridge__heading { font-size:1.0625rem; }
+  html.js .hero:not(.hero--fit) .hero__h1 { min-height:60vw; }
   .hero__tags { display:none; }
   .hero__right { padding-top:1.5rem; border-top:1px solid var(--color-border-faint); gap:1.25rem; }
   .hero__stats { gap:1rem; }
