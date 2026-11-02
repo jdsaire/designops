@@ -19,6 +19,10 @@
   letter-spacing:-0.02em; color:var(--color-brand-white);}
 
 /* ---- 1 · Keep exploring ---- */
+@media (min-width:768px){
+  .brief-more .act__head{text-align:center;}
+  .brief-more .section__eyebrow{align-items:center;}
+}
 .brief-more .act__head{margin-bottom:clamp(1.75rem,3vw,2.5rem);}
 .brief-more .dl__img{object-fit:cover;}   /* Main's 5:4 work art fills the 3:2 frame, as it fills Main's cards */
 @media (max-width:767px){

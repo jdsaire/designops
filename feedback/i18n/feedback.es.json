@@ -1,8 +1,8 @@
 {
   "report_arc_label": "Reporte un problema",
-  "report_arc_pre": "EL LAB",
-  "report_arc_k": "EVOLUCIONA.",
-  "report_arc_sub": "Sus contribuciones, apreciadas.",
+  "report_arc_pre": "ENVÍE",
+  "report_arc_k": "FEEDBACK.",
+  "report_arc_sub": "Sus contribuciones son apreciadas.",
   "report_form_head": "ENVÍE SU REPORTE.",
   "report_reason_label": "Motivo del reporte",
   "report_reason_placeholder": "Seleccione",
