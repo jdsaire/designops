@@ -65,10 +65,10 @@
   animation: ticker-right var(--ticker-duration, 28s) linear infinite;
 }
 
-/* MARQUEE (decoration spec, exception X-1): a lane holds still while a pointer rests on it, so a logo can be read;
-   it resumes when the pointer leaves. Pointer devices only, so a tap never leaves a lane stuck. */
+/* MARQUEE (decoration spec, exception X-1, narrowed by PR46-Q38): keyboard focus holds a lane still; the mouse no
+   longer does, and reduced motion stops it altogether. The narrowing is owed to the spec. */
 @media (hover: hover) {
-  .ticker__band:hover .ticker__track { animation-play-state: paused; }
+  .ticker__band:focus-within .ticker__track { animation-play-state: paused; }
 }
 
 /* Logo group */
