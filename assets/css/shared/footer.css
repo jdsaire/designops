@@ -44,7 +44,7 @@
 .footer__tagline .purple { color: var(--color-brand-purple); }
 .footer__em { font-style: italic; padding-right: 0.03em; }
 
-/* Links: the conversation channel and the authorship proof. Each row is at least 44 px tall. */
+/* Contacts: the direct line, the conversation channel and the authorship proof. Each row is at least 44 px tall. */
 .footer__links {
   display: flex;
   flex-direction: column;
@@ -85,6 +85,15 @@
   font-size: 0.8125rem;
   color: var(--color-text-dim);
 }
+
+/* The site's one closing action (PR #46): the Contact organism's call, now in the footer. Same drawing as shared/cta.css;
+   the briefs don't link that file yet. Not on Contact or Feedback, where it would compete with the form. */
+.footer__cta { display: inline-flex; align-items: center; gap: 0.75rem; width: fit-content; min-height: 44px; font-size: 1rem; font-weight: var(--fw-bold); letter-spacing: 0.005em; color: var(--color-brand-white); text-decoration: none; }
+.footer__cta-icon { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--color-brand-purple); transition: background var(--duration-ui) var(--ease-standard); }
+.footer__cta-icon svg { width: 0.9rem; height: 0.9rem; fill: none; stroke: var(--color-on-brand); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.footer__cta:hover .footer__cta-icon, .footer__cta:focus-visible .footer__cta-icon { background: var(--color-purple-hover); }
+.footer__cta:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+@media (max-width: 767px) { .footer__cta-icon { width: 1.75rem; height: 1.75rem; } }
 
 /* Tier 2: the sitemap (PR46-Q21). Text only: the navbar's icons stay in the navbar. Four clusters; two by two on phones,
    rows of 32 px; centred as a block from 768. */
