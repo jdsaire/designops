@@ -49,13 +49,6 @@
   gap: 0.75rem;
 }
 #contact .form-select--pages selectedcontent { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#contact .form-select--pages::picker(select) {
-  margin-top: 0.25rem;
-  padding: 0.25rem 0;
-  background: var(--surface-raised);
-  border: 1px solid var(--border-hairline);
-  color: var(--color-brand-white);
-}
 #contact .form-select--pages option {
   min-height: 44px;
   padding: 0.5rem 1rem;
@@ -64,8 +57,6 @@
 }
 #contact .form-select--pages option::checkmark { display: none; }
 #contact .form-select--pages option[hidden] { display: none; }   /* the placeholder, as in a native select */
-#contact .form-select--pages option:hover,
-#contact .form-select--pages option:focus-visible { color: var(--color-brand-white); background: rgba(161, 0, 255, 0.08); outline: none; }
 #contact .form-select--pages option:checked { color: var(--color-brand-white); }
 #contact .page-opt__name { text-transform: uppercase; letter-spacing: 0.04em; }   /* the names only; the placeholder keeps its case */
 #contact .page-opt__icon { flex: 0 0 auto; display: inline-flex; width: 20px; height: 20px; }

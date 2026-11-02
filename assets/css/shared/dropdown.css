@@ -1,0 +1,82 @@
+/* shared/dropdown.css — the site's one dropdown (PR #46, PR45-Q28, PR46-Q22, Q23, Q40). Two sizes share one surface:
+   - The navbar's menus (.nav__menu): big icons, a name and a tag, dim at rest and bright on hover. Each opens centred
+     under its own label; the open label keeps its hover state (shared/nav.css).
+   - The compact panels (.nav__util-menu, the report page's picker): hairline rows, each one a line, with the purple
+     tint and rule on the hovered row; the chosen row shows them until another row is hovered.
+   Linked by every page, after shared/nav.css. */
+
+/* ---- The surface ---- */
+.nav__menu,
+.nav__util-menu {
+  position: absolute; z-index: 101;
+  background: var(--surface-panel); border: 1px solid var(--color-border-soft); border-radius: 2px;
+  box-shadow: 0 12px 32px var(--shadow-3);
+}
+.nav__menu[hidden], .nav__util-menu[hidden] { display: none; }
+
+/* ---- Navbar menus ---- */
+.nav__menu {
+  top: calc(100% + 0.9rem); left: 50%; transform: translateX(-50%);
+  width: max-content; display: grid; gap: 0.5rem; padding: 1.25rem;
+}
+.nav__menu--briefs { grid-template-columns: repeat(4, minmax(9.5rem, 1fr)); }
+.nav__card {
+  display: flex; flex-direction: column; align-items: center; gap: 0.45rem; min-width: 9.5rem; padding: 1.1rem 0.75rem;
+  text-align: center; color: var(--color-brand-white); opacity: 0.55;
+  transition: opacity var(--duration-ui) var(--ease-standard);
+}
+a.nav__card:hover, a.nav__card:focus-visible { opacity: 1; }
+.nav__card-icon { width: 72px; height: 72px; stroke-width: 1; }
+.nav__card-name { font-size: 0.95rem; font-weight: var(--fw-bold); }
+.nav__card-tag { font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+
+/* ---- A page that isn't live yet (data-nav-state="soon"): shown, never a link ---- */
+[data-nav-state="soon"] { cursor: default; }
+.nav__soon {
+  padding: 0.1rem 0.3rem; border: 1px solid var(--color-border-soft); font-size: 0.6rem; font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: var(--color-text-dim);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nav__menu { padding: 0.5rem; }
+  .nav__menu--briefs { grid-template-columns: repeat(4, 6.75rem); }
+  .nav__card { min-width: 0; padding: 0.75rem 0.25rem; }
+  .nav__card-icon { width: 48px; height: 48px; }
+  .nav__card-name { font-size: 0.8rem; }
+}
+
+/* ---- Compact panels ---- */
+.nav__util-menu { top: 100%; right: 0; width: max-content; padding: 0.4rem 0; display: flex; flex-direction: column; }
+.nav__util--up .nav__util-menu { top: auto; bottom: 100%; }
+.nav__util-row {
+  display: block; width: 100%; padding: 0.55rem 1rem; background: none; border: 0; border-left: 2px solid transparent;
+  font-family: var(--font-primary); font-size: 0.8rem; font-weight: var(--fw-medium); letter-spacing: 0.04em;
+  text-align: left; text-transform: uppercase; color: var(--color-text-muted); cursor: pointer;
+  transition: color var(--duration-ui) var(--ease-standard), background var(--duration-ui) var(--ease-standard), border-color var(--duration-ui) var(--ease-standard);
+}
+.nav__util-row:hover,
+.nav__util-row:focus-visible,
+.nav__util-row[aria-pressed="true"],
+.nav__util-row[aria-selected="true"],
+#contact .form-select--pages option:hover,
+#contact .form-select--pages option:focus-visible {
+  color: var(--color-brand-white); background: rgba(161, 0, 255, 0.10); outline: none;
+}
+.nav__util-row:hover,
+.nav__util-row:focus-visible,
+.nav__util-row[aria-pressed="true"],
+.nav__util-row[aria-selected="true"] {
+  border-left-color: var(--color-brand-purple); text-shadow: 0.35px 0 0 currentColor, -0.35px 0 0 currentColor;
+}
+/* One highlight at a time: hovering another row takes it from the chosen one. */
+.nav__util-menu:hover .nav__util-row:not(:hover) {
+  color: var(--color-text-muted); background: none; border-left-color: transparent; text-shadow: none;
+}
+#contact .form-select--pages::picker(select) {
+  margin-top: 0.25rem; padding: 0.25rem 0;
+  background: var(--surface-raised); border: 1px solid var(--border-hairline); color: var(--color-brand-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__card, .nav__util-row { transition: none; }
+}

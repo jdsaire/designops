@@ -58,6 +58,12 @@ function swapLang(lang) {
       if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
     });
 
+    /* title swap (the theme switch's tooltips, PR #46) */
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.dataset.i18nTitle;
+      if (dict[key] !== undefined) el.setAttribute('title', dict[key]);
+    });
+
     /* placeholder swap for form inputs/textarea */
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const key = el.dataset.i18nPlaceholder;

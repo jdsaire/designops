@@ -89,8 +89,16 @@
 .hero__sub { margin:clamp(1.75rem,3vw,2.75rem) 0 0; max-width:42rem; }
 .hero__sub .hero__sub-hl.bridge__heading { font-size:1.375rem; }
 
-/* The call to see the work: the shared .cta, spaced on the stage's scale. */
-.hero__stage > .hero__cta { margin:clamp(1.5rem,2.4vw,2.25rem) 0 0; }
+/* The way down (PR46-Q35, Q39): the hero's one action, at its foot. It nudges three times, then rests. */
+.hero__cue {
+  position:absolute; left:50%; bottom:1.25rem; z-index:2; transform:translateX(-50%);
+  display:inline-flex; flex-direction:column; align-items:center; gap:0.35rem; white-space:nowrap;
+  font-size:0.7rem; font-weight:var(--fw-semibold); letter-spacing:0.14em; text-transform:uppercase; color:var(--color-text-muted);
+}
+.hero__cue::after { content:""; width:0.55rem; height:0.55rem; border-right:1.6px solid var(--color-brand-purple); border-bottom:1.6px solid var(--color-brand-purple);
+  transform:rotate(45deg); animation:hero-nudge 1.8s var(--ease-standard) 3; }
+.hero__cue:hover, .hero__cue:focus-visible { color:var(--color-brand-white); }
+@keyframes hero-nudge { 50% { translate:0 5px; } }
 
 /* While hero.js fits the heading, only the heading waits unseen (PR #46, PR46-Q6): the attribution, the value
    proposition and the call paint with the first layout. The heading's box holds the fitted Spanish height (measured
@@ -135,6 +143,8 @@ html.js .hero:not(.hero--fit) .hero__h1 { visibility:hidden; min-height:min(17.5
   .hero__attr { flex-direction:column; align-items:flex-start; row-gap:0.15rem; }
   .hero__attribution { font-size:0.9375rem; }
   .hero__sep { display:none; }
+  .hero__sub { margin-top:2.25rem; }
+  .hero__attr { margin-bottom:2.25rem; }
   .hero__sub .hero__sub-hl.bridge__heading { font-size:1.0625rem; }
   html.js .hero:not(.hero--fit) .hero__h1 { min-height:60vw; }
   .hero__tags { display:none; }
