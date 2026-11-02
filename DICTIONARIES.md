@@ -10,7 +10,7 @@ Every word the site shows comes from an English and a Spanish dictionary, one pa
 | Page | Main | [`i18n/main.en.json`](i18n/main.en.json) | [`i18n/main.es.json`](i18n/main.es.json) | 49 | 49 |
 | Page | About | [`about/i18n/about.en.json`](about/i18n/about.en.json) | [`about/i18n/about.es.json`](about/i18n/about.es.json) | 210 | 210 |
 | Page | Contact | [`contact/i18n/contact.en.json`](contact/i18n/contact.en.json) | [`contact/i18n/contact.es.json`](contact/i18n/contact.es.json) | 30 | 30 |
-| Page | Report an issue | [`report/i18n/report.en.json`](report/i18n/report.en.json) | [`report/i18n/report.es.json`](report/i18n/report.es.json) | 38 | 38 |
+| Page | Report an issue | [`feedback/i18n/feedback.en.json`](feedback/i18n/feedback.en.json) | [`feedback/i18n/feedback.es.json`](feedback/i18n/feedback.es.json) | 38 | 38 |
 | Local | Brief 01 · AccreditaPass | [`work/accreditapass/i18n/accreditapass.en.json`](work/accreditapass/i18n/accreditapass.en.json) | [`work/accreditapass/i18n/accreditapass.es.json`](work/accreditapass/i18n/accreditapass.es.json) | 146 | 146 |
 | Local | Brief 02 · Trust & Verify | [`work/trust-verify-brief/i18n/yape-trust-verify.en.json`](work/trust-verify-brief/i18n/yape-trust-verify.en.json) | [`work/trust-verify-brief/i18n/yape-trust-verify.es.json`](work/trust-verify-brief/i18n/yape-trust-verify.es.json) | 151 | 151 |
 | Local | Brief 03 · TUUA Transfer | [`work/airport/i18n/airport.en.json`](work/airport/i18n/airport.en.json) | [`work/airport/i18n/airport.es.json`](work/airport/i18n/airport.es.json) | 250 | 250 |

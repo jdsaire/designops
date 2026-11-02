@@ -1,4 +1,4 @@
-/* pages/report/report.css — the issue report page's own layout (PR #45 G1b; AIE-Q71, PR45-Q16). Everything else is
+/* pages/feedback/feedback.css — the issue report page's own layout (PR #45 G1b; AIE-Q71, PR45-Q16). Everything else is
    Contact's (pages/contact/contact.css, shared/channels.css, shared/display.css), kept unchanged through Contact's
    ids. Two things live here: the form's columns, and the page select with the nav's icons (PR45-Q12). */
 
@@ -22,7 +22,7 @@
 }
 
 /* ---- The page select (PR45-Q12): a customizable select, so each option carries the nav's icon (cloned from the
-   page's own overlay by pages/report/main.js), the names in uppercase, no numbering. It stays a real <select>, so
+   page's own overlay by pages/feedback/main.js), the names in uppercase, no numbering. It stays a real <select>, so
    Contact's validator and the form data read it. The closed box matches the other selects (Contact's .form-select
    and the wrapper's chevron); the picker uses the tokens, one 44 px row per page. Where base-select isn't supported
    the select renders natively, text only. ---- */

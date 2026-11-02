@@ -1,4 +1,4 @@
-/* pages/report/main.js — the issue report page's entry (PR #45 G1b; AIE-Q60…Q63, Q71).
+/* pages/feedback/main.js — the issue report page's entry (PR #45 G1b; AIE-Q60…Q63, Q71).
    Contact's entry with the report page's dictionary: the same form organism (pages/contact/contact.js, which finds
    the form and its success modal by their ids and validates every required field) and the display opening's fit.
    Two small behaviours of its own: ?reason=<value> preselects that reason (the privacy policy links
@@ -13,7 +13,7 @@ import { init as initContact }   from '../contact/contact.js';
 import { init as initDecoration } from '../../core/decoration.js';
 import { init as initSlogan } from '../about/slogan.js';
 
-setPage('report/i18n/report');
+setPage('feedback/i18n/feedback');
 
 /* Each page option names, in data-icon, the nav overlay row it stands for; its icon is cloned from there, so the
    form shows the same drawing as the phone menu and no icon is drawn twice. */
