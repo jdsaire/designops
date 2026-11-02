@@ -47,7 +47,7 @@ function init(opts) {
       let target;
       try { target = new URL(a.getAttribute('href'), location.href).pathname.replace(/index\.html$/, ''); }
       catch (e) { return; }
-      if (target !== here || a.hash) return;   /* Résumé is a place on About, not a page of its own, for now */
+      if (target !== here) return;
       a.classList.add('is-current');
       a.setAttribute('aria-current', 'page');
     });

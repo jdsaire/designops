@@ -17,6 +17,7 @@ R = ['assets/i18n/briefs/briefs-ui.{lc}.json', 'assets/i18n/briefs/tags.{lc}.jso
 PAGES = {
     'main': ('index.html', G, ['i18n/main.{lc}.json']),
     'about': ('about/index.html', G, ['about/i18n/about.{lc}.json']),
+    'resume': ('resume/index.html', G, ['resume/i18n/resume.{lc}.json']),
     'contact': ('contact/index.html', G, ['contact/i18n/contact.{lc}.json']),
     'b01': ('work/accreditapass/index.html', G + R, ['work/accreditapass/i18n/accreditapass.{lc}.json']),
     'b02': ('work/trust-verify-brief/index.html', G + R, ['work/trust-verify-brief/i18n/yape-trust-verify.{lc}.json']),

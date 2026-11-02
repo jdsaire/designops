@@ -1,4 +1,4 @@
-/* pages/about/cv.js — the CV downloads in About's hero.
+/* pages/resume/cv.js — the CV downloads on the Résumé page.
 
    The markup carries the English files as the default. The page's own
    dictionary holds the file for each language under the key named by the

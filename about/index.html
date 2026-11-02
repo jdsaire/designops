@@ -92,7 +92,7 @@
           </div>
         </div>
         <a href="../about/" data-nav-page="about/" class="nav__link" data-i18n="nav_evolution" aria-current="page">About</a>
-        <a href="../about/#bridge1-onboarding" data-nav-page="about/#bridge1-onboarding" class="nav__link" data-i18n="nav_resume">Résumé</a>
+        <a href="../resume/" data-nav-page="resume/" class="nav__link" data-i18n="nav_resume">Résumé</a>
       </div>
 
       <!-- RIGHT utility -->
@@ -153,7 +153,7 @@
         <a href="../about/" data-nav-page="about/" class="nav__overlay-link" aria-current="page">
           <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c.8-3.9 3.8-6 7.5-6s6.7 2.1 7.5 6"/></svg><span data-i18n="nav_evolution">About</span></span>
         </a>
-        <a href="../about/#bridge1-onboarding" data-nav-page="about/#bridge1-onboarding" class="nav__overlay-link">
+        <a href="../resume/" data-nav-page="resume/" class="nav__overlay-link">
           <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg><span data-i18n="nav_resume">Résumé</span></span>
         </a>
         <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
@@ -189,46 +189,6 @@
        Relocated from Main (S10C); opens the About page.
        Anchor: #bridge1-onboarding
        ============================================================ -->
-  <section class="bridge" id="bridge1-onboarding" aria-labelledby="bridge1-onboarding-heading">
-    <div class="bridge__media">
-      <span class="img-alt-host" alt="Juan Diego Saire — AI Product &amp; Experience Engineer, Lima, Peru." data-i18n-alt="about_hero_portrait_caption">
-        <img
-          class="bridge__image"
-          src="../assets/img/bridge1_onboarding.svg"
-          alt="Confident black-and-white portrait of Juan Diego Saire in a white shirt with rolled-up sleeves, leaning in with a ready-to-build posture."
-          data-i18n-alt="about_hero_image_alt"
-          loading="eager"
-          decoding="async"
-          width="900"
-          height="1200"
-        >
-      </span>
-      <div class="bridge__overlay" aria-hidden="true"></div>
-    </div>
-
-    <div class="bridge__content">
-      <span class="bridge__rule" aria-hidden="true"></span>
-      <div class="bridge__heading-wrapper">
-        <h1
-          class="bridge__heading"
-          id="bridge1-onboarding-heading"
-        ><span data-i18n="about_hero_heading">Engineer. MBA. Six years in tech &amp; design. I direct AI to turn business challenges into bulletproof websites and apps.</span></h1>
-      </div>
-      <!-- The CV, offered at the opening (PR35-Q54): the Contact page's channel row (shared/channels.css).
-           Each link carries the English file as its default; pages/about/cv.js points it at the
-           reader's language from the about_cv_href keys (PR36). -->
-      <div class="contact-channels bridge__downloads">
-        <a class="cta" href="../assets/docs/CV_Juan_Diego_Saire_EN.pdf" data-cv-href="about_cv_href" download type="application/pdf">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false"><path d="M11 3h2v10.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17V3ZM4 19h16v2H4v-2Z" fill="currentColor"/></svg>
-          <span class="cta__label" data-i18n="about_cv_cta">Download CV (PDF)</span>
-        </a>
-        <a class="cta" href="../assets/docs/CV_Juan_Diego_Saire_EN.md" data-cv-href="about_cv_href_md" download type="text/markdown">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="footer__linkedin-icon" aria-hidden="true" focusable="false"><path d="M11 3h2v10.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17V3ZM4 19h16v2H4v-2Z" fill="currentColor"/></svg>
-          <span class="cta__label" data-i18n="about_cv_cta_md">Download CV (MD)</span>
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- ============================================================
        ARC 01 · LAB — anchor #lab (PR43B-Q2): manifesto carousel, milestones, figures (chassis B v2, PR43B-Q15).
@@ -237,7 +197,7 @@
   <section class="section arc arc--lab" id="lab" aria-labelledby="lab-h">
     <div class="section__inner">
       <p class="ah-label" data-i18n="about_lab_h_date">Since Oct 2025</p>
-      <h2 class="ah" id="lab-h"><span class="ah__line"><span class="ah__noun" data-i18n="about_lab_h_n1">LAB</span> <em class="ah__hook" data-i18n="about_lab_h_k1">OPEN.</em></span><span class="ah__line"><span class="ah__noun" data-i18n="about_lab_h_n2">BUILDS</span> <em class="ah__hook" data-i18n="about_lab_h_k2">GO LIVE.</em></span></h2>
+      <h1 class="ah" id="lab-h"><span class="ah__line"><span class="ah__noun" data-i18n="about_lab_h_n1">LAB</span> <em class="ah__hook" data-i18n="about_lab_h_k1">OPEN.</em></span><span class="ah__line"><span class="ah__noun" data-i18n="about_lab_h_n2">BUILDS</span> <em class="ah__hook" data-i18n="about_lab_h_k2">GO LIVE.</em></span></h1>
       <p class="ah-sub"><span class="bridge__heading" data-i18n="about_arc_lab_h">Welcome to my R&amp;D Lab.</span></p>
       <div class="org" id="lab-manifesto">
         <div class="org__head">
@@ -1040,7 +1000,7 @@
         <div class="footer__col">
           <p class="footer__col-head" data-i18n="footer_col_profile">Profile</p>
           <a class="footer__map-link" href="../about/" data-nav-page="about/" data-i18n="nav_evolution">About</a>
-          <a class="footer__map-link" href="../about/#bridge1-onboarding" data-nav-page="about/#bridge1-onboarding" data-i18n="nav_resume">Résumé</a>
+          <a class="footer__map-link" href="../resume/" data-nav-page="resume/" data-i18n="nav_resume">Résumé</a>
         </div>
         <div class="footer__col">
           <p class="footer__col-head" data-i18n="footer_col_forms">Forms</p>

@@ -272,27 +272,5 @@ html[data-theme="light"] .tl .jr-mark--platform[data-mark="github"] .jr-mark__im
   object-fit: contain;
 }
 
-/* ── Hero CV downloads (PR35-Q54) ──────────────────────────────
-   The Contact page's channel row (shared/channels.css) under the hero heading. The space from
-   the heading to the first label repeats the bridge's own rule-to-heading space: on phones the
-   44 px targets centre their labels, so the row tucks up by 0.375rem; from 768 the heading
-   wrapper's 1rem plus 1rem matches. Between 1024 and 1279 the split column is narrow (356 px of
-   text at 1024), so About's opening takes 3rem of padding instead of 4rem/5rem: the heading and
-   both links then end inside the first screen, side by side. shared/bridge.css stays as it is,
-   so Main's positioning bridge is untouched. */
-#bridge1-onboarding .bridge__downloads { margin-top: -0.375rem; }
-/* Phones (JD, PR35-Q57, Q59): one row, MD right after PDF, as from 768. The full labels need
-   more than the 260–330 px column, so each wraps inside its own link ("Download CV" over
-   "(PDF)"), beside its icon. */
-@media (max-width: 767px) {
-  #bridge1-onboarding .bridge__downloads { flex-direction: row; align-items: center; }
-}
-@media (min-width: 768px) {
-  #bridge1-onboarding .bridge__downloads { margin-top: 1rem; }
-}
-@media (min-width: 1024px) and (max-width: 1279px) {
-  #bridge1-onboarding .bridge__content { padding: 3rem; }
-}
-
 /* ---- Pre-Lab's four figures: four across from 1024, two by two from 768 (brief-charts.css sets three) ---- */
 /* .hlr--4: shared/dashboard.css (PR43-Q30) */
