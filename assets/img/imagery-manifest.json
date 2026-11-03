@@ -1,0 +1,267 @@
+{
+  "schema_version": "1.0.0",
+  "author": "jdsaire",
+  "governance_policy": "Raster images approved through an image round (skill ai-studio-image-round). Each is AI-generated, art-directed and selected by jdsaire, and labelled on the page that shows it. It is never replaced by an SVG fallback, re-encoded or swapped without a new round and a manifest update. Theme-invariant: dark editorial in both themes.",
+  "label_rule": "Every page that shows a listed asset carries the key named in label_key, visible, in the section that shows it (PR46-Q48).",
+  "label_key": "ui_ai_imagery_note",
+  "method_note": "Generated with an AI image model in an external round; the model and settings are kept in the round record outside the repository (PR42-Q37 pattern).",
+  "governed_by": [
+    "docs/v4/STANDING-RULES.md#sr-5",
+    "assets/img/README.md"
+  ],
+  "budgets": {
+    "format": "image/webp",
+    "variants_px": [
+      480,
+      800
+    ],
+    "max_kb_800": 120,
+    "max_kb_480": 60,
+    "loading": "lazy",
+    "decoding": "async",
+    "lcp_rule": "No listed asset may be the LCP element of any page at 390 or 1440.",
+    "object_position_posters": "50% 0% (phone cards are 10:17, wider than 9:16: anchoring the top keeps the subject at or below its rendered height)"
+  },
+  "assets": [
+    {
+      "id": "work-01-sports",
+      "organism": "main.work.card.01",
+      "layout_mode": "full-bleed-poster-9x16",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/work/work-01-sports-480.webp",
+        "assets/img/work/work-01-sports-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "width": 1536,
+        "height": 2752,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt": "",
+      "alt_rationale": "Decorative backdrop: the card's own heading names the build (PR42-Q30).",
+      "description": "Night view of a generic stadium's lit roof truss and spiral access ramps, violet floodlight glow in mist; empty black sky above.",
+      "text_zone": {
+        "rule": "top 50% low-detail dark",
+        "measured_mean_luminance": 0.019,
+        "measured_p95_luminance": 0.085
+      },
+      "replaces": "assets/img/work/accreditapass.svg on Main only (kept for the briefs' Keep exploring slides)",
+      "fence": [
+        "B01 rights-holder never named; no real venue",
+        "B19",
+        "no people, text, logos, screens"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "work-01-sports-480.webp": 42.2,
+        "work-01-sports-800.webp": 98.8
+      }
+    },
+    {
+      "id": "work-02-banking",
+      "organism": "main.work.card.02",
+      "layout_mode": "full-bleed-poster-9x16",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/work/work-02-banking-480.webp",
+        "assets/img/work/work-02-banking-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "width": 1536,
+        "height": 2752,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt": "",
+      "alt_rationale": "Decorative backdrop (PR42-Q30).",
+      "description": "A worn wooden counter in low warm light: a phone on its stand with the screen off, a small block of smoked violet glass glowing from inside, blank paper slips and an open ledger; empty dark upper field.",
+      "text_zone": {
+        "rule": "top 50% low-detail dark",
+        "measured_mean_luminance": 0.0052,
+        "measured_p95_luminance": 0.018
+      },
+      "replaces": "assets/img/work/yape-trust-verify.svg on Main only",
+      "fence": [
+        "B10, B24 simulated data",
+        "R-TV no absolute security: no padlock, shield, seal, check mark",
+        "no brand colours or marks"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "work-02-banking-480.webp": 21.0,
+        "work-02-banking-800.webp": 45.8
+      },
+      "refined": "PR46-Q53: one EDIT session on JD's render; text, screens, people, emblem and devices removed"
+    },
+    {
+      "id": "work-03-airport",
+      "organism": "main.work.card.03",
+      "layout_mode": "full-bleed-poster-9x16",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/work/work-03-airport-480.webp",
+        "assets/img/work/work-03-airport-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "width": 1536,
+        "height": 2752,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt": "",
+      "alt_rationale": "Decorative backdrop (PR42-Q30).",
+      "description": "A steel counter in an empty, out-of-focus terminal hall at night: a phone with the screen off, a glowing smoked-violet glass block, blank passes and plain passport covers; empty dark upper field.",
+      "text_zone": {
+        "rule": "top 50% low-detail dark",
+        "measured_mean_luminance": 0.0195,
+        "measured_p95_luminance": 0.1154
+      },
+      "replaces": "assets/img/work/airport.svg on Main only",
+      "fence": [
+        "W02 designed, not built or run; no real terminal",
+        "W03",
+        "no aircraft livery or signage"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "work-03-airport-480.webp": 29.9,
+        "work-03-airport-800.webp": 70.4
+      },
+      "refined": "PR46-Q53: one EDIT session on JD's render; text, screens, people, emblem and devices removed"
+    },
+    {
+      "id": "work-04-software",
+      "organism": "main.work.card.04",
+      "layout_mode": "full-bleed-poster-9x16",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/work/work-04-software-480.webp",
+        "assets/img/work/work-04-software-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "9:16",
+        "resolution": "2K",
+        "width": 1536,
+        "height": 2752,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt": "",
+      "alt_rationale": "Decorative backdrop (PR42-Q30).",
+      "description": "Studio render of graphite, brushed-metal and translucent violet blocks interlocking into a stepped structure on a dark floor; empty black upper field.",
+      "text_zone": {
+        "rule": "top 50% low-detail dark",
+        "measured_mean_luminance": 0.0148,
+        "measured_p95_luminance": 0.0618
+      },
+      "replaces": "assets/img/work/front-end-evolution.svg on Main only",
+      "fence": [
+        "B13, B21",
+        "B18 no AI feature implied",
+        "POSITIONING §1.9 engineering never names his work"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "work-04-software-480.webp": 27.0,
+        "work-04-software-800.webp": 57.9
+      }
+    },
+    {
+      "id": "cap-01-build",
+      "organism": "main.capabilities.01",
+      "layout_mode": "centred-frame-3x2",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/services/cap-01-build-480.webp",
+        "assets/img/services/cap-01-build-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "width": 2528,
+        "height": 1696,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt_key": "cap_s1_img_alt",
+      "description": "Two brushed-titanium caliper arms seating a violet glass core inside carbon rings, on a dark studio surface.",
+      "replaces": "assets/img/services/cap-production.svg",
+      "fence": [
+        "B22 'validated' only in its ruled strings",
+        "no money, padlock"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "cap-01-build-480.webp": 16.3,
+        "cap-01-build-800.webp": 27.6
+      }
+    },
+    {
+      "id": "cap-02-train",
+      "organism": "main.capabilities.02",
+      "layout_mode": "centred-frame-3x2",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/services/cap-02-train-480.webp",
+        "assets/img/services/cap-02-train-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "width": 2528,
+        "height": 1696,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt_key": "cap_s2_img_alt",
+      "description": "A row of steel-framed smoked-glass panels on a black stone slab, the first lit violet from within, the light carried down the row.",
+      "replaces": "assets/img/services/cap-adoption.svg",
+      "fence": [
+        "no people, no classroom"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "cap-02-train-480.webp": 15.5,
+        "cap-02-train-800.webp": 25.5
+      }
+    },
+    {
+      "id": "cap-03-align",
+      "organism": "main.capabilities.03",
+      "layout_mode": "centred-frame-3x2",
+      "theme_behavior": "dark-editorial-invariant",
+      "files": [
+        "assets/img/services/cap-03-align-480.webp",
+        "assets/img/services/cap-03-align-800.webp"
+      ],
+      "source": {
+        "aspect_ratio": "3:2",
+        "resolution": "2K",
+        "width": 2528,
+        "height": 1696,
+        "delivered_as": "JPEG (AI Studio download default)"
+      },
+      "selected_direction": "single direction, iterated in session (directions A/B/C superseded by JD's theme prompt; file names carry no version)",
+      "alt_key": "cap_s3_img_alt",
+      "description": "Concentric rings of carbon, brushed steel and anodised violet aluminium settled into one plane around a glowing core, on dark slate.",
+      "replaces": "assets/img/services/cap-augmentation.svg",
+      "fence": [
+        "B27 'seamless' stays out of the alt",
+        "no speed claim"
+      ],
+      "status": "locked",
+      "bytes_kb": {
+        "cap-03-align-480.webp": 21.2,
+        "cap-03-align-800.webp": 38.4
+      }
+    }
+  ],
+  "round": "main-batch-1"
+}
