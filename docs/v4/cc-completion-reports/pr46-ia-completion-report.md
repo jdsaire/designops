@@ -1,6 +1,6 @@
 # Completion report · PR #46 · Information architecture (v1.1.0)
 
-**Branch:** `deploy/v33-pr46-design-system` on `26dc94a` · **Author:** jdsaire · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR46-IA.md`](../cc-plans/Plan-PR46-IA.md) (v1_1 and v1_2 as accepted; v1_0's Design System scope moved to #47 by PR46-Q11)
+**Branch:** `deploy/v33-pr46-design-system` on `26dc94a` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/46 · **Merge:** manual · **Plan:** [`../cc-plans/Plan-PR46-IA.md`](../cc-plans/Plan-PR46-IA.md) (v1_1 and v1_2 as accepted; v1_0's Design System scope moved to #47 by PR46-Q11)
 
 ## What a reader now sees
 
@@ -25,6 +25,7 @@
 | G4 · Footer + pages | Three tiers on every page; `/feedback/` with a stub at `/report/`; the Contact organism joined the footer; `/resume/` created |
 | G5 · Injection | 14 Spanish values (copy-es drafts, JD's edits); Feedback and About head copy |
 | G5A · Main imagery | 7 images, 14 files sha256-identical to the round's; contrast ≥ 19.8:1 on every card headline; images deferred until near, after the first build regressed Main's LCP (3.54 → 4.74 s); deferred: base 4.14 vs tip 4.21 s, total bytes 947 → 765 KB. Records: `LAB-CHECK-PR46-G5A` |
+| G7 · Regression | 216 cells (9 pages × 12 × Chrome + WebKit), all differ as intended; no noise floor for Chrome 156.0.8078.80, so cells compared against 0; console, links, parity, order, overflow, axe and failed requests 0; CLS max 0.049; read time 16/16 brief cells |
 | Checks | `parity`, `links`, `orphans`, `imagery` `failures: 0` and `order --strict` 0 at the tip; DICTIONARIES.md 12 pairs, 1,181 keys per language |
 | Authorship | Sole author jdsaire. The attribution grep reads 2 on the imagery manifest's labelling lines, ruled an exception (PR46-Q62) |
 
