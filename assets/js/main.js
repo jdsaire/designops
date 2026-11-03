@@ -19,10 +19,12 @@ import { init as initTicker }    from './pages/home/ticker.js';
 import { init as initCarousel }  from './pages/capabilities/carousel.js';
 import { init as initDecoration } from './core/decoration.js';
 import { init as initNavCue }    from './pages/home/navcue.js';
+import { init as initDeferImages } from './core/defer-images.js';
 
 setPage('i18n/main');
 
 document.addEventListener('DOMContentLoaded', () => {
+  initDeferImages();
   initI18n();
   initTheme();
   initProgress();
