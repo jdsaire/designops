@@ -1,6 +1,6 @@
 # assets/js/
 
-The site's scripts, as ES modules. Main, About and Contact each start from one entry file that imports what the page needs; the four briefs import the core modules from an inline script.
+The site's scripts, as ES modules. Main, About, Résumé, Contact and Feedback each start from one entry file that imports what the page needs; the four briefs import the core modules from an inline script.
 
 | File | Who it's for |
 |---|---|

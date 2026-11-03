@@ -1,8 +1,8 @@
 """Do the page dictionaries follow the page? From the repository root: python3 tools/order.py [--write <page>]
 For each page's own EN/ES pair, compares the key order with the order in which the page's markup first uses each key
-(data-i18n, -html, -aria, -alt, -placeholder) and reports how many keys sit out of place (the fewest moves).
+(data-i18n, -html, -aria, -alt, -placeholder, -title) and reports how many keys sit out of place (the fewest moves).
 Keys the page's script renders (absent from the markup) are left where they are.
-`--write <page>` (main, about, contact, b01, b02, b03, b04, report) rewrites that pair in page order, values untouched, EN and
+`--write <page>` (main, about, resume, contact, b01, b02, b03, b04, feedback) rewrites that pair in page order, values untouched, EN and
 ES alike: script-rendered keys go right after the key that shares their longest name prefix.
 Report only: the exit code is 0 unless --strict is given. Standard library only."""
 import bisect, collections, json, os, re, sys
@@ -10,14 +10,15 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 PAGES = {
     'main': ('index.html', 'i18n/main'),
     'about': ('about/index.html', 'about/i18n/about'),
+    'resume': ('resume/index.html', 'resume/i18n/resume'),
     'contact': ('contact/index.html', 'contact/i18n/contact'),
     'b01': ('work/accreditapass/index.html', 'work/accreditapass/i18n/accreditapass'),
     'b02': ('work/trust-verify-brief/index.html', 'work/trust-verify-brief/i18n/yape-trust-verify'),
     'b03': ('work/airport/index.html', 'work/airport/i18n/airport'),
     'b04': ('work/portfolio-evolution/index.html', 'work/portfolio-evolution/i18n/designops'),
-    'report': ('report/index.html', 'report/i18n/report'),
+    'feedback': ('feedback/index.html', 'feedback/i18n/feedback'),
 }
-ATTR = re.compile(r'data-i18n(?:-html|-aria|-alt|-placeholder)?="([^"]+)"')
+ATTR = re.compile(r'data-i18n(?:-html|-aria|-alt|-placeholder|-title)?="([^"]+)"')
 
 def first_use(html):
     first = {}

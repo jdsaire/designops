@@ -1,6 +1,6 @@
 /* core/legal.js — the site's overlays (terms, license, privacy policy, privacy choices; PR45-Q18, Q23), the privacy
    choice, sentences with linked words, and the terms' list (PR #45, AIE-Q26, Q62: "Report an issue" is a plain link
-   to /report/, no overlay).
+   to /feedback/, no overlay).
    Each overlay follows Contact's success modal (pages/contact/contact.js): it opens from its control in the row,
    moves focus to its close button, keeps Tab inside, closes on Escape, on the close button or on a click on the
    backdrop, and returns focus to the control that opened it.

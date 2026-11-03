@@ -8,5 +8,6 @@ The checks anyone can run on a fresh clone, from the repository root, with Pytho
 | [`links.py`](links.py) | Anyone who added, moved or renamed a file. `python3 tools/links.py`: every relative link in the repository's Markdown resolves |
 | [`orphans.py`](orphans.py) | Anyone who removed markup or script. `python3 tools/orphans.py`: every dictionary key is still used somewhere |
 | [`order.py`](order.py) | Anyone who added keys to a page. `python3 tools/order.py` reports how many keys sit out of page order; `--write <page>` reorders that page's pair, values untouched. A report, so it fails only with `--strict` |
+| [`imagery.py`](imagery.py) | Anyone who added, moved or replaced a raster image. `python3 tools/imagery.py`: every raster under `assets/img/work` and `assets/img/services` is in [`../assets/img/imagery-manifest.json`](../assets/img/imagery-manifest.json), within its budget and width, and every page that shows one carries its label |
 
 The dictionaries these tools read are listed in [`../DICTIONARIES.md`](../DICTIONARIES.md). Visual checks (screenshots across widths, themes, languages and browsers) need a headless browser and live with each run's records, outside the repository.

@@ -44,26 +44,13 @@ html[data-theme="light"] .section--alt { background: var(--color-brand-black); b
 
 /* .section__headline and .section__lede: shared/editorial.css (PR43-Q29) */
 
-/* ---- CONTACT organism (Main and About; PR35-Q55) · centred at desktop and tablet ----
-   Mirrors the header contract in shared/designops-variant.css. Scoped to the organism's class,
-   so the Contact page's own #contact form section never matches. The eyebrow is a flex column
-   pinned to flex-start, so it needs an explicit override; the headline and the inline-flex CTA
-   follow text-align. Mobile keeps the left alignment. The CTA sits in the former lede's place
-   (S10C): the gap matches Main's About headline to CTA. */
-@media (min-width: 768px) {
-  .section--contact-cta .section__inner  { text-align: center; }
-  .section--contact-cta .section__eyebrow { align-items: center; }
-}
-.section--contact-cta .cta { margin-top: clamp(2rem, 3.5vw, 3.5rem); }
-/* Main's .cta (pages/home/hero.css) sets its icon at 1.75rem on phones; the organism carries that
-   size so About's copy matches Main's at every width. */
-@media (max-width: 767px) {
-  .section--contact-cta .cta__icon { width: 1.75rem; height: 1.75rem; }
-}
-
 /* Illustration tag (PR #42, PR42-Q6, Q30): every drawn image carries it, so no drawing is taken for a screen of the
    apps. Same look as the briefs' carousel tag (.dl__tag in shared/carousel.css); key ui_illus_label (global). */
 .services__image-slot { position: relative; }
 .illus-tag { position: absolute; left: .75rem; top: .75rem; z-index: 1; padding: .3rem .55rem; font-size: .66rem; font-weight: var(--fw-semibold);
   letter-spacing: .14em; text-transform: uppercase; line-height: 1; color: var(--color-text-muted); background: rgba(var(--ground), .85);
   border: 1px solid var(--color-border-soft); pointer-events: none; }
+
+/* The label for AI-made imagery (PR46-Q48, Q55): once per section that shows a listed image
+   (assets/img/imagery-manifest.json), under it, small and muted. */
+.imagery-note { margin: 1.25rem 0 0; font-size: 0.75rem; line-height: 1.5; letter-spacing: 0.01em; color: var(--color-text-dim); }

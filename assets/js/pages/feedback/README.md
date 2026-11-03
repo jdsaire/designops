@@ -1,4 +1,4 @@
-# assets/js/pages/report/
+# assets/js/pages/feedback/
 
 The issue report page's script.
 

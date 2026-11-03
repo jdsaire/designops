@@ -17,12 +17,13 @@ R = ['assets/i18n/briefs/briefs-ui.{lc}.json', 'assets/i18n/briefs/tags.{lc}.jso
 PAGES = {
     'main': ('index.html', G, ['i18n/main.{lc}.json']),
     'about': ('about/index.html', G, ['about/i18n/about.{lc}.json']),
+    'resume': ('resume/index.html', G, ['resume/i18n/resume.{lc}.json']),
     'contact': ('contact/index.html', G, ['contact/i18n/contact.{lc}.json']),
     'b01': ('work/accreditapass/index.html', G + R, ['work/accreditapass/i18n/accreditapass.{lc}.json']),
     'b02': ('work/trust-verify-brief/index.html', G + R, ['work/trust-verify-brief/i18n/yape-trust-verify.{lc}.json']),
     'b03': ('work/airport/index.html', G + R, ['work/airport/i18n/airport.{lc}.json']),
     'b04': ('work/portfolio-evolution/index.html', G + R, ['work/portfolio-evolution/i18n/designops.{lc}.json']),
-    'report': ('report/index.html', G, ['report/i18n/report.{lc}.json']),
+    'feedback': ('feedback/index.html', G, ['feedback/i18n/feedback.{lc}.json']),
 }
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 find = {'parity': [], 'missing': [], 'shadow': [], 'fallback': []}

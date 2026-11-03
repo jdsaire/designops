@@ -4,8 +4,8 @@
      replacing PR35-Q32's upper case), with the last word of each line in Archivo Italic. Main's section-headline
      type: 700, clamp(2rem, 4vw, 3.5rem), 1.08, -0.02em.
    - The closing bar above it is the eyebrow bar's mark (decoration spec v1.1, CLOSING BAR).
-   - F2 from 1024: statement left, the two links stacked right and bottom-aligned; one column below.
-   - Contact carries the statement and © only; its two links sit under the page heading (PR35-Q33). */
+   - PR #46: three tiers on every page, the same footer everywhere: the statement and three contacts, the sitemap, the
+     legal row. Contact and Feedback carry it too. */
 .footer {
   width: 100%;
   background: var(--color-brand-black);
@@ -44,7 +44,7 @@
 .footer__tagline .purple { color: var(--color-brand-purple); }
 .footer__em { font-style: italic; padding-right: 0.03em; }
 
-/* Links: the conversation channel and the authorship proof. Each row is at least 44 px tall. */
+/* Contacts: the direct line, the conversation channel and the authorship proof. Each row is at least 44 px tall. */
 .footer__links {
   display: flex;
   flex-direction: column;
@@ -86,17 +86,30 @@
   color: var(--color-text-dim);
 }
 
-/* FOOTER — TABLET 768px–1023px: the links side by side under the statement */
+/* The site's one closing action (PR #46): the Contact organism's call, now in the footer. Same drawing as shared/cta.css;
+   the briefs don't link that file yet. Not on Contact or Feedback, where it would compete with the form. */
+.footer__cta { display: inline-flex; align-items: center; gap: 0.75rem; width: fit-content; min-height: 44px; font-size: 1rem; font-weight: var(--fw-bold); letter-spacing: 0.005em; color: var(--color-brand-white); text-decoration: none; }
+.footer__cta-icon { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--color-brand-purple); transition: background var(--duration-ui) var(--ease-standard); }
+.footer__cta-icon svg { width: 0.9rem; height: 0.9rem; fill: none; stroke: var(--color-on-brand); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.footer__cta:hover .footer__cta-icon, .footer__cta:focus-visible .footer__cta-icon { background: var(--color-purple-hover); }
+.footer__cta:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+@media (max-width: 767px) { .footer__cta-icon { width: 1.75rem; height: 1.75rem; } }
+
+/* Tier 2: the sitemap (PR46-Q21). Text only: the navbar's icons stay in the navbar. Four clusters; two by two on phones,
+   rows of 32 px; centred as a block from 768. */
+.footer__map { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+.footer__col-head { margin: 0 0 0.5rem; font-size: 0.72rem; font-weight: var(--fw-semibold); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+.footer__map-link { display: flex; align-items: center; gap: 0.5rem; min-height: 32px; font-size: 0.9rem; color: var(--color-brand-white); text-decoration: none; transition: color var(--duration-ui) var(--ease-standard); }
+a.footer__map-link:hover, a.footer__map-link:focus-visible { color: var(--color-brand-purple); }
+.footer__map-link[data-nav-state="soon"] { color: var(--color-text-dim); }
+.footer__icon--line { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+
+/* FOOTER — 768 and up: one centred axis (PR46-Q32). The value line and the contacts stacked, then the sitemap, then
+   the legal row. */
 @media (min-width: 768px) {
-  .footer__links { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: 2.25rem; }
-}
-/* FOOTER — DESKTOP ≥1024px: F2 split */
-@media (min-width: 1024px) {
-  .footer__content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    column-gap: clamp(2rem, 5vw, 5rem);
-  }
-  .footer__links { flex-direction: column; align-items: flex-start; }
+  .footer__content { align-items: center; text-align: center; gap: 1.25rem; }
+  .footer .footer__bar { margin-left: auto; margin-right: auto; }
+  .footer__links { flex-direction: row; flex-wrap: wrap; justify-content: center; column-gap: 1.5rem; }
+  .footer__map { grid-template-columns: repeat(4, max-content); justify-content: center; column-gap: clamp(3rem, 7vw, 7rem); padding-top: 1.75rem; border-top: 1px solid var(--color-border-faint); }
+  .footer__map-link { font-size: 0.92rem; }
 }

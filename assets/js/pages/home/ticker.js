@@ -44,18 +44,33 @@ function init() {
     lanes.forEach(buildLane);
   }
 
-  // Measure only once logos have intrinsic width, else baseW reads 0.
+  // PR #46: the logos are the page's heaviest images, and loading="lazy" still fetches them from the first screen
+  // (Chrome starts up to 2,500 px away), so they wait for the reader to near the ticker.
   const imgs = Array.prototype.slice.call(document.querySelectorAll('.ticker__logo'));
-  let pending = imgs.filter((i) => !i.complete).length;
-  if (pending === 0) {
-    buildAll();
+  function loadLogos() {
+    // Measure only once logos have intrinsic width, else baseW reads 0.
+    imgs.forEach((i) => { i.src = i.dataset.src; });
+    let pending = imgs.filter((i) => !i.complete).length;
+    if (pending === 0) {
+      buildAll();
+    } else {
+      imgs.forEach((i) => {
+        if (i.complete) return;
+        const done = () => { if (--pending === 0) buildAll(); };
+        i.addEventListener('load', done, { once: true });
+        i.addEventListener('error', done, { once: true });
+      });
+    }
+  }
+  if ('IntersectionObserver' in window) {
+    const near = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      near.disconnect();
+      loadLogos();
+    }, { rootMargin: '600px 0px' });
+    lanes.forEach((band) => near.observe(band));
   } else {
-    imgs.forEach((i) => {
-      if (i.complete) return;
-      const done = () => { if (--pending === 0) buildAll(); };
-      i.addEventListener('load', done, { once: true });
-      i.addEventListener('error', done, { once: true });
-    });
+    loadLogos();
   }
 
   let resizeTimer;

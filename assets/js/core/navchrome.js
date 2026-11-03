@@ -186,6 +186,8 @@ function init(opts) {
     if (langPanel) setLangActive(langPanel, lang);
     const overlayLang = document.getElementById('overlayLang');
     if (overlayLang) setLangActive(overlayLang, lang);
+    const overlayLangLabel = document.getElementById('overlayLangLabel');
+    if (overlayLangLabel) overlayLangLabel.textContent = lang;
     if (swapLang) swapLang(lang);
   }
 
@@ -201,6 +203,21 @@ function init(opts) {
     });
     workMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => workDisc.setOpen(false)));
   }
+
+  /* ── Lab, theme and language: the same disclosure, in the bar and in the phone menu (PR #46). One menu is open at a
+     time, a choice closes its panel, and Escape returns to the trigger. ── */
+  document.querySelectorAll('[data-nav-menu]').forEach(trigger => {
+    let disc = null;
+    disc = wireDisclosure(trigger, document.getElementById(trigger.getAttribute('aria-controls')), () => closeAllExcept(disc));
+    if (!disc) return;
+    disclosures.push(disc);
+    disc.menu.querySelectorAll('button').forEach(b => b.addEventListener('click', () => disc.setOpen(false)));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' && e.key !== 'Esc') return;
+    const open = disclosures.find(d => d && d.trigger && d.trigger.getAttribute('aria-expanded') === 'true');
+    if (open) { open.setOpen(false); open.trigger.focus(); }
+  });
 
   /* Outside-click closes every open disclosure. */
   document.addEventListener('click', () => closeAllExcept(null));
@@ -220,6 +237,7 @@ function init(opts) {
   }
   function closeOverlay() {
     if (!overlay) return;
+    closeAllExcept(null);
     overlay.classList.remove('nav__overlay--open');
     nameAsClose(false);
     if (hamburger) { hamburger.setAttribute('aria-expanded', 'false'); hamburger.classList.remove('nav__hamburger--open'); }
@@ -253,9 +271,14 @@ function init(opts) {
     const overlayWorkMenu = document.getElementById('overlayWorkMenu');
     /* The overlay's Work group opens collapsed (PR #42 G6b, reversing W1): a tap on
        Work shows the briefs a reader can open. */
-    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null, false);
+    const overlayLabTrigger = document.getElementById('overlayLabTrigger');
+    const overlayLabMenu = document.getElementById('overlayLabMenu');
+    /* One group open at a time (PR #46). */
+    let overlayLabDisc = null;
+    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, () => { if (overlayLabDisc) overlayLabDisc.setOpen(false); }, false);
+    overlayLabDisc = wireDisclosure(overlayLabTrigger, overlayLabMenu, () => { if (overlayWorkDisc) overlayWorkDisc.setOpen(false); }, false);
     /* Flat links close the overlay on navigation; Work items too. */
-    overlay.querySelectorAll('.nav__overlay-link, .nav__overlay-subitem').forEach(el => {
+    overlay.querySelectorAll('.nav__overlay-link, .nav__overlay-subitem, .nav__drawer-feedback').forEach(el => {
       el.addEventListener('click', () => { if (el.tagName === 'A') closeOverlay(); });
     });
     if (overlayWorkTrigger) {
@@ -265,6 +288,8 @@ function init(opts) {
     const overlayLang = document.getElementById('overlayLang');
     if (overlayLang) {
       setLangActive(overlayLang, curLang);
+      const overlayLangLabel = document.getElementById('overlayLangLabel');
+      if (overlayLangLabel) overlayLangLabel.textContent = curLang;
       overlayLang.querySelectorAll('.nav__overlay-lang-option').forEach(opt => {
         opt.addEventListener('click', () => setLang(opt.dataset.lang));
       });
