@@ -1,6 +1,6 @@
 # feedback/
 
-The issue report page, served at `/feedback/`: where a visitor reports a problem with this site (content, display, accessibility, interaction, light security, a privacy request). It isn't in the navigation; the footer row, Contact, the privacy policy and [`../.well-known/security.txt`](../.well-known/security.txt) link it. The form posts to Web3Forms with Contact's key and its own subject, "Site issue report".
+The Feedback page, served at `/feedback/` (at `/report/` until PR #46, which still forwards): where a visitor reports a problem with this site (content, display, accessibility, interaction, light security, a privacy request). It isn't in the navigation; the footer row, Contact, the privacy policy and [`../.well-known/security.txt`](../.well-known/security.txt) link it. The form posts to Web3Forms with Contact's key and its own subject, "Site issue report".
 
 | File | Who it's for |
 |---|---|

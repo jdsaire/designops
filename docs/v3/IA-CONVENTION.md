@@ -10,7 +10,8 @@ Written for Wave 6 (`docs/v3/`), refreshed in PR #44 to match the repository as 
 index.html                          Main (must stay at the repo root)
 i18n/main.{en,es}.json              Main's own dictionaries: the root is Main's page folder
 logos/                              the site mark in its states (favicon and header logo)
-about/   contact/                   one folder per page: index.html, i18n/, img/ where it has images
+about/  resume/  contact/  feedback/  one folder per page: index.html, i18n/, img/ where it has images
+report/                             a retired address: a stub that forwards to feedback/ (PR #46)
 assets/
   css/   base/ shared/ pages/       tokens and reset · nav, footer, carousels, decoration · per page
   js/    core/ pages/ main.js       i18n engine, paths, nav · per page · Main's entry point (ES module)
@@ -48,7 +49,7 @@ So **`index.html` stays at the repo root and `assets/i18n/{en,es}.json` stays wh
 ## Slugs and retired addresses
 
 - A brief's slug names the work in neutral terms, never a third party's brand (Brief 02 became `trust-verify-brief/` in PR #44).
-- GitHub Pages has no server-side redirect. A brief that moves leaves a stub at its old address (meta refresh, canonical to the new address, `noindex, follow`), and the stub never moves. The list is in [`../../work/README.md`](../../work/README.md).
+- GitHub Pages has no server-side redirect. A page that moves leaves a stub at its old address (meta refresh, canonical to the new address, `noindex, follow`), and the stub never moves. The briefs' list is in [`../../work/README.md`](../../work/README.md); `report/` forwards to `feedback/` (PR #46).
 
 ## READMEs
 
@@ -60,7 +61,7 @@ Three levels, a lower one never repeating a key from a higher one: global (every
 
 ## Invariants
 
-- **Relative paths only.** The site serves from `/designops/`; a leading-slash path resolves against the domain root and 404s.
+- **Relative paths only.** The site serves from the domain root (jdsaire.com, since PR #45), and paths stay relative so the tree still works from any folder or a fork. The one exception, by design, is the head: canonical, og:url and og:image are absolute on `https://jdsaire.com/` (PR #46).
 - **Zero build.** No bundler, no root `package.json`, no build step for any page. The Trust & Verify app, once a self-contained sub-app here, has lived in its own repository since 1 Sep 2026 (PR #22).
 - **CSS link order is load-bearing.** The cascade depends on it; preserve it across any move.
 - New pages are created directly in this structure rather than moved into it later.

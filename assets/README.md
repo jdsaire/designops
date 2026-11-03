@@ -7,7 +7,7 @@ Everything more than one page uses: styles, scripts, the site-wide dictionaries,
 | [`css/`](css/) | Anyone changing how a page looks: base tokens, shared components, per-page styles. See [`css/README.md`](css/README.md) |
 | [`js/`](js/) | Anyone changing behaviour: the core engines, Main's entry, per-page scripts. See [`js/README.md`](js/README.md) |
 | [`i18n/`](i18n/) | Anyone changing the copy every page shares: the site chrome (`en.json`, `es.json`) and, in `briefs/`, the layer the four briefs share |
-| [`img/`](img/README.md) | Anyone replacing an image: logos, badges, the portrait, work and service art |
+| [`img/`](img/README.md) | Anyone replacing an image: logos, badges, the portrait, and Main's work and capability images with their manifest |
 | [`fonts/archivo/`](fonts/archivo/README.md) | Anyone checking the typeface: the self-hosted Archivo files and their licence |
 | [`docs/`](docs/README.md) | Readers downloading the CV, and anyone updating it |
 
