@@ -5,12 +5,13 @@ The site's shared images. Each subfolder holds one kind; the files are images on
 | File | Who it's for |
 |---|---|
 | [`logos/`](logos/) | The institution logos in Main's ticker and About, plus the GitHub and Figma marks |
-| [`badges/`](badges/) | The credential badges on About |
+| [`badges/`](badges/) | The credential badges on About (WebP, 72 px tall, twice their largest display size; v1.1.1) |
 | [`bridge-positioning/`](bridge-positioning/) | The portrait on Main, in three sizes and two formats |
 | [`work/`](work/) | Main's work-card posters (`work-0N-*-{480,800}.webp`, raster, from an image round) and the line art the briefs' Keep exploring slides use (`*.svg`) |
 | [`services/`](services/) | Main's capability images (`cap-0N-*-{480,800}.webp`, raster, from an image round) |
 | [`imagery-manifest.json`](imagery-manifest.json) | Every raster image above: its round, budget, label key and status |
 | [`bridge1_onboarding.svg`](bridge1_onboarding.svg) | The bridge artwork on Main, About and Contact |
+| [`resume-portrait.webp`](resume-portrait.webp) | Résumé's bridge portrait: `bridge1_onboarding.svg` rendered at its own 1068 × 1600 with transparency, WebP q80 (v1.1.1) |
 | [`jdigital-logo-mini2.svg`](jdigital-logo-mini2.svg) | The small mark on Contact |
 
 The site mark in its states is in [`../../logos/`](../../logos/); a brief's own images are in its `work/<brief>/img/` folder.
