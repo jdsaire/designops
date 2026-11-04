@@ -2,7 +2,7 @@
 
 **Juan Diego Saire — AI Product & Experience Engineer.** Lima, Peru.
 
-I build high-performing websites and apps, translating business challenges into tested products using advanced AI.
+I build reliable websites and apps, translating business challenges into tested products using advanced AI.
 
 This repository is the source of my portfolio site, in English and Spanish. The site is the front of **Product Lab**, an independent product lab: [the lab, on About](https://jdsaire.com/about/#lab).
 
