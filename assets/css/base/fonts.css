@@ -1,6 +1,6 @@
 /* base/fonts.css — the site's typeface, self-hosted (assets/fonts/archivo/, SIL OFL 1.1).
-   Archivo ships as one variable file per style: weight 100–900 and width 62–125% (the hero's
-   line widths use the width axis). Every page links this file before its own styles and preloads
+   Archivo ships as one variable file per style, weight 100–900, its width axis pinned at 100%
+   (v1.1.1: no style sets another width, and the pinned files are 74 KB instead of 192). Every page links this file before its own styles and preloads
    archivo-normal.woff2; Main also preloads the italic, which its hero heading sets on first paint.
    Elsewhere the italic loads when a page first sets italic text.
 
@@ -22,7 +22,7 @@
   font-family: 'Archivo';
   src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
   font-weight: 100 549;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: normal;
   font-display: swap;
 }
@@ -30,7 +30,7 @@
   font-family: 'Archivo';
   src: local('Arial'), local('ArialMT'), local('Roboto'), local('Roboto-Regular');
   font-weight: 100 549;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: normal;
   unicode-range: U+0026;
   ascent-override: 87.8%;
@@ -41,7 +41,7 @@
   font-family: 'Archivo';
   src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
   font-weight: 550 799;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: normal;
   font-display: swap;
 }
@@ -49,7 +49,7 @@
   font-family: 'Archivo';
   src: local('Arial Bold'), local('Arial-BoldMT'), local('Roboto Bold'), local('Roboto-Bold');
   font-weight: 550 799;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: normal;
   unicode-range: U+0026;
   ascent-override: 87.8%;
@@ -60,7 +60,7 @@
   font-family: 'Archivo';
   src: url('../../fonts/archivo/archivo-normal.woff2') format('woff2');
   font-weight: 800 900;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: normal;
   font-display: swap;
 }
@@ -68,7 +68,7 @@
   font-family: 'Archivo';
   src: local('Arial Black'), local('Arial-Black'), local('Roboto Black'), local('Roboto-Black');
   font-weight: 800 900;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: normal;
   unicode-range: U+0026;
   ascent-override: 87.8%;
@@ -79,7 +79,7 @@
   font-family: 'Archivo';
   src: url('../../fonts/archivo/archivo-italic.woff2') format('woff2');
   font-weight: 100 900;
-  font-stretch: 62% 125%;
+  font-stretch: 100%;
   font-style: italic;
   font-display: swap;
 }
