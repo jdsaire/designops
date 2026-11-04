@@ -6,7 +6,7 @@
 <!-- Content policy (PR #45, PR45-Q7; SR-2): everything loads from this origin. Inline scripts and <style> blocks are
      allowed by hash, so a changed byte needs a new hash; style attributes stay allowed (the briefs' computed chart
      positions). A meta tag can't carry frame-ancestors, report-to or sandbox: those wait for the response header. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI=' 'sha256-8ptk01H94Mcx0USO4yOV4a+baBJThJRUKDDiAcokHTo=' 'sha256-FmlK6SUnebzUzISBy6TO3f+LhhdC3WzbjuMKJYfazao='; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'sha256-tXhwN1fg9MA6ACBwQZj7/ynzXSKMbdQgeDlxDqQd3Ag='; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nNQszXoZUeUP9p22PbvtHvRJYYdED92dNSxgABbJuBU=' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI=' 'sha256-8ptk01H94Mcx0USO4yOV4a+baBJThJRUKDDiAcokHTo=' 'sha256-FmlK6SUnebzUzISBy6TO3f+LhhdC3WzbjuMKJYfazao='; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'sha256-tXhwN1fg9MA6ACBwQZj7/ynzXSKMbdQgeDlxDqQd3Ag='; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
 <title>Never miss a match · Juan Diego Saire</title>
 <meta name="description" content="AccreditaPass tells reporters covering the 2026 World Cup what their press pass allows, before security turns them away.">
 <link rel="canonical" href="https://jdsaire.com/work/accreditapass/">
@@ -25,6 +25,16 @@
 <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
 <script>document.documentElement.classList.add('js');</script>
 <link rel="preload" href="../../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="../../logos/jdigital-logo-default.svg">
+  <link rel="modulepreload" href="../../assets/js/core/progress.js">
+  <link rel="modulepreload" href="../../assets/js/core/decoration.js">
+  <link rel="modulepreload" href="../../assets/js/core/navchrome.js">
+  <link rel="modulepreload" href="../../assets/js/core/paths.js">
+  <link rel="modulepreload" href="../../assets/js/core/legal.js">
+  <link rel="modulepreload" href="../../assets/js/core/theme.js">
+  <link rel="modulepreload" href="../../assets/js/core/carousel.js">
+  <link rel="modulepreload" href="../../assets/js/core/brief-index.js">
+  <script data-p="../../assets/i18n/es.json ../../assets/i18n/briefs/briefs-ui.es.json ../../assets/i18n/briefs/tags.es.json i18n/accreditapass.es.json">try{var L=localStorage.getItem('jds-lang')||'ES';if(L!=='EN'){document.currentScript.dataset.p.split(' ').forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});if(!localStorage.getItem('jds-i18n:'+location.pathname+':'+L)){var s=document.documentElement.style,u=function(){s.removeProperty('visibility');};s.visibility='hidden';document.addEventListener('i18n:changed',function(){requestAnimationFrame(u);},{once:true});setTimeout(u,1500);}}}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/base/fonts.css">
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/dropdown.css">
@@ -340,7 +350,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
         <a href="../../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — Product Lab. Home.">
         JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
-        <span class="nav__version">v1.1.0</span>
+        <span class="nav__version">v1.1.1</span>
       </div>
 
       <!-- CENTER nav links -->

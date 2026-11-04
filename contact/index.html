@@ -6,7 +6,7 @@
   <!-- Content policy (PR #45, PR45-Q7; SR-2): everything loads from this origin. Inline scripts and <style> blocks are
        allowed by hash, so a changed byte needs a new hash; style attributes stay allowed (the briefs' computed chart
        positions). A meta tag can't carry frame-ancestors, report-to or sandbox: those wait for the response header. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI='; style-src 'self' 'unsafe-inline'; style-src-elem 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nNQszXoZUeUP9p22PbvtHvRJYYdED92dNSxgABbJuBU=' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI='; style-src 'self' 'unsafe-inline'; style-src-elem 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action https://api.web3forms.com; base-uri 'none'">
   <title>Contact · Juan Diego Saire — Product Lab</title>
   <meta name="description" content="Tell me about the team and the challenge. One form, a reply within 48 hours.">
   <link rel="canonical" href="https://jdsaire.com/contact/">
@@ -22,6 +22,16 @@
 
   <script>try{if(localStorage.getItem('jds-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('deco-armed');</script>
   <link rel="preload" href="../assets/fonts/archivo/archivo-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="modulepreload" href="../assets/js/core/i18n.js">
+  <link rel="modulepreload" href="../assets/js/core/paths.js">
+  <link rel="modulepreload" href="../assets/js/core/theme.js">
+  <link rel="modulepreload" href="../assets/js/core/progress.js">
+  <link rel="modulepreload" href="../assets/js/core/navchrome.js">
+  <link rel="modulepreload" href="../assets/js/core/legal.js">
+  <link rel="modulepreload" href="../assets/js/pages/contact/contact.js">
+  <link rel="modulepreload" href="../assets/js/core/decoration.js">
+  <link rel="modulepreload" href="../assets/js/pages/about/slogan.js">
+  <script data-p="../assets/i18n/es.json i18n/contact.es.json">try{var L=localStorage.getItem('jds-lang')||'ES';if(L!=='EN'){document.currentScript.dataset.p.split(' ').forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});if(!localStorage.getItem('jds-i18n:'+location.pathname+':'+L)){var s=document.documentElement.style,u=function(){s.removeProperty('visibility');};s.visibility='hidden';document.addEventListener('i18n:changed',function(){requestAnimationFrame(u);},{once:true});setTimeout(u,1500);}}}catch(e){}</script>
   <link rel="stylesheet" href="../assets/css/base/fonts.css">
   <link rel="stylesheet" href="../assets/css/base/tokens.css">
   <link rel="stylesheet" href="../assets/css/base/reset.css">
@@ -58,7 +68,7 @@
         <a href="../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — Product Lab. Home.">
         JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
-        <span class="nav__version">v1.1.0</span>
+        <span class="nav__version">v1.1.1</span>
       </div>
 
       <!-- CENTER nav links -->

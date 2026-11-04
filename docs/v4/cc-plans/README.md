@@ -28,3 +28,4 @@ Approved deployment plans for v4 and later.
 | PR #44 · Repository hygiene + carry-ins | `Plan-PR44-RepoHygiene.md` |
 | PR #45 · Go-live: legal row, report page, domain, content policy | `Plan-PR45-GoLive.md` |
 | PR #46 · Information architecture, Résumé and Feedback pages, Main imagery | `Plan-PR46-IA.md` |
+| PR #47 · Performance: fonts, head preloads, language before first paint, images (v1.1.1) | `Plan-PR47-Performance.md` |

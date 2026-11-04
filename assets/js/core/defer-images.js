@@ -1,7 +1,7 @@
 /* core/defer-images.js — below-the-fold images that wait for the reader (PR #46 G5A).
    loading="lazy" still starts an image up to ~2,500 px away, so Main's posters and capability images were fetched
    with the first paint and counted against it. An image marked data-src / data-srcset gets its source only when it
-   comes within 600 px of the viewport, with the rest of its section. Without IntersectionObserver every image loads at once. The ticker's logos
+   comes within 200 px of the viewport (v1.1.1: 600 px still fetched them inside the phone LCP window), with the rest of its section. Without IntersectionObserver every image loads at once. The ticker's logos
    follow the same rule in pages/home/ticker.js, which also has to measure them. */
 function init() {
   const imgs = Array.prototype.slice.call(document.querySelectorAll('img[data-src]'));
@@ -21,7 +21,7 @@ function init() {
       show(img);
       near.unobserve(img);
     });
-  }), { rootMargin: '0px 0px 600px 0px' });
+  }), { rootMargin: '0px 0px 200px 0px' });
   imgs.forEach((img) => near.observe(img));
 }
 
