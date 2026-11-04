@@ -23,6 +23,7 @@
 | G2 · Chain + shifts | 0 duplicate requests and 0 console or CSP messages on 9 pages in ES and EN; shifts traced to 0 on Brief 04 phone (0.135), Contact phone (0.107) and Feedback desktop (0.117); the paint hold costs 0.15–0.3 s of phone LCP in the preview |
 | G3 · Images | Résumé phone LCP 4.66 → 2.41 s in the preview; badges and portrait checked side by side at 2× |
 | G4 · Preview read | Over HTTP/2: 18/18, phone LCP 1.50–1.68 s, desktop 0.32–0.38 s, CLS 0, TBT ≤ 2 ms; one bundled stylesheet gave no gain (About 1.59 → 1.81 s) |
+| G5 · Regression | 216 cells (9 pages × 12 × Chrome + WebKit) against `fdbf0b1`, floor key Chrome 156.0.8078.80: 6 identical, 210 differ, every one explained: the release label at 1440 (v1.1.0 → v1.1.1), About's badge column, Résumé's portrait in WebKit (re-encoded, same picture) and 1–22 px of type antialiasing from the pinned fonts. Console, links, parity, order, overflow, axe, failed requests and attribution 0; CLS at or below base on every page |
 | Checks | `parity`, `links`, `orphans`, `imagery` `failures: 0` and `order --strict` 0 at every gate; inspector counts 0 at every gate |
 | Authorship | Sole author jdsaire |
 
