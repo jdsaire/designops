@@ -28,3 +28,5 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #44 · Repository hygiene + carry-ins | `pr44-repo-hygiene-completion-report.md` |
 | PR #45 · Go-live: legal row, report page, domain, content policy | `pr45-go-live-completion-report.md` |
 | PR #46 · Information architecture, Résumé and Feedback pages, Main imagery | `pr46-ia-completion-report.md` |
+| PR #47 · Performance: fonts, head preloads, language before first paint, images (v1.1.1) | `pr47-performance-completion-report.md` |
+| v1.1.2 · The offer reads reliable | `v112-reliable-completion-report.md` |

@@ -2,7 +2,7 @@
 
 **Juan Diego Saire — AI Product & Experience Engineer.** Lima, Peru.
 
-I build high-performing websites and apps, translating business challenges into tested products using advanced AI.
+I build reliable websites and apps, translating business challenges into tested products using advanced AI.
 
 This repository is the source of my portfolio site, in English and Spanish. The site is the front of **Product Lab**, an independent product lab: [the lab, on About](https://jdsaire.com/about/#lab).
 
@@ -42,7 +42,8 @@ Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resu
 
 | PR | Version | Merged | What a reader sees | Plan · Report |
 |---|---|---|---|---|
-| [#47](https://github.com/jdsaire/designops/pull/47) | v1.1.1 | pending merge | Pages arrive lighter and steady: smaller fonts and images, the reader's language before the first paint, nothing moving as a page loads | [plan](docs/v4/cc-plans/Plan-PR47-Performance.md) · [report](docs/v4/cc-completion-reports/pr47-performance-completion-report.md) |
+| [#48](https://github.com/jdsaire/designops/pull/48) | v1.1.2 | pending merge | The offer reads reliable websites and apps, in English and Spanish | [plan](docs/v4/cc-plans/Plan-v112-Reliable.md) · [report](docs/v4/cc-completion-reports/v112-reliable-completion-report.md) |
+| [#47](https://github.com/jdsaire/designops/pull/47) | v1.1.1 | 4 Nov 2026 | Pages arrive lighter and steady: smaller fonts and images, the reader's language before the first paint, nothing moving as a page loads | [plan](docs/v4/cc-plans/Plan-PR47-Performance.md) · [report](docs/v4/cc-completion-reports/pr47-performance-completion-report.md) |
 | [#46](https://github.com/jdsaire/designops/pull/46) | v1.1.0 | 3 Nov 2026 | One navigation bar and footer for a growing site: Briefs and Lab menus, a Résumé page and a Feedback page, single theme and language controls, studio images on Main, a lighter first screen on phones | [plan](docs/v4/cc-plans/Plan-PR46-IA.md) · [report](docs/v4/cc-completion-reports/pr46-ia-completion-report.md) |
 | [#45](https://github.com/jdsaire/designops/pull/45) | v1.0.0 | 29 Oct 2026 | A legal row on every page (terms, license, privacy policy, privacy choices) in one dark overlay; a page to report an issue; consent on both forms; the site's links, canonicals and a content policy on jdsaire.com | [plan](docs/v4/cc-plans/Plan-PR45-GoLive.md) · [report](docs/v4/cc-completion-reports/pr45-go-live-completion-report.md) |
 | [#44](https://github.com/jdsaire/designops/pull/44) | — | 27 Oct 2026 | This repository opens on who built it, with this changelog; Brief 02 moves to `work/trust-verify-brief/` and gains three act ledes | [plan](docs/v4/cc-plans/Plan-PR44-RepoHygiene.md) · [report](docs/v4/cc-completion-reports/pr44-repo-hygiene-completion-report.md) |
