@@ -1,6 +1,6 @@
-# Completion report · v1.1.2 · The offer reads reliable
+# Completion report · PR #48 · v1.1.2 · The offer reads reliable
 
-**Branch:** `copy/v112-reliable` on `1b89507` · **Author:** jdsaire · **Pull request:** pending · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v112-Reliable.md`](../cc-plans/Plan-v112-Reliable.md)
+**Branch:** `copy/v112-reliable` on `1b89507` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/48 · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v112-Reliable.md`](../cc-plans/Plan-v112-Reliable.md)
 
 ## What a reader now sees
 
@@ -15,7 +15,7 @@ The performance bar of record (Lighthouse lab, nine pages × phone + desktop) re
 
 ## Commits
 
-`464d4d7` Main offer · `7b1c65d` README offer · `8a608cd` release label and changelog · plus this report's commit and the PR number commit.
+`464d4d7` Main offer · `7b1c65d` README offer · `8a608cd` release label and changelog · plus this report's commit (`a1c3b74`) and the PR number commit.
 
 ## Results per gate
 
