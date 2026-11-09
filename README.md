@@ -37,6 +37,7 @@ Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resu
 | [`tools/`](tools/README.md) | Checks anyone can run on a fresh clone: dictionary parity, links, unused keys, key order, the raster images against their manifest. Python 3, nothing to install |
 | [`docs/`](docs/README.md) | The project's records, not the site: every run's plan and report, the specs, the standing rules, how a change ships |
 | [`CHANGELOG.md`](CHANGELOG.md) | Every merged pull request, oldest first |
+| [`LICENSE`](LICENSE) | All rights reserved: the terms for copying or reusing anything here, in the [License](#license) section below |
 
 ## Latest changes
 
@@ -50,3 +51,7 @@ Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resu
 | [#42](https://github.com/jdsaire/designops/pull/42) | — | 19 Oct 2026 | Each brief explains its solution in three illustrated reasons; Brief 01 gains its context | [plan](docs/v4/cc-plans/Plan-PR42-SolutionAct.md) · [report](docs/v4/cc-completion-reports/pr42-solution-act-completion-report.md) |
 
 The full list, from the first pull request: [`CHANGELOG.md`](CHANGELOG.md).
+
+## License
+
+© 2026 Juan Diego Saire. All rights reserved. The text, images, design and code of this site and its repository may not be copied or reused without written permission. See [LICENSE](LICENSE).
