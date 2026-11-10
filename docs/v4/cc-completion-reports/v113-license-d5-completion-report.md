@@ -1,6 +1,6 @@
-# Completion report · PR pending · v1.1.3 · License and the offer without "advanced"
+# Completion report · PR #49 · v1.1.3 · License and the offer without "advanced"
 
-**Branch:** `copy/v113-license-d5` on `5c8f2a0` · **Author:** jdsaire · **Pull request:** pending · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v113-LicenseD5.md`](../cc-plans/Plan-v113-LicenseD5.md)
+**Branch:** `copy/v113-license-d5` on `5c8f2a0` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/49 · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v113-LicenseD5.md`](../cc-plans/Plan-v113-LicenseD5.md)
 
 ## What a reader now sees
 
