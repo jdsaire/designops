@@ -30,3 +30,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #46 · Information architecture, Résumé and Feedback pages, Main imagery | `pr46-ia-completion-report.md` |
 | PR #47 · Performance: fonts, head preloads, language before first paint, images (v1.1.1) | `pr47-performance-completion-report.md` |
 | v1.1.2 · The offer reads reliable | `v112-reliable-completion-report.md` |
+| v1.1.3 · License and the offer without "advanced" | `v113-license-d5-completion-report.md` |
