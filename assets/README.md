@@ -10,5 +10,6 @@ Everything more than one page uses: styles, scripts, the site-wide dictionaries,
 | [`img/`](img/README.md) | Anyone replacing an image: logos, badges, the portrait, and Main's work and capability images with their manifest |
 | [`fonts/archivo/`](fonts/archivo/README.md) | Anyone checking the typeface: the self-hosted Archivo files and their licence |
 | [`docs/`](docs/README.md) | The CV the Résumé page shows, and anyone updating it |
+| [`vendor/pdfjs/`](vendor/pdfjs/README.md) | Anyone updating the third-party PDF.js files the Résumé page uses on phones and tablets, with their license |
 
 Looking for the project's plans and reports instead? They are in [`../docs/`](../docs/README.md), which the site does not load.
