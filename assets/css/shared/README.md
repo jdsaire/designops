@@ -23,7 +23,7 @@ Components that appear on more than one page. Each file says in its first commen
 | [`carousel-phone.css`](carousel-phone.css) | One phone carousel style below 768, for Main's capabilities carousel and the briefs' Act 03. Main and all four briefs |
 | [`bridge.css`](bridge.css) | The portrait-and-heading bridge. Main and About |
 | [`ticker.css`](ticker.css) | The credentials ticker. Main |
-| [`channels.css`](channels.css) | A row of outbound links, each an icon and a label. The Résumé page's CV downloads |
+| [`channels.css`](channels.css) | A row of outbound links, each an icon and a label. Linked by Contact, Feedback and About |
 | [`page-hero.css`](page-hero.css) | The hero and section basics of the dedicated pages. About and Contact |
 | [`section-extras.css`](section-extras.css) | Shared section details, including the illustration tag and the imagery caption under Main's images. Main, About and Contact |
 | [`designops-variant.css`](designops-variant.css) | The capabilities, evolution and track-record variants. Main, About and Contact |
