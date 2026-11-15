@@ -43,7 +43,7 @@ Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resu
 
 | PR | Version | Merged | What a reader sees | Plan · Report |
 |---|---|---|---|---|
-| pending | v1.3.1 | pending merge | A link to any page shared on LinkedIn shows that page's own card | [plan](docs/v4/cc-plans/Plan-v131-OgImage.md) · [report](docs/v4/cc-completion-reports/v131-og-image-completion-report.md) |
+| [#51](https://github.com/jdsaire/designops/pull/51) | v1.3.1 | pending merge | A link to any page shared on LinkedIn shows that page's own card | [plan](docs/v4/cc-plans/Plan-v131-OgImage.md) · [report](docs/v4/cc-completion-reports/v131-og-image-completion-report.md) |
 | [#50](https://github.com/jdsaire/designops/pull/50) | v1.3.0 | 15 Nov 2026 | The Résumé shows the CV on the page, in English or Spanish: in the browser's own viewer on computers, and as a sheet fitted to the screen with a Download button on phones and tablets; the Markdown copies are gone | — |
 | [#49](https://github.com/jdsaire/designops/pull/49) | v1.1.3 | 9 Nov 2026 | This repository carries an all-rights-reserved license, and the offer ends on AI without "advanced", in English and Spanish | [plan](docs/v4/cc-plans/Plan-v113-LicenseD5.md) · [report](docs/v4/cc-completion-reports/v113-license-d5-completion-report.md) |
 | [#48](https://github.com/jdsaire/designops/pull/48) | v1.1.2 | 4 Nov 2026 | The offer reads reliable websites and apps, in English and Spanish | [plan](docs/v4/cc-plans/Plan-v112-Reliable.md) · [report](docs/v4/cc-completion-reports/v112-reliable-completion-report.md) |

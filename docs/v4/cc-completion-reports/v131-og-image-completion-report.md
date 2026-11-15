@@ -1,6 +1,6 @@
-# Completion report · PR pending · v1.3.1 · Each page shows its own card when shared
+# Completion report · PR #51 · v1.3.1 · Each page shows its own card when shared
 
-**Branch:** `site/og-image` on `8baa848` · **Author:** jdsaire · **Pull request:** pending · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v131-OgImage.md`](../cc-plans/Plan-v131-OgImage.md)
+**Branch:** `site/og-image` on `8baa848` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/51 · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v131-OgImage.md`](../cc-plans/Plan-v131-OgImage.md)
 
 ## What a reader now sees
 
