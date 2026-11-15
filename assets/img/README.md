@@ -10,7 +10,8 @@ The site's shared images. Each subfolder holds one kind; the files are images on
 | [`work/`](work/) | Main's work-card posters (`work-0N-*-{480,800}.webp`, raster, from an image round) and the line art the briefs' Keep exploring slides use (`*.svg`) |
 | [`services/`](services/) | Main's capability images (`cap-0N-*-{480,800}.webp`, raster, from an image round) |
 | [`imagery-manifest.json`](imagery-manifest.json) | Every raster image above: its round, budget, label key and status |
-| [`bridge1_onboarding.svg`](bridge1_onboarding.svg) | The bridge artwork on Main, About and Contact |
+| [`og/`](og/) | The link-preview card each page names as its `og:image` (`og-0N-<page>.png`, PNG at 1200 × 627, LinkedIn's size; v1.3.1). Approved as rendered and shipped byte for byte; never re-encoded or edited without a new approval |
+| [`bridge1_onboarding.svg`](bridge1_onboarding.svg) | The bridge artwork that `resume-portrait.webp` is rendered from; no page shows it directly |
 | [`resume-portrait.webp`](resume-portrait.webp) | Résumé's bridge portrait: `bridge1_onboarding.svg` rendered at its own 1068 × 1600 with transparency, WebP q80 (v1.1.1) |
 | [`jdigital-logo-mini2.svg`](jdigital-logo-mini2.svg) | The small mark on Contact |
 
