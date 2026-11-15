@@ -20,3 +20,20 @@
 @media (min-width: 1024px) and (max-width: 1279px) {
   #bridge1-onboarding .bridge__content { padding: 3rem; }
 }
+/* ── The CV, read on the page (GR-Q157, GR-Q160 as read by RV-Q1) ──────────────
+   The opening above already fills the first screen, so the frame takes the next one: as tall as the
+   viewport under the fixed nav once it reaches the top. svh, not vh, so it doesn't grow and shrink as a
+   phone's browser bar comes and goes (the vh line is for browsers without svh). On phones the section
+   keeps the page gutter at its sides: a strip outside the frame where a thumb scrolls the page, not
+   the PDF, on the way to the footer. The fallback link is the site's call to action, centred. */
+.resume-viewer [hidden] { display: none; }
+.resume-viewer__frame {
+  display: block; width: 100%; border: 0;
+  height: calc(100vh - var(--nav-height));
+  height: calc(100svh - var(--nav-height));
+}
+.resume-viewer__fallback { display: flex; justify-content: center; margin: 0; padding: 3rem var(--gutter) 1rem; }
+.resume-viewer__fallback .cta:focus-visible { outline: 2px solid var(--color-brand-purple); outline-offset: 3px; }
+@media (max-width: 767px) {
+  .resume-viewer { padding-inline: var(--gutter); }
+}
