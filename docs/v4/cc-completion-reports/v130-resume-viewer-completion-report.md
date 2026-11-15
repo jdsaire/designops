@@ -1,6 +1,6 @@
-# Completion report · PR pending · v1.3.0 · The Résumé shows the CV
+# Completion report · PR #50 · v1.3.0 · The Résumé shows the CV
 
-**Branch:** `site/resume-viewer` on `5d6287c` · **Author:** jdsaire · **Pull request:** pending · **Merge:** manual, held (see below) · **Plan:** [`../cc-plans/Plan-v130-ResumeViewer.md`](../cc-plans/Plan-v130-ResumeViewer.md)
+**Branch:** `site/resume-viewer` on `5d6287c` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/50 · **Merge:** manual, held (see below) · **Plan:** [`../cc-plans/Plan-v130-ResumeViewer.md`](../cc-plans/Plan-v130-ResumeViewer.md)
 
 ## What a reader now sees
 
