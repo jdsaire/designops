@@ -43,7 +43,7 @@ Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resu
 
 | PR | Version | Merged | What a reader sees | Plan · Report |
 |---|---|---|---|---|
-| pending | v1.3.0 | pending merge | The Résumé shows the CV on the page, in English or Spanish, with a link where the browser can't display it; the download buttons and Markdown copies are gone | — |
+| pending | v1.3.0 | pending merge | The Résumé shows the CV on the page, in English or Spanish: in the browser's own viewer on computers, and as a sheet fitted to the screen with a Download button on phones and tablets; the Markdown copies are gone | — |
 | [#49](https://github.com/jdsaire/designops/pull/49) | v1.1.3 | 9 Nov 2026 | This repository carries an all-rights-reserved license, and the offer ends on AI without "advanced", in English and Spanish | [plan](docs/v4/cc-plans/Plan-v113-LicenseD5.md) · [report](docs/v4/cc-completion-reports/v113-license-d5-completion-report.md) |
 | [#48](https://github.com/jdsaire/designops/pull/48) | v1.1.2 | 4 Nov 2026 | The offer reads reliable websites and apps, in English and Spanish | [plan](docs/v4/cc-plans/Plan-v112-Reliable.md) · [report](docs/v4/cc-completion-reports/v112-reliable-completion-report.md) |
 | [#47](https://github.com/jdsaire/designops/pull/47) | v1.1.1 | 4 Nov 2026 | Pages arrive lighter and steady: smaller fonts and images, the reader's language before the first paint, nothing moving as a page loads | [plan](docs/v4/cc-plans/Plan-PR47-Performance.md) · [report](docs/v4/cc-completion-reports/pr47-performance-completion-report.md) |
