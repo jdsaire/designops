@@ -31,3 +31,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | PR #47 · Performance: fonts, head preloads, language before first paint, images (v1.1.1) | `pr47-performance-completion-report.md` |
 | v1.1.2 · The offer reads reliable | `v112-reliable-completion-report.md` |
 | v1.1.3 · License and the offer without "advanced" | `v113-license-d5-completion-report.md` |
+| v1.3.0 · The Résumé shows the CV | `v130-resume-viewer-completion-report.md` |
