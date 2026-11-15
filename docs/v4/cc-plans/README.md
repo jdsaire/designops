@@ -31,3 +31,4 @@ Approved deployment plans for v4 and later.
 | PR #47 · Performance: fonts, head preloads, language before first paint, images (v1.1.1) | `Plan-PR47-Performance.md` |
 | v1.1.2 · The offer reads reliable | `Plan-v112-Reliable.md` |
 | v1.1.3 · License and the offer without "advanced" | `Plan-v113-LicenseD5.md` |
+| v1.3.0 · The Résumé shows the CV | `Plan-v130-ResumeViewer.md` |

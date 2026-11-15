@@ -1,5 +1,5 @@
-/* pages/resume/main.js — Résumé page entry (PR #46): the opening that was About's hero, with the CV links, until the
-   full page is built. paths.js arrives transitively via i18n.js + navchrome.js. */
+/* pages/resume/main.js — Résumé page entry (PR #46): the opening that was About's hero, then the CV read on the
+   page (GR-Q157). paths.js arrives transitively via i18n.js + navchrome.js. */
 import { init as initI18n, swapLang, setPage } from '../../core/i18n.js';
 import { init as initTheme }   from '../../core/theme.js';
 import { init as initProgress }  from '../../core/progress.js';

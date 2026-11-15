@@ -1,6 +1,6 @@
 # resume/
 
-The Résumé page, served at `/resume/`: the portrait, the one-line summary and the CV downloads. It holds what was About's opening until the full page is built.
+The Résumé page, served at `/resume/`: the portrait and the one-line summary, then the CV itself in the reader's language: in the browser's own viewer on computers with a mouse, and as a sheet fitted to the screen, with one Download, on phones and tablets. It holds what was About's opening and the CV until the full page is built.
 
 | File | Who it's for |
 |---|---|

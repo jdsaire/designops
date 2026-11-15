@@ -9,6 +9,7 @@ Everything more than one page uses: styles, scripts, the site-wide dictionaries,
 | [`i18n/`](i18n/) | Anyone changing the copy every page shares: the site chrome (`en.json`, `es.json`) and, in `briefs/`, the layer the four briefs share |
 | [`img/`](img/README.md) | Anyone replacing an image: logos, badges, the portrait, and Main's work and capability images with their manifest |
 | [`fonts/archivo/`](fonts/archivo/README.md) | Anyone checking the typeface: the self-hosted Archivo files and their licence |
-| [`docs/`](docs/README.md) | Readers downloading the CV, and anyone updating it |
+| [`docs/`](docs/README.md) | The CV the Résumé page shows, and anyone updating it |
+| [`vendor/pdfjs/`](vendor/pdfjs/README.md) | Anyone updating the third-party PDF.js files the Résumé page uses on phones and tablets, with their license |
 
 Looking for the project's plans and reports instead? They are in [`../docs/`](../docs/README.md), which the site does not load.
