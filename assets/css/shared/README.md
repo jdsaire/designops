@@ -22,6 +22,7 @@ Components that appear on more than one page. Each file says in its first commen
 | [`carousel.css`](carousel.css) | The slide carousel: Act 03 in all four briefs, Keep exploring at their end, and About's two manifestos, with its illustration tag and per-slide call to action from 768. The offset follows the layout through a resize. All four briefs and About |
 | [`carousel-phone.css`](carousel-phone.css) | One phone carousel style below 768, for Main's capabilities carousel and the briefs' Act 03. Main and all four briefs |
 | [`bridge.css`](bridge.css) | The portrait-and-heading bridge. Main and About |
+| [`net.css`](net.css) | The stakeholder network: canvas rings and node card from 768, ring list and bottom sheet below. Brief 03 (Act 02) and the Design System page |
 | [`ticker.css`](ticker.css) | The credentials ticker. Main |
 | [`channels.css`](channels.css) | A row of outbound links, each an icon and a label. Linked by Contact, Feedback and About |
 | [`page-hero.css`](page-hero.css) | The hero and section basics of the dedicated pages. About and Contact |

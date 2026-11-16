@@ -21,10 +21,10 @@ PAGES = {
     'contact': ('contact/index.html', G, ['contact/i18n/contact.{lc}.json']),
     'b01': ('work/accreditapass/index.html', G + R, ['work/accreditapass/i18n/accreditapass.{lc}.json']),
     'b02': ('work/trust-verify-brief/index.html', G + R, ['work/trust-verify-brief/i18n/yape-trust-verify.{lc}.json']),
-    'b03': ('work/airport/index.html', G + R, ['work/airport/i18n/airport.{lc}.json']),
+    'b03': ('work/airport/index.html', G + R + ['assets/i18n/briefs/net.{lc}.json'], ['work/airport/i18n/airport.{lc}.json']),
     'b04': ('work/portfolio-evolution/index.html', G + R, ['work/portfolio-evolution/i18n/designops.{lc}.json']),
     'feedback': ('feedback/index.html', G, ['feedback/i18n/feedback.{lc}.json']),
-    'design-system': ('design-system/index.html', G, ['design-system/i18n/design-system.{lc}.json']),
+    'design-system': ('design-system/index.html', G + ['assets/i18n/briefs/net.{lc}.json'], ['design-system/i18n/design-system.{lc}.json']),
 }
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 find = {'parity': [], 'missing': [], 'shadow': [], 'fallback': []}

@@ -12,7 +12,7 @@ import { rootPrefix } from './paths.js';
 const i18nDicts   = { EN: null, ES: null };
 const i18nLoading = { EN: null, ES: null };
 let   i18nCurrent = 'EN';
-let   i18nPage    = null;   /* page dictionary base, root-relative, no .{lang}.json suffix */
+let   i18nPage    = null;   /* page dictionary base(s), root-relative, no .{lang}.json suffix: one string, or an array merged in order */
 
 function setPage(base) { i18nPage = base; }
 
@@ -25,7 +25,8 @@ function loadDict(lang) {
   if (i18nLoading[lang]) return i18nLoading[lang];
   const sfx = lang === 'ES' ? 'es' : 'en';
   const chrome = fetchJSON(rootPrefix + 'assets/i18n/' + sfx + '.json');
-  const page   = i18nPage ? fetchJSON(rootPrefix + i18nPage + '.' + sfx + '.json') : Promise.resolve({});
+  const bases  = i18nPage ? [].concat(i18nPage) : [];
+  const page   = Promise.all(bases.map(b => fetchJSON(rootPrefix + b + '.' + sfx + '.json'))).then(ps => Object.assign({}, ...ps));
   i18nLoading[lang] = Promise.all([chrome, page])
     .then(([c, p]) => { const dict = Object.assign({}, c, p); i18nDicts[lang] = dict; return dict; })
     .catch(err => { console.warn('i18n fetch failed for ' + lang + ':', err); return null; });

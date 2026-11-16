@@ -1,0 +1,67 @@
+/* shared/net.css — the stakeholder network (Brief 03 Act 02; WD rings, jdigital constellation lineage), moved here unchanged from
+   work/airport/index.html so Brief 03 and the Design System page draw the same component (v1.2.0, V120-Q26). From 768 the rings
+   are drawn on a canvas with a card per node; below 768 the canvas hides and the ring list of chips opens a bottom sheet.
+   Script: core/net.js. Strings: assets/i18n/briefs/net.{en,es}.json. */
+.net{margin-top:clamp(1.6rem,3vw,2.4rem); position:relative;
+  --net-af:#A100FF; --net-ops:#C2A3FF; --net-com:#8F5BFF; --net-ds:#E3D1FF; --net-af-text:#C766FF;}
+/* office label text keeps 4.5:1: a lighter tint of A&F on black; a deeper Commercial on white */
+html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B2FD9; --net-ds:#460073; --net-af-text:#A100FF;}
+.net__stage{position:relative; border:1px solid rgba(var(--ink),.5); background:var(--color-brand-black);}
+.net__canvas{display:block; width:100%; height:760px; cursor:default;}
+@media (max-width:1023px){ .net__canvas{height:640px;} }
+.net__card{position:absolute; width:min(300px,80%); background:var(--surface-card); border:1px solid rgba(var(--ink),.25);
+  border-top:4px solid var(--color-brand-purple); padding:1rem 1.1rem 1.1rem; box-shadow:0 12px 32px var(--shadow-2); z-index:2;}
+.net__card[hidden]{display:none;}
+.net__card-path{font-size:.6rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-dim); padding-right:1.6rem;}
+.net__card-t{font-size:1.05rem; font-weight:var(--fw-bold); color:var(--color-brand-white); margin-top:.35rem;}
+.net__card-role{font-size:.64rem; font-weight:var(--fw-semibold); letter-spacing:.12em; text-transform:uppercase; color:var(--color-purple-light); margin-top:.3rem;}
+.net__card-x{font-size:.86rem; line-height:1.5; color:var(--color-text-muted); font-weight:var(--fw-light); margin-top:.55rem;}
+.net__close{position:absolute; top:.45rem; right:.45rem; width:44px; height:44px; font-size:1.1rem; color:var(--color-text-muted); cursor:pointer;}
+.net__close:hover{color:var(--color-brand-white);}
+.net__close:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-4px;}
+.net__legend{list-style:none; display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-bottom:.9rem; font-size:.74rem; color:var(--color-text-muted);}
+.net__legend li{display:flex; align-items:center; gap:.5rem;}
+.net__lg{display:inline-block; width:28px; height:0; border-top:3px solid rgba(var(--ink),.8);}
+.net__lg--medium{border-top-width:2px;}
+.net__lg--weak{border-top:1.5px dashed rgba(var(--ink),.8);}
+.net__lg--ext{width:14px; height:14px; border:1.5px dashed rgba(var(--ink),.8); border-radius:50%;}
+/* the desktop prompt: a watermark in the column the card uses; gone while a card is open (WD-Q56) */
+.net__tap{display:none; position:absolute; right:20px; top:50%; width:300px; transform:translateY(-50%); margin:0; pointer-events:none;
+  align-items:center; gap:1.1rem; color:var(--color-text-dim); font-size:clamp(1.3rem,1.7vw,1.8rem); font-weight:var(--fw-light);
+  line-height:1.25; letter-spacing:.14em; text-transform:uppercase;
+  transition:opacity var(--duration-ui) var(--ease-standard), visibility var(--duration-ui) var(--ease-standard);}
+.net__tap-arrow{flex:0 0 auto; width:56px; height:24px;}
+@media (min-width:1024px){ .net[data-side] .net__tap{display:flex;} }
+.net[data-active] .net__tap{opacity:0; visibility:hidden;}
+@media (prefers-reduced-motion:reduce){ .net__tap{transition:none;} }
+/* the ring list: the accessible and mobile layer. Visually hidden from 768, still focusable */
+.net__list{display:grid; gap:1rem; margin-top:1rem;}
+@media (min-width:768px){ .net__list{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;} }
+.net__ring-h{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:.45rem;}
+.net__chips{list-style:none; display:flex; flex-wrap:wrap; gap:.4rem;}
+.net__chip{display:inline-flex; align-items:center; gap:.5rem; min-height:44px; padding:.45rem .8rem; font-size:.84rem; font-weight:var(--fw-medium);
+  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;}
+.net__group[data-ring="weak"] .net__chip, .net__group[data-ring="ext"] .net__chip{border-style:dashed;}
+.net__chip:hover, .net__chip[aria-pressed="true"]{border-color:var(--color-brand-purple);}
+.net__chip[data-net-id="inn"]{background:rgba(161,0,255,.16); border-color:var(--color-brand-purple);}
+.net__chip[data-net-id="bil"], .net__chip[data-net-id="arc"], .net__chip[data-net-id="its"]{border-color:var(--color-brand-purple);}
+.net__chip:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
+.net__dot{width:.6rem; height:.6rem; border-radius:50%; background:var(--net-c, var(--color-brand-purple));}
+.net__chip[data-office="af"]{--net-c:var(--net-af);} .net__chip[data-office="ops"]{--net-c:var(--net-ops);}
+.net__chip[data-office="com"]{--net-c:var(--net-com);} .net__chip[data-office="ds"]{--net-c:var(--net-ds);}
+/* phone sheet: the Capabilities pattern (jdigital): it slides up over a dimmed, blurred page */
+.net__backdrop{position:fixed; inset:0; background:var(--scrim-modal); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); z-index:90;
+  opacity:0; visibility:hidden; transition:opacity 320ms var(--ease-standard), visibility 320ms var(--ease-standard);}
+.net__backdrop.is-open{opacity:1; visibility:visible; transition:opacity 320ms var(--ease-standard);}
+.net__sheet{position:fixed; left:0; right:0; bottom:0; z-index:91; background:var(--surface-card); border-top:4px solid var(--color-brand-purple);
+  padding:1.6rem 1.2rem 1.6rem; max-height:70vh; overflow:auto;}
+.net__sheet{transform:translateY(100%); visibility:hidden; transition:transform 320ms var(--ease-standard), visibility 320ms var(--ease-standard);}
+.net__sheet.is-open{transform:none; visibility:visible; transition:transform 320ms var(--ease-standard);}   /* visible at once on open, so focus can land */
+@media (min-width:768px){ .net__sheet, .net__backdrop{display:none;} }
+@media (prefers-reduced-motion:reduce){ .net__sheet, .net__backdrop{transition:none;} }
+.net__sheet-handle{position:absolute; top:.55rem; left:50%; width:36px; height:4px; margin-left:-18px; background:rgba(var(--ink),.3);}
+@media (max-width:767px){
+  .net__legend{display:none;}
+  .net__stage{border:0; background:transparent;}
+  .net__stage{display:none;}
+}

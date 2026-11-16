@@ -6,7 +6,7 @@
 <!-- Content policy (PR #45, PR45-Q7; SR-2): everything loads from this origin. Inline scripts and <style> blocks are
      allowed by hash, so a changed byte needs a new hash; style attributes stay allowed (the briefs' computed chart
      positions). A meta tag can't carry frame-ancestors, report-to or sandbox: those wait for the response header. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nNQszXoZUeUP9p22PbvtHvRJYYdED92dNSxgABbJuBU=' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI=' 'sha256-XTs29eqpDc7RDLzsUJ8vdFI51uE7EIUoG1P8H1TzZks=' 'sha256-G+hMaAwlM9QodHNQJTyN+76Q88CVUBncMgvwDx0dJ/g='; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'sha256-vwhSvR+MN2zDNAN/8vkBl/1ONozv8qexEBgJXFpTAFA='; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nNQszXoZUeUP9p22PbvtHvRJYYdED92dNSxgABbJuBU=' 'sha256-aUmyA8+i5gZ/Y86fQxX5aHAuJDdkyMmPwLpWoy1xwRs=' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-0wLZa9KDZXomjRI0UgSA0vELmVj5paNb9AnVfcmyGtI=' 'sha256-f95KkVwOQeleIRBB1YqAS6Zfy31V2pwDihKoUIvkdGs=' 'sha256-iJEGB+1iZ9kwZrnJM0AeUho12hD2vOgGS6ciQvqBy/0='; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'sha256-GI+T+I7FH6nu3HjvzwNG+CX3wPo+Z9ojKQHpUhtXRbI='; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'">
 <title>Paying what was never paid · Juan Diego Saire</title>
 <meta name="description" content="Lima Airport had never charged international transfer passengers a fee. I designed the web channel to collect it and handed it over.">
 <link rel="canonical" href="https://jdsaire.com/work/airport/">
@@ -42,7 +42,7 @@
   <link rel="modulepreload" href="../../assets/js/core/theme.js">
   <link rel="modulepreload" href="../../assets/js/core/carousel.js">
   <link rel="modulepreload" href="../../assets/js/core/brief-index.js">
-  <script data-p="../../assets/i18n/es.json ../../assets/i18n/briefs/briefs-ui.es.json ../../assets/i18n/briefs/tags.es.json i18n/airport.es.json">try{var L=localStorage.getItem('jds-lang')||'ES';if(L!=='EN'){document.currentScript.dataset.p.split(' ').forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});if(!localStorage.getItem('jds-i18n:'+location.pathname+':'+L)){var s=document.documentElement.style,u=function(){s.removeProperty('visibility');};s.visibility='hidden';document.addEventListener('i18n:changed',function(){requestAnimationFrame(u);},{once:true});setTimeout(u,1500);}}}catch(e){}</script>
+  <script data-p="../../assets/i18n/es.json ../../assets/i18n/briefs/briefs-ui.es.json ../../assets/i18n/briefs/tags.es.json ../../assets/i18n/briefs/net.es.json i18n/airport.es.json">try{var L=localStorage.getItem('jds-lang')||'ES';if(L!=='EN'){document.currentScript.dataset.p.split(' ').forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});if(!localStorage.getItem('jds-i18n:'+location.pathname+':'+L)){var s=document.documentElement.style,u=function(){s.removeProperty('visibility');};s.visibility='hidden';document.addEventListener('i18n:changed',function(){requestAnimationFrame(u);},{once:true});setTimeout(u,1500);}}}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/base/fonts.css">
 <link rel="stylesheet" href="../../assets/css/shared/nav.css">
 <link rel="stylesheet" href="../../assets/css/shared/dropdown.css">
@@ -51,6 +51,7 @@
 <link rel="stylesheet" href="../../assets/css/shared/switch.css">
 <link rel="stylesheet" href="../../assets/css/shared/legal.css">
 <link rel="stylesheet" href="../../assets/css/shared/decoration.css">
+<link rel="stylesheet" href="../../assets/css/shared/net.css">
 <link rel="stylesheet" href="../../assets/css/shared/brief-index.css">
 <link rel="stylesheet" href="../../assets/css/shared/brief-ending.css">
 <link rel="stylesheet" href="../../assets/css/shared/editorial.css">
@@ -492,69 +493,6 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer;}
   .desk-how__i{grid-row:1 / 3; align-self:center; flex:none; width:3rem; height:2.5rem; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linejoin:miter;}   /* fixed: the card's height comes from its text, never from the icon */
   .desk-how__t{font-size:.68rem; font-weight:var(--fw-bold); letter-spacing:.16em; text-transform:uppercase;}
   .desk-how__x{font-size:.92rem; line-height:1.45; font-weight:var(--fw-regular, 400); margin-top:.3rem;}
-}
-.net{margin-top:clamp(1.6rem,3vw,2.4rem); position:relative;
-  --net-af:#A100FF; --net-ops:#C2A3FF; --net-com:#8F5BFF; --net-ds:#E3D1FF; --net-af-text:#C766FF;}
-/* office label text keeps 4.5:1: a lighter tint of A&F on black; a deeper Commercial on white */
-html[data-theme="light"] .net{--net-af:#A100FF; --net-ops:#7500C0; --net-com:#6B2FD9; --net-ds:#460073; --net-af-text:#A100FF;}
-.net__stage{position:relative; border:1px solid rgba(var(--ink),.5); background:var(--color-brand-black);}
-.net__canvas{display:block; width:100%; height:760px; cursor:default;}
-@media (max-width:1023px){ .net__canvas{height:640px;} }
-.net__card{position:absolute; width:min(300px,80%); background:var(--surface-card); border:1px solid rgba(var(--ink),.25);
-  border-top:4px solid var(--color-brand-purple); padding:1rem 1.1rem 1.1rem; box-shadow:0 12px 32px var(--shadow-2); z-index:2;}
-.net__card[hidden]{display:none;}
-.net__card-path{font-size:.6rem; font-weight:var(--fw-semibold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text-dim); padding-right:1.6rem;}
-.net__card-t{font-size:1.05rem; font-weight:var(--fw-bold); color:var(--color-brand-white); margin-top:.35rem;}
-.net__card-role{font-size:.64rem; font-weight:var(--fw-semibold); letter-spacing:.12em; text-transform:uppercase; color:var(--color-purple-light); margin-top:.3rem;}
-.net__card-x{font-size:.86rem; line-height:1.5; color:var(--color-text-muted); font-weight:var(--fw-light); margin-top:.55rem;}
-.net__close{position:absolute; top:.45rem; right:.45rem; width:44px; height:44px; font-size:1.1rem; color:var(--color-text-muted); cursor:pointer;}
-.net__close:hover{color:var(--color-brand-white);}
-.net__close:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:-4px;}
-.net__legend{list-style:none; display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-bottom:.9rem; font-size:.74rem; color:var(--color-text-muted);}
-.net__legend li{display:flex; align-items:center; gap:.5rem;}
-.net__lg{display:inline-block; width:28px; height:0; border-top:3px solid rgba(var(--ink),.8);}
-.net__lg--medium{border-top-width:2px;}
-.net__lg--weak{border-top:1.5px dashed rgba(var(--ink),.8);}
-.net__lg--ext{width:14px; height:14px; border:1.5px dashed rgba(var(--ink),.8); border-radius:50%;}
-/* the desktop prompt: a watermark in the column the card uses; gone while a card is open (WD-Q56) */
-.net__tap{display:none; position:absolute; right:20px; top:50%; width:300px; transform:translateY(-50%); margin:0; pointer-events:none;
-  align-items:center; gap:1.1rem; color:var(--color-text-dim); font-size:clamp(1.3rem,1.7vw,1.8rem); font-weight:var(--fw-light);
-  line-height:1.25; letter-spacing:.14em; text-transform:uppercase;
-  transition:opacity var(--duration-ui) var(--ease-standard), visibility var(--duration-ui) var(--ease-standard);}
-.net__tap-arrow{flex:0 0 auto; width:56px; height:24px;}
-@media (min-width:1024px){ .net[data-side] .net__tap{display:flex;} }
-.net[data-active] .net__tap{opacity:0; visibility:hidden;}
-@media (prefers-reduced-motion:reduce){ .net__tap{transition:none;} }
-/* the ring list: the accessible and mobile layer. Visually hidden from 768, still focusable */
-.net__list{display:grid; gap:1rem; margin-top:1rem;}
-@media (min-width:768px){ .net__list{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;} }
-.net__ring-h{font-size:.62rem; font-weight:var(--fw-semibold); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:.45rem;}
-.net__chips{list-style:none; display:flex; flex-wrap:wrap; gap:.4rem;}
-.net__chip{display:inline-flex; align-items:center; gap:.5rem; min-height:44px; padding:.45rem .8rem; font-size:.84rem; font-weight:var(--fw-medium);
-  color:var(--color-brand-white); background:var(--surface-card); border:1px solid rgba(var(--ink),.5); cursor:pointer;}
-.net__group[data-ring="weak"] .net__chip, .net__group[data-ring="ext"] .net__chip{border-style:dashed;}
-.net__chip:hover, .net__chip[aria-pressed="true"]{border-color:var(--color-brand-purple);}
-.net__chip[data-net-id="inn"]{background:rgba(161,0,255,.16); border-color:var(--color-brand-purple);}
-.net__chip[data-net-id="bil"], .net__chip[data-net-id="arc"], .net__chip[data-net-id="its"]{border-color:var(--color-brand-purple);}
-.net__chip:focus-visible{outline:2px solid var(--color-brand-purple); outline-offset:2px;}
-.net__dot{width:.6rem; height:.6rem; border-radius:50%; background:var(--net-c, var(--color-brand-purple));}
-.net__chip[data-office="af"]{--net-c:var(--net-af);} .net__chip[data-office="ops"]{--net-c:var(--net-ops);}
-.net__chip[data-office="com"]{--net-c:var(--net-com);} .net__chip[data-office="ds"]{--net-c:var(--net-ds);}
-/* phone sheet: the Capabilities pattern (jdigital): it slides up over a dimmed, blurred page */
-.net__backdrop{position:fixed; inset:0; background:var(--scrim-modal); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); z-index:90;
-  opacity:0; visibility:hidden; transition:opacity 320ms var(--ease-standard), visibility 320ms var(--ease-standard);}
-.net__backdrop.is-open{opacity:1; visibility:visible; transition:opacity 320ms var(--ease-standard);}
-.net__sheet{position:fixed; left:0; right:0; bottom:0; z-index:91; background:var(--surface-card); border-top:4px solid var(--color-brand-purple);
-  padding:1.6rem 1.2rem 1.6rem; max-height:70vh; overflow:auto;}
-.net__sheet{transform:translateY(100%); visibility:hidden; transition:transform 320ms var(--ease-standard), visibility 320ms var(--ease-standard);}
-.net__sheet.is-open{transform:none; visibility:visible; transition:transform 320ms var(--ease-standard);}   /* visible at once on open, so focus can land */
-@media (min-width:768px){ .net__sheet, .net__backdrop{display:none;} }
-@media (prefers-reduced-motion:reduce){ .net__sheet, .net__backdrop{transition:none;} }
-.net__sheet-handle{position:absolute; top:.55rem; left:50%; width:36px; height:4px; margin-left:-18px; background:rgba(var(--ink),.3);}
-@media (max-width:767px){
-  .net__legend{display:none;}
-  .net__stage{border:0; background:transparent;}
-  .net__stage{display:none;}
 }
 /* read time per language and width (PR43 G6, SR-3): the four .rt spans of the other briefs (shared/brief-charts.css),
    restated here because Brief 03 does not link that file */
@@ -1309,7 +1247,7 @@ function fetchBody(lc){
 /* Regional layer (WB-Q8): strings shared by the briefs live once in
    ../../assets/i18n/briefs/. Merge order: chrome → regional → body. */
 const REGIONAL_BASE = "../../assets/i18n/briefs/";
-const REGIONAL_FILES = ["briefs-ui", "tags"];
+const REGIONAL_FILES = ["briefs-ui", "tags", "net"];
 const regionalCache = {};
 function fetchRegional(lc){
   return regionalCache[lc] || (regionalCache[lc] = Promise.all(REGIONAL_FILES.map(f => fetchDict(REGIONAL_BASE + f + "." + lc + ".json")))
@@ -1426,160 +1364,6 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   (uiState.get("rv") || []).forEach(id=>{ const b = btns.find(x=>x.getAttribute("aria-controls")===id); if(b && b.getAttribute("aria-expanded")!=="true") b.click(); });
   const mo = new MutationObserver(save); btns.forEach(b=> mo.observe(b, { attributes:true, attributeFilter:["aria-expanded"] })); }
 
-/* ============ Act 02 stakeholder network — canvas rings, card, sheet, ring list ============ */
-(function(){
-  const root = document.querySelector('[data-net]'); if(!root) return;
-  const stage = root.querySelector('.net__stage'), cv = root.querySelector('.net__canvas'), ctx = cv.getContext('2d');
-  const card = root.querySelector('.net__card'), sheet = root.querySelector('.net__sheet'), backdrop = root.querySelector('.net__backdrop');
-  const chips = [...root.querySelectorAll('.net__chip')];
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const SECT = { af:[95,178], ops:[-62,92], com:[188,245], ds:[255,305] };       // degrees, maths orientation
-  const RING = { strong:.42, medium:.61, weak:.77, ext:.92 };
-  const LW = { strong:3, medium:2, weak:1.2, ext:1.1 };
-  const TIER2 = new Set(['bil','arc','its']);   // the areas a reader should open after mine
-  const LINKS = [["inn", "bil"], ["inn", "fc"], ["inn", "arc"], ["inn", "its"], ["its", "arc"], ["inn", "ter"], ["bil", "fc"], ["bil", "arc"], ["bil", "prc"], ["aop", "ter"], ["cx", "ter"], ["prc", "ext_col"], ["prc", "ext_gw"], ["arc", "ext_gw"], ["ter", "ext_flow"], ["ter", "ext_secp"], ["com", "ext_air"], ["bil", "ext_reg"], ["ter", "ext_pax"]];
-  const nodes = chips.map(c => ({ id:c.dataset.netId, office:c.dataset.office, ring:c.dataset.ring, chip:c,
-    phase:Math.random()*6.28, amp:2+Math.random()*2, speed:.6+Math.random()*.5 }));
-  const byId = Object.fromEntries(nodes.map(n=>[n.id,n]));
-  let W=0, H=0, cx=0, cy=0, R=0, compact=false, hover=null, active=null, dpr=1, visible=true;
-  const txt = sel => (root.querySelector(sel)||{}).textContent || '';
-  const col = v => getComputedStyle(root).getPropertyValue(v).trim();
-  function rgba(hex,a){ const h=hex.replace('#',''); const n=parseInt(h.length===3?h.split('').map(x=>x+x).join(''):h,16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; }
-  function ink(a){ return `rgba(${col('--ink')},${a})`; }
-  function layout(){
-    const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = window.devicePixelRatio||1;
-    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
-    compact = W < 560; const side = W >= 1000; root.toggleAttribute('data-side', side); cx = side ? (W - 340)/2 : W/2; cy = H/2; R = Math.min(cx, H*.5) * (compact ? .96 : .92);
-    for(const off of Object.keys(SECT)){
-      const [a0,a1] = SECT[off];
-      for(const ring of Object.keys(RING)){
-        const mine = nodes.filter(n=>n.office===off && n.ring===ring);
-        mine.forEach((n,i)=>{ const a=(a0+(a1-a0)*(i+1)/(mine.length+1))*Math.PI/180;
-          n.x = cx + Math.cos(a)*R*RING[ring]; n.y = cy - Math.sin(a)*R*RING[ring]; n.a=a; });
-      }
-    }
-    const pos = {}; nodes.forEach(n=>pos[n.id]=[Math.round(n.x),Math.round(n.y)]); cv.dataset.pos = JSON.stringify(pos);
-    cv.dataset.geo = JSON.stringify({ cx:Math.round(cx), cy:Math.round(cy), R:Math.round(R) });
-    const rr = {}; nodes.forEach(n=>rr[n.id]=rad(n)); cv.dataset.r = JSON.stringify(rr);
-  }
-  function rad(n){ const base = compact ? {strong:7,medium:6,weak:5,ext:4.5} : (W < 860 ? {strong:26,medium:25,weak:23,ext:21} : {strong:31,medium:29,weak:27,ext:24}); return base[n.ring]; }
-  function offCol(o){ return col('--net-'+o) || '#A100FF'; }
-  function curve(x1,y1,x2,y2,stroke,lw,dash,bend){
-    const mx=(x1+x2)/2, my=(y1+y2)/2, dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1;
-    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.quadraticCurveTo(mx-dy/L*bend, my+dx/L*bend, x2,y2);
-    ctx.setLineDash(dash?[5,5]:[]); ctx.strokeStyle=stroke; ctx.lineWidth=lw; ctx.stroke(); ctx.setLineDash([]);
-  }
-  function label(n,x,y,r){
-    if(compact) return;
-    const t = (n.chip.querySelector('.net__lt')||{}).textContent||''; const sp=t.indexOf(' ');
-    const lines = (sp===-1 || t.length<11) ? [t] : [t.slice(0,sp), t.slice(sp+1)];
-    let fs = n.ring==='ext' ? 10.5 : 11; ctx.font = `600 ${fs}px Archivo, Arial, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
-    const wmax = Math.max(...lines.map(l=>ctx.measureText(l).width)), room = 2*r - 6;          // longer names (ES) shrink to fit their circle
-    if(wmax > room){ fs = Math.max(8, fs*room/wmax); ctx.font = `600 ${fs}px Archivo, Arial, sans-serif`; }
-    ctx.fillStyle = col('--color-brand-white'); const lh=fs*1.25, y0=y-(lines.length-1)*lh/2;
-    lines.forEach((ln,i)=>ctx.fillText(ln,x,y0+i*lh));
-  }
-  function draw(ts){
-    const t = reduce.matches ? 0 : ts/1000;
-    ctx.clearRect(0,0,W,H);
-    // rings and their labels
-    Object.entries(RING).forEach(([ring,f])=>{
-      ctx.beginPath(); ctx.arc(cx,cy,R*f,0,Math.PI*2); ctx.setLineDash(ring==='ext'?[2,6]:[]); ctx.strokeStyle=ink(.16); ctx.lineWidth=1; ctx.stroke(); ctx.setLineDash([]);
-      if(!compact){ ctx.font='600 9.5px Archivo, Arial, sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle=ink(.55);
-        const lab = root.querySelectorAll('.net__l-ring')[Object.keys(RING).indexOf(ring)]; ctx.fillText((lab?lab.textContent:'').toUpperCase(), cx, cy-R*f-7); }
-    });
-    // office labels on the outer edge
-    if(!compact) Object.entries(SECT).forEach(([o,[a0,a1]])=>{
-      const a=((a0+a1)/2)*Math.PI/180, rr=R*1.0; let x=cx+Math.cos(a)*rr, y=cy-Math.sin(a)*rr*.98;
-      ctx.font='700 11px Archivo, Arial, sans-serif'; const lbl = txt('.net__l-off--'+o).toUpperCase(), lw = ctx.measureText(lbl).width;
-      let lx = Math.cos(a)>.2 ? x : (Math.cos(a)<-.2 ? x - lw : x - lw/2);
-      if(o==='ds' && byId.inn){ const ai = byId.inn.a, rl = R*.69;   // on my node's ray, inside the medium–weak band
-        const px = cx + Math.cos(ai)*rl, py = cy - Math.sin(ai)*rl; lx = px - lw/2; y = py + 4; cv.dataset.dsLabel = JSON.stringify([Math.round(px), Math.round(py)]); }
-      lx = Math.max(8, Math.min(lx, W - 8 - lw));   // keep inside the canvas
-      ctx.textAlign='left'; ctx.fillStyle=col('--net-'+o+'-text') || offCol(o); ctx.fillText(lbl, lx, y);
-    });
-    const P = n => [n.x, n.y + Math.sin(t*n.speed+n.phase)*(compact?0:n.amp)];
-    const hot = new Set(); const focus = active||hover;
-    if(focus){ hot.add(focus.id); LINKS.forEach(([a,b])=>{ if(a===focus.id) hot.add(b); if(b===focus.id) hot.add(a); }); }
-    // centre spokes for internal nodes
-    nodes.filter(n=>n.ring!=='ext').forEach(n=>{ const [x,y]=P(n); const on = focus && focus.id===n.id;
-      curve(cx,cy,x,y, rgba(offCol(n.office), on?.95:(focus?.18:.55)), LW[n.ring]*(on?1.5:1), n.ring==='weak', 0); });
-    // cross links
-    LINKS.forEach(([a,b])=>{ const A=byId[a], B=byId[b]; if(!A||!B) return; const [x1,y1]=P(A), [x2,y2]=P(B);
-      const on = focus && (focus.id===a||focus.id===b); const ext = A.ring==='ext'||B.ring==='ext';
-      curve(x1,y1,x2,y2, ink(on?.85:(focus?.08:(ext?.32:.28))), on?2.4:(ext?1.1:1.4), ext||A.ring==='weak'||B.ring==='weak', 14); });
-    // nodes
-    nodes.forEach(n=>{ const [x,y]=P(n); const r=rad(n); const c = n.ring==='ext' ? col('--color-brand-white') : offCol(n.office);
-      const on = focus && focus.id===n.id, dim = focus && !hot.has(n.id);
-      if(!compact){ const g=ctx.createRadialGradient(x,y,r*.2,x,y,r*2.1); g.addColorStop(0, rgba(c.startsWith('#')?c:'#A100FF', on?.5:(n.id==='inn'?.35:(TIER2.has(n.id)?.27:.14)))); g.addColorStop(1,'rgba(0,0,0,0)');
-        ctx.beginPath(); ctx.arc(x,y,r*2.1,0,Math.PI*2); ctx.fillStyle=g; ctx.fill(); }
-      ctx.globalAlpha = dim ? .35 : 1;
-      ctx.beginPath(); ctx.arc(x,y,r*(on?1.12:1),0,Math.PI*2); ctx.fillStyle = n.id==='inn' ? rgba('#A100FF',.22) : col('--color-brand-black'); ctx.fill();
-      ctx.setLineDash(n.ring==='ext'||n.ring==='weak'?[4,4]:[]); ctx.strokeStyle = n.ring==='ext' ? ink(.7) : c; ctx.lineWidth = on?2.4:(n.ring==='strong'?1.8:1.3); ctx.stroke(); ctx.setLineDash([]);
-      if(n.id==='inn' && !compact){ ctx.beginPath(); ctx.arc(x,y,r+6,0,Math.PI*2); ctx.setLineDash([3,5]); ctx.strokeStyle=rgba('#A100FF',.7); ctx.lineWidth=1; ctx.stroke(); ctx.setLineDash([]); }
-      if(TIER2.has(n.id) && !compact){ ctx.beginPath(); ctx.arc(x,y,r+5,0,Math.PI*2); ctx.strokeStyle=rgba('#A100FF',.75); ctx.lineWidth=1.4; ctx.stroke(); }
-      label(n,x,y,r); ctx.globalAlpha = 1; n.rx=x; n.ry=y; n.r=r; });
-    // centre
-    const pr = compact?20:56;   /* the centre's pulse retired (decoration spec D04): one ambient motion per component */
-    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,pr*1.6); g.addColorStop(0,'rgba(161,0,255,.22)'); g.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.beginPath(); ctx.arc(cx,cy,pr*1.6,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
-    ctx.beginPath(); ctx.arc(cx,cy,pr,0,Math.PI*2); ctx.fillStyle=col('--surface-card'); ctx.fill(); ctx.strokeStyle='#A100FF'; ctx.lineWidth=2.4; ctx.stroke();
-    if(!compact){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 13px Archivo, Arial, sans-serif'; ctx.fillStyle=col('--color-purple-light');
-      ctx.fillText(txt('.net__l-centre'), cx, cy); }
-  }
-  /* Frames only while the map is on screen; phones never bob, so they draw once and then on demand. */
-  let running = false;
-  function loop(ts){ running = false; if(!visible || reduce.matches) return; draw(ts||0); if(compact) return; running = true; requestAnimationFrame(loop); }
-  function start(){ if(!running && !reduce.matches){ running = true; requestAnimationFrame(loop); } }
-  function fill(box, n){
-    const m = n.chip.parentElement.querySelector('.net__meta');
-    box.querySelector('.net__card-path').textContent = m.querySelector('.net__m-path').textContent;
-    box.querySelector('.net__card-t').textContent = n.chip.querySelector('.net__lt').textContent;
-    box.querySelector('.net__card-role').textContent = m.querySelector('.net__m-role').textContent;
-    box.querySelector('.net__card-x').textContent = m.querySelector('.net__m-x').textContent;
-  }
-  function placeCard(n){
-    const cw = card.offsetWidth || 300, ch = card.offsetHeight || 160;
-    const top = Math.max(16, Math.min(n.y - ch/2, H - ch - 16));
-    if(cx + R + 24 + cw < W - 16){ card.style.left = (W - cw - 20)+'px'; card.style.top = top+'px'; return; }
-    const left = n.x >= cx ? 16 : W - cw - 16;   // the side opposite the node
-    card.style.left = left+'px'; card.style.top = top+'px';
-  }
-  const mqPhone = window.matchMedia('(max-width:767px)'), mobile = () => mqPhone.matches;
-  function showSheet(on){ sheet.classList.toggle('is-open', on); backdrop.classList.toggle('is-open', on); sheet.setAttribute('aria-hidden', String(!on)); }
-  // crossing the phone breakpoint with an area open moves it to the other variant: sheet ⇄ card beside its node
-  mqPhone.addEventListener('change', ()=>{ const n = active; if(!n) return;
-    if(mobile()){ card.hidden = true; fill(sheet,n); showSheet(true); }
-    else { showSheet(false); requestAnimationFrame(()=>{ layout(); fill(card,n); card.hidden = false; placeCard(n); draw(performance.now()); }); } });
-  function open(n, from){
-    active = n; root.dataset.active = n.id; uiState.set('net', n.id); chips.forEach(c=>c.setAttribute('aria-pressed', String(c===n.chip)));
-    if(mobile()){ fill(sheet,n); showSheet(true); sheet.querySelector('.net__close').focus(); }
-    else { fill(card,n); card.hidden=false; placeCard(n); }
-    if(reduce.matches || !running) draw(performance.now());
-  }
-  function close(){ const n = active; active=null; delete root.dataset.active; uiState.set('net', null); chips.forEach(c=>c.setAttribute('aria-pressed','false'));
-    card.hidden=true; const wasSheet = sheet.classList.contains('is-open'); showSheet(false); if(wasSheet && n) n.chip.focus(); if(reduce.matches || !running) draw(performance.now()); }
-  function hit(x,y){ return nodes.find(n=>Math.hypot(x-(n.rx??n.x), y-(n.ry??n.y)) < (n.r||30)+6) || null; }
-  function xy(e){ const r=cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
-  cv.addEventListener('mousemove', e=>{ if(compact) return; const h=hit(...xy(e)); if(h!==hover){ hover=h; cv.style.cursor=h?'pointer':'default'; if(reduce.matches || !running) draw(performance.now());} });
-  cv.addEventListener('mouseleave', ()=>{ hover=null; if(reduce.matches || !running) draw(performance.now()); });
-  cv.addEventListener('click', e=>{ if(compact) return; const h=hit(...xy(e)); if(!h || h===active) close(); else open(h); });
-  chips.forEach(c=>{ c.setAttribute('aria-pressed','false'); c.addEventListener('click', ()=>{ const n=byId[c.dataset.netId]; if(active===n && !mobile()) close(); else open(n); });
-    c.addEventListener('focus', ()=>{ if(!mobile()){ hover=byId[c.dataset.netId]; if(reduce.matches || !running) draw(performance.now());} });
-    c.addEventListener('blur', ()=>{ hover=null; }); });
-  root.querySelectorAll('.net__close').forEach(b=>b.addEventListener('click', close));
-  backdrop.addEventListener('click', close);
-  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && active) close(); });
-  document.addEventListener('i18n:changed', ()=>{ if(active){ fill(mobile()?sheet:card, active);} draw(performance.now()); });
-  new MutationObserver(()=>draw(performance.now())).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
-  new ResizeObserver(()=>{ layout(); if(active && !mobile()) placeCard(active); draw(performance.now()); }).observe(stage);
-  new IntersectionObserver(es=>es.forEach(en=>{ visible = en.isIntersecting; if(visible) start(); }), {threshold:0}).observe(cv);
-  reduce.addEventListener('change', ()=>{ if(!reduce.matches) start(); else draw(0); });
-  document.body.append(backdrop, sheet);   // at the document root, as in jdigital: no animated ancestor can trap the fixed layers
-  layout(); draw(0); start();
-  if(document.fonts) document.fonts.load('600 11px Archivo').then(()=>{ layout(); draw(performance.now()); }, ()=>{});   // labels are measured: redo once the face is in
-  { const sv = uiState.get('net'); if(sv && byId[sv]) open(byId[sv]); }   // a reload keeps the open card or sheet
-})();
 
 /* ============ Act 04 screens — phone swipe track with dots (Main Work pattern) ============ */
 (function(){
@@ -1718,6 +1502,7 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   import { init as initTheme }    from "../../assets/js/core/theme.js";
   import { init as initCarousel } from "../../assets/js/core/carousel.js";
   import { init as initIndex }    from "../../assets/js/core/brief-index.js";
+  import { init as initNet }      from "../../assets/js/core/net.js";
   initTheme();
   initProgress();
   initDecoration();
@@ -1725,6 +1510,7 @@ mqDesktop.addEventListener("change", ()=>{ closePanel(); document.querySelectorA
   initLegal({ swapLang: window.swapLang });   // the footer's legal row and overlays (PR #45)
   initCarousel({ store: uiState });   // Act 03: the slide survives a reload, under the page's own b03:ui key
   initIndex();   // the act index between the hero and Act 00 (PR #43)
+  initNet({ store: uiState });   // Act 02: the stakeholder network (shared since v1.2.0), under the page's own b03:ui key
 </script>
 </body>
 </html>
