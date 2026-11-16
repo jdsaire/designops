@@ -1,4 +1,6 @@
-# Decoration system — capability spec (v1.7)
+# Decoration system — capability spec (v1.8)
+
+**v1.8 SIGNED (4 Nov 2026, SIGNED BUNDLE; PR #46 sync, SY46-Q1; rides Design System v1.2.0 into `docs/v3/organisms/`, SY47-Q1, BRIEF-CC-v120-DesignSystem-v1_1 G4):** X-1 narrowed by PR46-Q38: the ticker's lanes no longer hold while hovered; keyboard focus pauses them. Everything else is v1.7 verbatim.
 
 Companion to `decoration-system.html`, the live specimen. It loads the site's own tokens, face and decoration layer,
 so it shows the shipped code, not a copy.
@@ -175,7 +177,7 @@ No role means the decoration is retired.
 | **RELATE** | Message: what had to finish first | each dependency line starts as the bar it leaves finishes and reveals along its direction through a mask, 500 ms; it keeps its 5/4 dash, and its arrowhead appears as it arrives | dashed lines with heads | B02 (5 lines), from 768 |
 | **FIELD** (retired, PR35-Q50) | Aesthetic: the opening | the hero gradient holds still; an endless drift without the retired pause button would need a 2.2.2 exception | still | Main hero |
 | **ENTRANCE** (retired, PR35-Q49) | — | the hero shows at once when it is fitted | in place | Main hero |
-| **MARQUEE** (X-1) | Aesthetic + Message: a deliberate pause before the work (PR35-Q28) | two lanes at 60 px/s in opposite directions; a lane holds while hovered; a logo lifts from .55 to 1 opacity on hover | static lanes | Main ticker |
+| **MARQUEE** (X-1) | Aesthetic + Message: a deliberate pause before the work (PR35-Q28) | two lanes at 60 px/s in opposite directions; no hover hold since PR #46, keyboard focus pauses a lane (PR46-Q38); a logo lifts from .55 to 1 opacity on hover | static lanes | Main ticker |
 | **LIVE MAP** (X-2) | Interaction: the map is live and explorable | nodes bob 2–4 px on desktop while the map is on screen; hover or tap focuses ties; the centre pulse is retired | still | B03 network (phones show the list and sheet) |
 | **TOKEN** | Message: the passenger's path | on desktop, a token walks the flowchart once when the chart is first seen (about 12–15 s), lighting each step it passes, then fades; the loop then stops; hover redraws on demand | final frame | B03 flowchart |
 | **COUNT** (retired, PR35-Q49) | — | About's track-record figures are static, like the briefs' | the figure | About |
@@ -195,7 +197,7 @@ No role means the decoration is retired.
 
 | ID | Component | Relaxed | Why the content stays reachable |
 |---|---|---|---|
-| X-1 | Main credential ticker | WCAG 2.2.2: a loop over 5 s with no pause control | Each lane is one image labelled for screen readers ("Academic and institutional credentials", "Industry and applied execution credentials"), so no reading depends on the motion. A lane holds while hovered. Reduced motion shows static lanes. |
+| X-1 | Main credential ticker | WCAG 2.2.2: a loop over 5 s with no pause control | Each lane is one image labelled for screen readers ("Academic and institutional credentials", "Industry and applied execution credentials"), so no reading depends on the motion. Keyboard focus pauses a lane (PR46-Q38; the hover hold is retired). Reduced motion shows static lanes. |
 | X-2 | B03 network bob | WCAG 2.2.2 | It moves 2–4 px, on desktop only, and only while on screen. Reduced motion is still. Every role is in the 17-item list beside the map: visible on phones, read by screen readers on desktop. Ties are reachable by hover, tap and the list. |
 | ~~X-3~~ | About track record | revoked by PR35-Q49: the figures are static | — |
 | ~~X-4~~ | Main hero entrance | revoked by PR35-Q49: the hero shows at once | — |
@@ -235,7 +237,7 @@ v1.0's D01–D26 carry over, with corrections in bold. D27–D36 are new in v1.1
 | # | Component | Verdict (v1.1) | Role | Note |
 |---|---|---|---|---|
 | D01 | Main · hero gradient | **Still** (PR35-Q50) | Aesthetic | no drift |
-| D02 | Main · credential ticker | **Keep** MARQUEE + hover hold | Aesthetic, Message | X-1; **60 px/s** |
+| D02 | Main · credential ticker | **Keep** MARQUEE + focus pause (PR46-Q38) | Aesthetic, Message | X-1; **60 px/s** |
 | D03 | B03 · network bob | **Keep** LIVE MAP | Interaction | X-2; **frames only while on screen** |
 | D04 | B03 · network centre pulse | Retire | — | a second loop in one component |
 | D05 | B03 · network ring entrance (round-1 idea) | Retire | — | would delay canvas labels |
