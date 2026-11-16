@@ -33,3 +33,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | v1.1.3 · License and the offer without "advanced" | `v113-license-d5-completion-report.md` |
 | v1.3.0 · The Résumé shows the CV | `v130-resume-viewer-completion-report.md` |
 | v1.3.1 · Each page shows its own card when shared | `v131-og-image-completion-report.md` |
+| v1.2.0 · A Design System page in the Lab menu | `v120-design-system-completion-report.md` |
