@@ -38,7 +38,7 @@
 .ds-grid { display: grid; grid-template-columns: 1fr; gap: 2rem var(--col-gap); }
 .ds-grid > * { min-width: 0; }
 @media (min-width: 768px) { .ds-grid--2, .ds-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1024px) { .ds-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .ds-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ds-grid--2l { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1280px) { .ds-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .ds-stack { display: grid; gap: 2.5rem; }
 
