@@ -1,6 +1,6 @@
 # Completion report · v1.2.0 · A Design System page in the Lab menu
 
-**Branch:** `site/design-system` on `874637b` · **Author:** jdsaire · **Pull request:** pending · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v120-DesignSystem.md`](../cc-plans/Plan-v120-DesignSystem.md)
+**Branch:** `site/design-system` on `874637b` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/52 · **Merge:** manual · **Plan:** [`../cc-plans/Plan-v120-DesignSystem.md`](../cc-plans/Plan-v120-DesignSystem.md)
 
 ## What a reader now sees
 
