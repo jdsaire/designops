@@ -30,12 +30,20 @@ a.nav__card:hover, a.nav__card:focus-visible { opacity: 1; }
 .nav__card-name { font-size: 0.95rem; font-weight: var(--fw-bold); }
 .nav__card-tag { font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
 
-/* ---- A page that isn't live yet (data-nav-state="soon"): shown, never a link ---- */
-[data-nav-state="soon"] { cursor: default; }
-.nav__soon {
+/* ---- A page that's new (data-nav-state="new", v1.2.0; SY51-Q5, V120-Q2): a live link whose tag reads NEW beside PULSE
+   (decoration spec X-6: the 0.45 rem brand-purple square, opacity 1 → 0.3 → 1 every 2.4 s, decorative; still at full
+   opacity under reduced motion). The row's other states are the link's own. ---- */
+.nav__new {
+  display: inline-flex; align-items: center; gap: 0.4em;
   padding: 0.1rem 0.3rem; border: 1px solid var(--color-border-soft); font-size: 0.6rem; font-weight: var(--fw-semibold);
-  letter-spacing: 0.06em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: var(--color-text-dim);
+  letter-spacing: 0.06em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: var(--color-brand-white);
 }
+.nav__new::before {
+  content: ""; flex: 0 0 auto; width: 0.45rem; height: 0.45rem; background: var(--color-brand-purple);
+  animation: nav-pulse 2.4s var(--ease-standard) infinite;
+}
+@keyframes nav-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .nav__new::before { animation: none; } }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .nav__menu { padding: 0.5rem; }
