@@ -1,6 +1,6 @@
 # work/airport/
 
-Brief 03 · TUUA Transfer, served at `/work/airport/`: "Paying what was never paid". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) and its relay tracks (`relay.css`) from [`../../assets/`](../../assets/README.md).
+Brief 03 · TUUA Transfer, served at `/work/airport/`: "Paying what was never paid". The page is self-contained, with its styles and scripts inline; it links the shared chrome (navigation, footer, progress bar, decoration) its relay tracks (`relay.css`) and, since v1.2.0, the stakeholder network of Act 02 (`shared/net.css`, `core/net.js`, strings in `assets/i18n/briefs/net`), shared with the Design System page, from [`../../assets/`](../../assets/README.md).
 
 | File | Who it's for |
 |---|---|
