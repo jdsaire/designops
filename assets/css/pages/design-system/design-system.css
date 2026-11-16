@@ -33,9 +33,9 @@
 .ds-head .section__eyebrow { margin-bottom: clamp(1.25rem, 2vw, 2rem); }
 .ds-head .section__eyebrow-text { margin: 0; }
 .ds-n { font-variant-numeric: tabular-nums; }
-.ds-hero { margin: 0; max-width: 14em; font-size: clamp(2.25rem, 5vw, 4.25rem); font-weight: var(--fw-black); line-height: 1.02;
+.ds-hero { margin: 0; max-width: 14em; font-size: clamp(1.5rem, 8.6cqi, 4.25rem); font-weight: var(--fw-black); line-height: 1.02;
   letter-spacing: -0.03em; text-transform: uppercase; color: var(--color-brand-white); overflow-wrap: anywhere; }
-.ds-hero em { padding: 0 0.12em; font-style: italic; background: var(--color-brand-purple); color: var(--color-on-brand); }
+.ds-hero em { white-space: nowrap; padding: 0 0.12em; font-style: italic; background: var(--color-brand-purple); color: var(--color-on-brand); }
 .ds-head .section__lede { margin-top: 1.25rem; }
 .ds-sub { margin: clamp(2.5rem, 4vw, 3.5rem) 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border-soft);
   font-size: 0.8rem; font-weight: var(--fw-semibold); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
@@ -53,13 +53,15 @@
   border: 1px solid var(--color-border-soft); }
 .ds-atom .cta, .ds-atom .ah-label { margin: 0; }
 .ds-atom .section__eyebrow { margin: 0; align-items: flex-start; }
-.ds-sw, .ds-ladder, .ds-kv, .ds-tmpl { list-style: none; margin: 0; padding: 0; }
+.ds-sw, .ds-ladder, .ds-kv { list-style: none; margin: 0; padding: 0; }
 .ds-sw { display: grid; gap: 0.75rem; }
 .ds-sw li { display: grid; grid-template-columns: 2.5rem 1fr; column-gap: 0.85rem; align-items: center; }
 .ds-sw i { grid-row: 1 / 3; width: 2.5rem; height: 2.5rem; border: 1px solid var(--color-border-soft); background: var(--sw); }
 .ds-sw b, .ds-ladder b { font-size: 0.8rem; font-weight: var(--fw-semibold); }
 .ds-sw b, .ds-sw code, .ds-ladder b, .ds-ladder code, .ds-pairs .k, .ds-pairs code, .ds-t code, .ds-kv code, .ds-kv b { white-space: nowrap; }
-.ds-sw code, .ds-ladder code, .ds-pairs code, .ds-t code, .ds-kv code { font-family: var(--font-primary); font-size: 0.78rem; }
+/* Identifiers (token, class and value names) are code, the same in both languages: set as code, not as copy (V120-Q29) */
+.ds-sw b, .ds-ladder b, .ds-pairs .k, .ds-sw code, .ds-ladder code, .ds-pairs code, .ds-t code, .ds-kv code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.76rem; letter-spacing: 0; }
 .ds-v { color: var(--color-text-muted); }
 .ds-ladder { border: 1px solid var(--color-border-soft); }
 .ds-ladder li { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.7rem 0.85rem; background: var(--sw); }
@@ -81,7 +83,9 @@
   .ds-t td { display: block; width: auto !important; padding: 0.3rem 0; border: 0; }
 }
 .ds-weights { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0; font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--color-brand-white); }
-.ds-weights span { font-weight: var(--w); }
+.ds-w { display: inline-flex; flex-direction: column; gap: 0.3rem; }
+.ds-w__s { font-weight: var(--w); }
+.ds-w__n { font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
 
 /* ---- 02 Molecules: one menu card, resting and on hover ---- */
 .ds-card1 { position: static; transform: none; display: inline-grid; width: auto; }
@@ -92,12 +96,6 @@
 .ds-menu-static.nav__menu--briefs { grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); }
 .ds-menu-static .nav__card { min-width: 0; }
 .ds-more { margin: 0; }
-
-/* ---- 04 Templates: the brief, top to bottom ---- */
-.ds-tmpl { display: grid; gap: 4px; max-width: 34rem; }
-.ds-tmpl li { padding: 0.6rem; border: 1px solid var(--color-border-soft); background: rgba(var(--ink), 0.06);
-  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-dim); }
-.ds-tmpl li.is-chrome { background: rgba(161, 0, 255, 0.14); }
 
 /* ---- 05 Dark vs light ---- */
 .ds-pairs { width: 100%; border-collapse: collapse; }
@@ -116,8 +114,9 @@
 }
 
 /* ---- 06 Accessibility ---- */
-.ds-kv li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border-faint); font-size: 0.9rem; }
-.ds-kv b { font-weight: var(--fw-semibold); text-align: right; }
+.ds-kv li { display: grid; grid-template-columns: minmax(8.5rem, max-content) auto; justify-content: start; align-items: baseline; gap: 0 2rem; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border-faint); font-size: 0.9rem; }
+.ds-kv b { font-weight: var(--fw-semibold); text-align: left; }
+@media (max-width: 767px) { .ds-kv li { grid-template-columns: minmax(7.5rem, max-content) auto; gap: 0 1rem; } }
 
 /* ---- 07 Writing per language ---- */
 .ds-lang { padding-top: 1rem; border-top: 3px solid var(--color-brand-purple); }
@@ -133,10 +132,18 @@
 .ds-ico { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; min-height: 7.5rem; padding: 1rem 0.5rem;
   background: rgba(var(--ink), 0.025); font-size: 0.75rem; font-weight: var(--fw-medium); color: var(--color-text-muted); text-align: center; }
 .ds-ico .nav__ov-icon { width: 32px; height: 32px; color: var(--color-brand-white); }
-.ds-icons--ui { grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* the three UI glyphs: one row at every width */
+/* The UI glyphs: on the line set's own grid from 768 (same cell width, left-aligned); one row of three below */
+@media (max-width: 767px) { .ds-icons--ui { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .ds-icons--ui .ds-ico .cta__icon { width: 2rem; height: 2rem; }
 
 /* Swatch strokes read in both themes: white on dark, black on light (V120-Q26) */
 .ds-sw i, .ds-pairs i { border-color: var(--color-brand-white); }
 /* A tier's one-line descriptor, lede style, under its sub-head */
 .ds-tier-desc { margin: -0.5rem 0 1.5rem; }
+
+/* The hero scales with its column, so a one-word title and its full stop stay on one line at every width */
+.ds-main { container-type: inline-size; }
+/* Molecules: the two states side by side, close */
+.ds-states { display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; }
+/* Below 360 a worded value may take a second line rather than spill past the column */
+@media (max-width: 359px) { .ds-kv b { white-space: normal; } }
