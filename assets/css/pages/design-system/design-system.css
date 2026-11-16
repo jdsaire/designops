@@ -1,0 +1,153 @@
+/* pages/design-system/design-system.css — the design system page's own layout (v1.2.0; SY51-Q7, V120-Q11…Q18). Layout
+   only: every specimen is the shipped component with its own stylesheet (shared/cta.css, shared/dropdown.css,
+   shared/legal.css, shared/display.css, shared/brief-index.css), and every colour, weight and size here is a site
+   token. One page-scoped variant of the briefs' index: from 768 it stands as a side column instead of a row. Values
+   never wrap (V120-Q17): a token and its value always sit on one line. */
+
+/* ---- The opening owns its screen; the docs start below it, after a rule ---- */
+.pagehero--ds { padding-bottom: clamp(4rem, 10vw, 9rem); }
+.ds-docs { max-width: var(--max-content-width); margin: 0 auto; padding: clamp(3rem, 6vw, 5rem) var(--gutter) 0; border-top: 1px solid var(--color-border-faint); }
+/* The index's eyebrow names the landmark for screen readers only; on screen the index speaks for itself (V120-Q22). */
+.ds-docs .idx-eb { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* Phones: the index is the briefs' select bar, edge to edge like on the briefs, with air before section 01. */
+@media (max-width: 767px) {
+  .ds-docs { padding-top: 0; }
+  .ds-side { margin: 0 calc(-1 * var(--gutter)) clamp(3rem, 10vw, 4rem); }
+  .ds-docs .idx__in { padding: 0 var(--gutter); }
+}
+/* From 768: a sticky side column. */
+@media (min-width: 768px) {
+  .ds-docs { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: var(--col-gap); }
+  .ds-docs .idx__in { padding: 0; }
+  .ds-docs .idx { position: sticky; top: calc(var(--nav-height) + 1.5rem); background: none; border: 0;
+    -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .ds-docs .idx__list { display: flex; flex-direction: column; gap: 2px; padding: 0; }
+  .ds-docs .idx__list a { min-height: 44px; }
+}
+@media (min-width: 1024px) { .ds-docs { grid-template-columns: 15rem minmax(0, 1fr); } }
+
+/* ---- Sections: eyebrow, hero title, lede, specimens ---- */
+.ds-sec { padding: 0 0 clamp(4rem, 8vw, 8rem); scroll-margin-top: calc(var(--nav-height) + 4rem); }
+.ds-sec + .ds-sec { padding-top: clamp(4rem, 8vw, 8rem); border-top: 1px solid var(--color-border-faint); }
+.ds-head { margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+.ds-head .section__eyebrow { margin-bottom: clamp(1.25rem, 2vw, 2rem); }
+.ds-head .section__eyebrow-text { margin: 0; }
+.ds-n { font-variant-numeric: tabular-nums; }
+.ds-hero { margin: 0; max-width: 14em; font-size: clamp(1.5rem, 8.6cqi, 4.25rem); font-weight: var(--fw-black); line-height: 1.02;
+  letter-spacing: -0.03em; text-transform: uppercase; color: var(--color-brand-white); overflow-wrap: anywhere; }
+.ds-hero em { white-space: nowrap; padding: 0 0.12em; font-style: italic; background: var(--color-brand-purple); color: var(--color-on-brand); }
+.ds-head .section__lede { margin-top: 1.25rem; }
+.ds-sub { margin: clamp(2.5rem, 4vw, 3.5rem) 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border-soft);
+  font-size: 0.8rem; font-weight: var(--fw-semibold); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+.ds-label { display: block; margin: 0 0 0.9rem; font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-text-dim); }
+.ds-grid { display: grid; grid-template-columns: 1fr; gap: 2rem var(--col-gap); }
+.ds-grid > * { min-width: 0; }
+@media (min-width: 768px) { .ds-grid--2, .ds-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .ds-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ds-grid--2l { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .ds-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.ds-stack { display: grid; gap: 2.5rem; }
+
+/* ---- 01 Atoms ---- */
+.ds-atom { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; min-height: 7.5rem; padding: 1.5rem;
+  border: 1px solid var(--color-border-soft); }
+.ds-atom .cta, .ds-atom .ah-label { margin: 0; }
+.ds-atom .section__eyebrow { margin: 0; align-items: flex-start; }
+.ds-sw, .ds-ladder, .ds-kv { list-style: none; margin: 0; padding: 0; }
+.ds-sw { display: grid; gap: 0.75rem; }
+.ds-sw li { display: grid; grid-template-columns: 2.5rem 1fr; column-gap: 0.85rem; align-items: center; }
+.ds-sw i { grid-row: 1 / 3; width: 2.5rem; height: 2.5rem; border: 1px solid var(--color-border-soft); background: var(--sw); }
+.ds-sw b, .ds-ladder b { font-size: 0.8rem; font-weight: var(--fw-semibold); }
+.ds-sw b, .ds-sw code, .ds-ladder b, .ds-ladder code, .ds-pairs .k, .ds-pairs code, .ds-t code, .ds-kv code, .ds-kv b { white-space: nowrap; }
+/* Identifiers (token, class and value names) are code, the same in both languages: set as code, not as copy (V120-Q29) */
+.ds-sw b, .ds-ladder b, .ds-pairs .k, .ds-sw code, .ds-ladder code, .ds-pairs code, .ds-t code, .ds-kv code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.76rem; letter-spacing: 0; }
+.ds-v { color: var(--color-text-muted); }
+.ds-ladder { border: 1px solid var(--color-border-soft); }
+.ds-ladder li { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.7rem 0.85rem; background: var(--sw); }
+.ds-ladder b, .ds-ladder code { font-size: 0.72rem; }
+.ds-t { width: 100%; border-collapse: collapse; }
+.ds-t td { padding: 1rem 0.75rem 1rem 0; border-bottom: 1px solid var(--color-border-faint); vertical-align: baseline; }
+.ds-t td:first-child { width: 12rem; }
+.ds-t code { color: var(--color-text-muted); white-space: normal; }
+.ds-ts { color: var(--color-brand-white); }
+.ds-ts--display { font-size: clamp(2.4rem, 5.6vw, 5rem); font-weight: var(--fw-black); line-height: 1.02; letter-spacing: -0.03em; text-transform: uppercase; }
+.ds-ts--headline { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: var(--fw-bold); line-height: 1.08; letter-spacing: -0.02em; }
+.ds-ts--deck { font-size: clamp(1.1rem, 1.6vw, 1.45rem); font-weight: var(--fw-light); }
+.ds-ts--lede { font-size: clamp(1rem, 1.3vw, 1.125rem); font-weight: var(--fw-light); line-height: 1.65; }
+.ds-ts--cta { font-size: 1rem; font-weight: var(--fw-bold); letter-spacing: 0.005em; }
+.ds-ts--eyebrow { font-size: 0.8rem; font-weight: var(--fw-semibold); letter-spacing: 0.12em; text-transform: uppercase; }
+.ds-ts--label { font-size: 0.7rem; font-weight: var(--fw-semibold); letter-spacing: 0.1em; text-transform: uppercase; }
+@media (max-width: 767px) {
+  .ds-t tr { display: block; padding: 0.9rem 0; border-bottom: 1px solid var(--color-border-faint); }
+  .ds-t td { display: block; width: auto !important; padding: 0.3rem 0; border: 0; }
+}
+.ds-weights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1.5rem; max-width: 36rem; margin: 0;
+  font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--color-brand-white); }
+@media (min-width: 768px) { .ds-weights { grid-template-columns: repeat(3, minmax(0, 1fr)); } }   /* two rows of three; two columns below 768 (V120-Q30) */
+.ds-w { display: inline-flex; flex-direction: column; gap: 0.3rem; }
+.ds-w__s { font-weight: var(--w); }
+.ds-w__n { font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+
+/* ---- 02 Molecules: one menu card, resting and on hover ---- */
+.ds-card1 { position: static; transform: none; display: inline-grid; width: auto; }
+.ds-hover .nav__card { opacity: 1; }
+
+/* ---- 03 Organisms: the navbar menu in the flow, full column ---- */
+.ds-menu-static { position: static; transform: none; width: auto; max-width: 100%; }
+.ds-menu-static.nav__menu--briefs { grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); }
+.ds-menu-static .nav__card { min-width: 0; }
+.ds-more { margin: 0; }
+
+/* ---- 05 Dark vs light ---- */
+.ds-pairs { width: 100%; border-collapse: collapse; }
+.ds-pairs th { padding: 0 0.75rem 0.75rem 0; text-align: left; font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-text-dim); }
+.ds-pairs td { padding: 0.55rem 0.75rem 0.55rem 0; border-top: 1px solid var(--color-border-faint); }
+.ds-pairs .k { font-size: 0.8rem; font-weight: var(--fw-semibold); }
+.ds-pairs i { display: inline-block; width: 1rem; height: 1rem; margin-right: 0.5rem; vertical-align: -0.15rem;
+  border: 1px solid var(--color-border-soft); }
+@media (max-width: 767px) {
+  .ds-pairs thead { display: none; }
+  .ds-pairs tr { display: grid; grid-template-columns: 1fr 1fr; padding: 0.6rem 0; border-top: 1px solid var(--color-border-faint); }
+  .ds-pairs td { padding: 0.2rem 0; border: 0; }
+  .ds-pairs td.k { grid-column: 1 / -1; }
+  .ds-pairs code { font-size: 0.7rem; }
+}
+
+/* ---- 06 Accessibility ---- */
+.ds-kv li { display: grid; grid-template-columns: minmax(8.5rem, max-content) auto; justify-content: start; align-items: baseline; gap: 0 2rem; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border-faint); font-size: 0.9rem; }
+.ds-kv b { font-weight: var(--fw-semibold); text-align: left; }
+@media (max-width: 767px) { .ds-kv li { grid-template-columns: minmax(7.5rem, max-content) auto; gap: 0 1rem; } }
+
+/* ---- 07 Writing per language ---- */
+.ds-lang { padding-top: 1rem; border-top: 3px solid var(--color-brand-purple); }
+.ds-lang p { margin: 0 0 1rem; line-height: 1.6; color: var(--color-text-muted); }
+.ds-lang p strong { color: var(--color-brand-white); }
+
+/* ---- 08 Information architecture ---- */
+.ds-ia h3 { margin: 0 0 0.5rem; font-size: 1.05rem; font-weight: var(--fw-bold); }
+.ds-ia p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--color-text-muted); }
+
+/* ---- 03 Icons: the live line set at 32 px with its names, then the UI glyphs and the drawing rules ---- */
+.ds-icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); gap: 2px; }
+.ds-ico { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; min-height: 7.5rem; padding: 1rem 0.5rem;
+  background: rgba(var(--ink), 0.025); font-size: 0.75rem; font-weight: var(--fw-medium); color: var(--color-text-muted); text-align: center; }
+.ds-ico .nav__ov-icon { width: 32px; height: 32px; color: var(--color-brand-white); }
+/* The UI glyphs: on the line set's own grid from 768 (same cell width, left-aligned); one row of three below */
+@media (max-width: 767px) { .ds-icons--ui { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ds-icons--ui .ds-ico .cta__icon { width: 2rem; height: 2rem; }
+
+/* Swatch strokes read in both themes: white on dark, black on light (V120-Q26) */
+.ds-sw i, .ds-pairs i { border-color: var(--color-brand-white); }
+/* A tier's one-line descriptor, lede style, under its sub-head */
+.ds-tier-desc { margin: -0.5rem 0 1.5rem; }
+
+/* The hero scales with its column, so a one-word title and its full stop stay on one line at every width */
+.ds-main { container-type: inline-size; }
+/* Molecules: the two states side by side, close */
+.ds-states { display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; }
+/* Below 360 a worded value may take a second line rather than spill past the column */
+@media (max-width: 359px) { .ds-kv b { white-space: normal; } }
+/* Below 768 the icon cells read left-aligned: glyph over its name, both on the cell's left edge (V120-Q30) */
+@media (max-width: 767px) { .ds-ico { align-items: flex-start; text-align: left; padding: 1rem; } }

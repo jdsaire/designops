@@ -21,14 +21,14 @@ Each brief is one case study, in English and Spanish. The line beside it is the 
 | Brief 03 · TUUA Transfer · airport | [`work/airport/`](work/airport/README.md) | Paying what was never paid — I designed the web prototype of new fee charged by Lima Airport. |
 | Brief 04 · Portfolio · software | [`work/portfolio-evolution/`](work/portfolio-evolution/README.md) | This web. My web. — How I built and deployed this site with AI, end to end. |
 
-Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resume/README.md) and [Contact](contact/README.md) complete the site, with a page for sending feedback about it ([`feedback/`](feedback/README.md)). Every page switches between English and Spanish, and between a dark and a light theme, and ends on the same footer: the closing call and contacts, a sitemap, and the legal row with the privacy policy and your privacy choices.
+Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resume/README.md) and [Contact](contact/README.md) complete the site, with a page for sending feedback about it ([`feedback/`](feedback/README.md)) and the [Design System](design-system/README.md) behind it in the Lab menu. Every page switches between English and Spanish, and between a dark and a light theme, and ends on the same footer: the closing call and contacts, a sitemap, and the legal row with the privacy policy and your privacy choices.
 
 ## Where everything lives
 
 | Path | What it is |
 |---|---|
 | [`index.html`](index.html), [`i18n/`](i18n/) | Main and its own dictionaries. Main stays at the root, where every path on the site is resolved from |
-| [`about/`](about/README.md), [`resume/`](resume/README.md), [`contact/`](contact/README.md), [`feedback/`](feedback/README.md) | One folder per page: the page and its own dictionaries. `report/` is a retired address that forwards to `feedback/` |
+| [`about/`](about/README.md), [`resume/`](resume/README.md), [`contact/`](contact/README.md), [`feedback/`](feedback/README.md), [`design-system/`](design-system/README.md) | One folder per page: the page and its own dictionaries. `report/` is a retired address that forwards to `feedback/` |
 | [`.well-known/`](.well-known/README.md) | Files other software looks for at a fixed address: `security.txt` |
 | [`work/`](work/README.md) | The four briefs, one folder each, plus the retired addresses that still answer |
 | [`assets/`](assets/README.md) | Everything shared: styles, scripts, the site-wide dictionaries, images, fonts, the CVs |
@@ -43,8 +43,9 @@ Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resu
 
 | PR | Version | Merged | What a reader sees | Plan · Report |
 |---|---|---|---|---|
-| [#51](https://github.com/jdsaire/designops/pull/51) | v1.3.1 | pending merge | A link to any page shared on LinkedIn shows that page's own card | [plan](docs/v4/cc-plans/Plan-v131-OgImage.md) · [report](docs/v4/cc-completion-reports/v131-og-image-completion-report.md) |
-| [#50](https://github.com/jdsaire/designops/pull/50) | v1.3.0 | 15 Nov 2026 | The Résumé shows the CV on the page, in English or Spanish: in the browser's own viewer on computers, and as a sheet fitted to the screen with a Download button on phones and tablets; the Markdown copies are gone | — |
+| [#52](https://github.com/jdsaire/designops/pull/52) | v1.2.0 | pending merge | A Design System page in the Lab menu: typography, color, icons, atomic design and accessibility, shown with the site's own parts in both themes and languages; Brief 03's stakeholder network becomes a shared component | [plan](docs/v4/cc-plans/Plan-v120-DesignSystem.md) · [report](docs/v4/cc-completion-reports/v120-design-system-completion-report.md) |
+| [#51](https://github.com/jdsaire/designops/pull/51) | v1.3.1 | 15 Nov 2026 | A link to any page shared on LinkedIn shows that page's own card | [plan](docs/v4/cc-plans/Plan-v131-OgImage.md) · [report](docs/v4/cc-completion-reports/v131-og-image-completion-report.md) |
+| [#50](https://github.com/jdsaire/designops/pull/50) | v1.3.0 | 15 Nov 2026 | The Résumé shows the CV on the page, in English or Spanish: in the browser's own viewer on computers, and as a sheet fitted to the screen with a Download button on phones and tablets; the Markdown copies are gone | [plan](docs/v4/cc-plans/Plan-v130-ResumeViewer.md) · [report](docs/v4/cc-completion-reports/v130-resume-viewer-completion-report.md) |
 | [#49](https://github.com/jdsaire/designops/pull/49) | v1.1.3 | 9 Nov 2026 | This repository carries an all-rights-reserved license, and the offer ends on AI without "advanced", in English and Spanish | [plan](docs/v4/cc-plans/Plan-v113-LicenseD5.md) · [report](docs/v4/cc-completion-reports/v113-license-d5-completion-report.md) |
 | [#48](https://github.com/jdsaire/designops/pull/48) | v1.1.2 | 4 Nov 2026 | The offer reads reliable websites and apps, in English and Spanish | [plan](docs/v4/cc-plans/Plan-v112-Reliable.md) · [report](docs/v4/cc-completion-reports/v112-reliable-completion-report.md) |
 | [#47](https://github.com/jdsaire/designops/pull/47) | v1.1.1 | 4 Nov 2026 | Pages arrive lighter and steady: smaller fonts and images, the reader's language before the first paint, nothing moving as a page loads | [plan](docs/v4/cc-plans/Plan-PR47-Performance.md) · [report](docs/v4/cc-completion-reports/pr47-performance-completion-report.md) |

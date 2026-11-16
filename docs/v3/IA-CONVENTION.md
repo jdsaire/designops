@@ -10,7 +10,7 @@ Written for Wave 6 (`docs/v3/`), refreshed in PR #44 to match the repository as 
 index.html                          Main (must stay at the repo root)
 i18n/main.{en,es}.json              Main's own dictionaries: the root is Main's page folder
 logos/                              the site mark in its states (favicon and header logo)
-about/  resume/  contact/  feedback/  one folder per page: index.html, i18n/, img/ where it has images
+about/  resume/  contact/  feedback/  design-system/  one folder per page: index.html, i18n/, img/ where it has images
 report/                             a retired address: a stub that forwards to feedback/ (PR #46)
 assets/
   css/   base/ shared/ pages/       tokens and reset · nav, footer, carousels, decoration · per page

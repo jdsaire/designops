@@ -12,7 +12,7 @@ os.chdir(ROOT)
 MAN = 'assets/img/imagery-manifest.json'
 PAGES = ['index.html', 'about/index.html', 'resume/index.html', 'contact/index.html', 'feedback/index.html',
          'work/accreditapass/index.html', 'work/trust-verify-brief/index.html', 'work/airport/index.html',
-         'work/portfolio-evolution/index.html']
+         'work/portfolio-evolution/index.html', 'design-system/index.html']
 fail = []
 
 def webp_size(path):

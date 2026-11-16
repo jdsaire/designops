@@ -17,6 +17,7 @@ PAGES = {
     'b03': ('work/airport/index.html', 'work/airport/i18n/airport'),
     'b04': ('work/portfolio-evolution/index.html', 'work/portfolio-evolution/i18n/designops'),
     'feedback': ('feedback/index.html', 'feedback/i18n/feedback'),
+    'design-system': ('design-system/index.html', 'design-system/i18n/design-system'),
 }
 ATTR = re.compile(r'data-i18n(?:-html|-aria|-alt|-placeholder|-title)?="([^"]+)"')
 

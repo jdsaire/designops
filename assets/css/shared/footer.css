@@ -101,7 +101,6 @@
 .footer__col-head { margin: 0 0 0.5rem; font-size: 0.72rem; font-weight: var(--fw-semibold); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
 .footer__map-link { display: flex; align-items: center; gap: 0.5rem; min-height: 32px; font-size: 0.9rem; color: var(--color-brand-white); text-decoration: none; transition: color var(--duration-ui) var(--ease-standard); }
 a.footer__map-link:hover, a.footer__map-link:focus-visible { color: var(--color-brand-purple); }
-.footer__map-link[data-nav-state="soon"] { color: var(--color-text-dim); }
 .footer__icon--line { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
 /* FOOTER — 768 and up: one centred axis (PR46-Q32). The value line and the contacts stacked, then the sitemap, then

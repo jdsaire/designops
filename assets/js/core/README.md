@@ -12,5 +12,6 @@ The modules every page runs. Two of them, `i18n.js` and `paths.js`, decide where
 | [`progress.js`](progress.js) | Anyone changing the scroll progress bar |
 | [`carousel.js`](carousel.js) | Anyone changing the slide carousel (briefs' Act 03 and Keep exploring, About's manifestos): steps, swipe, count, the slide kept across a reload; it sets the slide index and CSS computes the offset |
 | [`brief-index.js`](brief-index.js) | Anyone changing a brief's index: the current act, the phone select, the progress line, and the fold at the closing rule |
+| [`net.js`](net.js) | Anyone changing the stakeholder network (Brief 03 Act 02, also on the Design System page): the rings, labels, card, phone sheet and ring list; each page passes its own session store |
 | [`decoration.js`](decoration.js) | Anyone changing a decoration pattern; the spec is [`../../../docs/v3/organisms/decoration-system.spec.md`](../../../docs/v3/organisms/decoration-system.spec.md) |
 | [`defer-images.js`](defer-images.js) | Anyone adding a heavy image below the fold. An image marked `data-src` / `data-srcset` gets its source when it comes within 600 px, so it never loads with the first paint (Main's posters and capability images) |

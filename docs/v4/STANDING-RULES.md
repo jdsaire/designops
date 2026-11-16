@@ -51,8 +51,7 @@ hash is recomputed whenever that script changes.
 
 **Known limits, recorded so they are not rediscovered.** GitHub Pages serves no response headers we
 control, so a meta tag is the only vehicle available. `frame-ancestors`, `report-uri` and `sandbox`
-are inert in a meta policy, which means this page has no clickjacking protection from CSP. The
-policy covers `contact/` alone; extending it to the other seven pages is CC-3's.
+are inert in a meta policy, which means this page has no clickjacking protection from CSP. Every page carries its own policy, derived from what that page loads; a new page derives its own before it ships, and the inline scripts' hashes are recomputed whenever one changes.
 
 ---
 
@@ -90,3 +89,17 @@ refreshed only in clean-up passes drifts between them, and a stranger reads the 
 **How to apply.** The pull-request template's documentation checklist is filled in before the final gate. Every
 relative link in a touched README resolves; the parity check reports 0. A pull request that cannot meet this
 says why in its completion report and opens a backlog line.
+
+---
+
+## SR-5 · Raster images are governed by their manifest
+
+**In force from:** v1.2.0 (Design System), ruled in the PR #46 sync (SY46-Q1) and carried by SY51-Q6, 16 Nov 2026.
+
+A raster image under `assets/img/` is listed in `imagery-manifest.json` with its budget, its label key and its round. It is never replaced by an SVG, re-encoded or swapped without a new round and a manifest update. The page that shows it carries the label key visibly in that section.
+
+**Scope.** `tools/imagery.py` checks the rasters under `assets/img/work/` and `assets/img/services/`: each listed, within its budget and width, and labelled on the page that shows it. The link-preview cards in `assets/img/og/`, the Résumé portrait and the credential badges are real captures or brand renders, not round imagery; they sit outside the check and carry no label (V120-Q5).
+
+**Why.** PR #46 brought the first AI-generated images to Main. A manifest that names each file, its budget and its label is what keeps a later change from swapping an image without a round, or showing it without saying what it is.
+
+**How to apply.** Run `python3 tools/imagery.py` after any change under `assets/img/work/` or `assets/img/services/`; it ends `failures: 0`.

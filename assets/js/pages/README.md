@@ -10,3 +10,4 @@ Scripts that belong to one page, one folder per page. The four briefs keep their
 | [`contact/`](contact/README.md) | Contact |
 | [`resume/`](resume/README.md) | The Résumé page |
 | [`feedback/`](feedback/README.md) | The Feedback page |
+| [`design-system/`](design-system/README.md) | The Design System page |
