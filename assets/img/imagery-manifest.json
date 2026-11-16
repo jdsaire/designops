@@ -9,6 +9,7 @@
     "docs/v4/STANDING-RULES.md#sr-5",
     "assets/img/README.md"
   ],
+  "scope": "tools/imagery.py checks the rasters under assets/img/work and assets/img/services. The link-preview cards in assets/img/og/, the Résumé portrait and the credential badges are real captures or brand renders, not round imagery: outside this manifest and its check, with no label (SR-5 Scope, V120-Q5).",
   "budgets": {
     "format": "image/webp",
     "variants_px": [
