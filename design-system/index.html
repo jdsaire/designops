@@ -31,8 +31,9 @@
   <link rel="modulepreload" href="../assets/js/core/navchrome.js">
   <link rel="modulepreload" href="../assets/js/core/legal.js">
   <link rel="modulepreload" href="../assets/js/core/decoration.js">
+  <link rel="modulepreload" href="../assets/js/core/brief-index.js">
   <link rel="modulepreload" href="../assets/js/pages/about/slogan.js">
-  <script data-p="../assets/i18n/es.json i18n/design-system.es.json">try{var L=localStorage.getItem('jds-lang')||'ES';if(L!=='EN'){document.currentScript.dataset.p.split(' ').forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});if(!localStorage.getItem('jds-i18n:'+location.pathname+':'+L)){var s=document.documentElement.style,u=function(){s.removeProperty('visibility');};s.visibility='hidden';document.addEventListener('i18n:changed',function(){requestAnimationFrame(u);},{once:true});setTimeout(u,1500);}}}catch(e){}</script>
+  <script data-p="../assets/i18n/es.json ../design-system/i18n/design-system.es.json">try{var L=localStorage.getItem('jds-lang')||'ES';if(L!=='EN'){document.currentScript.dataset.p.split(' ').forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});if(!localStorage.getItem('jds-i18n:'+location.pathname+':'+L)){var s=document.documentElement.style,u=function(){s.removeProperty('visibility');};s.visibility='hidden';document.addEventListener('i18n:changed',function(){requestAnimationFrame(u);},{once:true});setTimeout(u,1500);}}}catch(e){}</script>
   <link rel="stylesheet" href="../assets/css/base/fonts.css">
   <link rel="stylesheet" href="../assets/css/base/tokens.css">
   <link rel="stylesheet" href="../assets/css/base/reset.css">
@@ -44,6 +45,7 @@
   <link rel="stylesheet" href="../assets/css/shared/editorial.css">
   <link rel="stylesheet" href="../assets/css/shared/display.css">
   <link rel="stylesheet" href="../assets/css/pages/contact/contact.css">
+  <link rel="stylesheet" href="../assets/css/shared/brief-index.css">
   <link rel="stylesheet" href="../assets/css/pages/design-system/design-system.css">
   <link rel="stylesheet" href="../assets/css/shared/footer.css">
   <link rel="stylesheet" href="../assets/css/shared/legal.css">
@@ -187,10 +189,11 @@
 
   <main id="main">
 
-  <!-- The design system page (v1.2.0; SY51-Q3, Q7; V120-Q1): Contact's opening, then four sections, each an eyebrow, a
-       lede and one live specimen built from the site's own stylesheets and modules. Only components a live page uses
-       (AIE-Q85 as amended by V120-Q1); token values are read from the running stylesheet (pages/design-system/main.js),
-       never copied here. Every string is COPY-v120-DS-LOCK's, or a reused site key. -->
+  <!-- The design system page (v1.2.0; SY51-Q3, Q7; V120-Q11…Q18): Contact's opening, then eight sections in atomic order
+       (atoms → molecules → organisms → templates, then dark vs light, accessibility, writing per language, information
+       architecture), navigated by the briefs' index (shared/brief-index.css + core/brief-index.js): a side column from 768,
+       the select below. Specimens are live parts with their own stylesheets; token values are read from the running
+       stylesheet (pages/design-system/main.js). Every string is COPY-v120-DS-LOCK's, or a reused site key. -->
   <section class="pagehero pagehero--contact pagehero--ds" aria-labelledby="ds-h">
     <div class="section__inner pagehero__inner">
       <div class="contact-intro">
@@ -201,118 +204,69 @@
     </div>
   </section>
 
-  <!-- 01 Foundations: the four token roles. Swatches name their token; main.js writes each value as the browser
-       resolves it, so the theme menu flips them in place. -->
-  <section class="section ds-section" id="ds-foundations" aria-labelledby="ds-found-h">
-    <div class="section__inner">
-      <div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><h2 class="section__eyebrow-text" id="ds-found-h" data-i18n="ds_found_h">[ds_found_h]</h2></div>
-      <p class="section__lede ds-lede" data-i18n="ds_found_lede">[ds_found_lede]</p>
-      <div class="ds-roles">
-        <div class="ds-role">
-          <h3 class="ds-role__name" data-i18n="ds_role_brand">[ds_role_brand]</h3>
-          <ul class="ds-swatches">
-            <li class="ds-swatch" data-token="--color-brand-purple"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-brand-purple</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-swatch" data-token="--color-purple-hover"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-purple-hover</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-swatch" data-token="--color-purple-light"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-purple-light</code><code class="ds-swatch__value"></code></li>
-          </ul>
-        </div>
-        <div class="ds-role">
-          <h3 class="ds-role__name" data-i18n="ds_role_ink">[ds_role_ink]</h3>
-          <ul class="ds-swatches">
-            <li class="ds-swatch" data-token="--color-brand-black"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-brand-black</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-swatch" data-token="--color-brand-white"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-brand-white</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-swatch" data-token="--color-text-muted"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-text-muted</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-swatch" data-token="--color-text-dim"><span class="ds-swatch__chip" aria-hidden="true"></span><code class="ds-swatch__token">color-text-dim</code><code class="ds-swatch__value"></code></li>
-          </ul>
-        </div>
-        <div class="ds-role">
-          <h3 class="ds-role__name" data-i18n="ds_role_surface">[ds_role_surface]</h3>
-          <ul class="ds-ladder">
-            <li class="ds-step" data-token="--surface-sunken"><code class="ds-swatch__token">surface-sunken</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-step" data-token="--surface-card"><code class="ds-swatch__token">surface-card</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-step" data-token="--surface-raised"><code class="ds-swatch__token">surface-raised</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-step" data-token="--surface-input"><code class="ds-swatch__token">surface-input</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-step" data-token="--surface-hover"><code class="ds-swatch__token">surface-hover</code><code class="ds-swatch__value"></code></li>
-            <li class="ds-step" data-token="--surface-elevated"><code class="ds-swatch__token">surface-elevated</code><code class="ds-swatch__value"></code></li>
-          </ul>
-        </div>
-        <div class="ds-role ds-role--type">
-          <h3 class="ds-role__name" data-i18n="ds_role_type">[ds_role_type]</h3>
-          <ol class="ds-ramp">
-            <li class="ds-ramp__step" style="--w:var(--fw-black)"><span class="ds-ramp__sample" data-i18n="ds_type_sample">[ds_type_sample]</span><code class="ds-swatch__token">fw-black 900</code></li>
-            <li class="ds-ramp__step" style="--w:var(--fw-bold)"><span class="ds-ramp__sample" data-i18n="ds_type_sample">[ds_type_sample]</span><code class="ds-swatch__token">fw-bold 700</code></li>
-            <li class="ds-ramp__step" style="--w:var(--fw-semibold)"><span class="ds-ramp__sample" data-i18n="ds_type_sample">[ds_type_sample]</span><code class="ds-swatch__token">fw-semibold 600</code></li>
-            <li class="ds-ramp__step" style="--w:var(--fw-light)"><span class="ds-ramp__sample" data-i18n="ds_type_sample">[ds_type_sample]</span><code class="ds-swatch__token">fw-light 300</code></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 Actions: the site's one CTA (shared/cta.css), as a link and as a button. -->
-  <section class="section ds-section" id="ds-actions" aria-labelledby="ds-actions-h">
-    <div class="section__inner">
-      <div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><h2 class="section__eyebrow-text" id="ds-actions-h" data-i18n="ds_actions_h">[ds_actions_h]</h2></div>
-      <p class="section__lede ds-lede" data-i18n="ds_actions_lede">[ds_actions_lede]</p>
-      <div class="ds-specimen ds-specimen--actions">
-        <a class="cta" href="#ds-menus"><span class="cta__label" data-i18n="ds_cta_link">[ds_cta_link]</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></a>
-        <button type="button" class="cta" data-ds-noop><span class="cta__label" data-i18n="ds_cta_button">[ds_cta_button]</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 Menus and dialogs: the navbar's dropdown surface (shared/dropdown.css) with the briefs' cards, opened by its own
-       trigger here; and the real Choices overlay, opened through core/legal.js. -->
-  <section class="section ds-section" id="ds-menus" aria-labelledby="ds-menus-h">
-    <div class="section__inner">
-      <div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><h2 class="section__eyebrow-text" id="ds-menus-h" data-i18n="ds_menus_h">[ds_menus_h]</h2></div>
-      <p class="section__lede ds-lede" data-i18n="ds_menus_lede">[ds_menus_lede]</p>
-      <div class="ds-specimen ds-specimen--menus">
-        <div class="ds-dropdown">
-          <button class="nav__link nav__work-trigger ds-dropdown__trigger" id="dsMenuTrigger" type="button" aria-expanded="true" aria-controls="dsMenu"><span data-i18n="ds_dropdown_trigger">[ds_dropdown_trigger]</span><span class="nav__work-caret" aria-hidden="true"></span></button>
-          <div class="nav__menu nav__menu--briefs ds-dropdown__menu" id="dsMenu" role="menu" aria-labelledby="dsMenuTrigger">
+  <div class="ds-docs">
+    <aside class="ds-side">
+      <div class="idx-eb"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><span class="section__eyebrow-text" id="idxL" data-i18n="ds_idx_eb">[ds_idx_eb]</span></div></div>
+      <nav class="idx" data-idx aria-labelledby="idxL"><div class="idx__in"><div class="idx__pick"><span class="idx__field"><select class="idx__select" id="idxSel" aria-labelledby="idxL"></select></span></div><ol class="idx__list" id="idxList"><li><a href="#ds-atoms"><span class="idx__n">01 · </span><span class="idx__t" data-i18n="ds_atoms_idx">[ds_atoms_idx]</span></a></li><li><a href="#ds-mols"><span class="idx__n">02 · </span><span class="idx__t" data-i18n="ds_mols_idx">[ds_mols_idx]</span></a></li><li><a href="#ds-orgs"><span class="idx__n">03 · </span><span class="idx__t" data-i18n="ds_orgs_idx">[ds_orgs_idx]</span></a></li><li><a href="#ds-tmpl"><span class="idx__n">04 · </span><span class="idx__t" data-i18n="ds_tmpl_idx">[ds_tmpl_idx]</span></a></li><li><a href="#ds-themes"><span class="idx__n">05 · </span><span class="idx__t" data-i18n="ds_themes_idx">[ds_themes_idx]</span></a></li><li><a href="#ds-a11y"><span class="idx__n">06 · </span><span class="idx__t" data-i18n="ds_a11y_idx">[ds_a11y_idx]</span></a></li><li><a href="#ds-write"><span class="idx__n">07 · </span><span class="idx__t" data-i18n="ds_write_idx">[ds_write_idx]</span></a></li><li><a href="#ds-ia"><span class="idx__n">08 · </span><span class="idx__t" data-i18n="ds_ia_idx">[ds_ia_idx]</span></a></li></ol></div><div class="idx__line" aria-hidden="true"><i></i></div></nav>
+    </aside>
+    <div class="ds-main">
+<section class="ds-sec" id="ds-atoms" aria-labelledby="ds-atoms-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">01 · </span><span data-i18n="ds_atoms_idx">[ds_atoms_idx]</span></p></div><h2 class="ds-hero" id="ds-atoms-h" data-i18n-html="ds_atoms_h">[ds_atoms_h]</h2><p class="section__lede"><span data-i18n="ds_atoms_lede">[ds_atoms_lede]</span></p></div><div class="ds-grid ds-grid--3">
+<div class="ds-atom"><span class="ds-label" data-i18n="ds_atom_cta">[ds_atom_cta]</span><a class="cta" href="#ds-mols"><span class="cta__label" data-i18n="choices_link">Read the privacy policy</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></a></div>
+<div class="ds-atom"><span class="ds-label" data-i18n="ds_atom_eyebrow">[ds_atom_eyebrow]</span><span class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><span class="section__eyebrow-text" data-i18n="ds_atom_eyebrow">[ds_atom_eyebrow]</span></span></div>
+<div class="ds-atom"><span class="ds-label" data-i18n="ds_atom_pulse">[ds_atom_pulse]</span><p class="ah-label" data-i18n="ds_atom_pulse">[ds_atom_pulse]</p></div>
+</div>
+<h3 class="ds-sub" data-i18n="ds_colour_sub">[ds_colour_sub]</h3>
+<div class="ds-grid ds-grid--4">
+<div><h4 class="ds-label" data-i18n="ds_role_brand">[ds_role_brand]</h4><ul class="ds-sw"><li data-token="--color-brand-purple"><i aria-hidden="true"></i><b>color-brand-purple</b><code class="ds-v"></code></li><li data-token="--color-purple-hover"><i aria-hidden="true"></i><b>color-purple-hover</b><code class="ds-v"></code></li><li data-token="--color-purple-light"><i aria-hidden="true"></i><b>color-purple-light</b><code class="ds-v"></code></li></ul></div>
+<div><h4 class="ds-label" data-i18n="ds_role_ink">[ds_role_ink]</h4><ul class="ds-sw"><li data-token="--color-brand-black"><i aria-hidden="true"></i><b>color-brand-black</b><code class="ds-v"></code></li><li data-token="--color-brand-white"><i aria-hidden="true"></i><b>color-brand-white</b><code class="ds-v"></code></li><li data-token="--color-text-muted"><i aria-hidden="true"></i><b>color-text-muted</b><code class="ds-v"></code></li><li data-token="--color-text-dim"><i aria-hidden="true"></i><b>color-text-dim</b><code class="ds-v"></code></li></ul></div>
+<div><h4 class="ds-label" data-i18n="ds_role_surface">[ds_role_surface]</h4><ul class="ds-ladder"><li data-token="--surface-sunken"><b>surface-sunken</b><code class="ds-v"></code></li><li data-token="--surface-card"><b>surface-card</b><code class="ds-v"></code></li><li data-token="--surface-raised"><b>surface-raised</b><code class="ds-v"></code></li><li data-token="--surface-input"><b>surface-input</b><code class="ds-v"></code></li><li data-token="--surface-hover"><b>surface-hover</b><code class="ds-v"></code></li><li data-token="--surface-elevated"><b>surface-elevated</b><code class="ds-v"></code></li></ul></div>
+<div><h4 class="ds-label" data-i18n="ds_role_lines">[ds_role_lines]</h4><ul class="ds-sw"><li data-token="--border-hairline"><i aria-hidden="true"></i><b>border-hairline</b><code class="ds-v"></code></li><li data-token="--color-border-soft"><i aria-hidden="true"></i><b>color-border-soft</b><code class="ds-v"></code></li><li data-token="--color-on-brand"><i aria-hidden="true"></i><b>color-on-brand</b><code class="ds-v"></code></li><li data-token="--scrim-modal"><i aria-hidden="true"></i><b>scrim-modal</b><code class="ds-v"></code></li></ul></div>
+</div>
+<h3 class="ds-sub" data-i18n="ds_type_sub">[ds_type_sub]</h3>
+<table class="ds-t"><tbody>
+<tr><td><span class="ds-ts ds-ts--display">Aa</span></td><td><code>pagehero__h1 · 900 · clamp(2.4rem, 5.6vw, 5rem) · 1.02 · −0.03em · uppercase</code></td></tr>
+<tr><td><span class="ds-ts ds-ts--headline">Aa</span></td><td><code>section__headline · 700 · clamp(2rem, 4vw, 3.5rem) · 1.08 · −0.02em</code></td></tr>
+<tr><td><span class="ds-ts ds-ts--deck">Aa</span></td><td><code>pagehero__deck · 300 · clamp(1.1rem, 1.6vw, 1.45rem)</code></td></tr>
+<tr><td><span class="ds-ts ds-ts--lede">Aa</span></td><td><code>section__lede · 300 · clamp(1rem, 1.3vw, 1.125rem) · 1.65</code></td></tr>
+<tr><td><span class="ds-ts ds-ts--cta">Aa</span></td><td><code>cta__label · 700 · 1rem · 0.005em</code></td></tr>
+<tr><td><span class="ds-ts ds-ts--eyebrow">Aa</span></td><td><code>section__eyebrow-text · 600 · 0.8rem · 0.12em · uppercase</code></td></tr>
+<tr><td><span class="ds-ts ds-ts--label">Aa</span></td><td><code>form-label · 600 · 0.7rem · 0.1em · uppercase</code></td></tr>
+</tbody></table>
+<h3 class="ds-sub" data-i18n="ds_weights_sub">[ds_weights_sub]</h3>
+<p class="ds-weights"><span style="--w:300">Aa 300</span><span style="--w:400">Aa 400</span><span style="--w:500">Aa 500</span><span style="--w:600">Aa 600</span><span style="--w:700">Aa 700</span><span style="--w:900">Aa 900</span><span style="--w:700">&amp;</span></p></section>
+<section class="ds-sec" id="ds-mols" aria-labelledby="ds-mols-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">02 · </span><span data-i18n="ds_mols_idx">[ds_mols_idx]</span></p></div><h2 class="ds-hero" id="ds-mols-h" data-i18n-html="ds_mols_h">[ds_mols_h]</h2><p class="section__lede"><span data-i18n="ds_mols_lede">[ds_mols_lede]</span></p></div><div class="ds-grid ds-grid--2">
+<div><span class="ds-label" data-i18n="ds_card_default">[ds_card_default]</span><div class="nav__menu ds-card1"><a class="nav__card" role="menuitem" href="../work/airport/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8c.8 0 1.4.7 1.4 1.6v5l7.1 4.3v1.9l-7.1-2.2v4.3l2 1.5V21L12 20l-3.4 1v-1.8l2-1.5v-4.3l-7.1 2.2v-1.9l7.1-4.3v-5c0-.9.6-1.6 1.4-1.6z"/></svg><span class="nav__card-name">TUUA Transfer</span><span class="nav__card-tag" data-i18n="nav_tag_3">Airport</span></a></div></div>
+<div><span class="ds-label" data-i18n="ds_card_hover">[ds_card_hover]</span><div class="nav__menu ds-card1 ds-hover"><a class="nav__card" role="menuitem" href="../work/airport/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8c.8 0 1.4.7 1.4 1.6v5l7.1 4.3v1.9l-7.1-2.2v4.3l2 1.5V21L12 20l-3.4 1v-1.8l2-1.5v-4.3l-7.1 2.2v-1.9l7.1-4.3v-5c0-.9.6-1.6 1.4-1.6z"/></svg><span class="nav__card-name">TUUA Transfer</span><span class="nav__card-tag" data-i18n="nav_tag_3">Airport</span></a></div></div>
+</div></section>
+<section class="ds-sec" id="ds-orgs" aria-labelledby="ds-orgs-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">03 · </span><span data-i18n="ds_orgs_idx">[ds_orgs_idx]</span></p></div><h2 class="ds-hero" id="ds-orgs-h" data-i18n-html="ds_orgs_h">[ds_orgs_h]</h2><p class="section__lede"><span data-i18n="ds_orgs_lede">[ds_orgs_lede]</span></p></div><div class="ds-stack">
+<div><span class="ds-label" data-i18n="ds_org_dropdown">[ds_org_dropdown]</span><div class="nav__menu nav__menu--briefs ds-menu-static" role="menu" aria-label="Briefs" data-i18n-aria="nav_briefs">
             <a class="nav__card" role="menuitem" href="../work/accreditapass/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 2.8h6"/><path d="M12 2.8V6"/><rect x="5.5" y="6" width="13" height="15"/><circle cx="12" cy="11.6" r="2.3"/><path d="M8.5 17.5h7"/></svg><span class="nav__card-name">AccreditaPass</span><span class="nav__card-tag" data-i18n="nav_tag_1">Sports</span></a>
             <a class="nav__card" role="menuitem" href="../work/trust-verify-brief/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.1 7.5 9.5 4.4-1.4 7.5-4.9 7.5-9.5V6z"/><path d="M8.6 12.2l2.4 2.4 4.5-4.6"/></svg><span class="nav__card-name">Trust &amp; Verify</span><span class="nav__card-tag" data-i18n="nav_tag_2">Banking</span></a>
             <a class="nav__card" role="menuitem" href="../work/airport/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8c.8 0 1.4.7 1.4 1.6v5l7.1 4.3v1.9l-7.1-2.2v4.3l2 1.5V21L12 20l-3.4 1v-1.8l2-1.5v-4.3l-7.1 2.2v-1.9l7.1-4.3v-5c0-.9.6-1.6 1.4-1.6z"/></svg><span class="nav__card-name">TUUA Transfer</span><span class="nav__card-tag" data-i18n="nav_tag_3">Airport</span></a>
             <a class="nav__card" role="menuitem" href="../work/portfolio-evolution/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15"/><path d="M3 8.5h18"/><path d="M10 12l-2 2 2 2M14 12l2 2-2 2"/></svg><span class="nav__card-name">Portfolio</span><span class="nav__card-tag" data-i18n="nav_tag_4">Software</span></a>
-          </div>
-        </div>
-        <button type="button" class="cta ds-overlay-open" data-legal-open="legalChoices" aria-haspopup="dialog"><span class="cta__label" data-i18n="ds_overlay_open">[ds_overlay_open]</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></button>
-      </div>
+</div></div>
+<div><span class="ds-label" data-i18n="ds_org_overlay">[ds_org_overlay]</span><button type="button" class="cta" data-legal-open="legalChoices" aria-haspopup="dialog"><span class="cta__label" data-i18n="legal_choices">Your privacy choices</span><span class="cta__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></span></button></div>
+<p class="ds-label ds-more" data-i18n="ds_org_more">[ds_org_more]</p>
+</div></section>
+<section class="ds-sec" id="ds-tmpl" aria-labelledby="ds-tmpl-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">04 · </span><span data-i18n="ds_tmpl_idx">[ds_tmpl_idx]</span></p></div><h2 class="ds-hero" id="ds-tmpl-h" data-i18n-html="ds_tmpl_h">[ds_tmpl_h]</h2><p class="section__lede"><span data-i18n="ds_tmpl_lede">[ds_tmpl_lede]</span></p></div><div><span class="ds-label" data-i18n="ds_tmpl_brief">[ds_tmpl_brief]</span><ol class="ds-tmpl">
+<li class="is-chrome"><span data-i18n="ds_tmpl_nav">[ds_tmpl_nav]</span></li><li><span data-i18n="ds_tmpl_hero">[ds_tmpl_hero]</span></li><li class="is-chrome"><span data-i18n="ds_tmpl_index">[ds_tmpl_index]</span></li><li><span data-i18n="ds_tmpl_acts">[ds_tmpl_acts]</span></li><li><span data-i18n="ds_tmpl_ending">[ds_tmpl_ending]</span></li><li class="is-chrome"><span data-i18n="ds_tmpl_footer">[ds_tmpl_footer]</span></li>
+</ol></div></section>
+<section class="ds-sec" id="ds-themes" aria-labelledby="ds-themes-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">05 · </span><span data-i18n="ds_themes_idx">[ds_themes_idx]</span></p></div><h2 class="ds-hero" id="ds-themes-h" data-i18n-html="ds_themes_h">[ds_themes_h]</h2><p class="section__lede"><span data-i18n="ds_themes_lede">[ds_themes_lede]</span></p></div><table class="ds-pairs"><thead><tr><th><span data-i18n="ds_th_token">[ds_th_token]</span></th><th><span data-i18n="ds_th_dark">[ds_th_dark]</span></th><th><span data-i18n="ds_th_light">[ds_th_light]</span></th></tr></thead><tbody><tr data-pair="--ink"><td class="k">ink</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--ground"><td class="k">ground</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-brand-black"><td class="k">color-brand-black</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-brand-white"><td class="k">color-brand-white</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-text-muted"><td class="k">color-text-muted</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-text-dim"><td class="k">color-text-dim</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-purple-light"><td class="k">color-purple-light</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--surface-card"><td class="k">surface-card</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--surface-raised"><td class="k">surface-raised</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--surface-panel"><td class="k">surface-panel</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--border-hairline"><td class="k">border-hairline</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--shadow-3"><td class="k">shadow-3</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--scrim-modal"><td class="k">scrim-modal</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-brand-purple"><td class="k">color-brand-purple</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr><tr data-pair="--color-on-brand"><td class="k">color-on-brand</td><td><i class="ds-sw-d" aria-hidden="true"></i><code class="ds-d"></code></td><td><i class="ds-sw-l" aria-hidden="true"></i><code class="ds-l"></code></td></tr></tbody></table><p class="ds-legend"><span class="ds-legend__mark" aria-hidden="true"></span><span data-i18n="ds_th_fixed">[ds_th_fixed]</span></p></section>
+<section class="ds-sec" id="ds-a11y" aria-labelledby="ds-a11y-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">06 · </span><span data-i18n="ds_a11y_idx">[ds_a11y_idx]</span></p></div><h2 class="ds-hero" id="ds-a11y-h" data-i18n-html="ds_a11y_h">[ds_a11y_h]</h2><p class="section__lede"><span data-i18n="ds_a11y_lede">[ds_a11y_lede]</span></p></div><div class="ds-grid ds-grid--2">
+<div><h3 class="ds-label" data-i18n="ds_a11y_contrast">[ds_a11y_contrast]</h3><ul class="ds-kv">
+<li><code>color-text-dim</code><b>5.28 · 4.76</b></li><li><code>color-brand-purple</code><b>3.96 · 5.30</b></li><li><code>color-error</code><b>6.16 · 3.41</b></li><li><code>color-text-muted</code><b>7.37 · 5.74</b></li></ul></div>
+<div><h3 class="ds-label" data-i18n="ds_a11y_interaction">[ds_a11y_interaction]</h3><ul class="ds-kv">
+<li><span data-i18n="ds_a11y_target">[ds_a11y_target]</span><b>44 px</b></li><li><span data-i18n="ds_a11y_focus">[ds_a11y_focus]</span><b data-i18n="ds_a11y_focus_v">[ds_a11y_focus_v]</b></li><li><span data-i18n="ds_a11y_motion">[ds_a11y_motion]</span><b data-i18n="ds_a11y_motion_v">[ds_a11y_motion_v]</b></li><li><span data-i18n="ds_a11y_overlay">[ds_a11y_overlay]</span><b data-i18n="ds_a11y_overlay_v">[ds_a11y_overlay_v]</b></li></ul></div>
+</div></section>
+<section class="ds-sec" id="ds-write" aria-labelledby="ds-write-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">07 · </span><span data-i18n="ds_write_idx">[ds_write_idx]</span></p></div><h2 class="ds-hero" id="ds-write-h" data-i18n-html="ds_write_h">[ds_write_h]</h2><p class="section__lede"><span data-i18n="ds_write_lede">[ds_write_lede]</span></p></div><div class="ds-grid ds-grid--2">
+<div class="ds-lang" lang="en"><span class="ds-label" data-i18n="ds_write_en">[ds_write_en]</span><p><strong>Your privacy choices</strong></p><p>No cookies, no trackers. This device keeps only your theme, language, page text and menu state.</p></div>
+<div class="ds-lang" lang="es"><span class="ds-label" data-i18n="ds_write_es">[ds_write_es]</span><p><strong>Preferencias de privacidad</strong></p><p>Cero cookies y cero rastreadores. Solo se guarda en su equipo el tema, el idioma, el texto del sitio y el estado del menú.</p></div>
+</div></section>
+<section class="ds-sec" id="ds-ia" aria-labelledby="ds-ia-h"><div class="ds-head"><div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><p class="section__eyebrow-text"><span class="ds-n">08 · </span><span data-i18n="ds_ia_idx">[ds_ia_idx]</span></p></div><h2 class="ds-hero" id="ds-ia-h" data-i18n-html="ds_ia_h">[ds_ia_h]</h2><p class="section__lede"><span data-i18n="ds_ia_lede">[ds_ia_lede]</span></p></div><div class="ds-grid ds-grid--3 ds-ia">
+<div><h3 data-i18n="ds_ia_ont_h">[ds_ia_ont_h]</h3><p data-i18n="ds_ia_ont_x">[ds_ia_ont_x]</p></div><div><h3 data-i18n="ds_ia_tax_h">[ds_ia_tax_h]</h3><p data-i18n="ds_ia_tax_x">[ds_ia_tax_x]</p></div><div><h3 data-i18n="ds_ia_cho_h">[ds_ia_cho_h]</h3><p data-i18n="ds_ia_cho_x">[ds_ia_cho_x]</p></div>
+</div></section>
     </div>
-  </section>
-
-  <!-- 04 Forms: Contact's form organism (pages/contact/contact.css) under its id. No form element, no action, no access
-       key, no submit control: nothing here can be sent. One field shows its error state. -->
-  <section id="contact" class="section ds-section ds-forms" aria-labelledby="ds-forms-h">
-    <div class="section__inner">
-      <div class="section__eyebrow"><span class="section__eyebrow-bar" aria-hidden="true"></span><h2 class="section__eyebrow-text" id="ds-forms-h" data-i18n="ds_forms_h">[ds_forms_h]</h2></div>
-      <p class="section__lede ds-lede" data-i18n="ds_forms_lede">[ds_forms_lede]</p>
-      <div class="ds-specimen ds-specimen--forms">
-        <div class="form-group has-error">
-          <label class="form-label" for="dsField"><span data-i18n="ds_form_label">[ds_form_label]</span> <span class="asterisk">*</span></label>
-          <input class="form-input" id="dsField" type="text" aria-invalid="true" aria-describedby="dsFieldErr">
-          <span class="error-hint" id="dsFieldErr" data-i18n="ds_form_error">[ds_form_error]</span>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="dsSelect"><span data-i18n="ds_select_label">[ds_select_label]</span></label>
-          <div class="select-wrapper">
-            <select class="form-select" id="dsSelect">
-              <option value="" data-i18n="ds_select_placeholder">[ds_select_placeholder]</option>
-              <option value="1" data-i18n="ds_select_opt1">[ds_select_opt1]</option>
-              <option value="2" data-i18n="ds_select_opt2">[ds_select_opt2]</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group form-group--consent">
-          <label class="form-consent" for="dsConsent">
-            <input class="form-checkbox" type="checkbox" id="dsConsent">
-            <span class="form-consent__text"><span data-i18n-link="consent_checkbox|consent_link" data-legal-target="legalPrivacy">I agree that what I send is processed as described in the <button type="button" class="legal__inline" data-legal-open="legalPrivacy" aria-haspopup="dialog">privacy policy</button>, including its transfer outside Peru.</span></span>
-          </label>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 
   </main>
 
@@ -365,7 +319,7 @@
         </div>
         <div class="footer__col">
           <p class="footer__col-head" data-i18n="footer_col_lab">Lab</p>
-          <a class="footer__map-link" href="../design-system/" data-nav-page="design-system/" data-nav-state="new"><span data-i18n="nav_design_system">Design System</span><span class="nav__new" data-i18n="nav_new">[nav_new]</span></a>
+          <a class="footer__map-link" href="../design-system/" data-nav-page="design-system/" data-nav-state="new"><span data-i18n="nav_design_system">Design System</span></a>
         </div>
       </nav>
 
