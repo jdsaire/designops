@@ -71,7 +71,7 @@
         <a href="../#top" data-nav-link="#top" class="nav__logo" aria-label="Juan Diego Saire — Product Lab. Home.">
         JD·SAIRE <small data-i18n="chrome_wordmark_sub">Product Lab</small>
       </a>
-        <span class="nav__version">v1.3.1</span>
+        <span class="nav__version">v1.4.0</span>
       </div>
 
       <!-- CENTER nav links -->
@@ -89,18 +89,9 @@
             <a class="nav__card" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15"/><path d="M3 8.5h18"/><path d="M10 12l-2 2 2 2M14 12l2 2-2 2"/></svg><span class="nav__card-name">Portfolio</span><span class="nav__card-tag" data-i18n="nav_tag_4">Software</span></a>
           </div>
         </div>
-        <div class="nav__dropdown">
-          <button class="nav__link nav__work-trigger" id="labTrigger" type="button" data-nav-menu
-                  aria-expanded="false" aria-controls="labMenu">
-            <span data-i18n="nav_lab">Lab</span>
-            <span class="nav__work-caret" aria-hidden="true"></span>
-          </button>
-          <div class="nav__menu" id="labMenu" hidden>
-            <a class="nav__card" href="../design-system/" data-nav-page="design-system/" data-nav-state="new"><svg class="nav__ov-icon nav__card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 3 8l9 5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg><span class="nav__card-name" data-i18n="nav_design_system">Design System</span><span class="nav__new" data-i18n="nav_new">New</span></a>
-          </div>
-        </div>
-        <a href="../about/" data-nav-page="about/" class="nav__link" data-i18n="nav_evolution">About</a>
         <a href="../resume/" data-nav-page="resume/" class="nav__link" data-i18n="nav_resume">Résumé</a>
+        <a href="../about/" data-nav-page="about/" class="nav__link" data-i18n="nav_evolution">History</a>
+        <a href="../design-system/" data-nav-page="design-system/" class="nav__link" data-i18n="nav_design_system">Design System</a>
       </div>
 
       <!-- RIGHT utility -->
@@ -149,20 +140,14 @@
             <a class="nav__overlay-subitem" role="menuitem" href="../work/portfolio-evolution/" data-nav-work="portfolio-evolution/"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15"/><path d="M3 8.5h18"/><path d="M10 12l-2 2 2 2M14 12l2 2-2 2"/></svg><span data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></a>
           </div>
         </div>
-        <div class="nav__overlay-group">
-          <button class="nav__overlay-link nav__overlay-work-trigger" id="overlayLabTrigger" type="button"
-                  aria-expanded="false" aria-controls="overlayLabMenu">
-            <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6.5L4.6 18.2A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.7-2.8L14 9.5V3"/><path d="M7.5 15h9"/></svg><span data-i18n="nav_lab">Lab</span></span>
-          </button>
-          <div class="nav__overlay-submenu" id="overlayLabMenu" hidden>
-            <a class="nav__overlay-subitem" href="../design-system/" data-nav-page="design-system/" data-nav-state="new"><span data-i18n="nav_design_system">Design System</span><span class="nav__new" data-i18n="nav_new">New</span></a>
-          </div>
-        </div>
-        <a href="../about/" data-nav-page="about/" class="nav__overlay-link">
-          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c.8-3.9 3.8-6 7.5-6s6.7 2.1 7.5 6"/></svg><span data-i18n="nav_evolution">About</span></span>
-        </a>
         <a href="../resume/" data-nav-page="resume/" class="nav__overlay-link">
           <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg><span data-i18n="nav_resume">Résumé</span></span>
+        </a>
+        <a href="../about/" data-nav-page="about/" class="nav__overlay-link">
+          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6.5L4.6 18.2A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.7-2.8L14 9.5V3"/><path d="M7.5 15h9"/></svg><span data-i18n="nav_evolution">History</span></span>
+        </a>
+        <a href="../design-system/" data-nav-page="design-system/" class="nav__overlay-link">
+          <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0 0 17.6c1 0 1.7-.8 1.7-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.7-1.7h2.1a4.3 4.3 0 0 0 4.3-4.3c0-4.2-3.9-7.5-8.8-7.5z"/><circle cx="7.6" cy="12" r="1.1"/><circle cx="9.6" cy="7.6" r="1.1"/><circle cx="14.4" cy="7.6" r="1.1"/></svg><span data-i18n="nav_design_system">Design System</span></span>
         </a>
         <a href="../contact/" data-nav-page="contact/" class="nav__overlay-link">
           <span class="nav__ov-row"><svg class="nav__ov-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg><span data-i18n="nav_cta">Contact</span></span>
@@ -202,7 +187,7 @@
 
       <div class="contact-intro">
         <p class="ah-label" data-i18n="report_arc_label">Upgrade area</p>
-        <h1 class="ah" id="report-h"><span class="ah__line"><span class="ah__noun" data-i18n="report_arc_pre">SHARE</span> <em class="ah__hook" data-i18n="report_arc_k">FEEDBACK.</em></span></h1>
+        <h1 class="ah" id="report-h"><span class="ah__line"><em class="ah__hook" data-i18n="report_arc_k">FEEDBACK.</em></span></h1>
         <p class="ah-sub"><span class="bridge__heading" data-i18n="report_arc_sub">Thanks for your time.</span></p>
       </div>
 
@@ -269,7 +254,9 @@
                   <option value="trust-verify" data-icon='[data-nav-work="trust-verify-brief/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_card2_label">TRUST &amp; VERIFY · BANKING</span></option>
                   <option value="tuua-transfer" data-icon='[data-nav-work="airport/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_card3_label">TUUA TRANSFER · AIRPORT</span></option>
                   <option value="portfolio" data-icon='[data-nav-work="portfolio-evolution/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_card4_label">PORTFOLIO · SOFTWARE</span></option>
-                  <option value="about" data-icon='.nav__overlay-link[data-nav-page="about/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_evolution">About</span></option>
+                  <option value="resume" data-icon='.nav__overlay-link[data-nav-page="resume/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_resume">Résumé</span></option>
+                  <option value="about" data-icon='.nav__overlay-link[data-nav-page="about/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_evolution">History</span></option>
+                  <option value="design-system" data-icon='.nav__overlay-link[data-nav-page="design-system/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_design_system">Design System</span></option>
                   <option value="contact" data-icon='.nav__overlay-link[data-nav-page="contact/"]'><span class="page-opt__icon"></span><span class="page-opt__name" data-i18n="nav_cta">Contact</span></option>
                 </select>
               </div>
@@ -427,7 +414,7 @@
         </div>
         <div class="footer__col">
           <p class="footer__col-head" data-i18n="footer_col_profile">Profile</p>
-          <a class="footer__map-link" href="../about/" data-nav-page="about/" data-i18n="nav_evolution">About</a>
+          <a class="footer__map-link" href="../about/" data-nav-page="about/" data-i18n="nav_evolution">History</a>
           <a class="footer__map-link" href="../resume/" data-nav-page="resume/" data-i18n="nav_resume">Résumé</a>
         </div>
         <div class="footer__col">

@@ -34,3 +34,4 @@ Completion reports for v4 and later deployments, one per executed run.
 | v1.3.0 · The Résumé shows the CV | `v130-resume-viewer-completion-report.md` |
 | v1.3.1 · Each page shows its own card when shared | `v131-og-image-completion-report.md` |
 | v1.2.0 · A Design System page in the Lab menu | `v120-design-system-completion-report.md` |
+| v1.4.0 · The navigation without Lab | `v140-nav-no-lab-completion-report.md` |

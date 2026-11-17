@@ -173,7 +173,8 @@ html[data-theme="light"] .nav__util-icon--dark { display:none; }
 /* ============================================================ TABLET ============================================================ */
 @media (min-width:768px) and (max-width:1023px) {
   .nav__inner { grid-template-columns:1fr auto 1fr; gap:0.75rem; }
-  .nav__link { padding:0.5rem 0.5rem; }
+  /* Four top-level links since PR #53 (PR53-Q13): smaller and tighter in this band, so the wordmark keeps its full width. */
+  .nav__link { padding:0.5rem 0.25rem; font-size:0.7rem; letter-spacing:0.08em; }
   .nav__utility { gap:0.5rem; }
   .nav__hamburger { display:none; }
   .nav__center { display:flex; }
@@ -241,7 +242,6 @@ html[data-theme="light"] .nav__util-icon--dark { display:none; }
 .nav__overlay-links { flex:1 0 auto; padding:8px 0 0; }
 .nav__drawer-pages { flex:1 1 auto; }
 .nav__overlay-links .nav__overlay-link { font-size:1.15rem; min-height:44px; box-sizing:border-box; padding-top:0.7rem; padding-bottom:0.7rem; }
-.nav__overlay-subitem[data-nav-state="new"] { justify-content:space-between; padding-right:var(--gutter) !important; }
 .nav__drawer-foot { position:sticky; bottom:0; display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
   padding:0.5rem var(--gutter); background:var(--color-brand-black); border-top:1px solid var(--color-border-soft); }
 .nav__drawer-feedback { display:inline-flex; align-items:center; min-height:44px; font-size:0.95rem; font-weight:var(--fw-medium); color:var(--color-brand-white); }

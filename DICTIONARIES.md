@@ -4,21 +4,21 @@ Every word the site shows comes from an English and a Spanish dictionary, one pa
 
 | Level | Serves | English | Spanish | Keys EN | Keys ES |
 |---|---|---|---|---|---|
-| Global | Every page: navigation and its menus, the footer with its sitemap and legal row, the four legal overlays with the privacy policy, the carousel buttons, the forms' consent line, the imagery caption and the shared Contact and dashboard labels | [`assets/i18n/en.json`](assets/i18n/en.json) | [`assets/i18n/es.json`](assets/i18n/es.json) | 99 | 99 |
+| Global | Every page: navigation and its menus, the footer with its sitemap and legal row, the four legal overlays with the privacy policy, the carousel buttons, the forms' consent line, the imagery caption and the shared Contact and dashboard labels | [`assets/i18n/en.json`](assets/i18n/en.json) | [`assets/i18n/es.json`](assets/i18n/es.json) | 97 | 97 |
 | Regional | The four briefs: shared interface labels | [`assets/i18n/briefs/briefs-ui.en.json`](assets/i18n/briefs/briefs-ui.en.json) | [`assets/i18n/briefs/briefs-ui.es.json`](assets/i18n/briefs/briefs-ui.es.json) | 32 | 32 |
 | Regional | The four briefs: tags | [`assets/i18n/briefs/tags.en.json`](assets/i18n/briefs/tags.en.json) | [`assets/i18n/briefs/tags.es.json`](assets/i18n/briefs/tags.es.json) | 17 | 17 |
 | Regional | The stakeholder network: Brief 03 (Act 02) and the Design System page | [`assets/i18n/briefs/net.en.json`](assets/i18n/briefs/net.en.json) | [`assets/i18n/briefs/net.es.json`](assets/i18n/briefs/net.es.json) | 64 | 64 |
-| Page | Main | [`i18n/main.en.json`](i18n/main.en.json) | [`i18n/main.es.json`](i18n/main.es.json) | 49 | 49 |
+| Page | Main | [`i18n/main.en.json`](i18n/main.en.json) | [`i18n/main.es.json`](i18n/main.es.json) | 50 | 50 |
 | Page | About | [`about/i18n/about.en.json`](about/i18n/about.en.json) | [`about/i18n/about.es.json`](about/i18n/about.es.json) | 203 | 203 |
 | Page | Résumé | [`resume/i18n/resume.en.json`](resume/i18n/resume.en.json) | [`resume/i18n/resume.es.json`](resume/i18n/resume.es.json) | 9 | 9 |
 | Page | Contact | [`contact/i18n/contact.en.json`](contact/i18n/contact.en.json) | [`contact/i18n/contact.es.json`](contact/i18n/contact.es.json) | 29 | 29 |
-| Page | Feedback | [`feedback/i18n/feedback.en.json`](feedback/i18n/feedback.en.json) | [`feedback/i18n/feedback.es.json`](feedback/i18n/feedback.es.json) | 38 | 38 |
+| Page | Feedback | [`feedback/i18n/feedback.en.json`](feedback/i18n/feedback.en.json) | [`feedback/i18n/feedback.es.json`](feedback/i18n/feedback.es.json) | 37 | 37 |
 | Page | Design System | [`design-system/i18n/design-system.en.json`](design-system/i18n/design-system.en.json) | [`design-system/i18n/design-system.es.json`](design-system/i18n/design-system.es.json) | 55 | 55 |
 | Local | Brief 01 · AccreditaPass | [`work/accreditapass/i18n/accreditapass.en.json`](work/accreditapass/i18n/accreditapass.en.json) | [`work/accreditapass/i18n/accreditapass.es.json`](work/accreditapass/i18n/accreditapass.es.json) | 146 | 146 |
 | Local | Brief 02 · Trust & Verify | [`work/trust-verify-brief/i18n/yape-trust-verify.en.json`](work/trust-verify-brief/i18n/yape-trust-verify.en.json) | [`work/trust-verify-brief/i18n/yape-trust-verify.es.json`](work/trust-verify-brief/i18n/yape-trust-verify.es.json) | 151 | 151 |
 | Local | Brief 03 · TUUA Transfer | [`work/airport/i18n/airport.en.json`](work/airport/i18n/airport.en.json) | [`work/airport/i18n/airport.es.json`](work/airport/i18n/airport.es.json) | 186 | 186 |
 | Local | Brief 04 · Portfolio | [`work/portfolio-evolution/i18n/designops.en.json`](work/portfolio-evolution/i18n/designops.en.json) | [`work/portfolio-evolution/i18n/designops.es.json`](work/portfolio-evolution/i18n/designops.es.json) | 160 | 160 |
-| | **Total** | | | **1,238** | **1,238** |
+| | **Total** | | | **1,236** | **1,236** |
 
 Main, About, Résumé, Contact and the Feedback page load the global pair and their own; the Design System page loads the global pair, the network pair and its own; each brief loads the global pair, the two regional pairs (Brief 03 also the network pair) and its own. Within a pair the keys follow the order in which the page uses them, so a dictionary reads top to bottom like its page; `python3 tools/order.py --strict` reads 0 on every page: the seven from PR #42, Feedback (the report page) since PR #45, Résumé since PR #46, the Design System page since v1.2.0.
 
