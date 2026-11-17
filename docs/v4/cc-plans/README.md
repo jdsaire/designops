@@ -34,3 +34,4 @@ Approved deployment plans for v4 and later.
 | v1.3.0 · The Résumé shows the CV | `Plan-v130-ResumeViewer.md` |
 | v1.3.1 · Each page shows its own card when shared | `Plan-v131-OgImage.md` |
 | v1.2.0 · A Design System page in the Lab menu | `Plan-v120-DesignSystem.md` |
+| v1.4.0 · The navigation without Lab | `Plan-v140-NavNoLab.md` |
