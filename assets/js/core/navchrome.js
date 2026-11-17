@@ -204,7 +204,7 @@ function init(opts) {
     workMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => workDisc.setOpen(false)));
   }
 
-  /* ── Lab, theme and language: the same disclosure, in the bar and in the phone menu (PR #46). One menu is open at a
+  /* ── Theme and language: the same disclosure, in the bar and in the phone menu (PR #46). One menu is open at a
      time, a choice closes its panel, and Escape returns to the trigger. ── */
   document.querySelectorAll('[data-nav-menu]').forEach(trigger => {
     let disc = null;
@@ -270,13 +270,9 @@ function init(opts) {
     const overlayWorkTrigger = document.getElementById('overlayWorkTrigger');
     const overlayWorkMenu = document.getElementById('overlayWorkMenu');
     /* The overlay's Work group opens collapsed (PR #42 G6b, reversing W1): a tap on
-       Work shows the briefs a reader can open. */
-    const overlayLabTrigger = document.getElementById('overlayLabTrigger');
-    const overlayLabMenu = document.getElementById('overlayLabMenu');
-    /* One group open at a time (PR #46). */
-    let overlayLabDisc = null;
-    const overlayWorkDisc = wireDisclosure(overlayWorkTrigger, overlayWorkMenu, () => { if (overlayLabDisc) overlayLabDisc.setOpen(false); }, false);
-    overlayLabDisc = wireDisclosure(overlayLabTrigger, overlayLabMenu, () => { if (overlayWorkDisc) overlayWorkDisc.setOpen(false); }, false);
+       Work shows the briefs a reader can open. Since PR #53 it is the overlay's only group: Design System is a flat
+       link beside Résumé and History (PR53-Q3). */
+    wireDisclosure(overlayWorkTrigger, overlayWorkMenu, null, false);
     /* Flat links close the overlay on navigation; Work items too. */
     overlay.querySelectorAll('.nav__overlay-link, .nav__overlay-subitem, .nav__drawer-feedback').forEach(el => {
       el.addEventListener('click', () => { if (el.tagName === 'A') closeOverlay(); });
