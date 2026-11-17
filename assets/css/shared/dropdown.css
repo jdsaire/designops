@@ -30,22 +30,6 @@ a.nav__card:hover, a.nav__card:focus-visible { opacity: 1; }
 .nav__card-name { font-size: 0.95rem; font-weight: var(--fw-bold); }
 .nav__card-tag { font-size: 0.68rem; font-weight: var(--fw-medium); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
 
-/* ---- A page that's new (data-nav-state="new", v1.2.0; SY51-Q5, V120-Q2 as amended by V120-Q17): a live link whose tag is
-   the PULSE label, unboxed: bold text beside the X-6 square (0.45 rem brand purple, opacity 1 → 0.3 → 1 every 2.4 s,
-   decorative; still at full opacity under reduced motion). In the navbar menu and the phone menu only; the footer's link
-   carries no tag. ---- */
-.nav__new {
-  display: inline-flex; align-items: center; gap: 0.5em;
-  font-size: 0.75rem; font-weight: var(--fw-bold); letter-spacing: 0.01em; line-height: 1.2; white-space: nowrap;
-  color: var(--color-brand-white);
-}
-.nav__new::before {
-  content: ""; flex: 0 0 auto; width: 0.45rem; height: 0.45rem; background: var(--color-brand-purple);
-  animation: nav-pulse 2.4s var(--ease-standard) infinite;
-}
-@keyframes nav-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@media (prefers-reduced-motion: reduce) { .nav__new::before { animation: none; } }
-
 @media (min-width: 768px) and (max-width: 1023px) {
   .nav__menu { padding: 0.5rem; }
   .nav__menu--briefs { grid-template-columns: repeat(4, 6.75rem); }
