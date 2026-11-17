@@ -1,6 +1,6 @@
 # Completion report · PR #53 · v1.4.0 · The navigation without Lab
 
-**Branch:** `site/nav-no-lab` on `b6eba12` · **Author:** jdsaire · **Pull request:** PR_URL · **Merge:** manual (shared navigation, `navchrome.js` and dictionaries) · **Plan:** [`Plan-v140-NavNoLab.md`](../cc-plans/Plan-v140-NavNoLab.md)
+**Branch:** `site/nav-no-lab` on `b6eba12` · **Author:** jdsaire · **Pull request:** https://github.com/jdsaire/designops/pull/53 · **Merge:** manual (shared navigation, `navchrome.js` and dictionaries) · **Plan:** [`Plan-v140-NavNoLab.md`](../cc-plans/Plan-v140-NavNoLab.md)
 
 ## What a reader now sees
 
