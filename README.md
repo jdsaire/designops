@@ -21,7 +21,7 @@ Each brief is one case study, in English and Spanish. The line beside it is the 
 | Brief 03 · TUUA Transfer · airport | [`work/airport/`](work/airport/README.md) | Paying what was never paid — I designed the web prototype of new fee charged by Lima Airport. |
 | Brief 04 · Portfolio · software | [`work/portfolio-evolution/`](work/portfolio-evolution/README.md) | This web. My web. — How I built and deployed this site with AI, end to end. |
 
-Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resume/README.md) and [Contact](contact/README.md) complete the site, with a page for sending feedback about it ([`feedback/`](feedback/README.md)) and the [Design System](design-system/README.md) behind it in the Lab menu. Every page switches between English and Spanish, and between a dark and a light theme, and ends on the same footer: the closing call and contacts, a sitemap, and the legal row with the privacy policy and your privacy choices.
+Main ([`index.html`](index.html)), [About](about/README.md), the [Résumé](resume/README.md) and [Contact](contact/README.md) complete the site, with a page for sending feedback about it ([`feedback/`](feedback/README.md)) and the [Design System](design-system/README.md) behind it, in the navigation bar. Every page switches between English and Spanish, and between a dark and a light theme, and ends on the same footer: the closing call and contacts, a sitemap, and the legal row with the privacy policy and your privacy choices.
 
 ## Where everything lives
 
